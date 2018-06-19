@@ -1,0 +1,950 @@
+﻿<Type Name="XmlFormView" FullName="Microsoft.Office.InfoPath.Server.Controls.XmlFormView">
+  <TypeSignature Language="C#" Value="public class XmlFormView : System.Web.UI.WebControls.WebParts.WebPart" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XmlFormView extends System.Web.UI.WebControls.WebParts.WebPart implements class System.Web.UI.INamingContainer" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" />
+  <TypeSignature Language="VB.NET" Value="Public Class XmlFormView&#xA;Inherits WebPart" />
+  <TypeSignature Language="C++ CLI" Value="public ref class XmlFormView : System::Web::UI::WebControls::WebParts::WebPart" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Web.UI.WebControls.WebParts.WebPart</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.WebControls.MdsCompliant(IsCompliant=false)</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.ComponentModel.Designer(typeof(Microsoft.Office.InfoPath.Server.Controls.XmlFormViewDesigner))</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Web.UI.ParseChildren(true)</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Web.UI.ToolboxData("&lt;{0}:XmlFormView runat="server" width="100%" height="250px"&gt;&lt;/{0}:XmlFormView&gt;")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>The main ASP.NET control used to show InfoPath forms in a browser.</summary>
+    <remarks>
+      <para>The <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> object and its associated members are used to display InfoPath forms in a Web browser. No additional components are necessary on the desktop computer except a Web browser in order to open and fill out a form based on a browser-enabled form template.</para>
+      <para>InfoPath Forms Services uses the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control to display forms based on form templates designed in Microsoft InfoPath so that they are browser-compatible. Developers can also use the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control to show InfoPath forms in custom Web pages. This requires Microsoft SharePoint Server 2010 with a client access license for InfoPath Forms Services. For more information on how to develop custom Web pages with the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control, see Hosting the InfoPath Form Editing Environment in a Custom Web Form.</para>
+      <para>
+        <b>Note</b>: As an alternative to using the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control, you can now use the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.WebUI.BrowserFormWebPart" /> to display InfoPath forms in SharePoint pages. For more information, see Working with the InfoPath Form Web Part.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>In the following example, the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control, XmlFormView1, is hosted in a custom Web page and contains a browser-enabled form template located on the same site. The <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" /> event of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control is used to populate a control, TextBox1, in the custom Web page.</para>
+      <code>Imports Microsoft.Office.InfoPath.Server.Controls
+Protected Sub XmlFormView1_NotifyHost(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs) Handles XmlFormView1.NotifyHost
+    TextBox1.Text = e.Notification.ToString()
+End Sub</code>
+      <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+      <code>Public Sub CTRL3_5_Clicked(ByVal sender As Object, ByVal e As ClickedEventArgs)
+    Dim myNav As XPathNavigator = Me.MainDataSource.CreateNavigator()
+    Me.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", Me.NamespaceManager).ToString())
+End Sub</code>
+      <code>using Microsoft.Office.InfoPath.Server.Controls
+protected void XmlFormView1_NotifyHost(object sender, NotifyHostEventArgs e)
+{
+    TextBox1.Text = e.Notification.ToString();
+}</code>
+      <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+      <code>public void CTRL3_5_Clicked(object sender, ClickedEventArgs e)
+{
+    XPathNavigator myNav = this.MainDataSource.CreateNavigator();
+    this.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", this.NamespaceManager).ToString());
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public XmlFormView ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; XmlFormView();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Close">
+      <MemberSignature Language="C#" Value="public event EventHandler Close;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler Close" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Close" />
+      <MemberSignature Language="VB.NET" Value="Public Custom Event Close As EventHandler " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; event EventHandler ^ Close;" />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Handles the close event of a form in a <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</summary>
+        <remarks>
+          <para>This event represents one of four events of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control that allow communication of a form in the control to the Web page in which the control is hosted. Read-only properties of the form can be queried before the form is closed. These properties are available through the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlForm" /> property of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DataConnectionBaseUrl">
+      <MemberSignature Language="C#" Value="public Uri DataConnectionBaseUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri DataConnectionBaseUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.DataConnectionBaseUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property DataConnectionBaseUrl As Uri" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Uri ^ DataConnectionBaseUrl { Uri ^ get(); void set(Uri ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the base URL that will replace the specified substring of the service URL for all relative Web services in the form.</summary>
+        <value>The base URL that will replace the specified substring of the service URL for all relative Web services in the form.</value>
+        <remarks>
+          <para>Form templates containing Web service data connections can be modified to enable relative Web service URLs in place of the absolute Web service URLs used when the data connection is established in design mode. It requires modification of the manifest.xsf file of the form template in order to replace the xsf2:connectoid element with the xsf2:relativeQuery element, as in the example below. The replace attribute specifies the substring of the URL to replace at form initialization with the value set by the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.DataConnectionBaseUrl" /> property.</para>
+          <code>&amp;lt;xsf2:webServiceAdapterExt ref="ExampleWebService" trackDataSetChanges="no"&amp;gt;
+    &amp;lt;xsf2:relativeQuery replace="http://&lt;span class="placeholder"&gt;ServerName&lt;/span&gt;/sites/&lt;span class="placeholder"&gt;SiteName&lt;/span&gt;" /&amp;gt;
+&amp;lt;/xsf2:webServiceAdapterExt&amp;gt;</code>
+          <para>Notes</para>
+          <list type="bullet">
+            <item>
+              <description>If the relativeQuery element does not exist in the manifest extension for the adapter, the full serviceURL specified in the manifest will be used.</description>
+            </item>
+            <item>
+              <description>If <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.DataConnectionBaseUrl" /> is a null reference (Nothing in Visual Basic) or <see cref="T:String.Empty" />, the full serviceURL specified in the manifest will be used.</description>
+            </item>
+            <item>
+              <description>The <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.DataConnectionBaseUrl" /> must be a valid URL.</description>
+            </item>
+            <item>
+              <description>An error will occur if the webServiceAdapterExt element contains both the xsf2:connectoid and the xsf2:relativeQuery elements.</description>
+            </item>
+            <item>
+              <description>The <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.DataConnectionBaseUrl" /> property applies to all Web service data connections in the form.</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultView">
+      <MemberSignature Language="C#" Value="public string DefaultView { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DefaultView" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.DefaultView" />
+      <MemberSignature Language="VB.NET" Value="Public Property DefaultView As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DefaultView { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the default view for the form displayed in the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</summary>
+        <value>The name of the default view.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public override void Dispose ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Dispose() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Dispose" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Dispose ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Dispose();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Enables the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control to perform final clean up before it is released from memory.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EditingStatus">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.InfoPath.Server.Controls.XmlFormView.EditingState EditingStatus { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Office.InfoPath.Server.Controls.XmlFormView/EditingState EditingStatus" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.EditingStatus" />
+      <MemberSignature Language="VB.NET" Value="Public Property EditingStatus As XmlFormView.EditingState" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::InfoPath::Server::Controls::XmlFormView::EditingState EditingStatus { Microsoft::Office::InfoPath::Server::Controls::XmlFormView::EditingState get(); void set(Microsoft::Office::InfoPath::Server::Controls::XmlFormView::EditingState value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.InfoPath.Server.Controls.XmlFormView+EditingState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the editing status of a form hosted in the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</summary>
+        <value>One of the enumeration values.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.EditingStatus" /> property is based on the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.EditingState" /> enumeration, which includes the following values.</para>
+          <list type="table">
+            <item>
+              <term>Init</term>
+              <description>The form is not visible when the Web page is opened. The <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.EditingStatus" /> must be changed to Editing before the form can be used.</description>
+            </item>
+            <item>
+              <term>Editing</term>
+              <description>The form is visible to the user and is ready to use.</description>
+            </item>
+            <item>
+              <term>Closed</term>
+              <description>The form is closed. The message "The form has been closed" is shown to the user inside the control.</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Initialize">
+      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs&gt; Initialize;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs&gt; Initialize" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Initialize" />
+      <MemberSignature Language="VB.NET" Value="Public Custom Event Initialize As EventHandler(Of InitializeEventArgs) " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; event EventHandler&lt;Microsoft::Office::InfoPath::Server::Controls::InitializeEventArgs ^&gt; ^ Initialize;" />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler&lt;Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Handles the initialization event of a form in a <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</summary>
+        <remarks>
+          <para>This event represents one of four events of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control that allows communication of a form in the control to the Web page in which the control is hosted. Read-only properties of the form can be queried after the form is opened but before it is shown in the control. These properties are available through the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlForm" /> property of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>In the following example, the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.EditingStatus" /> property of the form is shown in a text box located on the Web page.</para>
+          <code>Protected Sub XmlFormView1_&lt;span class="label"&gt;Initialize&lt;/span&gt;(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs) Handles XmlFormView1.&lt;span class="label"&gt;Initialize&lt;/span&gt;
+    TextBox11.Text = XmlFormView1.EditingStatus.ToString()
+End Sub</code>
+          <code>protected void XmlFormView1_&lt;span class="label"&gt;Initialize&lt;/span&gt;(object sender, InitializeEventArgs e)
+{
+    TextBox11.Text = XmlFormView1.EditingStatus.ToString();
+}</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="NotifyHost">
+      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs&gt; NotifyHost;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs&gt; NotifyHost" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" />
+      <MemberSignature Language="VB.NET" Value="Public Custom Event NotifyHost As EventHandler(Of NotifyHostEventArgs) " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; event EventHandler&lt;Microsoft::Office::InfoPath::Server::Controls::NotifyHostEventArgs ^&gt; ^ NotifyHost;" />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler&lt;Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Handles the host notification event of a form in an <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</summary>
+        <remarks>
+          <para>This event represents one of four events of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control that allows communication of a form in the control to the Web page in which the control is hosted. Read-only properties of the form can be queried when code in the form is used to notify the hosting Web page. These properties are available through the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlForm" /> property of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>In the following example, the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control, XmlFormView1, is hosted in a custom Web page and contains a browser-enabled form template located on the same site. The <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" /> event of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control is used to populate a control, TextBox1, in the custom Web page.</para>
+          <code>Imports Microsoft.Office.InfoPath.Server.Controls
+Protected Sub XmlFormView1_&lt;span class="label"&gt;NotifyHost&lt;/span&gt;(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs) Handles XmlFormView1.&lt;span class="label"&gt;NotifyHost&lt;/span&gt;
+    TextBox1.Text = e.Notification.ToString()
+End Sub</code>
+          <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+          <code>Public Sub CTRL3_5_Clicked(ByVal sender As Object, ByVal e As ClickedEventArgs)
+    Dim myNav As XPathNavigator = Me.MainDataSource.CreateNavigator()
+    Me.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", Me.NamespaceManager).ToString())
+End Sub</code>
+          <code>using Microsoft.Office.InfoPath.Server.Controls
+protected void XmlFormView1_&lt;span class="label"&gt;NotifyHost&lt;/span&gt;(object sender, NotifyHostEventArgs e)
+{
+    TextBox1.Text = e.Notification.ToString();
+}</code>
+          <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+          <code>public void CTRL3_5_Clicked(object sender, ClickedEventArgs e)
+{
+    XPathNavigator myNav = this.MainDataSource.CreateNavigator();
+    this.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", this.NamespaceManager).ToString());
+}</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="OnDataBinding">
+      <MemberSignature Language="C#" Value="protected override void OnDataBinding (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnDataBinding(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.OnDataBinding(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnDataBinding (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnDataBinding(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>Use the <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Initialize" />, <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" />, <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitToHost" />, or <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Close" /> events instead of this method</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnInit">
+      <MemberSignature Language="C#" Value="protected override void OnInit (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnInit(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.OnInit(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnInit (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnInit(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>Use the <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Initialize" />, <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" />, <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitToHost" />, or <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Close" /> events instead of this method.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>Use the <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Initialize" />, <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" />, <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitToHost" />, or <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Close" /> events instead of this method.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPreRender">
+      <MemberSignature Language="C#" Value="protected override void OnPreRender (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnPreRender(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.OnPreRender(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreRender (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreRender(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>Use the <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Initialize" />, <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" />, <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitToHost" />, or <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Close" /> events instead of this method.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnUnload">
+      <MemberSignature Language="C#" Value="protected override void OnUnload (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnUnload(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.OnUnload(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnUnload (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnUnload(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>Use the <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Initialize" />, <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" />, <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitToHost" />, or <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Close" /> events instead of this method.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Options">
+      <MemberSignature Language="C#" Value="public string Options { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Options" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Options" />
+      <MemberSignature Language="VB.NET" Value="Public Property Options As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Options { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets an option, namely <paramref name="DisableSave" />, for the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</summary>
+        <value>
+          <paramref name="DisableSave" />, if the Save button has been disabled; otherwise <see cref="T:String.Empty" />.</value>
+        <remarks>
+          <para>The only supported value for the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Options" /> property is <paramref name="DisableSave" />, which hides the Save button in the browser and disables the save feature of the form. The value is case-insensitive.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PrintWindow">
+      <MemberSignature Language="C#" Value="public bool PrintWindow { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool PrintWindow" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.PrintWindow" />
+      <MemberSignature Language="VB.NET" Value="Public Property PrintWindow As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool PrintWindow { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>boolean</b> value that controls whether the print view is shown.</summary>
+        <value>
+          <b>true</b>, if the print view is shown; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>If the form template loaded in the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control does not contain a view designed for printing, the default view is shown and all data-bound controls are read-only and other controls, such as buttons, are hidden.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>In the following example, the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.PrintWindow" /> property of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control is set to <b>true</b> during the <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Initialize" /> event.</para>
+          <code>Protected Sub XmlFormView1_Initialize(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs) Handles XmlFormView1.Initialize
+    XmlFormView1.&lt;span class="label"&gt;PrintWindow&lt;/span&gt; = True
+End Sub</code>
+          <code>protected void XmlFormView1_Initialize(object sender, InitializeEventArgs e)
+{
+    XmlFormView1.&lt;span class="label"&gt;PrintWindow&lt;/span&gt; = true;
+}</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderContents">
+      <MemberSignature Language="C#" Value="protected override void RenderContents (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void RenderContents(class System.Web.UI.HtmlTextWriter writer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.RenderContents(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub RenderContents (writer As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void RenderContents(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <remarks>
+          <para>This member is not intended to be used directly from your code. This member is public because of Microsoft ASP.NET infrastructure requirements.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderControl">
+      <MemberSignature Language="C#" Value="public override void RenderControl (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RenderControl(class System.Web.UI.HtmlTextWriter writer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.RenderControl(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub RenderControl (writer As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void RenderControl(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <remarks>
+          <para>This member is not intended to be used directly from your code. This member is public because of Microsoft ASP.NET infrastructure requirements.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SaveLocation">
+      <MemberSignature Language="C#" Value="public string SaveLocation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SaveLocation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SaveLocation" />
+      <MemberSignature Language="VB.NET" Value="Public Property SaveLocation As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SaveLocation { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the location to which the form will be saved.</summary>
+        <value>The path to the save location.</value>
+        <remarks>
+          <para>When saving the form is disabled, the value of the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SaveLocation" /> property is ignored. When the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Options" /> property includes <paramref name="DisableSave" />, the Save button will be hidden in the browser.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowFooter">
+      <MemberSignature Language="C#" Value="public bool ShowFooter { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ShowFooter" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.ShowFooter" />
+      <MemberSignature Language="VB.NET" Value="Public Property ShowFooter As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShowFooter { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>boolean</b> value indicating whether the footer will be displayed below the form.</summary>
+        <value>
+          <b>true</b>, if the footer is displayed; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>The header and footer show common actions that can be taken by the user of the form, such as saving, printing, and switching views.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowHeader">
+      <MemberSignature Language="C#" Value="public bool ShowHeader { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ShowHeader" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.ShowHeader" />
+      <MemberSignature Language="VB.NET" Value="Public Property ShowHeader As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShowHeader { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>boolean</b> value indicating whether the header will be displayed above the form.</summary>
+        <value>
+          <b>true</b>, if the header is displayed; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>The header and footer show common actions that can be taken by the user of the form, such as saving, printing, and switching views.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SubmitStatus">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitState SubmitStatus { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Office.InfoPath.Server.Controls.XmlFormView/SubmitState SubmitStatus" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitStatus" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SubmitStatus As XmlFormView.SubmitState" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::InfoPath::Server::Controls::XmlFormView::SubmitState SubmitStatus { Microsoft::Office::InfoPath::Server::Controls::XmlFormView::SubmitState get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.InfoPath.Server.Controls.XmlFormView+SubmitState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the state of last submit operation.</summary>
+        <value>One of the enumeration values.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitStatus" /> property is based on the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitState" /> enumeration, which includes the following values.</para>
+          <list type="table">
+            <item>
+              <term>Error</term>
+              <description>The submit process encountered an error.</description>
+            </item>
+            <item>
+              <term>None</term>
+              <description>The form has not been submitted.</description>
+            </item>
+            <item>
+              <term>Success</term>
+              <description>The most recent form submission was successful.</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SubmitToHost">
+      <MemberSignature Language="C#" Value="public event EventHandler&lt;Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs&gt; SubmitToHost;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs&gt; SubmitToHost" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitToHost" />
+      <MemberSignature Language="VB.NET" Value="Public Custom Event SubmitToHost As EventHandler(Of SubmitToHostEventArgs) " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; event EventHandler&lt;Microsoft::Office::InfoPath::Server::Controls::SubmitToHostEventArgs ^&gt; ^ SubmitToHost;" />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler&lt;Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Handles the submit to host event of a form in a <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</summary>
+        <remarks>
+          <para>This event represents one of four events of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control that allows communication of a form in the control to the Web page in which the control is hosted. Read-only properties of the form can be queried when the form is submitted to the hosting Web page. These properties are available through the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlForm" /> property of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>In the following example, the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs.ReturnStatus" /> property of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs" /> object is displayed in a text box located on the Web page.</para>
+          <code>Protected Sub XmlFormView1_&lt;span class="label"&gt;SubmitToHost&lt;/span&gt;(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs) Handles XmlFormView1.&lt;span class="label"&gt;SubmitToHost&lt;/span&gt;
+    TextBox11.Text = e.ReturnStatus.ToString()
+End Sub</code>
+          <code>protected void XmlFormView1_&lt;span class="label"&gt;SubmitToHost&lt;/span&gt;(object sender, SubmitToHostEventArgs e)
+{
+    TextBox11.Text = e.ReturnStatus.ToString();
+}</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="XmlForm">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.InfoPath.XmlForm XmlForm { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.InfoPath.XmlForm XmlForm" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlForm" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property XmlForm As XmlForm" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::InfoPath::XmlForm ^ XmlForm { Microsoft::Office::InfoPath::XmlForm ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.InfoPath.XmlForm</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a reference to an <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object represents the current form and provides access to the form's main data source.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Use the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlForm" /> property to get a reference to an <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object that represents the form. A limited subset of members of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> class can be accessed when using the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control. For more information about these members, see the Help included with Visual Studio 2012.</para>
+          <para>Properties (Read Only)</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <see cref="P:Microsoft.Office.InfoPath.XmlForm.ReadOnly" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.Office.InfoPath.XmlForm.New" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.Office.InfoPath.XmlForm.Uri" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.Office.InfoPath.XmlForm.XmlLang" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.Office.InfoPath.XmlForm.Signed" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.Office.InfoPath.XmlForm.DataSources" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.Office.InfoPath.XmlForm.MainDataSource" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.Office.InfoPath.XmlForm.NamespaceManager" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.Office.InfoPath.XmlForm.FormState" />
+              </description>
+            </item>
+          </list>
+          <para>Methods</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <see cref="M:Microsoft.Office.InfoPath.XmlForm.Submit" />
+              </description>
+            </item>
+          </list>
+          <para>
+            <b>Important</b>: Using members other than this subset will result in the error "Calling this property or method from a hosting page is not supported."</para>
+          <para>Using the XmlForm Property</para>
+          <para>The <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlForm" /> property can only be accessed during one of the following events:</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Initialize" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitToHost" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Close" />
+              </description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+        <example>
+          <para>In the following example, a series of textboxes in the Web page are populated with values from the properties that can be used by accessing the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlForm" /> property. A value from the main data source of the form is used as the value for <b>TextBox10</b>. This routine is called when code in the form calls the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+          <para>The following example requires the following three <b>Imports</b> statements:</para>
+          <code>Imports System.Xml
+Imports System.Xml.XPath
+Imports Microsoft.Office.InfoPath.Server.Controls
+Protected Sub XmlFormView1_NotifyHost(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs) Handles XmlFormView1.NotifyHost
+    Dim xNavMain As XPathNavigator
+    Dim xNameSpace As XmlNamespaceManager
+    Try
+        TextBox2.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.[New].ToString()
+        TextBox3.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.ReadOnly.ToString()
+        TextBox4.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.MainDataSource.ReadOnly.ToString()
+        TextBox5.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.ToString()
+        TextBox6.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.XmlLang.ToString()
+        TextBox7.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.Signed.ToString()
+        TextBox8.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.FormState.Count.ToString()
+        TextBox9.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.DataSources.Count.ToString()
+        xNavMain = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.MainDataSource.CreateNavigator()
+        xNameSpace = New XmlNamespaceManager(New NameTable())
+        xNameSpace.AddNamespace("my", XmlFormView1.XmlForm.NamespaceManager._
+        LookupNamespace("my").ToString())
+        TextBox10.Text = xNavMain.SelectSingleNode("/my:myFields/my:field2", xNameSpace).ToString()
+    Catch ex As Exception
+        TextBox11.Text = ex.Message.ToString()
+    End Try
+End Sub</code>
+          <para>The following example requires the following three <b>using</b> statements:</para>
+          <code>using System.Xml;
+using System.Xml.XPath;
+using Microsoft.Office.InfoPath.Server.Controls;
+protected void XmlFormView1_NotifyHost(object sender, NotifyHostEventArgs e)
+{
+    try
+    {
+        TextBox2.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.New.ToString();
+        TextBox3.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.ReadOnly.ToString();
+        TextBox4.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.MainDataSource.ReadOnly.ToString();
+        TextBox5.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.ToString();
+        TextBox6.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.XmlLang.ToString();
+        TextBox7.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.Signed.ToString();
+        TextBox8.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.FormState.Count.ToString();
+        TextBox9.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.DataSources.Count.ToString();
+        XPathNavigator xNavMain = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.MainDataSource.CreateNavigator();
+        XmlNamespaceManager xNameSpace = new XmlNamespaceManager(new NameTable());
+        xNameSpace.AddNamespace("my", XmlFormView1.XmlForm.NamespaceManager.LookupNamespace("my").ToString());
+        TextBox10.Text = xNavMain.SelectSingleNode("/my:myFields/my:field2", xNameSpace).ToString();
+    }
+    catch (Exception ex)
+    {
+        TextBox11.Text = ex.Message.ToString();
+    }
+}</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="XmlLocation">
+      <MemberSignature Language="C#" Value="public string XmlLocation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string XmlLocation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlLocation" />
+      <MemberSignature Language="VB.NET" Value="Public Property XmlLocation As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ XmlLocation { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL of the form template's XML file.</summary>
+        <value>The URL of the form template's XML file</value>
+        <remarks>
+          <para>This value can be set only when the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.EditingStatus" /> of the form is not "Editing." Attempts to set the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlLocation" /> property when the form is currently being edited will result in an error.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="XsnLocation">
+      <MemberSignature Language="C#" Value="public string XsnLocation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string XsnLocation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XsnLocation" />
+      <MemberSignature Language="VB.NET" Value="Public Property XsnLocation As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ XsnLocation { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL that specifies the location of the form template.</summary>
+        <value>A URL that specifies the location of the form template</value>
+        <remarks>
+          <para>This value can be set only when the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.EditingStatus" /> of the form is not "Editing." Attempts to set the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XsnLocation" /> property when the form is currently being edited will result in an error.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

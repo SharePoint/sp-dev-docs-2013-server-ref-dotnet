@@ -1,0 +1,317 @@
+﻿<Type Name="TaxonomyNavigationCacheStatistics" FullName="Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics">
+  <TypeSignature Language="C#" Value="public sealed class TaxonomyNavigationCacheStatistics" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit TaxonomyNavigationCacheStatistics extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class TaxonomyNavigationCacheStatistics" />
+  <TypeSignature Language="C++ CLI" Value="public ref class TaxonomyNavigationCacheStatistics sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Reports basic statistics for monitoring the behavior of the taxonomy navigation cache.</summary>
+    <remarks>
+      <para>These statistics are tracked separately for each executable process because each process has its own instance of the taxonomy navigation cache. In order to monitor a w3wp.exe worker process, these statistics must be read from within that process.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TaxonomyNavigationCacheStatistics ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; TaxonomyNavigationCacheStatistics();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentCachedBytes">
+      <MemberSignature Language="C#" Value="public long CurrentCachedBytes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 CurrentCachedBytes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.CurrentCachedBytes" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CurrentCachedBytes As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property long CurrentCachedBytes { long get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the estimated size in bytes for all of the currently cached <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> objects.</summary>
+        <value>The estimated size in bytes for all of the currently cached <b>NavigationTermSet</b> objects.</value>
+        <remarks>
+          <para>This property is thread safe.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentCachedObjects">
+      <MemberSignature Language="C#" Value="public int CurrentCachedObjects { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 CurrentCachedObjects" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.CurrentCachedObjects" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CurrentCachedObjects As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int CurrentCachedObjects { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the estimated count of all of the currently cached objects.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentCachedSites">
+      <MemberSignature Language="C#" Value="public int CurrentCachedSites { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 CurrentCachedSites" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.CurrentCachedSites" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CurrentCachedSites As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int CurrentCachedSites { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of <see cref="T:Microsoft.SharePoint.SPSite" /> objects for which data is currently loaded in the cache.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>
+            <b>SPSite</b> objects in the cache have very little effect on the overall cache size, but each instance represents a <see cref="M:Microsoft.SharePoint.SPSite.GetChanges" /> subscription that is processed by the publishing cache.</para>
+          <para>This property is thread safe.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentCachedTermSets">
+      <MemberSignature Language="C#" Value="public int CurrentCachedTermSets { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 CurrentCachedTermSets" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.CurrentCachedTermSets" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CurrentCachedTermSets As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int CurrentCachedTermSets { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> objects that are currently allocated in the cache.</summary>
+        <value>The number of <b>NavigationTermSet</b> objects that are currently allocated in the publishing cache.</value>
+        <remarks>
+          <para>
+            <b>NavigationTermSet</b> objects are generally the largest objects stored in the publishing cache.</para>
+          <para>This property is thread safe.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentCachedWebSettings">
+      <MemberSignature Language="C#" Value="public int CurrentCachedWebSettings { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 CurrentCachedWebSettings" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.CurrentCachedWebSettings" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CurrentCachedWebSettings As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int CurrentCachedWebSettings { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of <see cref="T:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings" /> objects that are currently loaded in the cache.</summary>
+        <value>The number of <b>WebNavigationSettings</b> objects that are currently loaded in the cache.</value>
+        <remarks>
+          <para>
+            <b>WebNavigationSettings</b> objects tend to be small when compared to <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> objects.</para>
+          <para>This property is thread safe.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ResetTotals">
+      <MemberSignature Language="C#" Value="public void ResetTotals ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ResetTotals() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.ResetTotals" />
+      <MemberSignature Language="VB.NET" Value="Public Sub ResetTotals ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void ResetTotals();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Resets the statistics that track totals.</summary>
+        <remarks>
+          <para>This method resets the following properties to zero:</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <see cref="P:Microsoft.SharePoint.Publishing.Navigation.TotalWebSettingsRequests" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.SharePoint.Publishing.Navigation.TotalWebSettingsLoad" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.SharePoint.Publishing.Navigation.TotalTermSetRequests" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.SharePoint.Publishing.Navigation.TotalTermSetLoads" />
+              </description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.ToString" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ ToString();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns a simple text report of the properties of this <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics" /> object.</summary>
+        <returns>A simple text report of the properties of this <b>TaxonomyNavigationCacheStatistics</b> object.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TotalTermSetLoads">
+      <MemberSignature Language="C#" Value="public long TotalTermSetLoads { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 TotalTermSetLoads" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.TotalTermSetLoads" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TotalTermSetLoads As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property long TotalTermSetLoads { long get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of times a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> object was loaded from the taxonomy.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TotalTermSetRequests">
+      <MemberSignature Language="C#" Value="public long TotalTermSetRequests { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 TotalTermSetRequests" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.TotalTermSetRequests" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TotalTermSetRequests As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property long TotalTermSetRequests { long get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of cache hits and misses for term set requests.</summary>
+        <value>The number of calls to the <b>GetNavigationTermSetForProvider</b> method.</value>
+        <remarks>
+          <para>The total includes both cache hits and cache misses. <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCache" /> is an internal class that is used to isolate the taxonomy navigation manager’s core functionality. It requires careful thread locking analysis and is reserved for internal use. </para>
+          <para>This property is thread safe.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TotalWebSettingsLoads">
+      <MemberSignature Language="C#" Value="public long TotalWebSettingsLoads { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 TotalWebSettingsLoads" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.TotalWebSettingsLoads" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TotalWebSettingsLoads As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property long TotalWebSettingsLoads { long get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a count of the number of cache misses for <see cref="T:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings" /> object requests.</summary>
+        <value>The number of calls to the <b>GetWebNavigationSettings</b> method.</value>
+        <remarks>
+          <para>The total includes both cache hits and cache misses.</para>
+          <para>This property is thread safe.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TotalWebSettingsRequests">
+      <MemberSignature Language="C#" Value="public long TotalWebSettingsRequests { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 TotalWebSettingsRequests" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.TotalWebSettingsRequests" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TotalWebSettingsRequests As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property long TotalWebSettingsRequests { long get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a count of the number of cache hits and misses for <see cref="T:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings" /> object requests.</summary>
+        <value>The number of cache misses for <b>WebNavigationSettings</b> objects.</value>
+        <remarks>
+          <para>Getting the number of cache misses may involve a SQL roundtrip, depending on whether the <see cref="T:Microsoft.SharePoint.SPWeb" /> object is already in the publishing cache.</para>
+          <para>This property is thread safe.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

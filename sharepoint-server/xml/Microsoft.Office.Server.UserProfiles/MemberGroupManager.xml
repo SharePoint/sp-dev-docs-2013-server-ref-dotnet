@@ -1,0 +1,325 @@
+﻿<Type Name="MemberGroupManager" FullName="Microsoft.Office.Server.UserProfiles.MemberGroupManager">
+  <TypeSignature Language="C#" Value="public class MemberGroupManager : Microsoft.Office.Server.UserProfiles.ProfileManagerBase, System.Collections.IEnumerable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit MemberGroupManager extends Microsoft.Office.Server.UserProfiles.ProfileManagerBase implements class System.Collections.IEnumerable" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.MemberGroupManager" />
+  <TypeSignature Language="VB.NET" Value="Public Class MemberGroupManager&#xA;Inherits ProfileManagerBase&#xA;Implements IEnumerable" />
+  <TypeSignature Language="C++ CLI" Value="public ref class MemberGroupManager : Microsoft::Office::Server::UserProfiles::ProfileManagerBase, System::Collections::IEnumerable" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.Office.Server.UserProfiles.ProfileManagerBase</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Collections.IEnumerable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Represents the member group manager.</summary>
+    <remarks>
+      <para>This class implements the Microsoft .NET Framework <b>IEnumerable</b> interface, which is required for data binding and iterating collections.</para>
+      <para>For more information about types of membership groups, see Memberships Overview. For a code example about how to create a member group and add a member to the newly created group, see How to: Create Memberships.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Count">
+      <MemberSignature Language="C#" Value="public override long Count { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 Count" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.MemberGroupManager.Count" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property Count As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property long Count { long get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the total number of member groups.</summary>
+        <value>The number of member groups that the member group manager is managing.</value>
+        <remarks>
+          <para>For more information about types of membership groups, see Memberships Overview. For a code example about how to create a member group and add a member to the newly created group, see How to: Create Memberships.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateMemberGroup">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.MemberGroup CreateMemberGroup (Guid source, string displayName, string mailNickname, string description, string url, string sourceReference);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.MemberGroup CreateMemberGroup(valuetype System.Guid source, string displayName, string mailNickname, string description, string url, string sourceReference) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.MemberGroupManager.CreateMemberGroup(System.Guid,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateMemberGroup (source As Guid, displayName As String, mailNickname As String, description As String, url As String, sourceReference As String) As MemberGroup" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::MemberGroup ^ CreateMemberGroup(Guid source, System::String ^ displayName, System::String ^ mailNickname, System::String ^ description, System::String ^ url, System::String ^ sourceReference);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.MemberGroup</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="source" Type="System.Guid" />
+        <Parameter Name="displayName" Type="System.String" />
+        <Parameter Name="mailNickname" Type="System.String" />
+        <Parameter Name="description" Type="System.String" />
+        <Parameter Name="url" Type="System.String" />
+        <Parameter Name="sourceReference" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="source">To be added.</param>
+        <param name="displayName">The display name for the new member group.</param>
+        <param name="mailNickname">To be added.</param>
+        <param name="description">To be added.</param>
+        <param name="url">The URL for the new member group.</param>
+        <param name="sourceReference">The membership source unique reference for the member group.</param>
+        <summary>Creates a member group.</summary>
+        <returns>The <b>MemberGroup</b> object.</returns>
+        <remarks>
+          <para>The membership source uses the <b>SourceReference</b> value to uniquely reference the group. For example, the membership source unique reference for the Active Directory directory service is the distinguished name. For SharePoint sites, it is the ID.</para>
+          <para>The source type of a membership can be a distribution list, a SharePoint site, or a custom membership source. For more information, see the <see cref="T:Microsoft.Office.Server.UserProfiles.MembershipSource" /> enumeration.</para>
+          <para>For more information about types of membership groups, see Memberships Overview. For a code example about how to create a member group and add a member to the newly created group, see How to: Create Memberships.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public override Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.MemberGroupManager.GetChanges" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChanges () As UserProfileChangeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::Office::Server::UserProfiles::UserProfileChangeCollection ^ GetChanges();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public override Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges (Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery changeQuery);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges(class Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery changeQuery) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.MemberGroupManager.GetChanges(Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChanges (changeQuery As ProfileBaseChangeQuery) As UserProfileChangeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::Office::Server::UserProfiles::UserProfileChangeCollection ^ GetChanges(Microsoft::Office::Server::UserProfiles::ProfileBaseChangeQuery ^ changeQuery);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="changeQuery" Type="Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery" />
+      </Parameters>
+      <Docs>
+        <param name="changeQuery">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public override Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges (Microsoft.Office.Server.UserProfiles.UserProfileChangeToken changeToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges(class Microsoft.Office.Server.UserProfiles.UserProfileChangeToken changeToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.MemberGroupManager.GetChanges(Microsoft.Office.Server.UserProfiles.UserProfileChangeToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChanges (changeToken As UserProfileChangeToken) As UserProfileChangeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::Office::Server::UserProfiles::UserProfileChangeCollection ^ GetChanges(Microsoft::Office::Server::UserProfiles::UserProfileChangeToken ^ changeToken);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="changeToken" Type="Microsoft.Office.Server.UserProfiles.UserProfileChangeToken" />
+      </Parameters>
+      <Docs>
+        <param name="changeToken">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEnumerator">
+      <MemberSignature Language="C#" Value="public override System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Collections.IEnumerator GetEnumerator() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.MemberGroupManager.GetEnumerator" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetEnumerator () As IEnumerator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Collections::IEnumerator ^ GetEnumerator();" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Collections.IEnumerable.GetEnumerator</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.IEnumerator</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns an enumerator that can iterate through the <see cref="T:Microsoft.Office.Server.UserProfiles.MemberGroupManager" /> instance.</summary>
+        <returns>An <b>IEnumerator</b> interface that is used to iterate through the <b>MemberGroupManager</b> object.</returns>
+        <remarks>
+          <para>
+            <b>GetEnumerator</b> is a method that implements the foreach statement (For Each in Microsoft Visual Basic). You do not need to call this method directly. This method implements the Microsoft .NET Framework <b>IEnumerable.GetEnumerator</b> method. See the .NET Framework SDK for documentation about the <b>IEnumerable.GetEnumerator</b> method.</para>
+          <para>For more information about types of membership groups, see Memberships Overview. For a code example about how to create a member group and add a member to the newly created group, see How to: Create Memberships.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEnumerator">
+      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator (bool includeAll, bool deltaImport);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.IEnumerator GetEnumerator(bool includeAll, bool deltaImport) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.MemberGroupManager.GetEnumerator(System.Boolean,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetEnumerator (includeAll As Boolean, deltaImport As Boolean) As IEnumerator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::IEnumerator ^ GetEnumerator(bool includeAll, bool deltaImport);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("This method will be removed in future relases. Use the default IEnumerable implementation of GetEnumerator which now returns all groups.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.IEnumerator</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="includeAll" Type="System.Boolean" />
+        <Parameter Name="deltaImport" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="includeAll">To be added.</param>
+        <param name="deltaImport">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMemberGroupBySourceAndSourceReference">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.MemberGroup GetMemberGroupBySourceAndSourceReference (Guid source, string sourceReference);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.MemberGroup GetMemberGroupBySourceAndSourceReference(valuetype System.Guid source, string sourceReference) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.MemberGroupManager.GetMemberGroupBySourceAndSourceReference(System.Guid,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetMemberGroupBySourceAndSourceReference (source As Guid, sourceReference As String) As MemberGroup" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::MemberGroup ^ GetMemberGroupBySourceAndSourceReference(Guid source, System::String ^ sourceReference);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.MemberGroup</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="source" Type="System.Guid" />
+        <Parameter Name="sourceReference" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="source">The globally unique identifier (GUID) for the member group.</param>
+        <param name="sourceReference">The membership source unique reference for the member group.</param>
+        <summary>Gets a member group by using the <paramref name="source" /> and <paramref name="sourceReference" /> parameters.</summary>
+        <returns>The <b>MemberGroup</b> object.</returns>
+        <remarks>
+          <para>The membership source uses the <b>SourceReference</b> value to uniquely reference the group. For example, the membership source unique reference for the Active Directory directory service is the distinguished name. For SharePoint sites, it is the ID.</para>
+          <para>The source type of a membership can be a distribution list, a SharePoint site, or a custom membership source. For more information, see the <see cref="T:Microsoft.Office.Server.UserProfiles.MembershipSource" /> enumeration.</para>
+          <para>For more information about types of membership groups, see Memberships Overview. For a code example about how to create a member group and add a member to the newly created group, see How to: Create Memberships.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetProfile">
+      <MemberSignature Language="C#" Value="public override Microsoft.Office.Server.UserProfiles.ProfileBase GetProfile (long recordId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.Office.Server.UserProfiles.ProfileBase GetProfile(int64 recordId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.MemberGroupManager.GetProfile(System.Int64)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetProfile (recordId As Long) As ProfileBase" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::Office::Server::UserProfiles::ProfileBase ^ GetProfile(long recordId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileBase</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recordId" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="recordId">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.MemberGroup this[long id] { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.MemberGroup Item(int64)" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.MemberGroupManager.Item(System.Int64)" />
+      <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(id As Long) As MemberGroup" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::MemberGroup ^ default[long] { Microsoft::Office::Server::UserProfiles::MemberGroup ^ get(long id); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.MemberGroup</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="id" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="id">To be added.</param>
+        <summary>Gets an item by using the specified unique identifier (ID).</summary>
+        <value>The <b>MemberGroup</b> object that corresponds to the unique identifier that you passed in.</value>
+        <remarks>
+          <para>For more information about types of membership groups, see Memberships Overview. For a code example about how to create a member group and add a member to the newly created group, see How to: Create Memberships.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveProfile">
+      <MemberSignature Language="C#" Value="public override void RemoveProfile (Microsoft.Office.Server.UserProfiles.ProfileBase profile);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RemoveProfile(class Microsoft.Office.Server.UserProfiles.ProfileBase profile) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.MemberGroupManager.RemoveProfile(Microsoft.Office.Server.UserProfiles.ProfileBase)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub RemoveProfile (profile As ProfileBase)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void RemoveProfile(Microsoft::Office::Server::UserProfiles::ProfileBase ^ profile);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="profile" Type="Microsoft.Office.Server.UserProfiles.ProfileBase" />
+      </Parameters>
+      <Docs>
+        <param name="profile">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

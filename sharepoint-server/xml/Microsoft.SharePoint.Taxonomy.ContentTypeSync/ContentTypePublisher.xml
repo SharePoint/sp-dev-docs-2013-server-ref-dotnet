@@ -1,0 +1,225 @@
+﻿<Type Name="ContentTypePublisher" FullName="Microsoft.SharePoint.Taxonomy.ContentTypeSync.ContentTypePublisher">
+  <TypeSignature Language="C#" Value="public sealed class ContentTypePublisher" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ContentTypePublisher extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.ContentTypeSync.ContentTypePublisher" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class ContentTypePublisher" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ContentTypePublisher sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Publishes or unpublishes a content type on the hub site.</summary>
+    <remarks>
+      <para>After a managed metadata service application and its proxy are provisioned and a site has been designated as the hub on the service application, use this class to publish or unpublish the content types on the hub site.</para>
+      <para>Also, use this class to verify whether a content type on this hub site is published, and to verify whether the MetadataHub feature is enabled on the hub.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.IO;
+using System.Globalization;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Taxonomy;
+using Microsoft.SharePoint.Taxonomy.ContentTypeSync;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class ContentTypeSyndicationSamples
+    {
+        /// &amp;lt;summary&amp;gt;
+        /// Demostrates how to use ContentTypePublisher class by creating a new
+        /// content type and then publish it and unpublish it.
+        /// Before this method is called, a Managed Metadata service application
+        /// should be created and a hub has been designated on the service application.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;param name="hubSite"&amp;gt;
+        /// The site that has been designated as the hub
+        /// &amp;lt;/param&amp;gt;
+        public static void UseContentTypePublisher(SPSite hubSite)
+        {
+            // Get the root web of the site
+            SPWeb rootWeb = hubSite.RootWeb;
+
+            // Create a new content type based on Document content type
+            SPContentType docCt = rootWeb.ContentTypes["Document"];
+            Random random = new Random();
+            string newCTName = "Test content type " + random.Next().ToString();
+            SPContentType newCt = new SPContentType(docCt,
+                rootWeb.ContentTypes,
+                newCTName);
+
+            rootWeb.ContentTypes.Add(newCt);
+
+            Console.WriteLine(newCTName + " has been created.");
+
+            // Check if the site is a valid hub site
+            if (ContentTypePublisher.IsContentTypeSharingEnabled(hubSite))
+            {
+                ContentTypePublisher publisher = new ContentTypePublisher(hubSite);
+
+                Console.WriteLine("Publishing the content type. ");
+                publisher.Publish(newCt);
+
+                // Check if this content type has been published
+                if (publisher.IsPublished(newCt))
+                {
+                    Console.WriteLine(newCTName + " is a published content type.");
+                }
+
+                Console.WriteLine("Unpublishing the content type. ");
+                publisher.Unpublish(newCt);
+
+                // Check if this content type is still published
+                if (!publisher.IsPublished(newCt))
+                {
+                    Console.WriteLine(newCTName + " is not a published content type.");
+                }
+            }
+            else
+            {
+                // The provided site is not a valid hub site
+                Console.WriteLine("This site is not a valid hub site");
+            }
+
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ContentTypePublisher (Microsoft.SharePoint.SPSite hubSite);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPSite hubSite) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.ContentTypeSync.ContentTypePublisher.#ctor(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (hubSite As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ContentTypePublisher(Microsoft::SharePoint::SPSite ^ hubSite);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="hubSite" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="hubSite">A hub site (<see cref="T:Microsoft.SharePoint.SPSite" />)</param>
+        <summary>Initializes a new instance of the ContentTypePublisher class for the provided hub site (<see cref="T:Microsoft.SharePoint.SPSite" />).</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The hubSite is a null reference (Nothing in Visual Basic) or its root web is a null reference (Nothing in Visual Basic)</exception>
+        <exception cref="T:System.ArgumentException">The site is not a valid hub because the MetadataHub feature is not enabled for it.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="IsContentTypeSharingEnabled">
+      <MemberSignature Language="C#" Value="public static bool IsContentTypeSharingEnabled (Microsoft.SharePoint.SPSite hubSite);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsContentTypeSharingEnabled(class Microsoft.SharePoint.SPSite hubSite) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.ContentTypeSync.ContentTypePublisher.IsContentTypeSharingEnabled(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsContentTypeSharingEnabled (hubSite As SPSite) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsContentTypeSharingEnabled(Microsoft::SharePoint::SPSite ^ hubSite);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="hubSite" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="hubSite">The hub site</param>
+        <summary>Represents a Boolean value that indicates whether the MetadataHub feature is enabled for the specified site.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsPublished">
+      <MemberSignature Language="C#" Value="public bool IsPublished (Microsoft.SharePoint.SPContentType contentType);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsPublished(class Microsoft.SharePoint.SPContentType contentType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.ContentTypeSync.ContentTypePublisher.IsPublished(Microsoft.SharePoint.SPContentType)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsPublished (contentType As SPContentType) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsPublished(Microsoft::SharePoint::SPContentType ^ contentType);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contentType" Type="Microsoft.SharePoint.SPContentType" />
+      </Parameters>
+      <Docs>
+        <param name="contentType">The content type to be checked. The content type should be on the root Web of the hub site.</param>
+        <summary>Indicates if the content type is published.</summary>
+        <returns>
+          <b>true</b> if content type is published on one or more associated service applications; <b>false</b> if the content type is not published on any associated service applications</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The user must have rights to add or customize pages to be able to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Publish">
+      <MemberSignature Language="C#" Value="public void Publish (Microsoft.SharePoint.SPContentType contentType);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Publish(class Microsoft.SharePoint.SPContentType contentType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.ContentTypeSync.ContentTypePublisher.Publish(Microsoft.SharePoint.SPContentType)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Publish (contentType As SPContentType)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Publish(Microsoft::SharePoint::SPContentType ^ contentType);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contentType" Type="Microsoft.SharePoint.SPContentType" />
+      </Parameters>
+      <Docs>
+        <param name="contentType">The content type to be published. The content type should be on the root Web of the hub site.</param>
+        <summary>Publishes a content type on the specified hub site.</summary>
+        <remarks>
+          <para>If there are multiple service applications associated with the current hub site and one or more are using the current site as the hub, the content type is published to all of the associated service applications.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The user must have rights to add or customize pages to be able to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.ContentTypeSync.ContentTypeSyndicationException">The content type fails to be published onto one or more associated service applications.Or the content type or one of its dependent content types contains a managed metadata field that uses a customized term set that is not available outside of the current site collection.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Unpublish">
+      <MemberSignature Language="C#" Value="public void Unpublish (Microsoft.SharePoint.SPContentType contentType);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Unpublish(class Microsoft.SharePoint.SPContentType contentType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.ContentTypeSync.ContentTypePublisher.Unpublish(Microsoft.SharePoint.SPContentType)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Unpublish (contentType As SPContentType)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Unpublish(Microsoft::SharePoint::SPContentType ^ contentType);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contentType" Type="Microsoft.SharePoint.SPContentType" />
+      </Parameters>
+      <Docs>
+        <param name="contentType">The content type to be unpublished. The content type should be on the root Web of the hub site.</param>
+        <summary>Unpublishes a content type on the specified hub site.</summary>
+        <remarks>
+          <para>If there are multiple service applications associated with the current hub site and one or more are using the current site as the hub, the content type is unpublished for all of those associated service applications.
+</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The user must have rights to add or customize pages to be able to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.ContentTypeSync.ContentTypeSyndicationException">The content type fails to be unpublished on one or more associated service applications.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

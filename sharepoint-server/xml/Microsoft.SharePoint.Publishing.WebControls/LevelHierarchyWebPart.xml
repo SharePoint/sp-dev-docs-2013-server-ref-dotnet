@@ -1,0 +1,529 @@
+﻿<Type Name="LevelHierarchyWebPart" FullName="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart">
+  <TypeSignature Language="C#" Value="public abstract class LevelHierarchyWebPart : Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit LevelHierarchyWebPart extends Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart implements class System.Web.UI.INamingContainer" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class LevelHierarchyWebPart&#xA;Inherits CmsDataFormWebPart" />
+  <TypeSignature Language="C++ CLI" Value="public ref class LevelHierarchyWebPart abstract : Microsoft::SharePoint::Publishing::WebControls::CmsDataFormWebPart" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Xml.Serialization.XmlRoot(Namespace="urn:schemas-microsoft-com:LevelHierarchyWebPart")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents the base class for Web Parts that render hierarchical data using Extensible Stylesheet Language (XSL) style sheets.</summary>
+    <remarks>
+      <para>Hierarchical data from a <b>HierarchicalDataSource</b> is rendered by this Web Part by using the concept of levels and level styles. There are a maximum of three supported levels, and styles can be assigned to each of the three levels. For example, given this hierarchical data structure: </para>
+      <para>GroupA Item1 Item2GroupB Item3 Item4GroupC Item5 Item6GroupD Item6 Item7</para>
+      <para>GroupA is Level1; GroupB is Level2; GroupC is Level2; GroupD is Level3. The level styling information is contained in an XSL style sheet; for an example, see LevelStyle.xsl.</para>
+      <para>This Web Part works in conjunction with the primary XSL style sheet that enables the output to be displayed in columns and that, if configured, displays Title text above the hierarchical data. The hierarchical data is from a hierarchical data source and the number of levels of data to get is determined by properties that are set on this Web Part.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected LevelHierarchyWebPart ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; LevelHierarchyWebPart();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConfigureDataSource">
+      <MemberSignature Language="C#" Value="protected void ConfigureDataSource ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void ConfigureDataSource() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.ConfigureDataSource" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub ConfigureDataSource ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; void ConfigureDataSource();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Configures the data source.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConfigureDataSource">
+      <MemberSignature Language="C#" Value="protected virtual void ConfigureDataSource (Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource levelHierarchyDataSource);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void ConfigureDataSource(class Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource levelHierarchyDataSource) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.ConfigureDataSource(Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void ConfigureDataSource(Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyDataSource ^ levelHierarchyDataSource);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="levelHierarchyDataSource" Type="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource" />
+      </Parameters>
+      <Docs>
+        <param name="levelHierarchyDataSource">The LevelHierarchyDataSource to be configured.</param>
+        <summary>Enables derived classes to control configuration of the data source.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConnectToDataSourceControl">
+      <MemberSignature Language="C#" Value="protected override bool ConnectToDataSourceControl ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool ConnectToDataSourceControl() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.ConnectToDataSourceControl" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function ConnectToDataSourceControl () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override bool ConnectToDataSourceControl();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Overrides the base class and creates a specified data source control during the <b>DataFormWebPart</b> life cycle.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateDataSource">
+      <MemberSignature Language="C#" Value="protected abstract Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource CreateDataSource ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource CreateDataSource() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.CreateDataSource" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Function CreateDataSource () As LevelHierarchyDataSource" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyDataSource ^ CreateDataSource();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates a LevelHierarchyDataSource for the associated control.</summary>
+        <returns>A LevelHierarchyDataSource object.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultSampleData">
+      <MemberSignature Language="C#" Value="protected override string DefaultSampleData { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DefaultSampleData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.DefaultSampleData" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides ReadOnly Property DefaultSampleData As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ DefaultSampleData { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the default sample data that is used by Microsoft SharePoint Designer 2010 when there is no actual data available.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayColumns">
+      <MemberSignature Language="C#" Value="public int DisplayColumns { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 DisplayColumns" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.DisplayColumns" />
+      <MemberSignature Language="VB.NET" Value="Public Property DisplayColumns As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int DisplayColumns { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryOrganization")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(3)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the number of columns used to render levels.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>A column starts only at Level1. To render more than one column, you must specify more than one Level1 level. The default value is 3. If a negative number or 0 is passed to the setter property, a value of 1 is assumed.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetXPathNavigator">
+      <MemberSignature Language="C#" Value="protected override System.Xml.XPath.XPathNavigator GetXPathNavigator (string viewPath);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Xml.XPath.XPathNavigator GetXPathNavigator(string viewPath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.GetXPathNavigator(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetXPathNavigator (viewPath As String) As XPathNavigator" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Xml::XPath::XPathNavigator ^ GetXPathNavigator(System::String ^ viewPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Xml.XPath.XPathNavigator</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="viewPath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="viewPath">A string that contains the path to the view to be retrieved.</param>
+        <summary>Creates an <b>XPathNavigator</b> containing the data to be rendered by the XSL template.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Header">
+      <MemberSignature Language="C#" Value="public string Header { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Header" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Header" />
+      <MemberSignature Language="VB.NET" Value="Public Property Header As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Header { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryOrganization")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the text to display above the level information in the Web Part.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default value is an empty string.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.WebPartPages.WebPartPageUserException">Header text contains too many characters. The maximum allowed is 500.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="HeaderTemplate">
+      <MemberSignature Language="C#" Value="public string HeaderTemplate { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string HeaderTemplate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.HeaderTemplate" />
+      <MemberSignature Language="VB.NET" Value="Public Property HeaderTemplate As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ HeaderTemplate { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryOrganization")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("DefaultHeader")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the style used to display the header text.</summary>
+        <value>The name of the XSL template used to display the header text.</value>
+        <remarks>
+          <para>The Web Part must be associated with an XSL style sheet that either contains or imports a template with a name that matches the header template name. The default value is <b>DefaultHeader</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Level1Style">
+      <MemberSignature Language="C#" Value="public string Level1Style { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Level1Style" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Level1Style" />
+      <MemberSignature Language="VB.NET" Value="Public Property Level1Style As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Level1Style { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryOrganization")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("Vertical")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the style used to display items in the first level.</summary>
+        <value>The name of the XSL template to use to display first level data.</value>
+        <remarks>
+          <para>For the Web Part to render a level, the Web Part must be associated with an XSL stylesheet that either contains or imports a template with a name that matches the first level style name. The default value is <b>VerticalBold</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Level2Style">
+      <MemberSignature Language="C#" Value="public string Level2Style { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Level2Style" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Level2Style" />
+      <MemberSignature Language="VB.NET" Value="Public Property Level2Style As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Level2Style { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryOrganization")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("Vertical")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the style used to display items in the second level data.</summary>
+        <value>The name of the XSL template used to display second level data.</value>
+        <remarks>
+          <para>In order for the Web Part to render a level, the Web Part must be associated with an XSL style sheet that either contains or imports a template with a name that matches the second level style name. The default value is <b>Vertical</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Level3Style">
+      <MemberSignature Language="C#" Value="public string Level3Style { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Level3Style" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Level3Style" />
+      <MemberSignature Language="VB.NET" Value="Public Property Level3Style As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Level3Style { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryOrganization")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("Vertical")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the style used to display items in the third level.</summary>
+        <value>The name of the XSL template used to display third level data.</value>
+        <remarks>
+          <para>In order for the Web Part to render a level, the Web Part must be associated with an XSL style sheet that either contains or imports a template with a name that matches the third level style name. The default value is <b>Vertical</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LevelHierarchyDataSource">
+      <MemberSignature Language="C#" Value="protected virtual Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource LevelHierarchyDataSource { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource LevelHierarchyDataSource" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.LevelHierarchyDataSource" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable ReadOnly Property LevelHierarchyDataSource As LevelHierarchyDataSource" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyDataSource ^ LevelHierarchyDataSource { Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyDataSource ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the level of the data source in the hierarchy.</summary>
+        <value>A <b>LevelHierarchyDataSource</b> that represents the level of the data source in the hierarchy.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LevelsToShow">
+      <MemberSignature Language="C#" Value="public int LevelsToShow { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 LevelsToShow" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.LevelsToShow" />
+      <MemberSignature Language="VB.NET" Value="Public Property LevelsToShow As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int LevelsToShow { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryContent")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(2)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the number of levels to show in this Web Part.</summary>
+        <value>An <b>int</b> that contains the number of levels to show in this Web Part.</value>
+        <remarks>
+          <para>This information is passed to the <b>LevelHierarchyDataSource</b> to control the number of levels of data to get. The default value is <b>2</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ModifyXsltArgumentList">
+      <MemberSignature Language="C#" Value="protected override void ModifyXsltArgumentList (Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper argList);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void ModifyXsltArgumentList(class Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper argList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.ModifyXsltArgumentList(Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub ModifyXsltArgumentList (argList As ArgumentClassWrapper)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void ModifyXsltArgumentList(Microsoft::SharePoint::WebPartPages::ArgumentClassWrapper ^ argList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="argList" Type="Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper" />
+      </Parameters>
+      <Docs>
+        <param name="argList">An argument list generated by the base class.</param>
+        <summary>Changes the XSL argument list generated by the base class before it is passed to the XSL transformer.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">An EventArgs object that represents the event information.</param>
+        <summary>Raises the load event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPreRender">
+      <MemberSignature Language="C#" Value="protected override void OnPreRender (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnPreRender(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.OnPreRender(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreRender (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreRender(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">An EventArgs object that represents the event information.</param>
+        <summary>Configures the data source, binds it to the Data Form Web Part, and runs the XSLT transform. Any errors generated by this action are logged to the trace log.</summary>
+        <remarks>
+          <para>Any errors generated by this action are logged to the trace log.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

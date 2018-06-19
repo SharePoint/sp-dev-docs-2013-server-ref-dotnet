@@ -1,0 +1,117 @@
+﻿<Type Name="SubmitToHostEventArgs" FullName="Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs">
+  <TypeSignature Language="C#" Value="public class SubmitToHostEventArgs : EventArgs" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SubmitToHostEventArgs extends System.EventArgs" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs" />
+  <TypeSignature Language="VB.NET" Value="Public Class SubmitToHostEventArgs&#xA;Inherits EventArgs" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SubmitToHostEventArgs : EventArgs" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.EventArgs</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Used to return information about the submit to host operation of a hosted InfoPath form template.</summary>
+    <remarks>
+      <para>Use the <see cref="T:Microsoft.Office.InfoPath.SubmitToHostConnection" /> object from the <see cref="N:Microsoft.Office.InfoPath" /> namespace to perform actions not supported by rules or other declarative logic. For more information about creating a SubmitToHostAdapter data connection in an InfoPath form template, see Hosting the InfoPath Form Editing Environment in a Custom Web Form.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>In the following example, properties of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs" /> object are used to populate text boxes in the Web page.</para>
+      <code>Protected Sub XmlFormView1_SubmitToHost(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.&lt;span class="label"&gt;SubmitToHostEventArgs&lt;/span&gt;) Handles XmlFormView1.SubmitToHost
+    TextBox2.Text = e.AdapterName.ToString()
+    If e.ReturnStatus = True Then
+        TextBox3.Text = e.ReturnStatus.ToString()
+    Else
+        TextBox3.Text = e.ErrorMessage.ToString()
+    End If
+End Sub</code>
+      <code>protected void XmlFormView1_SubmitToHost(object sender, &lt;span class="label"&gt;SubmitToHostEventArgs&lt;/span&gt; e)
+{
+    TextBox2.Text = e.AdapterName.ToString();
+    if (e.ReturnStatus = true)
+    {
+        TextBox3.Text = e.ReturnStatus.ToString();
+    }
+    else
+    {
+        TextBox3.Text = e.ErrorMessage.ToString();
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="AdapterName">
+      <MemberSignature Language="C#" Value="public string AdapterName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AdapterName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs.AdapterName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AdapterName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AdapterName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of the data connection used to submit the XML data of the form to the Web page.</summary>
+        <value>The name of the submit data connection.</value>
+        <remarks>
+          <para>For more information about creating a SubmitToHostAdapter data connection in an InfoPath form template, see Hosting the InfoPath Form Editing Environment in a Custom Web Form.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ErrorMessage">
+      <MemberSignature Language="C#" Value="public string ErrorMessage { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ErrorMessage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs.ErrorMessage" />
+      <MemberSignature Language="VB.NET" Value="Public Property ErrorMessage As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ErrorMessage { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the error message if the data connection failed while submitting the XML data of the form to the Web page.</summary>
+        <value>The text of the error message.</value>
+        <remarks>
+          <para>For more information about creating a SubmitToHostAdapter data connection in an InfoPath form template, see Hosting the InfoPath Form Editing Environment in a Custom Web Form.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReturnStatus">
+      <MemberSignature Language="C#" Value="public bool ReturnStatus { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ReturnStatus" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.SubmitToHostEventArgs.ReturnStatus" />
+      <MemberSignature Language="VB.NET" Value="Public Property ReturnStatus As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ReturnStatus { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the status of the submit operation of the data connection used to submit the XML data of the form to the Web page.</summary>
+        <value>
+          <b>true</b>, if the submit operation succeeded; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>For more information about creating a SubmitToHostAdapter data connection in an InfoPath form template, see Hosting the InfoPath Form Editing Environment in a Custom Web Form.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

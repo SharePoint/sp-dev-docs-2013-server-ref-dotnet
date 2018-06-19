@@ -1,0 +1,517 @@
+﻿<Type Name="SecureStoreProvider" FullName="Microsoft.Office.SecureStoreService.Server.SecureStoreProvider">
+  <TypeSignature Language="C#" Value="public sealed class SecureStoreProvider : Microsoft.BusinessData.Infrastructure.SecureStore.ICredentialEntry, Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderExtended, Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceContext" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SecureStoreProvider extends System.Object implements class Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider, class Microsoft.BusinessData.Infrastructure.SecureStore.ICredentialEntry, class Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider, class Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderExtended, class Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceContext" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SecureStoreProvider&#xA;Implements ICredentialEntry, ISecureStoreProviderExtended, ISecureStoreServiceContext" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SecureStoreProvider sealed : Microsoft::BusinessData::Infrastructure::SecureStore::ICredentialEntry, Microsoft::BusinessData::Infrastructure::SecureStore::ISecureStoreProviderExtended, Microsoft::Office::SecureStoreService::Server::ISecureStoreServiceContext" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.BusinessData.Infrastructure.SecureStore.ICredentialEntry</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderExtended</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceContext</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Represents an implementation of a Secure Store provider. This class provides runtime functionality for the callers to get credentials and metadata of target applications. </summary>
+    <remarks>
+      <para>The <b>SecureStoreProvider</b> ability to be plugged is provided through the <b>ISecureStoreProvider</b> interface.The <b>SecureStoreProvider</b> class implements the <b>ISecureStoreProviderExtended</b> and <b>ISecureStoreServiceContext</b> interfaces. The <b>ISecureStoreProviderExtended</b> interface provides a way to plug a Secure Store provider into Microsoft SharePoint Foundation. The <b>ISecureStoreServiceContext</b> interface enables the users to set the <b>SPServiceContext</b>. The <b>SecureStoreProvider</b> implementation maps a call to the appropriate method(s) in the default SSO proxy for the <b>SPServiceContext</b>.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SecureStoreProvider ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; SecureStoreProvider();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Context">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPServiceContext Context { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPServiceContext Context" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.Context" />
+      <MemberSignature Language="VB.NET" Value="Public Property Context As SPServiceContext" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPServiceContext ^ Context { Microsoft::SharePoint::SPServiceContext ^ get(); void set(Microsoft::SharePoint::SPServiceContext ^ value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceContext.Context</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPServiceContext</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the current context of the Secure Store Service.</summary>
+        <value>The current context of the Secure Store Service.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateConnectionSettings">
+      <MemberSignature Language="C#" Value="public void CreateConnectionSettings (Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings endpoint);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CreateConnectionSettings(class Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings endpoint) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.CreateConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub CreateConnectionSettings (endpoint As ConnectionSettings)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void CreateConnectionSettings(Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ endpoint);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.CreateConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="endpoint" Type="Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings" />
+      </Parameters>
+      <Docs>
+        <param name="endpoint">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteConnectionSettings">
+      <MemberSignature Language="C#" Value="public void DeleteConnectionSettings (string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DeleteConnectionSettings(string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.DeleteConnectionSettings(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteConnectionSettings (name As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void DeleteConnectionSettings(System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.DeleteConnectionSettings(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteCredentials">
+      <MemberSignature Language="C#" Value="public void DeleteCredentials (string appId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DeleteCredentials(string appId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.DeleteCredentials(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteCredentials (appId As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void DeleteCredentials(System::String ^ appId);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.DeleteCredentials(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="appId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="appId">The target application ID.</param>
+        <summary>Deletes the credentials for the target application with the specified target application ID.</summary>
+        <remarks>
+          <para>This method does not delete credentials for group target applications. It deletes credentials only for individual target applications.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialsNotFoundException">The credentials are not available for the specified target application.</exception>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreTargetApplicationNotFoundException">The target application does not exist in the Secure Store.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllConnectionSettings">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&gt; GetAllConnectionSettings (Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType type);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&gt; GetAllConnectionSettings(valuetype Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType type) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetAllConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAllConnectionSettings (type As ConnectionSettingsType) As IEnumerable(Of ConnectionSettings)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IEnumerable&lt;Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^&gt; ^ GetAllConnectionSettings(Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettingsType type);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.GetAllConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IEnumerable&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="type" Type="Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType" />
+      </Parameters>
+      <Docs>
+        <param name="type">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChildConnectionSettings">
+      <MemberSignature Language="C#" Value="public Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings GetChildConnectionSettings (string parentName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings GetChildConnectionSettings(string parentName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetChildConnectionSettings(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetChildConnectionSettings (parentName As String) As ConnectionSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ GetChildConnectionSettings(System::String ^ parentName);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.GetChildConnectionSettings(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parentName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="parentName">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetConnectionSettings">
+      <MemberSignature Language="C#" Value="public Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings GetConnectionSettings (string name, bool includeCredentials);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings GetConnectionSettings(string name, bool includeCredentials) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetConnectionSettings(System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetConnectionSettings (name As String, includeCredentials As Boolean) As ConnectionSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ GetConnectionSettings(System::String ^ name, bool includeCredentials);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.GetConnectionSettings(System.String,System.Boolean)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="includeCredentials" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="name">ConnectionSettings name.</param>
+        <param name="includeCredentials">Indicates whether to fetch the credentials too</param>
+        <summary>
+            Return the ConnectionSettings with the given name.
+            </summary>
+        <returns>Return the ConnectionSettings instance</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCredentialManagementUrl">
+      <MemberSignature Language="C#" Value="public Uri GetCredentialManagementUrl (string appId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Uri GetCredentialManagementUrl(string appId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetCredentialManagementUrl(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCredentialManagementUrl (appId As String) As Uri" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Uri ^ GetCredentialManagementUrl(System::String ^ appId);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ICredentialEntry.GetCredentialManagementUrl(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="appId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="appId">The target application ID.</param>
+        <summary>Gets the URI for managing credentials for the target application using the specified target application ID.</summary>
+        <returns>The URI for managing credentials for the target application.</returns>
+        <remarks>
+          <para>This method gets the URI for managing credentials only for individual applications.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreTargetApplicationNotFoundException">The target application does not exist in the Secure Store.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCredentials">
+      <MemberSignature Language="C#" Value="public Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection GetCredentials (string appId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection GetCredentials(string appId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetCredentials(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCredentials (appId As String) As SecureStoreCredentialCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::SecureStoreCredentialCollection ^ GetCredentials(System::String ^ appId);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.GetCredentials(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="appId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="appId">The target application ID.</param>
+        <summary>Gets the credentials for the target application using the specified target application ID.</summary>
+        <returns>The collection of credentials for the target application.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialsNotFoundException">The credentials are not available for the specified target application.</exception>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreTargetApplicationNotFoundException">The target application does not exist in the Secure Store.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCredentialsUsingTicket">
+      <MemberSignature Language="C#" Value="public Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection GetCredentialsUsingTicket (string ticket, string appId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection GetCredentialsUsingTicket(string ticket, string appId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetCredentialsUsingTicket(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCredentialsUsingTicket (ticket As String, appId As String) As SecureStoreCredentialCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::SecureStoreCredentialCollection ^ GetCredentialsUsingTicket(System::String ^ ticket, System::String ^ appId);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.GetCredentialsUsingTicket(System.String,System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ticket" Type="System.String" />
+        <Parameter Name="appId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="ticket">A Secure Store ticket that is previously issued through a call to <see cref="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.IssueTicket" />.</param>
+        <param name="appId">The target application ID.</param>
+        <summary>Gets the credentials for the target application using the specified previously issued Secure Store ticket and target application ID.</summary>
+        <returns>The collection of the credentials for the target application.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialsNotFoundException">The credentials are not available for the specified target application.</exception>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreTargetApplicationNotFoundException">The target application does not exist in the Secure Store.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetRestrictedCredentials">
+      <MemberSignature Language="C#" Value="public Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection GetRestrictedCredentials (string appId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection GetRestrictedCredentials(string appId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetRestrictedCredentials(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetRestrictedCredentials (appId As String) As SecureStoreCredentialCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::SecureStoreCredentialCollection ^ GetRestrictedCredentials(System::String ^ appId);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.GetRestrictedCredentials(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="appId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="appId">The ID of the restricted target application.</param>
+        <summary>Gets the credentials for a restricted target application using the specified target application ID.</summary>
+        <returns>The collection of credentials for the restricted target application.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialsNotFoundException">The credentials are not available for the specified target application.</exception>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreTargetApplicationNotFoundException">The target application does not exist in the Secure Store.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTargetApplication">
+      <MemberSignature Language="C#" Value="public Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition GetTargetApplication (string appId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition GetTargetApplication(string appId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetTargetApplication(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTargetApplication (appId As String) As ITargetApplicationDefinition" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::ITargetApplicationDefinition ^ GetTargetApplication(System::String ^ appId);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderExtended.GetTargetApplication(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="appId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="appId">The target application ID.</param>
+        <summary>Gets the definition of the target application.</summary>
+        <returns>The definition of the target application.</returns>
+        <remarks>
+          <para>This method gets the definition of the target application using the <see cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition" />.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreTargetApplicationNotFoundException">The target application does not exist in the Secure Store.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTargetApplicationFields">
+      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationField&gt; GetTargetApplicationFields (string appId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;class Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationField&gt; GetTargetApplicationFields(string appId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetTargetApplicationFields(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTargetApplicationFields (appId As String) As ReadOnlyCollection(Of ITargetApplicationField)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::ObjectModel::ReadOnlyCollection&lt;Microsoft::BusinessData::Infrastructure::SecureStore::ITargetApplicationField ^&gt; ^ GetTargetApplicationFields(System::String ^ appId);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderExtended.GetTargetApplicationFields(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationField&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="appId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="appId">The target application ID.</param>
+        <summary>Gets the fields for the target application using the specified target application ID.</summary>
+        <returns>The read-only field collection of the target application.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreTargetApplicationNotFoundException">The target application does not exist in the Secure Store.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTargetApplications">
+      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition&gt; GetTargetApplications ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;class Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition&gt; GetTargetApplications() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetTargetApplications" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTargetApplications () As ReadOnlyCollection(Of ITargetApplicationDefinition)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::ObjectModel::ReadOnlyCollection&lt;Microsoft::BusinessData::Infrastructure::SecureStore::ITargetApplicationDefinition ^&gt; ^ GetTargetApplications();" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderExtended.GetTargetApplications</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the definitions of all the target applications that the caller has access to.</summary>
+        <returns>A read-only collection of target application definitions.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IssueTicket">
+      <MemberSignature Language="C#" Value="public string IssueTicket ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string IssueTicket() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.IssueTicket" />
+      <MemberSignature Language="VB.NET" Value="Public Function IssueTicket () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::String ^ IssueTicket();" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.IssueTicket</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets a ticket that can be used later to retrieve credentials.</summary>
+        <returns>A ticket that can be used later to retrieve credentials.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ProviderInformation">
+      <MemberSignature Language="C#" Value="public Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderInformation ProviderInformation { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderInformation ProviderInformation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.ProviderInformation" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ProviderInformation As ISecureStoreProviderInformation" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::BusinessData::Infrastructure::SecureStore::ISecureStoreProviderInformation ^ ProviderInformation { Microsoft::BusinessData::Infrastructure::SecureStore::ISecureStoreProviderInformation ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.ProviderInformation</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderInformation</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the information provided by the current Secure Store provider.</summary>
+        <value>The information provided by the current Secure Store provider.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateConnectionSettings">
+      <MemberSignature Language="C#" Value="public void UpdateConnectionSettings (Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings connectionSettings);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void UpdateConnectionSettings(class Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings connectionSettings) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.UpdateConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void UpdateConnectionSettings(Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ connectionSettings);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.UpdateConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connectionSettings" Type="Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings" />
+      </Parameters>
+      <Docs>
+        <param name="connectionSettings">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

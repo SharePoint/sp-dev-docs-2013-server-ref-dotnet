@@ -1,0 +1,342 @@
+﻿<Type Name="TermProperty" FullName="Microsoft.SharePoint.Taxonomy.TermProperty">
+  <TypeSignature Language="C#" Value="public sealed class TermProperty : Microsoft.SharePoint.WebPartPages.WebPart" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit TermProperty extends Microsoft.SharePoint.WebPartPages.WebPart" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.TermProperty" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class TermProperty&#xA;Inherits WebPart" />
+  <TypeSignature Language="C++ CLI" Value="public ref class TermProperty sealed : Microsoft::SharePoint::WebPartPages::WebPart" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.WebPartPages.WebPart</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Web.UI.ToolboxData("&lt;{0}:TermProperty runat="server" /&gt;")</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Xml.Serialization.XmlRoot(Namespace="urn:schemas-microsoft-com:TermProperty")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Provides a Web Part that renders a property of a <see cref="T:Microsoft.SharePoint.Taxonomy.Term" />,  such as its default label, description, path, ID, or the value of one of its custom properties. </summary>
+    <remarks>
+      <para>The <see cref="P:Microsoft.SharePoint.Taxonomy.TermProperty.TermStoreID" />,
+            <see cref="P:Microsoft.SharePoint.Taxonomy.TermProperty.TermSetID" />,
+            <see cref="P:Microsoft.SharePoint.Taxonomy.TermProperty.TermID" /> and
+            <see cref="P:Microsoft.SharePoint.Taxonomy.TermProperty.Property" /> properties are required to load the correct term and render the desired term property. </para>
+      <para> If either the term or the requested property is not found, the Web Part will render nothing. </para>
+      <para>This Web Part is the <b>Term</b> analogue to the <see cref="T:Microsoft.SharePoint.WebControls.ListItemProperty" /> control that allows the author to render a property of a list item on the page. </para>
+      <para>The following code example uses the TermProperty control to render the name of a term with the specified IDs.</para>
+      <code>&amp;lt;Taxonomy:TermProperty
+      TermID="4E2C0A64-A458-4287-8D00-147C4CBE11D0"
+      TermSetID="9BFD8D2B-C391-49D5-A883-2B6CCF071CF1"
+      TermStoreID="2B8BA5E1-3A8A-4C1A-8999-DB50550342CA"
+      Property="Title"
+      runat="server"/&amp;gt;</code>
+      <para>The next example uses the TermProperty control to render the value of a custom property defined on the term with key TargetUrl".</para>
+      <code>&amp;lt;Taxonomy:TermProperty
+      TermID="4E2C0A64-A458-4287-8D00-147C4CBE11D0"
+      TermSetID="9BFD8D2B-C391-49D5-A883-2B6CCF071CF1"
+      TermStoreID="2B8BA5E1-3A8A-4C1A-8999-DB50550342CA"
+      Property="CustomProperty:TargetUrl"
+      runat="server"/&amp;gt;</code>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TermProperty ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TermProperty.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; TermProperty();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>The default constructor used when this Web Part is in standalone mode. </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetToolParts">
+      <MemberSignature Language="C#" Value="public override Microsoft.SharePoint.WebPartPages.ToolPart[] GetToolParts ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.SharePoint.WebPartPages.ToolPart[] GetToolParts() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TermProperty.GetToolParts" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetToolParts () As ToolPart()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override cli::array &lt;Microsoft::SharePoint::WebPartPages::ToolPart ^&gt; ^ GetToolParts();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.WebPartPages.ToolPart[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Specifies the list of custom tool parts that are rendered inside the tool pane.</summary>
+        <returns>An array containing an instance of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermPropertyToolPart" /> class and the 
+            <see cref="T:Microsoft.SharePoint.WebPartPages.WebPartToolPart" /> class. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TermProperty.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">The value assigned to the event.</param>
+        <summary>Provides a value that contains data for the onload event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPreRender">
+      <MemberSignature Language="C#" Value="protected override void OnPreRender (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnPreRender(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TermProperty.OnPreRender(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreRender (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreRender(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">The value assigned to the event.</param>
+        <summary>Provides a value that contains data for the prerender event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Property">
+      <MemberSignature Language="C#" Value="public string Property { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Property" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TermProperty.Property" />
+      <MemberSignature Language="VB.NET" Value="Public Property Property As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Property { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebDescription("Property of the term to render (e.g. Name, Description, Path, ID or a custom property).")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebDisplayName("Render Property")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets which property of the  <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> should be rendered. </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Valid values are:</para>
+          <list type="bullet">
+            <item>
+              <description>Name</description>
+            </item>
+            <item>
+              <description>Description</description>
+            </item>
+            <item>
+              <description>Path</description>
+            </item>
+            <item>
+              <description>ID</description>
+            </item>
+            <item>
+              <description>CustomProperty:{Key}, where {Key} is the key of a custom property defined on the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /></description>
+            </item>
+          </list>
+          <para>A custom property with key "_Sys_Nav_CategoryImageUrl" is treated uniquely and will always be rendered using a simple HTML  <b>img</b> tag with no additional attributes. No other custom property keys are treated in this special way.</para>
+          <para>This property must be specified in order for the Web Part to render a value on the page.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderWebPart">
+      <MemberSignature Language="C#" Value="protected override void RenderWebPart (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void RenderWebPart(class System.Web.UI.HtmlTextWriter writer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TermProperty.RenderWebPart(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub RenderWebPart (writer As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void RenderWebPart(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequiresWebPartClientScript">
+      <MemberSignature Language="C#" Value="protected override bool RequiresWebPartClientScript ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool RequiresWebPartClientScript() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TermProperty.RequiresWebPartClientScript" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function RequiresWebPartClientScript () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override bool RequiresWebPartClientScript();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Provides a Boolean value that indicates whether this Web Part has client-side script to register with the Web Part Page Services Component (WPSC) framework. </summary>
+        <returns>
+          <b>true</b> if the Web Part has client-side script to register; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TermID">
+      <MemberSignature Language="C#" Value="public Guid TermID { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid TermID" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TermProperty.TermID" />
+      <MemberSignature Language="VB.NET" Value="Public Property TermID As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid TermID { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebDisplayName("Term ID")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the unique identifier of the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> whose property is to be rendered. </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TermSetID">
+      <MemberSignature Language="C#" Value="public Guid TermSetID { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid TermSetID" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TermProperty.TermSetID" />
+      <MemberSignature Language="VB.NET" Value="Public Property TermSetID As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid TermSetID { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebDisplayName("Term Set ID")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the unique identifier of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> that contains the term specified by the <see cref="P:Microsoft.SharePoint.Taxonomy.TermProperty.TermID" /> property. </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TermStoreID">
+      <MemberSignature Language="C#" Value="public Guid TermStoreID { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid TermStoreID" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TermProperty.TermStoreID" />
+      <MemberSignature Language="VB.NET" Value="Public Property TermStoreID As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid TermStoreID { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebDisplayName("Term Store ID")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the unique identifier of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> that contains the term specified by the <see cref="P:Microsoft.SharePoint.Taxonomy.TermProperty.TermID" /> property. </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

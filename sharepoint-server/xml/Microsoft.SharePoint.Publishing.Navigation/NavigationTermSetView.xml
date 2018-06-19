@@ -1,0 +1,353 @@
+﻿<Type Name="NavigationTermSetView" FullName="Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView">
+  <TypeSignature Language="C#" Value="public sealed class NavigationTermSetView : Microsoft.SharePoint.Publishing.FreezableObject" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit NavigationTermSetView extends Microsoft.SharePoint.Publishing.FreezableObject" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class NavigationTermSetView&#xA;Inherits FreezableObject" />
+  <TypeSignature Language="C++ CLI" Value="public ref class NavigationTermSetView sealed : Microsoft::SharePoint::Publishing::FreezableObject" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.FreezableObject</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, FactoryType=typeof(Microsoft.SharePoint.Publishing.Internal.PublishingClientObjectFactory), ObjectIdentityPropertyName="CanonicalId", ServerTypeId="097234E9-47DA-431F-BD12-173C296B187B")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents contextual information that affects the calculation of certain properties for the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> objects in a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> object.</summary>
+    <remarks>
+      <para>The <see cref="T:Microsoft.SharePoint.SPWeb" /> object, site map provider, and policy for trimming child nodes are all examples of contextual information that the <b>NavigationTermSetView</b> object can hold.</para>
+      <para>The <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView" /> class represents contextual information that is used when rendering a navigation term set, but which is not stored in the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> or cached by the taxonomy navigation cache. Therefore, the <b>NavigationTermSetView</b> class is not considered to be part of the term set. Nonetheless, this contextual information affects the behavior of <b>NavigationTerm</b> object and <b>NavigationTermSet</b> object, similar to how a physical object's appearance may change when viewed from different angles.</para>
+      <para>The <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.View" /> property is a member of both the <b>NavigationTermSet</b> class and <b>NavigationTerm</b> class, and is carried along while traversing the hierarchy. For example, after calling the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.GetWithNewView(Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView)" /> method, the returned object will have the view, and so will any other objects obtained from members such as the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.Parent" /> property and <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.TermSet" /> property.</para>
+      <para>The <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.View" /> property is read-only and fixed for a specified object instance. Therefore, the view-changing operations always return a new instance of the <b>NavigationTerm</b> object or <b>NavigationTermSet</b> object. Returning the <b>NavigationTerm</b> object or the <b>NavigationTermSet</b> object facilitates internal performance optimizations that require immutable objects.</para>
+      <para>It is possible for an <see cref="T:Microsoft.SharePoint.SPWeb" /> object to be configured to inherit its navigation term set from the parent <b>SPWeb</b> (specified by using the <see cref="F:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSource.InheritFromParentWeb" /> value). In this situation, the <b>NavigationTermSetView</b> object  of the parent <b>SPWeb</b> object is also used for the child <b>SPWeb</b> object. In other words, the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.WebId" /> property reflects the <b>SPWeb</b> object where the term set was configured, instead of the <b>SPWeb</b> object that is inheriting the navigation.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The example below constructs a new term set and enables managed navigation for an <b>SPWeb</b> object with /web1 as the URL.</para>
+      <code>static void ConfigureNavigation(SPWeb web)
+{
+     // Create the taxonomy term set.
+     TaxonomySession taxonomySession = new TaxonomySession(web.Site);
+     TermStore termStore = taxonomySession.DefaultSiteCollectionTermStore;
+     Group group = termStore.GetSiteCollectionGroup(web.Site);
+     TermSet termSet = group.CreateTermSet("Navigation Term Set");
+
+     // Create a view of the term set as it will look after the web has
+     // been configured to use it.
+     NavigationTermSet navTermSet = NavigationTermSet.GetAsResolvedByWeb(termSet, web,"GlobalNavigationTaxonomyProvider");
+
+     // Set up the navigation-specific properties.
+     NavigationTerm navTerm = navTermSet.CreateTerm("My Article", NavigationLinkType.FriendlyUrl);
+     navTerm.TargetUrl.Value = "~site/Pages/Article.aspx";
+     navTerm.ExcludeFromGlobalNavigation = true;
+
+     // Output      //"/web1/Pages/Article.aspx?TermStoreId=...&amp;amp;TermSetId=...&amp;amp;TermId=...
+     Debug.WriteLine(navTerm.GetResolvedTargetUrl(null, null));
+     termStore.CommitAll();
+
+     //Show how the term set will look when trimming is turned on.
+     NavigationTermSetView newView = navTermSet.View.GetCopy();
+     newView.ExcludeTermsByProvider = true;
+     NavigationTermSet trimmedTermSet = navTermSet.GetWithNewView(newView);
+
+     //Output: Terms with trimming = 0
+     Debug.WriteLine("Terms with trimming = " + trimmedTermSet.Terms.Count);
+     //Output: Terms without trimming = 1
+     Debug.WriteLine("Terms without trimming = " + navTermSet.Terms.Count);
+
+     // Finally, configure the web site to use the
+     // term set above for its navigation
+     WebNavigationSettings settings = new WebNavigationSettings(web);
+     settings.GlobalNavigation.Source = StandardNavigationSource.TaxonomyProvider;
+     settings.GlobalNavigation.TermStoreId = navTermSet.TermStoreId;
+     settings.GlobalNavigation.TermSetId = navTermSet.Id;
+settings.Update(taxonomySession);
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public NavigationTermSetView (Microsoft.SharePoint.SPWeb web, string siteMapProviderName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPWeb web, string siteMapProviderName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.#ctor(Microsoft.SharePoint.SPWeb,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (web As SPWeb, siteMapProviderName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; NavigationTermSetView(Microsoft::SharePoint::SPWeb ^ web, System::String ^ siteMapProviderName);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="siteMapProviderName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="web">Initializes the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.WebId" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ServerRelativeSiteUrl" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ServerRelativeWebUrl" /> property, and the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.WebTitle" /> property.</param>
+        <param name="siteMapProviderName">Initializes the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.SiteMapProviderName" /> property.</param>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView" /> object by using the context of the provided <see cref="T:Microsoft.SharePoint.SPWeb" /> object and the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.SiteMapProviderName" /> property.</summary>
+        <remarks>
+          <para>The constructor does not enable trimming. In other words, the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ExcludeDeprecatedTerms" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ExcludeTermsByPermissions" /> property, and the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ExcludeTermsByProvider" /> property are initialized to <b>false</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExcludeDeprecatedTerms">
+      <MemberSignature Language="C#" Value="public bool ExcludeDeprecatedTerms { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ExcludeDeprecatedTerms" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ExcludeDeprecatedTerms" />
+      <MemberSignature Language="VB.NET" Value="Public Property ExcludeDeprecatedTerms As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ExcludeDeprecatedTerms { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableProperty(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnThisObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> objects are trimmed if the underlying term is deprecated..</summary>
+        <value>
+          <b>true</b> if <b>NavigationTerm</b> objects are trimmed if the underlying term is deprecated; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>When traversing the tree of <b>NavigationTerm</b> objects, if this property is <b>true</b>, then terms are excluded from the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.Terms" /> collectioin whenever the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.IsDeprecated" /> property is <b>true</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExcludeTermsByPermissions">
+      <MemberSignature Language="C#" Value="public bool ExcludeTermsByPermissions { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ExcludeTermsByPermissions" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ExcludeTermsByPermissions" />
+      <MemberSignature Language="VB.NET" Value="Public Property ExcludeTermsByPermissions As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ExcludeTermsByPermissions { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableProperty(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnThisObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> objects are trimmed if the current user does not have permission to view the target page for the friendly URL of the <b>NavigationTerm</b> object.</summary>
+        <value>A Boolean value that indicates whether a view of a term is excluded.</value>
+        <remarks>
+          <para>When traversing the tree, if this property is <b>true</b>, then the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> objects will be excluded if the current user does not have permissions to view them.  This security trimming is applied only for <b>NavigationTerm</b> objects that point to pages in the current web. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExcludeTermsByProvider">
+      <MemberSignature Language="C#" Value="public bool ExcludeTermsByProvider { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ExcludeTermsByProvider" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ExcludeTermsByProvider" />
+      <MemberSignature Language="VB.NET" Value="Public Property ExcludeTermsByProvider As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ExcludeTermsByProvider { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableProperty(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnThisObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> objects are trimmed if the provider indicated by the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.SiteMapProviderName" /> property is one of the providers in the excluded providers collection.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCopy">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView GetCopy ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView GetCopy() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.GetCopy" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCopy () As NavigationTermSetView" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Navigation::NavigationTermSetView ^ GetCopy();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns an editable copy of the current <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView" /> object.</summary>
+        <returns>A copy of the current <b>NavigationTermSetView</b> object.</returns>
+        <remarks>
+          <para>Thiiis method is used primarily when modifying a view that already belongs to a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object, and is therefore frozen.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ServerRelativeSiteUrl">
+      <MemberSignature Language="C#" Value="public string ServerRelativeSiteUrl { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ServerRelativeSiteUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ServerRelativeSiteUrl" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ServerRelativeSiteUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ServerRelativeSiteUrl { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a server-relative URL for the <see cref="T:Microsoft.SharePoint.SPSite" /> object that uses the navigation term set.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>This property is taken from the <see cref="P:Microsoft.SharePoint.SPSite.ServerRelativeUrl" /> property for the <b>SPSite</b> that uses the navigation term set. It is used when expanding tokens such as ~site, which is used with properties such as <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet.TargetUrl" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ServerRelativeWebUrl">
+      <MemberSignature Language="C#" Value="public string ServerRelativeWebUrl { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ServerRelativeWebUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ServerRelativeWebUrl" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ServerRelativeWebUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ServerRelativeWebUrl { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a server-relative URL for the <see cref="T:Microsoft.SharePoint.SPWeb" /> object that uses the navigation term set.</summary>
+        <value>This property is taken from the <see cref="P:Microsoft.SharePoint.SPWeb.ServerRelativeUrl" /> property for the web that uses that navigation term set. It is used when expanding tokens such as ~web, which is used with properties such as <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.TargetUrl" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SiteMapProviderName">
+      <MemberSignature Language="C#" Value="public string SiteMapProviderName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SiteMapProviderName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.SiteMapProviderName" />
+      <MemberSignature Language="VB.NET" Value="Public Property SiteMapProviderName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SiteMapProviderName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableProperty(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnThisObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The name of a <see cref="T:System.Web.SiteMapProvider" /> instance that identifies the navigation menu to be used when applying the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.ExcludeTermsByProvider" /> property.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>This property may be initialized to an empty string, in which case the <b>ExcludeTermsByProvider</b> trimming has no effect for this view. This property cannot be a null reference (Nothing in Visual Basic).</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WebId">
+      <MemberSignature Language="C#" Value="public Guid WebId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid WebId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.WebId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property WebId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid WebId { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the GUID identifier for the <see cref="T:Microsoft.SharePoint.SPWeb" /> object that uses the navigation term set. .</summary>
+        <value>The <see cref="P:Microsoft.SharePoint.SPWeb.ID" /> property.</value>
+        <remarks>
+          <para>This property is taken from the <see cref="P:Microsoft.SharePoint.SPWeb.Id" /> property for the web that uses the navigation term set.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WebTitle">
+      <MemberSignature Language="C#" Value="public string WebTitle { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string WebTitle" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.WebTitle" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property WebTitle As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ WebTitle { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the title of the <see cref="T:Microsoft.SharePoint.SPWeb" /> object that uses the navigation term set.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>This property is taken from the <see cref="P:Microsoft.SharePoint.SPWeb.Id" /> property for the web that uses the navigation term set.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

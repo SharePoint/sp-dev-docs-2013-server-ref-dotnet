@@ -1,0 +1,402 @@
+﻿<Type Name="EcmDocumentRouter" FullName="Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter">
+  <TypeSignature Language="C#" Value="public class EcmDocumentRouter" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit EcmDocumentRouter extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter" />
+  <TypeSignature Language="VB.NET" Value="Public Class EcmDocumentRouter" />
+  <TypeSignature Language="C++ CLI" Value="public ref class EcmDocumentRouter" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>The EcmDocumentRouter class represents a content organizer that routes documents submitted to a Web site.</summary>
+    <remarks>
+      <para>The content organizer feature enables content stewards to configure their sites so that there is a single point of content creation and submission and so that content is automatically saved to the appropriate location based on the metadata of the document. Use the <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule" /> to specify the final location for documents based on their content type and conditions. The content organizer for a specified site uses the <see cref="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.RoutingRuleCollection" /> property to store all of the rules defined for a <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb" /> object.</para>
+      <para>Initialize a new instance of the <b>EcmDocumentRouter</b> class by using the <see cref="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.Router" /> property of an <b>EcmDocumentRoutingWeb</b>. The <b>EcmDocumentRouter</b> class also provides an API (<see cref="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter.SaveFileToFinalLocation(Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb,Microsoft.SharePoint.SPFolder,System.IO.Stream,System.String,System.String,System.Collections.Hashtable,Microsoft.SharePoint.SPUser,System.Boolean,System.String)" />) to override the pre-configured location and save the document to a different location.</para>
+      <para>The following code includes a sample custom router that inspects the content of a text file that is being saved for sensitive information, and a class that you can use to reorganize documents on a site based on new content organizer rules.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.Collections;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.IO;
+using Microsoft.SharePoint;
+using RecordsRepositoryProperty = Microsoft.SharePoint.RecordsRepositoryProperty;
+using EcmDocumentRoutingWeb = Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb;
+using EcmDocumentRouter = Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter;
+using ICustomRouter = Microsoft.Office.RecordsManagement.RecordsRepository.ICustomRouter;
+using CustomRouterResult = Microsoft.Office.RecordsManagement.RecordsRepository.CustomRouterResult;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public class SampleDocumentRouter : ICustomRouter
+    {
+        /// &amp;lt;summary&amp;gt;
+        /// A sample custom router which inspects the content of a text file being saved for sensitive information
+        /// If sensitive information is found, then the information is masked and saved by the custom router.          
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;param name="contentOrganizerWeb"&amp;gt;The Content Organizer that invoked the custom router.&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="recordSeries"&amp;gt;Content type of the file being organized&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="userName"&amp;gt;The name of the user who created the file. Value can be empty if the user no longer exists.&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="fileContent"&amp;gt;Content of the file being saved.&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="properties"&amp;gt;Metadata for the file being saved.&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="finalFolder"&amp;gt;The final location that the content organizer determined for this file.&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="resultDetails"&amp;gt;Any details that the custom router wants to furnish for logging purposes.&amp;lt;/param&amp;gt;
+        /// &amp;lt;returns&amp;gt;Whether the content organizer should continue to save the file in the designated location&amp;lt;/returns&amp;gt;
+        CustomRouterResult ICustomRouter.OnSubmitFile(
+            EcmDocumentRoutingWeb contentOrganizerWeb,
+            string recordSeries, // Content type name
+            string userName,
+            Stream fileContent,
+            RecordsRepositoryProperty[] properties,
+            SPFolder finalFolder,
+            ref string resultDetails)
+        {
+            if (contentOrganizerWeb == null)
+                throw new ArgumentNullException("contentOrganizerWeb");
+            // We should have a Content Organizer enabled web           
+            if (!contentOrganizerWeb.IsRoutingEnabled)
+                throw new ArgumentException("Invalid content organizer.");
+
+            // TODO: Replace these variable values and input parameters with your own values.
+            //Change Domain\LoginName with the login name of a site user creating this file.
+            const string submitterLoginName = "Domain\\LoginName";
+            // Change MyFileName to the required file name. This will be used if this custom router needs to save the processed file to the final location.
+            string modifiedFileName = "MyFileName.txt";
+            
+            // Read incoming content into a string so that we can look for ssn. 
+            // Do not close the stream that was passed in.
+            string fileContentString = string.Empty;
+            StreamReader sr = new StreamReader(fileContent);
+            {
+                fileContentString = sr.ReadToEnd();
+            }
+            // regular expression to match social security numbers in file content.
+            Regex socialSecurityRegex = new Regex("([0-9]){3}-([0-9]){2}-([0-9]){4}");
+            MatchCollection matches = socialSecurityRegex.Matches(fileContentString);
+            if (matches.Count &amp;lt;= 0)
+            {
+                // return a string which will be logged by the content organizer.
+                resultDetails = "File was inspected and no sensitive data was found.";
+                return CustomRouterResult.SuccessContinueProcessing;
+            }
+            else
+            {
+                string submittingUserName = userName;
+                if (string.IsNullOrEmpty(userName))
+                {
+                    // LoginName of the user creating the file
+                    submittingUserName = submitterLoginName;
+                }
+                // We want to fix up the file content and save the file ourselves
+                using (SPSite site = new SPSite(contentOrganizerWeb.DropOffZoneUrl))
+                {
+                    SPWeb web = site.OpenWeb();
+                    // User creating the file
+                    SPUser submittingUser = web.SiteUsers[submittingUserName];
+                    string fileName = modifiedFileName;
+                    // Create a Hashtable of properties which forms the metadata for the file
+                    Hashtable fileProperties = EcmDocumentRouter.GetHashtableForRecordsRepositoryProperties(properties, recordSeries);
+                    // Hide sensitive content in the file stream.
+                    fileContentString = socialSecurityRegex.Replace(fileContentString, "***-**-****");
+                    byte[] modifiedByteStream = Encoding.UTF8.GetBytes(fileContentString);
+                    SPFolder newFinalFolder = finalFolder;
+                    // Alternately, if modifying properties of the document, the following method can be used to find re-evaluate the content organizer rules for the document
+                    EcmDocumentRouter contentOrganizer = contentOrganizerWeb.Router;
+                    if (ModifyProperties(properties))
+                    {
+                        newFinalFolder = contentOrganizer.GetFinalRoutingDestinationFolder(properties, recordSeries);
+                    }
+
+                    // Modify content (and/or properties) as required and then save the modified content ourselves.
+                    using (MemoryStream finalStm = new MemoryStream(modifiedByteStream))
+                    {
+                        finalStm.Write(modifiedByteStream, 0, modifiedByteStream.Length);
+                        // Save the file here since we need to modify the file.
+                        EcmDocumentRouter.SaveFileToFinalLocation(contentOrganizerWeb,
+                            newFinalFolder,
+                            finalStm,
+                            fileName,
+                            "",
+                            fileProperties,
+                            submittingUser,
+                            true /*override versioning settings on the content organizer and create a new file*/, "");
+                    }
+                    
+                    resultDetails = "File was inspected and sensitive data was found. File has been saved with a custom name.";
+                    return CustomRouterResult.SuccessCancelFurtherProcessing;
+                }
+            }
+        }
+
+        private static bool ModifyProperties(RecordsRepositoryProperty[] properties)
+        {
+            if(properties == null)
+                throw new ArgumentNullException("properties");
+
+            // TODO: Replace these variable values and input parameters with your own values.
+            // Name of the field to be modified.
+            string guidPropertyToModify = SPBuiltInFieldId.Title.ToString();
+            // A valid value for the field being modified
+            const string modifiedPropertyValue = "Modified by custom router";
+            foreach (RecordsRepositoryProperty fileProperty in properties)
+            {
+                if (fileProperty.Name == guidPropertyToModify)
+                {
+                    fileProperty.Value = modifiedPropertyValue;
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+}</code>
+      <code>using System;
+using System.Text;
+using System.IO;
+using Microsoft.SharePoint;
+using SPUrlUtility = Microsoft.SharePoint.Utilities.SPUrlUtility;
+using EcmDocumentRoutingWeb = Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb;
+using EcmDocumentRouter = Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    /// &amp;lt;summary&amp;gt;
+    /// Use this class to re-organize documents within the site based on new content organizer rules.    
+    /// &amp;lt;/summary&amp;gt;    
+    /// &amp;lt;remarks&amp;gt;Assumes that documents are present in a content-organizer enabled web site.&amp;lt;/remarks&amp;gt;
+    /// &amp;lt;see cref="SPFile.MoveTo()"/&amp;gt;
+    /// &amp;lt;see cref="Microsoft.SDK.SharePointServer.Samples.ContentOrganizerCodeSample"/&amp;gt;
+    public class ReOrganizeDocuments
+    {
+        /// &amp;lt;summary&amp;gt;
+        /// Moves the input file to a location as specified by the content organizer rules
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;param name="sourceFile"&amp;gt;File to be reorganized&amp;lt;/param&amp;gt;
+        /// &amp;lt;returns&amp;gt;The new file object if the input file could be organized, otherwise the input file object.&amp;lt;/returns&amp;gt;
+        public SPFile ReorganizeFile(SPFile sourceFile)
+        {
+            if (sourceFile == null)
+            {
+                throw new ArgumentNullException("sourceFile");
+            }
+            SPListItem sourceItem = sourceFile.Item;
+            if (sourceItem == null)
+            {
+                throw new ArgumentException("Only files in document libraries can be organized");
+            }
+            // Caller must close this after the lifetime of the file object.
+            SPWeb parentWeb = sourceItem.Web;
+            EcmDocumentRoutingWeb contentOrganizerWeb = new EcmDocumentRoutingWeb(parentWeb);
+            if (!contentOrganizerWeb.IsRoutingEnabled)
+            {
+                // There is no infrastructure for organizing this file.
+                return sourceFile;
+            }
+
+            // Find the final location for this file based on its metadata
+            string finalFolderUrl = contentOrganizerWeb.Router.GetFinalRoutingDestinationFolderUrl(sourceItem);
+            if (!string.IsNullOrEmpty(finalFolderUrl))
+            {
+                // Absolute url of a new location has been found for this file.                
+                SPFolder targetFolder = parentWeb.GetFolder(finalFolderUrl);
+                // Find the new path for this file
+                string newFileUrl = SPUrlUtility.CombineUrl(targetFolder.ServerRelativeUrl, Path.GetFileName(sourceFile.Url));
+                // If a file exists with the same name, append a new version
+                sourceFile.MoveTo(newFileUrl, SPMoveOperations.Overwrite, false /*requireWebFilePermission*/);
+                return parentWeb.GetFile(newFileUrl);
+            }
+            // Routing the file was unsuccessful. Most likely reasons:
+            // 1. There were no rules configured for the properties (metadata) on this file
+            // 2. File did not have a value for all required metadata
+            // 3. Rule that matched this file required the file to be sent to an external location.
+            return sourceFile;
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="GetFinalRoutingDestinationFolder">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPFolder GetFinalRoutingDestinationFolder (Microsoft.SharePoint.RecordsRepositoryProperty[] rrpProperties, string contentTypeName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.SPFolder GetFinalRoutingDestinationFolder(class Microsoft.SharePoint.RecordsRepositoryProperty[] rrpProperties, string contentTypeName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter.GetFinalRoutingDestinationFolder(Microsoft.SharePoint.RecordsRepositoryProperty[],System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetFinalRoutingDestinationFolder (rrpProperties As RecordsRepositoryProperty(), contentTypeName As String) As SPFolder" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::SPFolder ^ GetFinalRoutingDestinationFolder(cli::array &lt;Microsoft::SharePoint::RecordsRepositoryProperty ^&gt; ^ rrpProperties, System::String ^ contentTypeName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPFolder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rrpProperties" Type="Microsoft.SharePoint.RecordsRepositoryProperty[]" />
+        <Parameter Name="contentTypeName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="rrpProperties">Properties of the Records Repository (<see cref="T:Microsoft.SharePoint.RecordsRepositoryProperty[]" />).</param>
+        <param name="contentTypeName">A string that identifies the name of the content type.</param>
+        <summary>Gets the final routing destination folder based on properties defined for the Records Repository and a string that identifies the name of the content type.</summary>
+        <returns>Returns <see cref="T:Microsoft.SharePoint.SPFolder" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFinalRoutingDestinationFolderUrl">
+      <MemberSignature Language="C#" Value="public string GetFinalRoutingDestinationFolderUrl (Microsoft.SharePoint.SPListItem itemToRoute);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetFinalRoutingDestinationFolderUrl(class Microsoft.SharePoint.SPListItem itemToRoute) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter.GetFinalRoutingDestinationFolderUrl(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetFinalRoutingDestinationFolderUrl (itemToRoute As SPListItem) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetFinalRoutingDestinationFolderUrl(Microsoft::SharePoint::SPListItem ^ itemToRoute);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="itemToRoute" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="itemToRoute">
+          <b>SPListItem</b>.</param>
+        <summary>Returns the full URL of the <see cref="T:Microsoft.SharePoint.SPFolder" /> object where this document should be routed </summary>
+        <returns>Returns <see cref="T:System.String" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFinalRoutingDestinationFolderUrl">
+      <MemberSignature Language="C#" Value="public string GetFinalRoutingDestinationFolderUrl (Microsoft.SharePoint.RecordsRepositoryProperty[] rrpProperties, string contentTypeName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetFinalRoutingDestinationFolderUrl(class Microsoft.SharePoint.RecordsRepositoryProperty[] rrpProperties, string contentTypeName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter.GetFinalRoutingDestinationFolderUrl(Microsoft.SharePoint.RecordsRepositoryProperty[],System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetFinalRoutingDestinationFolderUrl (rrpProperties As RecordsRepositoryProperty(), contentTypeName As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetFinalRoutingDestinationFolderUrl(cli::array &lt;Microsoft::SharePoint::RecordsRepositoryProperty ^&gt; ^ rrpProperties, System::String ^ contentTypeName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rrpProperties" Type="Microsoft.SharePoint.RecordsRepositoryProperty[]" />
+        <Parameter Name="contentTypeName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="rrpProperties">Properties of the document (<see cref="T:Microsoft.SharePoint.RecordsRepositoryProperty[]" />).</param>
+        <param name="contentTypeName">A string that identifies the name of the content type.</param>
+        <summary>Returns the URL for the folder that the router determines should be the final routing destination of the file.</summary>
+        <returns>Returns <see cref="T:System.String" />.</returns>
+        <remarks>
+          <para>This is the method which is called by the client-save web service. It requiresthe property array as well as the content type name, and </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashtableForRecordsRepositoryProperties">
+      <MemberSignature Language="C#" Value="public static System.Collections.Hashtable GetHashtableForRecordsRepositoryProperties (Microsoft.SharePoint.RecordsRepositoryProperty[] properties, string contentTypeName);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Hashtable GetHashtableForRecordsRepositoryProperties(class Microsoft.SharePoint.RecordsRepositoryProperty[] properties, string contentTypeName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter.GetHashtableForRecordsRepositoryProperties(Microsoft.SharePoint.RecordsRepositoryProperty[],System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetHashtableForRecordsRepositoryProperties (properties As RecordsRepositoryProperty(), contentTypeName As String) As Hashtable" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Collections::Hashtable ^ GetHashtableForRecordsRepositoryProperties(cli::array &lt;Microsoft::SharePoint::RecordsRepositoryProperty ^&gt; ^ properties, System::String ^ contentTypeName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Hashtable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="properties" Type="Microsoft.SharePoint.RecordsRepositoryProperty[]" />
+        <Parameter Name="contentTypeName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="properties">A <b>RecordsRepositoryProperty[]</b> array containing properties of a file.</param>
+        <param name="contentTypeName">The content type of the file whose properties are enumerated in the properties array</param>
+        <summary>Converts a <see cref="T:Microsoft.SharePoint.RecordsRepositoryProperty[]" /> array into a standardized Hashtable that can be used to save the file.</summary>
+        <returns>Returns <see cref="T:System.Collections.Hashtable" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RouteFileToFinalDestination">
+      <MemberSignature Language="C#" Value="public bool RouteFileToFinalDestination (Microsoft.SharePoint.SPListItem itemToRoute, out string finalDestination, out bool wasRoutedToOtherSite);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool RouteFileToFinalDestination(class Microsoft.SharePoint.SPListItem itemToRoute, [out] string&amp; finalDestination, [out] bool&amp; wasRoutedToOtherSite) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter.RouteFileToFinalDestination(Microsoft.SharePoint.SPListItem,System.String@,System.Boolean@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RouteFileToFinalDestination (itemToRoute As SPListItem, ByRef finalDestination As String, ByRef wasRoutedToOtherSite As Boolean) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RouteFileToFinalDestination(Microsoft::SharePoint::SPListItem ^ itemToRoute, [Runtime::InteropServices::Out] System::String ^ % finalDestination, [Runtime::InteropServices::Out] bool % wasRoutedToOtherSite);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="itemToRoute" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="finalDestination" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="wasRoutedToOtherSite" Type="System.Boolean&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="itemToRoute">Not supported.</param>
+        <param name="finalDestination">Not supported.</param>
+        <param name="wasRoutedToOtherSite">Not supported.</param>
+        <summary>Not supported.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SaveFileToFinalLocation">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.SPFile SaveFileToFinalLocation (Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb edrWeb, Microsoft.SharePoint.SPFolder targetFolder, System.IO.Stream fileStream, string fileName, string originalFilePath, System.Collections.Hashtable fileProperties, Microsoft.SharePoint.SPUser fileAuthor, bool overrideVersioning, string checkInComment);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.SPFile SaveFileToFinalLocation(class Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb edrWeb, class Microsoft.SharePoint.SPFolder targetFolder, class System.IO.Stream fileStream, string fileName, string originalFilePath, class System.Collections.Hashtable fileProperties, class Microsoft.SharePoint.SPUser fileAuthor, bool overrideVersioning, string checkInComment) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter.SaveFileToFinalLocation(Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb,Microsoft.SharePoint.SPFolder,System.IO.Stream,System.String,System.String,System.Collections.Hashtable,Microsoft.SharePoint.SPUser,System.Boolean,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function SaveFileToFinalLocation (edrWeb As EcmDocumentRoutingWeb, targetFolder As SPFolder, fileStream As Stream, fileName As String, originalFilePath As String, fileProperties As Hashtable, fileAuthor As SPUser, overrideVersioning As Boolean, checkInComment As String) As SPFile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::SPFile ^ SaveFileToFinalLocation(Microsoft::Office::RecordsManagement::RecordsRepository::EcmDocumentRoutingWeb ^ edrWeb, Microsoft::SharePoint::SPFolder ^ targetFolder, System::IO::Stream ^ fileStream, System::String ^ fileName, System::String ^ originalFilePath, System::Collections::Hashtable ^ fileProperties, Microsoft::SharePoint::SPUser ^ fileAuthor, bool overrideVersioning, System::String ^ checkInComment);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPFile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="edrWeb" Type="Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb" />
+        <Parameter Name="targetFolder" Type="Microsoft.SharePoint.SPFolder" />
+        <Parameter Name="fileStream" Type="System.IO.Stream" />
+        <Parameter Name="fileName" Type="System.String" />
+        <Parameter Name="originalFilePath" Type="System.String" />
+        <Parameter Name="fileProperties" Type="System.Collections.Hashtable" />
+        <Parameter Name="fileAuthor" Type="Microsoft.SharePoint.SPUser" />
+        <Parameter Name="overrideVersioning" Type="System.Boolean" />
+        <Parameter Name="checkInComment" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="edrWeb">The Document Routing Web where the file is to be saved.</param>
+        <param name="targetFolder">The <see cref="T:Microsoft.SharePoint.SPFolder" /> to which the file is to be saved. If saving directly to a list, provide the <see cref="P:Microsoft.SharePoint.SPList.RootFolder" /> property value.</param>
+        <param name="fileStream">Content of the file in a stream.</param>
+        <param name="fileName">Name of the file to be saved.</param>
+        <param name="originalFilePath">URL or path of the file from which the content and properties of the new file were taken.</param>
+        <param name="fileProperties">Properties of the file. If a field of the same name as a key in the hashtable exists on the content type of the new file, the field will be populated with the value in the hashtable.</param>
+        <param name="fileAuthor">User who created this file.</param>
+        <param name="overrideVersioning">Always create a new file regardless of the router name conflict settings.</param>
+        <param name="checkInComment">A comment about the check in.</param>
+        <summary>Save file content and properties to a location specified by <paramref name="targetFolder" /> parameter.</summary>
+        <returns>Returns <see cref="T:Microsoft.SharePoint.SPFile" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

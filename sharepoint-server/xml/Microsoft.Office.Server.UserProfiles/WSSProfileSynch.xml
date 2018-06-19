@@ -1,0 +1,161 @@
+﻿<Type Name="WSSProfileSynch" FullName="Microsoft.Office.Server.UserProfiles.WSSProfileSynch">
+  <TypeSignature Language="C#" Value="public static class WSSProfileSynch" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit WSSProfileSynch extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.WSSProfileSynch" />
+  <TypeSignature Language="VB.NET" Value="Public Class WSSProfileSynch" />
+  <TypeSignature Language="C++ CLI" Value="public ref class WSSProfileSynch abstract sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Handles the synchronization of user profile data in the Microsoft SharePoint Foundation user information list on each site, and the synchronization of SharePoint Foundation members' group membership in the user profile memberships. Do not use this class directly from your code; instead, use stsadm.exe.</summary>
+    <remarks>
+      <para>Person synchronization is bidirectional. In the up direction, the SharePoint Foundation site collection membership list is pulled into the SharePoint Server user profile database to inform SharePoint Server about which users are a member of which sites and allow incremental synchronization. In the down direction, the SharePoint Server user profile database sends down replicable user profile information for all members in the site collection.</para>
+      <para>For more information about incremental or full user profile synchronization, see Person Synchronization with Window SharePoint Services.</para>
+      <para>You must associate job definitions with a service or Web application. You can also associate a job definition with a specific server. For more information about job definitions, see the <see cref="T:Microsoft.SharePoint.Administration.SPJobDefinition" /> class in the <a href="2d788ce7-a8bc-48ab-afef-d1e21c98498d.htm">Microsoft SharePoint Foundation 2010 SDK</a></para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ClearSyncDataForContentDatabase">
+      <MemberSignature Language="C#" Value="public static void ClearSyncDataForContentDatabase (Microsoft.SharePoint.Administration.SPContentDatabase cdb);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ClearSyncDataForContentDatabase(class Microsoft.SharePoint.Administration.SPContentDatabase cdb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.WSSProfileSynch.ClearSyncDataForContentDatabase(Microsoft.SharePoint.Administration.SPContentDatabase)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ClearSyncDataForContentDatabase (cdb As SPContentDatabase)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ClearSyncDataForContentDatabase(Microsoft::SharePoint::Administration::SPContentDatabase ^ cdb);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cdb" Type="Microsoft.SharePoint.Administration.SPContentDatabase" />
+      </Parameters>
+      <Docs>
+        <param name="cdb">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ScheduleSiteForFullSynchronization">
+      <MemberSignature Language="C#" Value="public static void ScheduleSiteForFullSynchronization (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ScheduleSiteForFullSynchronization(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.WSSProfileSynch.ScheduleSiteForFullSynchronization(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ScheduleSiteForFullSynchronization (site As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ScheduleSiteForFullSynchronization(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">A collection of sites in a Web application, including a top-level Web site and its subsites.</param>
+        <summary>Schedules a full synchronization of user profile data in the database with those in the Windows SharePoint Services user information list on each site. Do not use this member directly from your code; instead, use stsadm.exe.</summary>
+        <remarks>
+          <para>The <see cref="T:Microsoft.Office.Server.UserProfiles.WSSProfileSynch" /> class is not intended to be used directly from your code; use stsadm.exe instead.</para>
+          <para>For more information about incremental or full user profile synchronization, see Person Synchronization with Window SharePoint Services.</para>
+          <para>For more information about the <paramref name="site" /> parameter, see the <see cref="T:Microsoft.SharePoint.SPSite" /> class in the Windows SharePoint Services 3.0 SDK.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SynchronizeContentDatabase">
+      <MemberSignature Language="C#" Value="public static void SynchronizeContentDatabase (Microsoft.SharePoint.Administration.SPContentDatabase cdb);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SynchronizeContentDatabase(class Microsoft.SharePoint.Administration.SPContentDatabase cdb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.WSSProfileSynch.SynchronizeContentDatabase(Microsoft.SharePoint.Administration.SPContentDatabase)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SynchronizeContentDatabase (cdb As SPContentDatabase)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SynchronizeContentDatabase(Microsoft::SharePoint::Administration::SPContentDatabase ^ cdb);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cdb" Type="Microsoft.SharePoint.Administration.SPContentDatabase" />
+      </Parameters>
+      <Docs>
+        <param name="cdb">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SynchronizeContentDatabse">
+      <MemberSignature Language="C#" Value="public static void SynchronizeContentDatabse (Microsoft.SharePoint.Administration.SPContentDatabase cdb);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SynchronizeContentDatabse(class Microsoft.SharePoint.Administration.SPContentDatabase cdb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.WSSProfileSynch.SynchronizeContentDatabse(Microsoft.SharePoint.Administration.SPContentDatabase)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SynchronizeContentDatabse (cdb As SPContentDatabase)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SynchronizeContentDatabse(Microsoft::SharePoint::Administration::SPContentDatabase ^ cdb);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("This method is spelled wrong. Use SynchronizeContentDatabase instead")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cdb" Type="Microsoft.SharePoint.Administration.SPContentDatabase" />
+      </Parameters>
+      <Docs>
+        <param name="cdb">The content database in the Windows SharePoint Services deployment.</param>
+        <summary>Handles the synchronization of user profile data in the content database. Do not use this member directly from your code; instead, use stsadm.exe.</summary>
+        <remarks>
+          <para>The <see cref="T:Microsoft.Office.Server.UserProfiles.WSSProfileSynch" /> class is not intended to be used directly from your code; use stsadm.exe instead.</para>
+          <para>For more information about incremental or full user profile synchronization, see Person Synchronization with Window SharePoint Services.</para>
+          <para>For more information about the <paramref name="cdb" /> parameter, see the <see cref="T:Microsoft.SharePoint.Administration.SPContentDatabase" /> class in the Windows SharePoint Services 3.0 SDK.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SynchronizeWebApplication">
+      <MemberSignature Language="C#" Value="public static void SynchronizeWebApplication (Microsoft.SharePoint.Administration.SPWebApplication wa);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SynchronizeWebApplication(class Microsoft.SharePoint.Administration.SPWebApplication wa) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.WSSProfileSynch.SynchronizeWebApplication(Microsoft.SharePoint.Administration.SPWebApplication)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SynchronizeWebApplication (wa As SPWebApplication)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SynchronizeWebApplication(Microsoft::SharePoint::Administration::SPWebApplication ^ wa);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="wa" Type="Microsoft.SharePoint.Administration.SPWebApplication" />
+      </Parameters>
+      <Docs>
+        <param name="wa">The Internet Information Services (IIS) load-balanced Web application that is installed on the server farm.</param>
+        <summary>Handles the synchronization of user profile data in a Web Application. Do not use this member directly from your code; instead, use stsadm.exe.</summary>
+        <remarks>
+          <para>The <see cref="T:Microsoft.Office.Server.UserProfiles.WSSProfileSynch" /> class is not intended to be used directly from your code; use stsadm.exe instead.</para>
+          <para>For more information about incremental or full user profile synchronization, see Person Synchronization with Window SharePoint Services.</para>
+          <para>For more information about the <paramref name="wa" /> parameter, see the <see cref="T:Microsoft.SharePoint.Administration.SPWebApplication" /> class in the Windows SharePoint Services 3.0 SDK.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

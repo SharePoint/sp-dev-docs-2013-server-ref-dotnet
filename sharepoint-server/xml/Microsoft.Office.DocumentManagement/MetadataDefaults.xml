@@ -1,0 +1,566 @@
+﻿<Type Name="MetadataDefaults" FullName="Microsoft.Office.DocumentManagement.MetadataDefaults">
+  <TypeSignature Language="C#" Value="public class MetadataDefaults" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit MetadataDefaults extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.DocumentManagement.MetadataDefaults" />
+  <TypeSignature Language="VB.NET" Value="Public Class MetadataDefaults" />
+  <TypeSignature Language="C++ CLI" Value="public ref class MetadataDefaults" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Provides a way to set and get default values for fields based on where the document is added.</summary>
+    <remarks>
+      <para>This class is a wrapper around a settings file stored in a document library's Forms folder.</para>
+      <para>The settings file contains default values for fields based on where the document is added. This class provides methods to get, set, and remove these defaults and apply them to a <see cref="T:Microsoft.SharePoint.SPListItem" /> object.</para>
+      <para>To create a MetadataDefaults object for a list, either create a new <b>MetadataDefaults</b> object by passing an <see cref="T:Microsoft.SharePoint.SPList" /> object, or by passing a server-relative list URL and an <see cref="T:Microsoft.SharePoint.SPWeb" /> object.</para>
+      <para>This class is only available for use on <see cref="T:Microsoft.SharePoint.SPDocumentLibrary" /> objects.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MetadataDefaults (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.#ctor(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (list As SPList)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; MetadataDefaults(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">The Document Library that the specified <see cref="T:Microsoft.Office.DocumentManagement.MetadataDefault" /> objects apply to</param>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.Office.DocumentManagement.MetadataDefaults(Microsoft.SharePoint.SPList)" /> object.</summary>
+        <remarks>
+          <para>Only document libraries should passed as the <paramref name="list" /> parameter.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = site.OpenWeb("/");
+SPList list = web.Lists["Documents"];
+MetadataDefaults defaults = MetadataDefaults(list);</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="list" /> parameter is set to a null reference (Nothing in Visual Basic). The <paramref name="list" /> parameter should be set to a value other than a null reference (Nothing in Visual Basic).
+(ArgumentNullException.ParamName="list")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MetadataDefaults (string listPath, Microsoft.SharePoint.SPWeb currentWeb);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string listPath, class Microsoft.SharePoint.SPWeb currentWeb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.#ctor(System.String,Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (listPath As String, currentWeb As SPWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; MetadataDefaults(System::String ^ listPath, Microsoft::SharePoint::SPWeb ^ currentWeb);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="listPath" Type="System.String" />
+        <Parameter Name="currentWeb" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="listPath">A server-relative URL to the Document Library for which the specified <see cref="T:Microsoft.Office.DocumentManagement.MetadataDefaults(System.String,Microsoft.SharePoint.SPWeb)" /> object sets metadata defaults</param>
+        <param name="currentWeb">The <see cref="T:Microsoft.SharePointSPWeb" /> object where the document library resides</param>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.Office.DocumentManagement.MetadataDefaults(System.String,Microsoft.SharePoint.SPWeb)" /> object.</summary>
+        <remarks>
+          <para>Takes a server-relative document library path and the <see cref="T:Microsoft.SharePoint.SPWeb" /> object that the document library is in.</para>
+          <para>Only <see cref="T:Microsoft.SharePoint.DocumentLibrary" /> objects should be passed to the <paramref name="listPath" /> parameter.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="listPath" /> parameter is set to a null reference (Nothing in Visual Basic) or set to <b>String.Empty</b>. The <paramref name="listPath" /> parameter should contain a server-relative URL that links to a document library(ArgumentNullException.ParamName="listPath")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ApplyDefaults">
+      <MemberSignature Language="C#" Value="public bool ApplyDefaults (Microsoft.SharePoint.SPListItem item);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool ApplyDefaults(class Microsoft.SharePoint.SPListItem item) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.ApplyDefaults(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ApplyDefaults (item As SPListItem) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool ApplyDefaults(Microsoft::SharePoint::SPListItem ^ item);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="item">Item to apply defaults to</param>
+        <summary>Applies default values to a <see cref="T:Microsoft.SharePoint.SPListItem" /> object. </summary>
+        <returns>
+          <b>true</b> if successful; otherwise <b>false</b></returns>
+        <remarks>
+          <para>For fields with multiple default values at different levels of the folder hierarchy, the default value from the <see cref="T:Microsoft.SharePoint.SPFolder" /> object that is nearest to the object that contains the <see cref="T:Microsoft.SharePoint.SPListItem" /> takes precedence.</para>
+          <para>Location-based defaults are only applied when either there is no existing value on the field or there is a value, but it is the list's default value for that field. This method follows these steps when applying location-based metadata defaults to the specified item.</para>
+          <list type="number">
+            <item>
+              <description>For each field, if there is a location-based default specified at the location the item is in, and there isn't a value on the item for that field or the value is the list default, set the location-based default on the item.</description>
+            </item>
+            <item>
+              <description>If there is no location-based default specified at this location, look in the parent folder, if it exists, for a location-based default and apply that using the same logic.</description>
+            </item>
+            <item>
+              <description>Repeat steps 1 and 2 while iterating up the folder hierarchy until the root folder is reached.</description>
+            </item>
+            <item>
+              <description>For example, if the item is being added to /Document/Old/Contoso/Sales and the "Title" field had a default value of "An Old Document" set at /Documents/Old, but no location-based default at /Documents/Old/Contoso/Sales, ApplyDefaults would look for a default for "Title" at /Documents/Old/Contoso/Sales, it wouldn't find one, so it would look at /Documents/Old/Contoso. Again it does not find a default so it navigates up to the parent folder and l at /Documents/Old. Here it would find the default for the "Title" field of "An Old Document". If the item passed in has no value for "Title" or the "Title" value is identical to the list-based default then M:Microsoft.Office.DocumentManagement.MetadataDefaults.ApplyDefaults(Microsoft.SharePoint.SPListItem) would set "Title" to be "An Old Document".</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+SPListItem item = web.GetListItem("/Documents/AdventureWorks/Proposal.docx");
+defaults.ApplyDefaults(item);
+item.SystemUpdate(false);</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDefaultMetadata">
+      <MemberSignature Language="C#" Value="public System.Web.UI.Pair[] GetDefaultMetadata (Microsoft.SharePoint.SPFolder folder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Web.UI.Pair[] GetDefaultMetadata(class Microsoft.SharePoint.SPFolder folder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.GetDefaultMetadata(Microsoft.SharePoint.SPFolder)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetDefaultMetadata (folder As SPFolder) As Pair()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::Web::UI::Pair ^&gt; ^ GetDefaultMetadata(Microsoft::SharePoint::SPFolder ^ folder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.Pair[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folder" Type="Microsoft.SharePoint.SPFolder" />
+      </Parameters>
+      <Docs>
+        <param name="folder">The <see cref="T:Microsoft.SharePoint.SPFolder" /> object to get default values for</param>
+        <summary>Gets the defaults for all field that have defaults for a specified folder.</summary>
+        <returns>All of the location-based field defaults set at the <paramref name="folder" /> parameter in an array of pairs</returns>
+        <remarks>
+          <para>The first value of each pair is the field on which the default value exists. The second value in the pair is the default value on that field at passed-in parameter's folder.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+SPFolder folder = web.GetFolder("/Documents/AdventureWorks");
+Pair[] fieldDefaults = defaults.GetDefaultMetadata(folder);</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="folder" /> parameter is set to a null reference (Nothing in Visual Basic). The folder parameter should be a non-null <see cref="T:Microsoft.SharePoint.SPFolder" /> object representing a folder in the document library. (ArgumentNullException.ParamName="folder")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDefaultMetadata">
+      <MemberSignature Language="C#" Value="public System.Web.UI.Pair[] GetDefaultMetadata (string folderPath);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Web.UI.Pair[] GetDefaultMetadata(string folderPath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.GetDefaultMetadata(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetDefaultMetadata (folderPath As String) As Pair()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::Web::UI::Pair ^&gt; ^ GetDefaultMetadata(System::String ^ folderPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.Pair[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folderPath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folderPath">The server-relative path of the folder to get defaults for</param>
+        <summary>Gets the defaults for all fields in a specified <see cref="T:Microsoft.SharePoint.SPFolder" /> that have defaults.</summary>
+        <returns>All of the location-based field defaults set at <paramref name="folderPath" /> parameter in an array of pairs.</returns>
+        <remarks>
+          <para>The first value of each pair is the field on which the default value exists. The second value in the pair is the default value on that field at passed-in parameter's <paramref name="folderPath" />.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+Pair[] fieldDefaults = defaults.GetDefaultMetadata("/Documents/AdventureWorks");</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="folderPath" /> parameter is set to a null reference (Nothing in Visual Basic) or set to <b>String.Empty</b>. The <paramref name="folderPath" /> parameter should be a server-relative URL that links to a <see cref="T:Microsoft.SharePoint.SPFolder" /> object in the document library.
+(ArgumentNullException.ParamName="folderPath")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFieldDefault">
+      <MemberSignature Language="C#" Value="public string GetFieldDefault (Microsoft.SharePoint.SPFolder folder, string fieldName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetFieldDefault(class Microsoft.SharePoint.SPFolder folder, string fieldName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.GetFieldDefault(Microsoft.SharePoint.SPFolder,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetFieldDefault (folder As SPFolder, fieldName As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetFieldDefault(Microsoft::SharePoint::SPFolder ^ folder, System::String ^ fieldName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folder" Type="Microsoft.SharePoint.SPFolder" />
+        <Parameter Name="fieldName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folder">The <see cref="T:Microsoft.SharePoint.SPFolder" /> object for which to get defaults</param>
+        <param name="fieldName">The internal name of the <see cref="T:Microsoft.SharePoint.SPField" /> object for the field to get the default for</param>
+        <summary>Gets the default value for a specified folder and field.</summary>
+        <returns>The default value set on the field indicated by the <paramref name="fieldName" /> parameter at the <paramref name="folder" /> location, or <b>String.Empty</b> if no metadata default is defined for the current <see cref="T:Microsoft.SharePoint.SPFolder" /> object.</returns>
+        <remarks>To be added.</remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+SPFolder folder = web.GetFolder("/Documents/AdventureWorks");
+string defaultValue = defaults.GetFieldDefault(folder, "Title");</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="fieldName" /> parameter is set to a null reference (Nothing in Visual Basic) or set to <b>String.Empty</b>. The <paramref name="fieldName" /> parameter should be the internal name of a field on the document library.(ArgumentNullException.ParamName="fieldName")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFieldDefault">
+      <MemberSignature Language="C#" Value="public string GetFieldDefault (string folderPath, string fieldName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetFieldDefault(string folderPath, string fieldName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.GetFieldDefault(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetFieldDefault (folderPath As String, fieldName As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetFieldDefault(System::String ^ folderPath, System::String ^ fieldName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folderPath" Type="System.String" />
+        <Parameter Name="fieldName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folderPath">The server-relative path of the folder for which to get defaults</param>
+        <param name="fieldName">The internal name of the <see cref="T:Microsoft.SharePoint.SPField" /> object to get the default for</param>
+        <summary>Gets the default value for a specified field and folder.</summary>
+        <returns>The default value, or a null reference (Nothing in Visual Basic) if no metadata default is defined for the specified <see cref="T:Microsoft.SharePoint.SPFolder" /> object</returns>
+        <remarks>To be added.</remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+string defaultValue = defaults.GetFieldDefault("/Documents/AdventureWorks", "Title");</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="fieldName" /> parameter is set to a null reference (Nothing in Visual Basic) or set to <b>String.Empty</b>. The <paramref name="fieldName" /> parameter should be an internal name of a field on the document library.
+(ArgumentNullException.ParamName="fieldName")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveAllDefaults">
+      <MemberSignature Language="C#" Value="public void RemoveAllDefaults ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveAllDefaults() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.RemoveAllDefaults" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RemoveAllDefaults ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemoveAllDefaults();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Removes all of the default values set on the document library.</summary>
+        <remarks>To be added.</remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+defaults.RemoveAllDefaults();
+defaults.Update();</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveAllFieldDefaults">
+      <MemberSignature Language="C#" Value="public bool RemoveAllFieldDefaults (Microsoft.SharePoint.SPFolder folder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool RemoveAllFieldDefaults(class Microsoft.SharePoint.SPFolder folder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.RemoveAllFieldDefaults(Microsoft.SharePoint.SPFolder)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RemoveAllFieldDefaults (folder As SPFolder) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RemoveAllFieldDefaults(Microsoft::SharePoint::SPFolder ^ folder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folder" Type="Microsoft.SharePoint.SPFolder" />
+      </Parameters>
+      <Docs>
+        <param name="folder">The <see cref="T:Microsoft.SharePoint.SPFolder" /> from which to remove default values</param>
+        <summary>Removes all of the defaults set at a specified location.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b></returns>
+        <remarks>To be added.</remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+SPFolder folder = web.GetFolder("/Documents/AdventureWorks");
+defaults.RemoveAllFieldDefaults(folder);
+defaults.Update();</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="folder" /> parameter is set to a null reference (Nothing in Visual Basic). The <paramref name="folder" /> parameter should be a non-null <see cref="T:Microsoft.SharePoint.SPFolder" /> object representing a folder in the document library.
+(ArgumentNullException.ParamName="folder")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveAllFieldDefaults">
+      <MemberSignature Language="C#" Value="public bool RemoveAllFieldDefaults (string folderPath);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool RemoveAllFieldDefaults(string folderPath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.RemoveAllFieldDefaults(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RemoveAllFieldDefaults (folderPath As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RemoveAllFieldDefaults(System::String ^ folderPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folderPath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folderPath">The server-relative path to the location from which to remove the defaults</param>
+        <summary>Removes all of the default values that are set at a specified location.</summary>
+        <returns>
+          <b>true</b> if successful, otherwise, <b>false</b></returns>
+        <remarks>
+          <para>Removes the default values set on all of the fields at the location specified by the <paramref name="folderPath" /> parameter.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+defaults.RemoveAllFieldDefaults("/Documents/AdventureWorks");
+defaults.Update();</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="folderPath" /> parameter is set to a null reference (Nothing in Visual Basic) or set to <b>String.Empty</b>. The <paramref name="folderPath" /> parameter should be a server-relative URL that links to a <see cref="T:Microsoft.SharePoint.SPFolder" /> in the document library.(ArgumentNullException.ParamName="folderPath")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveFieldDefault">
+      <MemberSignature Language="C#" Value="public bool RemoveFieldDefault (Microsoft.SharePoint.SPFolder folder, string fieldName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool RemoveFieldDefault(class Microsoft.SharePoint.SPFolder folder, string fieldName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.RemoveFieldDefault(Microsoft.SharePoint.SPFolder,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RemoveFieldDefault (folder As SPFolder, fieldName As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RemoveFieldDefault(Microsoft::SharePoint::SPFolder ^ folder, System::String ^ fieldName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folder" Type="Microsoft.SharePoint.SPFolder" />
+        <Parameter Name="fieldName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folder">The <see cref="T:Microsoft.SharePoint.SPFolder" /> object for which to remove the metadata default</param>
+        <param name="fieldName">The internal name of the <see cref="T:Microsoft.SharePoint.SPField" /> object for which to remove a default</param>
+        <summary>Removes the default value of a <see cref="T:Microsoft.SharePoint.SPField" /> object at a specified <see cref="T:Microsoft.SharePoint.SPFolder" /> object.</summary>
+        <returns>
+          <b>true</b> if successful;otherwise, <b>false</b></returns>
+        <remarks>To be added.</remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+SPFolder folder = web.GetFolder("/Documents/AdventureWorks");
+defaults.RemoveFieldDefault(folder, "Title");
+defaults.Update();
+</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="fieldName" /> parameter is set to a null reference (Nothing in Visual Basic) or set to <b>String.Empty</b>. The <paramref name="fieldName" /> parameter should be an internal name of a field on the document library.
+(ArgumentNullException.ParamName="fieldName")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveFieldDefault">
+      <MemberSignature Language="C#" Value="public bool RemoveFieldDefault (string folderPath, string fieldName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool RemoveFieldDefault(string folderPath, string fieldName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.RemoveFieldDefault(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RemoveFieldDefault (folderPath As String, fieldName As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RemoveFieldDefault(System::String ^ folderPath, System::String ^ fieldName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folderPath" Type="System.String" />
+        <Parameter Name="fieldName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folderPath">The server-relative path that links to the <see cref="T:Microsoft.SharePoint.SPFolder" /> object from which to remove the default value.</param>
+        <param name="fieldName">The internal name of the <see cref="T:Microsoft.SharePoint.SPField" /> object from which to remove a default value.</param>
+        <summary>Removes the default value of a field from an <see cref="T:Microsoft.SharePoint.SPFolder" /> object.</summary>
+        <returns>
+          <b>true</b> if successful;otherwise, <b>false</b></returns>
+        <remarks>To be added.</remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+defaults.RemoveFieldDefault("/Documents/AdventureWorks", "Title");
+defaults.Update();</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="fieldName" /> parameter is set to a null reference (Nothing in Visual Basic) or set to <b>String.Empty</b>. The <paramref name="fieldName" /> parameter should be an internal name of a <see cref="T:Microsoft.SharePoint.SPField" /> object on the document library.
+(ArgumentNullException.ParamName="fieldName")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetFieldDefault">
+      <MemberSignature Language="C#" Value="public bool SetFieldDefault (Microsoft.SharePoint.SPFolder folder, string fieldName, string value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool SetFieldDefault(class Microsoft.SharePoint.SPFolder folder, string fieldName, string value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.SetFieldDefault(Microsoft.SharePoint.SPFolder,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function SetFieldDefault (folder As SPFolder, fieldName As String, value As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool SetFieldDefault(Microsoft::SharePoint::SPFolder ^ folder, System::String ^ fieldName, System::String ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folder" Type="Microsoft.SharePoint.SPFolder" />
+        <Parameter Name="fieldName" Type="System.String" />
+        <Parameter Name="value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folder">
+          <see cref="T:Microsoft.SharePoint.SPFolder" /> location at which to set the default value</param>
+        <param name="fieldName">Internal name of the <see cref="T:Microsoft.SharePoint.SPField" /> object for which to set the default</param>
+        <param name="value">The default value</param>
+        <summary>Sets a default for a field at a location.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b></returns>
+        <remarks>
+          <para>This method sets a default value on a field to apply to documents added to the specified location. The value should be appropriate for the type of field the default is being set on. For example, a <b>DateTime</b> string for a <b>SPFieldDataTime</b> object.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+SPFolder folder = web.GetFolder("/Documents/AdventureWorks");
+defaults.SetFieldDefault(folder, "Title", "AdventureWorks Document");
+defaults.Update();</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="value" /> parameter is set to a null reference (Nothing in Visual Basic) or set to <b>String.Empty</b>. The <paramref name="value" /> parameter should be the default value that is applied to the specified <see cref="T:Microsoft.SharePoint.SPField" /> object on documents added to this folder.
+(ArgumentNullException.ParamName="value")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetFieldDefault">
+      <MemberSignature Language="C#" Value="public bool SetFieldDefault (string folderPath, string fieldName, string value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool SetFieldDefault(string folderPath, string fieldName, string value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.SetFieldDefault(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function SetFieldDefault (folderPath As String, fieldName As String, value As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool SetFieldDefault(System::String ^ folderPath, System::String ^ fieldName, System::String ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folderPath" Type="System.String" />
+        <Parameter Name="fieldName" Type="System.String" />
+        <Parameter Name="value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folderPath">Server-relative path that links to the location at which to set the default</param>
+        <param name="fieldName">Internal name of the <see cref="T:Microsoft.SharePoint.SPField" /> object at which to set the default</param>
+        <param name="value">The default value</param>
+        <summary>Sets a default value for a default field to apply to documents at a specified location.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b></returns>
+        <remarks>
+          <para>The value should be appropriate for the type of field the default is being set on. For example, use a <b>DateTime</b> string for a <see cref="T:Microsoft.SharePoint.SPFieldDateTime" />.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+defaults.SetFieldDefault("/Documents/AdventureWorks", "Title", "AdventureWorks Document");
+defaults.Update();</para>
+        </example>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="value" /> parameter is set to a null reference (Nothing in Visual Basic) or set to <b>String.Empty</b>. The <paramref name="value" /> parameter should be the default value that is applied to the specified <see cref="T:Microsoft.SharePoint.SPField" /> object on documents added to this folder.
+(ArgumentNullException.ParamName="value")</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Write changes to default values to the disk and adds or removes the appropriate event handlers.</summary>
+        <remarks>
+          <para>Any method on the <see cref="T:Microsoft.Office.DocumentManagement.MetadataDefaults" /> type does not take effect until the changes have been applied to the settings document. If the settings document contains any location-based defaults, an <b>SPItemEventReceiver.ItemAdded</b> event receiver is registered so that any new items added to this document library receive the specified location-based defaults. If the settings document contains no defaults, then the <b>ItemAdded</b> event receiver will be unregistered to reduce processing time when adding new items to this document library.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>SPSite site = new SPSite("http://contoso");
+SPWeb web = new site.OpenWeb("/");
+MetadataDefaults defaults = MetadataDefaults("/Documents", web);
+defaults.SetFieldDefault("/Documents/AdventureWorks", "Title", "AdventureWorks Document");
+defaults.Update();</para>
+        </example>
+        <exception cref="T:System.ArgumentException">The document library for which the current <see cref="T:Microsoft.Office.DocumentManagement.MetadataDefaults" /> object is created for does not contain a <b>Forms</b> folder at the root of the library.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,140 @@
+﻿<Type Name="XmlConsoleDataSource" FullName="Microsoft.SharePoint.Publishing.WebControls.XmlConsoleDataSource">
+  <TypeSignature Language="C#" Value="public sealed class XmlConsoleDataSource : Microsoft.SharePoint.Publishing.WebControls.ConsoleDataSource" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit XmlConsoleDataSource extends Microsoft.SharePoint.Publishing.WebControls.ConsoleDataSource" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.XmlConsoleDataSource" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class XmlConsoleDataSource&#xA;Inherits ConsoleDataSource" />
+  <TypeSignature Language="C++ CLI" Value="public ref class XmlConsoleDataSource sealed : Microsoft::SharePoint::Publishing::WebControls::ConsoleDataSource" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.WebControls.ConsoleDataSource</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.WebControls.MdsCompliant(IsCompliant=true)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>An implementation of the <b>XmlConsoleDataSource</b> object that generates data that is based on a specially designed XML configuration file.</summary>
+    <remarks>
+      <para>The <b>XmlConsoleDataSource</b> object displays a hierarchical structure of actions to the author. This control is independent of the user interface (UI), which means that any UI can be developed to read this <b>ConsoleDataSource</b> object and display the actions. Examples of UIs that use this object include the <b>PublishingMenu</b> and <b>QuickAccessMenu</b>. A single XML that specifies how the actions should be structured populates each <b>XmlConsoleDataSource</b> object. This XML file includes the definitions for each action..</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public XmlConsoleDataSource ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.XmlConsoleDataSource.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; XmlConsoleDataSource();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Creates an instance of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.XmlConsoleDataSource" /> object. </summary>
+        <remarks>
+          <para>The configuration XML file is not specified upon construction.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConfigurationProvider">
+      <MemberSignature Language="C#" Value="public string ConfigurationProvider { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ConfigurationProvider" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.XmlConsoleDataSource.ConfigurationProvider" />
+      <MemberSignature Language="VB.NET" Value="Public Property ConfigurationProvider As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ConfigurationProvider { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>A String that represents the configuration XML file used to populate the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.XmlConsoleDataSource" /> object</summary>
+        <value>A string that represents the name of the XML configuration file.</value>
+        <remarks>
+          <para>All custom XML files should be found on the server at: <a href="http://servername/_catalogs/masterpage/Editing Menu">http://servername/_catalogs/masterpage/Editing%20Menu</a><b>XmlConsoleDataSource</b> object with a file named "CustomActions.xml" set the <b>ConfigurationProvider</b> property to "CustomActions", and the CustomActions.xml file is placed in the folder specified above.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsBuiltInConfiguration">
+      <MemberSignature Language="C#" Value="public bool IsBuiltInConfiguration { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsBuiltInConfiguration" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.XmlConsoleDataSource.IsBuiltInConfiguration" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsBuiltInConfiguration As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsBuiltInConfiguration { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines whether the file being used to populate this XmlConsole<b>DataSource</b> object is a predefined or custom file.</summary>
+        <value>A Boolean value that represents whether the XML file was predefined in the Microsoft SharePoint Foundation Publishing collection.</value>
+        <remarks>
+          <para>Set this value to <b>True</b> if the configuration file is a predefined file included with the product. Set this value to <b>False </b>if the configuration file is a custom file or is stored in the database.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.XmlConsoleDataSource.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>
+            Get the Tree loaded immediately upon load
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PopulateDataSource">
+      <MemberSignature Language="C#" Value="public override void PopulateDataSource ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void PopulateDataSource() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.XmlConsoleDataSource.PopulateDataSource" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub PopulateDataSource ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void PopulateDataSource();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Populates the <b>XmlConsoleDataSource</b> object based on the configuration XML file that is specified in the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.XmlConsoleDataSource.ConfigurationProvider" /> property</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

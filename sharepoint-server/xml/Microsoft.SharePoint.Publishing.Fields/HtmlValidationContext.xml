@@ -1,0 +1,786 @@
+﻿<Type Name="HtmlValidationContext" FullName="Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext">
+  <TypeSignature Language="C#" Value="public class HtmlValidationContext" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi HtmlValidationContext extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" />
+  <TypeSignature Language="VB.NET" Value="Public Class HtmlValidationContext" />
+  <TypeSignature Language="C++ CLI" Value="public ref class HtmlValidationContext" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>This class handles all validation checking and HTML filtering, based on constraint properties that are set on the validation context. </summary>
+    <remarks>
+      <para>The caller sets various constraints by setting the different constraint properties first. Then, the caller can invoke the <see cref="M:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.ValidateHtml(System.String,System.Boolean@,System.Boolean@)" /> method to validate the input HTML and get the filtered HTML in return. Any input HTML markup that is determined to be unsafe or invalid, such as script and object tags, is also always removed from the content regardless of constraint property settings.</para>
+      <para>Use this class for validation in the <b>RichHtmlField</b> control to validate and provide feedback to the user about failures.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The <b>ValidateHtmlCode</b> sample constructs an <b>HtmlValidationContext</b> object with various settings and uses it to restrict and validate HTML content and return a report string. The sample function takes two optional arguments:</para>
+      <list type="bullet">
+        <item>
+          <description>
+            <paramref name="htmlContent" />. A string of HTML to run through validation. If this string is empty, then the application uses a default string of test HTML.</description>
+        </item>
+        <item>
+          <description>
+            <paramref name="siteCollectionToRestrict" />. A <see cref="T:Microsoft.SharePoint.SPSite" /> object used to restrict the URLs present in the HTML. If this is set to <paramref name="null" /> then the URLs are not restricted to an <b>SPSite</b> object.</description>
+        </item>
+      </list>
+      <para>This sample covers the following constructor, properties, and methods:</para>
+      <list type="bullet">
+        <item>
+          <description>
+            <see cref="M:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.#ctor" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowedTagsSettingsMessage" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowFonts" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowHeadings" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowHyperlinks" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowImages" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowLists" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowTables" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowTextMarkup" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.GuidOfThisSiteCollection" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.RestrictUrlsToSiteCollection" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="M:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.ValidateHtml(System.String)" />
+          </description>
+        </item>
+        <item>
+          <description>
+            <see cref="M:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.ValidateHtml(System.String,System.Boolean@,System.Boolean@)" />
+          </description>
+        </item>
+      </list>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public HtmlValidationContext ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; HtmlValidationContext();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Constructs a new <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowedTagsSettingsMessage">
+      <MemberSignature Language="C#" Value="public string AllowedTagsSettingsMessage { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AllowedTagsSettingsMessage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowedTagsSettingsMessage" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AllowedTagsSettingsMessage As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AllowedTagsSettingsMessage { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a message—that can be read by a person—that describes the constraints and disallowed tags for the HTML in this <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> object.</summary>
+        <value>A string that describes the groups of tags that are not allowed by this <b>HtmlValidationContext</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowEmbedding">
+      <MemberSignature Language="C#" Value="public bool AllowEmbedding { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowEmbedding" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowEmbedding" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowEmbedding As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowEmbedding { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code. Gets or sets the constraint that allows embedding elements in the HTML.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowFonts">
+      <MemberSignature Language="C#" Value="public bool AllowFonts { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowFonts" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowFonts" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowFonts As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowFonts { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the constraint that allows font element tags to be added in the HTML.</summary>
+        <value>When set to <b>True</b>, font element tags are allowed.</value>
+        <remarks>To be added.</remarks>
+        <example>
+          <code>// Set the constraint properties to any desired combination of true and false
+      validationContext.AllowFonts = true;
+      validationContext.AllowHeadings = false;
+      validationContext.AllowHyperlinks = true;
+      validationContext.AllowImages = false;
+      validationContext.AllowLists = false;
+      validationContext.AllowTables = true;
+      validationContext.AllowTextMarkup = false;</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ValidateHtmlCode sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowHeadings">
+      <MemberSignature Language="C#" Value="public bool AllowHeadings { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowHeadings" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowHeadings" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowHeadings As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowHeadings { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the constraint that allows heading tags to be added in the HTML.</summary>
+        <value>Default is <b>True</b>.</value>
+        <remarks>
+          <para>When set to <b>True</b>, heading tags are allowed. If you set this flag to <b>False</b>, the following tags are removed from the HTML: </para>
+          <para>
+            <b>&lt;DIR&gt;</b>, <b>&lt;H1&gt;</b>, <b>&lt;H2&gt;</b>, <b>&lt;H3&gt;</b>, <b>&lt;H4&gt;</b>, <b>&lt;H5&gt;</b>, <b>&lt;H6&gt;</b>, <b>&lt;MARQUEE&gt;</b>, <b>&lt;ADDRESS&gt; </b>and <b>&lt;CENTER&gt;</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Set the constraint properties to any desired combination of true and false
+      validationContext.AllowFonts = true;
+      validationContext.AllowHeadings = false;
+      validationContext.AllowHyperlinks = true;
+      validationContext.AllowImages = false;
+      validationContext.AllowLists = false;
+      validationContext.AllowTables = true;
+      validationContext.AllowTextMarkup = false;</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ValidateHtmlCode sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowHyperlinks">
+      <MemberSignature Language="C#" Value="public bool AllowHyperlinks { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowHyperlinks" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowHyperlinks" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowHyperlinks As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowHyperlinks { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the constraint that allows hyperlinks to be added in the HTML.</summary>
+        <value>Default is <b>True</b>.</value>
+        <remarks>
+          <para>When set to <b>True</b>, hyperlinks are allowed. If you set this flag to <b>False</b>, <b>&lt;A&gt;</b>, <b>&lt;AREA&gt;</b> and <b>&lt;MAP&gt;</b> tags are removed from the HTML.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Set the constraint properties to any desired combination of true and false
+      validationContext.AllowFonts = true;
+      validationContext.AllowHeadings = false;
+      validationContext.AllowHyperlinks = true;
+      validationContext.AllowImages = false;
+      validationContext.AllowLists = false;
+      validationContext.AllowTables = true;
+      validationContext.AllowTextMarkup = false;</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ValidateHtmlCode sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowImages">
+      <MemberSignature Language="C#" Value="public bool AllowImages { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowImages" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowImages" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowImages As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowImages { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the constraint that allows image tags to be added in the HTML.</summary>
+        <value>Default is <b>True</b>.</value>
+        <remarks>
+          <para>When set to <b>True</b>, image tags are allowed. If you set this flag to <b>False</b>, <b>&lt;IMG&gt;</b> and <b>&lt;BGSOUND&gt;</b> tags are removed from the HTML.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Set the constraint properties to any desired combination of true and false
+      validationContext.AllowFonts = true;
+      validationContext.AllowHeadings = false;
+      validationContext.AllowHyperlinks = true;
+      validationContext.AllowImages = false;
+      validationContext.AllowLists = false;
+      validationContext.AllowTables = true;
+      validationContext.AllowTextMarkup = false;</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ValidateHtmlCode sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowLists">
+      <MemberSignature Language="C#" Value="public bool AllowLists { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowLists" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowLists" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowLists As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowLists { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the constraint that allows list tags to be added in the HTML.</summary>
+        <value>Default is <b>True</b>.</value>
+        <remarks>
+          <para>When set to <b>True</b>, list tags are allowed. If you set this flag to <b>False</b>, the following tags are removed:</para>
+          <para>
+            <b>&lt;LI&gt;</b>, <b>&lt;OL&gt;</b>, <b>&lt;UL&gt;</b>, <b>&lt;DD&gt;</b>, <b>&lt;DL&gt;</b>, <b>&lt;DT&gt;</b>, and <b>&lt;MENU&gt;</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Set the constraint properties to any desired combination of true and false
+      validationContext.AllowFonts = true;
+      validationContext.AllowHeadings = false;
+      validationContext.AllowHyperlinks = true;
+      validationContext.AllowImages = false;
+      validationContext.AllowLists = false;
+      validationContext.AllowTables = true;
+      validationContext.AllowTextMarkup = false;</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ValidateHtmlCode sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowReusableContent">
+      <MemberSignature Language="C#" Value="public bool AllowReusableContent { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowReusableContent" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowReusableContent" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowReusableContent As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowReusableContent { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowTables">
+      <MemberSignature Language="C#" Value="public bool AllowTables { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowTables" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowTables" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowTables As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowTables { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the constraint that allows table handling tags to be added in the HTML.</summary>
+        <value>Default is <b>True</b>.</value>
+        <remarks>
+          <para>When set to <b>True</b>, table handling tags are allowed. If you set this flag to <b>False</b>, the following tags are removed:</para>
+          <para>
+            <b>&lt;CAPTION&gt;</b>, <b>&lt;COL&gt;</b>, <b>&lt;COLGROUP&gt;</b>, <b>&lt;TABLE&gt;</b>, <b>&lt;TBODY&gt;</b>, <b>&lt;TD&gt;</b>, <b>&lt;TFOOT&gt;</b>, <b>&lt;TH&gt;</b>, <b>&lt;THEAD&gt;</b>, <b>&lt;TR&gt;</b>, <b>&lt;FIELDSET&gt;</b>, <b>&lt;LEGEND&gt;</b>,and <b>&lt;HR&gt;</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Set the constraint properties to any desired combination of true and false
+      validationContext.AllowFonts = true;
+      validationContext.AllowHeadings = false;
+      validationContext.AllowHyperlinks = true;
+      validationContext.AllowImages = false;
+      validationContext.AllowLists = false;
+      validationContext.AllowTables = true;
+      validationContext.AllowTextMarkup = false;</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ValidateHtmlCode sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowTextMarkup">
+      <MemberSignature Language="C#" Value="public bool AllowTextMarkup { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowTextMarkup" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowTextMarkup" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowTextMarkup As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowTextMarkup { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the constraint that allows explicit text markup tags, such as bold and italic, to be added in the HTML.</summary>
+        <value>Default is <b>True</b>.</value>
+        <remarks>
+          <para>When set to <b>True</b>, table handling tags are allowed. If you set this flag to <b>False</b>, the following tags are removed:</para>
+          <para>
+            <b>&lt;B&gt;</b>, <b>&lt;EM&gt;</b>, <b>&lt;I&gt;</b>, <b>&lt;STRONG&gt;</b>, <b>&lt;S&gt;</b>, <b>&lt;STRIKE&gt;</b>, <b>&lt;TT&gt;</b>, <b>&lt;ABBR&gt;</b>, <b>&lt;ACRONYM&gt;</b>, <b>&lt;CITE&gt;</b>, <b>&lt;CODE&gt;</b>, <b>&lt;DEL&gt;</b>, <b>&lt;DFN&gt;</b>, <b>&lt;INS&gt;</b>, <b>&lt;SAMP&gt;</b>, <b>&lt;BDO&gt;</b>, <b>&lt;RT&gt;</b>, <b>&lt;RUBY&gt;</b>, <b>&lt;U&gt;</b>, <b>&lt;BIG&gt;</b>, <b>&lt;SMALL&gt;</b>, <b>&lt;SUB&gt;</b>, <b>&lt;SUP&gt;</b>, <b>&lt;PRE&gt;</b>, <b>&lt;PLAINTEXT&gt;</b>, <b>&lt;XMP&gt;</b>, <b>&lt;Q&gt;</b>, <b>&lt;LISTING&gt;</b>, <b>&lt;BLOCKQUOTE&gt;</b>, <b>&lt;NOBR&gt;</b>,and <b>&lt;WBR&gt;</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Set the constraint properties to any desired combination of true and false
+      validationContext.AllowFonts = true;
+      validationContext.AllowHeadings = false;
+      validationContext.AllowHyperlinks = true;
+      validationContext.AllowImages = false;
+      validationContext.AllowLists = false;
+      validationContext.AllowTables = true;
+      validationContext.AllowTextMarkup = false;</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ValidateHtmlCode sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GuidOfThisSiteCollection">
+      <MemberSignature Language="C#" Value="public Guid GuidOfThisSiteCollection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid GuidOfThisSiteCollection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.GuidOfThisSiteCollection" />
+      <MemberSignature Language="VB.NET" Value="Public Property GuidOfThisSiteCollection As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid GuidOfThisSiteCollection { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the GUID of the current site collection.</summary>
+        <value>GUID that contains the identifier of the current site collection.</value>
+        <remarks>
+          <para>If you want to restrict URLs to a specific site collection, you must set this property to its GUID. This property is only used if <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.RestrictUrlsToSiteCollection" /> is set to <b>True</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>      if (null == siteCollectionToRestrict)
+      {
+          // No site collection provided so do not restrict URLs
+          validationContext.RestrictUrlsToSiteCollection = false;
+          validationContext.GuidOfThisSiteCollection = System.Guid.Empty;
+      }</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ValidateHtmlCode sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="RestrictUrlsToSiteCollection">
+      <MemberSignature Language="C#" Value="public bool RestrictUrlsToSiteCollection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool RestrictUrlsToSiteCollection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.RestrictUrlsToSiteCollection" />
+      <MemberSignature Language="VB.NET" Value="Public Property RestrictUrlsToSiteCollection As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool RestrictUrlsToSiteCollection { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the constraint that forces all URLs to point to the current site collection.</summary>
+        <value>A Boolean value that indicates whether to force all URLs to point to the current site collection.</value>
+        <remarks>
+          <para>When set to <b>True</b>, only URLs that point to files in a specific site collection are allowed. You should set the <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.GuidOfThisSiteCollection" /> to the GUID of the site collection.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>      if (null == siteCollectionToRestrict)
+      {
+          // No site collection provided so do not restrict URLs
+          validationContext.RestrictUrlsToSiteCollection = false;
+          validationContext.GuidOfThisSiteCollection = System.Guid.Empty;
+      }</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ValidateHtmlCode sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateHtml">
+      <MemberSignature Language="C#" Value="public string ValidateHtml (string inputHtml);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string ValidateHtml(string inputHtml) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.ValidateHtml(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ValidateHtml (inputHtml As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ ValidateHtml(System::String ^ inputHtml);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="inputHtml" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="inputHtml">HTML string that is validated.</param>
+        <summary>Removes unsafe or disallowed HTML markup and returns validated HTML.</summary>
+        <returns>The validated HTML, from which all unsafe or disallowed content is removed.</returns>
+        <remarks>
+          <para>Removes any tags, attributes, or markup from an HTML string that are unsafe or do not conform to the constraint settings that have been applied to this <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> object.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>string reportString = "Validating the following HTML \n[" + htmlContentToValidate + "]";
+
+HtmlValidationContext validationContext = new HtmlValidationContext();
+
+reportString += 
+"First validate with no constraints to remove unsafe content only \n[" + 
+validationContext.ValidateHtml(htmlContentToValidate) + "]";</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ValidateHtmlCode sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateHtml">
+      <MemberSignature Language="C#" Value="public string ValidateHtml (string inputHtml, out bool tagsWereDropped, out bool urlsWereDropped);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string ValidateHtml(string inputHtml, [out] bool&amp; tagsWereDropped, [out] bool&amp; urlsWereDropped) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.ValidateHtml(System.String,System.Boolean@,System.Boolean@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ValidateHtml (inputHtml As String, ByRef tagsWereDropped As Boolean, ByRef urlsWereDropped As Boolean) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ ValidateHtml(System::String ^ inputHtml, [Runtime::InteropServices::Out] bool % tagsWereDropped, [Runtime::InteropServices::Out] bool % urlsWereDropped);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="inputHtml" Type="System.String" />
+        <Parameter Name="tagsWereDropped" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="urlsWereDropped" Type="System.Boolean&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="inputHtml">HTML string that is validated.</param>
+        <param name="tagsWereDropped">On return, this parameter is set to <b>True</b> if any disallowed tags are found and removed during validation. Otherwise, set to <b>False</b>.</param>
+        <param name="urlsWereDropped">On return, this parameter is set to <b>True</b> if any disallowed URLs are found and removed during validation. Otherwise, set to <b>False</b>.</param>
+        <summary>Removes unsafe or disallowed HTML markup and returns validated HTML.</summary>
+        <returns>The validated HTML, from which all unsafe or disallowed content is removed.</returns>
+        <remarks>
+          <para>Removes any tags, attributes, or markup from an HTML string that are unsafe or do not conform to the constraint settings that are applied to this <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateImageValue">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Fields.ImageFieldValue ValidateImageValue (Microsoft.SharePoint.Publishing.Fields.ImageFieldValue imageValue, out bool tagsWereDropped, out bool urlsWereDropped);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Fields.ImageFieldValue ValidateImageValue(class Microsoft.SharePoint.Publishing.Fields.ImageFieldValue imageValue, [out] bool&amp; tagsWereDropped, [out] bool&amp; urlsWereDropped) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.ValidateImageValue(Microsoft.SharePoint.Publishing.Fields.ImageFieldValue,System.Boolean@,System.Boolean@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ValidateImageValue (imageValue As ImageFieldValue, ByRef tagsWereDropped As Boolean, ByRef urlsWereDropped As Boolean) As ImageFieldValue" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Fields::ImageFieldValue ^ ValidateImageValue(Microsoft::SharePoint::Publishing::Fields::ImageFieldValue ^ imageValue, [Runtime::InteropServices::Out] bool % tagsWereDropped, [Runtime::InteropServices::Out] bool % urlsWereDropped);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Fields.ImageFieldValue</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="imageValue" Type="Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" />
+        <Parameter Name="tagsWereDropped" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="urlsWereDropped" Type="System.Boolean&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="imageValue">The <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> object that is validated.</param>
+        <param name="tagsWereDropped">On return, this parameter is set to <b>True</b> if any disallowed tags were found and stripped during validation, otherwise <b>False</b>.</param>
+        <param name="urlsWereDropped">On return, this parameter is set to <b>True</b> if any disallowed URLs were found and stripped during validation, otherwise <b>False</b>.</param>
+        <summary>Removes unsafe or disallowed URLs and HTML markup and returns a validated <paramref name="imageValue" /> parameter.</summary>
+        <returns>The validated image value, from which all unsafe or disallowed content is removed.</returns>
+        <remarks>
+          <para>Removes any tags, attributes, or markup from an <b>ImageFieldValue</b> object that are unsafe or do not conform to the constraint settings that are applied to this <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> object.</para>
+          <para>The following properties do not affect this method: <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowFonts" />, <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowHeadings" />, <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowLists" />, <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowReusableContent" />, <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowTables" />, and <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowTextMarkup" />.</para>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowImages" /> property is always forced to be set to <b>True</b>.</para>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowHyperlinks" /> and <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.RestrictUrlsToSiteCollection" /> properties can be set to either <b>True</b> or <b>False</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>This sample constructs an HtmlValidationContext object and uses it to restrict and validate an <b>ImageFieldValue</b> object and return a report string. The sample functiontakes in two optional arguments:</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <paramref name="imageValue" />: An <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> object to run through the validation.  If this argument is empty then the application uses a default <b>ImageFieldValue</b> object instead.</description>
+            </item>
+            <item>
+              <description>
+                <paramref name="siteCollectionToRestrict" />: An <see cref="T:Microsoft.SharePoint.SPSite" /> to use for restricting the URLs in the HTML. If this argument is <paramref name="null" /> then the URLs are not restricted to an <b>SPSite</b>.</description>
+            </item>
+          </list>
+          <code>// ValidateImageValueSample
+using ImageFieldValue = Microsoft.SharePoint.Publishing.Fields.ImageFieldValue;
+using LinkFieldValue = Microsoft.SharePoint.Publishing.Fields.LinkFieldValue;
+using HtmlValidationContext = Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext;
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+
+        public static string ValidateImageValueSample(
+            ImageFieldValue imageValue,
+            SPSite siteCollectionToRestrict)
+        {
+            ImageFieldValue imageValueToValidate = imageValue;
+                    // If there is no provided value then construct a new default value
+            if (null == imageValueToValidate)
+            {
+                imageValueToValidate = new ImageFieldValue();
+                imageValueToValidate.ImageUrl = DefaultImageUrl;
+                imageValueToValidate.Hyperlink = DefaultHyperlink;
+            }
+            string reportString = "Validating the following image value \n[" + imageValueToValidate.ToString() + "]";
+
+            HtmlValidationContext validationContext = new HtmlValidationContext();
+
+            // Set the constraint properties that apply for image values
+            validationContext.AllowHyperlinks = true;
+
+            if (null == siteCollectionToRestrict)
+            {
+                // No site collection provided so do not restrict URLs
+                validationContext.RestrictUrlsToSiteCollection = false;
+                validationContext.GuidOfThisSiteCollection = System.Guid.Empty;
+            }
+            else
+            {
+                // Restrict URLs to be from the provided site collection or to be server relative
+                validationContext.RestrictUrlsToSiteCollection = true;
+                validationContext.GuidOfThisSiteCollection = siteCollectionToRestrict.ID;
+            }
+
+            bool droppedTags;
+            bool droppedUrls;
+            ImageFieldValue validatedValue = 
+                validationContext.ValidateImageValue(
+                    imageValueToValidate,
+                    out droppedTags,
+                    out droppedUrls);
+
+            reportString += "After validation we have the following image value \n[" + validatedValue.ToString() + "]";
+
+            return reportString;
+        }</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateLinkValue">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Fields.LinkFieldValue ValidateLinkValue (Microsoft.SharePoint.Publishing.Fields.LinkFieldValue linkValue, out bool tagsWereDropped, out bool urlsWereDropped);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Fields.LinkFieldValue ValidateLinkValue(class Microsoft.SharePoint.Publishing.Fields.LinkFieldValue linkValue, [out] bool&amp; tagsWereDropped, [out] bool&amp; urlsWereDropped) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.ValidateLinkValue(Microsoft.SharePoint.Publishing.Fields.LinkFieldValue,System.Boolean@,System.Boolean@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ValidateLinkValue (linkValue As LinkFieldValue, ByRef tagsWereDropped As Boolean, ByRef urlsWereDropped As Boolean) As LinkFieldValue" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Fields::LinkFieldValue ^ ValidateLinkValue(Microsoft::SharePoint::Publishing::Fields::LinkFieldValue ^ linkValue, [Runtime::InteropServices::Out] bool % tagsWereDropped, [Runtime::InteropServices::Out] bool % urlsWereDropped);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Fields.LinkFieldValue</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="linkValue" Type="Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" />
+        <Parameter Name="tagsWereDropped" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="urlsWereDropped" Type="System.Boolean&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="linkValue">The <b>LinkFieldValue</b> object that will be validated.</param>
+        <param name="tagsWereDropped">On return, this parameter is set to <b>True</b> if any disallowed tags are found and removed during validation. Otherwise, set to <b>False</b>.</param>
+        <param name="urlsWereDropped">On return, this parameter is set to <b>True</b> if any disallowed URLs were found and stripped during validation Otherwise, set to <b>False</b>.</param>
+        <summary>Strips out unsafe or disallowed URLs and HTML markup and returns a validated <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> object.</summary>
+        <returns>The validated <b>LinkFieldValue</b> object from which all unsafe or disallowed content has been removed.</returns>
+        <remarks>
+          <para>Removes any tags, attributes, or markup from an <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> object that are unsafe or do not conform to the constraint settings that have been applied to this <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> object.</para>
+          <para>The following properties do not affect this method: <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowFonts" />, <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowHeadings" />, <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowLists" />, <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowReusableContent" />, <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowTables" />, and <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowTextMarkup" />.</para>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.AllowImages" /> and <see cref="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.RestrictUrlsToSiteCollection" /> properties can be set to either <b>True</b> or <b>False</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>This sample constructs an <see cref="T:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext" /> object and uses it to restrict and validate a <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> object and return a report string. The sample function takes in two optional arguments:</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <paramref name="linkValue" />. A <b>LinkFieldValue</b> object to run through the validation. If this argument is empty then the application uses a default <b>LinkFieldValue</b> object.</description>
+            </item>
+            <item>
+              <description>s<paramref name="iteCollectionToRestrict" />. An <see cref="T:Microsoft.SharePoint.SPSite" /> object to use for restricting the URLs in the HTML. If this argument is <paramref name="null" /> then the URLs are not restricted to an <b>SPSite</b>.</description>
+            </item>
+          </list>
+          <code>// ValidateLinkValueSample
+using SPSite = Microsoft.SharePoint.SPSite;
+using ImageFieldValue = Microsoft.SharePoint.Publishing.Fields.ImageFieldValue;
+using LinkFieldValue = Microsoft.SharePoint.Publishing.Fields.LinkFieldValue;
+using ImageFieldValue = Microsoft.SharePoint.Publishing.Fields.ImageFieldValue;
+using LinkFieldValue = Microsoft.SharePoint.Publishing.Fields.LinkFieldValue;
+using HtmlValidationContext = Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext;
+namespace Microsoft.SDK.SharePointServer.Samples
+
+{
+
+        public static string ValidateLinkValueSample(
+            LinkFieldValue linkValue,
+            SPSite siteCollectionToRestrict)
+        {
+            LinkFieldValue linkValueToValidate = linkValue;
+
+            // If there is no provided value then construct a new default value
+            if (null == linkValueToValidate)
+            {
+                linkValueToValidate = new LinkFieldValue();
+                linkValueToValidate.NavigateUrl = DefaultHyperlink;
+                linkValueToValidate.Text = LinkFieldValue.GetDefaultDisplayText(DefaultHyperlink);
+            }
+            string reportString = "Validating the following link value \n[" + linkValueToValidate.ToString() + "]";
+
+            HtmlValidationContext validationContext = new HtmlValidationContext();
+
+            if (null == siteCollectionToRestrict)
+            {
+                // No site collection provided so do not restrict URLs
+                validationContext.RestrictUrlsToSiteCollection = false;
+                validationContext.GuidOfThisSiteCollection = System.Guid.Empty;
+            }
+            else
+            {
+                // Restrict URLs to be from the provided site collection or to be server relative
+                validationContext.RestrictUrlsToSiteCollection = true;
+                validationContext.GuidOfThisSiteCollection = siteCollectionToRestrict.ID;
+            }
+
+            bool droppedTags;
+            bool droppedUrls;
+            LinkFieldValue validatedValue = 
+                validationContext.ValidateLinkValue(
+                linkValueToValidate,
+                out droppedTags,
+                out droppedUrls);
+
+            reportString += "\nAfter validation we have the following link value \n[" + validatedValue.ToString() + "]";
+
+            return reportString;
+        }
+    }
+}</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidSiteSettingMessage">
+      <MemberSignature Language="C#" Value="public static string ValidSiteSettingMessage { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string ValidSiteSettingMessage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.ValidSiteSettingMessage" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property ValidSiteSettingMessage As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property System::String ^ ValidSiteSettingMessage { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

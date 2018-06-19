@@ -1,0 +1,505 @@
+﻿<Type Name="LinkFieldValue" FullName="Microsoft.SharePoint.Publishing.Fields.LinkFieldValue">
+  <TypeSignature Language="C#" Value="public class LinkFieldValue : Microsoft.SharePoint.Publishing.Fields.HtmlTagValue" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit LinkFieldValue extends Microsoft.SharePoint.Publishing.Fields.HtmlTagValue" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" />
+  <TypeSignature Language="VB.NET" Value="Public Class LinkFieldValue&#xA;Inherits HtmlTagValue" />
+  <TypeSignature Language="C++ CLI" Value="public ref class LinkFieldValue : Microsoft::SharePoint::Publishing::Fields::HtmlTagValue" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.Fields.HtmlTagValue</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>A field value class for a <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkField" /> object that represents an &lt;A&gt; tag and specific key attributes for that tag.</summary>
+    <remarks>
+      <para>This value object wraps an HTML string for a hyperlink and allows users to get and set certain value object properties and then get the resulting &lt;A&gt; tag HTML markup string. If the <see cref="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.NavigateUrl" /> property does not have a value, the <see cref="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.ToString" /> method returns an empty string. In other cases, the <b>ToString</b> method returns an HTML string that contains an &lt;A&gt; tag. Only certain properties are recognized on the &lt;A&gt; and &lt;IMG&gt; tags and used to generate the HTML string.</para>
+      <para>Recognized properties for &lt;A&gt; tag:</para>
+      <list type="bullet">
+        <item>
+          <description>
+            <b>href </b>(required)</description>
+        </item>
+        <item>
+          <description>
+            <b>title</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>target</b> (only "_blank" is allowed)</description>
+        </item>
+        <item>
+          <description />
+        </item>
+      </list>
+      <para>Recognized properties for &lt;IMG&gt; tag:</para>
+      <list type="bullet">
+        <item>
+          <description>
+            <b>src</b>
+          </description>
+        </item>
+        <item>
+          <description>Instances are usually retrieved from a <see cref="T:Microsoft.SharePoint.SPListItem" /> field value for the <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkField" /> column. It is also the object used to store the posted value in a <see cref="P:Microsoft.SharePoint.Publishing.WebControls.RichLinkField.Value" /> and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.RichLinkSelector.Value" /> control. You can also construct a new instance directly either as an empty value or based on HTML string that conforms to the basic pattern of an &lt;A&gt; tag optionally containing an icon &lt;IMG&gt; tag. After retrieving this value from an <b>SPListItem</b> field and changing any properties on this object, you must set the value object back into the <b>SPListItem</b> field value and use the <b>Update</b> method to store the value.</description>
+        </item>
+      </list>
+      <para />
+    </remarks>
+    <example>
+      <code>using SPListItem = Microsoft.SharePoint.SPListItem;
+using LinkFieldValue = Microsoft.SharePoint.Publishing.Fields.LinkFieldValue;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+public static class LinkFieldValueSamples
+  {
+  // You can change any of the following data that will be set into the LinkFieldValue.
+  private const string NewNavigateUrl = "/Documents/SampleFile.docx";
+  private const bool NewUseDefaultIcon = false;
+  private const string NewTarget = "_blank";
+  private const string NewToolTip = "Sample tool tip for the link";
+  private const string NewTextPrefix = "Open [";
+  private const string NewTextSuffix = "] in a new window";
+
+  // You can change the following default LinkFieldValue HTML markup.
+  private const string DefaultLinkFieldValueHtml = "&amp;lt;A href=\"/Documents/SampleFile.docx\" target=\"_blank\"&amp;gt;&amp;lt;IMG src=\"/_layouts/images/icdoc.gif\" alt=\"\"&amp;gt;Open [SampleFile.docx] in a new window&amp;lt;/a&amp;gt;";
+
+  public static string GetAndSetLinkFieldValue(
+  SPListItem listItemWithLinkField,
+  string linkFieldName)
+    {
+    if (null == listItemWithLinkField)
+      {
+      throw new System.ArgumentNullException("listItemWithLinkField", "The listItemWithLinkField argument must be a valid SPListItem");
+      }
+
+    if (string.IsNullOrEmpty(linkFieldName))
+    {
+    throw new System.ArgumentNullException("linkFieldName", "The linkFieldName argument must be a valid link field name on the SPListItem");
+    }
+    // Retrieve the current value from an SPListItem object
+    // with a column of the LinkField type with the
+    // name linkFieldName.
+    LinkFieldValue currentFieldValue = 
+    listItemWithLinkField[linkFieldName] as LinkFieldValue;
+
+    // If there is no current value, construct a new empty value.
+    if (null == currentFieldValue)
+    {
+      currentFieldValue = new LinkFieldValue();
+    }
+
+    // If this property is not set to a value, the ToString() for the
+    //  LinkFieldValue returns String.Empty and nothing is stored in
+    //  the field value when it is set back into the SPListItem.
+    currentFieldValue.NavigateUrl = NewNavigateUrl;
+
+    // These properties are optional for a LinkFieldValue.
+     currentFieldValue.Target = NewTarget;
+     currentFieldValue.ToolTip = NewToolTip;
+     currentFieldValue.UseDefaultIcon = NewUseDefaultIcon;
+
+    // Use the static GetDefaultIconUrl method to find the correct
+    //  icon URL in the given Web site for the file extension in NewNavigateUrl.
+    currentFieldValue.IconUrl =
+    LinkFieldValue.GetDefaultIconUrl(NewNavigateUrl, listItemWithLinkField.Web);
+
+     // Use the static GetDefaultDisplayText method to find the default
+     // link text for the given NewNavigateUrl.
+     currentFieldValue.Text = NewTextPrefix +
+     LinkFieldValue.GetDefaultDisplayText(NewNavigateUrl) +
+     NewTextSuffix;
+
+    // The changes to the properties of the LinkFieldValue object are
+    // local to this specific object instance and not stored in the SPListItem.
+    // To store the changes, the value must be set back to the SPListItem field value.
+    listItemWithLinkField[linkFieldName] = currentFieldValue;
+    listItemWithLinkField.Update();
+
+    // The ToString() returns the HTML markup that reflects the new LinkFieldValue properties.
+    return currentFieldValue.ToString();
+    }
+  }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public LinkFieldValue ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; LinkFieldValue();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Constructs a new empty instance of a <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> object.</summary>
+        <remarks>To be added.</remarks>
+        <example>
+          <code>using SPListItem = Microsoft.SharePoint.SPListItem;
+using LinkFieldValue = Microsoft.SharePoint.Publishing.Fields.LinkFieldValue;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+public static LinkFieldValue GetLinkFieldValueFromHtml(string htmlMarkupForLink)
+        {
+            string htmlForLinkFieldValue = htmlMarkupForLink;
+            if (string.IsNullOrEmpty(htmlMarkupForLink))
+            {
+                htmlForLinkFieldValue = DefaultLinkFieldValueHtml;
+            }
+
+            LinkFieldValue newLinkFieldValue = new LinkFieldValue(htmlForLinkFieldValue);
+
+            // The NavigateUrl, Tooltip, Text, and other properties
+            // reflect any recognized property values from the tags
+            //in the HTML markup.
+
+            return newLinkFieldValue;
+        }
+    }
+}</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public LinkFieldValue (string inputHtml);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string inputHtml) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.#ctor(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (inputHtml As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; LinkFieldValue(System::String ^ inputHtml);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="inputHtml" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="inputHtml">HTML string that contains an &lt;A&gt; tag with an <paramref name="href" /> attribute and optionally other recognized attributes that is used to initialize a new <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> object.</param>
+        <summary>Uses an &lt;A&gt; tag in the <paramref name="inputHtml" /> to construct a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> object from an HTML string.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDefaultDisplayText">
+      <MemberSignature Language="C#" Value="public static string GetDefaultDisplayText (string inputUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetDefaultDisplayText(string inputUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.GetDefaultDisplayText(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetDefaultDisplayText (inputUrl As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetDefaultDisplayText(System::String ^ inputUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="inputUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="inputUrl">URL to get default display text for.</param>
+        <summary>Returns default display text to use for the <paramref name="inputUrl" />.</summary>
+        <returns>The default display text for the <paramref name="inputUrl" />.</returns>
+        <remarks>
+          <para>If a file name can be found in the <paramref name="inputUrl" />, it is returned as the default text. Otherwise, the URL is returned.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Use the static GetDefaultDisplayText method to find the default
+// link text for the given NewNavigateUrl
+currentFieldValue.Text = NewTextPrefix +
+LinkFieldValue.GetDefaultDisplayText(NewNavigateUrl) +
+NewTextSuffix;</code>
+          <para>
+            <b>Note</b>: This example is part of the larger LinkFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDefaultIconUrl">
+      <MemberSignature Language="C#" Value="public static string GetDefaultIconUrl (string inputUrl, Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetDefaultIconUrl(string inputUrl, class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.GetDefaultIconUrl(System.String,Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetDefaultIconUrl (inputUrl As String, web As SPWeb) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetDefaultIconUrl(System::String ^ inputUrl, Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="inputUrl" Type="System.String" />
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="inputUrl">URL for which to get default type icon.</param>
+        <param name="web">Web to use for looking up the correct type icon URL.</param>
+        <summary>Returns a URL to a default Microsoft Office SharePoint Server 2007 type icon to use for the file type in the <paramref name="inputUrl" />.</summary>
+        <returns>A URL to a default Microsoft Office SharePoint Server 2007 type icon to use for the file type in the <paramref name="inputUrl" />.</returns>
+        <remarks>
+          <para>The type icon to use is based on the image icon file configured in the Web for the file extension found in the <see cref="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.NavigateUrl" /> property. If no file extension is found or the Web parameter is null, this method uses a generic icon.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Use the static GetDefaultIconUrl method to find the correct
+// icon URL in the given Web for the file extension in NewNavigateUrl.
+currentFieldValue.IconUrl =
+  LinkFieldValue.GetDefaultIconUrl(NewNavigateUrl, listItemWithLinkField.Web);</code>
+          <para>
+            <b>Note</b>: This example is part of the larger LinkFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="IconUrl">
+      <MemberSignature Language="C#" Value="public string IconUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string IconUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.IconUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property IconUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ IconUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL for the optional icon image that is displayed with this <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkField" /> object.</summary>
+        <value>The URL for an optional icon image or an empty string.</value>
+        <remarks>
+          <para>Generally, this URL is either left empty or set by using the <see cref="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.GetDefaultIconUrl(System.String)" /> or <see cref="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.GetDefaultIconUrl(System.String,Microsoft.SharePoint.SPWeb)" /> method.</para>
+          <para>You can set the URL that this property specifies to any URL value that is allowed by <b>OSafe</b>. However, if the URL is recognized as belonging to the <see cref="T:Microsoft.SharePoint.SPSite" /> where the data is stored, it is converted to a server-relative URL when you save the value. If the URL points to a file that Microsoft Office SharePoint Server 2007 recognizes, renaming or moving that file causes this URL to reflect the new name or location.</para>
+          <para>Default is an empty string, which means that the link has no icon image.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NavigateUrl">
+      <MemberSignature Language="C#" Value="public string NavigateUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string NavigateUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.NavigateUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property NavigateUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ NavigateUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL of the hyperlink to this <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> object.</summary>
+        <value>Returns the URL of the link to this <b>LinkFieldValue</b> object or an empty string. The value of this property is the <paramref name="href" /> attribute in the &lt;A&gt; tag in the <see cref="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.ToString" /> output.</value>
+        <remarks>
+          <para>The URL set in this property can be set to any URL reference, although some invalid values may be removed when the value is stored in a <see cref="T:Microsoft.SharePoint.SPListItem" /> field value. This is the primary data element for this field value. If this URL does not have a value, all other data in this object is ignored and the <b>ToString</b> returns an empty string.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that will be set into the LinkFieldValue.
+private const string NewNavigateUrl = "/Documents/SampleFile.docx";
+private const bool NewUseDefaultIcon = false;
+private const string NewTarget = "_blank";
+private const string NewToolTip = "Sample tool tip for the link";
+private const string NewTextPrefix = "Open [";
+private const string NewTextSuffix = "] in a new window";</code>
+          <para>
+            <b>Note</b>: This example is part of the larger LinkFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Target">
+      <MemberSignature Language="C#" Value="public string Target { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Target" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.Target" />
+      <MemberSignature Language="VB.NET" Value="Public Property Target As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Target { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the target window of the hyperlink value.</summary>
+        <value>Either the target window or frame that displays the Web page content that is linked to when the link is clicked, or an empty string.Empty string is the default.</value>
+        <remarks>
+          <para>The target name can be any window target, but only the <paramref name="_blank" /> value that indicates a new window is kept when the value is stored in a <see cref="T:Microsoft.SharePoint.SPListItem" /> field value.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that will be set into the LinkFieldValue.
+private const string NewNavigateUrl = "/Documents/SampleFile.docx";
+private const bool NewUseDefaultIcon = false;
+private const string NewTarget = "_blank";
+private const string NewToolTip = "Sample tool tip for the link";
+private const string NewTextPrefix = "Open [";
+private const string NewTextSuffix = "] in a new window";</code>
+          <para>
+            <b>Note</b>: This example is part of the larger LinkFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Text">
+      <MemberSignature Language="C#" Value="public string Text { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Text" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.Text" />
+      <MemberSignature Language="VB.NET" Value="Public Property Text As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Text { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the text that is displayed for the hyperlink.</summary>
+        <value>The text displayed in the hyperlink.The content in the &lt;A&gt; tag in the <see cref="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.ToString" /> output.</value>
+        <remarks>
+          <para>When there is no explicit value set for this property, the <see cref="M:Microsoft.SharePoint.Publishing.Fields.GetDefaultDisplayText(NavigateUrl)" /> method is used as the default value for <b>Text</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that will be set into the LinkFieldValue.
+private const string NewNavigateUrl = "/Documents/SampleFile.docx";
+private const bool NewUseDefaultIcon = false;
+private const string NewTarget = "_blank";
+private const string NewToolTip = "Sample tool tip for the link";
+private const string NewTextPrefix = "Open [";
+private const string NewTextSuffix = "] in a new window";</code>
+          <para>
+            <b>Note</b>: This example is part of the larger LinkFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ToolTip">
+      <MemberSignature Language="C#" Value="public string ToolTip { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ToolTip" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.ToolTip" />
+      <MemberSignature Language="VB.NET" Value="Public Property ToolTip As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ToolTip { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the text that is displayed on the hyperlink's tooltip.</summary>
+        <value>The default is an empty string.</value>
+        <remarks>
+          <para>This property value is the title attribute of the &lt;A&gt; tag in the <see cref="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.ToString" /> output.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that will be set into the LinkFieldValue.
+private const string NewNavigateUrl = "/Documents/SampleFile.docx";
+private const bool NewUseDefaultIcon = false;
+private const string NewTarget = "_blank";
+private const string NewToolTip = "Sample tool tip for the link";
+private const string NewTextPrefix = "Open [";
+private const string NewTextSuffix = "] in a new window";</code>
+          <para>
+            <b>Note</b>: This example is part of the larger LinkFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.ToString" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ ToString();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns an HTML string with an &lt;A&gt; tag and properties with values as currently set for this <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> object.</summary>
+        <returns>An HTML string with an &lt;A&gt; tag and properties with values as currently set for this <b>LinkFieldValue</b>, or an empty string.</returns>
+        <remarks>
+          <para>If the <see cref="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.NavigateUrl" /> property does not have a value, this method returns an empty string. Otherwise, this method returns an HTML string that contains an &lt;A&gt; tag. Only certain properties are recognized on the &lt;A&gt; and &lt;IMG&gt; tags, and are used to generate the HTML string.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Retrieve the current value from an SPListItem object
+// with a column of the LinkField type with the
+// name linkFieldName.
+LinkFieldValue currentFieldValue = 
+listItemWithLinkField[linkFieldName] as LinkFieldValue;
+
+// If there is no current value, construct a new empty value.
+if (null == currentFieldValue)
+{
+  currentFieldValue = new LinkFieldValue();
+}
+
+// If this property is not set to a value, the ToString() for the
+// LinkFieldValue returns String.Empty and nothing is stored in
+// the field value when it is set back into the SPListItem.
+currentFieldValue.NavigateUrl = NewNavigateUrl;</code>
+          <para>
+            <b>Note</b>: This example is part of the larger LinkFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="UseDefaultIcon">
+      <MemberSignature Language="C#" Value="public bool UseDefaultIcon { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseDefaultIcon" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.UseDefaultIcon" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseDefaultIcon As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseDefaultIcon { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that determines whether an <see cref="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.IconUrl" /> property is the default URL that is looked up, based on the <see cref="P:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue.NavigateUrl" /> property.</summary>
+        <value>A flag that determines whether an <b>IconUrl</b> defaults to the type icon based on the <b>NavigateUrl</b>. The default is <b>False</b>.If set to <b>True</b>, the <b>IconUrl</b> defaults to the type icon based on the <b>NavigateUrl</b>. Otherwise, set to <b>False</b>.</value>
+        <remarks>
+          <para>The type icon is based on the image icon file configured in the current <see cref="T:Microsoft.SharePoint.SPWeb" /> for the file extension found in the <b>NavigateUrl</b> property. If no file extension or no <see cref="T:Microsoft.SharePoint.SPContext.Web" /> is found, this method uses a generic icon.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that will be set into the LinkFieldValue.
+private const string NewNavigateUrl = "/Documents/SampleFile.docx";
+private const bool NewUseDefaultIcon = false;
+private const string NewTarget = "_blank";
+private const string NewToolTip = "Sample tool tip for the link";
+private const string NewTextPrefix = "Open [";
+private const string NewTextSuffix = "] in a new window";</code>
+          <para>
+            <b>Note</b>: This example is part of the larger LinkFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.LinkFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

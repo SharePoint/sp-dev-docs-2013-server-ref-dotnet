@@ -1,0 +1,114 @@
+﻿<Type Name="IndexedCollection&lt;T&gt;" FullName="Microsoft.SharePoint.Taxonomy.Generic.IndexedCollection&lt;T&gt;">
+  <TypeSignature Language="C#" Value="public abstract class IndexedCollection&lt;T&gt; : Microsoft.SharePoint.Taxonomy.Generic.GenericCollection&lt;T&gt; where T : class" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit IndexedCollection`1&lt;class T&gt; extends Microsoft.SharePoint.Taxonomy.Generic.GenericCollection`1&lt;!T&gt;" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.Generic.IndexedCollection`1" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class IndexedCollection(Of T)&#xA;Inherits GenericCollection(Of T)" />
+  <TypeSignature Language="C++ CLI" Value="generic &lt;typename T&gt;&#xA; where T : classpublic ref class IndexedCollection abstract : Microsoft::SharePoint::Taxonomy::Generic::GenericCollection&lt;T&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter Name="T">
+      <Constraints>
+        <ParameterAttribute>ReferenceTypeConstraint</ParameterAttribute>
+      </Constraints>
+    </TypeParameter>
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Taxonomy.Generic.GenericCollection&lt;T&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">T</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <typeparam name="T">The type of items contained in the collection</typeparam>
+    <summary>Represents a generic abstract base class collection with support for containing items which require integer, string and GUID indexers</summary>
+    <remarks>
+      <para>This class provides standard support for the <see cref="T:System.Collections.IEnumerator" /> object and the <see cref="T:System.Collections.ICollection" /> object and an integer indexer through the GenericCollection base class. Additionally, it provides string and GUID indexers with behavior defined by the derived collection class.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public T this[Guid index] { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance !T Item(valuetype System.Guid)" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Generic.IndexedCollection`1.Item(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(index As Guid) As T" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property T default[Guid] { T get(Guid index); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>T</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="index" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="index">To be added.</param>
+        <summary>GUID indexer for this collection</summary>
+        <value>The collection item at the index specified</value>
+        <remarks>
+          <para>The string indexer matches against the following properties for the derived collections.</para>
+          <list type="bullet">
+            <item>
+              <description>GroupCollection - Group.Id</description>
+            </item>
+            <item>
+              <description>TermCollection - Term.Id</description>
+            </item>
+            <item>
+              <description>TermSetCollection - TermSet.Id</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException" />
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public T this[string index] { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance !T Item(string)" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Generic.IndexedCollection`1.Item(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(index As String) As T" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property T default[System::String ^] { T get(System::String ^ index); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>T</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="index" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="index">String indexer to use for this collection</param>
+        <summary>Gets a string indexer for this collection.</summary>
+        <value>The item in the collection at the specified index</value>
+        <remarks>
+          <para>The string indexer matches against these properties for the derived collections.</para>
+          <list type="bullet">
+            <item>
+              <description>GroupCollection - Group.Name</description>
+            </item>
+            <item>
+              <description>TermCollection - Term's default Label</description>
+            </item>
+            <item>
+              <description>TermSetCollection - TermSet.Name</description>
+            </item>
+          </list>
+          <para>Integer or GUID indexers are optimized, and their use is preferred.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException" />
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,232 @@
+﻿<Type Name="DocumentIdProvider" FullName="Microsoft.Office.DocumentManagement.DocumentIdProvider">
+  <TypeSignature Language="C#" Value="public abstract class DocumentIdProvider" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit DocumentIdProvider extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.DocumentManagement.DocumentIdProvider" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class DocumentIdProvider" />
+  <TypeSignature Language="C++ CLI" Value="public ref class DocumentIdProvider abstract" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the base abstract class for implementing a Document ID generator.</summary>
+    <remarks>
+      <para>It is highly recommended that the Document ID generator provide IDs that are both unique and readily type-able by a user.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Office.DocumentManagement;
+using Microsoft.SharePoint;
+
+namespace CustomDocIDProvider
+{
+    /// &amp;lt;summary&amp;gt;
+    /// This class provides an example of implementing a document ID provider.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;remarks&amp;gt;
+    /// The format of ID is "{web Name}@{list Item Guid} is custom ID!"
+    /// &amp;lt;/remarks&amp;gt;
+    public class CustomDocumentIDProvider : DocumentIdProvider
+    {
+        // The format is "&amp;lt;web Name&amp;gt;@&amp;lt;list Item Guid&amp;gt; is custom ID!"
+        private string idFormat = "{0}@{1} is custom ID!";
+
+        public override string[] GetDocumentUrlsById(SPSite site, string documentId)
+        {
+            string itemUrl = string.Empty;
+            // Only proceed if we have the site and document id
+            if (site != null &amp;amp;&amp;amp; !string.IsNullOrEmpty(documentId))
+            {
+                string[] splits = documentId.Split('@', ' ');
+                string webName = splits.Length &amp;gt; 0 ? splits[0] : null;
+                string itemId = splits.Length &amp;gt; 1 ? splits[1] : null;
+                try
+                {
+                    SPWeb web = string.IsNullOrEmpty(webName) ? site.OpenWeb() : site.OpenWeb(webName);
+                    SPListItem item = null;
+                    Guid itemGuid = new Guid(itemId);
+                    // Find the item among the lists on the specified web
+                    foreach (SPList list in web.Lists)
+                    {
+try
+{
+                        item = list.Items[itemGuid];
+}
+catch
+{
+//if it's not in this list, go to the next one
+continue;
+}
+                        if (item != null)
+                        {
+                            itemUrl = web.Url + "/";
+                            itemUrl += item.Url;
+                        }
+                    }
+                }
+                catch (Exception) { /* item not found, return an empty array*/ }
+            }
+
+    if (string.IsNullOrEmpty(itemUrl))
+    {
+return null;
+            }
+    else
+    {
+        return new string[] { itemUrl };
+    }
+        }
+
+        public override string GenerateDocumentId(SPListItem listItem)
+        {
+            if (listItem == null)
+            {
+                throw new ArgumentNullException("listItem");
+            }
+            return string.Format(this.idFormat, listItem.Web.Name, listItem.UniqueId.ToString());
+        }
+
+        public override string GetSampleDocumentIdText(SPSite site)
+        {
+            return string.Format(this.idFormat, "/", "0");
+        }
+
+        public override bool DoCustomSearchBeforeDefaultSearch
+        {
+            get { return false; }
+        }
+    }
+}
+</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected DocumentIdProvider ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentIdProvider.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; DocumentIdProvider();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.DocumentManagement.DocumentIdProvider" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DoCustomSearchBeforeDefaultSearch">
+      <MemberSignature Language="C#" Value="public abstract bool DoCustomSearchBeforeDefaultSearch { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool DoCustomSearchBeforeDefaultSearch" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentIdProvider.DoCustomSearchBeforeDefaultSearch" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property DoCustomSearchBeforeDefaultSearch As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property bool DoCustomSearchBeforeDefaultSearch { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value specifying whether the current instance of the provider custom search method (<see cref="M:Microsoft.Office.DocumentManagement.DocumentIdProvider.GetDocumentUrlsById" />) should be called before built-in search is called when the user is trying to locate a document by its <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> value.</summary>
+        <value>
+          <b>true</b> if the provider custom search method (<b>GetDocumentUrlsById</b>) should be called before built-in search; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>Set this property to <b>true</b> when using <see cref="GetDocumentUrlsById" /> is more efficient than using the default search is when locating a document by its Document ID.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GenerateDocumentId">
+      <MemberSignature Language="C#" Value="public abstract string GenerateDocumentId (Microsoft.SharePoint.SPListItem listItem);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GenerateDocumentId(class Microsoft.SharePoint.SPListItem listItem) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentIdProvider.GenerateDocumentId(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function GenerateDocumentId (listItem As SPListItem) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::String ^ GenerateDocumentId(Microsoft::SharePoint::SPListItem ^ listItem);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="listItem" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="listItem">An <see cref="T:Microsoft.SharePoint.SPListItem" /> object that specifies the item for which a document ID must be generated.</param>
+        <summary>Generates a document ID when provided with a list item parameter that corresponds to a document.</summary>
+        <returns>A string that represents the newly generated Document ID.</returns>
+        <remarks>
+          <para>It is highly recomended that the Document ID generator provides IDs that are both unique and readily type-able by user.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDocumentUrlsById">
+      <MemberSignature Language="C#" Value="public abstract string[] GetDocumentUrlsById (Microsoft.SharePoint.SPSite site, string documentId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string[] GetDocumentUrlsById(class Microsoft.SharePoint.SPSite site, string documentId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentIdProvider.GetDocumentUrlsById(Microsoft.SharePoint.SPSite,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetDocumentUrlsById (site As SPSite, documentId As String) As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract cli::array &lt;System::String ^&gt; ^ GetDocumentUrlsById(Microsoft::SharePoint::SPSite ^ site, System::String ^ documentId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="documentId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object that specifies the site in which to search for documents with the provided <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object.</param>
+        <param name="documentId">A <see cref="T:Microsoft.SharePoint.SPSite" /> object that specifies the site in which to search for documents with the provided <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object. </param>
+        <summary>Implements a custom search method; returns an array of URLs pointing to documents with a specified <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> value.</summary>
+        <returns>A string arrays of URLs pointing to documents with the specified Document ID.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSampleDocumentIdText">
+      <MemberSignature Language="C#" Value="public abstract string GetSampleDocumentIdText (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetSampleDocumentIdText(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentIdProvider.GetSampleDocumentIdText(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetSampleDocumentIdText (site As SPSite) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::String ^ GetSampleDocumentIdText(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">An <see cref="T:Microsoft.SharePoint.SPSite" /> object that specifies the site in which the web part is located.</param>
+        <summary>Returns the default Document ID value that will be initially displayed in the Document ID search web part.</summary>
+        <returns>A string representing the default Document ID value that will be initially displayed in the Document ID search web part.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

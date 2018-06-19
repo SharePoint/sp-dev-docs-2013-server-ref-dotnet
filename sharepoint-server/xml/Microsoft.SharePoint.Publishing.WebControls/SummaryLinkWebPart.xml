@@ -1,0 +1,525 @@
+﻿<Type Name="SummaryLinkWebPart" FullName="Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart">
+  <TypeSignature Language="C#" Value="public sealed class SummaryLinkWebPart : Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart, Microsoft.SharePoint.Publishing.IWebPartVariationUpdate" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SummaryLinkWebPart extends Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart implements class Microsoft.SharePoint.Publishing.IWebPartVariationUpdate, class System.Web.UI.INamingContainer" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SummaryLinkWebPart&#xA;Inherits CmsDataFormWebPart&#xA;Implements IWebPartVariationUpdate" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SummaryLinkWebPart sealed : Microsoft::SharePoint::Publishing::WebControls::CmsDataFormWebPart, Microsoft::SharePoint::Publishing::IWebPartVariationUpdate" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.SharePoint.Publishing.IWebPartVariationUpdate</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.CLSCompliant(false)</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Xml.Serialization.XmlRoot(Namespace="urn:schemas-microsoft-com:SummaryLinkWebPart")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Derived ASP.NET Web Part that is used to interact with <b>SummaryLinks</b>.</summary>
+    <remarks>
+      <para>This Web Part is used to interact with <b>SummaryLinks</b> through the <b>SummaryLinkFieldValue</b> object. It can be used as a dynamic Web Part that exists inside a Web Part zone, in which case the data is stored using Web Part technology, or it can be wrapped by a control that handles storage of the <b>SummaryLinkFieldValue</b> in cases where the Web Part is static and has no Web Part storage. The <b>SummaryLinkFieldControl</b> is a control that wraps this <b>SummaryLinkWebPart</b> and provides storage inside a page field.</para>
+      <para>The <b>SummaryLinkWebPart</b> is a specialized <b>DataFormWebPart</b> that renders a display of the <b>SummaryLinks</b> using XSL style sheets that are associated with the Web Part. It also provides a Design mode experience which includes on-object user interface (UI), such as a toolbar, and <b>EditControlBlock</b> (ECB) menus that allow easy addition, deletion, and editing of individual summary links. The <b>SummaryLinkWebPart</b> supports a client-side drag-and-drop behavior, which allows links and groups to be rearranged.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SummaryLinkWebPart ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; SummaryLinkWebPart();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <b>SummaryLinkWebPart</b> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SummaryLinkWebPart (Microsoft.SharePoint.Publishing.WebControls.SummaryLinkFieldControl wrappingControl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.Publishing.WebControls.SummaryLinkFieldControl wrappingControl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.#ctor(Microsoft.SharePoint.Publishing.WebControls.SummaryLinkFieldControl)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (wrappingControl As SummaryLinkFieldControl)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; SummaryLinkWebPart(Microsoft::SharePoint::Publishing::WebControls::SummaryLinkFieldControl ^ wrappingControl);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="wrappingControl" Type="Microsoft.SharePoint.Publishing.WebControls.SummaryLinkFieldControl" />
+      </Parameters>
+      <Docs>
+        <param name="wrappingControl">A SummaryLinkFieldControl component to use as a wrapper for the SummaryLinkWebPart object.</param>
+        <summary>Initializes a new instance of a <b>SummaryLinkWebPart</b> object that is wrapped by a <b>SummaryLinkFieldControl</b> This <b>SummaryLinkWebPart</b> stores and uses information in the <b>SummaryLinkFieldControl</b>.</summary>
+        <remarks>
+          <para>The <b>SummaryLinkFieldControl</b> wraps the <b>SummaryLinkWebPart</b> to provide storage in a page field in cases where <b>SummaryLinks</b> are needed outside of a Web Part zone.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConnectToDataSourceControl">
+      <MemberSignature Language="C#" Value="protected override bool ConnectToDataSourceControl ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool ConnectToDataSourceControl() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.ConnectToDataSourceControl" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function ConnectToDataSourceControl () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override bool ConnectToDataSourceControl();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Connects the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart" /> object to the data source control.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateChildControls">
+      <MemberSignature Language="C#" Value="protected override void CreateChildControls ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void CreateChildControls() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.CreateChildControls" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub CreateChildControls ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void CreateChildControls();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates child controls of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultSampleData">
+      <MemberSignature Language="C#" Value="protected override string DefaultSampleData { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DefaultSampleData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.DefaultSampleData" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides ReadOnly Property DefaultSampleData As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ DefaultSampleData { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the default sample data that will be used by Microsoft SharePoint Designer when there is no real data available.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetToolParts">
+      <MemberSignature Language="C#" Value="public override Microsoft.SharePoint.WebPartPages.ToolPart[] GetToolParts ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.SharePoint.WebPartPages.ToolPart[] GetToolParts() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.GetToolParts" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetToolParts () As ToolPart()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override cli::array &lt;Microsoft::SharePoint::WebPartPages::ToolPart ^&gt; ^ GetToolParts();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.WebPartPages.ToolPart[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the tool parts that are displayed in the tool pane.</summary>
+        <returns>An array of tool parts that will appear in the tool pane.</returns>
+        <remarks>
+          <para>The user interface (UI) for the <b>SummaryLinkWebPart</b> allows links to be edited in Design mode. In most cases, the tool pane is not needed to configure the Web Part. However, the tool pane does provide some standard Web Part configuration options that control the general appearance of the Web Part.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetXPathNavigator">
+      <MemberSignature Language="C#" Value="protected override System.Xml.XPath.XPathNavigator GetXPathNavigator (string viewPath);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Xml.XPath.XPathNavigator GetXPathNavigator(string viewPath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.GetXPathNavigator(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetXPathNavigator (viewPath As String) As XPathNavigator" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Xml::XPath::XPathNavigator ^ GetXPathNavigator(System::String ^ viewPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Xml.XPath.XPathNavigator</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="viewPath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="viewPath">The XPath navigator path to get.</param>
+        <summary>Gets the path to the XPath navigator.</summary>
+        <returns>Returns <see cref="T:System.Xml.XPath.XPathNavigator" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LoadViewState">
+      <MemberSignature Language="C#" Value="protected override void LoadViewState (object savedState);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void LoadViewState(object savedState) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.LoadViewState(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub LoadViewState (savedState As Object)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void LoadViewState(System::Object ^ savedState);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="savedState" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="savedState">The last saved view state to load.</param>
+        <summary>Loads the last saved view state of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ManagedLinkHash">
+      <MemberSignature Language="C#" Value="public string ManagedLinkHash { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ManagedLinkHash" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.ManagedLinkHash" />
+      <MemberSignature Language="VB.NET" Value="Public Property ManagedLinkHash As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ManagedLinkHash { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a hash table of <b>ManagedLinks</b> used to determine if any link targets have changed.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The Web Part stores <b>SummaryLinks</b> that contain a <b>LinkUrl</b> and an <b>ImageUrl</b>. These URLs are managed by the Web Part framework so that they are updated if the link targets move within the SharePoint Server 2010 site. The <b>ManagedLinkHash</b> is a hash of the saved <b>ManagedLinks</b> links and is used to quickly determine if the <b>ManagedLinks</b> have been modified by the system since the last time that they were saved.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ManagedLinks">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList ManagedLinks { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ArrayList ManagedLinks" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.ManagedLinks" />
+      <MemberSignature Language="VB.NET" Value="Public Property ManagedLinks As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::ArrayList ^ ManagedLinks { System::Collections::ArrayList ^ get(); void set(System::Collections::ArrayList ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.ManagedLink(Fixup=true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URLs used by the <b>SummaryLinks</b> Web Part for automatic link updates.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The Web Part stores <b>SummaryLinks</b> that contain a <b>LinkUrl</b> and an <b>ImageUr</b>l. These URLs are extracted from the <b>SummaryLinks</b> and stored in this <b>ManagedLinks</b> property so that they can be updated by the Web Part framework if the link targets move within the SharePoint site.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ModifyXsltArgumentList">
+      <MemberSignature Language="C#" Value="protected override void ModifyXsltArgumentList (Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper argList);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void ModifyXsltArgumentList(class Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper argList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.ModifyXsltArgumentList(Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub ModifyXsltArgumentList (argList As ArgumentClassWrapper)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void ModifyXsltArgumentList(Microsoft::SharePoint::WebPartPages::ArgumentClassWrapper ^ argList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="argList" Type="Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper" />
+      </Parameters>
+      <Docs>
+        <param name="argList">Argument list generated by the base class.</param>
+        <summary>The method allows us a chance to change the Xsl argument list generatedby the base class before it is passed to xsl.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnDataSelected">
+      <MemberSignature Language="C#" Value="public void OnDataSelected (System.Collections.IEnumerable data);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void OnDataSelected(class System.Collections.IEnumerable data) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.OnDataSelected(System.Collections.IEnumerable)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub OnDataSelected (data As IEnumerable)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnDataSelected(System::Collections::IEnumerable ^ data);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="data" Type="System.Collections.IEnumerable" />
+      </Parameters>
+      <Docs>
+        <param name="data">The associated data.</param>
+        <summary>Provides a callback for the data source.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnInit">
+      <MemberSignature Language="C#" Value="protected override void OnInit (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnInit(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.OnInit(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnInit (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnInit(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">Event arguments.</param>
+        <summary>Overrides the <b>OnInit(System.EventArgs)</b> event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">Event arguments.</param>
+        <summary>Overrides the <b>OnLoad</b> event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPreRender">
+      <MemberSignature Language="C#" Value="protected override void OnPreRender (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnPreRender(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.OnPreRender(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreRender (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreRender(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">Event arguments.</param>
+        <summary>Overrides the <b>OnPreRender(System.EventArgs)</b> event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PreprocessPostBackEvent">
+      <MemberSignature Language="C#" Value="protected override void PreprocessPostBackEvent (ref string eventArg);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void PreprocessPostBackEvent(string&amp; eventArg) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.PreprocessPostBackEvent(System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub PreprocessPostBackEvent (ByRef eventArg As String)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void PreprocessPostBackEvent(System::String ^ % eventArg);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="eventArg" Type="System.String&amp;" RefType="ref" />
+      </Parameters>
+      <Docs>
+        <param name="eventArg">Event arguments.</param>
+        <summary>Overrides the <b>PreprocessPostBackEvent(System.String@)</b> event.</summary>
+        <remarks>
+          <para>The base Web Part uses the template pattern to allow derived classes to handle post back events.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SaveViewState">
+      <MemberSignature Language="C#" Value="protected override object SaveViewState ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance object SaveViewState() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.SaveViewState" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function SaveViewState () As Object" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Object ^ SaveViewState();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Save the view state.</summary>
+        <returns>Returns <see cref="T:System.Object" />.</returns>
+        <remarks>
+          <para>This is part of the view state control lifecycle. Viewstate for this control includes the <b>SummaryLinkValue</b> object. In Display mode, no view states are saved, but in all other modes the value completes a round trip.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SummaryLinkStore">
+      <MemberSignature Language="C#" Value="public string SummaryLinkStore { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SummaryLinkStore" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.SummaryLinkStore" />
+      <MemberSignature Language="VB.NET" Value="Public Property SummaryLinkStore As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SummaryLinkStore { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the serialized <b>SummaryLink</b> data.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The <b>SummaryLinkStore</b> stores the serialized <b>SummaryLinkFieldValue</b> and is retained by the Web Part framework.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SummaryLinkValue">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Fields.SummaryLinkFieldValue SummaryLinkValue { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Fields.SummaryLinkFieldValue SummaryLinkValue" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.SummaryLinkValue" />
+      <MemberSignature Language="VB.NET" Value="Public Property SummaryLinkValue As SummaryLinkFieldValue" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Fields::SummaryLinkFieldValue ^ SummaryLinkValue { Microsoft::SharePoint::Publishing::Fields::SummaryLinkFieldValue ^ get(); void set(Microsoft::SharePoint::Publishing::Fields::SummaryLinkFieldValue ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.WebPartStorage(Microsoft.SharePoint.WebPartPages.Storage.None)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Fields.SummaryLinkFieldValue</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>SummaryLinkValue</b> for the Web Part.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>This property can be used to retrieve the current <b>SummaryLinkFieldValue</b> object that contains configuration data as well as <b>SummaryLinks</b> that are being used by this Web Part. This property can also be used to apply a <b>SummaryLinkFieldValue</b> object to this Web Part if storage for the <b>SummaryLinkFieldValue</b> is being managed externally. This property does not persist. This property is used by the <b>SummaryLinkFieldControl</b> that wraps the <b>SummaryLinkWebPart</b>. The field control sets the <b>SummaryLinkValue</b> when it is created.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update (Microsoft.SharePoint.Publishing.PublishingWeb ownerWeb);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Update(class Microsoft.SharePoint.Publishing.PublishingWeb ownerWeb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart.Update(Microsoft.SharePoint.Publishing.PublishingWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update (ownerWeb As PublishingWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Update(Microsoft::SharePoint::Publishing::PublishingWeb ^ ownerWeb);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Publishing.IWebPartVariationUpdate.Update(Microsoft.SharePoint.Publishing.PublishingWeb)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ownerWeb" Type="Microsoft.SharePoint.Publishing.PublishingWeb" />
+      </Parameters>
+      <Docs>
+        <param name="ownerWeb">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,364 @@
+﻿<Type Name="PropertyBase" FullName="Microsoft.Office.Server.UserProfiles.PropertyBase">
+  <TypeSignature Language="C#" Value="public abstract class PropertyBase" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit PropertyBase extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.PropertyBase" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class PropertyBase" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PropertyBase abstract" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the abstract class that defines the basic elements of a profile property.</summary>
+    <remarks>
+      <para>This is the base class for <see cref="T:Microsoft.Office.Server.UserProfiles.CoreProperty" />, <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileTypeProperty" />, and <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileSubtypeProperty" />.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Commit">
+      <MemberSignature Language="C#" Value="public abstract void Commit ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Commit() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyBase.Commit" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Sub Commit ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract void Commit();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Commits changes to this property’s definition to the user profile database.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Commit">
+      <MemberSignature Language="C#" Value="protected void Commit (bool forceChange);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void Commit(bool forceChange) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyBase.Commit(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub Commit (forceChange As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; void Commit(bool forceChange);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="forceChange" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="forceChange">To be added.</param>
+        <summary>Pushes an updated property definition to the user profile database.</summary>
+        <remarks>
+          <para>If the <b>forceChange</b> parameter is <b>true</b>, then the definition is updated even if the internally tracked <b>IsChanged</b> status is not set to <b>true</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSection">
+      <MemberSignature Language="C#" Value="public abstract bool IsSection { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyBase.IsSection" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property IsSection As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property bool IsSection { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether this is a section property.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsUpgrade">
+      <MemberSignature Language="C#" Value="public virtual bool IsUpgrade { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsUpgrade" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyBase.IsUpgrade" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property IsUpgrade As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool IsUpgrade { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether this property exists in a previously upgraded installation.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>User profile manager permission is required to set this value. This value cannot be set if this is a section property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsUpgradePrivate">
+      <MemberSignature Language="C#" Value="public virtual bool IsUpgradePrivate { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsUpgradePrivate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyBase.IsUpgradePrivate" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property IsUpgradePrivate As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool IsUpgradePrivate { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether this property exists in a previously upgraded installation.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>User profile manager permission is required to set this value. This value cannot be set if this is a section property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LoadPropertyDefinition">
+      <MemberSignature Language="C#" Value="protected abstract void LoadPropertyDefinition ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void LoadPropertyDefinition() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyBase.LoadPropertyDefinition" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Sub LoadPropertyDefinition ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract void LoadPropertyDefinition();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Loads the property definition from the database.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LoadPropertyDefinition">
+      <MemberSignature Language="C#" Value="protected abstract void LoadPropertyDefinition (System.Data.IDataRecord record);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void LoadPropertyDefinition(class System.Data.IDataRecord record) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyBase.LoadPropertyDefinition(System.Data.IDataRecord)" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Sub LoadPropertyDefinition (record As IDataRecord)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract void LoadPropertyDefinition(System::Data::IDataRecord ^ record);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="record" Type="System.Data.IDataRecord" />
+      </Parameters>
+      <Docs>
+        <param name="record">To be added.</param>
+        <summary>Loads the property definition that is defined by the specified data record from the database.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LoadPropertyDefinition">
+      <MemberSignature Language="C#" Value="protected void LoadPropertyDefinition (System.Data.SqlClient.SqlCommand cmd, bool isSection);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void LoadPropertyDefinition(class System.Data.SqlClient.SqlCommand cmd, bool isSection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyBase.LoadPropertyDefinition(System.Data.SqlClient.SqlCommand,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub LoadPropertyDefinition (cmd As SqlCommand, isSection As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; void LoadPropertyDefinition(System::Data::SqlClient::SqlCommand ^ cmd, bool isSection);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cmd" Type="System.Data.SqlClient.SqlCommand" />
+        <Parameter Name="isSection" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="cmd">The prebuilt SQL command.</param>
+        <param name="isSection">The value indicating whether this property is a section property.</param>
+        <summary>Loads the property definition that is defined by the specified SQL command.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public abstract string Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyBase.Name" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property System::String ^ Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value for the property name.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PartitionID">
+      <MemberSignature Language="C#" Value="protected internal Guid PartitionID { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid PartitionID" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyBase.PartitionID" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend ReadOnly Property PartitionID As Guid" />
+      <MemberSignature Language="C++ CLI" Value="protected public:&#xA; property Guid PartitionID { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the GUID that uniquely identifies the current partition for this property.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PostAddedCleanup">
+      <MemberSignature Language="C#" Value="protected virtual void PostAddedCleanup ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void PostAddedCleanup() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyBase.PostAddedCleanup" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub PostAddedCleanup ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void PostAddedCleanup();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Reloads a property definition and performs any necessary cleanup.</summary>
+        <remarks>
+          <para>Use after the property has been added.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PostUpdatedCleanup">
+      <MemberSignature Language="C#" Value="protected virtual void PostUpdatedCleanup ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void PostUpdatedCleanup() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyBase.PostUpdatedCleanup" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub PostUpdatedCleanup ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void PostUpdatedCleanup();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Reloads a property definition and performs any necessary cleanup.</summary>
+        <remarks>
+          <para>Use after a property has been updated.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateLocalizedData">
+      <MemberSignature Language="C#" Value="protected virtual void UpdateLocalizedData ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void UpdateLocalizedData() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyBase.UpdateLocalizedData" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub UpdateLocalizedData ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void UpdateLocalizedData();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Updates any localized data associated with the property.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WriteRemovePropertyAttributesXML">
+      <MemberSignature Language="C#" Value="protected abstract void WriteRemovePropertyAttributesXML (System.Xml.XmlTextWriter xmlDoc);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void WriteRemovePropertyAttributesXML(class System.Xml.XmlTextWriter xmlDoc) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyBase.WriteRemovePropertyAttributesXML(System.Xml.XmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Sub WriteRemovePropertyAttributesXML (xmlDoc As XmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract void WriteRemovePropertyAttributesXML(System::Xml::XmlTextWriter ^ xmlDoc);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="xmlDoc" Type="System.Xml.XmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="xmlDoc">To be added.</param>
+        <summary>Writes to XML the property attributes required for removing.</summary>
+        <remarks>
+          <para>This method is used for XLM macros.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WriteUpdatePropertyAttributesXML">
+      <MemberSignature Language="C#" Value="protected abstract void WriteUpdatePropertyAttributesXML (System.Xml.XmlTextWriter xmlDoc, Microsoft.Office.Server.UserProfiles.PropertyBase.DBAction action);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void WriteUpdatePropertyAttributesXML(class System.Xml.XmlTextWriter xmlDoc, valuetype Microsoft.Office.Server.UserProfiles.PropertyBase/DBAction action) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyBase.WriteUpdatePropertyAttributesXML(System.Xml.XmlTextWriter,Microsoft.Office.Server.UserProfiles.PropertyBase.DBAction)" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Sub WriteUpdatePropertyAttributesXML (xmlDoc As XmlTextWriter, action As PropertyBase.DBAction)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract void WriteUpdatePropertyAttributesXML(System::Xml::XmlTextWriter ^ xmlDoc, Microsoft::Office::Server::UserProfiles::PropertyBase::DBAction action);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="xmlDoc" Type="System.Xml.XmlTextWriter" />
+        <Parameter Name="action" Type="Microsoft.Office.Server.UserProfiles.PropertyBase+DBAction" />
+      </Parameters>
+      <Docs>
+        <param name="xmlDoc">To be added.</param>
+        <param name="action">To be added.</param>
+        <summary>Writes to XML the property attributes required for updating.</summary>
+        <remarks>
+          <para>Used for XLM macros.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

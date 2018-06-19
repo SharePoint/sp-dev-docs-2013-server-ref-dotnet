@@ -1,0 +1,266 @@
+﻿<Type Name="DocumentRouterAutoFolderSettings" FullName="Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings">
+  <TypeSignature Language="C#" Value="public class DocumentRouterAutoFolderSettings" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DocumentRouterAutoFolderSettings extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings" />
+  <TypeSignature Language="VB.NET" Value="Public Class DocumentRouterAutoFolderSettings" />
+  <TypeSignature Language="C++ CLI" Value="public ref class DocumentRouterAutoFolderSettings" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Configures automatic folder creation in a content organizer site.</summary>
+    <remarks>
+      <para>The content organizer enables site administrators to set up rules of that manage incoming documents based on their content type and metadata. These rules specify the final location for the documents being submitted to the site.</para>
+      <para>Enable automatic folder creation within a rule using the <see cref="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.AutoFolderSettings" /> property of the <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule" /> object so that folders are created in the final location based on document metadata, or enable the <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb" /> object so that folders are automatically created after a certain number of documents have been added to the location specified by any rule.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DocumentRouterAutoFolderSettings ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; DocumentRouterAutoFolderSettings();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AutoFolderFolderNameFormat">
+      <MemberSignature Language="C#" Value="public string AutoFolderFolderNameFormat { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AutoFolderFolderNameFormat" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.AutoFolderFolderNameFormat" />
+      <MemberSignature Language="VB.NET" Value="Public Property AutoFolderFolderNameFormat As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AutoFolderFolderNameFormat { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the format for the name of the folder it is creating automatically based on metadata or volume.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>Automatically created folders are named based on this property. The <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb" /> object can be configured to use the current date and time to create distinct folders when the threshold number of documents is reached. The placeholder %1 in the folder name format is replaced by the date and time of folder creation. </para>
+          <para>The <see cref="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.AutoFolderSettings" /> can be configured to create distinct folders based on the name and value of a property on the document. Placeholder %1 is replaced with the display name of the property, and the placeholder %2 is replaced with the value of that property on the document.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AutoFolderPropertyId">
+      <MemberSignature Language="C#" Value="public Guid AutoFolderPropertyId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid AutoFolderPropertyId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.AutoFolderPropertyId" />
+      <MemberSignature Language="VB.NET" Value="Public Property AutoFolderPropertyId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid AutoFolderPropertyId { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the GUID of the field if it is creating folders based on metadata as specified by the <see cref="P:Microsoft.SharePoint.SPField.Id" /> property of the field.</summary>
+        <value>Returns <see cref="T:System.Guid" />.</value>
+        <remarks>
+          <para>This property uniquely identifies a field in a content type. It is used to find the value of the field in the document.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AutoFolderPropertyInternalName">
+      <MemberSignature Language="C#" Value="public string AutoFolderPropertyInternalName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AutoFolderPropertyInternalName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.AutoFolderPropertyInternalName" />
+      <MemberSignature Language="VB.NET" Value="Public Property AutoFolderPropertyInternalName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AutoFolderPropertyInternalName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the internal name of the field if it is creating folders based on metadata.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>This property uniquely identifies a field in a content type. It is used to find the value of the field in the document.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AutoFolderPropertyName">
+      <MemberSignature Language="C#" Value="public string AutoFolderPropertyName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AutoFolderPropertyName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.AutoFolderPropertyName" />
+      <MemberSignature Language="VB.NET" Value="Public Property AutoFolderPropertyName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AutoFolderPropertyName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the display name of the field if it is creating folders based on metadata.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>You can configure automatic folder creation to create folders using the name and value of metadata on the document. Metadata-based folder creation can only be configured for a rule by way of the <see cref="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.AutoFolderSettings" /> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AutoFolderPropertyTypeAsString">
+      <MemberSignature Language="C#" Value="public string AutoFolderPropertyTypeAsString { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AutoFolderPropertyTypeAsString" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.AutoFolderPropertyTypeAsString" />
+      <MemberSignature Language="VB.NET" Value="Public Property AutoFolderPropertyTypeAsString As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AutoFolderPropertyTypeAsString { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the type of the field if it is creating folders based on metadata as specified by the <see cref="P:Microsoft.SharePoint.SPFieldType.TypeAsString" /> property of the field.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateAutoFolderSettings">
+      <MemberSignature Language="C#" Value="public static Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings CreateAutoFolderSettings (string stgsXml);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings CreateAutoFolderSettings(string stgsXml) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.CreateAutoFolderSettings(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CreateAutoFolderSettings (stgsXml As String) As DocumentRouterAutoFolderSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::RecordsManagement::RecordsRepository::DocumentRouterAutoFolderSettings ^ CreateAutoFolderSettings(System::String ^ stgsXml);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="stgsXml" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="stgsXml">The settings XML string that is returned by the <see cref="M:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.ToString()" /> method.</param>
+        <summary>Creates an <b>AutoFolderSettings</b> object from its string representation.</summary>
+        <returns>Returns <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Enabled">
+      <MemberSignature Language="C#" Value="public bool Enabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Enabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.Enabled" />
+      <MemberSignature Language="VB.NET" Value="Public Property Enabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool Enabled { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether the specified automatic folder creation settings are enabled.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxFolderItems">
+      <MemberSignature Language="C#" Value="public int MaxFolderItems { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxFolderItems" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.MaxFolderItems" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxFolderItems As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaxFolderItems { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum number of documents in any folder that triggers automatic folder creation.</summary>
+        <value>Returns <see cref="T:System.Int32" />.</value>
+        <remarks>
+          <para>You can configure a content organizer-enabled site to create new folders for documents after the maximum number of documents have been added to a folder. By default, this threshold is set to 2500 documents. This property is used only if automatic folder creation is enabled for the <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TaxTermStoreId">
+      <MemberSignature Language="C#" Value="public Guid TaxTermStoreId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid TaxTermStoreId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.TaxTermStoreId" />
+      <MemberSignature Language="VB.NET" Value="Public Property TaxTermStoreId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid TaxTermStoreId { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the GUID of the managed metadata <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>This property is used only if <b>AutoFolderSettings</b> is enabled on a <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule" /> object. It is used to retrieve the value of the field if the field is a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings.ToString" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ ToString();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the serialized value of the <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings" /> object.</summary>
+        <returns>Returns <see cref="T:System.String" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

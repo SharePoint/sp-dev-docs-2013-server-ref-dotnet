@@ -1,0 +1,1195 @@
+﻿<Type Name="SummaryLink" FullName="Microsoft.SharePoint.Publishing.SummaryLink">
+  <TypeSignature Language="C#" Value="public sealed class SummaryLink" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SummaryLink extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.SummaryLink" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SummaryLink" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SummaryLink sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>A <b>SummaryLink</b> object that provides a way to store Web addresses.</summary>
+    <remarks>
+      <para>A <b>SummaryLink</b> is an annotated hyperlink.</para>
+      <para>At minimum, a <b>SummaryLink</b> object contains a <b>title</b>and a <b>linkUrl</b>. It also contains styling information that affects how it is rendered by the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkFieldControl" /> or <see cref="T:Microsoft.SharePoint.Publishing.WebControls.SummaryLinkWebPart" />.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Publishing;
+using Microsoft.SharePoint.Publishing.Fields;
+using Microsoft.SharePoint.Publishing.WebControls;
+using SharePointWebParts = Microsoft.SharePoint.WebPartPages;
+using System.Web.UI.WebControls.WebParts;
+
+namespace SummaryLinkFieldTest
+{
+    static class CreateSummaryLinks
+    {
+        /// Creates SummaryLinks in a SummaryLinkField within a PublishingPage
+        /// This sample creates group headers and summary links within a SummaryLinkFieldValue object
+        /// and then applies the SummaryLinkFieldValue to a SummaryLinkField within a Page.
+        /// 
+        /// Pre-requisite:
+        /// This sample assumes that 'Content Approval' is applied to 
+        /// the Pages document library containing the PublishingPage.
+        /// &amp;lt;param name="publishingPage"&amp;gt;The page in which to create the summary links&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="fieldName"&amp;gt;The name of the SummaryLinkField&amp;lt;/param&amp;gt;
+        public static void createFieldControlSummaryLinks(PublishingPage publishingPage, string fieldName)
+        {
+            // SummaryLinkFieldValue is the container for SummaryLinks and display configuration
+            // data.
+            SummaryLinkFieldValue summaryLinkValue = CreateSummaryLinks.createSummaryLinkValue();
+
+            if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                publishingPage.CheckOut();
+            }
+            
+            // Replace the existing contents of the field with the newly created SummaryLinkValue
+            publishingPage.ListItem[fieldName] = summaryLinkValue;
+
+            publishingPage.Update();
+            publishingPage.CheckIn("Checking in summary link change");
+            publishingPage.ListItem.File.Publish("Publishing summary link change");
+            publishingPage.ListItem.File.Approve("Approving summary link change");
+        }
+
+        
+        /// Creates SummaryLinks in a SummaryLinkWebPart within a PublishingPage
+        /// This sample creates group headers and summary links within a SummaryLinkFieldValue object
+        /// and then applies the SummaryLinkFieldValue to a SummaryLinkWebPart on a PublishingPage.
+        /// 
+        /// Pre-requisite:
+        /// This sample assumes that 'Content Approval' is applied to 
+        /// the Pages document library containing the PublishingPage.
+        /// &amp;lt;param name="publishingPage"&amp;gt;The page in which to create the summary links&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="webRelativePageUrl"&amp;gt;The web relative URL of the page&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="webPartTitle"&amp;gt;The Title of the web part&amp;lt;/param&amp;gt;
+        public static void createWebPartSummaryLinks(PublishingPage publishingPage, string webRelativePageUrl, string webPartTitle)
+        {
+            SummaryLinkFieldValue summaryLinkValue = CreateSummaryLinks.createSummaryLinkValue();
+
+            if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                publishingPage.CheckOut();
+            }
+
+            SharePointWebParts.SPLimitedWebPartManager webPartManager =
+                publishingPage.ListItem.Web.GetLimitedWebPartManager(webRelativePageUrl,
+                                                          System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared);
+
+            SharePointWebParts.SPLimitedWebPartCollection webParts = webPartManager.WebParts;
+
+            foreach (WebPart webPart in webParts)
+            {
+                SummaryLinkWebPart slwp = webPart as SummaryLinkWebPart;
+                if (slwp != null &amp;amp;&amp;amp; 
+                    string.CompareOrdinal(slwp.Title, webPartTitle) == 0)
+                {
+                    // Replace the existing contents of the Web part with the newly created SummaryLinkValue
+                    slwp.SummaryLinkValue = summaryLinkValue;
+                    webPartManager.SaveChanges(slwp);
+                    break;
+                }
+            }
+
+            publishingPage.Update();
+            publishingPage.CheckIn("Checking in summary link change");
+            publishingPage.ListItem.File.Publish("Publishing summary link change");
+            publishingPage.ListItem.File.Approve("Approving summary link change");
+        }
+
+        public static SummaryLinkFieldValue createSummaryLinkValue()
+        {
+            SummaryLinkFieldValue summaryLinkValue = new SummaryLinkFieldValue();
+            summaryLinkValue.DisplayColumns = 2;
+            summaryLinkValue.LinkStyle = "Bullets";
+            summaryLinkValue.GroupStyle = "Black";
+
+            SummaryLinkCollection summaryLinks = summaryLinkValue.SummaryLinks;
+
+            SummaryLink summaryLink;
+
+            // Add Groups and links.
+            // The link style set here must correspond to one of the template names in the XSL Item style
+            // This is not verified by the OM, but an incorrect template name results in the
+            // link not rendering.
+            
+            // GroupA
+
+            summaryLink = summaryLinks.Add("GroupA");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link1");
+            summaryLink.Description = "Description1";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link1";
+
+            summaryLink = summaryLinks.Add("Link2");
+            summaryLink.Description = "Description2";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link2";
+
+            // GroupB
+
+            summaryLink = summaryLinks.Add("GroupB");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link3");
+            summaryLink.Description = "Description3";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link3";
+            summaryLink.LinkToolTip = "Tooltip for link3";
+
+            return summaryLinkValue;
+        }
+    
+    }
+}</code>
+      <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports Microsoft.SharePoint
+Imports Microsoft.SharePoint.Publishing
+Imports Microsoft.SharePoint.Publishing.Fields
+Imports Microsoft.SharePoint.Publishing.WebControls
+Imports SharePointWebParts = Microsoft.SharePoint.WebPartPages
+Imports System.Web.UI.WebControls.WebParts
+
+Namespace SummaryLinkFieldTest
+    Friend NotInheritable Class CreateSummaryLinks
+        ''' Creates SummaryLinks in a SummaryLinkField within a PublishingPage
+        ''' This sample creates group headers and summary links within a SummaryLinkFieldValue object
+        ''' and then applies the SummaryLinkFieldValue to a SummaryLinkField within a Page.
+        ''' 
+        ''' Pre-requisite:
+        ''' This sample assumes that 'Content Approval' is applied to 
+        ''' the Pages document library containing the PublishingPage.
+        ''' &amp;lt;param name="publishingPage"&amp;gt;The page in which to create the summary links&amp;lt;/param&amp;gt;
+        ''' &amp;lt;param name="fieldName"&amp;gt;The name of the SummaryLinkField&amp;lt;/param&amp;gt;
+        Private Sub New()
+        End Sub
+        Public Shared Sub createFieldControlSummaryLinks(ByVal publishingPage As PublishingPage, ByVal fieldName As String)
+            ' SummaryLinkFieldValue is the container for SummaryLinks and display configuration
+            ' data.
+            Dim summaryLinkValue As SummaryLinkFieldValue = CreateSummaryLinks.createSummaryLinkValue()
+
+            If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                publishingPage.CheckOut()
+            End If
+
+            ' Replace the existing contents of the field with the newly created SummaryLinkValue
+            publishingPage.ListItem(fieldName) = summaryLinkValue
+
+            publishingPage.Update()
+            publishingPage.CheckIn("Checking in summary link change")
+            publishingPage.ListItem.File.Publish("Publishing summary link change")
+            publishingPage.ListItem.File.Approve("Approving summary link change")
+        End Sub
+
+
+        ''' Creates SummaryLinks in a SummaryLinkWebPart within a PublishingPage
+        ''' This sample creates group headers and summary links within a SummaryLinkFieldValue object
+        ''' and then applies the SummaryLinkFieldValue to a SummaryLinkWebPart on a PublishingPage.
+        ''' 
+        ''' Pre-requisite:
+        ''' This sample assumes that 'Content Approval' is applied to 
+        ''' the Pages document library containing the PublishingPage.
+        ''' &amp;lt;param name="publishingPage"&amp;gt;The page in which to create the summary links&amp;lt;/param&amp;gt;
+        ''' &amp;lt;param name="webRelativePageUrl"&amp;gt;The web relative URL of the page&amp;lt;/param&amp;gt;
+        ''' &amp;lt;param name="webPartTitle"&amp;gt;The Title of the web part&amp;lt;/param&amp;gt;
+        Public Shared Sub createWebPartSummaryLinks(ByVal publishingPage As PublishingPage, ByVal webRelativePageUrl As String, ByVal webPartTitle As String)
+            Dim summaryLinkValue As SummaryLinkFieldValue = CreateSummaryLinks.createSummaryLinkValue()
+
+            If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                publishingPage.CheckOut()
+            End If
+
+            Dim webPartManager As SharePointWebParts.SPLimitedWebPartManager = publishingPage.ListItem.Web.GetLimitedWebPartManager(webRelativePageUrl, System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)
+
+            Dim webParts As SharePointWebParts.SPLimitedWebPartCollection = webPartManager.WebParts
+
+            For Each webPart As WebPart In webParts
+                Dim slwp As SummaryLinkWebPart = TryCast(webPart, SummaryLinkWebPart)
+                If slwp IsNot Nothing AndAlso String.CompareOrdinal(slwp.Title, webPartTitle) = 0 Then
+                    ' Replace the existing contents of the Web part with the newly created SummaryLinkValue
+                    slwp.SummaryLinkValue = summaryLinkValue
+                    webPartManager.SaveChanges(slwp)
+                    Exit For
+                End If
+            Next webPart
+
+            publishingPage.Update()
+            publishingPage.CheckIn("Checking in summary link change")
+            publishingPage.ListItem.File.Publish("Publishing summary link change")
+            publishingPage.ListItem.File.Approve("Approving summary link change")
+        End Sub
+
+        Public Shared Function createSummaryLinkValue() As SummaryLinkFieldValue
+            Dim summaryLinkValue As New SummaryLinkFieldValue()
+            summaryLinkValue.DisplayColumns = 2
+            summaryLinkValue.LinkStyle = "Bullets"
+            summaryLinkValue.GroupStyle = "Black"
+
+            Dim summaryLinks As SummaryLinkCollection = summaryLinkValue.SummaryLinks
+
+            Dim summaryLink As SummaryLink
+
+            ' Add Groups and links.
+            ' The link style set here must correspond to one of the template names in the XSL Item style
+            ' This is not verified by the OM, but an incorrect template name results in the
+            ' link not rendering.
+
+            ' GroupA
+
+            summaryLink = summaryLinks.Add("GroupA")
+            summaryLink.IsGroupHeader = True
+
+            summaryLink = summaryLinks.Add("Link1")
+            summaryLink.Description = "Description1"
+            summaryLink.Style = "Default"
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+            summaryLink.LinkUrl = "http://www.example.com/link1"
+
+            summaryLink = summaryLinks.Add("Link2")
+            summaryLink.Description = "Description2"
+            summaryLink.Style = "Default"
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+            summaryLink.LinkUrl = "http://www.example.com/link2"
+
+            ' GroupB
+
+            summaryLink = summaryLinks.Add("GroupB")
+            summaryLink.IsGroupHeader = True
+
+            summaryLink = summaryLinks.Add("Link3")
+            summaryLink.Description = "Description3"
+            summaryLink.Style = "Default"
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+            summaryLink.LinkUrl = "http://www.example.com/link3"
+            summaryLink.LinkToolTip = "Tooltip for link3"
+
+            Return summaryLinkValue
+        End Function
+
+    End Class
+End Namespace</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SummaryLink (string title);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string title) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.SummaryLink.#ctor(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (title As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; SummaryLink(System::String ^ title);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="title" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="title">Title of the <b>SummaryLink</b> object.</param>
+        <summary>Constructs a new <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object with the specified title.</summary>
+        <remarks>
+          <para>A <b>SummaryLink</b> object can either be created using this constructor, or by using the <see cref="M:Microsoft.SharePoint.Publishing.SummaryLinkCollection.Add(String)" /> method. When a <b>SummaryLink</b> object is created independently of its collection, it should be added to the collection by using the <b>SummaryLinkCollection.Add(SummaryLink)</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BeginColumn">
+      <MemberSignature Language="C#" Value="public bool BeginColumn { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool BeginColumn" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.BeginColumn" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property BeginColumn As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool BeginColumn { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets data indicating whether this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object should begin in a new column.</summary>
+        <value>Data indicating whether this <b>SummaryLink</b> object should begin in a new column.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.SummaryLink.BeginColumn" /> property indicates whether this <b>SummaryLink</b> object is the first link in a column. The XSL rendering template uses this property to determine whether to render a new column. This property is set when the <see cref="T:Microsoft.SharePoint.Publishing.Fields.UpdateLinkProperties" /> method of the <see cref="T:Microsoft.SharePoint.Publishing.Fields.SummaryLinkFieldValue" /> object is called before the links render or are saved.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets text that describes the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object.</summary>
+        <value>Text that describes the <b>SummaryLink</b> object.</value>
+        <remarks>
+          <para>The description text is free-form text that can be used to describe the purpose of the link. It is applicable to People links and Web page links. Before this value is set, the input is first stripped of leading and trailing whitespace. This value is available in the XSL rendering through the <paramref name="@Description" /> parameter.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">Invalid property value. The value cannot exceed 1000 characters.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Group">
+      <MemberSignature Language="C#" Value="public string Group { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Group" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.Group" />
+      <MemberSignature Language="VB.NET" Value="Public Property Group As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Group { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the group to which this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object belongs.</summary>
+        <value>The name of the group to which this <b>SummaryLink</b> object belongs.</value>
+        <remarks>
+          <para>A <b>SummaryLink</b> object belongs to a group if it appears after a Group Header link within the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLinkCollection" /> object. The group that the link belongs to is determined by its order in the <b>SummaryLinkCollection</b>, not by setting this property.</para>
+          <para>This property indicates the group to which the link belongs and is intended mainly for XSL rendering by way of the <paramref name="@Group" /> parameter. The setter for this property is not intended for external use, and is used by internal serialization code that sets the value based on the nearest earlier group header link. If this value is set, it is recalculated when the <b>SummaryLinkFieldValue</b> is saved.</para>
+          <para>This value is available in the XSL rendering by way of the <paramref name="@Group" /> parameter.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">Invalid property value. The value cannot exceed 500 characters.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GroupStyle">
+      <MemberSignature Language="C#" Value="public string GroupStyle { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string GroupStyle" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.GroupStyle" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property GroupStyle As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupStyle { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets template information about how to render the group that contains the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object.</summary>
+        <value>Template information for rendering the group containing the <b>SummaryLink</b> object.</value>
+        <remarks>
+          <para>This property determines which group style to use for this <b>SummaryLink</b> object.</para>
+          <para>This property is set when the <see cref="T:Microsoft.SharePoint.Publishing.Fields.UpdateLinkProperties" /> method of the containing <see cref="T:Microsoft.SharePoint.Publishing.Fields.SummaryLinkFieldValue" /> object is called before the links are rendered or saved.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>public static SummaryLinkFieldValue createSummaryLinkValue()
+        {
+            SummaryLinkFieldValue summaryLinkValue = new SummaryLinkFieldValue();
+            summaryLinkValue.DisplayColumns = 2;
+            summaryLinkValue.LinkStyle = "Bullets";
+            summaryLinkValue.GroupStyle = "Black";</code>
+          <code>Public Shared Function createSummaryLinkValue() As SummaryLinkFieldValue
+            Dim summaryLinkValue As New SummaryLinkFieldValue()
+            summaryLinkValue.DisplayColumns = 2
+            summaryLinkValue.LinkStyle = "Bullets"
+            summaryLinkValue.GroupStyle = "Black"
+End Function</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ImageUrl">
+      <MemberSignature Language="C#" Value="public string ImageUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ImageUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.ImageUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property ImageUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ImageUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL for the image associated with this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object.</summary>
+        <value>The URL for the image associated with this <b>SummaryLink</b>.</value>
+        <remarks>
+          <para>The <b>ImageUrl</b> property can be empty. If the <b>ImageUrl</b> property contains a string that is not empty, the string must be a URL that is either server-relative or fully qualified. Server-relative URLs start with a single backslash character. A fully qualified <b>ImageUrl</b> must have one of the following allowed protocols:</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <b>http:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>https:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>file:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>ftp:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>mailto:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>msn:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>news: </b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>nntp: </b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>pnm: </b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>mms: </b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>outlook:</b>
+              </description>
+            </item>
+          </list>
+          <para>If the URL starts with "//" or "\\" it is considered to be a <b>file:</b> protocol and the beginning two slashes are replaced with <b>file://</b>. When setting the value, the input is first stripped of leading and trailing whitespace before being applied. If the absolute URL refers to an item in the current site collection, it is turned into a server-relative URL before being applied. This value is available in the XSL rendering through the <paramref name="@ImageUrl" /> parameter.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Add Groups and links.
+            // The link style set here must correspond to one of the template names in the XSL Item style
+            // This is not verified by the OM, but an incorrect template name results in the
+            // link not rendering.
+            
+            // GroupA
+
+            summaryLink = summaryLinks.Add("GroupA");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link1");
+            summaryLink.Description = "Description1";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link1";
+
+            summaryLink = summaryLinks.Add("Link2");
+            summaryLink.Description = "Description2";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link2";
+
+            // GroupB
+
+            summaryLink = summaryLinks.Add("GroupB");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link3");
+            summaryLink.Description = "Description3";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link3";
+            summaryLink.LinkToolTip = "Tooltip for link3";
+
+            return summaryLinkValue;</code>
+          <code>' Add Groups and links.
+' The link style set here must correspond to one of the template names in the XSL Item style
+' This is not verified by the OM, but an incorrect template name results in the
+' link not rendering.
+
+' GroupA
+
+summaryLink = summaryLinks.Add("GroupA")
+summaryLink.IsGroupHeader = True
+
+summaryLink = summaryLinks.Add("Link1")
+summaryLink.Description = "Description1"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link1"
+
+summaryLink = summaryLinks.Add("Link2")
+summaryLink.Description = "Description2"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link2"
+
+' GroupB
+
+summaryLink = summaryLinks.Add("GroupB")
+summaryLink.IsGroupHeader = True
+
+summaryLink = summaryLinks.Add("Link3")
+summaryLink.Description = "Description3"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link3"
+summaryLink.LinkToolTip = "Tooltip for link3"
+
+Return summaryLinkValue</code>
+          <para>
+            <b>Note</b>: This code example is part of a larger code example in the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> topic.</para>
+        </example>
+        <exception cref="T:System.ArgumentException">URL is not valid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ImageUrlAltText">
+      <MemberSignature Language="C#" Value="public string ImageUrlAltText { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ImageUrlAltText" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.ImageUrlAltText" />
+      <MemberSignature Language="VB.NET" Value="Public Property ImageUrlAltText As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ImageUrlAltText { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the text associated with the image URL for this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object.</summary>
+        <value>The text associated with the image URL for this <b>SummaryLink</b> object.</value>
+        <remarks>
+          <para>The alternate text can be used in HTML rendering as an <paramref name="alt" /> attribute of a <b>&lt;SRC&gt;</b> tag that renders the <b>ImageUrl</b> property. This provides a tooltip in some browsers that describes the image. This value is available in the XSL rendering through the <paramref name="@ImageUrlAltText" /> parameter. When setting the value, the input is first stripped of leading and trailing whitespace before being applied.</para>
+          <para>This property typically renders as the <paramref name="alt" /> attribute on an <b>&lt;IMG&gt;</b> tag.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">Invalid property value. The value cannot exceed 500 characters.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="IsGroupHeader">
+      <MemberSignature Language="C#" Value="public bool IsGroupHeader { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsGroupHeader" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.IsGroupHeader" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsGroupHeader As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsGroupHeader { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a flag that determines whether this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object is a group header that can be used to organize other <b>SummaryLink</b> objects.</summary>
+        <value>A flag that determines whether or not this <b>SummaryLink</b> is a group header.</value>
+        <remarks>
+          <para>A group header link that represents a grouping for other links. It does not have a link URL property.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Add Groups and links.
+            // The link style set here must correspond to one of the template names in the XSL Item style
+            // This is not verified by the OM, but an incorrect template name results in the
+            // link not rendering.
+            
+            // GroupA
+            summaryLink = summaryLinks.Add("GroupA");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link1");
+            summaryLink.Description = "Description1";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link1";
+
+            summaryLink = summaryLinks.Add("Link2");
+            summaryLink.Description = "Description2";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link2";
+
+            // GroupB
+
+            summaryLink = summaryLinks.Add("GroupB");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link3");
+            summaryLink.Description = "Description3";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link3";
+            summaryLink.LinkToolTip = "Tooltip for link3";
+
+            return summaryLinkValue;</code>
+          <code>' Add Groups and links.
+' The link style set here must correspond to one of the template names in the XSL Item style
+' This is not verified by the OM, but an incorrect template name results in the
+' link not rendering.
+
+' GroupA
+summaryLink = summaryLinks.Add("GroupA")
+summaryLink.IsGroupHeader = True
+
+summaryLink = summaryLinks.Add("Link1")
+summaryLink.Description = "Description1"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link1"
+
+summaryLink = summaryLinks.Add("Link2")
+summaryLink.Description = "Description2"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link2"
+
+' GroupB
+
+summaryLink = summaryLinks.Add("GroupB")
+summaryLink.IsGroupHeader = True
+
+summaryLink = summaryLinks.Add("Link3")
+summaryLink.Description = "Description3"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link3"
+summaryLink.LinkToolTip = "Tooltip for link3"
+
+Return summaryLinkValue</code>
+          <para>
+            <b>Note</b>: This code example is part of a larger code example in the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="IsPeopleLink">
+      <MemberSignature Language="C#" Value="public bool IsPeopleLink { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsPeopleLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.IsPeopleLink" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsPeopleLink As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsPeopleLink { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets data that determines whether this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object links to a person.</summary>
+        <value>Data that determines whether this <b>SummaryLink</b> object links to a person.</value>
+        <remarks>
+          <para>This property indicates whether this is a People link. The presence of the <see cref="P:Microsoft.SharePoint.Publishing.SummaryLink.LoginName" /> property indicates a person.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LinkToolTip">
+      <MemberSignature Language="C#" Value="public string LinkToolTip { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string LinkToolTip" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.LinkToolTip" />
+      <MemberSignature Language="VB.NET" Value="Public Property LinkToolTip As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LinkToolTip { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a tool tip for the URL of the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object.</summary>
+        <value>The tool tip for the URL of the <b>SummaryLink</b> object.</value>
+        <remarks>
+          <para>This typically renders as a title attribute on an "A" tag.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Add Groups and links.
+            // The link style set here must correspond to one of the template names in the XSL Item style
+            // This is not verified by the OM, but an incorrect template name results in the
+            // link not rendering.
+            
+            // GroupA
+
+            summaryLink = summaryLinks.Add("GroupA");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link1");
+            summaryLink.Description = "Description1";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link1";
+
+            summaryLink = summaryLinks.Add("Link2");
+            summaryLink.Description = "Description2";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link2";
+
+            // GroupB
+
+            summaryLink = summaryLinks.Add("GroupB");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link3");
+            summaryLink.Description = "Description3";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link3";
+            summaryLink.LinkToolTip = "Tooltip for link3";
+
+            return summaryLinkValue;</code>
+          <code>' Add Groups and links.
+' The link style set here must correspond to one of the template names in the XSL Item style
+' This is not verified by the OM, but an incorrect template name results in the
+' link not rendering.
+
+' GroupA
+
+summaryLink = summaryLinks.Add("GroupA")
+summaryLink.IsGroupHeader = True
+
+summaryLink = summaryLinks.Add("Link1")
+summaryLink.Description = "Description1"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link1"
+
+summaryLink = summaryLinks.Add("Link2")
+summaryLink.Description = "Description2"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link2"
+
+' GroupB
+
+summaryLink = summaryLinks.Add("GroupB")
+summaryLink.IsGroupHeader = True
+
+summaryLink = summaryLinks.Add("Link3")
+summaryLink.Description = "Description3"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link3"
+summaryLink.LinkToolTip = "Tooltip for link3"
+
+Return summaryLinkValue</code>
+          <para>
+            <b>Note</b>: This code example is part of a larger code example in the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> topic.</para>
+        </example>
+        <exception cref="T:System.ArgumentException">Invalid property value. The value cannot exceed 500 characters.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="LinkUrl">
+      <MemberSignature Language="C#" Value="public string LinkUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string LinkUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.LinkUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property LinkUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LinkUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL of the link item to which this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object links.</summary>
+        <value>URL of the link item to which this <b>SummaryLink</b> object links.</value>
+        <remarks>
+          <para>The <b>LinkUrl</b> property can be empty. If the <b>LinkUrl</b> property contains a string that is not empty, the string must be a URL that is either server-relative or fully qualified. Server-relative URLs start with a single backslash character. A fully qualified <b>LinkUrl</b> must have one of the following allowed protocols:</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <b>http:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>https:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>file:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>ftp:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>mailto:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>msn:</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>news: </b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>nntp: </b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>pnm: </b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>mms: </b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>outlook:</b>
+              </description>
+            </item>
+          </list>
+          <para>If the URL starts with "//" or "\\" it is considered to be a <b>file:</b> protocol and the beginning two slashes are replaced with <b>file://</b>. When setting the value, the input is first stripped of leading and trailing whitespace before being applied. If the absolute URL refers to an item in the current site collection, it is turned into a server-relative URL prior to being applied. This value is available in the XSL rendering through the <paramref name="@LinkUrl" /> parameter.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Add Groups and links.
+            // The link style set here must correspond to one of the template names in the XSL Item style
+            // This is not verified by the OM, but an incorrect template name results in the
+            // link not rendering.
+            
+            // GroupA
+
+            summaryLink = summaryLinks.Add("GroupA");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link1");
+            summaryLink.Description = "Description1";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link1";
+
+            summaryLink = summaryLinks.Add("Link2");
+            summaryLink.Description = "Description2";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link2";
+
+            // GroupB
+
+            summaryLink = summaryLinks.Add("GroupB");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link3");
+            summaryLink.Description = "Description3";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link3";
+            summaryLink.LinkToolTip = "Tooltip for link3";
+
+            return summaryLinkValue;</code>
+          <code>' Add Groups and links.
+' The link style set here must correspond to one of the template names in the XSL Item style
+' This is not verified by the OM, but an incorrect template name results in the
+' link not rendering.
+
+' GroupA
+
+summaryLink = summaryLinks.Add("GroupA")
+summaryLink.IsGroupHeader = True
+
+summaryLink = summaryLinks.Add("Link1")
+summaryLink.Description = "Description1"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link1"
+
+summaryLink = summaryLinks.Add("Link2")
+summaryLink.Description = "Description2"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link2"
+
+' GroupB
+
+summaryLink = summaryLinks.Add("GroupB")
+summaryLink.IsGroupHeader = True
+
+summaryLink = summaryLinks.Add("Link3")
+summaryLink.Description = "Description3"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link3"
+summaryLink.LinkToolTip = "Tooltip for link3"
+
+Return summaryLinkValue</code>
+          <para>
+            <b>Note</b>: This code example is part of a larger code example in the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> topic.</para>
+        </example>
+        <exception cref="T:System.ArgumentException">URL is not valid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="LoginName">
+      <MemberSignature Language="C#" Value="public string LoginName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string LoginName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.LoginName" />
+      <MemberSignature Language="VB.NET" Value="Public Property LoginName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LoginName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Session Initiation Protocol (SIP) address of the person who this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object references.</summary>
+        <value>The SIP address of the person whom this <b>SummaryLink</b> object references.</value>
+        <remarks>
+          <para>This property is only set if the <b>SummaryLink</b> object is a link to a person, otherwise it contains an empty string. The <b>LoginName</b> property is the key for the person, and is the data used to look up additional information about that person in the <b>UserProfile</b> object. This value is accessible in the XSL style sheets through the <paramref name="@LoginName" /> parameter.</para>
+          <para>This property only applies to <b>SummaryLink</b> objects that refer to people.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OpenInNewWindow">
+      <MemberSignature Language="C#" Value="public bool OpenInNewWindow { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool OpenInNewWindow" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.OpenInNewWindow" />
+      <MemberSignature Language="VB.NET" Value="Public Property OpenInNewWindow As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool OpenInNewWindow { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that determines whether or not clicking this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object opens its target in a new window.</summary>
+        <value>Boolean value that indicates whether clicking this <b>SummaryLink</b> opens its target in a new window.</value>
+        <remarks>
+          <para>This value can be used to output HTML that ensures that the link either opens in the current window, or in a new window. This value is available in the XSL rendering through the <paramref name="@OpenInNewWindow" /> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Order">
+      <MemberSignature Language="C#" Value="public int Order { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Order" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.Order" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Order As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Order { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the current position of the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object in the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLinkCollection" /> collection.</summary>
+        <value>The order of this <b>SummaryLink</b> in the <b>SummaryLinkCollection</b>.</value>
+        <remarks>
+          <para>When items are moved or deleted in the <b>SummaryLinkCollection</b>, their order properties are not immediately updated.</para>
+          <para>This property is used to identify a summary list link item that is being edited. It is set when the <see cref="T:Microsoft.SharePoint.Publishing.Fields.UpdateLinkProperties" /> method of the <see cref="T:Microsoft.SharePoint.Publishing.Fields.SummaryLinkFieldValue" /> object is called before the links are rendered or saved.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SipAddress">
+      <MemberSignature Language="C#" Value="public string SipAddress { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SipAddress" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.SipAddress" />
+      <MemberSignature Language="VB.NET" Value="Public Property SipAddress As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SipAddress { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Session Initiation Protocol (SIP) address of the person whom this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object references.</summary>
+        <value>The SIP address of the person that this <b>SummaryLink</b> object references.</value>
+        <remarks>
+          <para>The SIP address of the person whom this <b>SummaryLink</b> references.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Style">
+      <MemberSignature Language="C#" Value="public string Style { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Style" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.Style" />
+      <MemberSignature Language="VB.NET" Value="Public Property Style As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Style { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the style in which to render this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object.</summary>
+        <value>The style in which to render this <b>SummaryLink</b> object.</value>
+        <remarks>
+          <para>Summary Links are displayed through the <b>SummaryLinkWebPart</b> and <b>SummaryLinkFieldControl</b> objects. These controls have associated XSL style sheets that contain XSL templates that are used to render the links. The template that is applied for rendering this link is the template with a name matching this Style name. This value is available in the XSL rendering through the <paramref name="@Style" /> parameter.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Add Groups and links.
+            // The link style set here must correspond to one of the template names in the XSL Item style
+            // This is not verified by the OM, but an incorrect template name results in the
+            // link not rendering.
+            
+            // GroupA
+
+            summaryLink = summaryLinks.Add("GroupA");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link1");
+            summaryLink.Description = "Description1";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link1";
+
+            summaryLink = summaryLinks.Add("Link2");
+            summaryLink.Description = "Description2";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link2";
+
+            // GroupB
+
+            summaryLink = summaryLinks.Add("GroupB");
+            summaryLink.IsGroupHeader = true;
+
+            summaryLink = summaryLinks.Add("Link3");
+            summaryLink.Description = "Description3";
+            summaryLink.Style = "Default";
+            summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif";
+            summaryLink.LinkUrl = "http://www.example.com/link3";
+            summaryLink.LinkToolTip = "Tooltip for link3";
+
+            return summaryLinkValue;</code>
+          <code>' Add Groups and links.
+' The link style set here must correspond to one of the template names in the XSL Item style
+' This is not verified by the OM, but an incorrect template name results in the
+' link not rendering.
+
+' GroupA
+
+summaryLink = summaryLinks.Add("GroupA")
+summaryLink.IsGroupHeader = True
+
+summaryLink = summaryLinks.Add("Link1")
+summaryLink.Description = "Description1"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link1"
+
+summaryLink = summaryLinks.Add("Link2")
+summaryLink.Description = "Description2"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link2"
+
+' GroupB
+
+summaryLink = summaryLinks.Add("GroupB")
+summaryLink.IsGroupHeader = True
+
+summaryLink = summaryLinks.Add("Link3")
+summaryLink.Description = "Description3"
+summaryLink.Style = "Default"
+summaryLink.ImageUrl = "http://www.live.com/live/1.100.7.337/img/wl_jewel.gif"
+summaryLink.LinkUrl = "http://www.example.com/link3"
+summaryLink.LinkToolTip = "Tooltip for link3"
+
+Return summaryLinkValue</code>
+          <para>
+            <b>Note</b>: This code example is part of a larger code example in the <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Title">
+      <MemberSignature Language="C#" Value="public string Title { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Title" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.SummaryLink.Title" />
+      <MemberSignature Language="VB.NET" Value="Public Property Title As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Title { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the title text of this <see cref="T:Microsoft.SharePoint.Publishing.SummaryLink" /> object.</summary>
+        <value>Title text of this <b>SummaryLink</b> object.</value>
+        <remarks>
+          <para>The title of a <b>SummaryLink</b> object identifies its link. Title applies to both People links and Web page links. For a People link, the title is set to the display name of the person. When setting the property value, the input is first stripped of leading and trailing white space before being applied. This value is accessible in the XSL style sheets through the <paramref name="@Title" /> parameter.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">Invalid property value. The value cannot exceed 500 characters.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

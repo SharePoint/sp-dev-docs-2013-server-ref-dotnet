@@ -1,0 +1,191 @@
+﻿<Type Name="SocialData" FullName="Microsoft.Office.Server.SocialData.SocialData">
+  <TypeSignature Language="C#" Value="public abstract class SocialData" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit SocialData extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.SocialData.SocialData" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class SocialData" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SocialData abstract" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents an abstract class that contains properties comprising a piece of social data. </summary>
+    <remarks>
+      <para>A <b>SocialData</b> object consists, at the very least of a URL, a user, and a <b>DateTime</b> object representing the last time when the information stored in the object was updated. The constructor for this class is internal.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Delete">
+      <MemberSignature Language="C#" Value="public void Delete ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Delete() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialData.Delete" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Delete ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Delete();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deletes the piece of social data after ensuring that it exists and that the current user can change it.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteData">
+      <MemberSignature Language="C#" Value="protected abstract void DeleteData ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void DeleteData() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialData.DeleteData" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Sub DeleteData ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract void DeleteData();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Abstract method that deletes a piece of social data. </summary>
+        <remarks>
+          <para>
+            <see cref="M:Microsoft.Office.Server.SocialData.SocialData.Delete" /> calls this method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EnsureUpdateAllowed">
+      <MemberSignature Language="C#" Value="protected void EnsureUpdateAllowed ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void EnsureUpdateAllowed() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialData.EnsureUpdateAllowed" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub EnsureUpdateAllowed ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; void EnsureUpdateAllowed();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Determines whether a given piece of social data can be updated. </summary>
+        <remarks>
+          <para>This method throws an <see cref="T:System.InvalidOperationException" /> whenever the <b>SocialData</b> object does not exist. It throws an <see cref="T:System.UnauthorizedAccessException" /> whenever the current user is not the owner of the <b>SocialData</b> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastModifiedTime">
+      <MemberSignature Language="C#" Value="public DateTime LastModifiedTime { get; protected set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime LastModifiedTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.SocialData.SocialData.LastModifiedTime" />
+      <MemberSignature Language="VB.NET" Value="Public Property LastModifiedTime As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:  property DateTime LastModifiedTime {  public:&#xA;DateTime get(); protected:&#xA; void set(DateTime value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>DateTime</b> object representing the time when the piece of social data was last updated.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Manager">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialDataManager Manager { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.SocialData.SocialDataManager Manager" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.SocialData.SocialData.Manager" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Manager As SocialDataManager" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::SocialData::SocialDataManager ^ Manager { Microsoft::Office::Server::SocialData::SocialDataManager ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialDataManager</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>SocialDataManager</b> that instantiated this <b>SocialData</b> object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Owner">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile Owner { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.UserProfile Owner" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.SocialData.SocialData.Owner" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Owner As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::UserProfile ^ Owner { Microsoft::Office::Server::UserProfiles::UserProfile ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" /> that represents the owner of the <b>SocialData</b> object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Title">
+      <MemberSignature Language="C#" Value="public string Title { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Title" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.SocialData.SocialData.Title" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Title As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Title { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the title of this piece of social data.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Url">
+      <MemberSignature Language="C#" Value="public Uri Url { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri Url" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.SocialData.SocialData.Url" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Url As Uri" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Uri ^ Url { Uri ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="T:System.Uri" /> object stored by the piece of social data.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

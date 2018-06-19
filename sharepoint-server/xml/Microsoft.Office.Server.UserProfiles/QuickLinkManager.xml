@@ -1,0 +1,237 @@
+﻿<Type Name="QuickLinkManager" FullName="Microsoft.Office.Server.UserProfiles.QuickLinkManager">
+  <TypeSignature Language="C#" Value="public class QuickLinkManager : Microsoft.Office.Server.UserProfiles.PrivacyItemManagerBase&lt;Microsoft.Office.Server.UserProfiles.QuickLink&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit QuickLinkManager extends Microsoft.Office.Server.UserProfiles.PrivacyItemManagerBase`1&lt;class Microsoft.Office.Server.UserProfiles.QuickLink&gt;" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.QuickLinkManager" />
+  <TypeSignature Language="VB.NET" Value="Public Class QuickLinkManager&#xA;Inherits PrivacyItemManagerBase(Of QuickLink)" />
+  <TypeSignature Language="C++ CLI" Value="public ref class QuickLinkManager : Microsoft::Office::Server::UserProfiles::PrivacyItemManagerBase&lt;Microsoft::Office::Server::UserProfiles::QuickLink ^&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.Office.Server.UserProfiles.PrivacyItemManagerBase&lt;Microsoft.Office.Server.UserProfiles.QuickLink&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">Microsoft.Office.Server.UserProfiles.QuickLink</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the entry point for managing <see cref="T:Microsoft.Office.Server.UserProfiles.QuickLink" /> objects.</summary>
+    <remarks>To be added.</remarks>
+    <example>
+      <para>The following code example shows the use of the <see cref="T:Microsoft.Office.Server.UserProfiles.QuickLinkManager" /><b />class.</para>
+      <para>[Visual Basic]</para>
+      <code>      Public Sub QuickLinkSample()
+         'get portal site context from topology
+         Dim strUrl As String = "http://SampleName"
+         Dim tm As New TopologyManager()
+         Dim ps As PortalSite = tm.PortalSites(New Uri(strUrl))
+         Dim pc As PortalContext = PortalApplication.GetContext(ps)
+
+         'initialize user profile config manager object
+         Dim upm As New UserProfileManager(pc)
+         Dim sAccount As String = "mydomain\myalias"
+         Dim u As UserProfile = upm.GetUserProfile(sAccount)
+         Dim qlm As QuickLinkManager = u.QuickLinks
+         Dim strTitle As String = "mylink"
+         Dim sLinkUrl As String = "http://my"
+         Dim strGroup As String = "my group"
+         Dim ql As QuickLink = qlm.Add(strTitle, sLinkUrl, strGroup, True)
+         Dim iLinkID As Integer = ql.LinkID
+
+         'edit quick link
+         Dim qedit As QuickLink = qlm(iLinkID)
+         qedit.Group = "new group"
+         qedit.Commit()
+
+         'remove quick link
+         qlm.Delete(iLinkID)
+
+         'add another quick link to a person
+         Dim strTitle2 As String = "mycontact"
+         Dim sContactAcc As String = "mydomain\mycontact"
+         Dim ucon As UserProfile = upm.GetUserProfile(sContactAcc)
+         Dim userguid As Guid = ucon.ID
+         qlm.AddPerson(strTitle2, userguid, strGroup, False)
+      End Sub 'QuickLinkSample</code>
+      <para>[C#]</para>
+      <code>public void QuickLinkSample()
+{
+//get portal site context from topology
+string strUrl = "http://SampleName";
+TopologyManager tm = new TopologyManager();
+PortalSite ps = tm.PortalSites[new Uri(strUrl)];
+PortalContext pc = PortalApplication.GetContext(ps);
+
+//initialize user profile config manager object
+UserProfileManager upm = new UserProfileManager(pc);
+string sAccount = "mydomain\\myalias";
+UserProfile u = upm.GetUserProfile(sAccount);
+QuickLinkManager qlm = u.QuickLinks;
+string strTitle = "mylink";
+string sLinkUrl = "http://my";
+string strGroup = "my group";
+QuickLink ql = qlm.Add(strTitle, sLinkUrl, strGroup, true);
+int iLinkID = ql.LinkID;
+
+//edit quick link
+QuickLink qedit = qlm[iLinkID];
+qedit.Group = "new group";
+qedit.Commit();
+
+//remove quick link
+qlm.Delete(iLinkID);
+
+//add another quick link to a person
+string strTitle2 = "mycontact";
+string sContactAcc = "mydomain\\mycontact";
+UserProfile ucon = upm.GetUserProfile(sContactAcc);
+Guid userguid = ucon.ID;
+qlm.AddPerson(strTitle2, userguid, strGroup, false);
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public QuickLinkManager (Microsoft.Office.Server.UserProfiles.UserProfile userProfile);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.Office.Server.UserProfiles.UserProfile userProfile) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.QuickLinkManager.#ctor(Microsoft.Office.Server.UserProfiles.UserProfile)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; QuickLinkManager(Microsoft::Office::Server::UserProfiles::UserProfile ^ userProfile);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="userProfile" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+      </Parameters>
+      <Docs>
+        <param name="userProfile">
+          <see cref="F:Microsoft.Office.Server.UserProfiles.ObjectTypes.UserProfile" /> object associated with this <see cref="T:Microsoft.Office.Server.UserProfiles.QuickLinkManager" /> object.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.UserProfiles.QuickLinkManager" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.QuickLink Create (string strTitle, string strUrl, Microsoft.Office.Server.UserProfiles.QuickLinkGroupType groupType, string strGroup, Microsoft.Office.Server.UserProfiles.Privacy privacyLevel);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.QuickLink Create(string strTitle, string strUrl, valuetype Microsoft.Office.Server.UserProfiles.QuickLinkGroupType groupType, string strGroup, valuetype Microsoft.Office.Server.UserProfiles.Privacy privacyLevel) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.QuickLinkManager.Create(System.String,System.String,Microsoft.Office.Server.UserProfiles.QuickLinkGroupType,System.String,Microsoft.Office.Server.UserProfiles.Privacy)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Create (strTitle As String, strUrl As String, groupType As QuickLinkGroupType, strGroup As String, privacyLevel As Privacy) As QuickLink" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::QuickLink ^ Create(System::String ^ strTitle, System::String ^ strUrl, Microsoft::Office::Server::UserProfiles::QuickLinkGroupType groupType, System::String ^ strGroup, Microsoft::Office::Server::UserProfiles::Privacy privacyLevel);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.QuickLink</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strTitle" Type="System.String" />
+        <Parameter Name="strUrl" Type="System.String" />
+        <Parameter Name="groupType" Type="Microsoft.Office.Server.UserProfiles.QuickLinkGroupType" />
+        <Parameter Name="strGroup" Type="System.String" />
+        <Parameter Name="privacyLevel" Type="Microsoft.Office.Server.UserProfiles.Privacy" />
+      </Parameters>
+      <Docs>
+        <param name="strTitle">The title of the quick link.</param>
+        <param name="strUrl">The URL of the quick link.</param>
+        <param name="groupType">….</param>
+        <param name="strGroup">The name of group for the quick link.</param>
+        <param name="privacyLevel">….</param>
+        <summary>             Creates a generic quick link.             </summary>
+        <returns>
+          <b>Microsoft.SharePoint.Portal.UserProfiles.QuickLink</b>. The <see cref="T:Microsoft.Office.Server.UserProfiles.QuickLink" /> object that represents a quick link.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultPolicy">
+      <MemberSignature Language="C#" Value="public override Microsoft.Office.Server.UserProfiles.PrivacyPolicyItem DefaultPolicy { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.PrivacyPolicyItem DefaultPolicy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.QuickLinkManager.DefaultPolicy" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property DefaultPolicy As PrivacyPolicyItem" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::Office::Server::UserProfiles::PrivacyPolicyItem ^ DefaultPolicy { Microsoft::Office::Server::UserProfiles::PrivacyPolicyItem ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.PrivacyPolicyItem</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetGroupList">
+      <MemberSignature Language="C#" Value="public override System.Collections.Specialized.StringCollection GetGroupList ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Collections.Specialized.StringCollection GetGroupList() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.QuickLinkManager.GetGroupList" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetGroupList () As StringCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Collections::Specialized::StringCollection ^ GetGroupList();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Specialized.StringCollection</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets a list of groups.</summary>
+        <returns>
+          <b>System.Collections.Specialized.StringCollection. Collection</b> that represents a list of groups.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ModifyDataRow">
+      <MemberSignature Language="C#" Value="protected internal override void ModifyDataRow (System.Data.DataRow dataRow, Microsoft.Office.Server.UserProfiles.QuickLink privacyItem);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void ModifyDataRow(class System.Data.DataRow dataRow, class Microsoft.Office.Server.UserProfiles.QuickLink privacyItem) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.QuickLinkManager.ModifyDataRow(System.Data.DataRow,Microsoft.Office.Server.UserProfiles.QuickLink)" />
+      <MemberSignature Language="C++ CLI" Value="protected public:&#xA; override void ModifyDataRow(System::Data::DataRow ^ dataRow, Microsoft::Office::Server::UserProfiles::QuickLink ^ privacyItem);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="dataRow" Type="System.Data.DataRow" />
+        <Parameter Name="privacyItem" Type="Microsoft.Office.Server.UserProfiles.QuickLink" />
+      </Parameters>
+      <Docs>
+        <param name="dataRow">..</param>
+        <param name="privacyItem">..</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ModifyDataTable">
+      <MemberSignature Language="C#" Value="protected internal override void ModifyDataTable (System.Data.DataTable dataTable);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void ModifyDataTable(class System.Data.DataTable dataTable) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.QuickLinkManager.ModifyDataTable(System.Data.DataTable)" />
+      <MemberSignature Language="C++ CLI" Value="protected public:&#xA; override void ModifyDataTable(System::Data::DataTable ^ dataTable);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="dataTable" Type="System.Data.DataTable" />
+      </Parameters>
+      <Docs>
+        <param name="dataTable">..</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

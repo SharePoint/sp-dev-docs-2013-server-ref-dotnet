@@ -1,0 +1,117 @@
+﻿<Type Name="DocIdLookup" FullName="Microsoft.Office.DocumentManagement.DocIdLookup">
+  <TypeSignature Language="C#" Value="public abstract class DocIdLookup" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit DocIdLookup extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.DocumentManagement.DocIdLookup" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class DocIdLookup" />
+  <TypeSignature Language="C++ CLI" Value="public ref class DocIdLookup abstract" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Provides a way locate a document or collection of documents based on Document ID. </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected DocIdLookup ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocIdLookup.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; DocIdLookup();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.Office.DocumentManagement.DocIdLookup" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DoSearch">
+      <MemberSignature Language="C#" Value="public static string[] DoSearch (Microsoft.SharePoint.SPSite site, string docId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string[] DoSearch(class Microsoft.SharePoint.SPSite site, string docId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocIdLookup.DoSearch(Microsoft.SharePoint.SPSite,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function DoSearch (site As SPSite, docId As String) As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;System::String ^&gt; ^ DoSearch(Microsoft::SharePoint::SPSite ^ site, System::String ^ docId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="docId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="site">An <see cref="T:Microsoft.SharePoint.SPSite" /> object that specifies the site in which to search for documents with the provided <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object</param>
+        <param name="docId"> A <b>string</b> that specifies the <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object</param>
+        <summary>Returns an array of URLs that point to documents with the specified <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object.</summary>
+        <returns>A string array of URLs that point to documents that are associated with the specified <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /></returns>
+        <remarks>
+          <para>This method is called when a user is trying to locate a document by its Document ID. Depending on the default Document ID Provider registered, it may use custom provider search functionality. If the <see cref="P:Microsoft.Office.DocumentManagement.DocumentIdProvider.DoCustomSearchBeforeDefaultSearch" /> property for the provider is set to false, it uses the default search funtionality.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSearchScope">
+      <MemberSignature Language="C#" Value="public static string GetSearchScope (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetSearchScope(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocIdLookup.GetSearchScope(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetSearchScope (site As SPSite) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetSearchScope(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object that specifies the site for which to get the search scope</param>
+        <summary>Gets the search scope used by the built-in search provider.</summary>
+        <returns>Returns <see cref="T:System.String" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetSearchScope">
+      <MemberSignature Language="C#" Value="public static void SetSearchScope (Microsoft.SharePoint.SPSite site, string scope);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SetSearchScope(class Microsoft.SharePoint.SPSite site, string scope) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocIdLookup.SetSearchScope(Microsoft.SharePoint.SPSite,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SetSearchScope (site As SPSite, scope As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SetSearchScope(Microsoft::SharePoint::SPSite ^ site, System::String ^ scope);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="scope" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="site">An <see cref="T:Microsoft.SharePoint.SPSite" /> object that specifies the site for which to set the search scope</param>
+        <param name="scope">A <b>string</b> that specifies the search scope</param>
+        <summary>Sets the search scope to be used by the default search provider.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

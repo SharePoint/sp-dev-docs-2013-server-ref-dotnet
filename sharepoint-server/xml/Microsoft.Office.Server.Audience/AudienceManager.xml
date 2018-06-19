@@ -1,0 +1,1277 @@
+﻿<Type Name="AudienceManager" FullName="Microsoft.Office.Server.Audience.AudienceManager">
+  <TypeSignature Language="C#" Value="public class AudienceManager : Microsoft.SharePoint.WebPartPages.IRuntimeFilter2" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit AudienceManager extends System.Object implements class Microsoft.SharePoint.WebPartPages.IRuntimeFilter, class Microsoft.SharePoint.WebPartPages.IRuntimeFilter2" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.Audience.AudienceManager" />
+  <TypeSignature Language="VB.NET" Value="Public Class AudienceManager&#xA;Implements IRuntimeFilter2" />
+  <TypeSignature Language="C++ CLI" Value="public ref class AudienceManager : Microsoft::SharePoint::WebPartPages::IRuntimeFilter2" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.SharePoint.WebPartPages.IRuntimeFilter2</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Represents the entry point for the audience classes.</summary>
+    <remarks>
+      <para>The <b>AudienceManager</b> class is the entry point for the audience feature in Microsoft SharePoint Server 2010. It provides an implementation of <b>IRuntimeFilter</b>, which allows Web Parts and other content to be targeted to a specific audience. The <b>AudienceManager</b> class supports run-time functionality such as the retrieval of audience lists to which the user belongs. After you create an instance of the <b>AudienceManager</b> class, you can retrieve individual audience types, lists of audiences, and lists of users who are associated with an audience.</para>
+      <para>There are several default authentication rules and scopes implemented for the <b>AudienceManager</b> object: </para>
+      <list type="bullet">
+        <item>
+          <description>Members of the Administrator site group for SharePoint Server can view and modify the audiences associated with a portal site.</description>
+        </item>
+        <item>
+          <description>Members of the Administrator site group can also view audience information for other portal sites with which they share services. Shared services are portal services that are shared across server farms. The services are centrally managed from a single server for two or more server farms.</description>
+        </item>
+        <item>
+          <description>Members of the Administrator site group of the parent portal site can list and view audience information for child portal sites. This information is read-only.</description>
+        </item>
+        <item>
+          <description>A member of the Reader or Contributor site group can access only a list of audiences to which he or she belongs. This information is returned by the overloaded <b>GetUserAudienceIDs</b> method.</description>
+        </item>
+      </list>
+      <para />
+    </remarks>
+    <example>
+      <para>This code example shows how to create a rules-based audience to which you can target content. </para>
+      <para>
+        <b>Note</b>: The audience is only created here; it is not compiled, and rules have not been added. You can add rules by using the user interface or the object model, and then compile the audience by using the user interface. You can also compile audiences by using the <see cref="T:Microsoft.Office.Server.Audience.AudienceJob" /> class.</para>
+      <para>Replace servername and other strings with actual values before running the code example. Also add the following references in your Microsoft Visual Studio project:</para>
+      <list type="bullet">
+        <item>
+          <description>Microsoft.Office.Server</description>
+        </item>
+        <item>
+          <description>Microsoft.SharePoint</description>
+        </item>
+        <item>
+          <description>System.Web</description>
+        </item>
+      </list>
+      <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.SharePoint.Administration;
+using Microsoft.Office.Server.Audience;
+using Microsoft.SharePoint;
+using Microsoft.Office.Server;
+using System.Web;
+
+namespace AudienceConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                using (SPSite site = new SPSite("http://&lt;span class="placeholder"&gt;servername&lt;/span&gt;"))
+                {
+                    SPServiceContext context = SPServiceContext.GetContext(site);
+                    AudienceManager audManager = new AudienceManager(context);
+
+                    AudienceCollection ac = audManager.Audiences;
+                    Audience a = null;
+                    string sAudName = "Customer Connection";
+                    string sDescription = "Members of the Customer Connection v-team";
+
+                    try
+                    {
+                        a = ac.Create(sAudName, sDescription);
+                    }
+                    catch (AudienceDuplicateNameException e)
+                    {
+                        //Your exception handling code here
+                    }
+                    catch (AudienceException e1)
+                    {
+                        //Your exception handling code here
+                    }
+                }
+
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                Console.Read();
+            }
+
+        }
+    }
+}</code>
+      <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports Microsoft.SharePoint.Administration
+Imports Microsoft.Office.Server.Audience
+Imports Microsoft.SharePoint
+Imports Microsoft.Office.Server
+Imports System.Web
+
+Namespace AudienceConsoleApp
+    Module Program
+        Sub Main(ByVal args() As String)
+            Try
+                Using site As New SPSite("http://servername")
+                    Dim context As SPServiceContext = SPServiceContext.GetContext(site)
+                    Dim audManager As New AudienceManager(context)
+
+                    Dim ac As AudienceCollection = audManager.Audiences
+                    Dim a As Audience = Nothing
+                    Dim sAudName As String = "Customer Connection"
+                    Dim sDescription As String = "Members of the Customer Connection v-team"
+
+                    Try
+                        a = ac.Create(sAudName, sDescription)
+                    Catch e As AudienceDuplicateNameException
+                        'Your exception handling code here
+                    Catch e1 As AudienceException
+                        'Your exception handling code here
+                    End Try
+                End Using
+
+            Catch exception As Exception
+                Console.WriteLine(exception.ToString())
+                Console.Read()
+            End Try
+
+        End Sub
+    End Module
+End Namespace</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AudienceManager ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; AudienceManager();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.Audience.AudienceManager" /> class.</summary>
+        <remarks>
+          <para>If you call the <see cref="T:Microsoft.Office.Server.Audience.AudienceManager" /> constructor without any parameters, it derives the site URL from the current URL request.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AudienceManager (Microsoft.Office.Server.ServerContext serverContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.Office.Server.ServerContext serverContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.#ctor(Microsoft.Office.Server.ServerContext)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; AudienceManager(Microsoft::Office::Server::ServerContext ^ serverContext);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("ServerContext parameter is obsolete, use SPServiceContext instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="serverContext" Type="Microsoft.Office.Server.ServerContext" />
+      </Parameters>
+      <Docs>
+        <param name="serverContext">Reference to the <b>SPServiceContext</b> object that represents the site with which this instance of the <see cref="T:Microsoft.Office.Server.Audience.AudienceManager" /> object is associated.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.Audience.AudienceManager" /> class that connects to the site in the specified <b>SPServiceContext</b> object.</summary>
+        <remarks>
+          <para>This constructor retrieves the URL and globally unique identifier (GUID) for the current site based on the <see cref="T:Microsoft.SharePoint.Portal.SPServiceContext" /> object. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AudienceManager (Microsoft.SharePoint.SPServiceContext serviceContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPServiceContext serviceContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.#ctor(Microsoft.SharePoint.SPServiceContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (serviceContext As SPServiceContext)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; AudienceManager(Microsoft::SharePoint::SPServiceContext ^ serviceContext);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">To be added.</param>
+        <summary>             AudienceManager constructure. No input, will retrieve current             URL request as site URL             </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AudienceLeftContentList">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList AudienceLeftContentList { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ArrayList AudienceLeftContentList" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceManager.AudienceLeftContentList" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AudienceLeftContentList As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::ArrayList ^ AudienceLeftContentList { System::Collections::ArrayList ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets an <b>ArrayList</b> object of <see cref="T:Microsoft.Office.Server.Audience.AudienceLeftContent" /> objects.</summary>
+        <value>
+          <b>System.Collections.ArrayList</b> object that represents a list of <see cref="T:Microsoft.Office.Server.Audience.AudienceLeftContent" /> objects associated with the current audience. </value>
+        <remarks>
+          <para>The <b>AudienceLeftContentList</b> property is read-only. </para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to use the <b>AudienceLeftContentList</b> property to retrieve and list operand items associated with an audience.</para>
+          <code>AudienceManager AudMgr = new AudienceManager();
+ArrayList LeftContentList;
+LeftContentList = AudMgr.AudienceLeftContentList;
+
+for (int list=0; list &amp;lt; LeftContentList.Count; list++)
+{
+    System.Console.WriteLine("{0}", list);
+    System.Console.WriteLine("  Name" + ((AudienceLeftContent)LeftContentList[list]).Name);
+    System.Console.WriteLine("  DisplayName" + ((AudienceLeftContent)LeftContentList[list]).DisplayName);
+    System.Console.WriteLine("  DataType" + ((AudienceLeftContent)LeftContentList[list]).DataType);
+    System.Console.WriteLine("  DataLength" + ((AudienceLeftContent)LeftContentList[list]).DataLength);
+    System.Console.WriteLine("  bProperty" + ((AudienceLeftContent)LeftContentList[list]).bProperty);
+}
+System.Console.WriteLine("End");</code>
+          <code>Dim AudMgr As New AudienceManager()
+Dim LeftContentList As ArrayList
+LeftContentList = AudMgr.AudienceLeftContentList
+
+For list As Integer = 0 To LeftContentList.Count - 1
+    System.Console.WriteLine("{0}", list)
+    System.Console.WriteLine("  Name" &amp;amp; (CType(LeftContentList(list), AudienceLeftContent)).Name)
+    System.Console.WriteLine("  DisplayName" &amp;amp; (CType(LeftContentList(list), AudienceLeftContent)).DisplayName)
+    System.Console.WriteLine("  DataType" &amp;amp; (CType(LeftContentList(list), AudienceLeftContent)).DataType)
+    System.Console.WriteLine("  DataLength" &amp;amp; (CType(LeftContentList(list), AudienceLeftContent)).DataLength)
+    System.Console.WriteLine("  bProperty" &amp;amp; (CType(LeftContentList(list), AudienceLeftContent)).bProperty)
+Next list
+System.Console.WriteLine("End")</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AudienceOperatorList">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList AudienceOperatorList { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ArrayList AudienceOperatorList" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceManager.AudienceOperatorList" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AudienceOperatorList As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::ArrayList ^ AudienceOperatorList { System::Collections::ArrayList ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets an <b>ArrayList</b> object that contains references to <see cref="T:Microsoft.Office.Server.Audience.AudienceOperator" /> objects.</summary>
+        <value>
+          <b>System.Collections.ArrayList</b> object that represents a list of <see cref="T:Microsoft.Office.Server.Audience.AudienceOperator" /> objects associated with this audience.</value>
+        <remarks>
+          <para>The <see cref="T:Microsoft.Office.Server.Audience.AudienceOperator" /> property is read-only.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to retrieve and list operators associated with this audience.</para>
+          <code>AudienceManager AudMgr = new AudienceManager();
+ArrayList OperatorList;
+AudienceOperator Operator;
+
+OperatorList = AudienceManagerObj.AudienceOperatorList;
+
+for (int list=0; list &amp;lt; OperatorList.Count; list++)
+{
+    System.Console.WriteLine("{0}", list);
+    Operator = (AudienceOperator)OperatorList[list];
+    System.Console.WriteLine("  OperatorDisplayName " + Operator.OperatorDisplayName);
+    System.Console.WriteLine("  Operator " + Operator.Operator);
+    System.Console.WriteLine("  bNotOperator " + Operator.bNotOperator);
+    System.Console.WriteLine("  bGroupOperator " + Operator.bGroupOperator);
+}
+System.Console.WriteLine("End");</code>
+          <code>Dim AudMgr As New AudienceManager()
+Dim OperatorList As ArrayList
+Dim [Operator] As AudienceOperator
+
+OperatorList = AudienceManagerObj.AudienceOperatorList
+
+For list As Integer = 0 To OperatorList.Count - 1
+    System.Console.WriteLine("{0}", list)
+    [Operator] = CType(OperatorList(list), AudienceOperator)
+    System.Console.WriteLine("  OperatorDisplayName " &amp;amp; [Operator].OperatorDisplayName)
+    System.Console.WriteLine("  Operator " &amp;amp; [Operator].Operator)
+    System.Console.WriteLine("  bNotOperator " &amp;amp; [Operator].bNotOperator)
+    System.Console.WriteLine("  bGroupOperator " &amp;amp; [Operator].bGroupOperator)
+Next list
+System.Console.WriteLine("End")</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Audiences">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.Audience.AudienceCollection Audiences { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.Audience.AudienceCollection Audiences" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceManager.Audiences" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Audiences As AudienceCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::Audience::AudienceCollection ^ Audiences { Microsoft::Office::Server::Audience::AudienceCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.Audience.AudienceCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of <see cref="T:Microsoft.Office.Server.Audience.Audience" /> objects for the current site.</summary>
+        <value>
+          <see cref="T:Microsoft.Office.Server.Audience.AudienceCollection" /> collection of <see cref="T:Microsoft.Office.Server.Audience.Audience" /> objects that are associated with the current site.</value>
+        <remarks>
+          <para>The <b>Audiences</b> property is read-only. This property does not require the user to be a member of the Administrator site group for Microsoft Office SharePoint Server 2007. </para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to retrieve and list information for audiences associated with a site.</para>
+          <code>AudienceCollection Audiences;
+AudienceManager AudMgr = New AudienceManager();
+Audiences = AudMgr.Audiences;
+
+for (int list=0; list &amp;lt; Audiences.Count; list++)
+{
+    System.Console.WriteLine("{0}", list);
+    Audience = (Audience)Audiences[list];
+    System.Console.WriteLine("  Audience.Count ", Audience.Count);
+    System.Console.WriteLine("  Audience.AudienceCompiledSofar ", Audience.AudienceCompiledSofar);
+    System.Console.WriteLine("  Audience.LastCompileStartTime ", Audience.LastCompileStartTime);
+    System.Console.WriteLine("  Audience.LastCompileStartTime ", Audience.LastCompileFinishTime);
+    System.Console.WriteLine("  Audience.LastCompileError ", Audience.LastCompileError);
+    System.Console.WriteLine("  Audience.CompileInProgress ", Audience.CompileInProgress);
+}
+System.Console.WriteLine("End");</code>
+          <code>Dim Audiences As AudienceCollection
+Dim AudMgr As New AudienceManager()
+Audiences = AudMgr.Audiences
+
+For list As Integer = 0 To Audiences.Count - 1
+    System.Console.WriteLine("{0}", list)
+    Audience = CType(Audiences(list), Audience)
+    System.Console.WriteLine("  Audience.Count ", Audience.Count)
+    System.Console.WriteLine("  Audience.AudienceCompiledSofar ", Audience.AudienceCompiledSofar)
+    System.Console.WriteLine("  Audience.LastCompileStartTime ", Audience.LastCompileStartTime)
+    System.Console.WriteLine("  Audience.LastCompileStartTime ", Audience.LastCompileFinishTime)
+    System.Console.WriteLine("  Audience.LastCompileError ", Audience.LastCompileError)
+    System.Console.WriteLine("  Audience.CompileInProgress ", Audience.CompileInProgress)
+Next list
+System.Console.WriteLine("End")</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="CheckRuntimeRender">
+      <MemberSignature Language="C#" Value="public bool CheckRuntimeRender (string isIncludedFilter);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool CheckRuntimeRender(string isIncludedFilter) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.CheckRuntimeRender(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CheckRuntimeRender (isIncludedFilter As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool CheckRuntimeRender(System::String ^ isIncludedFilter);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.WebPartPages.IRuntimeFilter.CheckRuntimeRender(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="isIncludedFilter" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="isIncludedFilter">List of audience globally unique identifiers (GUIDs) in comma-delimited format. Each GUID must be contained in single quotation marks.</param>
+        <summary>Checks whether the audience membership of the current user is contained in the audience list of any Web Parts in this Web site based on Microsoft Windows SharePoint Services.</summary>
+        <returns>A Boolean value. <b>true</b> if the audience list contained in the <b>isIncludedFilter</b> parameter is persisted by a Web Part in this SharePoint site; otherwise, <b>false</b>. </returns>
+        <remarks>
+          <para>The <see cref="M:Microsoft.Office.Server.Audience.AudienceManager.CheckRuntimeRender(System.String)" /> method implements the <see cref="M:Microsoft.SharePoint.WebPartPages.IRuntimeFilter.CheckRuntimeRender(System.String)" /> method from the <see cref="T:Microsoft.SharePoint.WebPartPages.IRuntimeFilter" /> interface in the <see cref="N:Microsoft.SharePoint.WebPartPages" /> namespace. This method always returns a value of <b>true</b> if the <see cref="T:Microsoft.Office.Server.Audience.AudienceManager" /> object was initialized without a reference to a <b>SPServiceContext</b> object. This allows a Web Part with an associated audience GUID list to be imported into a site that is not based on Microsoft SharePoint Server 2010 without throwing exceptions.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to construct the list of audience GUIDs and invoke the <b>CheckRuntimeRender</b> method.</para>
+          <code>String AudienceList;
+AudienceManager AudMgr = new AudienceManager();
+bool ret;
+
+AudienceList = "'00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002'";
+ret = AudMgr.CheckRuntimeRender(AudienceList);</code>
+          <code>Dim AudienceList As String
+Dim AudMgr As New AudienceManager()
+Dim ret As Boolean
+
+AudienceList = "'00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002'"
+ret = AudMgr.CheckRuntimeRender(AudienceList)</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentServerContext">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.ServerContext CurrentServerContext { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.ServerContext CurrentServerContext" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceManager.CurrentServerContext" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CurrentServerContext As ServerContext" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::ServerContext ^ CurrentServerContext { Microsoft::Office::Server::ServerContext ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Use SPServiceContext instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.ServerContext</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the reference to the <see cref="T:Microsoft.SharePoint.SPServiceContext" /> object with which this object was initialized.</summary>
+        <value>
+          <see cref="T:Microsoft.SharePoint.SPServiceContext" />. Reference to an instance of the <b>SPServiceContext</b> object with which this instance of the <see cref="T:Microsoft.Office.Server.Audience.AudienceManager" /> object was initialized. </value>
+        <remarks>
+          <para>The <b>CurrentServerContext</b> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAudience">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.Audience.Audience GetAudience (Guid AudienceID);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.Audience.Audience GetAudience(valuetype System.Guid AudienceID) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.GetAudience(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAudience (AudienceID As Guid) As Audience" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::Audience::Audience ^ GetAudience(Guid AudienceID);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.Audience.Audience</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="AudienceID" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="AudienceID">GUID for an audience.</param>
+        <summary>Gets an instance of the <see cref="T:Microsoft.Office.Server.Audience.Audience" /> object that represents the audience with the specified globally unique identifier (GUID).</summary>
+        <returns>
+          <see cref="T:Microsoft.Office.Server.Audience.Audience" /> object that represents the audience with the specified GUID. Otherwise, a null reference (Nothing in Visual Basic) if the audience was not found or cannot be displayed within the current site.</returns>
+        <remarks>
+          <para>The <b>GetAudience</b> method provides a way to access an <see cref="T:Microsoft.Office.Server.Audience.Audience" /> object, assuming this audience is viewable from within the current site.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to get an <see cref="T:Microsoft.Office.Server.Audience.Audience" /> object by GUID and display basic information about that audience.</para>
+          <code>AudienceManager AudMgr = new AudienceManager();
+Audience Aud = AudMgr.GetAudience(new Guid("00000000-0000-0000-0000-000000000001"));
+
+if (Aud != null)
+{
+    System.Console.WriteLine("Audience.Name {0}", Aud.AudienceName);
+    System.Console.WriteLine("Audience.AudienceDescription {0}", Aud.AudienceDescription);
+    System.Console.WriteLine("Audience.AudienceID {0}", Audi.AudienceID.ToString());
+    System.Console.WriteLine("Audience.AudienceSite {0}", Aud.AudienceSite);
+
+}</code>
+          <code>Dim AudMgr As New AudienceManager()
+Dim Aud As Audience = AudMgr.GetAudience(New Guid("00000000-0000-0000-0000-000000000001"))
+
+If Aud IsNot Nothing Then
+    System.Console.WriteLine("Audience.Name {0}", Aud.AudienceName)
+    System.Console.WriteLine("Audience.AudienceDescription {0}", Aud.AudienceDescription)
+    System.Console.WriteLine("Audience.AudienceID {0}", Audi.AudienceID.ToString())
+    System.Console.WriteLine("Audience.AudienceSite {0}", Aud.AudienceSite)
+
+End If</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAudience">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.Audience.Audience GetAudience (string AudienceNameOrg);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.Audience.Audience GetAudience(string AudienceNameOrg) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.GetAudience(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAudience (AudienceNameOrg As String) As Audience" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::Audience::Audience ^ GetAudience(System::String ^ AudienceNameOrg);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.Audience.Audience</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="AudienceNameOrg" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="AudienceNameOrg">Name of an audience.</param>
+        <summary>Gets an instance of the <see cref="T:Microsoft.Office.Server.Audience.Audience" /> object that represents the audience with the specified name.</summary>
+        <returns>
+          <see cref="T:Microsoft.Office.Server.Audience.Audience" /> object that represents the audience with the specified name. Otherwise, a null reference (Nothing in Visual Basic) if the audience was not found or cannot be displayed within the current site.</returns>
+        <remarks>
+          <para>The <b>GetAudience</b> method provides a way to access an <see cref="T:Microsoft.Office.Server.Audience.Audience" /> object, assuming this audience is displayed within the current site.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to get an <see cref="T:Microsoft.Office.Server.Audience.Audience" /> object by name and display basic information about that audience.</para>
+          <code>AudienceManager AudMgr = new AudienceManager();
+Audience Aud = AudMgr.GetAudience("Audience Name");
+
+if (Aud != null)
+{
+    System.Console.WriteLine("Audience.Name {0}", Aud.AudienceName);
+    System.Console.WriteLine("Audience.AudienceDescription {0}", Aud.AudienceDescription);
+    System.Console.WriteLine("Audience.AudienceID {0}", Audi.AudienceID.ToString());
+    System.Console.WriteLine("Audience.AudienceSite {0}", Aud.AudienceSite);
+
+}</code>
+          <code>Dim AudMgr As New AudienceManager()
+Dim Aud As Audience = AudMgr.GetAudience("Audience Name")
+
+If Aud IsNot Nothing Then
+    System.Console.WriteLine("Audience.Name {0}", Aud.AudienceName)
+    System.Console.WriteLine("Audience.AudienceDescription {0}", Aud.AudienceDescription)
+    System.Console.WriteLine("Audience.AudienceID {0}", Audi.AudienceID.ToString())
+    System.Console.WriteLine("Audience.AudienceSite {0}", Aud.AudienceSite)
+
+End If</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAudienceIDs">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList GetAudienceIDs (System.Collections.ArrayList AudienceNameList);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ArrayList GetAudienceIDs(class System.Collections.ArrayList AudienceNameList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.GetAudienceIDs(System.Collections.ArrayList)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAudienceIDs (AudienceNameList As ArrayList) As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ArrayList ^ GetAudienceIDs(System::Collections::ArrayList ^ AudienceNameList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Use GetAudience(string AudienceNameOrg) to retrieve Audience.AudienceID instead")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="AudienceNameList" Type="System.Collections.ArrayList" />
+      </Parameters>
+      <Docs>
+        <param name="AudienceNameList">
+          <b>ArrayList</b> object that contains audience names.</param>
+        <summary>Gets a list of <see cref="T:Microsoft.Office.Server.Audience.AudienceNameID" /> objects that correspond to the specified list of audience names.</summary>
+        <returns>
+          <b>System.Collections.ArrayList</b> object that represents a list of <see cref="T:Microsoft.Office.Server.Audience.AudienceNameID" /> objects.</returns>
+        <remarks>
+          <para>The <b>GetAudienceIDs</b> method retrieves an <see cref="T:Microsoft.Office.Server.Audience.AudienceNameID" /> object that corresponds to the list of audience names specified in <b>AudienceNameList</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to build an <b>ArrayList</b> of audience names and invoke the <b>GetAudienceIDs</b> method.</para>
+          <code>ArrayList AudienceIDList;
+ArrayList AudienceNamelist = new ArrayList();
+AudienceNamelist.Add("All");
+AudienceIDList = AudMgr.GetAudienceIDs(AudienceNamelist);
+
+if (AudienceIDList != null)
+{
+    for (int i=0; i &amp;lt; AudienceIDList.Count; i++)
+    {
+        System.Console.WriteLine("{0}", i);
+        System.Console.WriteLine(((AudienceNameID)AudienceIDList[i]).AudienceID);
+        System.Console.WriteLine(((AudienceNameID)AudienceIDList[i]).AudienceName);
+        System.Console.WriteLine(((AudienceNameID)AudienceIDList[i]).bValid);
+    }
+}</code>
+          <code>Dim AudienceIDList As ArrayList
+Dim AudienceNamelist As New ArrayList()
+AudienceNamelist.Add("All")
+AudienceIDList = AudMgr.GetAudienceIDs(AudienceNamelist)
+
+If AudienceIDList IsNot Nothing Then
+    For i As Integer = 0 To AudienceIDList.Count - 1
+        System.Console.WriteLine("{0}", i)
+        System.Console.WriteLine((CType(AudienceIDList(i), AudienceNameID)).AudienceID)
+        System.Console.WriteLine((CType(AudienceIDList(i), AudienceNameID)).AudienceName)
+        System.Console.WriteLine((CType(AudienceIDList(i), AudienceNameID)).bValid)
+    Next i
+End If</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAudienceIDsAsText">
+      <MemberSignature Language="C#" Value="public static string GetAudienceIDsAsText (string[] globalAudienceIDs, string[] dlDistinguishedNames, string[] sharePointGroupIDs);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetAudienceIDsAsText(string[] globalAudienceIDs, string[] dlDistinguishedNames, string[] sharePointGroupIDs) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.GetAudienceIDsAsText(System.String[],System.String[],System.String[])" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetAudienceIDsAsText (globalAudienceIDs As String(), dlDistinguishedNames As String(), sharePointGroupIDs As String()) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetAudienceIDsAsText(cli::array &lt;System::String ^&gt; ^ globalAudienceIDs, cli::array &lt;System::String ^&gt; ^ dlDistinguishedNames, cli::array &lt;System::String ^&gt; ^ sharePointGroupIDs);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="globalAudienceIDs" Type="System.String[]" />
+        <Parameter Name="dlDistinguishedNames" Type="System.String[]" />
+        <Parameter Name="sharePointGroupIDs" Type="System.String[]" />
+      </Parameters>
+      <Docs>
+        <param name="globalAudienceIDs">A string <b>Array</b> containing the GUIDs of Global rule-based <see cref="T:Microsoft.Office.Server.Audience.Audience" /> objects.</param>
+        <param name="dlDistinguishedNames">A string <b>Array</b> containing the DistinguishedName identifiers of Distribution List based <see cref="T:Microsoft.Office.Server.Audience.Audience" /> objects.
+</param>
+        <param name="sharePointGroupIDs">A string <b>Array</b> containing the GroupIDs of SharePoint Group based <see cref="T:Microsoft.Office.Server.Audience.Audience" /> objects.</param>
+        <summary>Creates a delimited text representation of the specified <see cref="T:Microsoft.Office.Server.Audience.Audience" /> objects’ identifiers.</summary>
+        <returns>Returns a string that contains a text representation of the specified Audience objects. See Remarks for more information.</returns>
+        <remarks>
+          <para>The Return Value string contains the Audience identifiers in the order and format specified below. The Audience groups are separated by “;;”.</para>
+          <list type="number">
+            <item>
+              <description>Global Audience GUIDs delimited by commas.</description>
+            </item>
+            <item>
+              <description>Distribution List names separated by “\r\n” (Windows line break).</description>
+            </item>
+            <item>
+              <description>Sharepoint Group IDs separated by commas.</description>
+            </item>
+          </list>
+          <para>Sample return: " A88B9DCB-5B82-41E4-8A19-17672F307B95, B88B9DCB-5B82-41E4-8A19-17672F307B95 ;; cn=all developers,ou=distribution lists,dc=redmond,dc=corp,dc=microsoft,dc=com \r\n cn=all testers,ou=distribution lists,dc=redmond,dc=corp,dc=microsoft,dc=com \r\n ;; 1,12,21,37 "</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAudienceIDsFromText">
+      <MemberSignature Language="C#" Value="public static int GetAudienceIDsFromText (string audienceTextRepresentation, out string[] globalAudienceIDs, out string[] dlDistinguishedNames, out string[] sharePointGroupNames);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig int32 GetAudienceIDsFromText(string audienceTextRepresentation, [out] string[]&amp; globalAudienceIDs, [out] string[]&amp; dlDistinguishedNames, [out] string[]&amp; sharePointGroupNames) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.GetAudienceIDsFromText(System.String,System.String[]@,System.String[]@,System.String[]@)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetAudienceIDsFromText (audienceTextRepresentation As String, ByRef globalAudienceIDs As String(), ByRef dlDistinguishedNames As String(), ByRef sharePointGroupNames As String()) As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static int GetAudienceIDsFromText(System::String ^ audienceTextRepresentation, [Runtime::InteropServices::Out] cli::array &lt;System::String ^&gt; ^ % globalAudienceIDs, [Runtime::InteropServices::Out] cli::array &lt;System::String ^&gt; ^ % dlDistinguishedNames, [Runtime::InteropServices::Out] cli::array &lt;System::String ^&gt; ^ % sharePointGroupNames);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="audienceTextRepresentation" Type="System.String" />
+        <Parameter Name="globalAudienceIDs" Type="System.String[]&amp;" RefType="out" />
+        <Parameter Name="dlDistinguishedNames" Type="System.String[]&amp;" RefType="out" />
+        <Parameter Name="sharePointGroupNames" Type="System.String[]&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="audienceTextRepresentation">A string containing <b>Audience</b> object identifiers in the format of the <b>Return Value</b> of the <b>GetAudienceIDsAsText</b> method of the <see cref="T:Microsoft.Office.Server.Audience.AudienceManager" /> object.</param>
+        <param name="globalAudienceIDs">A reference to a string <b>Array</b> for Global <b>Audience</b> types.</param>
+        <param name="dlDistinguishedNames">A reference to a string <b>Array</b> for <b>Audience</b> objects defined by Distribution Lists.</param>
+        <param name="sharePointGroupNames">To be added.</param>
+        <summary>Counts the number of <see cref="T:Microsoft.Office.Server.Audience.Audience" /> object identifiers in a delimited string and loads the parsed identifiers in string <b>Arrays</b>.</summary>
+        <returns>An <b>Int32</b> value that equals the total number of <b>Audience</b> identifiers in the specified string.</returns>
+        <remarks>
+          <para>If string array references are provided, those arrays will be populated with the parsed <b>Audience</b> identifiers corresponding to the signature parameter names.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAudienceNames">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList GetAudienceNames (System.Collections.ArrayList AudienceIDList);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ArrayList GetAudienceNames(class System.Collections.ArrayList AudienceIDList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.GetAudienceNames(System.Collections.ArrayList)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAudienceNames (AudienceIDList As ArrayList) As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ArrayList ^ GetAudienceNames(System::Collections::ArrayList ^ AudienceIDList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="AudienceIDList" Type="System.Collections.ArrayList" />
+      </Parameters>
+      <Docs>
+        <param name="AudienceIDList">
+          <b>ArrayList</b> object that contains audience GUIDs.</param>
+        <summary>Gets a list of <see cref="T:Microsoft.Office.Server.Audience.AudienceNameID" /> objects that correspond to the specified list of audience globally unique identifiers (GUIDs).</summary>
+        <returns>
+          <b>System.Collections.ArrayList</b> object that represents a list of <see cref="T:Microsoft.Office.Server.Audience.AudienceNameID" /> objects.</returns>
+        <remarks>
+          <para>The <b>GetAudienceNames</b> method retrieves a list of <see cref="T:Microsoft.Office.Server.Audience.AudienceNameID" /> objects that correspond to the list of audience GUIDs specified in <b>AudienceIDList</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to build an <b>ArrayList</b> of audience GUIDs and invoke the <b>GetAudienceNames</b> method.</para>
+          <code>ArrayList AudienceIDList = new ArrayList();
+ArrayList AudienceNameList;
+AudienceIDList.Add(new Guid("00000000-0000-0000-0000-000000000000"));
+AudienceIDList.Add(new Guid("53581B32-8A7A-430E-893C-157B40BF41FF"));
+
+AudienceNameList = AudMgr.GetAudienceNames(AudienceIDList);
+
+if (AudienceNameList != null)
+{
+    for (int i=0; i &amp;lt; AudienceNameList.Count; i++)
+    {
+        System.Console.WriteLine("{0}", i);
+        System.Console.WriteLine(((AudienceNameID)AudienceNameList[i]).AudienceID);
+        System.Console.WriteLine(((AudienceNameID)AudienceNameList[i]).AudienceName);
+        System.Console.WriteLine(((AudienceNameID)AudienceNameList[i]).bValid);
+    }
+}</code>
+          <code>Dim AudienceIDList As New ArrayList()
+Dim AudienceNameList As ArrayList
+AudienceIDList.Add(New Guid("00000000-0000-0000-0000-000000000000"))
+AudienceIDList.Add(New Guid("53581B32-8A7A-430E-893C-157B40BF41FF"))
+
+AudienceNameList = AudMgr.GetAudienceNames(AudienceIDList)
+
+If AudienceNameList IsNot Nothing Then
+    For i As Integer = 0 To AudienceNameList.Count - 1
+        System.Console.WriteLine("{0}", i)
+        System.Console.WriteLine((CType(AudienceNameList(i), AudienceNameID)).AudienceID)
+        System.Console.WriteLine((CType(AudienceNameList(i), AudienceNameID)).AudienceName)
+        System.Console.WriteLine((CType(AudienceNameList(i), AudienceNameID)).bValid)
+    Next i
+End If</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAudienceOperator">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList GetAudienceOperator (string LeftContent);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ArrayList GetAudienceOperator(string LeftContent) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.GetAudienceOperator(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAudienceOperator (LeftContent As String) As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ArrayList ^ GetAudienceOperator(System::String ^ LeftContent);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="LeftContent" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="LeftContent">Operand portion of an audience rule.</param>
+        <summary>Gets a list of <see cref="T:Microsoft.Office.Server.Audience.AudienceOperator" /> objects that correspond to the specified operand.</summary>
+        <returns>
+          <b>System.Collections.ArrayList</b> object that represents a list of <see cref="T:Microsoft.Office.Server.Audience.AudienceOperator" /> objects.</returns>
+        <remarks>
+          <para>The <b>GetAudienceOperator</b> method examines the data type of the specified operand and returns a list of appropriate operators.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetToolPaneControl">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.WebPartPages.IToolPaneControl GetToolPaneControl ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.SharePoint.WebPartPages.IToolPaneControl GetToolPaneControl() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.GetToolPaneControl" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetToolPaneControl () As IToolPaneControl" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::SharePoint::WebPartPages::IToolPaneControl ^ GetToolPaneControl();" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.WebPartPages.IRuntimeFilter2.GetToolPaneControl</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.WebPartPages.IToolPaneControl</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Requests an <b>IToolPaneControl</b> interface.</summary>
+        <returns>An <b>IToolPaneControl</b> interface.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserAudienceIDs">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList GetUserAudienceIDs (bool needAudienceName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ArrayList GetUserAudienceIDs(bool needAudienceName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.GetUserAudienceIDs(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUserAudienceIDs (needAudienceName As Boolean) As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ArrayList ^ GetUserAudienceIDs(bool needAudienceName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="needAudienceName" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="needAudienceName">True if the <b>AudienceName</b> should be loaded, otherwise, false.</param>
+        <summary>Gets a list of globally unique identifiers (GUIDs) for the audiences to which the current user belongs.</summary>
+        <returns>
+          <b>System.Collections.ArrayList</b> object that represents a list of GUIDs for audiences to which the current user belongs.</returns>
+        <remarks>
+          <para>The <b>GetUserAudienceIDs</b> method identifies the current user by retrieving the security identifier (SID) for the current user from Microsoft Windows Server 2003. Account information such as Windows NT user name and domain are used to retrieve audience information from the database.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to use the <b>GetUserAudienceIDs</b> method to retrieve and list GUIDs for audiences to which the current user belongs.</para>
+          <code>AudienceManager AudMgr = new AudienceManager();
+ArrayList IDList = AudMgr.GetUserAudienceIDs();
+System.Console.WriteLine("User Audience GUIDs");
+
+for (int info=0; info&amp;lt;IDList.Count; info++)
+{
+    System.Console.WriteLine(((Guid)IDList[info]).ToString());
+}</code>
+          <code>Dim AudMgr As New AudienceManager()
+Dim IDList As ArrayList = AudMgr.GetUserAudienceIDs()
+System.Console.WriteLine("User Audience GUIDs")
+
+For info As Integer = 0 To IDList.Count - 1
+    System.Console.WriteLine((CType(IDList(info), Guid)).ToString())
+Next info</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserAudienceIDs">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList GetUserAudienceIDs (string accountName, bool needAudienceName, Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ArrayList GetUserAudienceIDs(string accountName, bool needAudienceName, class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.GetUserAudienceIDs(System.String,System.Boolean,Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUserAudienceIDs (accountName As String, needAudienceName As Boolean, web As SPWeb) As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ArrayList ^ GetUserAudienceIDs(System::String ^ accountName, bool needAudienceName, Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="accountName" Type="System.String" />
+        <Parameter Name="needAudienceName" Type="System.Boolean" />
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="accountName">Microsoft Windows NT account name of a user. Contains both the domain and the user name. For example, Domain\user_name.</param>
+        <param name="needAudienceName">True if the <b>AudienceName</b> should be loaded, otherwise, false.</param>
+        <param name="web">A <see cref="T:Microsoft.SharePoint.SPWeb" /> object.</param>
+        <summary>Gets a list of audience globally unique identifiers (GUIDs) for the specified user name.</summary>
+        <returns>
+          <b>System.Collections.ArrayList</b> object that represents a list of GUIDs for audiences for the specified user name and site.</returns>
+        <remarks>
+          <para>The <b>GetUserAudienceIDs</b> method retrieves account information for the user with the specified Windows NT user name. Account information such as user name and domain are used to retrieve audience information from the database. </para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to use the <b>GetUserAudienceIDs</b> method to retrieve and list GUIDs for the audiences to which the specified user belongs.</para>
+          <code>AudienceManager AudMgr = new AudienceManager();
+ArrayList IDList = AudMgr.GetUserAudienceIDs("DomainName\\user_name");
+System.Console.WriteLine("User Audience GUIDs");
+
+for (int info=0; info&amp;lt;IDList.Count; info++)
+{
+    System.Console.WriteLine(((Guid)IDList[info]).ToString());
+}</code>
+          <code>Dim AudMgr As New AudienceManager()
+Dim IDList As ArrayList = AudMgr.GetUserAudienceIDs("DomainName\\user_name")
+System.Console.WriteLine("User Audience GUIDs")
+
+For info As Integer = 0 To IDList.Count - 1
+    System.Console.WriteLine((CType(IDList(info), Guid)).ToString())
+Next info</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GUID_AllPortalUser">
+      <MemberSignature Language="C#" Value="public static readonly Guid GUID_AllPortalUser;" />
+      <MemberSignature Language="ILAsm" Value=".field public static initonly valuetype System.Guid GUID_AllPortalUser" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.Audience.AudienceManager.GUID_AllPortalUser" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly GUID_AllPortalUser As Guid " />
+      <MemberSignature Language="C++ CLI" Value="public: static initonly Guid GUID_AllPortalUser;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a new <b>GUID</b> for a user in the Everyone Global Audience.</summary>
+        <returns>A <b>GUID</b> for a user in the Everyone Global Audience.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="InitializeStrings">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList InitializeStrings (System.Globalization.CultureInfo ci);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.ArrayList InitializeStrings(class System.Globalization.CultureInfo ci) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.InitializeStrings(System.Globalization.CultureInfo)" />
+      <MemberSignature Language="VB.NET" Value="Public Function InitializeStrings (ci As CultureInfo) As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::ArrayList ^ InitializeStrings(System::Globalization::CultureInfo ^ ci);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.WebPartPages.IRuntimeFilter.InitializeStrings(System.Globalization.CultureInfo)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ci" Type="System.Globalization.CultureInfo" />
+      </Parameters>
+      <Docs>
+        <param name="ci">Instance of a <b>CultureInfo</b> object that specifies the culture and other globalization information.</param>
+        <summary>Initializes an array of strings that are used by the audience Web Part.</summary>
+        <returns>
+          <b>System.Collections.ArrayList</b> object that contains strings used by the audience Web Part. </returns>
+        <remarks>
+          <para>The <b>InitializeStrings</b> method is used internally by the <see cref="T:Microsoft.Office.Server.Audience.AudienceManager" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsCurrentUserInAudienceOf">
+      <MemberSignature Language="C#" Value="public static bool IsCurrentUserInAudienceOf (string audienceTextRepresentation, bool showUntargetedAudience);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsCurrentUserInAudienceOf(string audienceTextRepresentation, bool showUntargetedAudience) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.IsCurrentUserInAudienceOf(System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsCurrentUserInAudienceOf (audienceTextRepresentation As String, showUntargetedAudience As Boolean) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsCurrentUserInAudienceOf(System::String ^ audienceTextRepresentation, bool showUntargetedAudience);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="audienceTextRepresentation" Type="System.String" />
+        <Parameter Name="showUntargetedAudience" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="audienceTextRepresentation">..</param>
+        <param name="showUntargetedAudience">..</param>
+        <summary>             This method will check whether current user's Audience membership belong to any             audience as defined within audienceTextRepresentation.             If does, return true, else return false.             If there is any exception occured, this function will return false and log the exception, raise ShipAssert()             </summary>
+        <returns>true or false to mean whether current user is in audience or not</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsCurrentUserInAudienceOf">
+      <MemberSignature Language="C#" Value="public static bool IsCurrentUserInAudienceOf (Microsoft.Office.Server.WebControls.AudienceLoader audienceLoader, string audienceTextRepresentation, bool showUntargetedAudience);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsCurrentUserInAudienceOf(class Microsoft.Office.Server.WebControls.AudienceLoader audienceLoader, string audienceTextRepresentation, bool showUntargetedAudience) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.IsCurrentUserInAudienceOf(Microsoft.Office.Server.WebControls.AudienceLoader,System.String,System.Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsCurrentUserInAudienceOf(Microsoft::Office::Server::WebControls::AudienceLoader ^ audienceLoader, System::String ^ audienceTextRepresentation, bool showUntargetedAudience);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="audienceLoader" Type="Microsoft.Office.Server.WebControls.AudienceLoader" />
+        <Parameter Name="audienceTextRepresentation" Type="System.String" />
+        <Parameter Name="showUntargetedAudience" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="audienceLoader">..</param>
+        <param name="audienceTextRepresentation">..</param>
+        <param name="showUntargetedAudience">..</param>
+        <summary>             This method will check whether current user's Audience membership belong to any             audience as defined within audienceTextRepresentation.             If does, return true, else return false.             If there is any exception occured, this function will return false and log the exception, raise ShipAssert()             </summary>
+        <returns>true or false to mean whether current user is in audience or not</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsFilterActive">
+      <MemberSignature Language="C#" Value="public bool IsFilterActive ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsFilterActive() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.IsFilterActive" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsFilterActive () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool IsFilterActive();" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.WebPartPages.IRuntimeFilter.IsFilterActive</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Determines if the current <b>ServerContext</b> and <b>UserProfileApplication</b> have been set.</summary>
+        <returns>True if the context and user values have been set; otherwise, false.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsMemberOfAudience">
+      <MemberSignature Language="C#" Value="public bool IsMemberOfAudience (string AccountNameOrg, Guid AudienceGuid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsMemberOfAudience(string AccountNameOrg, valuetype System.Guid AudienceGuid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.IsMemberOfAudience(System.String,System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsMemberOfAudience (AccountNameOrg As String, AudienceGuid As Guid) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsMemberOfAudience(System::String ^ AccountNameOrg, Guid AudienceGuid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="AccountNameOrg" Type="System.String" />
+        <Parameter Name="AudienceGuid" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="AccountNameOrg">The account name of the user.</param>
+        <param name="AudienceGuid">The globally unique identifier of the audience.</param>
+        <summary>Determines whether a user is a member of a specified audience.</summary>
+        <returns>
+          <b>true</b> if the specified user is a member of the specified audience; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsMemberOfAudience">
+      <MemberSignature Language="C#" Value="public bool IsMemberOfAudience (string AccountNameOrg, string AudienceName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsMemberOfAudience(string AccountNameOrg, string AudienceName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.IsMemberOfAudience(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsMemberOfAudience (AccountNameOrg As String, AudienceName As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsMemberOfAudience(System::String ^ AccountNameOrg, System::String ^ AudienceName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="AccountNameOrg" Type="System.String" />
+        <Parameter Name="AudienceName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="AccountNameOrg">The account name of the user.</param>
+        <param name="AudienceName">The GUID of the audience.</param>
+        <summary>Determines whether a user is a member of a specified audience.</summary>
+        <returns>
+          <b>true</b> if the specified user is a member of the specified audience; otherwise, <b>false</b>. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Resolve">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.Audience.Audience[] Resolve (string searchPattern);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.Audience.Audience[] Resolve(string searchPattern) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.Resolve(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Resolve (searchPattern As String) As Audience()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::Audience::Audience ^&gt; ^ Resolve(System::String ^ searchPattern);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.Audience.Audience[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="searchPattern" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="searchPattern">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Search">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.Audience.Audience[] Search (string searchPattern);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.Audience.Audience[] Search(string searchPattern) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.Search(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Search (searchPattern As String) As Audience()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::Audience::Audience ^&gt; ^ Search(System::String ^ searchPattern);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.Audience.Audience[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="searchPattern" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="searchPattern">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Search">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.Audience.Audience[] Search (string[] searchPattern);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.Audience.Audience[] Search(string[] searchPattern) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.Search(System.String[])" />
+      <MemberSignature Language="VB.NET" Value="Public Function Search (searchPattern As String()) As Audience()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::Audience::Audience ^&gt; ^ Search(cli::array &lt;System::String ^&gt; ^ searchPattern);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.Audience.Audience[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="searchPattern" Type="System.String[]" />
+      </Parameters>
+      <Docs>
+        <param name="searchPattern">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SiteGuid">
+      <MemberSignature Language="C#" Value="public Guid SiteGuid { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid SiteGuid" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceManager.SiteGuid" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SiteGuid As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid SiteGuid { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("SiteGuid property is obsolete")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the globally unique identifier (GUID) for the current site.</summary>
+        <value>
+          <b>System.Guid</b> object that represents the GUID for the current site.</value>
+        <remarks>
+          <para>The <b>SiteGuid</b> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SiteURL">
+      <MemberSignature Language="C#" Value="public string SiteURL { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SiteURL" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceManager.SiteURL" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SiteURL As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SiteURL { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("SiteURL property is obsolete")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the URL for the current site.</summary>
+        <value>
+          <b>String</b> that represents the URL for the current site.</value>
+        <remarks>
+          <para>The <b>SiteURL</b> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateIsIncludedFilter">
+      <MemberSignature Language="C#" Value="public string ValidateIsIncludedFilter (string PersistedString);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string ValidateIsIncludedFilter(string PersistedString) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceManager.ValidateIsIncludedFilter(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ValidateIsIncludedFilter (PersistedString As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::String ^ ValidateIsIncludedFilter(System::String ^ PersistedString);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.WebPartPages.IRuntimeFilter.ValidateIsIncludedFilter(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="PersistedString" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="PersistedString">String of comma-delimited GUIDs for an audience.</param>
+        <summary>Verifies the validity of the specified string of globally unique identifiers (GUID)s for an audience.</summary>
+        <returns>
+          <b>String</b> that is a substring of the <paramref name="PersistedString" /> parameter that contains a comma-delimited list of valid GUIDs.</returns>
+        <remarks>
+          <para>The <b>ValidateIsIncludedFilter</b> method implements the <see cref="M:Microsoft.SharePoint.WebPartPages.IRuntimeFilter.ValidateIsIncludedFilter(System.String)" /> method of the <see cref="T:Microsoft.SharePoint.WebPartPages.IRuntimeFilter" /> interface of the <see cref="N:Microsoft.SharePoint.WebPartPages" /> namespace. This verifies data that is persisted by Web Parts before committing that data to the database. This method is used mainly when importing audience data. The validity of each GUID in the <paramref name="PersistedString" /> parameter is checked. If the GUID is invalid or does not appear in the content database, it is discarded. The return string contains only valid audience GUIDs.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example shows how to use the <b>ValidateIsIncludedFilter</b> method to verify a list of audience GUIDs.</para>
+          <code>string PersistedString;
+string ValidatedString;
+AudienceManager AudMgr = new AudienceManager();
+
+PersistedString = "'00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000001'";
+ValidatedString = AudMgr.ValidateIsIncludedFilter(PersistedString);</code>
+          <code>Dim PersistedString As String
+Dim ValidatedString As String
+Dim AudMgr As New AudienceManager()
+
+PersistedString = "'00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000001'"
+ValidatedString = AudMgr.ValidateIsIncludedFilter(PersistedString)</code>
+        </example>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

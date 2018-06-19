@@ -1,0 +1,164 @@
+﻿<Type Name="QueryBasedCollection&lt;T&gt;" FullName="Microsoft.SharePoint.Publishing.QueryBasedCollection&lt;T&gt;">
+  <TypeSignature Language="C#" Value="public abstract class QueryBasedCollection&lt;T&gt; : Microsoft.SharePoint.Publishing.CollectionBase&lt;T&gt; where T : class" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit QueryBasedCollection`1&lt;class T&gt; extends Microsoft.SharePoint.Publishing.CollectionBase`1&lt;!T&gt;" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.QueryBasedCollection`1" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class QueryBasedCollection(Of T)&#xA;Inherits CollectionBase(Of T)" />
+  <TypeSignature Language="C++ CLI" Value="generic &lt;typename T&gt;&#xA; where T : classpublic ref class QueryBasedCollection abstract : Microsoft::SharePoint::Publishing::CollectionBase&lt;T&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter Name="T">
+      <Constraints>
+        <ParameterAttribute>ReferenceTypeConstraint</ParameterAttribute>
+      </Constraints>
+    </TypeParameter>
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.CollectionBase&lt;T&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">T</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <typeparam name="T"></typeparam>
+    <summary>Represents the collection base class that provides data paging support for large collections and querying support such as sorting and filtering.</summary>
+    <remarks>
+      <para>In addition to the <b>foreach</b> enumeration support (<b>For Each</b> in Visual Basic) and <b>Count</b> property provided by the <b>CollectionBase</b> base class, this collection provides data paging support for large collections and querying support such as sorting and filtering.</para>
+      <para>You can apply sorting and filtering using Collaborative Application Markup Language (CAML), which defines a query to use in a Microsoft SharePoint Foundation<b>SPQuery</b> object. You must apply the CAML query when the collection is initially created or retrieved. For example, the <b>PublishingWeb.GetPages</b> method has overloads that take a CAML string directly, and overloads that take an <b>SPQuery</b> instance that has an <b>SPQuery.Query</b> property. You can use the CAML &lt;OrderBy&gt; tag to sort the collection. For example, to order a collection in ascending order based on title, use the following CAML query.</para>
+      <code>&amp;lt;OrderBy&amp;gt;&amp;lt;FieldRef Name="Title" Ascending="TRUE"&amp;gt;&amp;lt;/FieldRef&amp;gt;&amp;lt;/OrderBy&amp;gt;</code>
+      <para>The CAML &lt;Where&gt; tag can be used for filtering the collection.</para>
+      <para>To filter a collection based on title matching some value "abc", use the following CAML query.</para>
+      <code>&amp;lt;Where&amp;gt;&amp;lt;Eq&amp;gt;&amp;lt;FieldRef Name="Title"&amp;gt;&amp;lt;/FieldRef&amp;gt;&amp;lt;Value Type="Text"&amp;gt;abc&amp;lt;/Value&amp;gt;&amp;lt;/Eq&amp;gt;&amp;lt;/Where&amp;gt;</code>
+      <para>This collection also supports data paging, allowing subsets of the collection to be retrieved. You must specify the maximum number of objects to be retrieved in each subset when the collection is initially created or retrieved. For example, the <b>PublishingWeb.GetPages</b> method has overloads that take a row limit, and overloads that take an <b>SPQuery</b> instance that has an <b>SPQuery.RowLimit</b> property. The <b>QueryNext</b> method can be used to advance to the next subset of paged data.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="EnsureItemIsUnique">
+      <MemberSignature Language="C#" Value="protected T EnsureItemIsUnique (Microsoft.SharePoint.SPListItem item);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance !T EnsureItemIsUnique(class Microsoft.SharePoint.SPListItem item) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.QueryBasedCollection`1.EnsureItemIsUnique(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Protected Function EnsureItemIsUnique (item As SPListItem) As T" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; T EnsureItemIsUnique(Microsoft::SharePoint::SPListItem ^ item);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>T</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="item">The <see cref="T:Microsoft.SharePoint.SPListItem" /> object to be verified.</param>
+        <summary>Verifies whether the current item has already been retrieved.</summary>
+        <returns>An object of the specified type.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public T this[Guid uniqueId] { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance !T Item(valuetype System.Guid)" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.QueryBasedCollection`1.Item(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(uniqueId As Guid) As T" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property T default[Guid] { T get(Guid uniqueId); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>T</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="uniqueId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="uniqueId">Unique ID of a list item.</param>
+        <summary>Gets an item by its unique identifier (ID).</summary>
+        <value>The item matching the unique ID.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="UniqueId" /> parameter cannot be a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.ArgumentException">The <paramref name="UniqueId" /> is not valid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public T this[string webRelativeUrl] { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance !T Item(string)" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.QueryBasedCollection`1.Item(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(webRelativeUrl As String) As T" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property T default[System::String ^] { T get(System::String ^ webRelativeUrl); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>T</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webRelativeUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="webRelativeUrl">String that indicates the Web-relative URL of the item.</param>
+        <summary>Gets an item by its Web-relative URL.</summary>
+        <value>The item located by the Web-relative URL, or a null reference (Nothing in Visual Basic) if the value cannot be found.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="webRelativeUrl" /> is not valid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="QueryNext">
+      <MemberSignature Language="C#" Value="public bool QueryNext ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool QueryNext() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.QueryBasedCollection`1.QueryNext" />
+      <MemberSignature Language="VB.NET" Value="Public Function QueryNext () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool QueryNext();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Advances the collection to the next subset of paged data.</summary>
+        <returns>
+          <b>true</b> if a new set of paged data is retrieved; otherwise, <b>false</b>, which means that there is no remaining paged data available.</returns>
+        <remarks>
+          <para>This method populates the collection with the next subset of paged data available. The maximum size of the subset is based on the row limit that was specified when the collection was initially created or retrieved. This value is available in the <b>RowLimit</b> property. If no row limit was specified when the collection was created or retrieved then the value of <b>RowLimit</b> is zero and the collection will have already been retrieved in its entirety. In this case, the <b>QueryNext</b> method has no affect and will return <b>false</b>. The same is true if the row limit was explicitly set to zero.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RowLimit">
+      <MemberSignature Language="C#" Value="public uint RowLimit { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 RowLimit" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.QueryBasedCollection`1.RowLimit" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property RowLimit As UInteger" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::UInt32 RowLimit { System::UInt32 get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the maximum number of items that can be contained in a collection that is using data paging.</summary>
+        <value>The maximum number of items that can be contained in a collection that is using data paging.</value>
+        <remarks>
+          <para>The <b>QueryNext</b> method uses this <b>RowLimit</b> property to determine the maximum number of remaining items to retrieve each time it is called. This property can only be set when the collection is initially created or retrieved. It may be set explicitly as a parameter in a collection retrieval method or by setting the <b>SPQuery.RowLimit</b> property of an <b>SPQuery</b> that the collection is based upon. If this value is zero, the collection does not use data paging. In this case, the collection is populated with all items when it is created, and <b>QueryNext</b> has no effect.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

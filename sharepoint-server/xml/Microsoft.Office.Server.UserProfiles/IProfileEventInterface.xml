@@ -1,0 +1,77 @@
+﻿<Type Name="IProfileEventInterface" FullName="Microsoft.Office.Server.UserProfiles.IProfileEventInterface">
+  <TypeSignature Language="C#" Value="public interface IProfileEventInterface" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IProfileEventInterface" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.IProfileEventInterface" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IProfileEventInterface" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IProfileEventInterface" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>Executes an action whenever a user profile is about to be deleted.</summary>
+    <remarks>
+      <para>The <see cref="T:Microsoft.Office.Server.UserProfiles.IProfileEventInterface" /> interface is used to execute code whenever a user profile is about to be deleted. Implementing the <see cref="T:Microsoft.Office.Server.UserProfiles.IProfileEventInterface" /> interface allows you to perform an action immediately before a profile is deleted. If you choose not have the profile deleted, you can return <b>false</b> from the <see cref="M:Microsoft.Office.Server.UserProfiles.IProfileEventInterface.PreProfileDeleted(Microsoft.Office.Server.ServerContext,Microsoft.Office.Server.UserProfiles.UserProfile)" /> method.</para>
+      <para>The default <see cref="T:Microsoft.Office.Server.UserProfiles.MySiteProfileHandler" /> handler assigns the deleted user's My Site to that person's manager. If you want that behavior as well, you can subclass it. </para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="PreProfileDeleted">
+      <MemberSignature Language="C#" Value="public bool PreProfileDeleted (Microsoft.Office.Server.UserProfiles.UserProfile profile);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool PreProfileDeleted(class Microsoft.Office.Server.UserProfiles.UserProfile profile) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.IProfileEventInterface.PreProfileDeleted(Microsoft.Office.Server.UserProfiles.UserProfile)" />
+      <MemberSignature Language="VB.NET" Value="Public Function PreProfileDeleted (profile As UserProfile) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool PreProfileDeleted(Microsoft::Office::Server::UserProfiles::UserProfile ^ profile);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="profile" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+      </Parameters>
+      <Docs>
+        <param name="profile">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PreProfileDeleted">
+      <MemberSignature Language="C#" Value="public bool PreProfileDeleted (Microsoft.Office.Server.ServerContext context, Microsoft.Office.Server.UserProfiles.UserProfile profile);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool PreProfileDeleted(class Microsoft.Office.Server.ServerContext context, class Microsoft.Office.Server.UserProfiles.UserProfile profile) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.IProfileEventInterface.PreProfileDeleted(Microsoft.Office.Server.ServerContext,Microsoft.Office.Server.UserProfiles.UserProfile)" />
+      <MemberSignature Language="VB.NET" Value="Public Function PreProfileDeleted (context As ServerContext, profile As UserProfile) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool PreProfileDeleted(Microsoft::Office::Server::ServerContext ^ context, Microsoft::Office::Server::UserProfiles::UserProfile ^ profile);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("use PreProfileDeleted(UserProfile profile) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="Microsoft.Office.Server.ServerContext" />
+        <Parameter Name="profile" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+      </Parameters>
+      <Docs>
+        <param name="context">The server context that contains contextual information about the source or destination.</param>
+        <param name="profile">A <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" /> object representing the profile of a given user.</param>
+        <summary>Returns a Boolean value that specifies whether the earlier profile of a given user has been deleted.</summary>
+        <returns>If the profile of a given user has been deleted, <b>true</b>; otherwise <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,1064 @@
+﻿<Type Name="Group" FullName="Microsoft.SharePoint.Taxonomy.Group">
+  <TypeSignature Language="C#" Value="public sealed class Group : Microsoft.SharePoint.Taxonomy.TaxonomyItem" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit Group extends Microsoft.SharePoint.Taxonomy.TaxonomyItem" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.Group" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class Group&#xA;Inherits TaxonomyItem" />
+  <TypeSignature Language="C++ CLI" Value="public ref class Group sealed : Microsoft::SharePoint::Taxonomy::TaxonomyItem" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Taxonomy.TaxonomyItem</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, FactoryType=typeof(Microsoft.SharePoint.Taxonomy.Internal.TaxonomyClientObjectFactory), Name="TermGroup", ObjectIdentityPropertyName="CanonicalId", ServerTypeId="65D76872-0B65-42de-8EBD-D76F6D3491C6")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents the top-level container in a <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object.</summary>
+    <remarks>
+      <para>The <see cref="" /> object contains one or more child <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> instances, and these can be accessed through the <see cref="P:Microsoft.SharePoint.Taxonomy.Group.TermSets" /> property. The <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> class also provides methods for creating new child <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects.Permissions for editing child <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> and <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> instances is specified on the group. The <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> class provides methods for getting and setting permissions on the group, and for checking permissions.</para>
+      <para>The <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> class also provides properties to get and set values of the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object such as name and description, and enables the deletion of groups.</para>
+      <para>Additionally the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> class provides methods for checking changes on the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object.</para>
+      <para>The <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> class derives from the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyItem" /> base class
+which provides additional properties such as <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyItem.Id" />
+and <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyItem.TermStore" /></para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="AddContributor">
+      <MemberSignature Language="C#" Value="public void AddContributor (string principalName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddContributor(string principalName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.AddContributor(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddContributor (principalName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddContributor(System::String ^ principalName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="principalName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="principalName">The login name of the user to be added as a contributor</param>
+        <summary>Adds a contributor to the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object.</summary>
+        <remarks>
+          <para>Contributors have these permissions on the group.</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <b>TaxonomyRights.EditTerm</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>TaxonomyRights.EditTermSet</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>TaxonomyRights.Contributor</b>
+              </description>
+            </item>
+          </list>
+          <para>Contributors can read, create, modify and delete <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> instances and <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> instances within the Group.The current user must have the <b>TaxonomyRights.AddTermSetEditPermissions</b> permission in this Group in order to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> metho to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">The user name cannot be found.</exception>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="principalName" /> is null or empty</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="AddGroupManager">
+      <MemberSignature Language="C#" Value="public void AddGroupManager (string principalName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddGroupManager(string principalName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.AddGroupManager(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddGroupManager (principalName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddGroupManager(System::String ^ principalName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="principalName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="principalName">The login name of the user to be added as a group manager</param>
+        <summary>Adds a group manager to the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object.</summary>
+        <remarks>
+          <para>Group managers have these permissions in the group.</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <b>TaxonomyRights.EditTerm</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>TaxonomyRights.EditTermSet</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>TaxonomyRights.EditGroup</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>TaxonomyRights.AddTermSetEditPermissions</b>
+              </description>
+            </item>
+            <item>
+              <description>
+                <b>TaxonomyRights.GroupManager</b>
+              </description>
+            </item>
+          </list>
+          <para>Group managers can read and modify the group, and they can add or remove contributors from the group. Additionally they can perform all operations that a contributor can perform. The current user must have <b>TaxonomyRights.ManageTermStore</b> permission in the group to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">The user name can not be found.</exception>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="principalName" /> is null or empty</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="AddSiteCollectionAccess">
+      <MemberSignature Language="C#" Value="public void AddSiteCollectionAccess (Guid siteCollectionId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddSiteCollectionAccess(valuetype System.Guid siteCollectionId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.AddSiteCollectionAccess(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddSiteCollectionAccess (siteCollectionId As Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddSiteCollectionAccess(Guid siteCollectionId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="siteCollectionId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="siteCollectionId">A <see cref="P:Microsoft.SharePoint.SPSite.ID" /> property for the <see cref="T:Microsoft.SharePoint.SPSite" /> object that should be given access to the group.</param>
+        <summary>Adds a site collection to have access to its local site collection group.</summary>
+        <remarks>
+          <para>Add a site collection to a group to enable it to access the local group. This method adds the requested site collection to the list that can access the gorup. If the group is not a site collection group, this method has no effect. The user must have <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.ManageTermStore" /> permission to use this method.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>public void AddSiteCollectionAccess(Guid siteCollectionId)</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AddSiteCollectionReadOnlyAccess">
+      <MemberSignature Language="C#" Value="public void AddSiteCollectionReadOnlyAccess (string siteUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddSiteCollectionReadOnlyAccess(string siteUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.AddSiteCollectionReadOnlyAccess(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddSiteCollectionReadOnlyAccess (siteUrl As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddSiteCollectionReadOnlyAccess(System::String ^ siteUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="siteUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="siteUrl">The URL for the site collection.</param>
+        <summary>Adds a site collection to have read-only access to this local site collection group. </summary>
+        <remarks>
+          <para>
+            <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> must be called in order to save changes to the database. </para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation. To use this method,  <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.ManageTermStore" /> permission or <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.GroupManager" /> permission is required.</exception>
+        <exception cref="T:System.InvalidOperationException">The group is not a site collection group. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ClearSiteCollectionReadOnlyAccess">
+      <MemberSignature Language="C#" Value="public void ClearSiteCollectionReadOnlyAccess ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ClearSiteCollectionReadOnlyAccess() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.ClearSiteCollectionReadOnlyAccess" />
+      <MemberSignature Language="VB.NET" Value="Public Sub ClearSiteCollectionReadOnlyAccess ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void ClearSiteCollectionReadOnlyAccess();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Removes all site collection read-only access to this local site collection group.</summary>
+        <remarks>
+          <para>
+            <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> must be called in order to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation. The current user must have the <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.ManageTermStore" /> permission or the <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.GroupManager" /> permission in order to use this method.</exception>
+        <exception cref="T:System.InvalidOperationException">The group is not a site collection group.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Contributors">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Administration.SPAcl&lt;Microsoft.SharePoint.Taxonomy.TaxonomyRights&gt; Contributors { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Administration.SPAcl`1&lt;valuetype Microsoft.SharePoint.Taxonomy.TaxonomyRights&gt; Contributors" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Group.Contributors" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Contributors As SPAcl(Of TaxonomyRights)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::SPAcl&lt;Microsoft::SharePoint::Taxonomy::TaxonomyRights&gt; ^ Contributors { Microsoft::SharePoint::Administration::SPAcl&lt;Microsoft::SharePoint::Taxonomy::TaxonomyRights&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Administration.SPAcl&lt;Microsoft.SharePoint.Taxonomy.TaxonomyRights&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Returns the SPAcl indicating the users who are contributors to the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object.</summary>
+        <value>The SPAcl indicating the users who are contributors for the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object.</value>
+        <remarks>
+          <para>The SPAcl cannot be set directly.Any permission changes should be made using the<see cref="M:Microsoft.SharePoint.Taxonomy.Group.AddContributor(System.String)" /> and <see cref="M:Microsoft.SharePoint.Taxonomy.Group.DeleteContributor(System.String)" /> methods. Contributors or users who can modify the set of contributors can access this property. Specifically, the current user must have <b>TaxonomyRights.AddTermSetEditPermissions</b> permission or <b>TaxonomyRights.Contributor</b> permission to access this property.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTermSet">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSet CreateTermSet (string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermSet CreateTermSet(string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.CreateTermSet(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateTermSet (name As String) As TermSet" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermSet ^ CreateTermSet(System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSet</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="name">The name of the new <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> being created.</param>
+        <summary>Creates a new <see cref="T:Microsoft.SharePoint.TaxonomyTermSet" /> object in this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object by using the term store working language.</summary>
+        <returns>The newly created <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object</returns>
+        <remarks>
+          <para>The <paramref name="name" /> cannot exceed 255 characters, and it cannot contain any of the following illegal characters: ; " &lt; &gt; | &amp; tab.
+</para>
+          <para>Additionally the <paramref name="name" /> must be a unique <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> name within the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object.The current user must have <b>TaxonomyRights.EditTermSet</b> permission in order to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">Creating a term set in system Group is disallowed.</exception>
+        <exception cref="T:System.ArgumentException">The name parameter is invalid. It either contains invalid characters, is too long, or conflicts with the name of an existing TermSet in the same Group.</exception>
+        <exception cref="T:System.ArgumentNullException">The name cannot be null or empty.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTermSet">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSet CreateTermSet (string name, Guid newTermSetId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermSet CreateTermSet(string name, valuetype System.Guid newTermSetId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.CreateTermSet(System.String,System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateTermSet (name As String, newTermSetId As Guid) As TermSet" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermSet ^ CreateTermSet(System::String ^ name, Guid newTermSetId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSet</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="newTermSetId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="name">The name of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> being created</param>
+        <param name="newTermSetId">The unique identifier of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> being created</param>
+        <summary>Creates a new T:Microsoft.SharePoint.Taxonomy.TermSet object  in this T:Microsoft.SharePoint.Taxonomy.Group object by using the working language of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object and the specified unique identifier.</summary>
+        <returns>The newly created <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object</returns>
+        <remarks>
+          <para>The <paramref name="name" /> cannot exceed 255 characters, and it cannot contain any of the following illegal characters: ; " &lt; &gt; | &amp; tab</para>
+          <para>Additionally the <paramref name="name" /> parameter must be a unique <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> name within the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object. The <paramref name="newTermSetId" /> value must be a unique ID across all term sets in the term store.If it is already in use by another term set a <see cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException" /> will be thrown during the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> transaction. The current user must have <b>TaxonomyRights.EditTermSet</b> permission to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">Creating a term set in system Group is disallowed.</exception>
+        <exception cref="T:System.ArgumentException">The name parameter is invalid. It either contains invalid characters, is too long, or conflicts with the name of an existing TermSet in the same Group.</exception>
+        <exception cref="T:System.ArgumentNullException">The name cannot be null or empty.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTermSet">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSet CreateTermSet (string name, int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermSet CreateTermSet(string name, int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.CreateTermSet(System.String,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateTermSet (name As String, lcid As Integer) As TermSet" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermSet ^ CreateTermSet(System::String ^ name, int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSet</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="name">The name of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object being created.</param>
+        <param name="lcid">The language that the new TermSet name is in</param>
+        <summary>Creates a new <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object in the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object by using the provided language.</summary>
+        <returns>The newly created TermSet</returns>
+        <remarks>
+          <para>The <paramref name="name" /> cannot exceed 255 characters, and it cannot contain any of the following illegal characters: ; " &lt; &gt; | &amp; tab
+</para>
+          <para>Additionally the <paramref name="name" /> must be a unique <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object  name within the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object. The current user must have <b>TaxonomyRights.EditTermSet</b> permission to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">Creating a term set in system Group is disallowed.</exception>
+        <exception cref="T:System.ArgumentException">The name parameter is invalid. It either contains invalid characters, is too long, or conflicts with the name of an existing TermSet in the same Group.</exception>
+        <exception cref="T:System.ArgumentNullException">The name cannot be null or empty.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">The lcid is not one of the working languages for the term store </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTermSet">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSet CreateTermSet (string name, Guid newTermSetId, int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermSet CreateTermSet(string name, valuetype System.Guid newTermSetId, int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.CreateTermSet(System.String,System.Guid,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateTermSet (name As String, newTermSetId As Guid, lcid As Integer) As TermSet" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermSet ^ CreateTermSet(System::String ^ name, Guid newTermSetId, int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSet</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="newTermSetId" Type="System.Guid" />
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="name">The name of the new <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object that is being created</param>
+        <param name="newTermSetId">The unique identifier of the new <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object that is being created</param>
+        <param name="lcid">The language that the new <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> name is written in</param>
+        <summary>Creates a new <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object in the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object by using the provided language and the specified unique identifier.</summary>
+        <returns>The newly created <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object</returns>
+        <remarks>
+          <para>The <paramref name="name" /> cannot exceed 255 characters, and it cannot contain any of the following illegal characters</para>
+          <list type="number">
+            <item>
+              <description>; " &lt; &gt; | &amp; tab</description>
+            </item>
+          </list>
+          <para>Additionally the <paramref name="name" /> parameter must be a unique <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> name within the current Group and the <paramref name="newTermSetId" /> value must be a unique ID across all <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects in the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" />. If it is already in use by another <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object, a <see cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException" /> exception will be thrown during the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> transaction.The current user must have <b>TaxonomyRights.EditTermSet</b> permission to use this method. Call <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">Creating a term set in system group is disallowed.</exception>
+        <exception cref="T:System.ArgumentException">The name parameter is invalid. It either contains invalid characters, is too long, or conflicts with the name of an existing term set in the same group.</exception>
+        <exception cref="T:System.ArgumentNullException">The name cannot be a null reference (Nothing in Visual Basic) or empty.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="lcid" /> is not one of the working languages for the term store </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Delete">
+      <MemberSignature Language="C#" Value="public override void Delete ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Delete() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.Delete" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Delete ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Delete();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, Name="DeleteObject")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deletes this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> from the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object.</summary>
+        <remarks>
+          <para>The delete operation will fail if the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object is not empty. The delete operation will fail if the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object is the system Group.The current user must have <b>TaxonomyRights.ManageTermStore</b> permission to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">A Group cannot be deleted unless it is empty and it is not the system Group.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteContributor">
+      <MemberSignature Language="C#" Value="public void DeleteContributor (string principalName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteContributor(string principalName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.DeleteContributor(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteContributor (principalName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteContributor(System::String ^ principalName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="principalName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="principalName">The login name of the user to be removed as a contributor</param>
+        <summary>Deletes a contributor from the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object.</summary>
+        <remarks>
+          <para>The current user must have <b>TaxonomyRights.AddTermSetEditPermissions</b> permission to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">The specified user is not a contributor on this group. Deletion of this user as a contributor failed.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteGroupManager">
+      <MemberSignature Language="C#" Value="public void DeleteGroupManager (string principalName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteGroupManager(string principalName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.DeleteGroupManager(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteGroupManager (principalName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteGroupManager(System::String ^ principalName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="principalName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="principalName">The login name of the user to be removed as a group manager</param>
+        <summary>Deletes a group manager from the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object.</summary>
+        <remarks>
+          <para>The current user must have <b>TaxonomyRights.ManageTermStore</b> permission to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">The specified user is not a group manager on this group. Deletion of this user as a group manager failed.</exception>
+        <exception cref="T:System.UnauthorizedAccessException" />
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteSiteCollectionAccess">
+      <MemberSignature Language="C#" Value="public void DeleteSiteCollectionAccess (Guid siteCollectionId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteSiteCollectionAccess(valuetype System.Guid siteCollectionId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.DeleteSiteCollectionAccess(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteSiteCollectionAccess (siteCollectionId As Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteSiteCollectionAccess(Guid siteCollectionId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="siteCollectionId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="siteCollectionId">The <see cref="P:Microsoft.SharePoint.SPSite.ID" /> property for the <see cref="T:Microsoft.SharePoint.SPSite" /> object that should have access removed for the group.</param>
+        <summary>Removes site collection access to local site collection group.</summary>
+        <remarks>
+          <para>In order for a site collection to access its local group, it needs to be added to the group. This method removes the requested site collection from the list that can access this group. If the group is not a site collection group, this method has no effect. The current user must have the <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.ManageTermStore" /> permission in order to use this method.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>public void DeleteSiteCollectionAccess(Guid siteCollectionId)</code>
+        </example>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteSiteCollectionReadOnlyAccess">
+      <MemberSignature Language="C#" Value="public bool DeleteSiteCollectionReadOnlyAccess (string siteCollectionUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool DeleteSiteCollectionReadOnlyAccess(string siteCollectionUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.DeleteSiteCollectionReadOnlyAccess(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function DeleteSiteCollectionReadOnlyAccess (siteCollectionUrl As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool DeleteSiteCollectionReadOnlyAccess(System::String ^ siteCollectionUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="siteCollectionUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="siteCollectionUrl">The <see cref="P:Microsoft.SharePoint.SPSite.Url" /> of the site collection.</param>
+        <summary>Removes a site collection from having read-only access to this local site collection group.</summary>
+        <returns>
+          <b>true</b> if the specified site collection URL is deleted; otherwise, <b>false</b>.</returns>
+        <remarks>
+          <para>In order for a site collection to access its local group, it needs to be added to the group. This method removes the requested site collection from the list that can access this group. </para>
+          <para>If the group is not a site collection group, this method has no effect. </para>
+          <para>
+            <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> must be called in order to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation. To use this method, the <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.ManageTermStore" /> permission or <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.GroupManager" />  permission is required.
+            </exception>
+        <exception cref="T:System.InvalidOperationException">The group is not a site collection group.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Group.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the description of this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object</summary>
+        <value>The description of this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object</value>
+        <remarks>
+          <para>The description can be empty. The description length cannot exceed 1000 characters.The description cannot contain tab characters. The current user must have <b>TaxonomyRights.EditGroup</b> permission in order to set this property. After setting this property, call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">The description '{0}' is invalid. It probably contains invalid characters or is too long.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="DoesUserHavePermissions">
+      <MemberSignature Language="C#" Value="public bool DoesUserHavePermissions (Microsoft.SharePoint.Taxonomy.TaxonomyRights rights);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool DoesUserHavePermissions(valuetype Microsoft.SharePoint.Taxonomy.TaxonomyRights rights) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.DoesUserHavePermissions(Microsoft.SharePoint.Taxonomy.TaxonomyRights)" />
+      <MemberSignature Language="VB.NET" Value="Public Function DoesUserHavePermissions (rights As TaxonomyRights) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool DoesUserHavePermissions(Microsoft::SharePoint::Taxonomy::TaxonomyRights rights);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rights" Type="Microsoft.SharePoint.Taxonomy.TaxonomyRights" />
+      </Parameters>
+      <Docs>
+        <param name="rights">The <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyRights" /> permissions to check for the current user</param>
+        <summary>Checks whether the current user has the permissions specified.</summary>
+        <returns>
+          <b>true</b> if the current user has the specified permissions; otherwise, <b>false</b></returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Export">
+      <MemberSignature Language="C#" Value="public string Export ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string Export() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.Export" />
+      <MemberSignature Language="VB.NET" Value="Public Function Export () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ Export();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, Name="ExportObject")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>This method is not implemented.</summary>
+        <returns>Returns <see cref="T:System.String" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.ChangedItemCollection GetChanges (DateTime startTime);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.ChangedItemCollection GetChanges(valuetype System.DateTime startTime) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.GetChanges(System.DateTime)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetChanges (startTime As DateTime) As ChangedItemCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::ChangedItemCollection ^ GetChanges(DateTime startTime);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.ChangedItemCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="startTime" Type="System.DateTime" />
+      </Parameters>
+      <Docs>
+        <param name="startTime">A UTC time indicating the earliest change to be returned</param>
+        <summary>Gets a collection of <see cref="T:Microsoft.SharePoint.Taxonomy.ChangedItem" /> objects that represent changes to this Group since a specified time.</summary>
+        <returns>A collection of <see cref="T:Microsoft.SharePoint.Taxonomy.ChangedItem" /> objects that represent changes to the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object since a specified time.</returns>
+        <remarks>
+          <para>The changes returned in the collection include changes in the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object and its child <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> and <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> instances. The collection returned may be empty.
+</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.ChangedItemCollection GetChanges (DateTime startTime, Microsoft.SharePoint.Taxonomy.ChangedItemType itemType);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.ChangedItemCollection GetChanges(valuetype System.DateTime startTime, valuetype Microsoft.SharePoint.Taxonomy.ChangedItemType itemType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.GetChanges(System.DateTime,Microsoft.SharePoint.Taxonomy.ChangedItemType)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetChanges (startTime As DateTime, itemType As ChangedItemType) As ChangedItemCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::ChangedItemCollection ^ GetChanges(DateTime startTime, Microsoft::SharePoint::Taxonomy::ChangedItemType itemType);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.ChangedItemCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="startTime" Type="System.DateTime" />
+        <Parameter Name="itemType" Type="Microsoft.SharePoint.Taxonomy.ChangedItemType" />
+      </Parameters>
+      <Docs>
+        <param name="startTime">A UTC time indicating the earliest change to return</param>
+        <param name="itemType">The type of <see cref="T:Microsoft.SharePoint.Taxonomy.ChangedItem" /> object to return</param>
+        <summary>Gets a collection of <see cref="T:Microsoft.SharePoint.Taxonomy.ChangedItem" /> instances that represent changes to the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object since a specified time, restricted by item type.</summary>
+        <returns>A collection of <see cref="T:Microsot.SharePoint.Taxonomy.ChangedItem" /> instances that represent changes to the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> since the specified time.</returns>
+        <remarks>
+          <para>The changes returned in the collection include changes in the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> and its child <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> and <see cref="T:Microsoft.SharePoint.TaxonomyTerm" /> objects, unless the <see cref="T:Microsoft.SharePoint.Taxonomy.ChangedItemType" /> object restricts some of these items from being returned.The collection returned may be empty.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.ChangedItemCollection GetChanges (DateTime startTime, Microsoft.SharePoint.Taxonomy.ChangedItemType itemType, Microsoft.SharePoint.Taxonomy.ChangedOperationType operationType);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.ChangedItemCollection GetChanges(valuetype System.DateTime startTime, valuetype Microsoft.SharePoint.Taxonomy.ChangedItemType itemType, valuetype Microsoft.SharePoint.Taxonomy.ChangedOperationType operationType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.GetChanges(System.DateTime,Microsoft.SharePoint.Taxonomy.ChangedItemType,Microsoft.SharePoint.Taxonomy.ChangedOperationType)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetChanges (startTime As DateTime, itemType As ChangedItemType, operationType As ChangedOperationType) As ChangedItemCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::ChangedItemCollection ^ GetChanges(DateTime startTime, Microsoft::SharePoint::Taxonomy::ChangedItemType itemType, Microsoft::SharePoint::Taxonomy::ChangedOperationType operationType);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.ChangedItemCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="startTime" Type="System.DateTime" />
+        <Parameter Name="itemType" Type="Microsoft.SharePoint.Taxonomy.ChangedItemType" />
+        <Parameter Name="operationType" Type="Microsoft.SharePoint.Taxonomy.ChangedOperationType" />
+      </Parameters>
+      <Docs>
+        <param name="startTime">A UTC time indicating the earliest change to be returned</param>
+        <param name="itemType">Indicates the type of <see cref="T:Microsoft.SharePoint.Taxonomy.ChangeItem" /> objects to return</param>
+        <param name="operationType">Indicates the types of operations to return</param>
+        <summary>Gets a collection of <see cref="T:Microsoft.SharePoint.Taxonomy.ChangedItem" /> objects that represent changes to this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object since a specified time, restricted by item type and operation type.</summary>
+        <returns>A collection of <see cref="T:Microsoft.SharePoint.Taxonomy.ChangedItem" /> instances that represent changes to the current <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object since a specified time.</returns>
+        <remarks>
+          <para>The changes returned in the collection include changes in the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object and its child <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> and <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects, unless the <see cref="T:Microsoft.SharePoint.Taxonomy.ChangedItemType" /> restricts some of these items from being returned. The collection returned may be empty.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEffectivePermissions">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TaxonomyRights GetEffectivePermissions ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype Microsoft.SharePoint.Taxonomy.TaxonomyRights GetEffectivePermissions() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.GetEffectivePermissions" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetEffectivePermissions () As TaxonomyRights" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TaxonomyRights GetEffectivePermissions();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TaxonomyRights</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyRights" /> permissions of the current user in this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object</summary>
+        <returns>The <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyRights" /> permissions of the current user in this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /></returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTermSetsWithCustomProperty">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSetCollection GetTermSetsWithCustomProperty (string customPropertyName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermSetCollection GetTermSetsWithCustomProperty(string customPropertyName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.GetTermSetsWithCustomProperty(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTermSetsWithCustomProperty (customPropertyName As String) As TermSetCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermSetCollection ^ GetTermSetsWithCustomProperty(System::String ^ customPropertyName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSetCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="customPropertyName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="customPropertyName">The name of the custom property.</param>
+        <summary>Searches <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects that have a custom property with the specified name in the <b>Group</b> object.</summary>
+        <returns>A collection of <b>TermSet</b> objects that match the value of the specified parameter.</returns>
+        <remarks>
+          <para>The search results are directly from term store. It may not be in sync with whatever changes that has been made but not committed. For better results, call <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> or <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.RollBackAll" /> before you call this method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTermSetsWithCustomProperty">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSetCollection GetTermSetsWithCustomProperty (string customPropertyName, string customPropertyValue);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermSetCollection GetTermSetsWithCustomProperty(string customPropertyName, string customPropertyValue) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.GetTermSetsWithCustomProperty(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTermSetsWithCustomProperty (customPropertyName As String, customPropertyValue As String) As TermSetCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermSetCollection ^ GetTermSetsWithCustomProperty(System::String ^ customPropertyName, System::String ^ customPropertyValue);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSetCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="customPropertyName" Type="System.String" />
+        <Parameter Name="customPropertyValue" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="customPropertyName">The name of the custom property.</param>
+        <param name="customPropertyValue">The value of the custom property.</param>
+        <summary>Searches <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects that have a custom property with the specified name  and value in the <b>Group</b> object.</summary>
+        <returns>A collection of <b>TermSet</b> objects that match the values of the specified parameters.</returns>
+        <remarks>
+          <para>The search results are directly from term store. It may not be in sync with whatever changes that has been made but not committed. For better results, call <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> or <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.RollBackAll" /> before you call this method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTermSetsWithCustomProperty">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSetCollection GetTermSetsWithCustomProperty (string customPropertyName, string customPropertyValue, Microsoft.SharePoint.Taxonomy.StringMatchOption stringMatchOption);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermSetCollection GetTermSetsWithCustomProperty(string customPropertyName, string customPropertyValue, valuetype Microsoft.SharePoint.Taxonomy.StringMatchOption stringMatchOption) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.GetTermSetsWithCustomProperty(System.String,System.String,Microsoft.SharePoint.Taxonomy.StringMatchOption)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermSetCollection ^ GetTermSetsWithCustomProperty(System::String ^ customPropertyName, System::String ^ customPropertyValue, Microsoft::SharePoint::Taxonomy::StringMatchOption stringMatchOption);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSetCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="customPropertyName" Type="System.String" />
+        <Parameter Name="customPropertyValue" Type="System.String" />
+        <Parameter Name="stringMatchOption" Type="Microsoft.SharePoint.Taxonomy.StringMatchOption" />
+      </Parameters>
+      <Docs>
+        <param name="customPropertyName">The name of the custom property.</param>
+        <param name="customPropertyValue">The value of the customer property.</param>
+        <param name="stringMatchOption">The string matching options for the property value.</param>
+        <summary>
+            Searches <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects that  have a custom property with the specified name and value in the <b>Group</b> object. </summary>
+        <returns>A collection of <b>TermSet</b> objects that match the values of the specified parameters. </returns>
+        <remarks>
+          <para>The search results are directly from term store. It may not be in sync with whatever changes that has been made but not committed. For better results, call <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> or <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.RollBackAll" /> before you call this method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTermSetsWithCustomProperty">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSetCollection GetTermSetsWithCustomProperty (string customPropertyName, string customPropertyValue, Microsoft.SharePoint.Taxonomy.StringMatchOption stringMatchOption, int resultCollectionSize);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermSetCollection GetTermSetsWithCustomProperty(string customPropertyName, string customPropertyValue, valuetype Microsoft.SharePoint.Taxonomy.StringMatchOption stringMatchOption, int32 resultCollectionSize) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Group.GetTermSetsWithCustomProperty(System.String,System.String,Microsoft.SharePoint.Taxonomy.StringMatchOption,System.Int32)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermSetCollection ^ GetTermSetsWithCustomProperty(System::String ^ customPropertyName, System::String ^ customPropertyValue, Microsoft::SharePoint::Taxonomy::StringMatchOption stringMatchOption, int resultCollectionSize);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSetCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="customPropertyName" Type="System.String" />
+        <Parameter Name="customPropertyValue" Type="System.String" />
+        <Parameter Name="stringMatchOption" Type="Microsoft.SharePoint.Taxonomy.StringMatchOption" />
+        <Parameter Name="resultCollectionSize" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="customPropertyName">The name of the custom property. </param>
+        <param name="customPropertyValue">The value of the custom property.</param>
+        <param name="stringMatchOption">The string matching options for the property value.</param>
+        <param name="resultCollectionSize">The maximum number of objects in the returned collection. </param>
+        <summary>Searches <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects that have a custom property with the specified name and value in the <b>Group</b> object. </summary>
+        <returns>A collection of <b>TermSet</b> objects that match the values of the specified parameters.</returns>
+        <remarks>
+          <para>The search results are directly from term store. It may not be in sync with whatever changes that has been made but not committed. For better results, call <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> or <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.RollBackAll" /> before you call this method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GroupManagers">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Administration.SPAcl&lt;Microsoft.SharePoint.Taxonomy.TaxonomyRights&gt; GroupManagers { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Administration.SPAcl`1&lt;valuetype Microsoft.SharePoint.Taxonomy.TaxonomyRights&gt; GroupManagers" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Group.GroupManagers" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property GroupManagers As SPAcl(Of TaxonomyRights)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::SPAcl&lt;Microsoft::SharePoint::Taxonomy::TaxonomyRights&gt; ^ GroupManagers { Microsoft::SharePoint::Administration::SPAcl&lt;Microsoft::SharePoint::Taxonomy::TaxonomyRights&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Administration.SPAcl&lt;Microsoft.SharePoint.Taxonomy.TaxonomyRights&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Returns the SPAcl indicating the users who are group managers for this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object.</summary>
+        <value>The SPAcl indicating the users who are group managers for this group.</value>
+        <remarks>
+          <para>The SPAcl cannot be set directly.Any permission changes should be made using the <see cref="M:Microsoft.SharePoint.Taxonomy.Group.AddGroupManager(System.String)" /> and <see cref="M:Microsoft.SharePoint.Taxonomy.Group.DeleteGroupManager(System.String)" /> methods. Group managers themselves, or users who can modify the set of group managers canaccess this property. Specifically, the current user must have <b>TaxonomyRights.ManageTermStore</b> permission or <b>TaxonomyRights.GroupManager</b> permission to access this property.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="IsReadOnlySiteCollectionGroup">
+      <MemberSignature Language="C#" Value="public bool IsReadOnlySiteCollectionGroup { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsReadOnlySiteCollectionGroup" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Group.IsReadOnlySiteCollectionGroup" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsReadOnlySiteCollectionGroup As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsReadOnlySiteCollectionGroup { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that is <b>true</b> if the group for the current site is a read-only site collection group; otherwise, <b>false</b></summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSiteCollectionGroup">
+      <MemberSignature Language="C#" Value="public bool IsSiteCollectionGroup { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSiteCollectionGroup" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Group.IsSiteCollectionGroup" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSiteCollectionGroup As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSiteCollectionGroup { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object is a site collection Group.</summary>
+        <value>
+          <b>true</b> if this group is a site collection group; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>A site collection group is stores the column-specific <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects for a specific site collection.The Group.Name generally indicates the site collection that the group is related to. Calling set on this property is not supported and is for internal use only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSystemGroup">
+      <MemberSignature Language="C#" Value="public bool IsSystemGroup { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSystemGroup" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Group.IsSystemGroup" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSystemGroup As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSystemGroup { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object is the system Group.</summary>
+        <value>
+          <b>true</b> if this Group is the system Group; otherwise, <b>false</b></value>
+        <remarks>
+          <para>The system group is the group where <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects that are used by the system are stored.An example is the <b>Keywords term set</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public override string Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Group.Name" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of this <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object.</summary>
+        <value>The name of this group</value>
+        <remarks>
+          <para>There is a single Group name across all LCIDs, and this name must be unique within the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object. The name cannot exceed 255 characters, and it cannot contain any of the following illegal character:  ; " &lt; &gt; | &amp; tab
+</para>
+          <para>The current user must have <b>TaxonomyRights.EditGroup</b> permission to set this property. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:System.ArgumentException">Group names must be unique.</exception>
+        <exception cref="T:System.ArgumentNullException">The name cannot be a null reference (Nothing in Visual Basic) or empty.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">Renaming a system Group is disallowed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SiteCollectionAccessIds">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Guid&gt; SiteCollectionAccessIds { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.List`1&lt;valuetype System.Guid&gt; SiteCollectionAccessIds" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Group.SiteCollectionAccessIds" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SiteCollectionAccessIds As List(Of Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::List&lt;Guid&gt; ^ SiteCollectionAccessIds { System::Collections::Generic::List&lt;Guid&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;System.Guid&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a list of SPSite IDs that have access to the local site collection group.</summary>
+        <value>Returns <see cref="T:System.Collections.Generic.List`1" />.</value>
+        <remarks>
+          <para>In order for a site collection to access its local group, it must be added the group. This list of site collection IDs indicates the set of <see cref="T:Microsoft.SharePoint.SPSite" />objects that have access to this site collection group. These IDs have no effect if this is not a local site collection group.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>public List&amp;lt;Guid&amp;gt; SiteCollectionAccessIds</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="SiteCollectionReadOnlyAccessUrls">
+      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;string&gt; SiteCollectionReadOnlyAccessUrls { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;string&gt; SiteCollectionReadOnlyAccessUrls" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Group.SiteCollectionReadOnlyAccessUrls" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SiteCollectionReadOnlyAccessUrls As ReadOnlyCollection(Of String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::ObjectModel::ReadOnlyCollection&lt;System::String ^&gt; ^ SiteCollectionReadOnlyAccessUrls { System::Collections::ObjectModel::ReadOnlyCollection&lt;System::String ^&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ObjectModel.ReadOnlyCollection&lt;System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a  list of URLs of site collections that have read-only access.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TermSets">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSetCollection TermSets { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.TermSetCollection TermSets" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Group.TermSets" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TermSets As TermSetCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::TermSetCollection ^ TermSets { Microsoft::SharePoint::Taxonomy::TermSetCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSetCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of the child TermSet instances of this Group</summary>
+        <value>A collection of the child TermSet instances of this Group</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

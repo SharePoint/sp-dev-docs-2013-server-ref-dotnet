@@ -1,0 +1,70 @@
+﻿<Type Name="NotifyHostEventArgs" FullName="Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs">
+  <TypeSignature Language="C#" Value="public class NotifyHostEventArgs : EventArgs" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit NotifyHostEventArgs extends System.EventArgs" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs" />
+  <TypeSignature Language="VB.NET" Value="Public Class NotifyHostEventArgs&#xA;Inherits EventArgs" />
+  <TypeSignature Language="C++ CLI" Value="public ref class NotifyHostEventArgs : EventArgs" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.EventArgs</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Used to send data from the hosted InfoPath form template to the Web page.</summary>
+    <remarks>
+      <para>If XML data is passed to the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control using the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, it is not validated before it is sent. Use the <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.SubmitToHost" /> event and a corresponding SubmitToHostAdapter data connection from the form to receive validated XML in the Web page.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>In the following example, the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control, XmlFormView1, is hosted in a custom Web page and contains a browser-enabled form template located on the same site. The <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" /> event of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control is used to populate a control, TextBox1, in the custom Web page.</para>
+      <code>Imports Microsoft.Office.InfoPath.Server.Controls
+Protected Sub XmlFormView1_NotifyHost(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.&lt;span class="label"&gt;NotifyHostEventArgs&lt;/span&gt;) Handles XmlFormView1.NotifyHost
+    TextBox1.Text = e.Notification.ToString()
+End Sub</code>
+      <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+      <code>Public Sub CTRL3_5_Clicked(ByVal sender As Object, ByVal e As ClickedEventArgs)
+    Dim myNav As XPathNavigator = Me.MainDataSource.CreateNavigator()
+    Me.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", Me.NamespaceManager).ToString())
+End Sub</code>
+      <code>using Microsoft.Office.InfoPath.Server.Controls
+protected void XmlFormView1_NotifyHost(object sender, &lt;span class="label"&gt;NotifyHostEventArgs&lt;/span&gt; e)
+{
+    TextBox1.Text = e.Notification.ToString();
+}</code>
+      <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+      <code>public void CTRL3_5_Clicked(object sender, ClickedEventArgs e)
+{
+    XPathNavigator myNav = this.MainDataSource.CreateNavigator();
+    this.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", this.NamespaceManager).ToString());
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="Notification">
+      <MemberSignature Language="C#" Value="public string Notification { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Notification" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs.Notification" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Notification As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Notification { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the string passed from the form to the Web page hosting the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs.Notification" /> property will be empty unless a string is passed from the form using the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object, available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace. For more information about this and other members of the <see cref="N:Microsoft.Office.InfoPath" /> namespace, see the Help installed with Visual Studio 2012.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

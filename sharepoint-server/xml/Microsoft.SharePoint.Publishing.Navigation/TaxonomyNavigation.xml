@@ -1,0 +1,654 @@
+﻿<Type Name="TaxonomyNavigation" FullName="Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation">
+  <TypeSignature Language="C#" Value="public static class TaxonomyNavigation" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit TaxonomyNavigation extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation" />
+  <TypeSignature Language="VB.NET" Value="Public Class TaxonomyNavigation" />
+  <TypeSignature Language="C++ CLI" Value="public ref class TaxonomyNavigation abstract sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ServerTypeId="F3724139-55ED-4C05-8576-2C3830831C10")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Provides common operations related to the managed navigation feature, friendly URLs, and the taxonomy navigation cache. </summary>
+    <remarks>
+      <para>The managed navigation feature enables the navigation menu for a website to be modeled by using a taxonomy <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object, as well as by providing a model for implementing friendly URLs for the website. The main classes for this feature are <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomyTermSetProvider" />, which drives the navigation menus; <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" />, which extends the taxonomy <b>TermSet</b> class with additional navigation-related properties, and the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings" /> class, which configures the settings. The <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation" /> static class provides additional general operations that are related to this feature.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The following example demonstrates creating a sample term set and then configuring a SharePoint web site to use Taxonomy navigation with the sample term set.</para>
+      <code>using System;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Taxonomy;
+using Microsoft.SharePoint.Publishing.Navigation;
+
+namespace NavigationDemos
+{
+    public class Class1
+    {
+        public static readonly Guid NavTermSetId = new Guid("&amp;lt;GUID&amp;gt;");
+        public static readonly Guid TaggingTermSetId = new Guid("&amp;lt;GUID&amp;gt;");
+
+        //Creates the sample term set. If it exists, it will be deleted
+        public static NavigationTermSet RecreateSampleNavTermSet(TaxonomySession taxonomySession, SPWeb web)
+        {
+            // Use the first TermStore in the list
+            if (taxonomySession.TermStores.Count == 0)
+                throw new InvalidOperationException("The Taxonomy Service is offline or missing");
+
+            TermStore termStore = taxonomySession.TermStores[0];
+
+            // Does the TermSet already exist?
+            TermSet existingTermSet = termStore.GetTermSet(NavTermSetId);
+
+            if (existingTermSet != null)
+            {
+                //If the TermSet exists, delete it.
+                existingTermSet.Delete();
+                termStore.CommitAll();
+            }
+
+            // Create a new TermSet
+            Group siteCollectionGroup = termStore.GetSiteCollectionGroup(web.Site);
+            TermSet termSet = siteCollectionGroup.CreateTermSet("Navigation Demo", NavTermSetId);
+            NavigationTermSet navTermSet = NavigationTermSet.GetAsResolvedByWeb(termSet, web,
+                StandardNavigationProviderNames.GlobalNavigationTaxonomyProvider);
+            navTermSet.IsNavigationTermSet = true;
+            navTermSet.TargetUrlForChildTerms.Value = "~site/Pages/Topics/Topic.aspx";
+            NavigationTerm term1 = navTermSet.CreateTerm("Term 1", NavigationLinkType.SimpleLink);
+            term1.SimpleLinkUrl = "http://www.bing.com/";
+            NavigationTerm term2 = navTermSet.CreateTerm("Term 2", NavigationLinkType.FriendlyUrl);
+            NavigationTerm term2a = term2.CreateTerm("Term 2 A", NavigationLinkType.FriendlyUrl);
+            NavigationTerm term2b = term2.CreateTerm("Term 2 B", NavigationLinkType.FriendlyUrl);
+            NavigationTerm term3 = navTermSet.CreateTerm("Term 3", NavigationLinkType.FriendlyUrl);
+            termStore.CommitAll();
+
+            return navTermSet;
+        }
+
+        //Configures the web site to use Taxonomy navigation with the sample term set.
+        public static NavigationTermSet SetUpSampleNavTermSet(TaxonomySession taxonomySession, SPWeb web)
+        {
+            NavigationTermSet termSet = RecreateSampleNavTermSet(taxonomySession, web);
+
+            // Clear out any old settings
+            WebNavigationSettings webNavigationSettings = new WebNavigationSettings(web);
+            webNavigationSettings.ResetToDefaults();
+            webNavigationSettings.GlobalNavigation.Source = StandardNavigationSource.TaxonomyProvider;
+            webNavigationSettings.GlobalNavigation.TermStoreId = termSet.TermStoreId;
+            webNavigationSettings.GlobalNavigation.TermSetId = termSet.Id;
+            webNavigationSettings.CurrentNavigation.Source = StandardNavigationSource.TaxonomyProvider;
+            webNavigationSettings.CurrentNavigation.TermStoreId = termSet.TermStoreId;
+            webNavigationSettings.CurrentNavigation.TermSetId = termSet.Id;
+            webNavigationSettings.Update(taxonomySession);
+            TaxonomyNavigation.FlushSiteFromCache(web.Site);
+
+            return termSet;
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="CacheConfig">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheConfig CacheConfig { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheConfig CacheConfig" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.CacheConfig" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property CacheConfig As TaxonomyNavigationCacheConfig" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::SharePoint::Publishing::Navigation::TaxonomyNavigationCacheConfig ^ CacheConfig { Microsoft::SharePoint::Publishing::Navigation::TaxonomyNavigationCacheConfig ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheConfig</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the configuration variables for the managed navigation feature.</summary>
+        <value>Configuration variables for managed navigation</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CacheStatistics">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics CacheStatistics { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics CacheStatistics" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.CacheStatistics" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property CacheStatistics As TaxonomyNavigationCacheStatistics" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::SharePoint::Publishing::Navigation::TaxonomyNavigationCacheStatistics ^ CacheStatistics { Microsoft::SharePoint::Publishing::Navigation::TaxonomyNavigationCacheStatistics ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the runtime statistics for the managed navigation feature.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTaxonomySessionForEdit">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Taxonomy.TaxonomySession CreateTaxonomySessionForEdit (Microsoft.SharePoint.SPWeb contextWeb);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Taxonomy.TaxonomySession CreateTaxonomySessionForEdit(class Microsoft.SharePoint.SPWeb contextWeb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.CreateTaxonomySessionForEdit(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CreateTaxonomySessionForEdit (contextWeb As SPWeb) As TaxonomySession" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Taxonomy::TaxonomySession ^ CreateTaxonomySessionForEdit(Microsoft::SharePoint::SPWeb ^ contextWeb);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TaxonomySession</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contextWeb" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="contextWeb">To be added.</param>
+        <summary>Constructs a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomySession" /> object to be used for editing navigation term sets. </summary>
+        <returns>A <b>TaxonomySession</b> object.</returns>
+        <remarks>
+          <para>Use this method when creating a <b>TaxonomySession</b> object that will be used to update a navigation term set.</para>
+          <para>The publishing "Pages" library is used as the context for site collection group permissions, and the <paramref name="updateCache" /> parameter of the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomySession" /> method is set to true to prepare for an editing operation. This method also configures the <see cref="P:Microsoft.SharePoint.Taxonomy.TermStore.WorkingLanguage" /> property for each <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object that uses the locale ID (LCID) that is obtained from the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetNavigationLcidForWeb(Microsoft.SharePoint.SPWeb)" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FlushAllCacheContents">
+      <MemberSignature Language="C#" Value="public static void FlushAllCacheContents (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void FlushAllCacheContents(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.FlushAllCacheContents(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub FlushAllCacheContents (site As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void FlushAllCacheContents(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object from which to remove all objects from the taxonomy navigation cache</param>
+        <summary>Removes all objects from the taxonomy navigation cache.</summary>
+        <remarks>
+          <para>This operation requires <see cref="M:Microsoft.SharePoint.Administration.SPFarm.CurrentUserIsAdministrator" /> permissions.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FlushSiteFromCache">
+      <MemberSignature Language="C#" Value="public static void FlushSiteFromCache (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void FlushSiteFromCache(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.FlushSiteFromCache(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub FlushSiteFromCache (site As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void FlushSiteFromCache(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <b>SPSite</b> object to discard rom the taxonomy navigation cache.</param>
+        <summary>Discards the specified <see cref="T:Microsoft.SharePoint.SPSite" /> object from the taxonomy navigation cache.</summary>
+        <remarks>
+          <para>
+            <b>Note</b>: The method does not flush any term sets owned by the <b>SPSite</b> object. Use the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.axonTomyNavigation.FlushTermSetFromCache" /> or the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.FlushAllCacheContents" /> method to do that.</para>
+          <para>This operation requires <see cref="P:Microsoft.SharePoint.SPSite.userIsSiteAdminInSystem" /> permissions.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FlushTermSetFromCache">
+      <MemberSignature Language="C#" Value="public static void FlushTermSetFromCache (Microsoft.SharePoint.SPWeb webForPermissions, Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet termSet);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void FlushTermSetFromCache(class Microsoft.SharePoint.SPWeb webForPermissions, class Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet termSet) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.FlushTermSetFromCache(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub FlushTermSetFromCache (webForPermissions As SPWeb, termSet As NavigationTermSet)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void FlushTermSetFromCache(Microsoft::SharePoint::SPWeb ^ webForPermissions, Microsoft::SharePoint::Publishing::Navigation::NavigationTermSet ^ termSet);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webForPermissions" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="termSet" Type="Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" />
+      </Parameters>
+      <Docs>
+        <param name="webForPermissions">To be added.</param>
+        <param name="termSet">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FlushTermSetFromCache">
+      <MemberSignature Language="C#" Value="public static void FlushTermSetFromCache (Microsoft.SharePoint.SPWeb webForPermissions, Microsoft.SharePoint.Taxonomy.TermSet termSet);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void FlushTermSetFromCache(class Microsoft.SharePoint.SPWeb webForPermissions, class Microsoft.SharePoint.Taxonomy.TermSet termSet) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.FlushTermSetFromCache(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.Taxonomy.TermSet)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void FlushTermSetFromCache(Microsoft::SharePoint::SPWeb ^ webForPermissions, Microsoft::SharePoint::Taxonomy::TermSet ^ termSet);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webForPermissions" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="termSet" Type="Microsoft.SharePoint.Taxonomy.TermSet" />
+      </Parameters>
+      <Docs>
+        <param name="webForPermissions">To be added.</param>
+        <param name="termSet">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FlushTermSetFromCache">
+      <MemberSignature Language="C#" Value="public static void FlushTermSetFromCache (Microsoft.SharePoint.SPWeb webForPermissions, Guid termStoreId, Guid termSetId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void FlushTermSetFromCache(class Microsoft.SharePoint.SPWeb webForPermissions, valuetype System.Guid termStoreId, valuetype System.Guid termSetId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.FlushTermSetFromCache(Microsoft.SharePoint.SPWeb,System.Guid,System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub FlushTermSetFromCache (webForPermissions As SPWeb, termStoreId As Guid, termSetId As Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void FlushTermSetFromCache(Microsoft::SharePoint::SPWeb ^ webForPermissions, Guid termStoreId, Guid termSetId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webForPermissions" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="termStoreId" Type="System.Guid" />
+        <Parameter Name="termSetId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="webForPermissions">A <see cref="T:Microsoft.SharePoint.SPWeb" /> object that provides the user identity for permissions checks and identifies the cache partition to be flushed.</param>
+        <param name="termStoreId">ID of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object that contains the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object to be flushed.</param>
+        <param name="termSetId">ID of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object to be flushed.</param>
+        <summary>Discards the specified <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object from the taxonomy navigation cache.</summary>
+        <remarks>
+          <para>This operation requires <see cref="F:Microsoft.SharePoint.SPBasePermissions.AddListItems" /> permissions.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FlushWebFromCache">
+      <MemberSignature Language="C#" Value="public static void FlushWebFromCache (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void FlushWebFromCache(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.FlushWebFromCache(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub FlushWebFromCache (web As SPWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void FlushWebFromCache(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">
+          <b>SPWeb</b> object to discard</param>
+        <summary>Discards the specified <see cref="T:Microsoft.SharePoint.SPWeb" /> object from the taxonomy navigation cache. </summary>
+        <remarks>
+          <para>
+            <b>Note</b>: The method does not flush any term sets owned by the <see cref="T:Microsoft.SharePoint.SPSite" />; use the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.FlushTermSetFromCache" /> method or the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.FlushAllCacheContents(Microsoft.SharePoint.SPSite)" /> method to do that.</para>
+          <para>This operation requires <see cref="F:Microsoft.SharePoint.SPBasePermissions.AddListItems" /> permissions.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFriendlyUrlsForListItem">
+      <MemberSignature Language="C#" Value="public static System.Collections.Generic.IList&lt;Microsoft.SharePoint.Publishing.Navigation.NavigationTerm&gt; GetFriendlyUrlsForListItem (Microsoft.SharePoint.SPListItem listItem, bool includeInheritedSettings);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.IList`1&lt;class Microsoft.SharePoint.Publishing.Navigation.NavigationTerm&gt; GetFriendlyUrlsForListItem(class Microsoft.SharePoint.SPListItem listItem, bool includeInheritedSettings) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetFriendlyUrlsForListItem(Microsoft.SharePoint.SPListItem,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetFriendlyUrlsForListItem (listItem As SPListItem, includeInheritedSettings As Boolean) As IList(Of NavigationTerm)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Collections::Generic::IList&lt;Microsoft::SharePoint::Publishing::Navigation::NavigationTerm ^&gt; ^ GetFriendlyUrlsForListItem(Microsoft::SharePoint::SPListItem ^ listItem, bool includeInheritedSettings);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IList&lt;Microsoft.SharePoint.Publishing.Navigation.NavigationTerm&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="listItem" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="includeInheritedSettings" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="listItem">To be added.</param>
+        <param name="includeInheritedSettings">To be added.</param>
+        <summary>Returns a list of friendly URLs that use the specified publishing page as their target page.</summary>
+        <returns>A list of friendly URLs that use the specified publishing page as their target page.</returns>
+        <remarks>
+          <para>This method searches for all of the friendly URLs that use the specified <see cref="T:Microsoft.SharePoint.SPListItem" /> objects as their <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.TargetUrl" />. It returns a list of term-driven nodes where the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.GetResolvedTargetUrlWithoutQuery" /> method matches the specified <b>SPListItem</b> object. The search considers all active <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomySiteMapProvider" /> objects. It does not return nodes with friendly URLs that have been eclipsed by another term with the same friendly URL due to a naming conflict.</para>
+          <para>The returned nodes are always of type <see cref="F:Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType.FriendlyUrl" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetNavigationLcidForWeb">
+      <MemberSignature Language="C#" Value="public static int GetNavigationLcidForWeb (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig int32 GetNavigationLcidForWeb(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetNavigationLcidForWeb(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetNavigationLcidForWeb (web As SPWeb) As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static int GetNavigationLcidForWeb(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">
+          <b>SPWeb</b> object from which to read a term</param>
+        <summary>Returns the language code identifier (LCID) that the taxonomy navigation system will use when it reads the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object for the specified <see cref="T:Microsoft.SharePoint.SPWeb" /> object.</summary>
+        <returns>LCID</returns>
+        <remarks>
+          <para>The <see cref="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetNavigationLcidForWeb(Microsoft.SharePoint.SPWeb)" /> method should be assigned as the <see cref="P:Microsoft.SharePoint.Taxonomy.TermStore.WorkingLanguage" /> property when making changes to the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> object. If the variations feature is active, then this method is based on the <see cref="P:Microsoft.SharePoint.Publishing.VariationLabel.Locale" /> property. Otherwise, it returns the <see cref="P:Microsoft.SharePoint.SPWeb.Language" /> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPageUrlForFriendlyUrl">
+      <MemberSignature Language="C#" Value="public static string GetPageUrlForFriendlyUrl (Microsoft.SharePoint.SPSite contextSite, string inputUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetPageUrlForFriendlyUrl(class Microsoft.SharePoint.SPSite contextSite, string inputUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetPageUrlForFriendlyUrl(Microsoft.SharePoint.SPSite,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetPageUrlForFriendlyUrl (contextSite As SPSite, inputUrl As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetPageUrlForFriendlyUrl(Microsoft::SharePoint::SPSite ^ contextSite, System::String ^ inputUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contextSite" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="inputUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="contextSite">To be added.</param>
+        <param name="inputUrl">Input URL to test</param>
+        <summary>Returns a target page URL if the input URL is a friendly URL.</summary>
+        <returns>If the input is a friendly URL, a server-relative URL without any query parameters; otherwise, an empty string.</returns>
+        <remarks>
+          <para>If the <paramref name="inputURL" /> parameter is a friendly URL, this method returns its server-relative target URL without any query parameters. The returned data can be used to open the <see cref="T:Microsoft.SharePoint.SPListItem" /> object. If the <paramref name="inputURL" /> parameter is not a friendly URL, then an empty string is returned. This method does not return a null reference (Nothing in Visual Basic).</para>
+          <para>The <paramref name="inputURL" /> must belong to the context site, and it must be a server-relative or absolute URL.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTargetForRootFriendlyUrl">
+      <MemberSignature Language="C#" Value="public static string GetTargetForRootFriendlyUrl (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetTargetForRootFriendlyUrl(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetTargetForRootFriendlyUrl(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetTargetForRootFriendlyUrl (web As SPWeb) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetTargetForRootFriendlyUrl(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">The <b>SPWeb</b> object to check</param>
+        <summary>Returns the target page as a server-relative URL when the specified <see cref="T:Microsoft.SharePoint.SPWeb" /> is configured to use a root-friendly URL.</summary>
+        <returns>If the specified <b>SPWeb</b> object is configured to use a root-friendly URL, then the target page as a server-relative URL; otherwise, an empty string </returns>
+        <remarks>
+          <para>The root-friendly URL is a site URL that renders the Welcome Page by using URL rewriting instead of redirecting to the URL of the Welcome Page. For example, if the Welcome Page is configured as http://example.com/Pages/Default.aspx, then the corresponding root friendly URL is http://example.com. If managed navigation is not enabled, then the server renders http://example.com as a 302 redirect to the welcome page.</para>
+          <para>The return value is never a null reference (Nothing in Visual Basic).</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTermSetForWeb">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet GetTermSetForWeb (Microsoft.SharePoint.SPWeb web, string siteMapProviderName, bool includeInheritedSettings);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet GetTermSetForWeb(class Microsoft.SharePoint.SPWeb web, string siteMapProviderName, bool includeInheritedSettings) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetTermSetForWeb(Microsoft.SharePoint.SPWeb,System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetTermSetForWeb (web As SPWeb, siteMapProviderName As String, includeInheritedSettings As Boolean) As NavigationTermSet" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::Navigation::NavigationTermSet ^ GetTermSetForWeb(Microsoft::SharePoint::SPWeb ^ web, System::String ^ siteMapProviderName, bool includeInheritedSettings);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="siteMapProviderName" Type="System.String" />
+        <Parameter Name="includeInheritedSettings" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="web">The site whose navigation settings should be queried.</param>
+        <param name="siteMapProviderName">The name of the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomySiteMapProvider" /> instance as defined by the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationProviderNames" /> object.</param>
+        <param name="includeInheritedSettings">Specifies whether the parent <b>SPWeb</b> objects should be considered if the <b>SiteMapProvider</b> is configured to inherit its settings via the <b>StandardNavigationSource.InheritFromParentWeb</b> enumeration; otherwise, null is returned when these configurations are encountered.</param>
+        <summary>Returns efficiently from the taxonomy navigation cache a read-only instance of a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> object for the specified <see cref="T:Microsoft.SharePoint.SPWeb" /> object. </summary>
+        <returns>A <b>NavigationTermSet</b> object for the specified <b>SPWeb</b> object if managed navigation is configured for the site; otherwise, a null reference (Nothing in Visual Basic).</returns>
+        <remarks>
+          <para>If the <b>NavigationTermSet</b> object is not already in the cache, returning it may involve loading the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings" /> object from <see cref="P:Microsoft.SharePoint.SPWeb.Properties" /> and then loading the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" />.object. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetWebNavigationSettings">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings GetWebNavigationSettings (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings GetWebNavigationSettings(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetWebNavigationSettings(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetWebNavigationSettings (web As SPWeb) As WebNavigationSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::Navigation::WebNavigationSettings ^ GetWebNavigationSettings(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">
+          <b>SPWeb</b> object from which to return a <b>WebNavigationSettings</b>object. </param>
+        <summary>Returns the navigation settings for the specified <see cref="T:Microsoft.SharePoint.SPWeb" /> object as a read-only instance of the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings" /> class that is efficiently obtained from the taxonomy navigation cache.</summary>
+        <returns>A read-only, cached <b>WebNavigationSettings</b> object.</returns>
+        <remarks>
+          <para>Since this object is fetched from the cache, the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetWebNavigationSettings(Microsoft.SharePoint.SPWeb)" /> method is more efficient than calling the constructor for the <b>WebNavigationSettings</b> object. If the <b>WebNavigationSettings</b> object is not already in the cache, the system adds it. However, if the settings were recently changed during the same HTTP request, the returned settings may be out of data until the cache has been refreshed.</para>
+          <para>The <b>GetWebNavigationSettings(Microsoft.SharePoint.SPWeb)</b> method returns null if there are no settings defined in the <see cref="T:Microsoft.SharePoint.SPWeb" /> object, or if the settings are invalid.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsValidTargetForRootFriendlyUrl">
+      <MemberSignature Language="C#" Value="public static bool IsValidTargetForRootFriendlyUrl (Microsoft.SharePoint.SPWeb web, string serverRelativeUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsValidTargetForRootFriendlyUrl(class Microsoft.SharePoint.SPWeb web, string serverRelativeUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.IsValidTargetForRootFriendlyUrl(Microsoft.SharePoint.SPWeb,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsValidTargetForRootFriendlyUrl (web As SPWeb, serverRelativeUrl As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsValidTargetForRootFriendlyUrl(Microsoft::SharePoint::SPWeb ^ web, System::String ^ serverRelativeUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="serverRelativeUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="web">The <b>SPWeb</b> object to test.</param>
+        <param name="serverRelativeUrl">The server-relative URL to test.</param>
+        <summary>Returns a value that indicates whether a specified server-relative URL can be used as the Welcome Page for the root-friendly URL.</summary>
+        <returns>Returns <b>true</b> of the specified URL can be used as the target URL for the specified <b>SPWeb</b> object; otherwise, <b>false</b></returns>
+        <remarks>
+          <para>The following tests are performed:</para>
+          <para />
+          <list type="bullet">
+            <item>
+              <description>The page must exist.</description>
+            </item>
+            <item>
+              <description>The page must belong to the specified <b>SPWeb</b>.</description>
+            </item>
+            <item>
+              <description>The page must be in the "Pages" library.</description>
+            </item>
+            <item>
+              <description>The page must have a published version.</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetCrawlAsFriendlyUrlPage">
+      <MemberSignature Language="C#" Value="public static bool SetCrawlAsFriendlyUrlPage (Microsoft.SharePoint.Publishing.Navigation.NavigationTerm navigationTerm, bool crawlAsFriendlyUrlPage);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool SetCrawlAsFriendlyUrlPage(class Microsoft.SharePoint.Publishing.Navigation.NavigationTerm navigationTerm, bool crawlAsFriendlyUrlPage) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.SetCrawlAsFriendlyUrlPage(Microsoft.SharePoint.Publishing.Navigation.NavigationTerm,System.Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool SetCrawlAsFriendlyUrlPage(Microsoft::SharePoint::Publishing::Navigation::NavigationTerm ^ navigationTerm, bool crawlAsFriendlyUrlPage);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="navigationTerm" Type="Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" />
+        <Parameter Name="crawlAsFriendlyUrlPage" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="navigationTerm">
+          <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object to specify</param>
+        <param name="crawlAsFriendlyUrlPage">The <b>CrawlAsFriendlyUrlPage</b> to update</param>
+        <summary>Updates the <b>CrawlAsFriendlyUrlPage</b> flag on the <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object that is pointed to by the <paramref name="navigationTerm" /> parameter with the specified value.</summary>
+        <returns>
+          <b>true</b> if the update to the target <b>PublishingPage</b> object was successful or if the page property was already in the specified state; otherwise, <b>false</b>.</returns>
+        <remarks>
+          <para>This method assigns a Boolean property that is stored with the specified publishing page. If this property is <b>true</b>, then the search crawler omits the physical URL of the page from the search index because the search index already contains one or more friendly URLs for the page. If this property is <b>false</b>, then the page is indexed in the normal manner.</para>
+          <para>If this method returns false, the <paramref name="navigationTerm" /> parameter is a null reference (Nothing in Visual Basic), the <paramref name="navigationTerm" /> parameter is not a friendly URL, the target page is invalid, the target page cannot be found, the caller does not have permissions to perform the change, or related reasons.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TryParseFriendlyUrl">
+      <MemberSignature Language="C#" Value="public static bool TryParseFriendlyUrl (Microsoft.SharePoint.SPSite site, string inputUrl, out Microsoft.SharePoint.Publishing.Navigation.NavigationTerm friendlyUrlTerm, out string[] catalogUrlSegments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool TryParseFriendlyUrl(class Microsoft.SharePoint.SPSite site, string inputUrl, [out] class Microsoft.SharePoint.Publishing.Navigation.NavigationTerm&amp; friendlyUrlTerm, [out] string[]&amp; catalogUrlSegments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.TryParseFriendlyUrl(Microsoft.SharePoint.SPSite,System.String,Microsoft.SharePoint.Publishing.Navigation.NavigationTerm@,System.String[]@)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function TryParseFriendlyUrl (site As SPSite, inputUrl As String, ByRef friendlyUrlTerm As NavigationTerm, ByRef catalogUrlSegments As String()) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool TryParseFriendlyUrl(Microsoft::SharePoint::SPSite ^ site, System::String ^ inputUrl, [Runtime::InteropServices::Out] Microsoft::SharePoint::Publishing::Navigation::NavigationTerm ^ % friendlyUrlTerm, [Runtime::InteropServices::Out] cli::array &lt;System::String ^&gt; ^ % catalogUrlSegments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="inputUrl" Type="System.String" />
+        <Parameter Name="friendlyUrlTerm" Type="Microsoft.SharePoint.Publishing.Navigation.NavigationTerm&amp;" RefType="out" />
+        <Parameter Name="catalogUrlSegments" Type="System.String[]&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" />object that the URL belongs to.</param>
+        <param name="inputUrl">The URL to be parsed in absolute or server-relative form.</param>
+        <param name="friendlyUrlTerm">For a root friendly URL (that is, one based on the site welcome page), this output is a null reference (Nothing in Visual Basic). For a friendly URL or a catalog friendly URL, it returns the term that  defines it. This parameter is onlymeaningful when the function returns <b>true</b>. </param>
+        <param name="catalogUrlSegments">If the input URL is a catalog friendly URL, then this output array reports the additional URL segments. If the input URL is a regular friendly URL, then the array will have zero elements. If the function returns <b>false</b>, then the array has zero elements.</param>
+        <summary>Parses the specified absolute URL or server-relative URL  to determine whether it is a friendly URL, a catalog friendly URL, or a root friendly URL.</summary>
+        <returns>
+          <b>true</b> if the URL is a friendly URL, catalog-friendly URL, or root URL; otherwise, <b>false</b></returns>
+        <remarks>
+          <para>If the URL is a friendly URL, a catalog friendly URL, or a root friendly URL, then this method returns <b>true</b> and assigns the output parameters; otherwise, it returns <b>false</b>. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

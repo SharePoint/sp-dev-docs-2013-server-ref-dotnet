@@ -1,0 +1,118 @@
+﻿<Type Name="SocialDataManager" FullName="Microsoft.Office.Server.SocialData.SocialDataManager">
+  <TypeSignature Language="C#" Value="public abstract class SocialDataManager" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit SocialDataManager extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.SocialData.SocialDataManager" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class SocialDataManager" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SocialDataManager abstract" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents an abstract base class that contains methods and properties that enable you to add, delete, retrieve, and manage social data.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="GetBulkUserProfiles">
+      <MemberSignature Language="C#" Value="protected System.Collections.Generic.List&lt;Microsoft.Office.Server.UserProfiles.UserProfile&gt; GetBulkUserProfiles (System.Collections.Generic.List&lt;long&gt; rgUserRecordIds);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance class System.Collections.Generic.List`1&lt;class Microsoft.Office.Server.UserProfiles.UserProfile&gt; GetBulkUserProfiles(class System.Collections.Generic.List`1&lt;int64&gt; rgUserRecordIds) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialDataManager.GetBulkUserProfiles(System.Collections.Generic.List{System.Int64})" />
+      <MemberSignature Language="VB.NET" Value="Protected Function GetBulkUserProfiles (rgUserRecordIds As List(Of Long)) As List(Of UserProfile)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; System::Collections::Generic::List&lt;Microsoft::Office::Server::UserProfiles::UserProfile ^&gt; ^ GetBulkUserProfiles(System::Collections::Generic::List&lt;long&gt; ^ rgUserRecordIds);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.Office.Server.UserProfiles.UserProfile&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rgUserRecordIds" Type="System.Collections.Generic.List&lt;System.Int64&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="rgUserRecordIds">A <see cref="T:System.Collections.Generic.List" /> of record IDs corresponding to the user record IDs that are to be returned.</param>
+        <summary>Retrieves a list of user profiles corresponding to the specified list of user record IDs.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetBulkUserProfiles">
+      <MemberSignature Language="C#" Value="protected System.Collections.Generic.List&lt;Microsoft.Office.Server.UserProfiles.UserProfile&gt; GetBulkUserProfiles (System.Collections.Generic.List&lt;long&gt; rgUserRecordIds, bool includeNullsForUnresolvableUsers);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance class System.Collections.Generic.List`1&lt;class Microsoft.Office.Server.UserProfiles.UserProfile&gt; GetBulkUserProfiles(class System.Collections.Generic.List`1&lt;int64&gt; rgUserRecordIds, bool includeNullsForUnresolvableUsers) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialDataManager.GetBulkUserProfiles(System.Collections.Generic.List{System.Int64},System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Protected Function GetBulkUserProfiles (rgUserRecordIds As List(Of Long), includeNullsForUnresolvableUsers As Boolean) As List(Of UserProfile)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; System::Collections::Generic::List&lt;Microsoft::Office::Server::UserProfiles::UserProfile ^&gt; ^ GetBulkUserProfiles(System::Collections::Generic::List&lt;long&gt; ^ rgUserRecordIds, bool includeNullsForUnresolvableUsers);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.Office.Server.UserProfiles.UserProfile&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rgUserRecordIds" Type="System.Collections.Generic.List&lt;System.Int64&gt;" />
+        <Parameter Name="includeNullsForUnresolvableUsers" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="rgUserRecordIds">A <see cref="T:System.Collections.Generic.List" /> of record IDs corresponding to the user record IDs that are to be returned.</param>
+        <param name="includeNullsForUnresolvableUsers">A Boolean value specifying whether a a null reference (Nothing in Visual Basic) value will be returned for each record ID whenever a corresponding user profile is not found. This value is true by default.</param>
+        <summary>Retrieves a list of user profiles corresponding to the specified list of user record IDs. </summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>If <paramref name="includeNullsForUnresolvableUsers" /> is <b>true</b> (its default value), this method returns the same number of user profiles as the number of specified user record IDs. A a null reference (Nothing in Visual Basic) value is returned for every record ID that does not have a corresponding user profile. If <paramref name="includeNullsForUnresolvableUsers" /> is <b>false</b>, then no value will be returned whenever a user profile is not found, and as a side effect the order of the user record IDs will not be maintained.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserProfile">
+      <MemberSignature Language="C#" Value="protected Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile (long recordID);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile(int64 recordID) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialDataManager.GetUserProfile(System.Int64)" />
+      <MemberSignature Language="VB.NET" Value="Protected Function GetUserProfile (recordID As Long) As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ GetUserProfile(long recordID);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recordID" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="recordID">To be added.</param>
+        <summary>Retrieves a user profile corresponding to the specified user record ID.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSocialAdmin">
+      <MemberSignature Language="C#" Value="public bool IsSocialAdmin { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSocialAdmin" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.SocialData.SocialDataManager.IsSocialAdmin" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSocialAdmin As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSocialAdmin { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

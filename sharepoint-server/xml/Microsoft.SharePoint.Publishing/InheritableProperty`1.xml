@@ -1,0 +1,300 @@
+﻿<Type Name="InheritableProperty&lt;TValueType&gt;" FullName="Microsoft.SharePoint.Publishing.InheritableProperty&lt;TValueType&gt;">
+  <TypeSignature Language="C#" Value="public abstract class InheritableProperty&lt;TValueType&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit InheritableProperty`1&lt;TValueType&gt; extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.InheritableProperty`1" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class InheritableProperty(Of TValueType)" />
+  <TypeSignature Language="C++ CLI" Value="generic &lt;typename TValueType&gt;&#xA;public ref class InheritableProperty abstract" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter Name="TValueType" />
+  </TypeParameters>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <typeparam name="TValueType">Base type of the inheritable property. Examples include values such as <paramref name="string" /> and <paramref name="int" />.</typeparam>
+    <summary>Base class for inheritable properties on the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> class.</summary>
+    <remarks>
+      <para>Used to simulate inheritable properties on instances of <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> objects. For example, <b>CustomMasterUrl</b> is not a derived property on an <b>SPWeb</b> object. However, the <b>CustomMasterUrl</b> property on a <b>PublishingWeb</b> is a derived property. The <b>InheritableProperty`1</b> class adds support that pushes properties down to subwebs that are set to inherit the parent Web property. This class also allows the hierarchy below a current Web to be reset.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="GetDirectValue">
+      <MemberSignature Language="C#" Value="protected abstract TValueType GetDirectValue (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance !TValueType GetDirectValue(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.InheritableProperty`1.GetDirectValue(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Function GetDirectValue (web As SPWeb) As TValueType" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract TValueType GetDirectValue(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>TValueType</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">
+          <b>PublishingWeb</b> object from which to get the property value.</param>
+        <summary>Gets the property value directly from the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object.</summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>This abstract method needs to be over-ridden in an inherited class.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="InheritFlagPropertyName">
+      <MemberSignature Language="C#" Value="protected abstract string InheritFlagPropertyName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string InheritFlagPropertyName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.InheritableProperty`1.InheritFlagPropertyName" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride ReadOnly Property InheritFlagPropertyName As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract property System::String ^ InheritFlagPropertyName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of the property flag to inherit.</summary>
+        <value>A string that specifies the name of the property flag to inherit.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsInheriting">
+      <MemberSignature Language="C#" Value="public bool IsInheriting { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsInheriting" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.InheritableProperty`1.IsInheriting" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsInheriting As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsInheriting { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Indicates whether this property is inheriting its value from the parent <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>
+            <b>true</b> if the <b>PublishingWeb</b> object  inherits its value, <b>PublishingWeb</b> object; otherwise, <b>false</b></para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetDirectValue">
+      <MemberSignature Language="C#" Value="protected abstract void SetDirectValue (TValueType value, Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void SetDirectValue(!TValueType value, class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.InheritableProperty`1.SetDirectValue(`0,Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Sub SetDirectValue (value As TValueType, web As SPWeb)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract void SetDirectValue(TValueType value, Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="TValueType" />
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="value">Property value being set on the target <b>PublishingWeb</b> object.</param>
+        <param name="web">
+          <b>PublishingWeb</b> object upon which to set the property value.</param>
+        <summary>Sets the property value directly to the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object.</summary>
+        <remarks>
+          <para>This abstract method needs to be over-ridden in an inherited class.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetInherit">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob SetInherit (bool inherit, bool forceAllSubWebInherit);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob SetInherit(bool inherit, bool forceAllSubWebInherit) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.InheritableProperty`1.SetInherit(System.Boolean,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function SetInherit (inherit As Boolean, forceAllSubWebInherit As Boolean) As LongRunningOperationJob" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Internal::LongRunningOperationJob ^ SetInherit(bool inherit, bool forceAllSubWebInherit);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="inherit" Type="System.Boolean" />
+        <Parameter Name="forceAllSubWebInherit" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="inherit">
+          <b>true</b> to inherit; otherwise, <b>false</b>.</param>
+        <param name="forceAllSubWebInherit">Forces all subsites to inherit this value, even if the property on a subsite currently does not inherit.</param>
+        <summary>Sets the flag to indicate whether this property inherits its value from its parent site.</summary>
+        <returns>A flag indicating whether this property inherits its value from its parent site.</returns>
+        <remarks>
+          <para>This method sets the inheritance of a <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object. The current user must have permissions to set the inheritance value for the current <b>PublishingWeb</b> object. If there are child <b>PublishingWeb</b> objects set to inherit, they are updated with the new values regardless of whether the current user has permissions to modify the child <b>PublishingWeb</b> objects. </para>
+          <para>If <b>forceAllSubWebInherit</b> is set to <b>True</b>, the current user must have permissions to modify any child <b>PublishingWeb</b> objects that are marked as inheriting. When breaking inheritance, the currently inherited value is kept.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetInherit">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob SetInherit (bool inherit, bool forceAllSubWebInherit, string successUrl, string failureUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob SetInherit(bool inherit, bool forceAllSubWebInherit, string successUrl, string failureUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.InheritableProperty`1.SetInherit(System.Boolean,System.Boolean,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function SetInherit (inherit As Boolean, forceAllSubWebInherit As Boolean, successUrl As String, failureUrl As String) As LongRunningOperationJob" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Internal::LongRunningOperationJob ^ SetInherit(bool inherit, bool forceAllSubWebInherit, System::String ^ successUrl, System::String ^ failureUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="inherit" Type="System.Boolean" />
+        <Parameter Name="forceAllSubWebInherit" Type="System.Boolean" />
+        <Parameter Name="successUrl" Type="System.String" />
+        <Parameter Name="failureUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="inherit">
+          <b>true</b> to inherit; otherwise, <b>false</b>.</param>
+        <param name="forceAllSubWebInherit">Forces all subsites to inherit this value, even if the property on a subsite currently does not inherit.</param>
+        <param name="successUrl">A string that specifies the Url indicating success.</param>
+        <param name="failureUrl">A string that specifies the Url indicating failure.</param>
+        <summary>Sets the flag to indicate whether this property inherits its value from its parent site.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetValue">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob SetValue (TValueType value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob SetValue(!TValueType value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.InheritableProperty`1.SetValue(`0)" />
+      <MemberSignature Language="VB.NET" Value="Public Function SetValue (value As TValueType) As LongRunningOperationJob" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Internal::LongRunningOperationJob ^ SetValue(TValueType value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="TValueType" />
+      </Parameters>
+      <Docs>
+        <param name="value">The property value set by this method.</param>
+        <summary>Sets the value of this property.</summary>
+        <returns>A <b>LongRunningOperationJob</b> object.</returns>
+        <remarks>
+          <para>This method sets the value of the property on the current <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object. If there are child <b>PublishingWeb</b> objects set to inherit, all changes are propagated to the child <b>PublishingWeb</b> objects. The current user must have permissions to modify the parent <b>PublishingWeb</b> object, but does not need permissions to modify child <b>PublishingWeb</b> objects that are marked as inheriting. This operation may be asynchronous if subsites exist under the current site.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetValue">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob SetValue (TValueType value, bool forceAllSubWebInherit);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob SetValue(!TValueType value, bool forceAllSubWebInherit) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.InheritableProperty`1.SetValue(`0,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function SetValue (value As TValueType, forceAllSubWebInherit As Boolean) As LongRunningOperationJob" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Internal::LongRunningOperationJob ^ SetValue(TValueType value, bool forceAllSubWebInherit);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="TValueType" />
+        <Parameter Name="forceAllSubWebInherit" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="value">The property value set by this method. </param>
+        <param name="forceAllSubWebInherit">Forces all subsites to inherit this value, even if the property on a subsite currently does not inherit.</param>
+        <summary>Set value of this property.</summary>
+        <returns>A <b>LongRunningOperationJob</b> object.</returns>
+        <remarks>
+          <para>This method sets the value of the current <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object, and forces all child <b>PublishingWeb</b> objects to inherit the new value if the <b>forceAllSubWebInherit</b> parameter is set to <b>True</b>. If the <b>forceAllSubWebInherit</b> parameter is set to <b>TRUE</b>, the user must have permissions to modify any child <b>PublishingWeb</b> objects that are marked as inheriting. This operation may be asynchronous if there subsites exist under the current site.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetValue">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob SetValue (TValueType value, bool forceAllSubWebInherit, string successUrl, string failureUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob SetValue(!TValueType value, bool forceAllSubWebInherit, string successUrl, string failureUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.InheritableProperty`1.SetValue(`0,System.Boolean,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function SetValue (value As TValueType, forceAllSubWebInherit As Boolean, successUrl As String, failureUrl As String) As LongRunningOperationJob" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Internal::LongRunningOperationJob ^ SetValue(TValueType value, bool forceAllSubWebInherit, System::String ^ successUrl, System::String ^ failureUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="TValueType" />
+        <Parameter Name="forceAllSubWebInherit" Type="System.Boolean" />
+        <Parameter Name="successUrl" Type="System.String" />
+        <Parameter Name="failureUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="value">To be added.</param>
+        <param name="forceAllSubWebInherit">To be added.</param>
+        <param name="successUrl">To be added.</param>
+        <param name="failureUrl">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Value">
+      <MemberSignature Language="C#" Value="public TValueType Value { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance !TValueType Value" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.InheritableProperty`1.Value" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Value As TValueType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property TValueType Value { TValueType get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>TValueType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the value of the property.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>This returns the effective value of the property on this <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

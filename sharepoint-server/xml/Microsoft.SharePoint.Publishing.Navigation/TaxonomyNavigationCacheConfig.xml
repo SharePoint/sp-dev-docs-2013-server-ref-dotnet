@@ -1,0 +1,98 @@
+﻿<Type Name="TaxonomyNavigationCacheConfig" FullName="Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheConfig">
+  <TypeSignature Language="C#" Value="public sealed class TaxonomyNavigationCacheConfig" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit TaxonomyNavigationCacheConfig extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheConfig" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class TaxonomyNavigationCacheConfig" />
+  <TypeSignature Language="C++ CLI" Value="public ref class TaxonomyNavigationCacheConfig sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Manages configuration parameters for a taxonomy navigation cache.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TaxonomyNavigationCacheConfig ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheConfig.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; TaxonomyNavigationCacheConfig();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheConfig" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaximumCacheSizeInBytes">
+      <MemberSignature Language="C#" Value="public long MaximumCacheSizeInBytes { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 MaximumCacheSizeInBytes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheConfig.MaximumCacheSizeInBytes" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaximumCacheSizeInBytes As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property long MaximumCacheSizeInBytes { long get(); void set(long value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(20971520)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a long integer that specifies the maximum size for the taxonomy navigation cache.</summary>
+        <value>A long integer that specifies the maximum size for the taxonomy navigation cache (i.e., the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.CurrentCachedBytes" /> property.</value>
+        <remarks>
+          <para>The value of this property sets the maximum size for the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheStatistics.CurrentCachedBytes" /> property. The maximum size is not a hard limit. The limit can be exceeded temporarily until the next cache pruning operation. It is legal to specify zero as the limit, in which case all objects are freed whenever the pruning operation occurs. </para>
+          <para>This property is thread safe. A separate state is stored for each SharePoint server instance.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UsePersistedTermSets">
+      <MemberSignature Language="C#" Value="public bool UsePersistedTermSets { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UsePersistedTermSets" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigationCacheConfig.UsePersistedTermSets" />
+      <MemberSignature Language="VB.NET" Value="Public Property UsePersistedTermSets As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UsePersistedTermSets { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value that indicates whether persisted term sets are used.</summary>
+        <value>
+          <b>true</b> to load the managed navigation data from a persisted term set when the managed metadata service (MMS) is offline; otherwise, <b>false</b></value>
+        <remarks>
+          <para>If the value is <b>true</b>, when the managed metadata service is offline the taxonomy navigation component will try to load persisted <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects that are saved by the persisted navigation term set synchronization timer job.
+</para>
+          <para>This property is thread safe. A separate state is stored for each <see cref="T:Microsoft.SharePoint.Administration.SPServer" /> instance.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

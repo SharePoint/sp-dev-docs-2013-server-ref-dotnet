@@ -1,0 +1,91 @@
+﻿<Type Name="InitializeEventArgs" FullName="Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs">
+  <TypeSignature Language="C#" Value="public sealed class InitializeEventArgs : EventArgs" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit InitializeEventArgs extends System.EventArgs" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class InitializeEventArgs&#xA;Inherits EventArgs" />
+  <TypeSignature Language="C++ CLI" Value="public ref class InitializeEventArgs sealed : EventArgs" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.EventArgs</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Used to set <see cref="P:Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs.InputParameters" /> of an InfoPath form template hosted in the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</summary>
+    <remarks>
+      <para>For more information about using query and input parameters, see How To: Use Query Parameters to Invoke Browser-Enabled InfoPath Forms.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>In the following example, the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs.InputParameters" /> property is used in the <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Initialize" /> event of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control to create a name/value pair indicating the department name.</para>
+      <code>Protected Sub XmlFormView1_Initialize(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs) Handles XmlFormView1.Initialize
+    e.&lt;span class="label"&gt;InputParameters&lt;/span&gt;("Dept") = "Accounting"
+End Sub</code>
+      <para>To use this input parameter in form code, use the <see cref="P:Microsoft.Office.InfoPath.LoadingEventArgs.InputParameters" /> property of the <see cref="T:Microsoft.Office.InfoPath.LoadingEventArgs" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace. For example, the value set in the XmlFormView1 initialization event is used to set a field's value in the form.</para>
+      <code>Public Sub FormEvents_Loading(ByVal sender As Object, ByVal e As LoadingEventArgs)
+    Dim MyNav As XPathNavigator
+    MyNav = Me.MainDataSource.CreateNavigator()
+    MyNav.SelectSingleNode("/my:myFields/my:field2", Me.NamespaceManager).SetValue(e.InputParameters("Dept").ToString())
+End Sub</code>
+      <code>protected void XmlFormView1_Initialize(object sender, InitializeEventArgs e)
+{
+    e.&lt;span class="label"&gt;InputParameters&lt;/span&gt;["Dept"] = "Accounting";
+}</code>
+      <para>To use this input parameter in form code, use the <see cref="P:Microsoft.Office.InfoPath.LoadingEventArgs.InputParameters" /> property of the <see cref="T:Microsoft.Office.InfoPath.LoadingEventArgs" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace. For example, the value set in the XmlFormView1 initialization event is used to set a field's value in the form.</para>
+      <code>public void FormEvents_Loading(object sender, LoadingEventArgs e)
+{
+    XPathNavigator myNav = this.MainDataSource.CreateNavigator();
+    myNav.SelectSingleNode("/my:myFields/my:field2", this.NamespaceManager).SetValue(e.InputParameters["Dept"].ToString());
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="InputParameters">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.Dictionary&lt;string,string&gt; InputParameters { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.Dictionary`2&lt;string, string&gt; InputParameters" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs.InputParameters" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property InputParameters As Dictionary(Of String, String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::Dictionary&lt;System::String ^, System::String ^&gt; ^ InputParameters { System::Collections::Generic::Dictionary&lt;System::String ^, System::String ^&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.Dictionary&lt;System.String,System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Sets name/value pairs for use as custom parameters that can be used in the form being initialized in the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>For more information about query and input parameters, see How To: Use Query Parameters to Invoke Browser-Enabled InfoPath Forms.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>In the following example, the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs.InputParameters" /> property is used in the <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.Initialize" /> event of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control to create a name/value pair indicating the department name.</para>
+          <code>Protected Sub XmlFormView1_Initialize(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.InitializeEventArgs) Handles XmlFormView1.Initialize
+    e.&lt;span class="label"&gt;InputParameters&lt;/span&gt;("Dept") = "Accounting"
+End Sub</code>
+          <para>To use this input parameter in form code, use the <see cref="P:Microsoft.Office.InfoPath.LoadingEventArgs.InputParameters" /> property of the <see cref="T:Microsoft.Office.InfoPath.LoadingEventArgs" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace. For example, the value set in the XmlFormView1 initialization event is used to set a field's value in the form.</para>
+          <code>Public Sub FormEvents_Loading(ByVal sender As Object, ByVal e As LoadingEventArgs)
+    Dim MyNav As XPathNavigator
+    MyNav = Me.MainDataSource.CreateNavigator()
+    MyNav.SelectSingleNode("/my:myFields/my:field2", Me.NamespaceManager).SetValue(e.InputParameters("Dept").ToString())
+End Sub</code>
+          <code>protected void XmlFormView1_Initialize(object sender, InitializeEventArgs e)
+{
+    e.&lt;span class="label"&gt;InputParameters&lt;/span&gt;["Dept"] = "Accounting";
+}</code>
+          <para>To use this input parameter in form code, use the <see cref="P:Microsoft.Office.InfoPath.LoadingEventArgs.InputParameters" /> property of the <see cref="T:Microsoft.Office.InfoPath.LoadingEventArgs" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace. For example, the value set in the XmlFormView1 initialization event is used to set a field's value in the form.</para>
+          <code>public void FormEvents_Loading(object sender, LoadingEventArgs e)
+{
+    XPathNavigator myNav = this.MainDataSource.CreateNavigator();
+    myNav.SelectSingleNode("/my:myFields/my:field2", this.NamespaceManager).SetValue(e.InputParameters["Dept"].ToString());
+}</code>
+        </example>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

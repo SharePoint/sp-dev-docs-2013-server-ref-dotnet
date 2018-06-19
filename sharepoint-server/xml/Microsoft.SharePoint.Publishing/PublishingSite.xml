@@ -1,0 +1,1173 @@
+﻿<Type Name="PublishingSite" FullName="Microsoft.SharePoint.Publishing.PublishingSite">
+  <TypeSignature Language="C#" Value="public sealed class PublishingSite" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PublishingSite extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.PublishingSite" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PublishingSite" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PublishingSite sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ServerTypeId="8A896237-0D29-4A38-A399-C8FDE4B09D80")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Provides publishing behavior for an <see cref="T:Microsoft.SharePoint.SPSite" /> object that supports publishing.</summary>
+    <remarks>
+      <para>The <b>PublishingSite</b> class provides publishing-specific behavior for an <b>SPSite</b> object that supports publishing, including access to commonly used publishing-related objects from the <b>SPSite</b> object's <see cref="P:Microsoft.SharePoint.SPSite.RootWeb" /> property such as <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> objects in the master page gallery and <see cref="T:Microsoft.SharePoint.SPContentType" /> objects. You can instantiate objects of this class by using the public constructor <see cref="T:Microsoft.SharePoint.Publishing.PublishingSite(Microsoft.SharePoint.SPSite)" />.The <b>PublishingSite</b> class wraps an <b>SPSite</b> class. The <b>PublishingResources</b> feature must already be activated for the <b>SPSite</b> class, which you can verify by calling the <see cref="M:Microsoft.SharePoint.Publishing.PublishingSite.IsPublishingSite(Microsoft.SharePoint.SPSite)" /> method.</para>
+      <para>This class also directly exposes the underlying <b>SPSite</b> through the <see cref="P:Microsoft.SharePoint.Publishing.PublishingSite.Site" /> property so that you can easily access additional <b>SPSite</b> functionality through the object model.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public PublishingSite (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingSite.#ctor(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (site As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; PublishingSite(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <b>SPSite</b> to retrieve a <b>PublishingSite</b> wrapper for.</param>
+        <summary>Constructs an instance of a <see cref="T:Microsoft.SharePoint.Publishing.PublishingSite" /> object that wraps the given <see cref="T:Microsoft.SharePoint.SPSite" /> object.</summary>
+        <remarks>
+          <para>Use this method to instantiate a <b>PublishingSite</b> object that wraps an <b>SPSite</b> that you have already retrieved. The caller must clean up the original <b>SPSite</b> by calling the <see cref="M:Microsoft.SharePoint.SPSite.Close" /> method when this <b>PublishingSite</b> object and the <b>SPSite</b> object passed are no longer in use. The site parameter should be a non-null <b>SPSite</b> instance for which the <b>PublishingResources</b> feature is active. Before instantiating a <b>PublishingSite</b> object, first check the <see cref="M:Microsoft.SharePoint.Publishing.PublishingSite.IsPublishingSite(Microsoft.SharePoint.SPSite)" /> method to confirm that publishing behavior is supported on the <b>SPSite</b>. If publishing is not supported on the <b>SPSite</b>, the methods and properties of the <b>PublishingSite</b> wrapper may produce unexpected behavior.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>using SPSite = Microsoft.SharePoint.SPSite;
+using PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite;
+using SPWeb = Microsoft.SharePoint.SPWeb;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using PublishingWebCollection = Microsoft.SharePoint.Publishing.PublishingWebCollection;
+using SPWebTemplate = Microsoft.SharePoint.SPWebTemplate;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingWebCollectionCodeSamples
+    {
+
+  // This method creates a new PublishingWeb below 
+  //the root Web of a PublishingSite object.
+  //
+  // Prerequisites:
+  // The SPSite passed should be a site that supports publishing.
+  //
+  // This sample demonstrates use of:
+  // PublishingSite.IsPublishingSite( SPSite )
+  // PublishingSite constructor
+  // PublishingSite.RootWeb
+  // PublishingWeb.GetPublishingWebs()
+  // PublishingWeb.Web
+  // PublishingWebCollection.Add(string, uint, string)
+  public static void CreatePublishingWebBelowRoot( SPSite site, SPWebTemplate webTemplate )
+  {
+// Replace these variable values and 
+// input parameters with your own values.
+// Your Web URL name for the PublishingWeb object to create.
+string yourWebUrlName = "yourWebUrl";
+
+PublishingWeb newWeb = null;
+
+try
+{
+    //
+    // Validate the input parameters.
+    //
+    if (null == site)
+    {
+  throw new System.ArgumentNullException("site");
+    }
+    if (null == webTemplate)
+    {
+  throw new System.ArgumentNullException("webTemplate");
+    }
+
+    PublishingSite publishingSite = null;
+    if (!PublishingSite.IsPublishingSite(site))
+    {
+  throw new System.ArgumentException(
+"The SPSite is expected to be a PublishingSite",
+"site");
+    }
+    publishingSite = new PublishingSite( site );
+
+    SPWeb rootWeb = publishingSite.RootWeb;
+    if( !PublishingWeb.IsPublishingWeb( rootWeb ))
+    {
+  throw new System.ArgumentException(
+"The SPSite.RootWeb is expected to be a PublishingWeb",
+"site");
+    }
+
+    PublishingWeb rootPublishingWeb = 
+PublishingWeb.GetPublishingWeb( rootWeb );
+    PublishingWebCollection publishingWebs = 
+rootPublishingWeb.GetPublishingWebs();
+
+    //
+    // Create the new PublishingWeb object by using 
+    /. the sample values provided.
+    //
+    newWeb = publishingWebs.Add(
+  yourWebUrlName,
+  rootWeb.Language,   // Replace with your own language value.
+  webTemplate.Name ); // Replace with your Web template name.
+
+    // The new PublishingWeb has the Publishing feature active.
+    System.Diagnostics.Debug.Assert(
+  null != newWeb.Web.Features[Microsoft.SharePoint.Publishing.FeatureIds.Publishing]);
+
+}
+finally
+{
+    //
+    // Always close the SPWeb object when done to release memory.
+    //
+    if( null != newWeb )
+    {
+  newWeb.Web.Close();
+    }
+}
+
+  }
+    }
+}</code>
+          <code>Imports SPSite = Microsoft.SharePoint.SPSite
+Imports PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite
+Imports SPWeb = Microsoft.SharePoint.SPWeb
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports PublishingWebCollection = Microsoft.SharePoint.Publishing.PublishingWebCollection
+Imports SPWebTemplate = Microsoft.SharePoint.SPWebTemplate
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingWebCollectionCodeSamples
+
+  ' This method creates a new PublishingWeb below 
+  'the root Web of a PublishingSite object.
+  '
+  ' Prerequisites:
+  ' The SPSite passed should be a site that supports publishing.
+  '
+  ' This sample demonstrates use of:
+  ' PublishingSite.IsPublishingSite( SPSite )
+  ' PublishingSite constructor
+  ' PublishingSite.RootWeb
+  ' PublishingWeb.GetPublishingWebs()
+  ' PublishingWeb.Web
+  ' PublishingWebCollection.Add(string, uint, string)
+  Private Sub New()
+  End Sub
+  Public Shared Sub CreatePublishingWebBelowRoot(ByVal site As SPSite, ByVal webTemplate As SPWebTemplate)
+' Replace these variable values and 
+' input parameters with your own values.
+' Your Web URL name for the PublishingWeb object to create.
+Dim yourWebUrlName As String = "yourWebUrl"
+
+Dim newWeb As PublishingWeb = Nothing
+
+Try
+    '
+    ' Validate the input parameters.
+    '
+    If Nothing Is site Then
+  Throw New System.ArgumentNullException("site")
+    End If
+    If Nothing Is webTemplate Then
+  Throw New System.ArgumentNullException("webTemplate")
+    End If
+
+    Dim publishingSite As PublishingSite = Nothing
+    If Not PublishingSite.IsPublishingSite(site) Then
+  Throw New System.ArgumentException("The SPSite is expected to be a PublishingSite", "site")
+    End If
+    publishingSite = New PublishingSite(site)
+
+    Dim rootWeb As SPWeb = publishingSite.RootWeb
+    If Not PublishingWeb.IsPublishingWeb(rootWeb) Then
+  Throw New System.ArgumentException("The SPSite.RootWeb is expected to be a PublishingWeb", "site")
+    End If
+
+    Dim rootPublishingWeb As PublishingWeb = PublishingWeb.GetPublishingWeb(rootWeb)
+    Dim publishingWebs As PublishingWebCollection = rootPublishingWeb.GetPublishingWebs()
+
+    '
+    ' Create the new PublishingWeb object by using 
+    '
+    /.the sample values provided.newWeb = publishingWebs.Add(yourWebUrlName, rootWeb.Language, webTemplate.Name) ' Replace with your Web template name. -  Replace with your own language value.
+
+    ' The new PublishingWeb has the Publishing feature active.
+    System.Diagnostics.Debug.Assert(Nothing IsNot newWeb.Web.Features(Microsoft.SharePoint.Publishing.FeatureIds.Publishing))
+
+Finally
+    '
+    ' Always close the SPWeb object when done to release memory.
+    '
+    If Nothing IsNot newWeb Then
+  newWeb.Web.Close()
+    End If
+End Try
+
+  End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ContentTypes">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPContentTypeCollection ContentTypes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPContentTypeCollection ContentTypes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingSite.ContentTypes" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ContentTypes As SPContentTypeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPContentTypeCollection ^ ContentTypes { Microsoft::SharePoint::SPContentTypeCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPContentTypeCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of <see cref="T:Microsoft.SharePoint.SPWeb.SPContentType" /> objects from the <see cref="T:Microsoft.SharePoint.SPSite.RootWeb" /> property.</summary>
+        <value>The collection of <b>SPContentType</b> objects from the <b>RootWeb</b> property.</value>
+        <remarks>
+          <para>This property wraps the <see cref="P:Microsoft.SharePoint.SPWeb.ContentTypes" /> property of the <b>RootWeb</b> property.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>using SPContentTypeId = Microsoft.SharePoint.SPContentTypeId;
+using SPContentType = Microsoft.SharePoint.SPContentType;
+using SPSite = Microsoft.SharePoint.SPSite;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPWeb = Microsoft.SharePoint.SPWeb;
+using PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using PageLayoutCollection = Microsoft.SharePoint.Publishing.PageLayoutCollection;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingWebCodeSamples
+    {
+// This sample restricts the set of available page layouts used
+// for creating pages in a publishing Web so that only page layouts
+// associated with a certain content type are available.
+  //
+  // Prerequisites:
+  // The associatedContentTypeId parameter is from a content
+  // type on the root Web of the site.
+  //
+  public static void RestrictPageLayoutsByContentType(
+PublishingWeb publishingWeb, 
+SPContentTypeId associatedContentTypeId)
+  {
+// Replace these variable values and input
+// parameters with your own values.
+bool excludeHiddenLayouts = true;
+bool resetAllSubsitesToInherit = true;
+
+//
+// Validate the input parameters.
+//
+if (null == publishingWeb)
+{
+    throw new System.ArgumentNullException("publishingWeb");
+}
+
+SPSite site = publishingWeb.Web.Site;
+PublishingSite publishingSite = new PublishingSite(site);
+
+//
+// Retrieve a collection of all page layouts in the site
+// collection that match the content type.
+//
+SPContentType associatedContentType = publishingSite.ContentTypes[associatedContentTypeId];
+if (null == associatedContentType)
+{
+    throw new System.ArgumentException(
+  "The SPContentTypeId did not match an SPContentType in the SPSite.RootWeb",
+  "associatedContentTypeId");
+}
+
+PageLayoutCollection pageLayoutsByContentType = 
+    publishingSite.GetPageLayouts(associatedContentType, excludeHiddenLayouts);
+
+//
+// Update the Web to use these page layouts when
+// creating pages.
+//
+publishingWeb.SetAvailablePageLayouts(
+    pageLayoutsByContentType.ToArray(),
+    resetAllSubsitesToInherit);
+
+publishingWeb.Update();
+
+//
+// Verify the expected results (this is not required,
+// and simply demonstrates the results of calling the
+//  SetAvailablePageLayouts method).
+System.Diagnostics.Debug.Assert(!publishingWeb.IsAllowingAllPageLayouts);
+System.Diagnostics.Debug.Assert(!publishingWeb.IsInheritingAvailablePageLayouts);
+
+PageLayout[] availablePageLayouts = publishingWeb.GetAvailablePageLayouts();
+foreach (PageLayout pageLayout in availablePageLayouts)
+{
+    System.Diagnostics.Debug.Assert(
+  pageLayout.AssociatedContentType.Id == associatedContentTypeId);
+}
+
+  }
+
+    }
+}
+</code>
+          <code>Imports SPContentTypeId = Microsoft.SharePoint.SPContentTypeId
+Imports SPContentType = Microsoft.SharePoint.SPContentType
+Imports SPSite = Microsoft.SharePoint.SPSite
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPWeb = Microsoft.SharePoint.SPWeb
+Imports PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports PageLayoutCollection = Microsoft.SharePoint.Publishing.PageLayoutCollection
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingWebCodeSamples
+' This sample restricts the set of available page layouts used
+' for creating pages in a publishing Web so that only page layouts
+' associated with a certain content type are available.
+  '
+  ' Prerequisites:
+  ' The associatedContentTypeId parameter is from a content
+  ' type on the root Web of the site.
+  '
+  Private Sub New()
+  End Sub
+  Public Shared Sub RestrictPageLayoutsByContentType(ByVal publishingWeb As PublishingWeb, ByVal associatedContentTypeId As SPContentTypeId)
+' Replace these variable values and input
+' parameters with your own values.
+Dim excludeHiddenLayouts As Boolean = True
+Dim resetAllSubsitesToInherit As Boolean = True
+
+'
+' Validate the input parameters.
+'
+If Nothing Is publishingWeb Then
+    Throw New System.ArgumentNullException("publishingWeb")
+End If
+
+Dim site As SPSite = publishingWeb.Web.Site
+Dim publishingSite As New PublishingSite(site)
+
+'
+' Retrieve a collection of all page layouts in the site
+' collection that match the content type.
+'
+Dim associatedContentType As SPContentType = publishingSite.ContentTypes(associatedContentTypeId)
+If Nothing Is associatedContentType Then
+    Throw New System.ArgumentException("The SPContentTypeId did not match an SPContentType in the SPSite.RootWeb", "associatedContentTypeId")
+End If
+
+Dim pageLayoutsByContentType As PageLayoutCollection = publishingSite.GetPageLayouts(associatedContentType, excludeHiddenLayouts)
+
+'
+' Update the Web to use these page layouts when
+' creating pages.
+'
+publishingWeb.SetAvailablePageLayouts(pageLayoutsByContentType.ToArray(), resetAllSubsitesToInherit)
+
+publishingWeb.Update()
+
+'
+' Verify the expected results (this is not required,
+' and simply demonstrates the results of calling the
+'  SetAvailablePageLayouts method).
+System.Diagnostics.Debug.Assert((Not publishingWeb.IsAllowingAllPageLayouts))
+System.Diagnostics.Debug.Assert((Not publishingWeb.IsInheritingAvailablePageLayouts))
+
+Dim availablePageLayouts() As PageLayout = publishingWeb.GetAvailablePageLayouts()
+For Each pageLayout As PageLayout In availablePageLayouts
+    System.Diagnostics.Debug.Assert(pageLayout.AssociatedContentType.Id Is associatedContentTypeId)
+Next pageLayout
+
+  End Sub
+
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="CreatePageLayout">
+      <MemberSignature Language="C#" Value="public static void CreatePageLayout (Microsoft.SharePoint.Publishing.PageLayoutCreationInformation parameters);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void CreatePageLayout(class Microsoft.SharePoint.Publishing.PageLayoutCreationInformation parameters) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingSite.CreatePageLayout(Microsoft.SharePoint.Publishing.PageLayoutCreationInformation)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub CreatePageLayout (parameters As PageLayoutCreationInformation)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void CreatePageLayout(Microsoft::SharePoint::Publishing::PageLayoutCreationInformation ^ parameters);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parameters" Type="Microsoft.SharePoint.Publishing.PageLayoutCreationInformation" />
+      </Parameters>
+      <Docs>
+        <param name="parameters">The information needed to create a new page layout.</param>
+        <summary>Creates a new page layout design that is based on an instance of the <see cref="T:Microsoft.SharePoint.Publishing.PageLayoutCreationInformation" /> object.</summary>
+        <remarks>
+          <para>Use the <see cref="M:Microsoft.SharePoint.Publishing.PublishingSite.CreatePageLayout(Microsoft.SharePoint.Publishing.PageLayoutCreationInformation)" /> method create a new page layout in a web that is based on the master page and content type. The <see cref="P:Microsoft.SharePoint.Publishing.PageLayoutCreationInformation.Web" /> property, <see cref="P:Microsoft.SharePoint.Publishing.PageLayoutCreationInformation.MasterPageUrl" /> property, <see cref="P:Microsoft.SharePoint.Publishing.PageLayoutCreationInformation.NewPageLayoutEditablePath" /> property, <see cref="P:Microsoft.SharePoint.Publishing.PageLayoutCreationInformation.NewPageLayoutNameWithoutExtension" /> property, and <see cref="P:Microsoft.SharePoint.Publishing.PageLayoutCreationInformation.AssociatedContentTypeId" /> property should not be null in the page layout information parameter that is passed to the method.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The parameters, properties, or both that are required to create a new page layout are null.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPageLayouts">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PageLayoutCollection GetPageLayouts (bool excludeObsolete);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PageLayoutCollection GetPageLayouts(bool excludeObsolete) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingSite.GetPageLayouts(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetPageLayouts (excludeObsolete As Boolean) As PageLayoutCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PageLayoutCollection ^ GetPageLayouts(bool excludeObsolete);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PageLayoutCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="excludeObsolete" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="excludeObsolete">Boolean flag that indicates whether to exclude <b>PageLayout</b> objects that are marked as hidden.</param>
+        <summary>Gets a collection of <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> objects from the master page gallery of the <see cref="P:Microsoft.SharePoint.SPWeb.RootWeb" /> property.</summary>
+        <returns>A collection of <b>PageLayout</b> objects from the master page gallery of the <b>RootWeb</b> property.</returns>
+        <remarks>
+          <para>If the <b>excludeObsolete</b> parameter is set to <b>true</b>, <b>PageLayout</b> objects that are obsolete and have been marked as hidden are not returned in the collection. </para>
+          <para>If the <b>excludeObsolete</b> parameter is set to <b>false</b>, then obsolete <b>PageLayout</b> objects are included in the collection.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPageLayouts">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PageLayoutCollection GetPageLayouts (Microsoft.SharePoint.SPContentType associatedContentType, bool excludeObsolete);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PageLayoutCollection GetPageLayouts(class Microsoft.SharePoint.SPContentType associatedContentType, bool excludeObsolete) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingSite.GetPageLayouts(Microsoft.SharePoint.SPContentType,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetPageLayouts (associatedContentType As SPContentType, excludeObsolete As Boolean) As PageLayoutCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PageLayoutCollection ^ GetPageLayouts(Microsoft::SharePoint::SPContentType ^ associatedContentType, bool excludeObsolete);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PageLayoutCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="associatedContentType" Type="Microsoft.SharePoint.SPContentType" />
+        <Parameter Name="excludeObsolete" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="associatedContentType">
+          <b>SPContentType</b> object to match against the <b>AssociatedContentType</b> property values of the <b>PageLayout</b> objects returned in the collection.</param>
+        <param name="excludeObsolete">Boolean flag that indicates whether to exclude <b>PageLayout</b> objects that are marked as hidden.</param>
+        <summary>Gets a collection of <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> objects from the master page gallery of the <see cref="P:Microsoft.SharePoint.SPWeb.RootWeb" /> property that has a <see cref="P:Microsoft.SharePoint.Publishing.PageLayout.AssociatedContentType" /> property that matches a specific <see cref="T:Microsoft.SharePoint.SPContentType" /> object.</summary>
+        <returns>A collection of <b>PageLayout</b> objects from the master page gallery of the <b>RootWeb</b> property that have an <b>AssociatedContentType</b> property that matches a specific <b>SPContentType</b> object.</returns>
+        <remarks>
+          <para>The <paramref name="associatedContentType" /> parameter must not be a null reference (Nothing in Visual Basic). If the <b>excludeObsolete</b> parameter is set to <b>true</b>, obsolete <b>PageLayout</b> objects that have been marked as hidden are not returned in the collection. If the <b>excludeObsolete</b> parameter is set to <b>false</b>, obsolete <b>PageLayout</b> objects are included in the collection.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>using SPContentTypeId = Microsoft.SharePoint.SPContentTypeId;
+using SPContentType = Microsoft.SharePoint.SPContentType;
+using SPSite = Microsoft.SharePoint.SPSite;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPWeb = Microsoft.SharePoint.SPWeb;
+using PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using PageLayoutCollection = Microsoft.SharePoint.Publishing.PageLayoutCollection;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingWebCodeSamples
+    {
+// This sample restricts the set of available page layouts used
+// for creating pages in a publishing Web so that only page layouts
+// associated with a certain content type are available.
+  //
+  // Prerequisites:
+  // The associatedContentTypeId parameter is from a content
+  // type on the root Web site of the site.
+  //
+  public static void RestrictPageLayoutsByContentType(
+PublishingWeb publishingWeb, 
+SPContentTypeId associatedContentTypeId)
+  {
+// Replace these variable values and input
+// parameters with your own values.
+bool excludeHiddenLayouts = true;
+bool resetAllSubsitesToInherit = true;
+
+//
+// Validate the input parameters.
+//
+if (null == publishingWeb)
+{
+    throw new System.ArgumentNullException("publishingWeb");
+}
+
+SPSite site = publishingWeb.Web.Site;
+PublishingSite publishingSite = new PublishingSite(site);
+
+//
+// Retrieve a collection of all page layouts in the site
+// collection that match the content type.
+//
+SPContentType associatedContentType = publishingSite.ContentTypes[associatedContentTypeId];
+if (null == associatedContentType)
+{
+    throw new System.ArgumentException(
+  "The SPContentTypeId did not match an SPContentType in the SPSite.RootWeb",
+  "associatedContentTypeId");
+}
+
+PageLayoutCollection pageLayoutsByContentType = 
+    publishingSite.GetPageLayouts(associatedContentType, excludeHiddenLayouts);
+
+//
+// Update the Web to use these page layouts when
+// creating pages.
+//
+publishingWeb.SetAvailablePageLayouts(
+    pageLayoutsByContentType.ToArray(),
+    resetAllSubsitesToInherit);
+
+publishingWeb.Update();
+
+//
+// Verify the expected results (this is not required,
+// and simply demonstrates the results of calling the
+//  SetAvailablePageLayouts method).
+System.Diagnostics.Debug.Assert(!publishingWeb.IsAllowingAllPageLayouts);
+System.Diagnostics.Debug.Assert(!publishingWeb.IsInheritingAvailablePageLayouts);
+
+PageLayout[] availablePageLayouts = publishingWeb.GetAvailablePageLayouts();
+foreach (PageLayout pageLayout in availablePageLayouts)
+{
+    System.Diagnostics.Debug.Assert(
+  pageLayout.AssociatedContentType.Id == associatedContentTypeId);
+}
+
+  }
+
+    }
+}</code>
+          <code>Imports SPSite = Microsoft.SharePoint.SPSite
+Imports PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite
+Imports SPWeb = Microsoft.SharePoint.SPWeb
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports PublishingWebCollection = Microsoft.SharePoint.Publishing.PublishingWebCollection
+Imports SPWebTemplate = Microsoft.SharePoint.SPWebTemplate
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingWebCollectionCodeSamples
+
+  ' This method creates a new PublishingWeb below the root Web site of a PublishingSite object.
+  '
+  ' Prerequisites:
+  ' The SPSite passed should be a site that supports publishing.
+  '
+  ' This sample demonstrates use of:
+  ' PublishingSite.IsPublishingSite( SPSite )
+  ' PublishingSite constructor
+  ' PublishingSite.RootWeb
+  ' PublishingWeb.GetPublishingWebs()
+  ' PublishingWeb.Web
+  ' PublishingWebCollection.Add(string, uint, string)
+  Private Sub New()
+  End Sub
+  Public Shared Sub CreatePublishingWebBelowRoot(ByVal site As SPSite, ByVal webTemplate As SPWebTemplate)
+' Replace these variable values and input parameters with your own values.
+' yourWebURL: name for the PublishingWeb object to create.
+Dim yourWebUrlName As String = "yourWebUrl"
+
+Dim newWeb As PublishingWeb = Nothing
+
+Try
+    '
+    ' Validate the input parameters.
+    '
+    If Nothing Is site Then
+  Throw New System.ArgumentNullException("site")
+    End If
+    If Nothing Is webTemplate Then
+  Throw New System.ArgumentNullException("webTemplate")
+    End If
+
+    Dim publishingSite As PublishingSite = Nothing
+    If Not PublishingSite.IsPublishingSite(site) Then
+  Throw New System.ArgumentException("The SPSite is expected to be a PublishingSite", "site")
+    End If
+    publishingSite = New PublishingSite(site)
+
+    Dim rootWeb As SPWeb = publishingSite.RootWeb
+    If Not PublishingWeb.IsPublishingWeb(rootWeb) Then
+  Throw New System.ArgumentException("The SPSite.RootWeb is expected to be a PublishingWeb", "site")
+    End If
+
+    Dim rootPublishingWeb As PublishingWeb = PublishingWeb.GetPublishingWeb(rootWeb)
+    Dim publishingWebs As PublishingWebCollection = rootPublishingWeb.GetPublishingWebs()
+
+    '
+    ' Create the new PublishingWeb object by using the sample values provided.
+    '
+    newWeb = publishingWebs.Add(yourWebUrlName, rootWeb.Language, webTemplate.Name) ' Replace with your Web template name. -  Replace with your own language value.
+
+    ' The new PublishingWeb has the Publishing feature active.
+    System.Diagnostics.Debug.Assert(Nothing IsNot newWeb.Web.Features(Microsoft.SharePoint.Publishing.FeatureIds.Publishing))
+
+Finally
+    '
+    ' Always close the SPWeb object when done to release memory.
+    '
+    If Nothing IsNot newWeb Then
+  newWeb.Web.Close()
+    End If
+End Try
+
+  End Sub
+    End Class
+End Namespace</code>
+        </example>
+        <exception cref="T:System.ArgumentNullException">Indicates that the <paramref name="associatedContentType" /> parameter is a null reference (Nothing in Visual Basic), which is not valid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="IsPublishingSite">
+      <MemberSignature Language="C#" Value="public static bool IsPublishingSite (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsPublishingSite(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingSite.IsPublishingSite(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsPublishingSite (site As SPSite) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsPublishingSite(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site to be validated.</param>
+        <summary>Checks the <see cref="T:Microsoft.SharePoint.SPSite" /> object to determine whether it is also a <see cref="T:Microsoft.SharePoint.Publishing.PublishingSite" /> object.</summary>
+        <returns>Set to <b>true</b> if the <b>PublishingResources</b> feature has been activated for the <b>SPSite</b> object; otherwise, set to <b>false</b>.</returns>
+        <remarks>
+          <para>Checks the <b>SPSite</b> to determine whether the <b>PublishingResources</b> feature has been activated on the <b>SPSite</b> object. This method must be called before a <b>PublishingSite</b> object is instantiated.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>using SPSite = Microsoft.SharePoint.SPSite;
+using PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite;
+using SPWeb = Microsoft.SharePoint.SPWeb;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using PublishingWebCollection = Microsoft.SharePoint.Publishing.PublishingWebCollection;
+using SPWebTemplate = Microsoft.SharePoint.SPWebTemplate;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingWebCollectionCodeSamples
+    {
+
+  // This method creates a new PublishingWeb below the root Web of a PublishingSite object.
+  //
+  // Prerequisites:
+  // The SPSite passed should be a site that supports publishing.
+  //
+  // This sample demonstrates use of:
+  // PublishingSite.IsPublishingSite( SPSite )
+  // PublishingSite constructor
+  // PublishingSite.RootWeb
+  // PublishingWeb.GetPublishingWebs()
+  // PublishingWeb.Web
+  // PublishingWebCollection.Add(string, uint, string)
+  public static void CreatePublishingWebBelowRoot( SPSite site, SPWebTemplate webTemplate )
+  {
+// Replace these variable values and input parameters with your own values.
+// yourWebURL: name for the PublishingWeb object to create.
+string yourWebUrlName = "yourWebUrl";
+
+PublishingWeb newWeb = null;
+
+try
+{
+    //
+    // Validate the input parameters.
+    //
+    if (null == site)
+    {
+  throw new System.ArgumentNullException("site");
+    }
+    if (null == webTemplate)
+    {
+  throw new System.ArgumentNullException("webTemplate");
+    }
+
+    PublishingSite publishingSite = null;
+    if (!PublishingSite.IsPublishingSite(site))
+    {
+  throw new System.ArgumentException(
+"The SPSite is expected to be a PublishingSite",
+"site");
+    }
+    publishingSite = new PublishingSite( site );
+
+    SPWeb rootWeb = publishingSite.RootWeb;
+    if( !PublishingWeb.IsPublishingWeb( rootWeb ))
+    {
+  throw new System.ArgumentException(
+"The SPSite.RootWeb is expected to be a PublishingWeb",
+"site");
+    }
+
+    PublishingWeb rootPublishingWeb = PublishingWeb.GetPublishingWeb( rootWeb );
+    PublishingWebCollection publishingWebs = rootPublishingWeb.GetPublishingWebs();
+
+    //
+    // Create the new PublishingWeb object using the sample values provided.
+    //
+    newWeb = publishingWebs.Add(
+  yourWebUrlName,
+  rootWeb.Language,   // Replace with your own language value.
+  webTemplate.Name ); // Replace with your Web template name.
+
+    // The new PublishingWeb has the Publishing feature active.
+    System.Diagnostics.Debug.Assert(
+  null != newWeb.Web.Features[Microsoft.SharePoint.Publishing.FeatureIds.Publishing]);
+ 
+}
+finally
+{
+    //
+    // Always close the SPWeb object when done to release memory.
+    //
+    if( null != newWeb )
+    {
+  newWeb.Web.Close();
+    }
+}
+
+  }
+    }
+}</code>
+          <code>Imports SPSite = Microsoft.SharePoint.SPSite
+Imports PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite
+Imports SPWeb = Microsoft.SharePoint.SPWeb
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports PublishingWebCollection = Microsoft.SharePoint.Publishing.PublishingWebCollection
+Imports SPWebTemplate = Microsoft.SharePoint.SPWebTemplate
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingWebCollectionCodeSamples
+
+  ' This method creates a new PublishingWeb below the root Web of a PublishingSite object.
+  '
+  ' Prerequisites:
+  ' The SPSite passed should be a site that supports publishing.
+  '
+  ' This sample demonstrates use of:
+  ' PublishingSite.IsPublishingSite( SPSite )
+  ' PublishingSite constructor
+  ' PublishingSite.RootWeb
+  ' PublishingWeb.GetPublishingWebs()
+  ' PublishingWeb.Web
+  ' PublishingWebCollection.Add(string, uint, string)
+  Private Sub New()
+  End Sub
+  Public Shared Sub CreatePublishingWebBelowRoot(ByVal site As SPSite, ByVal webTemplate As SPWebTemplate)
+' Replace these variable values and input parameters with your own values.
+' yourWebURL: name for the PublishingWeb object to create.
+Dim yourWebUrlName As String = "yourWebUrl"
+
+Dim newWeb As PublishingWeb = Nothing
+
+Try
+    '
+    ' Validate the input parameters.
+    '
+    If Nothing Is site Then
+  Throw New System.ArgumentNullException("site")
+    End If
+    If Nothing Is webTemplate Then
+  Throw New System.ArgumentNullException("webTemplate")
+    End If
+
+    Dim publishingSite As PublishingSite = Nothing
+    If Not PublishingSite.IsPublishingSite(site) Then
+  Throw New System.ArgumentException("The SPSite is expected to be a PublishingSite", "site")
+    End If
+    publishingSite = New PublishingSite(site)
+
+    Dim rootWeb As SPWeb = publishingSite.RootWeb
+    If Not PublishingWeb.IsPublishingWeb(rootWeb) Then
+  Throw New System.ArgumentException("The SPSite.RootWeb is expected to be a PublishingWeb", "site")
+    End If
+
+    Dim rootPublishingWeb As PublishingWeb = PublishingWeb.GetPublishingWeb(rootWeb)
+    Dim publishingWebs As PublishingWebCollection = rootPublishingWeb.GetPublishingWebs()
+
+    '
+    ' Create the new PublishingWeb object using the sample values provided.
+    '
+    newWeb = publishingWebs.Add(yourWebUrlName, rootWeb.Language, webTemplate.Name) ' Replace with your Web template name. -  Replace with your own language value.
+
+    ' The new PublishingWeb has the Publishing feature active.
+    System.Diagnostics.Debug.Assert(Nothing IsNot newWeb.Web.Features(Microsoft.SharePoint.Publishing.FeatureIds.Publishing))
+
+Finally
+    '
+    ' Always close the SPWeb object when done to release memory.
+    '
+    If Nothing IsNot newWeb Then
+  newWeb.Web.Close()
+    End If
+End Try
+
+  End Sub
+    End Class
+End Namespace</code>
+        </example>
+        <exception cref="T:System.ArgumentNullException">
+          <b>SPSite</b> cannot be a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="PageLayouts">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PageLayoutCollection PageLayouts { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.PageLayoutCollection PageLayouts" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingSite.PageLayouts" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PageLayouts As PageLayoutCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::PageLayoutCollection ^ PageLayouts { Microsoft::SharePoint::Publishing::PageLayoutCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PageLayoutCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of non-obsolete <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> objects from the master page gallery of the <see cref="P:Microsoft.SharePoint.SPSite.RootWeb" /> property.</summary>
+        <value>A collection of <b>PageLayout</b> objects from the master page gallery of the <b>RootWeb</b> property.</value>
+        <remarks>
+          <para>
+            <b>PageLayout</b> objects that are obsolete and have been marked as hidden are not returned in the collection. This is similar to calling the <see cref="M:Microsoft.SharePoint.Publishing.PublishingSite.GetPageLayouts(System.Boolean)" /> method and passing a value of <b>true</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PublishedLinksList">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPList PublishedLinksList { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPList PublishedLinksList" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingSite.PublishedLinksList" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PublishedLinksList As SPList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPList ^ PublishedLinksList { Microsoft::SharePoint::SPList ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPList</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the Published Links list.</summary>
+        <value>The Published Links list.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The <b>%1</b> document library is missing.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RootWeb">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPWeb RootWeb { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPWeb RootWeb" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingSite.RootWeb" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property RootWeb As SPWeb" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPWeb ^ RootWeb { Microsoft::SharePoint::SPWeb ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPWeb</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the root <see cref="T:Microsoft.SharePoint.SPWeb" /> of this <see cref="T:Microsoft.SharePoint.Publishing.PublishingSite" /> object.</summary>
+        <value>The root <b>SPWeb</b> of this <b>PublishingSite</b> object.</value>
+        <remarks>
+          <para>This property wraps the <see cref="P:Microsoft.SharePoint.SPSite.RootWeb" /> property.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>using SPSite = Microsoft.SharePoint.SPSite;
+using PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite;
+using SPWeb = Microsoft.SharePoint.SPWeb;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using PublishingWebCollection = Microsoft.SharePoint.Publishing.PublishingWebCollection;
+using SPWebTemplate = Microsoft.SharePoint.SPWebTemplate;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingWebCollectionCodeSamples
+    {
+
+  // This method creates a new PublishingWeb below the root Web site of a PublishingSite object.
+  //
+  // Prerequisites:
+  // The SPSite passed should be a site that supports publishing.
+  //
+  // This sample demonstrates use of:
+  // PublishingSite.IsPublishingSite( SPSite )
+  // PublishingSite constructor
+  // PublishingSite.RootWeb
+  // PublishingWeb.GetPublishingWebs()
+  // PublishingWeb.Web
+  // PublishingWebCollection.Add(string, uint, string)
+  public static void CreatePublishingWebBelowRoot( SPSite site, SPWebTemplate webTemplate )
+  {
+// Replace these variable values and input parameters with your own values.
+// yourWebURL: name for the PublishingWeb object to create.
+string yourWebUrlName = "yourWebUrl";
+
+PublishingWeb newWeb = null;
+
+try
+{
+    //
+    // Validate the input parameters.
+    //
+    if (null == site)
+    {
+  throw new System.ArgumentNullException("site");
+    }
+    if (null == webTemplate)
+    {
+  throw new System.ArgumentNullException("webTemplate");
+    }
+
+    PublishingSite publishingSite = null;
+    if (!PublishingSite.IsPublishingSite(site))
+    {
+  throw new System.ArgumentException(
+"The SPSite is expected to be a PublishingSite",
+"site");
+    }
+    publishingSite = new PublishingSite( site );
+
+    SPWeb rootWeb = publishingSite.RootWeb;
+    if( !PublishingWeb.IsPublishingWeb( rootWeb ))
+    {
+  throw new System.ArgumentException(
+"The SPSite.RootWeb is expected to be a PublishingWeb",
+"site");
+    }
+
+    PublishingWeb rootPublishingWeb = PublishingWeb.GetPublishingWeb( rootWeb );
+    PublishingWebCollection publishingWebs = rootPublishingWeb.GetPublishingWebs();
+
+    //
+    // Create the new PublishingWeb object by using the sample values provided.
+    //
+    newWeb = publishingWebs.Add(
+  yourWebUrlName,
+  rootWeb.Language,   // Replace with your own language value.
+  webTemplate.Name ); // Replace with your Web template name.
+
+    // The new PublishingWeb has the Publishing feature active.
+    System.Diagnostics.Debug.Assert(
+  null != newWeb.Web.Features[Microsoft.SharePoint.Publishing.FeatureIds.Publishing]);
+ 
+}
+finally
+{
+    //
+    // Always close the SPWeb object when done to release memory.
+    //
+    if( null != newWeb )
+    {
+  newWeb.Web.Close();
+    }
+}
+
+  }
+    }
+}</code>
+          <code>Imports SPSite = Microsoft.SharePoint.SPSite
+Imports PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite
+Imports SPWeb = Microsoft.SharePoint.SPWeb
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports PublishingWebCollection = Microsoft.SharePoint.Publishing.PublishingWebCollection
+Imports SPWebTemplate = Microsoft.SharePoint.SPWebTemplate
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingWebCollectionCodeSamples
+
+  ' This method creates a new PublishingWeb below the root Web site of a PublishingSite object.
+  '
+  ' Prerequisites:
+  ' The SPSite passed should be a site that supports publishing.
+  '
+  ' This sample demonstrates use of:
+  ' PublishingSite.IsPublishingSite( SPSite )
+  ' PublishingSite constructor
+  ' PublishingSite.RootWeb
+  ' PublishingWeb.GetPublishingWebs()
+  ' PublishingWeb.Web
+  ' PublishingWebCollection.Add(string, uint, string)
+  Private Sub New()
+  End Sub
+  Public Shared Sub CreatePublishingWebBelowRoot(ByVal site As SPSite, ByVal webTemplate As SPWebTemplate)
+' Replace these variable values and input parameters with your own values.
+' yourWebURL: name for the PublishingWeb object to create.
+Dim yourWebUrlName As String = "yourWebUrl"
+
+Dim newWeb As PublishingWeb = Nothing
+
+Try
+    '
+    ' Validate the input parameters.
+    '
+    If Nothing Is site Then
+  Throw New System.ArgumentNullException("site")
+    End If
+    If Nothing Is webTemplate Then
+  Throw New System.ArgumentNullException("webTemplate")
+    End If
+
+    Dim publishingSite As PublishingSite = Nothing
+    If Not PublishingSite.IsPublishingSite(site) Then
+  Throw New System.ArgumentException("The SPSite is expected to be a PublishingSite", "site")
+    End If
+    publishingSite = New PublishingSite(site)
+
+    Dim rootWeb As SPWeb = publishingSite.RootWeb
+    If Not PublishingWeb.IsPublishingWeb(rootWeb) Then
+  Throw New System.ArgumentException("The SPSite.RootWeb is expected to be a PublishingWeb", "site")
+    End If
+
+    Dim rootPublishingWeb As PublishingWeb = PublishingWeb.GetPublishingWeb(rootWeb)
+    Dim publishingWebs As PublishingWebCollection = rootPublishingWeb.GetPublishingWebs()
+
+    '
+    ' Create the new PublishingWeb object by using the sample values provided.
+    '
+    newWeb = publishingWebs.Add(yourWebUrlName, rootWeb.Language, webTemplate.Name) ' Replace with your Web template name. -  Replace with your own language value.
+
+    ' The new PublishingWeb has the Publishing feature active.
+    System.Diagnostics.Debug.Assert(Nothing IsNot newWeb.Web.Features(Microsoft.SharePoint.Publishing.FeatureIds.Publishing))
+
+Finally
+    '
+    ' Always close the SPWeb object when done to release memory.
+    '
+    If Nothing IsNot newWeb Then
+  newWeb.Web.Close()
+    End If
+End Try
+
+  End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Site">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPSite Site { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPSite Site" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingSite.Site" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Site As SPSite" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPSite ^ Site { Microsoft::SharePoint::SPSite ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPSite</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.SPSite" /> object that is wrapped by this <see cref="T:Microsoft.SharePoint.Publishing.PublishingSite" /> instance.</summary>
+        <value>The <b>SPSite</b> that is wrapped by this <b>PublishingSite</b> instance.</value>
+        <remarks>
+          <para>The <b>PublishingSite</b> object wraps the <b>SPSite</b> object. This property directly exposes the underlying <b>SPSite</b> object so that you can easily access additional <b>SPSite</b> object functionality.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SiteCollectionDocumentsLibrary">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPDocumentLibrary SiteCollectionDocumentsLibrary { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPDocumentLibrary SiteCollectionDocumentsLibrary" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingSite.SiteCollectionDocumentsLibrary" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SiteCollectionDocumentsLibrary As SPDocumentLibrary" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPDocumentLibrary ^ SiteCollectionDocumentsLibrary { Microsoft::SharePoint::SPDocumentLibrary ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPDocumentLibrary</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the Site Collection Documents library.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The <b>%1</b> document library is missing.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SiteCollectionImagesLibrary">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPDocumentLibrary SiteCollectionImagesLibrary { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPDocumentLibrary SiteCollectionImagesLibrary" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingSite.SiteCollectionImagesLibrary" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SiteCollectionImagesLibrary As SPDocumentLibrary" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPDocumentLibrary ^ SiteCollectionImagesLibrary { Microsoft::SharePoint::SPDocumentLibrary ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPDocumentLibrary</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the Site Collection Images library.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The <b>%1</b> document library is missing.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

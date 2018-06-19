@@ -1,0 +1,247 @@
+﻿<Type Name="DocumentSetTemplate" FullName="Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate">
+  <TypeSignature Language="C#" Value="public class DocumentSetTemplate" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DocumentSetTemplate extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate" />
+  <TypeSignature Language="VB.NET" Value="Public Class DocumentSetTemplate" />
+  <TypeSignature Language="C++ CLI" Value="public ref class DocumentSetTemplate" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the template on which <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> objects are based.</summary>
+    <remarks>
+      <para>There is one template for each document set content type and one template for every other content type that inherits from it. Templates describe properties of the document set content type. These properties include the content types allowed inside the document set, its default documents, its shared fields, the fields that are displayed in its welcome page, and the view to use for the welcome page. </para>
+      <para />
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using Microsoft.SharePoint;
+using Microsoft.Office.DocumentManagement.DocumentSets;
+
+namespace SyncAllDocsetTemplates
+{
+class Program
+{
+static void Main(string[] args)
+{
+//Sets a field as shared and adds an allowed content type
+//to all document set content types, the field that is now
+//shared will be displayed on the welcome page
+//and all of the default documents will be made to have the
+//newly allowed content type
+using (SPSite site = new SPSite("http://localhost")) //get the site
+{
+using (SPWeb web = site.RootWeb)  //get the web
+{
+SPField field = web.Fields["ExistingField"];//get the new field
+SPContentType contentType = web.ContentTypes["ExistingCT"];//get the new content type
+foreach (SPContentType ct in web.ContentTypes)//iterate through all content types
+{
+if (DocumentSetTemplate.Id.IsParentOf(ct.Id) || ct.Id == DocumentSetTemplate.Id)//only take action if it's the base document set content type or one of its childs
+{
+//Get the document set template
+DocumentSetTemplate docsetTemplate = DocumentSetTemplate.GetDocumentSetTemplate(ct);
+//Add the new content type, make the field shared, and add it to the welcomepage
+docsetTemplate.AllowedContentTypes.Add(contentType.Id);
+docsetTemplate.SharedFields.Add(field);
+docsetTemplate.WelcomePageFields.Add(field);
+//Change the content type of all default documents to the new content type
+foreach (DefaultDocument defDoc in docsetTemplate.DefaultDocuments)
+{
+docsetTemplate.DefaultDocuments.ChangeContentTypeForDocument(defDoc.Name, contentType.Id);
+}
+//Finally, save the changes
+docsetTemplate.Update(false);
+}
+}
+}
+}
+}
+}
+}
+</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="AllowedContentTypes">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.DocumentManagement.DocumentSets.AllowedContentTypeCollection AllowedContentTypes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.DocumentManagement.DocumentSets.AllowedContentTypeCollection AllowedContentTypes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate.AllowedContentTypes" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AllowedContentTypes As AllowedContentTypeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::DocumentManagement::DocumentSets::AllowedContentTypeCollection ^ AllowedContentTypes { Microsoft::Office::DocumentManagement::DocumentSets::AllowedContentTypeCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.DocumentSets.AllowedContentTypeCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of the content types allowed in <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> objects that have this template.</summary>
+        <value>A collection of <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.AllowedContentTypesCollection" /> objects that represent the list of allowed content types.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultDocuments">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.DocumentManagement.DocumentSets.DefaultDocumentCollection DefaultDocuments { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.DocumentManagement.DocumentSets.DefaultDocumentCollection DefaultDocuments" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate.DefaultDocuments" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DefaultDocuments As DefaultDocumentCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::DocumentManagement::DocumentSets::DefaultDocumentCollection ^ DefaultDocuments { Microsoft::Office::DocumentManagement::DocumentSets::DefaultDocumentCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.DocumentSets.DefaultDocumentCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DefaultDocument" /> objects that are used for the <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> objects that are associated with this template.</summary>
+        <value>A collection of <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate" /> objects that represent the documents that are provisioned during creation of a new <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> objects that uses this template.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDocumentSetTemplate">
+      <MemberSignature Language="C#" Value="public static Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate GetDocumentSetTemplate (Microsoft.SharePoint.SPContentType ct);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate GetDocumentSetTemplate(class Microsoft.SharePoint.SPContentType ct) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate.GetDocumentSetTemplate(Microsoft.SharePoint.SPContentType)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetDocumentSetTemplate (ct As SPContentType) As DocumentSetTemplate" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::DocumentManagement::DocumentSets::DocumentSetTemplate ^ GetDocumentSetTemplate(Microsoft::SharePoint::SPContentType ^ ct);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ct" Type="Microsoft.SharePoint.SPContentType" />
+      </Parameters>
+      <Docs>
+        <param name="ct">To be added.</param>
+        <summary>Gets the <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate" /> from a <see cref="T:Microsoft.SharePoint.SPContentType" /> object.</summary>
+        <returns>The <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate" /> object that holds the settings for a document set content type.</returns>
+        <remarks>
+          <para>The settings stored in the template are the content types allowed in the document set, the fields that are marked as shared, the default documents, the fields to display on the welcome page and the view to use in the welcome page.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Id">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.SPContentTypeId Id { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property valuetype Microsoft.SharePoint.SPContentTypeId Id" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate.Id" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property Id As SPContentTypeId" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::SharePoint::SPContentTypeId Id { Microsoft::SharePoint::SPContentTypeId get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPContentTypeId</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Returns the parent <see cref="T:Microsoft.SharePoint.SPContentTypeId" /> object for document sets.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.SPContentTypeId" /> of the base document set content type</value>
+        <remarks>
+          <para>Use this property to discover whether a specified Content Type isa <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> object. All document set content types IDs inherit from this <see cref="T:Microsoft.SharePoint.SPContentTypeId" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SharedFields">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.DocumentManagement.DocumentSets.SharedFieldCollection SharedFields { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.DocumentManagement.DocumentSets.SharedFieldCollection SharedFields" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate.SharedFields" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SharedFields As SharedFieldCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::DocumentManagement::DocumentSets::SharedFieldCollection ^ SharedFields { Microsoft::Office::DocumentManagement::DocumentSets::SharedFieldCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.DocumentSets.SharedFieldCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collections of fields that are synchronised between the <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> object and its contents.</summary>
+        <value>A <see cref="T:Microsoft.SharePoint.SPField" /> collection representing the fields that are synchronised between the <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> object and its contents. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update (bool bPushDown);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update(bool bPushDown) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate.Update(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update (bPushDown As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update(bool bPushDown);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="bPushDown" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="bPushDown">
+          <b>true</b> if changes are pushed down to child content types; otherwise, <b>false</b></param>
+        <summary>Saves any changes made to the template.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WelcomePageFields">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.DocumentManagement.DocumentSets.WelcomePageFieldCollection WelcomePageFields { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.DocumentManagement.DocumentSets.WelcomePageFieldCollection WelcomePageFields" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate.WelcomePageFields" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property WelcomePageFields As WelcomePageFieldCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::DocumentManagement::DocumentSets::WelcomePageFieldCollection ^ WelcomePageFields { Microsoft::Office::DocumentManagement::DocumentSets::WelcomePageFieldCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.DocumentSets.WelcomePageFieldCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collections of fields that are displayed on the welcome page of <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> objects that use this template.</summary>
+        <value>An <see cref="T:Microsoft.SharePoint.SPField" /> collection representing the fields to be displayed on the welcome page</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WelcomePageView">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPView WelcomePageView { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPView WelcomePageView" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetTemplate.WelcomePageView" />
+      <MemberSignature Language="VB.NET" Value="Public Property WelcomePageView As SPView" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPView ^ WelcomePageView { Microsoft::SharePoint::SPView ^ get(); void set(Microsoft::SharePoint::SPView ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPView</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the view to use in displaying the contents of document sets on the welcome page of <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> objects that use this template.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.SPView" /> object to use for displaying the contents of <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> objects on its welcome page.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

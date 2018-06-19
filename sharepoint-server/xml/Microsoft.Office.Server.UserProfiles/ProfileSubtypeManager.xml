@@ -1,0 +1,271 @@
+﻿<Type Name="ProfileSubtypeManager" FullName="Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager">
+  <TypeSignature Language="C#" Value="public class ProfileSubtypeManager" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ProfileSubtypeManager extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager" />
+  <TypeSignature Language="VB.NET" Value="Public Class ProfileSubtypeManager" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ProfileSubtypeManager" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Creates, deletes, retrieves, and manages profile subtypes for a profile type.</summary>
+    <remarks>
+      <para>The following sample demonstrates how to use the <b>ProfileSubtypeManager</b> to create both a user profile and an organization profile <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileSubtype" />.</para>
+      <code>using Microsoft.Office.Server.UserProfiles;
+using Microsoft.SharePoint;
+ 
+namespace CreateSubtype
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            using (SPSite site = new SPSite("&lt;span class="placeholder"&gt;http://&amp;lt;servername&amp;gt;&lt;/span&gt;"))
+            {
+                SPServiceContext context = SPServiceContext.GetContext(site);
+                ProfileSubtypeManager psm = ProfileSubtypeManager.Get(context);
+ 
+                // create a user profile subtype
+                psm.CreateSubtype("Consultant", "Consultant Subtype", ProfileType.User);
+ 
+                // create an organization profile subtype
+                psm.CreateSubtype("Vendor", "Vendor Subtype", ProfileType.Organization);
+            }
+        }
+    }
+}
+</code>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CountForProfileType">
+      <MemberSignature Language="C#" Value="public int CountForProfileType (Microsoft.Office.Server.UserProfiles.ProfileType typeID);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 CountForProfileType(valuetype Microsoft.Office.Server.UserProfiles.ProfileType typeID) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager.CountForProfileType(Microsoft.Office.Server.UserProfiles.ProfileType)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CountForProfileType (typeID As ProfileType) As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; int CountForProfileType(Microsoft::Office::Server::UserProfiles::ProfileType typeID);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="typeID" Type="Microsoft.Office.Server.UserProfiles.ProfileType" />
+      </Parameters>
+      <Docs>
+        <param name="typeID">To be added.</param>
+        <summary>Gets a count of profile subtypes for the specified <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileType" /> object.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateSubtype">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileSubtype CreateSubtype (string name, string displayName, Microsoft.Office.Server.UserProfiles.ProfileType typeID);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.ProfileSubtype CreateSubtype(string name, string displayName, valuetype Microsoft.Office.Server.UserProfiles.ProfileType typeID) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager.CreateSubtype(System.String,System.String,Microsoft.Office.Server.UserProfiles.ProfileType)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateSubtype (name As String, displayName As String, typeID As ProfileType) As ProfileSubtype" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::ProfileSubtype ^ CreateSubtype(System::String ^ name, System::String ^ displayName, Microsoft::Office::Server::UserProfiles::ProfileType typeID);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileSubtype</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="displayName" Type="System.String" />
+        <Parameter Name="typeID" Type="Microsoft.Office.Server.UserProfiles.ProfileType" />
+      </Parameters>
+      <Docs>
+        <param name="name">To be added.</param>
+        <param name="displayName">To be added.</param>
+        <param name="typeID">To be added.</param>
+        <summary>Creates and returns a subtype, with the specified name and display name, for the specified profile type.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteSubtype">
+      <MemberSignature Language="C#" Value="public void DeleteSubtype (string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteSubtype(string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager.DeleteSubtype(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteSubtype (name As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteSubtype(System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="name">To be added.</param>
+        <summary>Deletes the specified profile subtype.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Get">
+      <MemberSignature Language="C#" Value="public static Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager Get ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager Get() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager.Get" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Get () As ProfileSubtypeManager" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::Server::UserProfiles::ProfileSubtypeManager ^ Get();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Retrieves the <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager" /> object for the current <see cref="T:Microsoft.SharePoint.SPServiceContext" />.</summary>
+        <returns>The <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager" /> object for the current <see cref="T:Microsoft.SharePoint.SPServiceContext" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Get">
+      <MemberSignature Language="C#" Value="public static Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager Get (Microsoft.SharePoint.SPServiceContext serviceContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager Get(class Microsoft.SharePoint.SPServiceContext serviceContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager.Get(Microsoft.SharePoint.SPServiceContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Get (serviceContext As SPServiceContext) As ProfileSubtypeManager" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::Server::UserProfiles::ProfileSubtypeManager ^ Get(Microsoft::SharePoint::SPServiceContext ^ serviceContext);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">The <see cref="T:Microsoft.SharePoint.SPServiceContext" /> object for which to retrieve the <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager" /> object.</param>
+        <summary>Retrieves the <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager" /> object for the specified <see cref="T:Microsoft.SharePoint.SPServiceContext" />.</summary>
+        <returns>The <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager" /> object for the specified <see cref="T:Microsoft.SharePoint.SPServiceContext" />.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="serviceContext" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDefaultProfileName">
+      <MemberSignature Language="C#" Value="public static string GetDefaultProfileName (Microsoft.Office.Server.UserProfiles.ProfileType type);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetDefaultProfileName(valuetype Microsoft.Office.Server.UserProfiles.ProfileType type) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager.GetDefaultProfileName(Microsoft.Office.Server.UserProfiles.ProfileType)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetDefaultProfileName (type As ProfileType) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetDefaultProfileName(Microsoft::Office::Server::UserProfiles::ProfileType type);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="type" Type="Microsoft.Office.Server.UserProfiles.ProfileType" />
+      </Parameters>
+      <Docs>
+        <param name="type">One of the <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileType" /> values. Possible values are <see cref="F:Microsoft.Office.Server.UserProfiles.ProfileType.Group" />, <see cref="F:Microsoft.Office.Server.UserProfiles.ProfileType.User" />, or <see cref="F:Microsoft.Office.Server.UserProfiles.ProfileType.Organization" />.</param>
+        <summary>Retrieves the name of the default subtype for the specified profile type.</summary>
+        <returns>One of following strings:UserProfileOrganizationProfileGroupProfile</returns>
+        <remarks>
+          <para>You can use the returned subtype name as the parameter value to the <see cref="M:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager.GetProfileSubtype(System.String)" /> method to retrieve the corresponding <b>ProfileSubtype</b> object.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.Office.Server.UserProfiles.UserProfileException">
+          <paramref name="type" /> is not one of the values of <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileType" />.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetProfileSubtype">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileSubtype GetProfileSubtype (int subtypeID);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.ProfileSubtype GetProfileSubtype(int32 subtypeID) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager.GetProfileSubtype(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetProfileSubtype (subtypeID As Integer) As ProfileSubtype" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::ProfileSubtype ^ GetProfileSubtype(int subtypeID);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileSubtype</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subtypeID" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="subtypeID">An integer that represents the identifier of the subtype to retrieve.</param>
+        <summary>Retrieves the profile subtype that matches the specified subtype identifier.</summary>
+        <returns>A <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileSubtype" /> that matches the specified subtype identifier.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetProfileSubtype">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileSubtype GetProfileSubtype (string subtypeName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.ProfileSubtype GetProfileSubtype(string subtypeName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager.GetProfileSubtype(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetProfileSubtype (subtypeName As String) As ProfileSubtype" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::ProfileSubtype ^ GetProfileSubtype(System::String ^ subtypeName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileSubtype</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subtypeName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subtypeName">A string that represents the name of the subtype to retrieve.</param>
+        <summary>Retrieves the profile subtype with the specified name.</summary>
+        <returns>A <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileSubtype" /> with the specified subtype name.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="subtypeName" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSubtypesForProfileType">
+      <MemberSignature Language="C#" Value="public System.Collections.ICollection GetSubtypesForProfileType (Microsoft.Office.Server.UserProfiles.ProfileType typeID);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ICollection GetSubtypesForProfileType(valuetype Microsoft.Office.Server.UserProfiles.ProfileType typeID) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileSubtypeManager.GetSubtypesForProfileType(Microsoft.Office.Server.UserProfiles.ProfileType)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSubtypesForProfileType (typeID As ProfileType) As ICollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ICollection ^ GetSubtypesForProfileType(Microsoft::Office::Server::UserProfiles::ProfileType typeID);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ICollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="typeID" Type="Microsoft.Office.Server.UserProfiles.ProfileType" />
+      </Parameters>
+      <Docs>
+        <param name="typeID">To be added.</param>
+        <summary>Gets a collection of <b>ProfileSubtype</b> objects associated with the specified profile type.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

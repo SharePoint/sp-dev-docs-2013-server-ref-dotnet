@@ -1,0 +1,2236 @@
+﻿<Type Name="PortalSiteMapProvider" FullName="Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider">
+  <TypeSignature Language="C#" Value="public class PortalSiteMapProvider : System.Web.SiteMapProvider, Microsoft.SharePoint.Navigation.IEditableSiteMapProvider" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit PortalSiteMapProvider extends System.Web.SiteMapProvider implements class Microsoft.SharePoint.Navigation.IEditableSiteMapProvider" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" />
+  <TypeSignature Language="VB.NET" Value="Public Class PortalSiteMapProvider&#xA;Inherits SiteMapProvider&#xA;Implements IEditableSiteMapProvider" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PortalSiteMapProvider : System::Web::SiteMapProvider, Microsoft::SharePoint::Navigation::IEditableSiteMapProvider" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Web.SiteMapProvider</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.SharePoint.Navigation.IEditableSiteMapProvider</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Provides <b>PortalSiteMapNode</b> objects that represent a merging of the Microsoft SharePoint Foundation 2010<see cref="T:Microsoft.SharePoint.SPNavigation" /> store and dynamic site structure, including sites and pages. </summary>
+    <remarks>
+      <para>This is the site map provider class for Microsoft SharePoint Server 2010.</para>
+      <para>Many named instances of this site map provider are listed in the web.config file, and are also available through static properties on this class that the master pages in SharePoint Server 2010 deliver. SharePoint Server 2010 uses these named instances to provide data to the horizontal and vertical navigation menus. The application shares named instances across all Web requests on the current application domain. The class stores no session information. If necessary, session information is stored on the <see cref="T:System.Web.HttpContext.HttpContext" /> class.</para>
+      <para>When generating navigation elements, the <see cref="T:Microsoft.SharePoint.Publishing.NavigationPortalSiteMapProvider" /> class uses the <b>CachedObject</b> interfaces instead of the actual <see cref="T:Microsoft.SharePoint.SPWeb" /> objects. The <b>PortalSiteMapProvider</b> object uses SharePoint Foundation cacheable access control lists (ACLs) to check permissions as necessary, and checks permissions only once per family of <b>PortalSiteMapProvider</b> objects.</para>
+      <para>Any <b>SPWeb</b> object that has the <see cref="P:Microsoft.SharePoint.SPWeb.HasUniquePerm" /> property set to <b>false</b> is part of a family. If an object's parent has had its ACL permissions checked and the object shares the same rights as the parent, the current object does not need to be checked because the parent has been checked.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public PortalSiteMapProvider ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; PortalSiteMapProvider();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Specifies the default constructor for the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CombinedNavSiteMapProvider">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider CombinedNavSiteMapProvider { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider CombinedNavSiteMapProvider" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CombinedNavSiteMapProvider" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property CombinedNavSiteMapProvider As PortalSiteMapProvider" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider ^ CombinedNavSiteMapProvider { Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" /> object that is attached to the global navigation or top navigation menu by default.</summary>
+        <value>A reference to the <b>PortalSiteMapProvider</b> object.</value>
+        <remarks>
+          <para>For the declaration of this <b>SiteMapProvider</b> object and its default settings, see the web.config file.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateAdditionalSiteMapNodes">
+      <MemberSignature Language="C#" Value="public virtual System.Web.SiteMapNodeCollection CreateAdditionalSiteMapNodes (Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode webNode);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Web.SiteMapNodeCollection CreateAdditionalSiteMapNodes(class Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode webNode) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CreateAdditionalSiteMapNodes(Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateAdditionalSiteMapNodes (webNode As PortalWebSiteMapNode) As SiteMapNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Web::SiteMapNodeCollection ^ CreateAdditionalSiteMapNodes(Microsoft::SharePoint::Publishing::Navigation::PortalWebSiteMapNode ^ webNode);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNodeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webNode" Type="Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode" />
+      </Parameters>
+      <Docs>
+        <param name="webNode">A <b>PortalWebSiteMapNode</b> object that represents a particular Web in navigation.</param>
+        <summary>Enables the addition of <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" /> objects under any <b>PortalWebSiteMapNode</b> object.</summary>
+        <returns>A <b>PortalSiteMapNodeCollection</b> object that represents nodes to add beneath a passed Web node.</returns>
+        <remarks>
+          <para>This method is called after populating the child objects of a <b>PortalWebSiteMapNode</b> object.</para>
+          <para>When overridden in a derived class, you can add a custom <b>PortalSiteMapNode</b> object or an object derived from a <b>PortalSiteMapNode</b> object under the specified Web node in navigation.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following example references the following assemblies:</para>
+          <list type="bullet">
+            <item>
+              <description>System.dll</description>
+            </item>
+            <item>
+              <description>System.Data.dll</description>
+            </item>
+            <item>
+              <description>System.Xml.dll</description>
+            </item>
+            <item>
+              <description>System.Web.dll</description>
+            </item>
+            <item>
+              <description>System.Configuration.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Library.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Publishing.dll</description>
+            </item>
+          </list>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Web;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Navigation;
+using Microsoft.SharePoint.Publishing;
+using Microsoft.SharePoint.Publishing.Navigation;
+
+namespace Microsoft.SDK.SharePointServer.Samples.WebControls
+{
+    class MyPortalSiteMapProvider : PortalSiteMapProvider
+    {
+        // Add nodes to navigation under the root node.
+
+        public override SiteMapNodeCollection CreateAdditionalSiteMapNodes(PortalWebSiteMapNode webNode)
+        {
+
+            // Initialize these variables properly before running this example code.
+            SPQuery query = null;
+            string listName = null;
+
+ 
+
+            // Only add items if this Web node is the root node.
+
+            if (webNode == webNode.PortalProvider.RootNode)
+
+            {
+                SiteMapNodeCollection additionalNodes = new SiteMapNodeCollection();
+ 
+                // Fetch a set of list items to insert.
+                SiteMapNodeCollection myListItems = this.GetCachedListItemsByQuery(
+                    webNode, listName, query, SPContext.Current.Web);
+                foreach (PortalListItemSiteMapNode listItem in myListItems)
+                {
+
+                    // Wrap these list item nodes with ProxySiteMapNodes so that they are security trimmed.
+                    additionalNodes.Add(new ProxySiteMapNode(webNode, webNode, listItem));
+                }
+                return additionalNodes;
+            }
+
+            return null;
+        }
+    }
+}</code>
+          <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports System.Data
+Imports System.Web
+Imports Microsoft.SharePoint
+Imports Microsoft.SharePoint.Navigation
+Imports Microsoft.SharePoint.Publishing
+Imports Microsoft.SharePoint.Publishing.Navigation
+
+Namespace Microsoft.SDK.SharePointServer.Samples.WebControls
+    Friend Class MyPortalSiteMapProvider
+        Inherits PortalSiteMapProvider
+        ' Add nodes to navigation under the root node.
+
+        Public Overrides Function CreateAdditionalSiteMapNodes(ByVal webNode As PortalWebSiteMapNode) As SiteMapNodeCollection
+
+            ' Initialize these variables properly before running this example code.
+            Dim query As SPQuery = Nothing
+            Dim listName As String = Nothing
+
+
+
+            ' Only add items if this Web node is the root node.
+
+            If webNode Is webNode.PortalProvider.RootNode Then
+
+                Dim additionalNodes As New SiteMapNodeCollection()
+
+                ' Fetch a set of list items to insert.
+                Dim myListItems As SiteMapNodeCollection = Me.GetCachedListItemsByQuery(webNode, listName, query, SPContext.Current.Web)
+                For Each listItem As PortalListItemSiteMapNode In myListItems
+
+                    ' Wrap these list item nodes with ProxySiteMapNodes so that they are security trimmed.
+                    additionalNodes.Add(New ProxySiteMapNode(webNode, webNode, listItem))
+                Next listItem
+                Return additionalNodes
+            End If
+
+            Return Nothing
+        End Function
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateCustomSiteMapNode">
+      <MemberSignature Language="C#" Value="public virtual Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode CreateCustomSiteMapNode (Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode webNode, Microsoft.SharePoint.Navigation.SPNavigationNode node, Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode parentNode);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode CreateCustomSiteMapNode(class Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode webNode, class Microsoft.SharePoint.Navigation.SPNavigationNode node, class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode parentNode) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CreateCustomSiteMapNode(Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode,Microsoft.SharePoint.Navigation.SPNavigationNode,Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CreateCustomSiteMapNode (webNode As PortalWebSiteMapNode, node As SPNavigationNode, parentNode As PortalSiteMapNode) As PortalSiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapNode ^ CreateCustomSiteMapNode(Microsoft::SharePoint::Publishing::Navigation::PortalWebSiteMapNode ^ webNode, Microsoft::SharePoint::Navigation::SPNavigationNode ^ node, Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapNode ^ parentNode);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webNode" Type="Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode" />
+        <Parameter Name="node" Type="Microsoft.SharePoint.Navigation.SPNavigationNode" />
+        <Parameter Name="parentNode" Type="Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" />
+      </Parameters>
+      <Docs>
+        <param name="webNode">
+          <b>PortalWebSiteMapNode</b> object that represents the Web site containing the <b>SPNavigationNode</b> object.</param>
+        <param name="node">
+          <b>SPNavigationNode</b> object marked as a custom node.</param>
+        <param name="parentNode">
+          <b>PortalSiteMapNode</b> object that is this node's parent in navigation.</param>
+        <summary>Enables custom handling of any <b>SPNavigationNode</b> objects marked as <b>Custom</b>.</summary>
+        <returns>The <b>PortalSiteMapNode</b> object that represents the custom <b>SPNavigationNode</b> object.</returns>
+        <remarks>
+          <para>SharePoint Server 2010 calls this method when it encounters an <b>SPNavigationNode</b> object with a <b>NodeType</b> property value set to Custo<b />m.</para>
+          <para>When overridden in a derived class, you can create and return a custom <b>PortalSiteMapNode</b> object or an object derived from a <b>PortalSiteMapNode</b> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateErrorPortalSiteMapNode">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode CreateErrorPortalSiteMapNode (Exception e, string url);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode CreateErrorPortalSiteMapNode(class System.Exception e, string url) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CreateErrorPortalSiteMapNode(System.Exception,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateErrorPortalSiteMapNode (e As Exception, url As String) As PortalSiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapNode ^ CreateErrorPortalSiteMapNode(Exception ^ e, System::String ^ url);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.Exception" />
+        <Parameter Name="url" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="e">Reserved for internal use.</param>
+        <param name="url">Reserved for internal use.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateErrorSiteMapNodeCollection">
+      <MemberSignature Language="C#" Value="public System.Web.SiteMapNodeCollection CreateErrorSiteMapNodeCollection (Exception e, string url);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Web.SiteMapNodeCollection CreateErrorSiteMapNodeCollection(class System.Exception e, string url) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CreateErrorSiteMapNodeCollection(System.Exception,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateErrorSiteMapNodeCollection (e As Exception, url As String) As SiteMapNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Web::SiteMapNodeCollection ^ CreateErrorSiteMapNodeCollection(Exception ^ e, System::String ^ url);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNodeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.Exception" />
+        <Parameter Name="url" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="e">Exception</param>
+        <param name="url">Url</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentNavSiteMapProvider">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider CurrentNavSiteMapProvider { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider CurrentNavSiteMapProvider" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CurrentNavSiteMapProvider" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property CurrentNavSiteMapProvider As PortalSiteMapProvider" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider ^ CurrentNavSiteMapProvider { Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" /> object that is attached by default to the current navigation or Quick Launch.</summary>
+        <value>A reference to the <b>PortalSiteMapProvider</b> object.</value>
+        <remarks>
+          <para>For the declaration of this <b>PortalSiteMapProvider</b> object and its default settings, see the web.config file.</para>
+          <para>This <b>PortalSiteMapProvider</b> uses the same settings as the <b>CurrentNavSiteMapProviderNoEncode</b> object, except that its <b>EncodeOutput</b> property is set to <b>true</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentNavSiteMapProviderNoEncode">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider CurrentNavSiteMapProviderNoEncode { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider CurrentNavSiteMapProviderNoEncode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property CurrentNavSiteMapProviderNoEncode As PortalSiteMapProvider" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider ^ CurrentNavSiteMapProviderNoEncode { Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" /> object that is attached to the breadcrumb navigation by default.</summary>
+        <value>A reference to the <b>PortalSiteMapProvider</b> object.</value>
+        <remarks>
+          <para>For the declaration of this <b>PortalSiteMapProvider</b> object and its default settings, see the web.config file.</para>
+          <para>This provider uses the same settings as <b>CurrentNavSiteMapProvider</b> property, except that its</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentNode">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode CurrentNode { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Web.SiteMapNode CurrentNode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CurrentNode" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property CurrentNode As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Web::SiteMapNode ^ CurrentNode { System::Web::SiteMapNode ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" /> object that represents the item a site user is currently visiting.</summary>
+        <value>A <b>PortalSiteMapNode</b> object that represents the item a user is currently visiting.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="currentSite">
+      <MemberSignature Language="C#" Value="protected Microsoft.SharePoint.SPSite currentSite;" />
+      <MemberSignature Language="ILAsm" Value=".field family class Microsoft.SharePoint.SPSite currentSite" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.currentSite" />
+      <MemberSignature Language="VB.NET" Value="Protected currentSite As SPSite " />
+      <MemberSignature Language="C++ CLI" Value="protected: Microsoft::SharePoint::SPSite ^ currentSite;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPSite</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the field that contains a <see cref="T:Microsoft.SharePoint.SPSite" /> object that represents the current site.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentSite">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPSite CurrentSite { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPSite CurrentSite" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CurrentSite" />
+      <MemberSignature Language="VB.NET" Value="Public Property CurrentSite As SPSite" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPSite ^ CurrentSite { Microsoft::SharePoint::SPSite ^ get(); void set(Microsoft::SharePoint::SPSite ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPSite</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <see cref="T:Microsoft.SharePoint.SPSite" /> object that is used by the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" /> object.</summary>
+        <value>An <b>SPSite</b> object that is used by the provider.</value>
+        <remarks>
+          <para>When accessed from within an <b>HttpContext</b> object, this property returns the <see cref="T:Microsoft.SharePoint.SPContext.CurrentSite" /> object. When accessed without an <b>HttpContext</b> object, you must set this property before requesting nodes from the provider.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="currentWeb">
+      <MemberSignature Language="C#" Value="protected Microsoft.SharePoint.SPWeb currentWeb;" />
+      <MemberSignature Language="ILAsm" Value=".field family class Microsoft.SharePoint.SPWeb currentWeb" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.currentWeb" />
+      <MemberSignature Language="VB.NET" Value="Protected currentWeb As SPWeb " />
+      <MemberSignature Language="C++ CLI" Value="protected: Microsoft::SharePoint::SPWeb ^ currentWeb;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPWeb</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the field that contains an <see cref="T:Microsoft.SharePoint.SPWeb" /> object that represents the current Web site.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentWeb">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPWeb CurrentWeb { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPWeb CurrentWeb" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CurrentWeb" />
+      <MemberSignature Language="VB.NET" Value="Public Property CurrentWeb As SPWeb" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPWeb ^ CurrentWeb { Microsoft::SharePoint::SPWeb ^ get(); void set(Microsoft::SharePoint::SPWeb ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPWeb</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <see cref="T:Microsoft.SharePoint.SPWeb" /> object that the <b>PortalSiteMapProvider</b> object uses as a security context.</summary>
+        <value>An <b>SPWeb</b> object that the provider uses as a security context.</value>
+        <remarks>
+          <para>When accessed from within an <b>HttpContext</b> object, this property returns a <see cref="T:Microsoft.SharePoint.SPContext.Current.Web" /> object. When accessed without an <b>HttpContext</b> object, you must set this property before requesting nodes from the provider.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DynamicChildLimit">
+      <MemberSignature Language="C#" Value="public int DynamicChildLimit { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 DynamicChildLimit" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.DynamicChildLimit" />
+      <MemberSignature Language="VB.NET" Value="Public Property DynamicChildLimit As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int DynamicChildLimit { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum number of dynamic child items to show at each level. Dynamic child items are subsites (that is, any <b>SPWeb</b> objects) and pages.</summary>
+        <value>An integer that represents the maximum number of dynamic child items to return.This value defaults to 50. Setting the value to 0 removes the limit.</value>
+        <remarks>
+          <para>You can use this property to limit the effect of poor navigation management. When a Web site has a large number of subsites or pages, and Show subsites or Show pages options are enabled, all items are displayed in the navigation menus. Showing a large number of items in the navigation menu is not useful and can have a negative impact on performance.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EditLinksAlternateAction">
+      <MemberSignature Language="C#" Value="protected static string EditLinksAlternateAction { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string EditLinksAlternateAction" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.EditLinksAlternateAction" />
+      <MemberSignature Language="VB.NET" Value="Protected Shared ReadOnly Property EditLinksAlternateAction As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; static property System::String ^ EditLinksAlternateAction { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EmptyCollection">
+      <MemberSignature Language="C#" Value="public static readonly System.Web.SiteMapNodeCollection EmptyCollection;" />
+      <MemberSignature Language="ILAsm" Value=".field public static initonly class System.Web.SiteMapNodeCollection EmptyCollection" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.EmptyCollection" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly EmptyCollection As SiteMapNodeCollection " />
+      <MemberSignature Language="C++ CLI" Value="public: static initonly System::Web::SiteMapNodeCollection ^ EmptyCollection;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNodeCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the field that contains a read-only empty <see cref="T:Microsoft.SharePoint.Publishing.SiteMapNodeCollection" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EnableAudienceTargeting">
+      <MemberSignature Language="C#" Value="public bool EnableAudienceTargeting { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool EnableAudienceTargeting" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.EnableAudienceTargeting" />
+      <MemberSignature Language="VB.NET" Value="Public Property EnableAudienceTargeting As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool EnableAudienceTargeting { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether to respect audience targeting settings when returning navigation nodes.</summary>
+        <value>
+          <b>true</b> to respect audience targeting settings when returning navigation nodes; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>If you are not using audience trimming features, you might get a performance improvement if you turn off this property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EncodeOutput">
+      <MemberSignature Language="C#" Value="public bool EncodeOutput { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool EncodeOutput" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.EncodeOutput" />
+      <MemberSignature Language="VB.NET" Value="Public Property EncodeOutput As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool EncodeOutput { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether to HTML-encode the <b>Title</b> property of each <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" /> object.</summary>
+        <value>
+          <b>true</b> to encode; otherwise, <b>false</b>.This property value defaults to <b>false</b>.</value>
+        <remarks>
+          <para>Use this property when attaching the provider to the ASP.NET Menu control, which does not HTML-encode the <b>Title</b> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FindSiteMapNode">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode FindSiteMapNode (string rawUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNode FindSiteMapNode(string rawUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.FindSiteMapNode(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function FindSiteMapNode (rawUrl As String) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNode ^ FindSiteMapNode(System::String ^ rawUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rawUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="rawUrl">The URL of the requested node.</param>
+        <summary>Returns the <b>PortalSiteMapNode</b> object for a specified URL and context.</summary>
+        <returns>A <b>PortalSiteMapNode</b> object that represents the item at the requested URL.</returns>
+        <remarks>
+          <para>The <paramref name="currentContext" /> parameter is used to determine the correct items to return.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FindSiteMapNode">
+      <MemberSignature Language="C#" Value="public System.Web.SiteMapNode FindSiteMapNode (string rawUrl, Microsoft.SharePoint.SPWeb currentContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Web.SiteMapNode FindSiteMapNode(string rawUrl, class Microsoft.SharePoint.SPWeb currentContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.FindSiteMapNode(System.String,Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Function FindSiteMapNode (rawUrl As String, currentContext As SPWeb) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Web::SiteMapNode ^ FindSiteMapNode(System::String ^ rawUrl, Microsoft::SharePoint::SPWeb ^ currentContext);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rawUrl" Type="System.String" />
+        <Parameter Name="currentContext" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="rawUrl">A string that contains the URL of the requested node.</param>
+        <param name="currentContext">An <b>SPWeb</b> object that represents the context of the current user for rights checking.</param>
+        <summary>Returns the <b>PortalSiteMapNode</b> for the given URL.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FlattenHeadings">
+      <MemberSignature Language="C#" Value="public bool FlattenHeadings { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool FlattenHeadings" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.FlattenHeadings" />
+      <MemberSignature Language="VB.NET" Value="Public Property FlattenHeadings As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool FlattenHeadings { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that represents whether to flatten heading nodes.</summary>
+        <value>
+          <b>true</b> to have the provider remove heading nodes from the hierarchy but still return their child objects.</value>
+        <remarks>
+          <para>Flattening a heading node removes it from the hierarchy but includes all of its child objects in its place.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCachedList">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.PortalListSiteMapNode GetCachedList (Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode webNode, string listName, Microsoft.SharePoint.SPWeb contextWeb);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Navigation.PortalListSiteMapNode GetCachedList(class Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode webNode, string listName, class Microsoft.SharePoint.SPWeb contextWeb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetCachedList(Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode,System.String,Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCachedList (webNode As PortalWebSiteMapNode, listName As String, contextWeb As SPWeb) As PortalListSiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Navigation::PortalListSiteMapNode ^ GetCachedList(Microsoft::SharePoint::Publishing::Navigation::PortalWebSiteMapNode ^ webNode, System::String ^ listName, Microsoft::SharePoint::SPWeb ^ contextWeb);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalListSiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webNode" Type="Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode" />
+        <Parameter Name="listName" Type="System.String" />
+        <Parameter Name="contextWeb" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="webNode">
+          <b>PortalWebSiteMapNode</b> object that represents the Web site that contains the list of interest.</param>
+        <param name="listName">The name of the list of interest.</param>
+        <param name="contextWeb">The Web site that exists within the context of the current user. For example, this parameter can be set to <b>SPContext.Current.Web</b>.</param>
+        <summary>Gets a <b>PortalListSiteMapNode</b> object that represents a specified <see cref="T:Microsoft.SharePoint.SPList" /> object.</summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>The <paramref name="contextWeb" /> parameter determines the correct items to return.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCachedListItemsByQuery">
+      <MemberSignature Language="C#" Value="public System.Web.SiteMapNodeCollection GetCachedListItemsByQuery (Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode webNode, string listName, Microsoft.SharePoint.SPQuery query, Microsoft.SharePoint.SPWeb contextWeb);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Web.SiteMapNodeCollection GetCachedListItemsByQuery(class Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode webNode, string listName, class Microsoft.SharePoint.SPQuery query, class Microsoft.SharePoint.SPWeb contextWeb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetCachedListItemsByQuery(Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode,System.String,Microsoft.SharePoint.SPQuery,Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCachedListItemsByQuery (webNode As PortalWebSiteMapNode, listName As String, query As SPQuery, contextWeb As SPWeb) As SiteMapNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Web::SiteMapNodeCollection ^ GetCachedListItemsByQuery(Microsoft::SharePoint::Publishing::Navigation::PortalWebSiteMapNode ^ webNode, System::String ^ listName, Microsoft::SharePoint::SPQuery ^ query, Microsoft::SharePoint::SPWeb ^ contextWeb);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNodeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webNode" Type="Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode" />
+        <Parameter Name="listName" Type="System.String" />
+        <Parameter Name="query" Type="Microsoft.SharePoint.SPQuery" />
+        <Parameter Name="contextWeb" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="webNode">The <b>PortalWebSiteMapNode</b> object that represents the Web site that contains the list of interest.</param>
+        <param name="listName">The name of the list of interest.</param>
+        <param name="query">The <b>SPQuery</b> object to run against the list.</param>
+        <param name="contextWeb">The <b>SPWeb</b> object that exists within the context of a particular user. For example, this parameter can specify the <b>SPContext.Current.Web</b> object for the current user.</param>
+        <summary>Gets a collection of <b>PortalListItemSiteMapNode</b> objects that represent the list items returned by a specified query.</summary>
+        <returns>A <b>SiteMapNodeCollection</b> object that contains <b>PortalListItemSiteMapNode</b> objects that represent the items returned by the query.</returns>
+        <remarks>
+          <para>The <paramref name="contextWeb" /> parameter is used to determine the correct list items to return.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following example references the following assemblies:</para>
+          <list type="bullet">
+            <item>
+              <description>System.dll</description>
+            </item>
+            <item>
+              <description>System.Data.dll</description>
+            </item>
+            <item>
+              <description>System.Xml.dll</description>
+            </item>
+            <item>
+              <description>System.Web.dll</description>
+            </item>
+            <item>
+              <description>System.Configuration.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Library.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Publishing.dll</description>
+            </item>
+          </list>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Web;
+
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Navigation;
+
+using Microsoft.SharePoint.Publishing;
+using Microsoft.SharePoint.Publishing.Navigation;
+
+
+namespace Microsoft.SDK.SharePointServer.Samples
+
+{
+
+    class GetCachedListItemSample
+
+    {
+
+        // Get a list of the created dates for the list items returned by the 
+        // given query when run against the cache.
+        // Note: You must call this method from within an
+        // HttpContext object (that is, HttpContext.Current must return a
+        // valid HttpContext)
+
+        public static List&amp;lt;DateTime&amp;gt;GetCachedListItemCreatedDates(
+            string serverRelativeWebUrl, string listName, SPQuery query)
+
+        {
+
+            List&amp;lt;DateTime&amp;gt; createdDates = null;
+
+             // Get a reference to the current navigation provider 
+            // (that is, the one that doesn't HTML-encode titles).
+
+            PortalSiteMapProvider portalProvider = 
+              PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode;
+
+            // Look up the node for the given Web site URL.
+
+            PortalWebSiteMapNode webNode = 
+
+                portalProvider.FindSiteMapNode(serverRelativeWebUrl) as PortalWebSiteMapNode;
+
+            if (webNode != null)
+
+            {
+
+                // Retrieve nodes representing the list items returned from the 
+                // given query, performed on the given list.
+
+                SiteMapNodeCollection listItemNodes = portalProvider.GetCachedListItemsByQuery(
+
+                        webNode, listName, query, SPContext.Current.Web);
+
+                createdDates = new List&amp;lt;DateTime&amp;gt;(listItemNodes.Count);
+                foreach (PortalListItemSiteMapNode listItemNode in listItemNodes)
+
+                {
+
+                    // Use the indexer to access a particular field, and add the value to
+                    // the list.
+
+                    createdDates.Add((DateTime)listItemNode[SPBuiltInFieldId.Created]);
+
+                }
+
+            }
+
+            // Return the list of titles.
+
+            return createdDates;
+
+        }
+    }
+}</code>
+          <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports System.Data
+Imports System.Web
+
+Imports Microsoft.SharePoint
+Imports Microsoft.SharePoint.Navigation
+
+Imports Microsoft.SharePoint.Publishing
+Imports Microsoft.SharePoint.Publishing.Navigation
+
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+
+
+    Friend Class GetCachedListItemSample
+
+
+        ' Get a list of the created dates for the list items returned by the 
+        ' given query when run against the cache.
+        ' Note: You must call this method from within an
+        ' HttpContext object (that is, HttpContext.Current must return a
+        ' valid HttpContext)
+
+        Public Shared Function GetCachedListItemCreatedDates(ByVal serverRelativeWebUrl As String, ByVal listName As String, ByVal query As SPQuery) As List(Of Date)
+
+
+            Dim createdDates As List(Of Date) = Nothing
+
+             ' Get a reference to the current navigation provider 
+            ' (that is, the one that doesn't HTML-encode titles).
+
+            Dim portalProvider As PortalSiteMapProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode
+
+            ' Look up the node for the given Web site URL.
+
+            Dim webNode As PortalWebSiteMapNode = TryCast(portalProvider.FindSiteMapNode(serverRelativeWebUrl), PortalWebSiteMapNode)
+
+            If webNode IsNot Nothing Then
+
+
+                ' Retrieve nodes representing the list items returned from the 
+                ' given query, performed on the given list.
+
+                Dim listItemNodes As SiteMapNodeCollection = portalProvider.GetCachedListItemsByQuery(webNode, listName, query, SPContext.Current.Web)
+
+                createdDates = New List(Of Date)(listItemNodes.Count)
+                For Each listItemNode As PortalListItemSiteMapNode In listItemNodes
+
+
+                    ' Use the indexer to access a particular field, and add the value to
+                    ' the list.
+
+                    createdDates.Add(CDate(listItemNode(SPBuiltInFieldId.Created)))
+
+                Next listItemNode
+
+            End If
+
+            ' Return the list of titles.
+
+            Return createdDates
+
+        End Function
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCachedSiteDataQuery">
+      <MemberSignature Language="C#" Value="public System.Data.DataTable GetCachedSiteDataQuery (Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode webNode, Microsoft.SharePoint.SPSiteDataQuery query, Microsoft.SharePoint.SPWeb contextWeb);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Data.DataTable GetCachedSiteDataQuery(class Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode webNode, class Microsoft.SharePoint.SPSiteDataQuery query, class Microsoft.SharePoint.SPWeb contextWeb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetCachedSiteDataQuery(Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode,Microsoft.SharePoint.SPSiteDataQuery,Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCachedSiteDataQuery (webNode As PortalWebSiteMapNode, query As SPSiteDataQuery, contextWeb As SPWeb) As DataTable" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Data::DataTable ^ GetCachedSiteDataQuery(Microsoft::SharePoint::Publishing::Navigation::PortalWebSiteMapNode ^ webNode, Microsoft::SharePoint::SPSiteDataQuery ^ query, Microsoft::SharePoint::SPWeb ^ contextWeb);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.DataTable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webNode" Type="Microsoft.SharePoint.Publishing.Navigation.PortalWebSiteMapNode" />
+        <Parameter Name="query" Type="Microsoft.SharePoint.SPSiteDataQuery" />
+        <Parameter Name="contextWeb" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="webNode">
+          <b>PortalWebSiteMapNode</b> object that represents the Web site that contains the data.</param>
+        <param name="query">The <b>SPSiteDataQuery</b> to run.</param>
+        <param name="contextWeb">The <b>SPWeb</b> object that exists within the context of a particular user. For example, this parameter can specify the <b>SPContext.Current.Web</b> object.</param>
+        <summary>Returns the cached result of a <b>SiteDataQuery</b> object. </summary>
+        <returns>The result returns only major or minor versions, not items that are checked out to the current user.</returns>
+        <remarks>
+          <para>The <paramref name="contextWeb" /> parameter is used to determine the correct items to return.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following example references the following assemblies:</para>
+          <list type="bullet">
+            <item>
+              <description>System.dll</description>
+            </item>
+            <item>
+              <description>System.Data.dll</description>
+            </item>
+            <item>
+              <description>System.Xml.dll</description>
+            </item>
+            <item>
+              <description>System.Web.dll</description>
+            </item>
+            <item>
+              <description>System.Configuration.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Library.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Publishing.dll</description>
+            </item>
+          </list>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Web;
+
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Navigation;
+
+using Microsoft.SharePoint.Publishing;
+using Microsoft.SharePoint.Publishing.Navigation;
+
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    class GetCachedSiteDataQuerySample
+    {
+        // Runs a given site data query against the cache and returns the results.
+        // Note: You must call this method from within an HttpContext object (for example, HttpContext.Current 
+        // must return a valid HttpContext).
+
+        public DataTable GetCachedSiteDataQuery(string webUrl, SPSiteDataQuery siteDataQuery)
+        {
+            PortalSiteMapProvider portalProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode;
+            PortalWebSiteMapNode webNode = portalProvider.FindSiteMapNode(webUrl) as PortalWebSiteMapNode;
+            if (webNode != null)
+            {
+                return portalProvider.GetCachedSiteDataQuery(
+                    webNode, siteDataQuery, SPContext.Current.Web);
+            }
+            return null;
+        }
+
+    }
+
+}</code>
+          <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports System.Data
+Imports System.Web
+
+Imports Microsoft.SharePoint
+Imports Microsoft.SharePoint.Navigation
+
+Imports Microsoft.SharePoint.Publishing
+Imports Microsoft.SharePoint.Publishing.Navigation
+
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Friend Class GetCachedSiteDataQuerySample
+        ' Runs a given site data query against the cache and returns the results.
+        ' Note: You must call this method from within an HttpContext object (for example, HttpContext.Current 
+        ' must return a valid HttpContext).
+
+        Public Function GetCachedSiteDataQuery(ByVal webUrl As String, ByVal siteDataQuery As SPSiteDataQuery) As DataTable
+            Dim portalProvider As PortalSiteMapProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode
+            Dim webNode As PortalWebSiteMapNode = TryCast(portalProvider.FindSiteMapNode(webUrl), PortalWebSiteMapNode)
+            If webNode IsNot Nothing Then
+                Return portalProvider.GetCachedSiteDataQuery(webNode, siteDataQuery, SPContext.Current.Web)
+            End If
+            Return Nothing
+        End Function
+
+    End Class
+
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChildNodes">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNodeCollection GetChildNodes (System.Web.SiteMapNode node);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNodeCollection GetChildNodes(class System.Web.SiteMapNode node) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetChildNodes(System.Web.SiteMapNode)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChildNodes (node As SiteMapNode) As SiteMapNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNodeCollection ^ GetChildNodes(System::Web::SiteMapNode ^ node);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNodeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="System.Web.SiteMapNode" />
+      </Parameters>
+      <Docs>
+        <param name="node">The node whose children are returned.</param>
+        <summary>Returns a security-trimmed collection of child nodes from a specified parent node.</summary>
+        <returns>A security-trimmed <b>SiteMapNodeCollection</b> object of child nodes.</returns>
+        <remarks>To be added.</remarks>
+        <example>
+          <para>The following example references the following assemblies:</para>
+          <list type="bullet">
+            <item>
+              <description>System.dll</description>
+            </item>
+            <item>
+              <description>System.Data.dll</description>
+            </item>
+            <item>
+              <description>System.Xml.dll</description>
+            </item>
+            <item>
+              <description>System.Web.dll</description>
+            </item>
+            <item>
+              <description>System.Configuration.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Library.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Publishing.dll</description>
+            </item>
+          </list>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Web;
+
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Navigation;
+
+using Microsoft.SharePoint.Publishing;
+using Microsoft.SharePoint.Publishing.Navigation;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    class GetChildNodesSample
+    {
+        // Get a list of the navigation headings beneath a specified
+        // Web cell in current navigation. This method must be called from
+        // within a current and valid HttpContext object.
+        public static List&amp;lt;string&amp;gt;GetNavigationHeadingTitles(string serverRelativeWebUrl)
+        {
+            List&amp;lt;string&amp;gt; titles = null;
+
+            // Get a reference to the current navigation provider:
+            // the one that doesn't HTML-encode titles.
+            PortalSiteMapProvider portalProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode;
+            // Look up the node for the given Web site URL.
+            PortalWebSiteMapNode webNode = 
+                portalProvider.FindSiteMapNode(serverRelativeWebUrl) as PortalWebSiteMapNode;
+
+            if (webNode != null)
+            {
+                // Retrieve the heading nodes beneath the 
+                // specified Web site.
+                SiteMapNodeCollection headingNodes = 
+                    portalProvider.GetChildNodes(webNode, NodeTypes.Heading, NodeTypes.None);
+
+                titles = new List&amp;lt;string&amp;gt;(headingNodes.Count);
+
+                foreach (PortalSiteMapNode headingNode in headingNodes)
+                {
+                    // Add the title to the list.
+                    titles.Add(headingNode.Title);
+                }
+            }
+
+            // Return the list of titles.
+            return titles;
+        }
+    }
+}</code>
+          <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports System.Data
+Imports System.Web
+
+Imports Microsoft.SharePoint
+Imports Microsoft.SharePoint.Navigation
+
+Imports Microsoft.SharePoint.Publishing
+Imports Microsoft.SharePoint.Publishing.Navigation
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Friend Class GetChildNodesSample
+        ' Get a list of the navigation headings beneath a specified
+        ' Web cell in current navigation. This method must be called from
+        ' within a current and valid HttpContext object.
+        Public Shared Function GetNavigationHeadingTitles(ByVal serverRelativeWebUrl As String) As List(Of String)
+            Dim titles As List(Of String) = Nothing
+
+            ' Get a reference to the current navigation provider:
+            ' the one that doesn't HTML-encode titles.
+            Dim portalProvider As PortalSiteMapProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode
+            ' Look up the node for the given Web site URL.
+            Dim webNode As PortalWebSiteMapNode = TryCast(portalProvider.FindSiteMapNode(serverRelativeWebUrl), PortalWebSiteMapNode)
+
+            If webNode IsNot Nothing Then
+                ' Retrieve the heading nodes beneath the 
+                ' specified Web site.
+                Dim headingNodes As SiteMapNodeCollection = portalProvider.GetChildNodes(webNode, NodeTypes.Heading, NodeTypes.None)
+
+                titles = New List(Of String)(headingNodes.Count)
+
+                For Each headingNode As PortalSiteMapNode In headingNodes
+                    ' Add the title to the list.
+                    titles.Add(headingNode.Title)
+                Next headingNode
+            End If
+
+            ' Return the list of titles.
+            Return titles
+        End Function
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChildNodes">
+      <MemberSignature Language="C#" Value="public virtual System.Web.SiteMapNodeCollection GetChildNodes (Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode node, Microsoft.SharePoint.Publishing.NodeTypes includedHiddenTypes);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Web.SiteMapNodeCollection GetChildNodes(class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode node, valuetype Microsoft.SharePoint.Publishing.NodeTypes includedHiddenTypes) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetChildNodes(Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode,Microsoft.SharePoint.Publishing.NodeTypes)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetChildNodes (node As PortalSiteMapNode, includedHiddenTypes As NodeTypes) As SiteMapNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Web::SiteMapNodeCollection ^ GetChildNodes(Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapNode ^ node, Microsoft::SharePoint::Publishing::NodeTypes includedHiddenTypes);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNodeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" />
+        <Parameter Name="includedHiddenTypes" Type="Microsoft.SharePoint.Publishing.NodeTypes" />
+      </Parameters>
+      <Docs>
+        <param name="node">The node whose children are returned.</param>
+        <param name="includedHiddenTypes">The types to return even if hidden.</param>
+        <summary>Returns a security-trimmed collection of child nodes of a specified node type from a specified parent.</summary>
+        <returns>A <see cref="T:Microsoft.SharePoint.SiteMapNodeCollection" /> object of child nodes security-trimmed for the current user.</returns>
+        <remarks>
+          <para>This object passes to a <see cref="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode.GetNavigationChildren(Microsoft.SharePoint.Publishing.NodeTypes)" /> method.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following example references the following assemblies:</para>
+          <list type="bullet">
+            <item>
+              <description>System.dll</description>
+            </item>
+            <item>
+              <description>System.Data.dll</description>
+            </item>
+            <item>
+              <description>System.Xml.dll</description>
+            </item>
+            <item>
+              <description>System.Web.dll</description>
+            </item>
+            <item>
+              <description>System.Configuration.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Library.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Publishing.dll</description>
+            </item>
+          </list>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Web;
+
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Navigation;
+
+using Microsoft.SharePoint.Publishing;
+using Microsoft.SharePoint.Publishing.Navigation;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    class GetChildNodesSample
+    {
+        // Get a list of the navigation headings beneath a specified
+        // Web site in current navigation. This method must be called from
+        // within a current and valid HttpContext object.
+        public static List&amp;lt;string&amp;gt;GetNavigationHeadingTitles(string serverRelativeWebUrl)
+        {
+            List&amp;lt;string&amp;gt; titles = null;
+
+            // Get a reference to the current navigation provider:
+            // the one that doesn't HTML-encode titles.
+            PortalSiteMapProvider portalProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode;
+            // Look up the node for the given Web site URL.
+            PortalWebSiteMapNode webNode = 
+                portalProvider.FindSiteMapNode(serverRelativeWebUrl) as PortalWebSiteMapNode;
+
+            if (webNode != null)
+            {
+                // Retrieve the heading nodes beneath the 
+                // specified Web site.
+                SiteMapNodeCollection headingNodes = 
+                    portalProvider.GetChildNodes(webNode, NodeTypes.Heading, NodeTypes.None);
+
+                titles = new List&amp;lt;string&amp;gt;(headingNodes.Count);
+
+                foreach (PortalSiteMapNode headingNode in headingNodes)
+                {
+                    // Add the title to the list.
+                    titles.Add(headingNode.Title);
+                }
+            }
+
+            // Return the list of titles.
+            return titles;
+        }
+    }
+}</code>
+          <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports System.Data
+Imports System.Web
+
+Imports Microsoft.SharePoint
+Imports Microsoft.SharePoint.Navigation
+
+Imports Microsoft.SharePoint.Publishing
+Imports Microsoft.SharePoint.Publishing.Navigation
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Friend Class GetChildNodesSample
+        ' Get a list of the navigation headings beneath a specified
+        ' Web site in current navigation. This method must be called from
+        ' within a current and valid HttpContext object.
+        Public Shared Function GetNavigationHeadingTitles(ByVal serverRelativeWebUrl As String) As List(Of String)
+            Dim titles As List(Of String) = Nothing
+
+            ' Get a reference to the current navigation provider:
+            ' the one that doesn't HTML-encode titles.
+            Dim portalProvider As PortalSiteMapProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode
+            ' Look up the node for the given Web site URL.
+            Dim webNode As PortalWebSiteMapNode = TryCast(portalProvider.FindSiteMapNode(serverRelativeWebUrl), PortalWebSiteMapNode)
+
+            If webNode IsNot Nothing Then
+                ' Retrieve the heading nodes beneath the 
+                ' specified Web site.
+                Dim headingNodes As SiteMapNodeCollection = portalProvider.GetChildNodes(webNode, NodeTypes.Heading, NodeTypes.None)
+
+                titles = New List(Of String)(headingNodes.Count)
+
+                For Each headingNode As PortalSiteMapNode In headingNodes
+                    ' Add the title to the list.
+                    titles.Add(headingNode.Title)
+                Next headingNode
+            End If
+
+            ' Return the list of titles.
+            Return titles
+        End Function
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChildNodes">
+      <MemberSignature Language="C#" Value="public virtual System.Web.SiteMapNodeCollection GetChildNodes (Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode node, Microsoft.SharePoint.Publishing.NodeTypes includedTypes, Microsoft.SharePoint.Publishing.NodeTypes includedHiddenTypes);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Web.SiteMapNodeCollection GetChildNodes(class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode node, valuetype Microsoft.SharePoint.Publishing.NodeTypes includedTypes, valuetype Microsoft.SharePoint.Publishing.NodeTypes includedHiddenTypes) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetChildNodes(Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode,Microsoft.SharePoint.Publishing.NodeTypes,Microsoft.SharePoint.Publishing.NodeTypes)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetChildNodes (node As PortalSiteMapNode, includedTypes As NodeTypes, includedHiddenTypes As NodeTypes) As SiteMapNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Web::SiteMapNodeCollection ^ GetChildNodes(Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapNode ^ node, Microsoft::SharePoint::Publishing::NodeTypes includedTypes, Microsoft::SharePoint::Publishing::NodeTypes includedHiddenTypes);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNodeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" />
+        <Parameter Name="includedTypes" Type="Microsoft.SharePoint.Publishing.NodeTypes" />
+        <Parameter Name="includedHiddenTypes" Type="Microsoft.SharePoint.Publishing.NodeTypes" />
+      </Parameters>
+      <Docs>
+        <param name="node">The node whose child nodes are returned.</param>
+        <param name="includedTypes">The types of child nodes to return.</param>
+        <param name="includedHiddenTypes">The types to return even if hidden.</param>
+        <summary>Returns a security-trimmed collection of child nodes for a specified parent node, specified node types to include, and specified node types to include if hidden.</summary>
+        <returns>A <see cref="T:Microsoft.SharePoint.Publishing.SiteMapNodeCollection" /> object of child nodes security-trimmed for the current user.</returns>
+        <remarks>To be added.</remarks>
+        <example>
+          <para>The following example references the following assemblies:</para>
+          <list type="bullet">
+            <item>
+              <description>System.dll</description>
+            </item>
+            <item>
+              <description>System.Data.dll</description>
+            </item>
+            <item>
+              <description>System.Xml.dll</description>
+            </item>
+            <item>
+              <description>System.Web.dll</description>
+            </item>
+            <item>
+              <description>System.Configuration.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Library.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Publishing.dll</description>
+            </item>
+          </list>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Web;
+
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Navigation;
+
+using Microsoft.SharePoint.Publishing;
+using Microsoft.SharePoint.Publishing.Navigation;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    class GetChildNodesSample
+    {
+        // Get a list of the navigation headings beneath a specified
+        // Web site in current navigation. This method must be called from
+        // within a current and valid HttpContext object.
+        public static List&amp;lt;string&amp;gt;GetNavigationHeadingTitles(string serverRelativeWebUrl)
+        {
+            List&amp;lt;string&amp;gt; titles = null;
+
+            // Get a reference to the current navigation provider:
+            // the one that doesn't HTML-encode titles.
+            PortalSiteMapProvider portalProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode;
+            // Look up the node for the given Web site URL.
+            PortalWebSiteMapNode webNode = 
+                portalProvider.FindSiteMapNode(serverRelativeWebUrl) as PortalWebSiteMapNode;
+
+            if (webNode != null)
+            {
+                // Retrieve the heading nodes beneath the 
+                // specified Web site.
+                SiteMapNodeCollection headingNodes = 
+                    portalProvider.GetChildNodes(webNode, NodeTypes.Heading, NodeTypes.None);
+
+                titles = new List&amp;lt;string&amp;gt;(headingNodes.Count);
+
+                foreach (PortalSiteMapNode headingNode in headingNodes)
+                {
+                    // Add the title to the list.
+                    titles.Add(headingNode.Title);
+                }
+            }
+
+            // Return the list of titles.
+            return titles;
+        }
+    }
+}</code>
+          <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports System.Data
+Imports System.Web
+
+Imports Microsoft.SharePoint
+Imports Microsoft.SharePoint.Navigation
+
+Imports Microsoft.SharePoint.Publishing
+Imports Microsoft.SharePoint.Publishing.Navigation
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Friend Class GetChildNodesSample
+        ' Get a list of the navigation headings beneath a specified
+        ' Web site in current navigation. This method must be called from
+        ' within a current and valid HttpContext object.
+        Public Shared Function GetNavigationHeadingTitles(ByVal serverRelativeWebUrl As String) As List(Of String)
+            Dim titles As List(Of String) = Nothing
+
+            ' Get a reference to the current navigation provider:
+            ' the one that doesn't HTML-encode titles.
+            Dim portalProvider As PortalSiteMapProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode
+            ' Look up the node for the given Web site URL.
+            Dim webNode As PortalWebSiteMapNode = TryCast(portalProvider.FindSiteMapNode(serverRelativeWebUrl), PortalWebSiteMapNode)
+
+            If webNode IsNot Nothing Then
+                ' Retrieve the heading nodes beneath the 
+                ' specified Web site.
+                Dim headingNodes As SiteMapNodeCollection = portalProvider.GetChildNodes(webNode, NodeTypes.Heading, NodeTypes.None)
+
+                titles = New List(Of String)(headingNodes.Count)
+
+                For Each headingNode As PortalSiteMapNode In headingNodes
+                    ' Add the title to the list.
+                    titles.Add(headingNode.Title)
+                Next headingNode
+            End If
+
+            ' Return the list of titles.
+            Return titles
+        End Function
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChildNodes">
+      <MemberSignature Language="C#" Value="public System.Web.SiteMapNodeCollection GetChildNodes (Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode node, Microsoft.SharePoint.Publishing.NodeTypes includedTypes, Microsoft.SharePoint.Publishing.NodeTypes includedHiddenTypes, Microsoft.SharePoint.Publishing.NodeOrder ordering, bool ascending);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Web.SiteMapNodeCollection GetChildNodes(class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode node, valuetype Microsoft.SharePoint.Publishing.NodeTypes includedTypes, valuetype Microsoft.SharePoint.Publishing.NodeTypes includedHiddenTypes, valuetype Microsoft.SharePoint.Publishing.NodeOrder ordering, bool ascending) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetChildNodes(Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode,Microsoft.SharePoint.Publishing.NodeTypes,Microsoft.SharePoint.Publishing.NodeTypes,Microsoft.SharePoint.Publishing.NodeOrder,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetChildNodes (node As PortalSiteMapNode, includedTypes As NodeTypes, includedHiddenTypes As NodeTypes, ordering As NodeOrder, ascending As Boolean) As SiteMapNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Web::SiteMapNodeCollection ^ GetChildNodes(Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapNode ^ node, Microsoft::SharePoint::Publishing::NodeTypes includedTypes, Microsoft::SharePoint::Publishing::NodeTypes includedHiddenTypes, Microsoft::SharePoint::Publishing::NodeOrder ordering, bool ascending);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNodeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" />
+        <Parameter Name="includedTypes" Type="Microsoft.SharePoint.Publishing.NodeTypes" />
+        <Parameter Name="includedHiddenTypes" Type="Microsoft.SharePoint.Publishing.NodeTypes" />
+        <Parameter Name="ordering" Type="Microsoft.SharePoint.Publishing.NodeOrder" />
+        <Parameter Name="ascending" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="node">Reserved for internal use.</param>
+        <param name="includedTypes">Reserved for internal use.</param>
+        <param name="includedHiddenTypes">Reserved for internal use.</param>
+        <param name="ordering">Reserved for internal use.</param>
+        <param name="ascending">Reserved for internal use.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChildNodes">
+      <MemberSignature Language="C#" Value="public virtual System.Web.SiteMapNodeCollection GetChildNodes (Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode node, Microsoft.SharePoint.Publishing.NodeTypes includedTypes, Microsoft.SharePoint.Publishing.NodeTypes includedHiddenTypes, Microsoft.SharePoint.Publishing.OrderingMethod ordering, Microsoft.SharePoint.Publishing.AutomaticSortingMethod method, bool ascending, int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Web.SiteMapNodeCollection GetChildNodes(class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode node, valuetype Microsoft.SharePoint.Publishing.NodeTypes includedTypes, valuetype Microsoft.SharePoint.Publishing.NodeTypes includedHiddenTypes, valuetype Microsoft.SharePoint.Publishing.OrderingMethod ordering, valuetype Microsoft.SharePoint.Publishing.AutomaticSortingMethod method, bool ascending, int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetChildNodes(Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode,Microsoft.SharePoint.Publishing.NodeTypes,Microsoft.SharePoint.Publishing.NodeTypes,Microsoft.SharePoint.Publishing.OrderingMethod,Microsoft.SharePoint.Publishing.AutomaticSortingMethod,System.Boolean,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetChildNodes (node As PortalSiteMapNode, includedTypes As NodeTypes, includedHiddenTypes As NodeTypes, ordering As OrderingMethod, method As AutomaticSortingMethod, ascending As Boolean, lcid As Integer) As SiteMapNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Web::SiteMapNodeCollection ^ GetChildNodes(Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapNode ^ node, Microsoft::SharePoint::Publishing::NodeTypes includedTypes, Microsoft::SharePoint::Publishing::NodeTypes includedHiddenTypes, Microsoft::SharePoint::Publishing::OrderingMethod ordering, Microsoft::SharePoint::Publishing::AutomaticSortingMethod method, bool ascending, int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNodeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" />
+        <Parameter Name="includedTypes" Type="Microsoft.SharePoint.Publishing.NodeTypes" />
+        <Parameter Name="includedHiddenTypes" Type="Microsoft.SharePoint.Publishing.NodeTypes" />
+        <Parameter Name="ordering" Type="Microsoft.SharePoint.Publishing.OrderingMethod" />
+        <Parameter Name="method" Type="Microsoft.SharePoint.Publishing.AutomaticSortingMethod" />
+        <Parameter Name="ascending" Type="System.Boolean" />
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="node">The node whose child nodes are returned.</param>
+        <param name="includedTypes">The types of child nodes to return.</param>
+        <param name="includedHiddenTypes">The types to return even if hidden.</param>
+        <param name="ordering">The type of ordering to use.</param>
+        <param name="method">The method of sorting to use with automatic sorting.</param>
+        <param name="ascending">Whether to use ascending or descending order.</param>
+        <param name="lcid">The locale ID to use for culture sorting.</param>
+        <summary>Returns a sorted, security-trimmed collection of child nodes for a specified parent node, types of nodes to include, types of hidden nodes to include, and sorting options.</summary>
+        <returns>A collection of child nodes of types specified that are sorted as specified.</returns>
+        <remarks>To be added.</remarks>
+        <example>
+          <para>The following example references the following assemblies:</para>
+          <list type="bullet">
+            <item>
+              <description>System.dll</description>
+            </item>
+            <item>
+              <description>System.Data.dll</description>
+            </item>
+            <item>
+              <description>System.Xml.dll</description>
+            </item>
+            <item>
+              <description>System.Web.dll</description>
+            </item>
+            <item>
+              <description>System.Configuration.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Library.dll</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint.Publishing.dll</description>
+            </item>
+          </list>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data;
+using System.Web;
+
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Navigation;
+
+using Microsoft.SharePoint.Publishing;
+using Microsoft.SharePoint.Publishing.Navigation;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    class GetChildNodesSample
+    {
+        // Get a list of the navigation headings beneath a specified
+        // Web site in current navigation. This method must be called from
+        // within a current and valid HttpContext object.
+        public static List&amp;lt;string&amp;gt;GetNavigationHeadingTitles(string serverRelativeWebUrl)
+        {
+            List&amp;lt;string&amp;gt; titles = null;
+
+            // Get a reference to the current navigation provider:
+            // the one that doesn't HTML-encode titles.
+            PortalSiteMapProvider portalProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode;
+            // lookup the node for the given Web site URL.
+            PortalWebSiteMapNode webNode = 
+                portalProvider.FindSiteMapNode(serverRelativeWebUrl) as PortalWebSiteMapNode;
+
+            if (webNode != null)
+            {
+                // Retrieve the heading nodes beneath the 
+                // specified Web site.
+                SiteMapNodeCollection headingNodes = 
+                    portalProvider.GetChildNodes(webNode, NodeTypes.Heading, NodeTypes.None);
+
+                titles = new List&amp;lt;string&amp;gt;(headingNodes.Count);
+
+                foreach (PortalSiteMapNode headingNode in headingNodes)
+                {
+                    // Add the title to the list.
+                    titles.Add(headingNode.Title);
+                }
+            }
+
+            // Return the list of titles.
+            return titles;
+        }
+    }
+}</code>
+          <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports System.Data
+Imports System.Web
+
+Imports Microsoft.SharePoint
+Imports Microsoft.SharePoint.Navigation
+
+Imports Microsoft.SharePoint.Publishing
+Imports Microsoft.SharePoint.Publishing.Navigation
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Friend Class GetChildNodesSample
+        ' Get a list of the navigation headings beneath a specified
+        ' Web site in current navigation. This method must be called from
+        ' within a current and valid HttpContext object.
+        Public Shared Function GetNavigationHeadingTitles(ByVal serverRelativeWebUrl As String) As List(Of String)
+            Dim titles As List(Of String) = Nothing
+
+            ' Get a reference to the current navigation provider:
+            ' the one that doesn't HTML-encode titles.
+            Dim portalProvider As PortalSiteMapProvider = PortalSiteMapProvider.CurrentNavSiteMapProviderNoEncode
+            ' lookup the node for the given Web site URL.
+            Dim webNode As PortalWebSiteMapNode = TryCast(portalProvider.FindSiteMapNode(serverRelativeWebUrl), PortalWebSiteMapNode)
+
+            If webNode IsNot Nothing Then
+                ' Retrieve the heading nodes beneath the 
+                ' specified Web site.
+                Dim headingNodes As SiteMapNodeCollection = portalProvider.GetChildNodes(webNode, NodeTypes.Heading, NodeTypes.None)
+
+                titles = New List(Of String)(headingNodes.Count)
+
+                For Each headingNode As PortalSiteMapNode In headingNodes
+                    ' Add the title to the list.
+                    titles.Add(headingNode.Title)
+                Next headingNode
+            End If
+
+            ' Return the list of titles.
+            Return titles
+        End Function
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMenuState">
+      <MemberSignature Language="C#" Value="protected Microsoft.SharePoint.Navigation.EditableAspMenuState GetMenuState (int maximumDepth);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance class Microsoft.SharePoint.Navigation.EditableAspMenuState GetMenuState(int32 maximumDepth) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetMenuState(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Protected Function GetMenuState (maximumDepth As Integer) As EditableAspMenuState" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; Microsoft::SharePoint::Navigation::EditableAspMenuState ^ GetMenuState(int maximumDepth);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Navigation.EditableAspMenuState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="maximumDepth" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="maximumDepth">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetParentNode">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode GetParentNode (System.Web.SiteMapNode node);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNode GetParentNode(class System.Web.SiteMapNode node) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetParentNode(System.Web.SiteMapNode)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetParentNode (node As SiteMapNode) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNode ^ GetParentNode(System::Web::SiteMapNode ^ node);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="System.Web.SiteMapNode" />
+      </Parameters>
+      <Docs>
+        <param name="node">The <b>PortalSiteMapNode</b> object to get the parent object from.</param>
+        <summary>Returns the parent of a specified <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" /> object.</summary>
+        <returns>The parent of a specified <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" /> object.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPermissionCache">
+      <MemberSignature Language="C#" Value="protected System.Collections.Generic.Dictionary&lt;Guid,bool&gt; GetPermissionCache (Microsoft.SharePoint.SPWeb contextWeb);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance class System.Collections.Generic.Dictionary`2&lt;valuetype System.Guid, bool&gt; GetPermissionCache(class Microsoft.SharePoint.SPWeb contextWeb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetPermissionCache(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Protected Function GetPermissionCache (contextWeb As SPWeb) As Dictionary(Of Guid, Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; System::Collections::Generic::Dictionary&lt;Guid, bool&gt; ^ GetPermissionCache(Microsoft::SharePoint::SPWeb ^ contextWeb);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.Dictionary&lt;System.Guid,System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contextWeb" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="contextWeb">An <b>SPWeb</b> object representing the current HTTP context.</param>
+        <summary>Returns a <b>Dictionary</b> of the permission GUIDs and associated permissions represented as a <b>Boolean</b> value.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetRootNodeCore">
+      <MemberSignature Language="C#" Value="protected override System.Web.SiteMapNode GetRootNodeCore ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Web.SiteMapNode GetRootNodeCore() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GetRootNodeCore" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetRootNodeCore () As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Web::SiteMapNode ^ GetRootNodeCore();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Represents an override of the method on the <see cref="T:Microsoft.SharePoint.Publishing.SiteMapProvider" /> class.</summary>
+        <returns>The <b>PortalSiteMapNode</b> object at the root of the hierarchy.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GlobalNavSiteMapProvider">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider GlobalNavSiteMapProvider { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider GlobalNavSiteMapProvider" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.GlobalNavSiteMapProvider" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property GlobalNavSiteMapProvider As PortalSiteMapProvider" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider ^ GlobalNavSiteMapProvider { Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" /> object that has the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.NavigationType" /> value equal to "Global".</summary>
+        <value>A reference to the <b>PortalSiteMapProvider</b> object.</value>
+        <remarks>
+          <para>For the declaration of this <b>PortalSiteMapProvider</b> object and its default settings, see the web.config file.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeAuthoredLinks">
+      <MemberSignature Language="C#" Value="public bool IncludeAuthoredLinks { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IncludeAuthoredLinks" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.IncludeAuthoredLinks" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludeAuthoredLinks As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IncludeAuthoredLinks { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that represents whether to return link nodes.</summary>
+        <value>
+          <b>true</b> for the provider to return authored link nodes; <b>false</b> to remove the link nodes from the hierarchy.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeHeadings">
+      <MemberSignature Language="C#" Value="public bool IncludeHeadings { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IncludeHeadings" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.IncludeHeadings" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludeHeadings As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IncludeHeadings { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that represents whether to return heading nodes.</summary>
+        <value>
+          <b>true</b> for the provider to return heading nodes; <b>false</b> to remove heading nodes from the hierarchy.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludePages">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.IncludeOption IncludePages { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider/IncludeOption IncludePages" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.IncludePages" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludePages As PortalSiteMapProvider.IncludeOption" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider::IncludeOption IncludePages { Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider::IncludeOption get(); void set(Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider::IncludeOption value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider+IncludeOption</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the method used to determine whether pages are returned by this provider.</summary>
+        <value>An <b>IncludeOption</b> property that represents a particular inclusion scheme.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeSubSites">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.IncludeOption IncludeSubSites { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider/IncludeOption IncludeSubSites" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.IncludeSubSites" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludeSubSites As PortalSiteMapProvider.IncludeOption" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider::IncludeOption IncludeSubSites { Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider::IncludeOption get(); void set(Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider::IncludeOption value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider+IncludeOption</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the method used to determine whether this provider returns subsites.</summary>
+        <value>An <b>IncludeOption</b> property that represents a particular inclusion scheme.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Initialize">
+      <MemberSignature Language="C#" Value="public override void Initialize (string name, System.Collections.Specialized.NameValueCollection config);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Initialize(string name, class System.Collections.Specialized.NameValueCollection config) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Initialize (name As String, config As NameValueCollection)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Initialize(System::String ^ name, System::Collections::Specialized::NameValueCollection ^ config);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="config" Type="System.Collections.Specialized.NameValueCollection" />
+      </Parameters>
+      <Docs>
+        <param name="name">The name of the provider.</param>
+        <param name="config">The name value collection of initialization properties.</param>
+        <summary>Initializes the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" /> object using the specified setting.</summary>
+        <remarks>
+          <para>The initialization properties of the name value collection correspond to those specified in the provider definition in the web.config file.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsEditable">
+      <MemberSignature Language="C#" Value="protected bool IsEditable { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsEditable" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.IsEditable" />
+      <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property IsEditable As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; property bool IsEditable { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaximumSupportedNodeDepth">
+      <MemberSignature Language="C#" Value="protected static int MaximumSupportedNodeDepth { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property int32 MaximumSupportedNodeDepth" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.MaximumSupportedNodeDepth" />
+      <MemberSignature Language="VB.NET" Value="Protected Shared ReadOnly Property MaximumSupportedNodeDepth As Integer" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; static property int MaximumSupportedNodeDepth { int get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction">
+      <MemberSignature Language="C#" Value="string Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.Microsoft#SharePoint#Navigation#IEditableSiteMapProvider#EditLinksAlternateAction" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property EditLinksAlternateAction As String Implements IEditableSiteMapProvider.EditLinksAlternateAction" />
+      <MemberSignature Language="C++ CLI" Value="property System::String ^ Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.GetMenuState">
+      <MemberSignature Language="C#" Value="Microsoft.SharePoint.Navigation.EditableAspMenuState IEditableSiteMapProvider.GetMenuState (string startingNodeKey, int maximumDepth, System.Collections.Specialized.StringCollection customProperties);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class Microsoft.SharePoint.Navigation.EditableAspMenuState Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.GetMenuState(string startingNodeKey, int32 maximumDepth, class System.Collections.Specialized.StringCollection customProperties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.Microsoft#SharePoint#Navigation#IEditableSiteMapProvider#GetMenuState(System.String,System.Int32,System.Collections.Specialized.StringCollection)" />
+      <MemberSignature Language="VB.NET" Value="Function GetMenuState (startingNodeKey As String, maximumDepth As Integer, customProperties As StringCollection) As EditableAspMenuState Implements IEditableSiteMapProvider.GetMenuState" />
+      <MemberSignature Language="C++ CLI" Value=" virtual Microsoft::SharePoint::Navigation::EditableAspMenuState ^ Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.GetMenuState(System::String ^ startingNodeKey, int maximumDepth, System::Collections::Specialized::StringCollection ^ customProperties) = Microsoft::SharePoint::Navigation::IEditableSiteMapProvider::GetMenuState;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.GetMenuState(System.String,System.Int32,System.Collections.Specialized.StringCollection)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Navigation.EditableAspMenuState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="startingNodeKey" Type="System.String" />
+        <Parameter Name="maximumDepth" Type="System.Int32" />
+        <Parameter Name="customProperties" Type="System.Collections.Specialized.StringCollection" />
+      </Parameters>
+      <Docs>
+        <param name="startingNodeKey">To be added.</param>
+        <param name="maximumDepth">To be added.</param>
+        <param name="customProperties">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable">
+      <MemberSignature Language="C#" Value="bool Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.Microsoft#SharePoint#Navigation#IEditableSiteMapProvider#IsEditable" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property IsEditable As Boolean Implements IEditableSiteMapProvider.IsEditable" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth">
+      <MemberSignature Language="C#" Value="int Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.Microsoft#SharePoint#Navigation#IEditableSiteMapProvider#MaximumSupportedNodeDepth" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property MaximumSupportedNodeDepth As Integer Implements IEditableSiteMapProvider.MaximumSupportedNodeDepth" />
+      <MemberSignature Language="C++ CLI" Value="property int Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth { int get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.SaveUpdatedMenuState">
+      <MemberSignature Language="C#" Value="void IEditableSiteMapProvider.SaveUpdatedMenuState (Microsoft.SharePoint.Navigation.EditableAspMenuState newState);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.SaveUpdatedMenuState(class Microsoft.SharePoint.Navigation.EditableAspMenuState newState) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.Microsoft#SharePoint#Navigation#IEditableSiteMapProvider#SaveUpdatedMenuState(Microsoft.SharePoint.Navigation.EditableAspMenuState)" />
+      <MemberSignature Language="VB.NET" Value="Sub SaveUpdatedMenuState (newState As EditableAspMenuState) Implements IEditableSiteMapProvider.SaveUpdatedMenuState" />
+      <MemberSignature Language="C++ CLI" Value=" virtual void Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.SaveUpdatedMenuState(Microsoft::SharePoint::Navigation::EditableAspMenuState ^ newState) = Microsoft::SharePoint::Navigation::IEditableSiteMapProvider::SaveUpdatedMenuState;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.SaveUpdatedMenuState(Microsoft.SharePoint.Navigation.EditableAspMenuState)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="newState" Type="Microsoft.SharePoint.Navigation.EditableAspMenuState" />
+      </Parameters>
+      <Docs>
+        <param name="newState">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NavigationType">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.PortalNavigationType NavigationType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Navigation.PortalNavigationType NavigationType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.NavigationType" />
+      <MemberSignature Language="VB.NET" Value="Public Property NavigationType As PortalNavigationType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Navigation::PortalNavigationType NavigationType { Microsoft::SharePoint::Publishing::Navigation::PortalNavigationType get(); void set(Microsoft::SharePoint::Publishing::Navigation::PortalNavigationType value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalNavigationType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the type of navigation of this navigation provider.</summary>
+        <value>A <b>PortalNavigationType</b> enumeration that represents one of several navigation types.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequireUniqueKeysForNodes">
+      <MemberSignature Language="C#" Value="public bool RequireUniqueKeysForNodes { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool RequireUniqueKeysForNodes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.RequireUniqueKeysForNodes" />
+      <MemberSignature Language="VB.NET" Value="Public Property RequireUniqueKeysForNodes As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool RequireUniqueKeysForNodes { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates if nodes require unique keys.</summary>
+        <value>
+          <b>true</b> if keys are required; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SaveUpdatedMenuState">
+      <MemberSignature Language="C#" Value="protected void SaveUpdatedMenuState (Microsoft.SharePoint.Navigation.EditableAspMenuState newState);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void SaveUpdatedMenuState(class Microsoft.SharePoint.Navigation.EditableAspMenuState newState) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.SaveUpdatedMenuState(Microsoft.SharePoint.Navigation.EditableAspMenuState)" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub SaveUpdatedMenuState (newState As EditableAspMenuState)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; void SaveUpdatedMenuState(Microsoft::SharePoint::Navigation::EditableAspMenuState ^ newState);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.SaveUpdatedMenuState(Microsoft.SharePoint.Navigation.EditableAspMenuState)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="newState" Type="Microsoft.SharePoint.Navigation.EditableAspMenuState" />
+      </Parameters>
+      <Docs>
+        <param name="newState">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TryGetCurrentNode">
+      <MemberSignature Language="C#" Value="public System.Web.SiteMapNode TryGetCurrentNode { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Web.SiteMapNode TryGetCurrentNode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.TryGetCurrentNode" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TryGetCurrentNode As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Web::SiteMapNode ^ TryGetCurrentNode { System::Web::SiteMapNode ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" /> object that represents the item that a site user is currently visiting.
+</summary>
+        <value>A <b>PortalSiteMapNode</b> object that represents the current item being visited, if one exists and the operation is inexpensive; otherwise, a null reference (Nothing in Visual Basic).</value>
+        <remarks>
+          <para>This property only gets the <b>PortalSiteMapNode</b> object if it would be an inexpensive operation.</para>
+          <para />
+          <para>For better performance, the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.CurrentNode" /> property only avoids database queries by reading its data from a cache. However, if the object cannot be found in the cache, then a database query will still occur, which may be undesirable.</para>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.TryGetCurrentNode" /> property guarantees that these database queries cannot occur by instead returning a null reference (Nothing in Visual Basic) if the required objects were not already loaded into the cache. This is useful for nonessential operations that should only be performed if this can be done cheaply.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TryGetRootNode">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode TryGetRootNode { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode TryGetRootNode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.TryGetRootNode" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TryGetRootNode As PortalSiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapNode ^ TryGetRootNode { Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapNode ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the root node only if it is cached.</summary>
+        <value>A reference to the root <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" /> portal. Returns a null reference (Nothing in Visual Basic) if the root Web site is not cached.</value>
+        <remarks>
+          <para>Use this property for Search and other functions and Features that can use a cached value if one exists, but when you do not want to create more workload by loading the cached value onto sites that are not portal sites.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Version">
+      <MemberSignature Language="C#" Value="public int Version { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Version" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.Version" />
+      <MemberSignature Language="VB.NET" Value="Public Property Version As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Version { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the version of the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" /> object.</summary>
+        <value>The version of the <b>PortalSiteMapProvider</b> object.</value>
+        <remarks>
+          <para>This setting affects three of the provider's default settings. A value of 13 or less will give behavior consistent with Microsoft Office SharePoint Server 2007. A value for 14 or higher causes the following changes:</para>
+          <list type="number">
+            <item>
+              <description>DynamicChildLimit defaults to 0, rather than 50</description>
+            </item>
+          </list>
+          <list type="number">
+            <item>
+              <description>RequireUniqueKeysForNodes defaults to true, rather than false</description>
+            </item>
+          </list>
+          <list type="number">
+            <item>
+              <description>CurrentNode returns the current page, even if the web does not include pages in navigation</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WebSiteMapProvider">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider WebSiteMapProvider { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider WebSiteMapProvider" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.WebSiteMapProvider" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property WebSiteMapProvider As PortalSiteMapProvider" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider ^ WebSiteMapProvider { Microsoft::SharePoint::Publishing::Navigation::PortalSiteMapProvider ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapNode" /> object used to enumerate the Web sites in this collection.</summary>
+        <value>A reference to the <b>PortalSiteMapProvider</b> object.</value>
+        <remarks>
+          <para>Configure this provider to return only <b>PortalWebSiteMapNode</b> objects that represent the <b>SPWeb</b> objects in this site collection.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

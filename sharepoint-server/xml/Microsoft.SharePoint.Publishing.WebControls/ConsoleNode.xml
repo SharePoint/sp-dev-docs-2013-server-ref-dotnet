@@ -1,0 +1,1052 @@
+﻿<Type Name="ConsoleNode" FullName="Microsoft.SharePoint.Publishing.WebControls.ConsoleNode">
+  <TypeSignature Language="C#" Value="public class ConsoleNode" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ConsoleNode extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" />
+  <TypeSignature Language="VB.NET" Value="Public Class ConsoleNode" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ConsoleNode" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the basic structure used for the Console menu. </summary>
+    <remarks>
+      <para>Each <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object can optionally have child <b>ConsoleNode</b> objects and associated console <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> objects. Action user interfaces such as the Editing menu, Quick Access button, or Site Actions menu present various actions to the user. Each of these has an instance of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleDataSource" /> object that provides a hierarchical collection of <b>ConsoleNode</b> objects. Some <b>ConsoleNode</b> objects implement the <b>ConsoleAction</b> class in a specific way.</para>
+      <para>When the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Action" /> property for a <b>ConsoleNode</b> is defined as a <b>ConsoleAction</b>, the properties of the <b>ConsoleAction</b>, such as <see cref="P:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.DisplayText" /> and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.NavigateUrl" />, are used as properties with the same names in the <b>ConsoleNode</b>.</para>
+      <para>When a property, such as <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.ImageUrl" />, is defined in both a <b>ConsoleNode</b> object and a <b>ConsoleAction</b> object that the <b>ConsoleNode</b> references, the value specified in the <b>ConsoleNode</b> overrides the value in the referenced <b>ConsoleAction</b> if the corresponding Boolean value has been set. In this case, setting the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionImageUrl" /> property to <b>false</b> causes the <b>ConsoleNode</b> to override the <b>ConsoleAction</b> property.</para>
+      <para>Each instance of this class represents an action or a submenu. For example, in the Site Actions menu, if a <b>ConsoleNode</b> has at least one child in the <b>ChildConsoleNodes</b> collection, it appears as the root of a submenu with the child <b>ConsoleNodes</b> appearing in the submenu. If the <b>ConsoleNode</b> has no child objects, it appears as a clickable action.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using Microsoft.SharePoint;
+using Microsoft.SharePoint.Publishing.WebControls;
+using Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions;
+
+namespace Microsoft.SDK.SharePointServer.Samples.Publishing.SiteActionsMenuItem
+{
+    /// &amp;lt;summary&amp;gt;
+    /// This sample adds an item to the Site Actions menu, when clicked goes to the Navigation Settings page.
+    /// 
+    /// The necessary steps to make this sample running:
+    /// 1. Create a new C# class library project.
+    /// 2. Add this snippet to the project.
+    /// 3. Sign the assembly with a strong name.
+    /// 4. Add references to the following assemblies:
+    ///    a. System.Web
+    ///    b. Microsoft.SharePoint
+    ///    c. Microsoft.SharePoint.Publishing
+    /// 5. Build the project.
+    /// 6. Install the assembly to the server's Global Assembly Cache (GAC).
+    /// 7. Replace the assembly information given in the following XML snippet with the assembly you have created.
+    ///    (trick: An easy way to learn the Public Key Token of the assembly is
+    ///            to right click the assembly in GAC and click properties.)
+    /// 8. Copy the XML snippet below updated with the assembly information into CustomSiteActions.xml,
+    ///    which is in Editing Menu folder in Master Page Gallery.
+    ///    (trick: copying can be done as follows; navigate to Site Settings, then Master Page Gallery, and then Editing Menu folder.
+    ///            Download a copy of CustomSiteActions.xml, update the local copy and upload back to the server. Finally publish the file.)
+    /// 9. Do an iisreset on the server.
+    /// 
+    /// &amp;lt;references&amp;gt;
+    ///     &amp;lt;reference TagPrefix="SharePointServerSamples" 
+    ///       assembly="Microsoft.SDK.SharePointServer.Samples.Publishing.SiteActionsMenuItem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7aa57999e9b11a7c" 
+    ///       namespace="Microsoft.SDK.SharePointServer.Samples.Publishing.SiteActionsMenuItem" /&amp;gt;
+    /// &amp;lt;/references&amp;gt;
+    /// &amp;lt;structure&amp;gt;
+    ///  &amp;lt;ConsoleNode
+    ///       Action="SharePointServerSamples:NavigationSettingsAction"  
+    ///       MenuGroupId="300"  
+    ///       Sequence="390"  
+    ///       PermissionContext="CurrentSite"
+    ///       HideStates="IsPublishingSiteFalse"
+    ///       UIVersion="4"
+    ///       ID="sampleNavSetng"/&amp;gt;
+    /// &amp;lt;/structure&amp;gt;
+    /// 
+    /// Explanation of the ConsoleNode properties;
+    /// * Action is used to define the ConsoleAction that is used with this ConsoleNode.
+    /// * MenuGroupId and Sequence define the position of the ConsoleNode inside the Site Actions menu.
+    /// * PermissionContext defines the context (CurrentItem, CurrentList, CurrentSite, RootSite) to be used
+    ///   while checking if the user has rights to use this ConsoleNode.
+    /// * HideStates defines the AuthoringStates for which the ConsoleNode is hidden (not rendered on UI.)
+    /// * UIVersion can be used to define a ConsoleNode specific to a UIVersion (v3 or v4).
+    /// &amp;lt;/summary&amp;gt;
+    public class NavigationSettingsAction : ConsoleAction
+    {
+        /// &amp;lt;summary&amp;gt;
+        /// This is the constructor of the specific ConsoleAction.
+        /// &amp;lt;/summary&amp;gt;
+        public NavigationSettingsAction()
+            : base()
+        {
+            this.DisplayText = "Navigation Settings";
+            this.Description = "Change the navigation settings for this site";
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// Gets the AuthoringStates required to enable the menu item.
+        /// &amp;lt;/summary&amp;gt;
+        public override AuthoringStates RequiredStates
+        {
+            get
+            {
+                return AuthoringStates.EmptyMask;
+            }
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// Gets the SPBasePermissions required to use this Console Action.
+        /// &amp;lt;/summary&amp;gt;
+        public override SPBasePermissions UserRights
+        {
+            get
+            {
+                return SPBasePermissions.AddAndCustomizePages;
+            }
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// Gets the url that the browser navigates to, when the menu item is clicked.
+        /// &amp;lt;/summary&amp;gt;
+        public override string NavigateUrl
+        {
+            get
+            {
+                string serverRelativeUrlOfCurrentWeb = SPContext.Current.Web.ServerRelativeUrl;
+                string navigationSettingsRelativeUrl = "_layouts/AreaNavigationSettings.aspx";
+                string result;
+
+                if (serverRelativeUrlOfCurrentWeb.EndsWith("/"))
+                {
+                    result = serverRelativeUrlOfCurrentWeb + navigationSettingsRelativeUrl;
+                }
+                else
+                {
+                    result = serverRelativeUrlOfCurrentWeb + "/" + navigationSettingsRelativeUrl;
+                }
+
+                return result;
+            }
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ConsoleNode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ConsoleNode();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object with the specified <b>ConsoleNode</b> as its no parent.</summary>
+        <remarks>
+          <para>Because this <b>ConsoleNode</b> object is the parent, it is also the root node.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ConsoleNode (Microsoft.SharePoint.Publishing.WebControls.ConsoleNode nodeParent);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.Publishing.WebControls.ConsoleNode nodeParent) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.#ctor(Microsoft.SharePoint.Publishing.WebControls.ConsoleNode)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (nodeParent As ConsoleNode)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ConsoleNode(Microsoft::SharePoint::Publishing::WebControls::ConsoleNode ^ nodeParent);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="nodeParent" Type="Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" />
+      </Parameters>
+      <Docs>
+        <param name="nodeParent">The parent of this <b>ConsoleNode</b>.</param>
+        <summary>Initializes a new instance of a  <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object that has a parent node.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AccessKey">
+      <MemberSignature Language="C#" Value="public string AccessKey { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AccessKey" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.AccessKey" />
+      <MemberSignature Language="VB.NET" Value="Public Property AccessKey As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AccessKey { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the access key of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>The access key of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</value>
+        <remarks>
+          <para>Some controls, such as the <b>PublishingMenu</b>, allow a <b>ConsoleNode</b> to have an <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.AccessKey" /> that can be used as the top-level menu.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Action">
+      <MemberSignature Language="C#" Value="public virtual Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction Action { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction Action" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Action" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property Action As ConsoleAction" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Publishing::WebControls::EditingMenuActions::ConsoleAction ^ Action { Microsoft::SharePoint::Publishing::WebControls::EditingMenuActions::ConsoleAction ^ get(); void set(Microsoft::SharePoint::Publishing::WebControls::EditingMenuActions::ConsoleAction ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object that corresponds to this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object that corresponds to this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</value>
+        <remarks>
+          <para>Use this property to associate a <b>ConsoleAction</b> object with a <b>ConsoleNode</b> object to include this <b>ConsoleAction</b> in the user interface. When a <b>ConsoleAction</b> is referenced, the following properties of the <b>ConsoleAction</b> propagate to the <b>ConsoleNode</b> properties with the same names:</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UserRights" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.ImageUrl" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.NavigateUrl" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.RequiredStates" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Text" />
+              </description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Attributes">
+      <MemberSignature Language="C#" Value="public System.Collections.Specialized.NameValueCollection Attributes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Specialized.NameValueCollection Attributes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Attributes" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Attributes As NameValueCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Specialized::NameValueCollection ^ Attributes { System::Collections::Specialized::NameValueCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Specialized.NameValueCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of all <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Attributes" /> properties pertaining to this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>A <b>NameValueCollection</b> of all <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Attributes" /> properties pertaining to this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</value>
+        <remarks>
+          <para>When extra properties are defined in the console XML that are not defined as properties of the <b>ConsoleNode</b> object, for example, they appear in this collection with all other standard properties.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ChangedNodeId">
+      <MemberSignature Language="C#" Value="public string ChangedNodeId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ChangedNodeId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.ChangedNodeId" />
+      <MemberSignature Language="VB.NET" Value="Public Property ChangedNodeId As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ChangedNodeId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the identifier (ID) of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object being replaced, modified, or deleted.</summary>
+        <value>A string representing the original ID of a <b>ConsoleNode</b> object.</value>
+        <remarks>
+          <para>The string representing the original ID of a <b>ConsoleNode</b> object may be modified.</para>
+          <para>When you use the <b>ConfigMenuOptions.Replace</b>, <b>ConfigMenuOptions.Modify</b>, or <b>ConfigOptions.Delete</b> options, you must specify both the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.OriginalId" /> property of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> being modified or deleted and the ID of the new node. These two IDs must be different.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ChildConsoleNodes">
+      <MemberSignature Language="C#" Value="public virtual Microsoft.SharePoint.Publishing.WebControls.ConsoleNodeCollection ChildConsoleNodes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.WebControls.ConsoleNodeCollection ChildConsoleNodes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.ChildConsoleNodes" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property ChildConsoleNodes As ConsoleNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Publishing::WebControls::ConsoleNodeCollection ^ ChildConsoleNodes { Microsoft::SharePoint::Publishing::WebControls::ConsoleNodeCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ConsoleNodeCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of <b>ConsoleNode </b>objects that are child objects of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConfigMenu">
+      <MemberSignature Language="C#" Value="public virtual Microsoft.SharePoint.Publishing.WebControls.ConfigMenuOptions ConfigMenu { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.ConfigMenuOptions ConfigMenu" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.ConfigMenu" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property ConfigMenu As ConfigMenuOptions" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Publishing::WebControls::ConfigMenuOptions ConfigMenu { Microsoft::SharePoint::Publishing::WebControls::ConfigMenuOptions get(); void set(Microsoft::SharePoint::Publishing::WebControls::ConfigMenuOptions value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ConfigMenuOptions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets how this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object is used with the existing hierarchy.</summary>
+        <value>A <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConfigMenuOptions" /> property value representing the meaning of this <b>ConsoleNode</b> object in the context of the existing hierarchy.</value>
+        <remarks>
+          <para>You can add <b>ConsoleNode</b> objects to an existing collection, replace an existing node, or represent the deletion of a node in the collection. The <b>ConfigMenu</b> property value represents how this <b>ConsoleNode</b> should be interpreted.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a string containing text that describes this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>A string containing text that describes this <b>ConsoleNode</b>.</value>
+        <remarks>
+          <para>Some user interface elements allow for a description to appear as part of each action. When this is true, SharePoint Server 2010 uses this text.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayText">
+      <MemberSignature Language="C#" Value="public string DisplayText { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DisplayText" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.DisplayText" />
+      <MemberSignature Language="VB.NET" Value="Public Property DisplayText As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DisplayText { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the display text associated with this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>The string representing the display text for this <b>ConsoleNode</b>.</value>
+        <remarks>
+          <para>This property has the same behavior as the <b>ConsoleNode.Text</b> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Enabled">
+      <MemberSignature Language="C#" Value="public virtual bool Enabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Enabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Enabled" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property Enabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool Enabled { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object should be enabled for the user.</summary>
+        <value>A Boolean value representing whether this <b>ConsoleNode</b> should be enabled or disabled for the current user.</value>
+        <remarks>
+          <para>You should not set this property directly. Whether the node is enabled is determined dynamically by the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleDataSource" /> object when it is evaluating the current context.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HasChildNodes">
+      <MemberSignature Language="C#" Value="public bool HasChildNodes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool HasChildNodes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.HasChildNodes" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property HasChildNodes As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool HasChildNodes { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that indicates whether this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object has any child <b>ConsoleNode</b> objects.</summary>
+        <value>A Boolean value representing whether this <b>ConsoleNode</b> has one or more child nodes.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HideIfDisabled">
+      <MemberSignature Language="C#" Value="public virtual bool HideIfDisabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool HideIfDisabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.HideIfDisabled" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property HideIfDisabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool HideIfDisabled { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object should be hidden from view when it is disabled.</summary>
+        <value>A Boolean value representing whether this <b>ConsoleNode</b> should be hidden if it is disabled.</value>
+        <remarks>
+          <para>Some actions are best hidden any time they are disabled, although the default is to show disabled actions. Setting this property to <b>true</b> hides the action when it is disabled due to the current context.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HideStates">
+      <MemberSignature Language="C#" Value="public virtual System.Collections.Generic.List&lt;Microsoft.SharePoint.Publishing.WebControls.AuthoringStates&gt; HideStates { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.List`1&lt;valuetype Microsoft.SharePoint.Publishing.WebControls.AuthoringStates&gt; HideStates" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.HideStates" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property HideStates As List(Of AuthoringStates)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Collections::Generic::List&lt;Microsoft::SharePoint::Publishing::WebControls::AuthoringStates&gt; ^ HideStates { System::Collections::Generic::List&lt;Microsoft::SharePoint::Publishing::WebControls::AuthoringStates&gt; ^ get(); void set(System::Collections::Generic::List&lt;Microsoft::SharePoint::Publishing::WebControls::AuthoringStates&gt; ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.SharePoint.Publishing.WebControls.AuthoringStates&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the states for which this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object should be hidden.</summary>
+        <value>An <see cref="T:Microsoft.SharePoint.Publishing.WebControls.AuthoringStates" /> object value representing what states should be set to <b>true</b> for this action to be hidden.</value>
+        <remarks>
+          <para>In some <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleDataSource" /> objects, disabled <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> objects are displayed in the user interface by default. In specific instances, a <b>ConsoleNode</b> should be hidden instead of disabled. For example, when the page is checked out, <b>CheckOutAction</b> can be hidden because it will never be enabled in that context.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Id">
+      <MemberSignature Language="C#" Value="public string Id { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Id" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Id" />
+      <MemberSignature Language="VB.NET" Value="Public Property Id As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Id { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the identifier (ID) of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>A string that represents the unique ID of this <b>ConsoleNode</b>.</value>
+        <remarks>
+          <para>Every <b>ConsoleNode</b> on a page must have a unique ID.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ImageUrl">
+      <MemberSignature Language="C#" Value="public virtual string ImageUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ImageUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.ImageUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property ImageUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ ImageUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL of the image shown when this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> is used.</summary>
+        <value>The URL of the image that is displayed when this <b>ConsoleNode</b> is used.</value>
+        <remarks>
+          <para>In some user interface elements, an icon is shown as part of the action. This value is the URL for that image.</para>
+          <para>This value overrides that of a referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object when <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionImageUrl" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsCurrentlyEnabled">
+      <MemberSignature Language="C#" Value="public virtual bool IsCurrentlyEnabled (Microsoft.SharePoint.Publishing.WebControls.AuthoringStates currentState);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsCurrentlyEnabled(valuetype Microsoft.SharePoint.Publishing.WebControls.AuthoringStates currentState) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.IsCurrentlyEnabled(Microsoft.SharePoint.Publishing.WebControls.AuthoringStates)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function IsCurrentlyEnabled (currentState As AuthoringStates) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool IsCurrentlyEnabled(Microsoft::SharePoint::Publishing::WebControls::AuthoringStates currentState);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentState" Type="Microsoft.SharePoint.Publishing.WebControls.AuthoringStates" />
+      </Parameters>
+      <Docs>
+        <param name="currentState">A bitmask of <b>AuthoringStates</b> representing the current state of the page.</param>
+        <summary>Specifies whether the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object should be enabled or disabled without being restricted to what is defined in the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.AuthoringStates" /> enumeration.</summary>
+        <returns>The <see cref="T:Microsoft.SharePoint.SPBasePermissions" /> rights mask representing the required rights.</returns>
+        <remarks>
+          <para>This value overrides that of a referenced <b>ConsoleAction</b> when the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionStatesMask" /> property is set to <b>false</b>.</para>
+          <para>In some situations, a bitwise <b>AND</b> of <b>AuthoringStates</b> is not adequate to define exactly when an action should be enabled. In this case, you can use this method to define the Boolean return value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSeparatorImage">
+      <MemberSignature Language="C#" Value="public bool IsSeparatorImage { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSeparatorImage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.IsSeparatorImage" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsSeparatorImage As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSeparatorImage { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object is a separator of other items.</summary>
+        <value>A Boolean value representing whether this <b>ConsoleNode</b> is a separator.</value>
+        <remarks>
+          <para>Some user interface elements allow for a <b>ConsoleNode</b> to be inserted into a hierarchy, which results in a separator image between sections.</para>
+          <para>Setting this property to <b>true</b> creates the separator image.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSiteRelative">
+      <MemberSignature Language="C#" Value="public bool IsSiteRelative { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSiteRelative" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.IsSiteRelative" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsSiteRelative As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSiteRelative { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether to interpret the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.NavigateUrl" /> property as relative to the current <see cref="T:Microsoft.SharePoint.SPWeb" /> object.</summary>
+        <value>A Boolean value indicating whether the <b>NavigateUrl</b> property should be interpreted as relative to the current <b>SPWeb</b>.</value>
+        <remarks>
+          <para>A typical use for this property is when Console XML references static URLs to pages in the _layouts directory.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MenuGroupId">
+      <MemberSignature Language="C#" Value="public virtual int MenuGroupId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MenuGroupId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.MenuGroupId" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property MenuGroupId As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property int MenuGroupId { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the group identifier (ID) in which this item should be displayed.</summary>
+        <value>An integer representing which group should contain this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</value>
+        <remarks>
+          <para>Some user interface elements (UI) have a mechanism to use this value to divide <b>ConsoleNode</b> objects into separate groups. Those with the same value all appear in the same group.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NavigateUrl">
+      <MemberSignature Language="C#" Value="public virtual string NavigateUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string NavigateUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.NavigateUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property NavigateUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ NavigateUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>href</b> value of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>Either a URL for navigation or ECMAScript to be executed when this <b>ConsoleNode</b> is clicked.</value>
+        <remarks>
+          <para>When a user clicks a <b>ConsoleNode</b> on the page, this property determines how the browser responds. If a conventional URL is specified here, the user is directed to that page. If ECMAScript is specified, the browser executes the script. Users can include script to post back to the same action to save the current page.</para>
+          <para>The value of this property overrides that of a referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object when the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionNavigateUrl" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OriginalId">
+      <MemberSignature Language="C#" Value="public string OriginalId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string OriginalId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.OriginalId" />
+      <MemberSignature Language="VB.NET" Value="Public Property OriginalId As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ OriginalId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the original identifier (ID) of this <b>ConsoleNode</b> before an associated action modifies it.</summary>
+        <value>A string representing the original ID of a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object before it is modified.</value>
+        <remarks>
+          <para>This property is used to maintain consistency internally between <b>ConsoleNode </b>objects and associated <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> objects.</para>
+          <para>Setting this property is usually unnecessary.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ParentNode">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.ConsoleNode ParentNode { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.WebControls.ConsoleNode ParentNode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.ParentNode" />
+      <MemberSignature Language="VB.NET" Value="Public Property ParentNode As ConsoleNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::ConsoleNode ^ ParentNode { Microsoft::SharePoint::Publishing::WebControls::ConsoleNode ^ get(); void set(Microsoft::SharePoint::Publishing::WebControls::ConsoleNode ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ConsoleNode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the parent <b>ConsoleNode</b> of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>The parent <b>ConsoleNode</b>, or a null reference (Nothing in Visual Basic) if this is the root.</value>
+        <remarks>
+          <para>Other than the root <b>ConsoleNode</b>, every <b>ConsoleNode</b> must have a parent in the hierarchy. This property makes it easier to traverse the hierarchy both up and down.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PermissionContext">
+      <MemberSignature Language="C#" Value="public virtual Microsoft.SharePoint.Utilities.PermissionContext PermissionContext { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Utilities.PermissionContext PermissionContext" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.PermissionContext" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property PermissionContext As PermissionContext" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Utilities::PermissionContext PermissionContext { Microsoft::SharePoint::Utilities::PermissionContext get(); void set(Microsoft::SharePoint::Utilities::PermissionContext value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Utilities.PermissionContext</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the context in which to evaluate the permissions of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>The <b>PermissionContext</b> representing the context in which the permissions should be evaluated.</value>
+        <remarks>
+          <para>Certain actions, such as Create Page, must be restricted at the site level. Others, such as Edit Page, must be restricted at the level of the current <see cref="T:Microsoft.SharePoint.SPListItem" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequiredStates">
+      <MemberSignature Language="C#" Value="public virtual Microsoft.SharePoint.Publishing.WebControls.AuthoringStates RequiredStates { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.AuthoringStates RequiredStates" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.RequiredStates" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property RequiredStates As AuthoringStates" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Publishing::WebControls::AuthoringStates RequiredStates { Microsoft::SharePoint::Publishing::WebControls::AuthoringStates get(); void set(Microsoft::SharePoint::Publishing::WebControls::AuthoringStates value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.AuthoringStates</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the states required to enable this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object in the current context.</summary>
+        <value>The states required for this action to be available.</value>
+        <remarks>
+          <para>When this <b>ConsoleNode</b> appears in the user interface, this value determines whether the action is enabled or disabled.</para>
+          <para>This value overrides that of a referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> when the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionStatesMask" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RightsMode">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Utilities.PermissionMode RightsMode { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Utilities.PermissionMode RightsMode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.RightsMode" />
+      <MemberSignature Language="VB.NET" Value="Public Property RightsMode As PermissionMode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Utilities::PermissionMode RightsMode { Microsoft::SharePoint::Utilities::PermissionMode get(); void set(Microsoft::SharePoint::Utilities::PermissionMode value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Utilities.PermissionMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether all or any <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UserRights" /> properties must be satisfied.</summary>
+        <value>A <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.PermissionContext" /> representing whether all or any rights must be satisfied. </value>
+        <remarks>
+          <para>You may want to grant access to a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> if the user has any one of several rights. In that case, set this property to PermissionMode.Any;.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Sequence">
+      <MemberSignature Language="C#" Value="public virtual int Sequence { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Sequence" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Sequence" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property Sequence As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property int Sequence { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the place where this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object appears in the node order.</summary>
+        <value>An integer representing where this <b>ConsoleNode</b> should appear in the node order.</value>
+        <remarks>
+          <para>Every <b>ConsoleNode</b> in a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNodeCollection" /> must have a unique <b>Sequence</b> value. The nodes are displayed in order from the lowest value to the highest value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Text">
+      <MemberSignature Language="C#" Value="public virtual string Text { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Text" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Text" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property Text As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ Text { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the display text associated with this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>The string representing the display text for this <b>ConsoleNode</b>.</value>
+        <remarks>
+          <para>The text given will be displayed as part of the action in the user interface.</para>
+          <para>This value overrides that of a referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> when the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionText" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Title">
+      <MemberSignature Language="C#" Value="public string Title { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Title" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Title" />
+      <MemberSignature Language="VB.NET" Value="Public Property Title As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Title { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the title of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>A string representing the title associated with this <b>ConsoleNode</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Type">
+      <MemberSignature Language="C#" Value="public static string Type { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string Type" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Type" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property Type As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property System::String ^ Type { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the type of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>The type of <b>ConsoleNode</b>.</value>
+        <remarks>
+          <para>This property is also used by the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleDataSource" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UIVersion">
+      <MemberSignature Language="C#" Value="public virtual int UIVersion { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 UIVersion" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UIVersion" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property UIVersion As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property int UIVersion { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets an integer that indicates the user interface experience point at which this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object is to be displayed.</summary>
+        <value>A value from the set {0, 3, 4}.</value>
+        <remarks>
+          <para>The value 4 indicates that this <b>ConsoleNode</b> element is displayed only on the new ribbon based user interface experience.
+</para>
+          <para>The value 3 indicates that this element is displayed only on the previous user interface experience.</para>
+          <para>Finally the value 0 indicates that this element is displayed on all user interface experiences.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseActionImageUrl">
+      <MemberSignature Language="C#" Value="public bool UseActionImageUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseActionImageUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionImageUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseActionImageUrl As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseActionImageUrl { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object should use its own <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.ImageUrl" /> property or that of the referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</summary>
+        <value>A Boolean value representing whether the <b>ImageUrl</b> property of the referenced <b>ConsoleAction</b> should be used in place of the same property of this <b>ConsoleNode</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseActionNavigateUrl">
+      <MemberSignature Language="C#" Value="public bool UseActionNavigateUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseActionNavigateUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionNavigateUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseActionNavigateUrl As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseActionNavigateUrl { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> should use its own <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.NavigateUrl" /> property or that of the referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</summary>
+        <value>A Boolean value representing whether the <b>NavigateUrl</b> property of the referenced <b>ConsoleAction</b> should be used in place of the same property of this <b>ConsoleNode</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseActionRightsMask">
+      <MemberSignature Language="C#" Value="public bool UseActionRightsMask { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseActionRightsMask" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionRightsMask" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseActionRightsMask As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseActionRightsMask { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> should use its own <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UserRights" /> property or that of the referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</summary>
+        <value>A Boolean value representing whether the <b>UserRights</b> property of the referenced <b>ConsoleAction</b> should be used in place of the same property of this <b>ConsoleNode</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseActionStatesMask">
+      <MemberSignature Language="C#" Value="public bool UseActionStatesMask { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseActionStatesMask" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionStatesMask" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseActionStatesMask As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseActionStatesMask { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> should use its own <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.RequiredStates" /> property or those of the referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</summary>
+        <value>A Boolean value that indicates whether the <b>RequiredStates</b> property of the referenced <b>ConsoleAction</b> should be used in place of the same property in the <b>ConsoleNode</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseActionText">
+      <MemberSignature Language="C#" Value="public bool UseActionText { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseActionText" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionText" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseActionText As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseActionText { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object should use its own display text or that of a referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</summary>
+        <value>A Boolean value representing whether the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.DisplayText" /> property of the referenced <b>ConsoleAction</b> should be used in place of the <b>Text</b> property of this <b>ConsoleNode</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserHasRights">
+      <MemberSignature Language="C#" Value="public virtual bool UserHasRights ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool UserHasRights() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UserHasRights" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function UserHasRights () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool UserHasRights();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Determines whether the current user has rights to view this <b>ConsoleNode</b> object.</summary>
+        <returns>A Boolean value representing whether this <b>ConsoleNode</b> should be available to the current user.</returns>
+        <remarks>
+          <para>If the user's rights can be defined on the basis of a bitwise <b>AND</b> of the <see cref="T:Microsoft.SharePoint.SPBasePermissions" /> object, you should not need to override this method. In contrast, you can specify any logic you need in this method call.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserRights">
+      <MemberSignature Language="C#" Value="public virtual Microsoft.SharePoint.SPBasePermissions UserRights { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.SPBasePermissions UserRights" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UserRights" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property UserRights As SPBasePermissions" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::SPBasePermissions UserRights { Microsoft::SharePoint::SPBasePermissions get(); void set(Microsoft::SharePoint::SPBasePermissions value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPBasePermissions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the rights required for this user to see this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.SPBasePermissions" /> object's rights mask representing the required rights.This value overrides that of a referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> when the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionStatesMask" /> property is set to <b>false</b>.</value>
+        <remarks>
+          <para>When the current user does not have these specified rights, this <b>ConsoleNode</b> object does not appear in the user interface.</para>
+          <para>This <b>UserRights</b> property indicates the list of permissions for the given <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object, but it is used in conjunction with the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.RightsMode" /> property <b>RightsMode</b> may be set to any or all. If <b>RightsMode</b> is set to any, the <b>ConsoleAction</b> shows if the user has any one of the permissions in this property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Visible">
+      <MemberSignature Language="C#" Value="public virtual bool Visible { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Visible" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.Visible" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property Visible As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool Visible { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies whether the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> should be displayed to the user.</summary>
+        <value>A Boolean value representing whether this <b>ConsoleNode</b> should be visible to the current user.</value>
+        <remarks>
+          <para>You should not set this property directly. Whether the node is visible is determined dynamically by the <b>ConsoleDataSource</b> object while it is evaluating the current context. </para>
+          <para>If the referenced <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> exists, its value always overrides anything set on the <b>ConsoleNode</b> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

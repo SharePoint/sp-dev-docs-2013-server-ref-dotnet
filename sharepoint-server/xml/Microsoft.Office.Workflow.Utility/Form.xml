@@ -1,0 +1,80 @@
+﻿<Type Name="Form" FullName="Microsoft.Office.Workflow.Utility.Form">
+  <TypeSignature Language="C#" Value="public sealed class Form" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit Form extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Workflow.Utility.Form" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class Form" />
+  <TypeSignature Language="C++ CLI" Value="public ref class Form sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Workflow.Tasks</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Provides utility functions for an Microsoft InfoPathworkflow form.</summary>
+    <remarks>
+      <para>For an example of how to use the members in the <see cref="T:Microsoft.Office.Workflow.Utility.Form" /> class, see the example in <see cref="M:Microsoft.Office.Workflow.Utility.Contact.ExpandGroups" /> method. </para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="XmlToHashtable">
+      <MemberSignature Language="C#" Value="public static System.Collections.Hashtable XmlToHashtable (string xml);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Hashtable XmlToHashtable(string xml) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Form.XmlToHashtable(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function XmlToHashtable (xml As String) As Hashtable" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Collections::Hashtable ^ XmlToHashtable(System::String ^ xml);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Workflow.Tasks</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Hashtable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="xml" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="xml">XML data to convert into a hash table.</param>
+        <summary>Parses and converts an XML string such as Microsoft Office InfoPath workflow form data into a hash table.  </summary>
+        <returns>The hash table representation of the XML data that was passed in. </returns>
+        <remarks>
+          <para>Keys in the hash table are matched to the top-level schema nodes in the XML.</para>
+          <para>The <see cref="M:Microsoft.Office.Workflow.Utility.Form.XmlToHashtable(System.String)" /> method creates only one level of hash table. It converts tags as keys and values of type <b>string</b>. In the following code examples, the XML data (first code example), gives you the hash table (second code example). where the following is specified:</para>
+          <list type="bullet">
+            <item>
+              <description>ht["a"] is the value "aaa" as string.</description>
+            </item>
+            <item>
+              <description>ht["b"] is the value "bbb" as string</description>
+            </item>
+            <item>
+              <description>ht["c"] is the value "&lt;d&gt;ddd&lt;/d&gt;" as string.</description>
+            </item>
+          </list>
+          <code>&amp;lt;data&amp;gt;
+  &amp;lt;a&amp;gt;aaa&amp;lt;/a&amp;gt;
+  &amp;lt;b&amp;gt;bbb&amp;lt;/b&amp;gt;
+  &amp;lt;c&amp;gt;
+    &amp;lt;d&amp;gt;ddd&amp;lt;/d&amp;gt;
+  &amp;lt;/c&amp;gt;
+&amp;lt;/data&amp;gt;</code>
+          <code>Hashtable ht = XmlToHashtable(data);</code>
+          <para>For an example of how to use the <see cref="M:Microsoft.Office.Workflow.Utility.Form.XmlToHashtable(System.String)" /> method, see the example in <see cref="M:Microsoft.Office.Workflow.Utility.Contact.ExpandGroups" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

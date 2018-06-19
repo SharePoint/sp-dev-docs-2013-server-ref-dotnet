@@ -1,0 +1,215 @@
+﻿<Type Name="IWorkbookModelUsage" FullName="Microsoft.Office.Excel.Server.WebServices.IWorkbookModelUsage">
+  <TypeSignature Language="C#" Value="public interface IWorkbookModelUsage" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IWorkbookModelUsage" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Excel.Server.WebServices.IWorkbookModelUsage" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IWorkbookModelUsage" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IWorkbookModelUsage" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Interface is called by SSPM within ECS to support usage tracking of the internal model. The object should be thread safe as a single instance of this will be created for each instance of ECS
+            and methods may be called on multiple threads
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Connect">
+      <MemberSignature Language="C#" Value="public object Connect (object modelHandle, string userName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object Connect(object modelHandle, string userName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Excel.Server.WebServices.IWorkbookModelUsage.Connect(System.Object,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Connect (modelHandle As Object, userName As String) As Object" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Object ^ Connect(System::Object ^ modelHandle, System::String ^ userName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="modelHandle" Type="System.Object" />
+        <Parameter Name="userName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="modelHandle">Handle returned from the initial Load call</param>
+        <param name="userName">Name of the user connecting to the model</param>
+        <summary>
+            Called when a new connection is initiated. This will be called also on the connection associated with the initial load
+            </summary>
+        <returns>A handle to the connection which will be passed to the RequestComplete method to associate the request with the connection</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Load">
+      <MemberSignature Language="C#" Value="public object Load (string serverName, string databaseName, string imageUrl, string imageID, int fileVersion, string userName, int imageSize, int dbSize, int healthScore, int elapsedTime);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object Load(string serverName, string databaseName, string imageUrl, string imageID, int32 fileVersion, string userName, int32 imageSize, int32 dbSize, int32 healthScore, int32 elapsedTime) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Excel.Server.WebServices.IWorkbookModelUsage.Load(System.String,System.String,System.String,System.String,System.Int32,System.String,System.Int32,System.Int32,System.Int32,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Load (serverName As String, databaseName As String, imageUrl As String, imageID As String, fileVersion As Integer, userName As String, imageSize As Integer, dbSize As Integer, healthScore As Integer, elapsedTime As Integer) As Object" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Object ^ Load(System::String ^ serverName, System::String ^ databaseName, System::String ^ imageUrl, System::String ^ imageID, int fileVersion, System::String ^ userName, int imageSize, int dbSize, int healthScore, int elapsedTime);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serverName" Type="System.String" />
+        <Parameter Name="databaseName" Type="System.String" />
+        <Parameter Name="imageUrl" Type="System.String" />
+        <Parameter Name="imageID" Type="System.String" />
+        <Parameter Name="fileVersion" Type="System.Int32" />
+        <Parameter Name="userName" Type="System.String" />
+        <Parameter Name="imageSize" Type="System.Int32" />
+        <Parameter Name="dbSize" Type="System.Int32" />
+        <Parameter Name="healthScore" Type="System.Int32" />
+        <Parameter Name="elapsedTime" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="serverName">The name of the Analysis Services server instance on which the database was loaded</param>
+        <param name="databaseName">The name of the database which was loaded</param>
+        <param name="imageUrl">The url of the file in SharePoint which contains the embedded model</param>
+        <param name="imageID">The file unique identifier</param>
+        <param name="fileVersion">The version of the file being loaded</param>
+        <param name="userName">The user which triggered the initial load</param>
+        <param name="imageSize">The size of the embedded model</param>
+        <param name="dbSize">The estimated size of the loaded database</param>
+        <param name="healthScore">An internal rating of the chosen server which was used to make the load balancing decions. -1 means the random balancing was enabled.</param>
+        <param name="elapsedTime">Amount of time, in seconds, that the load took</param>
+        <summary>
+            Called when an embedded model is initially loaded
+            </summary>
+        <returns>An object which can be used as a handle for subsequent calls to Connect, RequestComplete, and Unload</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MachineHealthCalculated">
+      <MemberSignature Language="C#" Value="public void MachineHealthCalculated (string serverName, long highMemoryLimitKB, long lowMemoryLimitKB, long memoryUsageKB, long shrinkableMemoryKB, int percentProcessorUtilization);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void MachineHealthCalculated(string serverName, int64 highMemoryLimitKB, int64 lowMemoryLimitKB, int64 memoryUsageKB, int64 shrinkableMemoryKB, int32 percentProcessorUtilization) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Excel.Server.WebServices.IWorkbookModelUsage.MachineHealthCalculated(System.String,System.Int64,System.Int64,System.Int64,System.Int64,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub MachineHealthCalculated (serverName As String, highMemoryLimitKB As Long, lowMemoryLimitKB As Long, memoryUsageKB As Long, shrinkableMemoryKB As Long, percentProcessorUtilization As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void MachineHealthCalculated(System::String ^ serverName, long highMemoryLimitKB, long lowMemoryLimitKB, long memoryUsageKB, long shrinkableMemoryKB, int percentProcessorUtilization);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serverName" Type="System.String" />
+        <Parameter Name="highMemoryLimitKB" Type="System.Int64" />
+        <Parameter Name="lowMemoryLimitKB" Type="System.Int64" />
+        <Parameter Name="memoryUsageKB" Type="System.Int64" />
+        <Parameter Name="shrinkableMemoryKB" Type="System.Int64" />
+        <Parameter Name="percentProcessorUtilization" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="serverName">The name of the Analysis Services server instance</param>
+        <param name="highMemoryLimitKB">To be added.</param>
+        <param name="lowMemoryLimitKB">To be added.</param>
+        <param name="memoryUsageKB">To be added.</param>
+        <param name="shrinkableMemoryKB">To be added.</param>
+        <param name="percentProcessorUtilization">Total percentage processor utilization on the machine</param>
+        <summary>
+            Excel Services periodically monitors the health of the AS machines which it is interacting with. This is a report of those statistics.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequestComplete">
+      <MemberSignature Language="C#" Value="public void RequestComplete (object connectionHandle, Microsoft.Office.Excel.Server.WebServices.RequestType reqType, int elapsedTime);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RequestComplete(object connectionHandle, valuetype Microsoft.Office.Excel.Server.WebServices.RequestType reqType, int32 elapsedTime) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Excel.Server.WebServices.IWorkbookModelUsage.RequestComplete(System.Object,Microsoft.Office.Excel.Server.WebServices.RequestType,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RequestComplete (connectionHandle As Object, reqType As RequestType, elapsedTime As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RequestComplete(System::Object ^ connectionHandle, Microsoft::Office::Excel::Server::WebServices::RequestType reqType, int elapsedTime);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connectionHandle" Type="System.Object" />
+        <Parameter Name="reqType" Type="Microsoft.Office.Excel.Server.WebServices.RequestType" />
+        <Parameter Name="elapsedTime" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="connectionHandle">Handle returned from the initial Connect call</param>
+        <param name="reqType">Type of request that was completed</param>
+        <param name="elapsedTime">Amount of time, in milliseconds, that the request took</param>
+        <summary>
+            Called after completion of a request
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Unload">
+      <MemberSignature Language="C#" Value="public void Unload (object modelHandle, int elapsedTime);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Unload(object modelHandle, int32 elapsedTime) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Excel.Server.WebServices.IWorkbookModelUsage.Unload(System.Object,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Unload (modelHandle As Object, elapsedTime As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Unload(System::Object ^ modelHandle, int elapsedTime);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="modelHandle" Type="System.Object" />
+        <Parameter Name="elapsedTime" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="modelHandle">Handle returned from the initial Load call</param>
+        <param name="elapsedTime">Amount of time, in milliseconds, that the request took</param>
+        <summary>
+            Called when a database is unloaded after all connections have been closed
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UnloadAbandoned">
+      <MemberSignature Language="C#" Value="public void UnloadAbandoned (string serverName, string databaseName, string imageUrl, int elapsedTime);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void UnloadAbandoned(string serverName, string databaseName, string imageUrl, int32 elapsedTime) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Excel.Server.WebServices.IWorkbookModelUsage.UnloadAbandoned(System.String,System.String,System.String,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub UnloadAbandoned (serverName As String, databaseName As String, imageUrl As String, elapsedTime As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void UnloadAbandoned(System::String ^ serverName, System::String ^ databaseName, System::String ^ imageUrl, int elapsedTime);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serverName" Type="System.String" />
+        <Parameter Name="databaseName" Type="System.String" />
+        <Parameter Name="imageUrl" Type="System.String" />
+        <Parameter Name="elapsedTime" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="serverName">The name of the Analysis Services server instance on which the database was loaded</param>
+        <param name="databaseName">The name of the database which was loaded</param>
+        <param name="imageUrl">The url of the file in SharePoint which contains the embedded model</param>
+        <param name="elapsedTime">Amount of time, in milliseconds, that the request took</param>
+        <summary>
+            Called when a database is unloaded as part of initialization cleanup. This is almost always associated with process crashes / recycyling.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

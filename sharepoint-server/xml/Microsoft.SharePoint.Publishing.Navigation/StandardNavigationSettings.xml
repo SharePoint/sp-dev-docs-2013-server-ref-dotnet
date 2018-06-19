@@ -1,0 +1,117 @@
+﻿<Type Name="StandardNavigationSettings" FullName="Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSettings">
+  <TypeSignature Language="C#" Value="public sealed class StandardNavigationSettings" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit StandardNavigationSettings extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSettings" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class StandardNavigationSettings" />
+  <TypeSignature Language="C++ CLI" Value="public ref class StandardNavigationSettings sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ServerTypeId="5EBDD423-1350-43F9-AD8C-CBE0887C7C42")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>manages the global navigation and the current navigation (the standard navigation schemes).</summary>
+    <remarks>
+      <para>This class represents the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings.GlobalNavigation" /> property and <see cref="P:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings.CurrentNavigation" /> property of the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings" /> class. </para>
+      <para>The <b>GlobalNavigation</b> scheme typically includes a navigation menu that appears at the top of the master page, while the <b>CurrentNavigation</b> typically includes a navigation menu that appears on the left side of the master page.</para>
+      <para>Behind the scenes, the high-level global and current navigation providers correspond to a number of low-level configurations that need to be specified in a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings" /> object. As an API, <b>StandardNavigationSettings</b> is the easiest one to use but it  has limited functionality. For example, configuring an auxiliary <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomySiteMapProvider" /> object can be done only by using a <see cref="P:Microsoft.SharePoint.Client.Publishing.Navigation.WebNavigationSettings.SiteMapProviderSettingsList" /> collection.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Source">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSource Source { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSource Source" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSettings.Source" />
+      <MemberSignature Language="VB.NET" Value="Public Property Source As StandardNavigationSource" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Navigation::StandardNavigationSource Source { Microsoft::SharePoint::Publishing::Navigation::StandardNavigationSource get(); void set(Microsoft::SharePoint::Publishing::Navigation::StandardNavigationSource value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSource</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the configuration for the global navigation or the current navigation (the standard navigation scheme).</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Use this property to determine the navigation model for a site.</para>
+          <para>This property determines the configuration for the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider" /> object, the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" /> object, and the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomySiteMapProvider" /> object that together represent the standard navigation models</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.InvalidOperationException">Thrown when attempting to assign <see cref="F:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSource.Unknown" /> to this property..</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TermSetId">
+      <MemberSignature Language="C#" Value="public Guid TermSetId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid TermSetId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSettings.TermSetId" />
+      <MemberSignature Language="VB.NET" Value="Public Property TermSetId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid TermSetId { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets an ID that specifies the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object used by the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomySiteMapProvider" /> object.</summary>
+        <value>An ID that specifies the <b>TermSet</b> object for the <b>TaxonomySiteMapProvider</b> object.</value>
+        <remarks>
+          <para>The property is used only when the P:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSettings.Source property is set to <see cref="F:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSource.TaxonomyProvider" /> or <see cref="F:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSource.InheritFromParent" />Web.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TermStoreId">
+      <MemberSignature Language="C#" Value="public Guid TermStoreId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid TermStoreId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSettings.TermStoreId" />
+      <MemberSignature Language="VB.NET" Value="Public Property TermStoreId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid TermStoreId { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a unique ID for  the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object that is used by the  <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomySiteMapProvider" /> object.</summary>
+        <value>An ID that specifies the <b>TermStore</b> object for the <b>TaxonomySiteMapProvider</b> object.</value>
+        <remarks>
+          <para>The property is used only with the <see cref="F:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSource.TaxonomyProvider" /> field and the <see cref="F:Microsoft.SharePoint.Publishing.Navigation.StandardNavigationSource.InheritFromParentWeb" /> field.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
