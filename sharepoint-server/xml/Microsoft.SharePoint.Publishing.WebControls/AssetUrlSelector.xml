@@ -619,6 +619,7 @@ assetSelector.AutoPostBack = SampleAutoPostBack</code>
           <para>If set to <b>ButtonType.Image</b>, you can use the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.PickerButtonImage" /> property to specify the URL for the button image. This property has no effect if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetPickerButtonVisible" /> property is set to <b>false</b>.</para>
           <para />
         </remarks>
+        <exception cref="T:System.InvalidOperationException">The value set in this property is not <b>ButtonType.Image</b> or <b>ButtonType.Button</b>, or else the property was set after child controls were already created.</exception>
         <example>
           <code>// These values control the appearance of the text box
 // and button for the control.
@@ -641,7 +642,6 @@ assetSelector.ButtonType = SampleButtonType
 assetSelector.PickerButtonImage = SamplePickerButtonImage
 assetSelector.PickerButtonText = SamplePickerButtonText</code>
         </example>
-        <exception cref="T:System.InvalidOperationException">The value set in this property is not <b>ButtonType.Image</b> or <b>ButtonType.Button</b>, or else the property was set after child controls were already created.</exception>
       </Docs>
     </Member>
     <Member MemberName="ClientCallback">
@@ -902,6 +902,7 @@ assetSelector.DisplayLookInSection = SampleDisplayLookInSection</code>
           <para>The <see cref="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.GetClientLaunchPickerReference(System.String)" /> method must be called before or during the <b>OnPreRender</b> phase of the page life cycle and you must set properties before calling this method to register the correct client ECMAScript on the page. Any changes to the control's properties after the call to the <b>GetClientLaunchPickerReference</b> method do not affect the Asset Picker dialog box behavior because the client script controlling the dialog box is already registered on the page.</para>
           <para />
         </remarks>
+        <exception cref="T:System.NullReferenceException">A a null reference (Nothing in Visual Basic) reference exception is thrown if the <b>Page</b> and <b>ID</b> properties of this control are not set to a valid <b>System.Web.UI.Page</b> object for registering the required ECMAScript. Either add the control into a control collection on the page or directly set the <b>Page</b> and <b>ID</b> properties.</exception>
         <example>
           <code>    // Setting the Page and ID properties is required when the// AssetUrlSelector control is not added to the page// control tree because// the AssetUrlSelector.GetClientLaunchPickerReference()// method must register script in the page.assetSelector.Page = containerControl.Page;assetSelector.ID = "SampleGenerateAssetUrlSelectorLaunchScript";
 // Uses text box client ID to connect the Asset// Picker to the text boxes for the resulting//  URL and default text values returned from the// Asset Picker dialog box.assetSelector.AssetUrlClientID = assetUrlControl.ClientID;assetSelector.AssetTextClientID = assetTextControl.ClientID;
@@ -948,7 +949,6 @@ assetTextControl.Attributes("ondblclick") = clientLaunchPickerScript &amp;amp; "
 ' Return the client launch script, which can be added to other ECMAScript on the page.
 Return clientLaunchPickerScript</code>
         </example>
-        <exception cref="T:System.NullReferenceException">A a null reference (Nothing in Visual Basic) reference exception is thrown if the <b>Page</b> and <b>ID</b> properties of this control are not set to a valid <b>System.Web.UI.Page</b> object for registering the required ECMAScript. Either add the control into a control collection on the page or directly set the <b>Page</b> and <b>ID</b> properties.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetClientLaunchPickerReference">
@@ -976,6 +976,7 @@ Return clientLaunchPickerScript</code>
           <para>The <paramref name="currentAssetUrl" />ECMAScript (JavaScript, JScript) parameter determines the current value passed to the Asset Picker dialog box. You can use this method if the Asset Picker dialog box is opened from an HTML element other than the button provided. You can set properties on this control and the <b>Visible</b>, <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetPickerButtonVisible" />, and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> properties to <b>false</b>. You can use the ECMAScript string returned from this function in an HTML element client <b>onclick</b> function or an emitted ECMAScript (JavaScript, JScript) block to open the Asset Picker dialog box. You must call the <see cref="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.GetClientLaunchPickerReference" /> method during or before the <b>OnPreRender</b> phase of the page life cycle and you must set properties before calling this method for the page to register the correct client ECMAScript (JavaScript, JScript). Any changes to the control's properties after the call to <b>GetClientLaunchPickerReference</b> do not affect the dialog box behavior because the client script controlling the dialog box is already registered in the page.</para>
           <para />
         </remarks>
+        <exception cref="T:System.NullReferenceException">A a null reference (Nothing in Visual Basic) reference exception is thrown if the <b>Page</b> property of this control is not set to a valid <b>System.Web.UI.Page</b> object to register the required ECMAScript (JavaScript, JScript). Either add the control to a control collection on the page or directly set the <b>Page</b> property.</exception>
         <example>
           <code>    // Set the ECMAScript to perform after populating the text boxes with the returned values.assetSelector.ClientCallback = ScriptClientCallback;
 string clientLaunchPickerScript;if(launchPickerWithCurrentBrowserUrl){
@@ -1003,7 +1004,6 @@ assetTextControl.Attributes("ondblclick") = clientLaunchPickerScript &amp;amp; "
 ' Return the client launch script, which can be added to other ECMAScript on the page
 Return clientLaunchPickerScript</code>
         </example>
-        <exception cref="T:System.NullReferenceException">A a null reference (Nothing in Visual Basic) reference exception is thrown if the <b>Page</b> property of this control is not set to a valid <b>System.Web.UI.Page</b> object to register the required ECMAScript (JavaScript, JScript). Either add the control to a control collection on the page or directly set the <b>Page</b> property.</exception>
       </Docs>
     </Member>
     <Member MemberName="IsUrlRequired">

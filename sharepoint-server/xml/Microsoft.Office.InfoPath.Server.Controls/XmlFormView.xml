@@ -58,6 +58,29 @@ protected void XmlFormView1_NotifyHost(object sender, NotifyHostEventArgs e)
     this.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", this.NamespaceManager).ToString());
 }</code>
     </example>
+    <example>
+      <para>In the following example, the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control, XmlFormView1, is hosted in a custom Web page and contains a browser-enabled form template located on the same site. The <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" /> event of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control is used to populate a control, TextBox1, in the custom Web page.</para>
+      <code>Imports Microsoft.Office.InfoPath.Server.Controls
+Protected Sub XmlFormView1_NotifyHost(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs) Handles XmlFormView1.NotifyHost
+    TextBox1.Text = e.Notification.ToString()
+End Sub</code>
+      <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the XmlForm.NotifyHost(System.String) method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+      <code>Public Sub CTRL3_5_Clicked(ByVal sender As Object, ByVal e As ClickedEventArgs)
+    Dim myNav As XPathNavigator = Me.MainDataSource.CreateNavigator()
+    Me.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", Me.NamespaceManager).ToString())
+End Sub</code>
+      <code>using Microsoft.Office.InfoPath.Server.Controls
+protected void XmlFormView1_NotifyHost(object sender, NotifyHostEventArgs e)
+{
+    TextBox1.Text = e.Notification.ToString();
+}</code>
+      <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the XmlForm.NotifyHost(System.String) method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+      <code>public void CTRL3_5_Clicked(object sender, ClickedEventArgs e)
+{
+    XPathNavigator myNav = this.MainDataSource.CreateNavigator();
+    this.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", this.NamespaceManager).ToString());
+}</code>
+    </example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -310,6 +333,29 @@ protected void XmlFormView1_&lt;span class="label"&gt;NotifyHost&lt;/span&gt;(ob
     TextBox1.Text = e.Notification.ToString();
 }</code>
           <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+          <code>public void CTRL3_5_Clicked(object sender, ClickedEventArgs e)
+{
+    XPathNavigator myNav = this.MainDataSource.CreateNavigator();
+    this.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", this.NamespaceManager).ToString());
+}</code>
+        </example>
+        <example>
+          <para>In the following example, the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control, XmlFormView1, is hosted in a custom Web page and contains a browser-enabled form template located on the same site. The <see cref="E:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.NotifyHost" /> event of the <see cref="T:Microsoft.Office.InfoPath.Server.Controls.XmlFormView" /> control is used to populate a control, TextBox1, in the custom Web page.</para>
+          <code>Imports Microsoft.Office.InfoPath.Server.Controls
+Protected Sub XmlFormView1_&lt;span class="label"&gt;NotifyHost&lt;/span&gt;(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs) Handles XmlFormView1.&lt;span class="label"&gt;NotifyHost&lt;/span&gt;
+    TextBox1.Text = e.Notification.ToString()
+End Sub</code>
+          <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the XmlForm.NotifyHost(System.String) method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+          <code>Public Sub CTRL3_5_Clicked(ByVal sender As Object, ByVal e As ClickedEventArgs)
+    Dim myNav As XPathNavigator = Me.MainDataSource.CreateNavigator()
+    Me.NotifyHost(myNav.SelectSingleNode("/my:myFields/my:field2", Me.NamespaceManager).ToString())
+End Sub</code>
+          <code>using Microsoft.Office.InfoPath.Server.Controls
+protected void XmlFormView1_&lt;span class="label"&gt;NotifyHost&lt;/span&gt;(object sender, NotifyHostEventArgs e)
+{
+    TextBox1.Text = e.Notification.ToString();
+}</code>
+          <para>The form code necessary to send a value from the main data source in the form, my:field2, to the hosting Web page uses the XmlForm.NotifyHost(System.String) method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
           <code>public void CTRL3_5_Clicked(object sender, ClickedEventArgs e)
 {
     XPathNavigator myNav = this.MainDataSource.CreateNavigator();
@@ -830,6 +876,60 @@ End Sub</code>
         </remarks>
         <example>
           <para>In the following example, a series of textboxes in the Web page are populated with values from the properties that can be used by accessing the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlForm" /> property. A value from the main data source of the form is used as the value for <b>TextBox10</b>. This routine is called when code in the form calls the <see cref="M:Microsoft.Office.InfoPath.XmlForm.NotifyHost(System.String)" /> method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
+          <para>The following example requires the following three <b>Imports</b> statements:</para>
+          <code>Imports System.Xml
+Imports System.Xml.XPath
+Imports Microsoft.Office.InfoPath.Server.Controls
+Protected Sub XmlFormView1_NotifyHost(ByVal sender As Object, ByVal e As Microsoft.Office.InfoPath.Server.Controls.NotifyHostEventArgs) Handles XmlFormView1.NotifyHost
+    Dim xNavMain As XPathNavigator
+    Dim xNameSpace As XmlNamespaceManager
+    Try
+        TextBox2.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.[New].ToString()
+        TextBox3.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.ReadOnly.ToString()
+        TextBox4.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.MainDataSource.ReadOnly.ToString()
+        TextBox5.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.ToString()
+        TextBox6.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.XmlLang.ToString()
+        TextBox7.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.Signed.ToString()
+        TextBox8.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.FormState.Count.ToString()
+        TextBox9.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.DataSources.Count.ToString()
+        xNavMain = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.MainDataSource.CreateNavigator()
+        xNameSpace = New XmlNamespaceManager(New NameTable())
+        xNameSpace.AddNamespace("my", XmlFormView1.XmlForm.NamespaceManager._
+        LookupNamespace("my").ToString())
+        TextBox10.Text = xNavMain.SelectSingleNode("/my:myFields/my:field2", xNameSpace).ToString()
+    Catch ex As Exception
+        TextBox11.Text = ex.Message.ToString()
+    End Try
+End Sub</code>
+          <para>The following example requires the following three <b>using</b> statements:</para>
+          <code>using System.Xml;
+using System.Xml.XPath;
+using Microsoft.Office.InfoPath.Server.Controls;
+protected void XmlFormView1_NotifyHost(object sender, NotifyHostEventArgs e)
+{
+    try
+    {
+        TextBox2.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.New.ToString();
+        TextBox3.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.ReadOnly.ToString();
+        TextBox4.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.MainDataSource.ReadOnly.ToString();
+        TextBox5.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.ToString();
+        TextBox6.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.XmlLang.ToString();
+        TextBox7.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.Signed.ToString();
+        TextBox8.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.FormState.Count.ToString();
+        TextBox9.Text = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.DataSources.Count.ToString();
+        XPathNavigator xNavMain = XmlFormView1.&lt;span class="label"&gt;XmlForm&lt;/span&gt;.MainDataSource.CreateNavigator();
+        XmlNamespaceManager xNameSpace = new XmlNamespaceManager(new NameTable());
+        xNameSpace.AddNamespace("my", XmlFormView1.XmlForm.NamespaceManager.LookupNamespace("my").ToString());
+        TextBox10.Text = xNavMain.SelectSingleNode("/my:myFields/my:field2", xNameSpace).ToString();
+    }
+    catch (Exception ex)
+    {
+        TextBox11.Text = ex.Message.ToString();
+    }
+}</code>
+        </example>
+        <example>
+          <para>In the following example, a series of textboxes in the Web page are populated with values from the properties that can be used by accessing the <see cref="P:Microsoft.Office.InfoPath.Server.Controls.XmlFormView.XmlForm" /> property. A value from the main data source of the form is used as the value for <b>TextBox10</b>. This routine is called when code in the form calls the XmlForm.NotifyHost(System.String) method of the <see cref="T:Microsoft.Office.InfoPath.XmlForm" /> object available in the <see cref="N:Microsoft.Office.InfoPath" /> namespace, in this case from a button in the form.</para>
           <para>The following example requires the following three <b>Imports</b> statements:</para>
           <code>Imports System.Xml
 Imports System.Xml.XPath

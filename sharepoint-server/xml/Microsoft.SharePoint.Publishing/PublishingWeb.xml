@@ -858,6 +858,8 @@ End Using</code>
           <para>To save changes after setting this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingWeb.Update" /> method.</para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentNullException">The value cannot be set to <b>null.</b></exception>
+        <exception cref="System.ArgumentException">The <see cref="T:Microsoft.SharePoint.SPFile" /> must exist in this site.</exception>
         <example>
           <para>This example demonstrates setting and saving property values on a publishing Web. Before building and running this example, verify that Publishing feature has been enabled for the <b>SPWeb</b>, and that the <b>defaultPageFileId</b> is <b>SPFile.UniqueId</b> for the new default page.</para>
           <code>using SPContentTypeId = Microsoft.SharePoint.SPContentTypeId;
@@ -996,8 +998,6 @@ publishingWeb.Update()
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.ArgumentNullException">The value cannot be set to <b>null.</b></exception>
-        <exception cref="System.ArgumentException">The <see cref="T:Microsoft.SharePoint.SPFile" /> must exist in this site.</exception>
       </Docs>
     </Member>
     <Member MemberName="DefaultPageLayout">
@@ -1744,6 +1744,7 @@ End Namespace</code>
           <para>To apply sorting or filtering, use a <see cref="M:Microsoft.SharePoint.Publishing.PublishingWeb.GetPublishingPages(Microsoft.SharePoint.SPQuery" /> method that takes <see cref="T:Microsoft.SharePoint.SPQuery" />, <see cref="T:System.String" />, or <see cref="T:System.String.UInt32" /> to create a Collaborative Application Markup Language (CAML) query that specifies sorting and collection membership requirements.</para>
           <para />
         </remarks>
+        <exception cref="Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The Pages document library is missing.</exception>
         <example>
           <para>This example creates a new <b>PublishingPage</b> in a <b>PublishingWeb</b>.</para>
           <para>Before compiling and running this example, verify that an <b>SPWeb</b> that is a publishing Web exists and is passed in as the Web parameter. The <b>PageLayout</b> to use for creating the page must also be passed in.</para>
@@ -1838,7 +1839,6 @@ newPage.CheckIn(checkInComment)
     End Class
 End Namespace</code>
         </example>
-        <exception cref="Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The Pages document library is missing.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetPublishingPages">
@@ -1867,6 +1867,9 @@ End Namespace</code>
           <para>Set the <see cref="P:Microsoft.SharePoint.SPQuery.Query" /> property on the query parameter to indicate the Collaborative Application Markup Language (CAML) query to use when retrieving the collection.</para>
           <para />
         </remarks>
+        <exception cref="Microsoft.SharePoint.SPException">The collection retrieval failed. The CAML query may be invalid.</exception>
+        <exception cref="Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The Pages document library is missing.</exception>
+        <exception cref="System.ArgumentNullException">The value cannot be set to a null reference (Nothing in Visual Basic).</exception>
         <example>
           <para>You can use the CAML <b>&lt;</b>OrderBy<b>&gt;</b> tag to sort the collection. For example, to order a collection in ascending order based on title, use this CAML query.</para>
           <code>&amp;lt;br/&amp;gt;
@@ -1884,9 +1887,6 @@ End Namespace</code>
 &amp;lt;/Eq&amp;gt;
 &amp;lt;/Where&amp;gt;</code>
         </example>
-        <exception cref="Microsoft.SharePoint.SPException">The collection retrieval failed. The CAML query may be invalid.</exception>
-        <exception cref="Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The Pages document library is missing.</exception>
-        <exception cref="System.ArgumentNullException">The value cannot be set to a null reference (Nothing in Visual Basic).</exception>
       </Docs>
     </Member>
     <Member MemberName="GetPublishingPages">
@@ -1915,6 +1915,9 @@ End Namespace</code>
           <para>The <paramref name="camlQueryXml" /> argument passed in this method is equivalent to the <see cref="P:Microsoft.SharePoint.SPQuery.Query" /> property.</para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentNullException">The <paramref name="camlQueryXml" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="Microsoft.SharePoint.SPException">The collection retrieval failed. The CAML query may not be valid.</exception>
+        <exception cref="Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The Pages document library is missing.</exception>
         <example>
           <para>You can use the CAML <b>&lt;</b>OrderBy<b>&gt;</b> tag to sort the collection. For example, to order a collection in ascending order based on title, use this CAML query.</para>
           <code>&amp;lt;br/&amp;gt;
@@ -1933,9 +1936,6 @@ End Namespace</code>
 &amp;lt;/Eq&amp;gt;
 &amp;lt;/Where&amp;gt;</code>
         </example>
-        <exception cref="System.ArgumentNullException">The <paramref name="camlQueryXml" /> parameter is a null reference (Nothing in Visual Basic).</exception>
-        <exception cref="Microsoft.SharePoint.SPException">The collection retrieval failed. The CAML query may not be valid.</exception>
-        <exception cref="Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The Pages document library is missing.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetPublishingPages">
@@ -1999,6 +1999,8 @@ End Namespace</code>
           <para>If the <paramref name="rowLimit" /> value is zero, then all <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> objects for the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> class are retrieved when the <see cref="T:Microsoft.SharePoint.Publishing.PublishingPageCollection" /> is created. The same is true if the <paramref name="rowLimit" /> exceeds the maximum number of <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> objects in the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> class.</para>
           <para />
         </remarks>
+        <exception cref="Microsoft.SharePoint.SPException">The collection retrieval failed. The CAML query may be invalid.</exception>
+        <exception cref="Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The Pages document library is missing.</exception>
         <example>
           <para>You can use the CAML <b>&lt;</b>OrderBy<b>&gt;</b> tag to sort the collection. For example, to order a collection in ascending order based on title, use this CAML query.</para>
           <code>&amp;lt;br/&amp;gt;
@@ -2017,8 +2019,6 @@ End Namespace</code>
 &amp;lt;/Eq&amp;gt;
 &amp;lt;/Where&amp;gt;</code>
         </example>
-        <exception cref="Microsoft.SharePoint.SPException">The collection retrieval failed. The CAML query may be invalid.</exception>
-        <exception cref="Microsoft.SharePoint.Publishing.InvalidPublishingWebException">The site is not valid. The Pages document library is missing.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetPublishingWeb">
@@ -2622,6 +2622,7 @@ Me.WebAnchorLocation = ownerWeb.GetVariationUrlFromSourceUrl(oldAnchor)</code>
           <para>Calling this method on the root site is not supported and results in an error.</para>
           <para />
         </remarks>
+        <exception cref="System.InvalidOperationException">The root site cannot inherit properties.</exception>
         <example>
           <para>This example demonstrates setting and saving property values on a publishing Web. Before building and running this example, verify that Publishing feature has been enabled for the <b>SPWeb</b>, and that the <b>defaultPageFileId</b> is <b>SPFile.UniqueId</b> for the new default page.</para>
           <code>using SPContentTypeId = Microsoft.SharePoint.SPContentTypeId;
@@ -2760,7 +2761,6 @@ publishingWeb.Update()
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.InvalidOperationException">The root site cannot inherit properties.</exception>
       </Docs>
     </Member>
     <Member MemberName="InheritCurrentNavigation">
@@ -3423,6 +3423,7 @@ End Namespace</code>
           <para>We recommend that you use this method before you call the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb.GetPublishingWeb(Microsoft.SharePoint.SPWeb)" /> method.</para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentNullException">The <see cref="T:Microsoft.SharePoint.SPWeb" /> cannot be <b>null.</b></exception>
         <example>
           <para>This example demonstrates setting and saving property values on a publishing Web. Before building and running this example, verify that Publishing feature has been enabled for the <b>SPWeb</b>, and that the <b>defaultPageFileId</b> is <b>SPFile.UniqueId</b> for the new default page.</para>
           <code>using SPContentTypeId = Microsoft.SharePoint.SPContentTypeId;
@@ -3561,7 +3562,6 @@ publishingWeb.Update()
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.ArgumentNullException">The <see cref="T:Microsoft.SharePoint.SPWeb" /> cannot be <b>null.</b></exception>
       </Docs>
     </Member>
     <Member MemberName="IsRoot">

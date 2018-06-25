@@ -15,42 +15,41 @@
   <Docs>
     <summary>Configures which settings on a <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationItem" /> object  on an <see cref="T:Microsoft.SharePoint.SPList" /> object control the display of metadata hierarchies and filters on list views.</summary>
     <remarks>
-      <para>Gets settings from and sets settings to an <see cref="T:Microsoft.SharePoint.SPList" /> object and persists them such that the list, site hierarchy tree, and filter controls can use them in the list view page UI. Always use the <see cref="GetMetadataNavigationSettings" /> static method to get settings from an <see cref="T:Microsoft.SharePoint.SPList" /> object when initializing new instances of the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object.</para>
+      <para>Gets settings from and sets settings to an <see cref="T:Microsoft.SharePoint.SPList" /> object and persists them such that the list, site hierarchy tree, and filter controls can use them in the list view page UI. Always use the GetMetadataNavigationSettings static method to get settings from an <see cref="T:Microsoft.SharePoint.SPList" /> object when initializing new instances of the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object.</para>
       <para>By default, all lists have settings where no key filters are configured and only the special folder  hierarchy type is configured, which shows only the <see cref="T:Microsoft.SharePoint.SPFolder" /> object in the tree. Use these methods to modify metadata hierarchy and key filter data in the tree. </para>
       <list type="table">
         <item>
-          <term>
-            <see cref="AddConfiguredHierarchy" />  method to add additional metadata hierarchies and key filters to settings.</term>
+          <term>AddConfiguredHierarchy method to add additional metadata hierarchies and key filters to settings.</term>
           <description>Adds metadata hierarchies to settings.</description>
         </item>
         <item>
           <term>
-            <see cref="AddConfigureKeyFilter" />
-          </term>
+              AddConfiguredKeyFilter
+            </term>
           <description>Adds key fliters to settings.</description>
         </item>
         <item>
           <term>
-            <see cref="FindConfiguredHierarchy" />
-          </term>
-          <description>Determines whether configured hierarchies exist in settings.Use the result on the original settings instead of creating a new hierarchy to ensure that the internal view settings are preserved. After adjusting the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object originally retrieved from the list, set the adjusted settings back on the list with the <see cref="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.SetMetadataNavigationSettings" /> object.</description>
+              FindConfiguredHierarchy
+            </term>
+          <description>Determines whether configured hierarchies exist in settings.Use the result on the original settings instead of creating a new hierarchy to ensure that the internal view settings are preserved. After adjusting the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object originally retrieved from the list, set the adjusted settings back on the list with the MetadataNavigationSettings.SetMetadataNavigationSettings object.</description>
         </item>
         <item>
           <term>
-            <see cref="FindConfiguredKeyFilter" />
-          </term>
+              FindConfiguredKeyFilter
+            </term>
           <description>Determines whether configured items exist in the settings.</description>
         </item>
         <item>
           <term>
-            <see cref="ClearConfiguredHierarchies" />
-          </term>
+              ClearConfiguredHierarchies
+            </term>
           <description>Empties settings and then adds new hierarchies in the desired order.</description>
         </item>
         <item>
           <term>
-            <see cref="ClearConfiguredKeyFilters" />
-          </term>
+              ClearConfiguredKeyFilters
+            </term>
           <description>Empties settings and then adds key filters in the desired order.</description>
         </item>
       </list>
@@ -335,7 +334,7 @@ namespace Microsoft.SDK.SharePointServer.Samples.WebControls
         <ReturnType>Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the active <see cref="MetadataNavigationContext.NavigationSettings" /> object for the current list, or gets a null reference (Nothing in Visual Basic) if there is no current list.</summary>
+        <summary>Gets the active NavigationSettings object for the current list, or gets a null reference (Nothing in Visual Basic) if there is no current list.</summary>
         <value>Returns <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" />.</value>
         <remarks>To be added.</remarks>
         <exception cref="T:System.NullReferenceException">Thrown if set to a null reference (Nothing in Visual Basic).</exception>
@@ -442,7 +441,7 @@ namespace Microsoft.SDK.SharePointServer.Samples.WebControls
           <para />
         </remarks>
         <exception cref="T:System.ArgumentNullException">Specified <see cref="T:Microsoft.SharePoint.SPWeb" /> object is set to a null reference (Nothing in Visual Basic)</exception>
-        <exception cref="T:System.NullReferenceException">The <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object is called outside of an ASP.Net page request and <see cref="MetadataNavigationContext.Current" /> is set to a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.NullReferenceException">The <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object is called outside of an ASP.Net page request and MetadataNavigationContext.Current is set to a null reference (Nothing in Visual Basic).</exception>
       </Docs>
     </Member>
     <Member MemberName="HierarchyNodeIdFieldRoot">

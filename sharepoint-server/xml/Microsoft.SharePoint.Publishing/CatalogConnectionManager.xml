@@ -261,7 +261,7 @@ namespace CatalogConnectionSample
         <param name="catalogInfo">Settings for the catalog that is being added.</param>
         <summary>Add a catalog connection to the site that is specified in the constructor.</summary>
         <remarks>
-          <para>Use the <see cref="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.GetPublishingCatalog(Microsoft.SharePoint.SPSite,System.String)" /> method to return catalog information and default settings.</para>
+          <para>Use the GetPublishingCatalog(Microsoft.SharePoint.SPSite,System.String) method to return catalog information and default settings.</para>
           <para>The connection is committed to the term store when the <see cref="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.Update" /> method is called.</para>
           <para />
         </remarks>
@@ -288,13 +288,13 @@ namespace CatalogConnectionSample
         <Parameter Name="catalogTaxonomyManagedProperty" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="catalogInfo">The connection settings to add. Settings to add should include the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogUrl" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogId" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogSiteUrl" /> property, which are returned by the <see cref="T:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.GetPublishingCatalog" /> method. This parameter should not be a null reference (Nothing in Visual Basic).</param>
+        <param name="catalogInfo">The connection settings to add. Settings to add should include the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogUrl" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogId" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogSiteUrl" /> property, which are returned by the PublishingCatalogUtility.GetPublishingCatalog method. This parameter should not be a null reference (Nothing in Visual Basic).</param>
         <param name="orderedPropertiesForUrlRewrite">Catalog item key fields that are used to generate friendly URLs for items in this catalog. The URL will be rewritten by using these property values in the same order.</param>
         <param name="webUrl">Server-relative URL of the web that form the base URL of the friendly URL for items in this catalog.</param>
         <param name="catalogTaxonomyManagedProperty">Managed property name of the taxonomy field that contains category information for catalog items.</param>
         <summary>Adds a catalog connection to the site that is specified in the constructor.</summary>
         <remarks>
-          <para>Use the <see cref="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.GetPublishingCatalog" /> method to get catalog information.</para>
+          <para>Use the GetPublishingCatalog method to get catalog information.</para>
           <para>The connection is added to the store when the <see cref="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.Update" /> method is called.
 </para>
           <para>Throws a<b>ArgumentNullException</b> exception if the <paramref name="catalogInfo" /> parameter is a null reference (Nothing in Visual Basic). URL rewrite is enabled only if non-empty values for the <paramref name="orderedPropertiesForUrlRewrite" /> parameter, the <paramref name="webUrl" /> parameter, and the <paramref name="catalogTaxonomyManagedProperty" /> parameter are passed in.</para>
@@ -324,7 +324,7 @@ namespace CatalogConnectionSample
         <Parameter Name="isCustomCatalogItemUrlRewriteTemplate" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="catalogInfo">The connection settings to be added. This should include the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogUrl" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogId" /> property, and the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogSiteUrl" /> property, which are returned by the <see cref="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.GetPublishingCatalog" /> method. This parameter should not be a null reference (Nothing in Visual Basic).</param>
+        <param name="catalogInfo">The connection settings to be added. This should include the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogUrl" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogId" /> property, and the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogSiteUrl" /> property, which are returned by the PublishingCatalogUtility.GetPublishingCatalog method. This parameter should not be a null reference (Nothing in Visual Basic).</param>
         <param name="catalogItemUrlRewriteTemplate">URL rewrite template to use to generate friendly URLs for items in this catalog. Any search managed property that is enclosed in "[", "]" are replaced dynamically. If isCustomCatalogItemUrlRewriteTemplate=true, then the template can be a web-relative page URL that can render different items based on a dynamic query parameter.</param>
         <param name="webServerRelativeUrl">The server-relative URL of the web connecting to this catalog. If item URLs are rewritten by using managed navigation friendly URLs, the managed navigation settings for this <see cref="T:Microsoft.SharePoint.SPWeb" /> object will be used.</param>
         <param name="catalogTaxonomyManagedProperty">The search managed property name of the taxonomy field that contains category information for catalog items.</param>

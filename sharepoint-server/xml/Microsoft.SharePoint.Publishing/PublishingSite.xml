@@ -499,6 +499,7 @@ End Namespace</code>
           <para>The <paramref name="associatedContentType" /> parameter must not be a null reference (Nothing in Visual Basic). If the <b>excludeObsolete</b> parameter is set to <b>true</b>, obsolete <b>PageLayout</b> objects that have been marked as hidden are not returned in the collection. If the <b>excludeObsolete</b> parameter is set to <b>false</b>, obsolete <b>PageLayout</b> objects are included in the collection.</para>
           <para />
         </remarks>
+        <exception cref="T:System.ArgumentNullException">Indicates that the <paramref name="associatedContentType" /> parameter is a null reference (Nothing in Visual Basic), which is not valid.</exception>
         <example>
           <code>using SPContentTypeId = Microsoft.SharePoint.SPContentTypeId;
 using SPContentType = Microsoft.SharePoint.SPContentType;
@@ -662,7 +663,6 @@ End Try
     End Class
 End Namespace</code>
         </example>
-        <exception cref="T:System.ArgumentNullException">Indicates that the <paramref name="associatedContentType" /> parameter is a null reference (Nothing in Visual Basic), which is not valid.</exception>
       </Docs>
     </Member>
     <Member MemberName="IsPublishingSite">
@@ -690,6 +690,8 @@ End Namespace</code>
           <para>Checks the <b>SPSite</b> to determine whether the <b>PublishingResources</b> feature has been activated on the <b>SPSite</b> object. This method must be called before a <b>PublishingSite</b> object is instantiated.</para>
           <para />
         </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <b>SPSite</b> cannot be a null reference (Nothing in Visual Basic).</exception>
         <example>
           <code>using SPSite = Microsoft.SharePoint.SPSite;
 using PublishingSite = Microsoft.SharePoint.Publishing.PublishingSite;
@@ -861,8 +863,6 @@ End Try
     End Class
 End Namespace</code>
         </example>
-        <exception cref="T:System.ArgumentNullException">
-          <b>SPSite</b> cannot be a null reference (Nothing in Visual Basic).</exception>
       </Docs>
     </Member>
     <Member MemberName="PageLayouts">

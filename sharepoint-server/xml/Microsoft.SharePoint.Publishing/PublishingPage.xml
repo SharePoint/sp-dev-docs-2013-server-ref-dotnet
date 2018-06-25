@@ -470,6 +470,7 @@ End Namespace</code>
           <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage.</b>,  View permissions to retrieve the page and to return its property values, and Edit permissions to change the value.</para>
           <para />
         </remarks>
+        <exception cref="UnauthorizedAccessException">the current user does not have sufficient permissions to perform this action.</exception>
         <example>
           <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
           <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the pages document library of a <b>PublishingWeb</b>.</para>
@@ -624,7 +625,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="UnauthorizedAccessException">the current user does not have sufficient permissions to perform this action.</exception>
       </Docs>
     </Member>
     <Member MemberName="ContentType">
@@ -857,6 +857,9 @@ End Namespace</code>
           <para>If this property value is used in HTML that is rendered in a browser, you should HTML-encode the property value to avoid the possibility of scripting attacks.</para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentException">A property value that is not valid.</exception>
+        <exception cref="System.ArgumentNullException">Indicates that the value being set is a null reference (Nothing in Visual Basic), which is not valid.</exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
         <example>
           <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
           <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the pages document library of a <b>PublishingWeb</b>.</para>
@@ -1011,9 +1014,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.ArgumentException">A property value that is not valid.</exception>
-        <exception cref="System.ArgumentNullException">Indicates that the value being set is a null reference (Nothing in Visual Basic), which is not valid.</exception>
-        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
       </Docs>
     </Member>
     <Member MemberName="DisconnectedPublishingPageUrl">
@@ -1145,6 +1145,8 @@ End Namespace</code>
           <para>The <b>sourceListItem</b> must be a non-null <b>SPListItem</b> instance.</para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentException">Invalid <b>SPListItem</b>. The <b>SPListItem</b> provided is not compatible with a <b>PublishingPage</b>.</exception>
+        <exception cref="System.ArgumentNullException">The <b>sourceListItem</b> is a null reference (Nothing in Visual Basic), which is not valid.</exception>
         <example>
           <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
           <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the Pages document library of a <b>PublishingWeb</b>.</para>
@@ -1299,8 +1301,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.ArgumentException">Invalid <b>SPListItem</b>. The <b>SPListItem</b> provided is not compatible with a <b>PublishingPage</b>.</exception>
-        <exception cref="System.ArgumentNullException">The <b>sourceListItem</b> is a null reference (Nothing in Visual Basic), which is not valid.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetVariation">
@@ -1682,6 +1682,10 @@ End Namespace</code>
           <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage</b>, View permissions to retrieve the page and to return its property values, and Edit permissions to change the value.</para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentException">
+          <b>PageLayout.AssociatedContentType</b> does not match the <b>PublishingPage.ContentType</b></exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+        <exception cref="System.ArgumentNullException">Indicates that the value being set was a null reference (Nothing in Visual Basic), which is not valid.</exception>
         <example>
           <para>This example replaces the <b>PageLayout</b> object for all <b>PublishingPage</b> objects in a Web to a new <b>PageLayout</b> that renders the same type of content.</para>
           <para>Before compiling and running this example, verify that the <paramref name="oldPageLayout" /> and <paramref name="newPageLayout" /> render the same content. They should use the same <b>AssociatedContentType</b> value.</para>
@@ -1818,10 +1822,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.ArgumentException">
-          <b>PageLayout.AssociatedContentType</b> does not match the <b>PublishingPage.ContentType</b></exception>
-        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
-        <exception cref="System.ArgumentNullException">Indicates that the value being set was a null reference (Nothing in Visual Basic), which is not valid.</exception>
       </Docs>
     </Member>
     <Member MemberName="LocalContactEmail">
@@ -2251,6 +2251,9 @@ End Namespace</code>
           <para>If this property value is used in HTML that is rendered in a browser, you should encode the property value in HTML to avoid the possibility of scripting attacks.</para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentNullException">Indicates that the value being set was a null reference (Nothing in Visual Basic), which is not valid.</exception>
+        <exception cref="System.ArgumentException">Invalid property value. The value cannot exceed 255 characters.</exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
         <example>
           <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
           <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the pages document library of a <b>PublishingWeb</b>.</para>
@@ -2405,9 +2408,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.ArgumentNullException">Indicates that the value being set was a null reference (Nothing in Visual Basic), which is not valid.</exception>
-        <exception cref="System.ArgumentException">Invalid property value. The value cannot exceed 255 characters.</exception>
-        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
       </Docs>
     </Member>
     <Member MemberName="Update">
@@ -2432,6 +2432,7 @@ End Namespace</code>
           <para>The user must have edit permissions on the <b>PublishingPage</b> to call this method.</para>
           <para />
         </remarks>
+        <exception cref="Microsoft.SharePoint.SPException">The update operation failed.</exception>
         <example>
           <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
           <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the pages document library of a <b>PublishingWeb</b>.</para>
@@ -2586,7 +2587,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="Microsoft.SharePoint.SPException">The update operation failed.</exception>
       </Docs>
     </Member>
     <Member MemberName="UpdateContentFromSourceDocument">

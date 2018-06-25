@@ -85,6 +85,8 @@
           <para>The user must have edit permissions on the <b>PublishingPage</b> to set this value. The user must have view permissions on the <b>PublishingPage</b> to initially retrieve it and get any of its property values.</para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentNullException">This value cannot be set to a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
         <example>
           <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
           <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
@@ -177,8 +179,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.ArgumentNullException">This value cannot be set to a null reference (Nothing in Visual Basic).</exception>
-        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetScheduledItem">
@@ -203,6 +203,8 @@ End Namespace</code>
         <summary>Retrieves an instance of the <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> class that wraps the specified <see cref="T:Microsoft.SharePoint.SPListItem" /> class.</summary>
         <returns>A <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> instance that wraps the specified <b>SPListItem</b>. </returns>
         <remarks>To be added.</remarks>
+        <exception cref="System.ArgumentException">Invalid <see cref="T:Microsoft.SharePoint.SPListItem" />. The <b>SPListItem</b> provided is not compatible with a <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" />. This indicates that the <b>SPListItem</b> is either not part of a document library that supports scheduling, or does not have start and end dates, which are required for scheduling.</exception>
+        <exception cref="System.ArgumentNullException">The <paramref name="sourceListItem" /> parameter cannot be a null reference (Nothing in Visual Basic).</exception>
         <example>
           <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
           <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
@@ -295,8 +297,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.ArgumentException">Invalid <see cref="T:Microsoft.SharePoint.SPListItem" />. The <b>SPListItem</b> provided is not compatible with a <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" />. This indicates that the <b>SPListItem</b> is either not part of a document library that supports scheduling, or does not have start and end dates, which are required for scheduling.</exception>
-        <exception cref="System.ArgumentNullException">The <paramref name="sourceListItem" /> parameter cannot be a null reference (Nothing in Visual Basic).</exception>
       </Docs>
     </Member>
     <Member MemberName="IsScheduledItem">
@@ -326,6 +326,7 @@ End Namespace</code>
           <para>This method confirms that the <b>SPListItem</b> is a member of a document library that supports scheduling, and that it has start and end dates, which are required for scheduling.</para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentNullException">The <paramref name="sourceListItem" /> parameter cannot be a null reference (Nothing in Visual Basic).</exception>
         <example>
           <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
           <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
@@ -417,7 +418,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.ArgumentNullException">The <paramref name="sourceListItem" /> parameter cannot be a null reference (Nothing in Visual Basic).</exception>
       </Docs>
     </Member>
     <Member MemberName="ListItem">
@@ -582,6 +582,7 @@ End Namespace</code>
           <para>The <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.StartDate" /> and <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" /> property values are used to determine the publication schedule. If the start date is earlier than the current date, the <b>SPListItem</b> is published immediately. If not, it is scheduled to publish at a future date. If the end date is specified, the <b>SPListItem</b> is scheduled to unpublish at a future date.</para>
           <para />
         </remarks>
+        <exception cref="Microsoft.SharePoint.SPException">Scheduling is not supported in this content database. Use Approve or Unpublish instead.</exception>
         <example>
           <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
           <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
@@ -673,7 +674,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="Microsoft.SharePoint.SPException">Scheduling is not supported in this content database. Use Approve or Unpublish instead.</exception>
       </Docs>
     </Member>
     <Member MemberName="Schedule">
@@ -706,6 +706,7 @@ End Namespace</code>
           <para>The <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.StartDate" /> and <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" /> values are used to determine the publication schedule. If the start date is earlier than now, the <b>SPListItem</b> is published immediately. Otherwise, it is scheduled to publish at a future date. If the end date is specified, the <b>SPListItem</b> is scheduled to unpublish at a future date.</para>
           <para />
         </remarks>
+        <exception cref="Microsoft.SharePoint.SPException">Scheduling is not supported in this content database. Use Approve or Unpublish instead.</exception>
         <example>
           <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
           <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
@@ -797,7 +798,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="Microsoft.SharePoint.SPException">Scheduling is not supported in this content database. Use Approve or Unpublish instead.</exception>
       </Docs>
     </Member>
     <Member MemberName="StartDate">
@@ -829,6 +829,8 @@ End Namespace</code>
           <para>The user must have edit permissions on the <b>PublishingPage</b> to set this value. The user must have view permissions on the <b>PublishingPage</b> to initially retrieve the <b>PublishingPage</b> and get any of its property values. </para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentNullException">The parameter cannot contain a a null reference (Nothing in Visual Basic) value.</exception>
+        <exception cref="Microsoft.SharePoint.SPException">The current user does not have sufficient permissions to perform this action.</exception>
         <example>
           <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
           <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
@@ -921,8 +923,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
     End Class
 End Namespace</code>
         </example>
-        <exception cref="System.ArgumentNullException">The parameter cannot contain a a null reference (Nothing in Visual Basic) value.</exception>
-        <exception cref="Microsoft.SharePoint.SPException">The current user does not have sufficient permissions to perform this action.</exception>
       </Docs>
     </Member>
   </Members>

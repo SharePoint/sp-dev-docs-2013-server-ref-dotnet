@@ -173,6 +173,13 @@
           <para>The user must have Add and Edit permissions in the <b>PublishingWeb</b>, specifically for items in the <b>PublishingWeb.PagesList</b>, to use this method.</para>
           <para />
         </remarks>
+        <exception cref="System.ArgumentException">Extension that is not valid for <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> URL name. <b>PublishingPage</b> URL names must have the file name extension .aspx.</exception>
+        <exception cref="System.IO.PathTooLongException">Specified file or folder name is too long. The URL path for all files and folders must be 260 characters or fewer (and no more than 128 characters for any single file or folder name in the URL). Type a shorter file or folder name.</exception>
+        <exception cref="Microsoft.SharePoint.SPException">File or folder name x contains characters that are not permitted. Use a different name.</exception>
+        <exception cref="System.ArgumentNullException">One of the input parameters is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="System.UnauthorizedAccessException">Current user does not have sufficient permissions to perform this action.</exception>
+        <exception cref="System.IO.FileLoadException">Another file with the same name already exists.</exception>
+        <exception cref="System.IO.DirectoryNotFoundException">There is a problem with the <paramref name="name" /> parameter.</exception>
         <example>
           <para>This example creates a new <b>PublishingPage</b> object in a <b>PublishingWeb</b>.</para>
           <para>Before compiling and running this example, verify that an <b>SPWeb</b> that is a <b>PublishingWeb</b> exists and is passed in as a Web parameter. </para>
@@ -279,13 +286,6 @@ Namespace Microsoft.SDK.SharePointServer.Samples
 End Namespace</code>
           <para />
         </example>
-        <exception cref="System.ArgumentException">Extension that is not valid for <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> URL name. <b>PublishingPage</b> URL names must have the file name extension .aspx.</exception>
-        <exception cref="System.IO.PathTooLongException">Specified file or folder name is too long. The URL path for all files and folders must be 260 characters or fewer (and no more than 128 characters for any single file or folder name in the URL). Type a shorter file or folder name.</exception>
-        <exception cref="Microsoft.SharePoint.SPException">File or folder name x contains characters that are not permitted. Use a different name.</exception>
-        <exception cref="System.ArgumentNullException">One of the input parameters is a null reference (Nothing in Visual Basic).</exception>
-        <exception cref="System.UnauthorizedAccessException">Current user does not have sufficient permissions to perform this action.</exception>
-        <exception cref="System.IO.FileLoadException">Another file with the same name already exists.</exception>
-        <exception cref="System.IO.DirectoryNotFoundException">There is a problem with the <paramref name="name" /> parameter.</exception>
       </Docs>
     </Member>
     <Member MemberName="Add">
