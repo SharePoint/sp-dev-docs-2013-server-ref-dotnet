@@ -1,0 +1,313 @@
+﻿<Type Name="VariationsTranslationTimerJob" FullName="Microsoft.Office.TranslationServices.VariationsTranslationTimerJob">
+  <TypeSignature Language="C#" Value="public static class VariationsTranslationTimerJob" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit VariationsTranslationTimerJob extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob" />
+  <TypeSignature Language="VB.NET" Value="Public Class VariationsTranslationTimerJob" />
+  <TypeSignature Language="C++ CLI" Value="public ref class VariationsTranslationTimerJob abstract sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ServerTypeId="0E043428-89F2-4747-B485-BC6D77C90A11")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Drives translation timer jobs in variation target webs.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ExportItems">
+      <MemberSignature Language="C#" Value="public static void ExportItems (Microsoft.SharePoint.SPList list, System.Collections.Generic.IEnumerable&lt;int&gt; itemIds);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ExportItems(class Microsoft.SharePoint.SPList list, class System.Collections.Generic.IEnumerable`1&lt;int32&gt; itemIds) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob.ExportItems(Microsoft.SharePoint.SPList,System.Collections.Generic.IEnumerable{System.Int32})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ExportItems (list As SPList, itemIds As IEnumerable(Of Integer))" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ExportItems(Microsoft::SharePoint::SPList ^ list, System::Collections::Generic::IEnumerable&lt;int&gt; ^ itemIds);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="itemIds" Type="System.Collections.Generic.IEnumerable&lt;System.Int32&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="list">To be added.</param>
+        <param name="itemIds">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExportItems">
+      <MemberSignature Language="C#" Value="public static void ExportItems (Microsoft.SharePoint.SPList list, System.Collections.Generic.IEnumerable&lt;int&gt; itemIds, System.Collections.Generic.IEnumerable&lt;string&gt; addressesToEmail);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ExportItems(class Microsoft.SharePoint.SPList list, class System.Collections.Generic.IEnumerable`1&lt;int32&gt; itemIds, class System.Collections.Generic.IEnumerable`1&lt;string&gt; addressesToEmail) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob.ExportItems(Microsoft.SharePoint.SPList,System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.String})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ExportItems (list As SPList, itemIds As IEnumerable(Of Integer), addressesToEmail As IEnumerable(Of String))" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ExportItems(Microsoft::SharePoint::SPList ^ list, System::Collections::Generic::IEnumerable&lt;int&gt; ^ itemIds, System::Collections::Generic::IEnumerable&lt;System::String ^&gt; ^ addressesToEmail);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="itemIds" Type="System.Collections.Generic.IEnumerable&lt;System.Int32&gt;" />
+        <Parameter Name="addressesToEmail" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="list">List containing the items to export.</param>
+        <param name="itemIds">IDs of the items to export.</param>
+        <param name="addressesToEmail">Email addresses that should be notified when the operation is completed.</param>
+        <summary>Creates a work item for the timer job to export a specific set of items to an XLIFF translation package.</summary>
+        <remarks>
+          <para>The resulting translation package can be downloaded from the translation packages library on the root web of the site collection. The download link will be included in the email sent after the operation completes. Users who do not have the <see cref="F:Microsoft.SharePoint.SPRights.CancelCheckout" /> permission may export, at most, one item per call. Users with the <b>CancelCheckout</b> permission may perform bulk operations on multiple items.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException" />
+        <exception cref="T:System.InvalidOperationException">The list is not configured for translation.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ExportItemsRequiringTranslation">
+      <MemberSignature Language="C#" Value="public static void ExportItemsRequiringTranslation (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ExportItemsRequiringTranslation(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob.ExportItemsRequiringTranslation(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ExportItemsRequiringTranslation (list As SPList)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ExportItemsRequiringTranslation(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExportItemsRequiringTranslation">
+      <MemberSignature Language="C#" Value="public static void ExportItemsRequiringTranslation (Microsoft.SharePoint.SPList list, System.Collections.Generic.IEnumerable&lt;string&gt; addressesToEmail);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ExportItemsRequiringTranslation(class Microsoft.SharePoint.SPList list, class System.Collections.Generic.IEnumerable`1&lt;string&gt; addressesToEmail) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob.ExportItemsRequiringTranslation(Microsoft.SharePoint.SPList,System.Collections.Generic.IEnumerable{System.String})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ExportItemsRequiringTranslation (list As SPList, addressesToEmail As IEnumerable(Of String))" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ExportItemsRequiringTranslation(Microsoft::SharePoint::SPList ^ list, System::Collections::Generic::IEnumerable&lt;System::String ^&gt; ^ addressesToEmail);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="addressesToEmail" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="list">List containing the items to export.</param>
+        <param name="addressesToEmail">Email addresses that should be notified when the operation is completed.</param>
+        <summary>Creates a work item for the timer job to export all items in the list that currently require translation to an XLIFF translation package.</summary>
+        <remarks>
+          <para>The resulting translation package can be downloaded from the translation packages library on the root web of the site collection. The download link will be included in the email sent after the operation completes. The current user must have the <see cref="F:Microsoft.SharePoint.SPRights.CancelCheckout" /> permission to perform the operation.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException" />
+        <exception cref="T:System.InvalidOperationException">The list is not configured for translation.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ImportTranslationPackage">
+      <MemberSignature Language="C#" Value="public static void ImportTranslationPackage (string translatorName, Microsoft.SharePoint.SPWeb targetWeb, int packageId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ImportTranslationPackage(string translatorName, class Microsoft.SharePoint.SPWeb targetWeb, int32 packageId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob.ImportTranslationPackage(System.String,Microsoft.SharePoint.SPWeb,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ImportTranslationPackage (translatorName As String, targetWeb As SPWeb, packageId As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ImportTranslationPackage(System::String ^ translatorName, Microsoft::SharePoint::SPWeb ^ targetWeb, int packageId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="translatorName" Type="System.String" />
+        <Parameter Name="targetWeb" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="packageId" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="translatorName">To be added.</param>
+        <param name="targetWeb">To be added.</param>
+        <param name="packageId">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ImportTranslationPackage">
+      <MemberSignature Language="C#" Value="public static void ImportTranslationPackage (string translatorName, Microsoft.SharePoint.SPWeb targetWeb, int packageId, System.Collections.Generic.IEnumerable&lt;string&gt; addressesToEmail);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ImportTranslationPackage(string translatorName, class Microsoft.SharePoint.SPWeb targetWeb, int32 packageId, class System.Collections.Generic.IEnumerable`1&lt;string&gt; addressesToEmail) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob.ImportTranslationPackage(System.String,Microsoft.SharePoint.SPWeb,System.Int32,System.Collections.Generic.IEnumerable{System.String})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ImportTranslationPackage (translatorName As String, targetWeb As SPWeb, packageId As Integer, addressesToEmail As IEnumerable(Of String))" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ImportTranslationPackage(System::String ^ translatorName, Microsoft::SharePoint::SPWeb ^ targetWeb, int packageId, System::Collections::Generic::IEnumerable&lt;System::String ^&gt; ^ addressesToEmail);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="translatorName" Type="System.String" />
+        <Parameter Name="targetWeb" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="packageId" Type="System.Int32" />
+        <Parameter Name="addressesToEmail" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="translatorName">Email addresses that should be notified when the operation is completed.</param>
+        <param name="targetWeb">Name of the entity that performed translation.</param>
+        <param name="packageId">Web containing the content in the translation package.</param>
+        <param name="addressesToEmail">ID of the package item in the Translation Packages library.</param>
+        <summary>Creates a work item for the timer job to import an XLIFF translation package.</summary>
+        <remarks>
+          <para>The package must be in the translation packages library on the root web of the site collection containing <paramref name="targetWeb" />. The current user must have the <see cref="F:Microsoft.SharePoint.SPRights.CancelCheckout" /> permission to perform the operation if the translation package contains content for more than one item.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException" />
+        <exception cref="T:System.InvalidOperationException">The web is not configured for translation.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions.</exception>
+        <exception cref="System.Xml.Schema.XmlSchemaException">A package does not comply with the strict schema of XLIFF Version 1.2 or is missing notes required to perform an import. The message contains the ID of the first failing file in the package.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MachineTranslateItems">
+      <MemberSignature Language="C#" Value="public static void MachineTranslateItems (Microsoft.SharePoint.SPList list, System.Collections.Generic.IEnumerable&lt;int&gt; itemIds);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void MachineTranslateItems(class Microsoft.SharePoint.SPList list, class System.Collections.Generic.IEnumerable`1&lt;int32&gt; itemIds) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob.MachineTranslateItems(Microsoft.SharePoint.SPList,System.Collections.Generic.IEnumerable{System.Int32})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub MachineTranslateItems (list As SPList, itemIds As IEnumerable(Of Integer))" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void MachineTranslateItems(Microsoft::SharePoint::SPList ^ list, System::Collections::Generic::IEnumerable&lt;int&gt; ^ itemIds);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="itemIds" Type="System.Collections.Generic.IEnumerable&lt;System.Int32&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="list">To be added.</param>
+        <param name="itemIds">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MachineTranslateItems">
+      <MemberSignature Language="C#" Value="public static void MachineTranslateItems (Microsoft.SharePoint.SPList list, System.Collections.Generic.IEnumerable&lt;int&gt; itemIds, System.Collections.Generic.IEnumerable&lt;string&gt; addressesToEmail);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void MachineTranslateItems(class Microsoft.SharePoint.SPList list, class System.Collections.Generic.IEnumerable`1&lt;int32&gt; itemIds, class System.Collections.Generic.IEnumerable`1&lt;string&gt; addressesToEmail) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob.MachineTranslateItems(Microsoft.SharePoint.SPList,System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.String})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub MachineTranslateItems (list As SPList, itemIds As IEnumerable(Of Integer), addressesToEmail As IEnumerable(Of String))" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void MachineTranslateItems(Microsoft::SharePoint::SPList ^ list, System::Collections::Generic::IEnumerable&lt;int&gt; ^ itemIds, System::Collections::Generic::IEnumerable&lt;System::String ^&gt; ^ addressesToEmail);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="itemIds" Type="System.Collections.Generic.IEnumerable&lt;System.Int32&gt;" />
+        <Parameter Name="addressesToEmail" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="list">List containing the items to machine translate.</param>
+        <param name="itemIds">IDs of the items to machine translate.</param>
+        <param name="addressesToEmail">Email addresses that should be notified when the operation is completed.</param>
+        <summary>Creates a work item for the timer job to machine translate a specific set of items.</summary>
+        <remarks>
+          <para>Users who do not have the <see cref="F:Microsoft.SharePoint.SPRights.CancelCheckout" /> permission may export, at most, one item per call. Users with the <b>CancelCheckout</b> permission may perform bulk operations on multiple items. The current user's identity must be configured properly in the Unique Particle Attribution (UPA) for use with <see cref="T:Microsoft.SharePoint.IdentityModel.OAuth2.OAuth2BearerCredentials" />.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException" />
+        <exception cref="T:System.InvalidOperationException">The list is not configured for translation.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MachineTranslateItemsRequiringTranslation">
+      <MemberSignature Language="C#" Value="public static void MachineTranslateItemsRequiringTranslation (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void MachineTranslateItemsRequiringTranslation(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob.MachineTranslateItemsRequiringTranslation(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub MachineTranslateItemsRequiringTranslation (list As SPList)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void MachineTranslateItemsRequiringTranslation(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MachineTranslateItemsRequiringTranslation">
+      <MemberSignature Language="C#" Value="public static void MachineTranslateItemsRequiringTranslation (Microsoft.SharePoint.SPList list, System.Collections.Generic.IEnumerable&lt;string&gt; addressesToEmail);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void MachineTranslateItemsRequiringTranslation(class Microsoft.SharePoint.SPList list, class System.Collections.Generic.IEnumerable`1&lt;string&gt; addressesToEmail) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.TranslationServices.VariationsTranslationTimerJob.MachineTranslateItemsRequiringTranslation(Microsoft.SharePoint.SPList,System.Collections.Generic.IEnumerable{System.String})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub MachineTranslateItemsRequiringTranslation (list As SPList, addressesToEmail As IEnumerable(Of String))" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void MachineTranslateItemsRequiringTranslation(Microsoft::SharePoint::SPList ^ list, System::Collections::Generic::IEnumerable&lt;System::String ^&gt; ^ addressesToEmail);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.TranslationServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="addressesToEmail" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="list">List containing the items to machine translate.</param>
+        <param name="addressesToEmail">Email addresses that should be notified when the operation is completed.</param>
+        <summary>Creates a work item for the timer job to machine translate all items in the list that currently require translation.</summary>
+        <remarks>
+          <para>The current user must have the <see cref="F:Microsoft.SharePoint.SPRights.CancelCheckout" /> permission to perform the operation. The current user's identity must be configured properly in the Unique Particle Attribution (UPA) for use with <see cref="T:Microsoft.SharePoint.IdentityModel.OAuth2.OAuth2BearerCredentials" />.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException" />
+        <exception cref="T:System.InvalidOperationException">The list is not configured for translation.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

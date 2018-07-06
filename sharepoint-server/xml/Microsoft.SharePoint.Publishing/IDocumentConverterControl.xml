@@ -1,0 +1,117 @@
+﻿<Type Name="IDocumentConverterControl" FullName="Microsoft.SharePoint.Publishing.IDocumentConverterControl">
+  <TypeSignature Language="C#" Value="public interface IDocumentConverterControl" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IDocumentConverterControl" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.IDocumentConverterControl" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IDocumentConverterControl" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IDocumentConverterControl" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Obsolete("This interface is obsolete - use the specialized Office services instead for conversions", false)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>This interface is used for exposing settings of document converters to the user.</summary>
+    <remarks>
+      <para>This interface is implemented by user controls that need to expose settings. The interface scope is specific to document converters in the context of the "Smart Client Authoring" feature. That is, the "document-to-publishing-page" conversion, as opposed to the "document-to-another-document" conversion.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ContentType">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPContentType ContentType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPContentType ContentType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.IDocumentConverterControl.ContentType" />
+      <MemberSignature Language="VB.NET" Value="Public Property ContentType As SPContentType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPContentType ^ ContentType { Microsoft::SharePoint::SPContentType ^ get(); void set(Microsoft::SharePoint::SPContentType ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPContentType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the content type of the source document for the document converter control.</summary>
+        <value>The content type of the source document for the document converter control.</value>
+        <remarks>
+          <para>This property is set before any of the other interface functions are called.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConverterSettings">
+      <MemberSignature Language="C#" Value="public string ConverterSettings { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ConverterSettings" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.IDocumentConverterControl.ConverterSettings" />
+      <MemberSignature Language="VB.NET" Value="Public Property ConverterSettings As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ConverterSettings { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the document converter settings as an XML string.</summary>
+        <value>An XML string that represents the document converter settings.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequiresConfiguration">
+      <MemberSignature Language="C#" Value="public bool RequiresConfiguration { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool RequiresConfiguration" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.IDocumentConverterControl.RequiresConfiguration" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property RequiresConfiguration As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool RequiresConfiguration { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value that determines whether this document converter requires configuration.</summary>
+        <value>A Boolean value that represents whether this document converter requires configuration.</value>
+        <remarks>
+          <para>The document-to-page conversion framework uses this property to query the control and determine if it needs to be configured before running a conversion. </para>
+          <para>The document content type is already set before this property is called. This property is only called if the <b>ConverterSettings</b> string is empty.</para>
+          <para>The control should use the settings and the content type to determine whether it needs more user input. If the control returns <b>True</b> when the user clicks OK on the configuration page, the document converter configuration and process are blocked until the document converter control returns <b>False</b> or until the <b>ConverterSettings</b> are no longer empty.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SectionDisplayTitle">
+      <MemberSignature Language="C#" Value="public string SectionDisplayTitle { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SectionDisplayTitle" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.IDocumentConverterControl.SectionDisplayTitle" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SectionDisplayTitle As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SectionDisplayTitle { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of the section on the page in which this document converter control displays.</summary>
+        <value>Name of the section on the page in which this document converter control displays.</value>
+        <remarks>
+          <para>This property references Help UI when the control requires configuration.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

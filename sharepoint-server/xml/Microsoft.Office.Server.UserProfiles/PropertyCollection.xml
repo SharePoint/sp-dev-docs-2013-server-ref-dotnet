@@ -1,0 +1,558 @@
+﻿<Type Name="PropertyCollection" FullName="Microsoft.Office.Server.UserProfiles.PropertyCollection">
+  <TypeSignature Language="C#" Value="public class PropertyCollection : System.Collections.IEnumerable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit PropertyCollection extends System.Object implements class System.Collections.IEnumerable" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.PropertyCollection" />
+  <TypeSignature Language="VB.NET" Value="Public Class PropertyCollection&#xA;Implements IEnumerable" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PropertyCollection : System::Collections::IEnumerable" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Collections.IEnumerable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Obsolete("PropertyCollection is replaced by ProfileSubtypePropertyManager.")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents a collection of <b>Property</b> objects. </summary>
+    <remarks>
+      <para>Use the <see cref="T:Microsoft.Office.Server.UserProfiles.PropertyCollection" /> class to enumerate all properties defined at a site.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The following code example shows the use of the <see cref="T:Microsoft.Office.Server.UserProfiles.PropertyCollection" /> class.</para>
+      <code>      Public Sub SectionSample()
+         'Get portal site context from topology.
+         Dim strUrl As String = "http://SampleName"
+         Dim tm As New TopologyManager()
+         Dim ps As PortalSite = tm.PortalSites(New Uri(strUrl))
+         Dim pc As PortalContext = PortalApplication.GetContext(ps)
+
+         'Initialize user profile config manager object.
+         Dim upcm As New UserProfileConfigManager(pc)
+
+         'Sample to create a new section.
+         Dim pcol As PropertyCollection = upcm.GetPropertiesWithSection()
+         Dim mysection As [Property] = pcol.Create(True)
+         mysection.Name = "my section"
+         mysection.Commit()
+         pcol.SetDisplayOrderBySectionName(mysection.Name, 0)
+         pcol.CommitDisplayOrder()
+      End Sub 'SectionSample</code>
+      <code>public void SectionSample()
+{
+//Get portal site context from topology.
+string strUrl = "http://SampleName";
+TopologyManager tm = new TopologyManager();
+PortalSite ps = tm.PortalSites[new Uri(strUrl)];
+PortalContext pc = PortalApplication.GetContext(ps);
+
+//Initialize user profile config manager object.
+UserProfileConfigManager upcm = new UserProfileConfigManager(pc);
+
+//Sample to create a new section.
+PropertyCollection pcol = upcm.GetPropertiesWithSection();
+Property mysection = pcol.Create(true);
+mysection.Name = "my section";
+mysection.Commit();
+pcol.SetDisplayOrderBySectionName(mysection.Name, 0);
+pcol.CommitDisplayOrder();
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public void Add (Microsoft.Office.Server.UserProfiles.Property property);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(class Microsoft.Office.Server.UserProfiles.Property property) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.Add(Microsoft.Office.Server.UserProfiles.Property)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Add(Microsoft::Office::Server::UserProfiles::Property ^ property);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="property" Type="Microsoft.Office.Server.UserProfiles.Property" />
+      </Parameters>
+      <Docs>
+        <param name="property">The <see cref="T:Microsoft.Office.Server.UserProfiles.Property" /> object to be added to this site.</param>
+        <summary>Adds a property to this site.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CommitDisplayOrder">
+      <MemberSignature Language="C#" Value="public void CommitDisplayOrder ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CommitDisplayOrder() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.CommitDisplayOrder" />
+      <MemberSignature Language="VB.NET" Value="Public Sub CommitDisplayOrder ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void CommitDisplayOrder();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Commits the changes made to the display order to the user profile database.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CopyTo">
+      <MemberSignature Language="C#" Value="public void CopyTo (Array array, int index);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CopyTo(class System.Array array, int32 index) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.CopyTo(System.Array,System.Int32)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void CopyTo(Array ^ array, int index);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="array" Type="System.Array" />
+        <Parameter Name="index" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="array">A one-dimensional array to which the property elements are copied.</param>
+        <param name="index">The zero-based index in the array at which copying begins.</param>
+        <summary>Copies the elements of the property collection to an array, starting at a specified index.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Count">
+      <MemberSignature Language="C#" Value="public int Count { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Count" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyCollection.Count" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Count As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Count { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of user profile property objects for this collection.</summary>
+        <value>The number of user profile property objects for this collection.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.Property Create (bool fIsSection);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.Property Create(bool fIsSection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.Create(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Create (fIsSection As Boolean) As Property" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::Property ^ Create(bool fIsSection);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.Property</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="fIsSection" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="fIsSection">
+          <b>true</b> if this property is a section; otherwise, <b>false</b>.</param>
+        <summary>Creates a <see cref="T:Microsoft.Office.Server.UserProfiles.Property" /> object and specifies whether the property is a section.</summary>
+        <returns>The   object that represents the new <b>property</b> object.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultLanguage">
+      <MemberSignature Language="C#" Value="public int DefaultLanguage { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 DefaultLanguage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyCollection.DefaultLanguage" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DefaultLanguage As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int DefaultLanguage { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEnumerator">
+      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.IEnumerator GetEnumerator() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.GetEnumerator" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetEnumerator () As IEnumerator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::IEnumerator ^ GetEnumerator();" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Collections.IEnumerable.GetEnumerator</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.IEnumerator</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the enumerator for the properties.</summary>
+        <returns>The that represents the enumerator for the properties.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPropertyByName">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.Property GetPropertyByName (string strPropName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.Property GetPropertyByName(string strPropName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.GetPropertyByName(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetPropertyByName (strPropName As String) As Property" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::Property ^ GetPropertyByName(System::String ^ strPropName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.Property</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strPropName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strPropName">The name of the property.</param>
+        <summary>Gets a property by name.</summary>
+        <returns> The that contains the <see cref="T:Microsoft.Office.Server.UserProfiles.Property" /> object.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPropertyByURI">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.Property GetPropertyByURI (string strPropURI);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.Property GetPropertyByURI(string strPropURI) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.GetPropertyByURI(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetPropertyByURI (strPropURI As String) As Property" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::Property ^ GetPropertyByURI(System::String ^ strPropURI);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.Property</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strPropURI" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strPropURI">The URI of the property.</param>
+        <summary>Gets a property by URI.</summary>
+        <returns> The that contains the <see cref="T:Microsoft.Office.Server.UserProfiles.Property" /> object.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSectionByName">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.Property GetSectionByName (string strSectionName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.Property GetSectionByName(string strSectionName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.GetSectionByName(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSectionByName (strSectionName As String) As Property" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::Property ^ GetSectionByName(System::String ^ strSectionName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.Property</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strSectionName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strSectionName">The name of the section.</param>
+        <summary>Gets a section by name.</summary>
+        <returns>The  that contains the <see cref="T:Microsoft.Office.Server.UserProfiles.Property" /> object.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSynchronized">
+      <MemberSignature Language="C#" Value="public bool IsSynchronized { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSynchronized" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyCollection.IsSynchronized" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSynchronized As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSynchronized { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether access to the <see cref="T:Microsoft.Office.Server.UserProfiles.PropertyCollection" /> is synchronized (thread safe).</summary>
+        <value>true if the property collection is synchronized; otherwise, false.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveByName">
+      <MemberSignature Language="C#" Value="public void RemoveByName (string strName, bool fIsSection);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveByName(string strName, bool fIsSection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.RemoveByName(System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RemoveByName (strName As String, fIsSection As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemoveByName(System::String ^ strName, bool fIsSection);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strName" Type="System.String" />
+        <Parameter Name="fIsSection" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="strName">The name of the property or section object to be removed from the user profile database.</param>
+        <param name="fIsSection">
+          <b>true</b> if this property is a section; otherwise, <b>false</b>.</param>
+        <summary>Removes a property or section object from the user profile database by name.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemovePropertyByName">
+      <MemberSignature Language="C#" Value="public void RemovePropertyByName (string strPropName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemovePropertyByName(string strPropName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.RemovePropertyByName(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RemovePropertyByName (strPropName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemovePropertyByName(System::String ^ strPropName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strPropName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strPropName">The name of the property to be removed from the user profile database.</param>
+        <summary>Removes the property from the user profile database by the name of the property.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemovePropertyByURI">
+      <MemberSignature Language="C#" Value="public void RemovePropertyByURI (string strPropURI);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemovePropertyByURI(string strPropURI) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.RemovePropertyByURI(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RemovePropertyByURI (strPropURI As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemovePropertyByURI(System::String ^ strPropURI);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strPropURI" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strPropURI">The URI of the property to be removed from the user profile database.</param>
+        <summary>Removes the property from the user profile database by the URI of the property.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveSectionByName">
+      <MemberSignature Language="C#" Value="public void RemoveSectionByName (string strSectionName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveSectionByName(string strSectionName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.RemoveSectionByName(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RemoveSectionByName (strSectionName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemoveSectionByName(System::String ^ strSectionName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strSectionName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strSectionName">The name of the section.</param>
+        <summary>Removes the specified section by name.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetDisplayOrderByName">
+      <MemberSignature Language="C#" Value="public void SetDisplayOrderByName (string strName, bool fIsSection, int nDisplayOrder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetDisplayOrderByName(string strName, bool fIsSection, int32 nDisplayOrder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.SetDisplayOrderByName(System.String,System.Boolean,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetDisplayOrderByName (strName As String, fIsSection As Boolean, nDisplayOrder As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetDisplayOrderByName(System::String ^ strName, bool fIsSection, int nDisplayOrder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strName" Type="System.String" />
+        <Parameter Name="fIsSection" Type="System.Boolean" />
+        <Parameter Name="nDisplayOrder" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="strName">The name of the property.</param>
+        <param name="fIsSection">
+          <b>true</b> if this property is a section; otherwise, <b>false</b>.</param>
+        <param name="nDisplayOrder">The order of the display.</param>
+        <summary>Sets the specified display order of the properties by name.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetDisplayOrderByPropertyName">
+      <MemberSignature Language="C#" Value="public void SetDisplayOrderByPropertyName (string strPropName, int nDisplayOrder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetDisplayOrderByPropertyName(string strPropName, int32 nDisplayOrder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.SetDisplayOrderByPropertyName(System.String,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetDisplayOrderByPropertyName (strPropName As String, nDisplayOrder As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetDisplayOrderByPropertyName(System::String ^ strPropName, int nDisplayOrder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strPropName" Type="System.String" />
+        <Parameter Name="nDisplayOrder" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="strPropName">The name of the property.</param>
+        <param name="nDisplayOrder">The order of the display.</param>
+        <summary>Sets the specified display order of the properties by property name.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetDisplayOrderByPropertyURI">
+      <MemberSignature Language="C#" Value="public void SetDisplayOrderByPropertyURI (string strPropURI, int nDisplayOrder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetDisplayOrderByPropertyURI(string strPropURI, int32 nDisplayOrder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.SetDisplayOrderByPropertyURI(System.String,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetDisplayOrderByPropertyURI (strPropURI As String, nDisplayOrder As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetDisplayOrderByPropertyURI(System::String ^ strPropURI, int nDisplayOrder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strPropURI" Type="System.String" />
+        <Parameter Name="nDisplayOrder" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="strPropURI">The URI of the property.</param>
+        <param name="nDisplayOrder">The order of the display.</param>
+        <summary>Sets the specified display order of the properties by property URI.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetDisplayOrderBySectionName">
+      <MemberSignature Language="C#" Value="public void SetDisplayOrderBySectionName (string strSectionName, int nDisplayOrder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetDisplayOrderBySectionName(string strSectionName, int32 nDisplayOrder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyCollection.SetDisplayOrderBySectionName(System.String,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetDisplayOrderBySectionName (strSectionName As String, nDisplayOrder As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetDisplayOrderBySectionName(System::String ^ strSectionName, int nDisplayOrder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strSectionName" Type="System.String" />
+        <Parameter Name="nDisplayOrder" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="strSectionName">The section name of the property.</param>
+        <param name="nDisplayOrder">The order of the display of the properties.</param>
+        <summary>Sets the specified display order of the properties by section name.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SubtypeName">
+      <MemberSignature Language="C#" Value="public string SubtypeName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SubtypeName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyCollection.SubtypeName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SubtypeName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SubtypeName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SyncRoot">
+      <MemberSignature Language="C#" Value="public object SyncRoot { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance object SyncRoot" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyCollection.SyncRoot" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SyncRoot As Object" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Object ^ SyncRoot { System::Object ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             An object that can be used to synchronize access to this collection             </summary>
+        <value>An object that can be used to synchronize access to this property collection.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

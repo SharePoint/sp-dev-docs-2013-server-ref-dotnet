@@ -1,0 +1,124 @@
+﻿<Type Name="PublishingCachablePage" FullName="Microsoft.SharePoint.Publishing.PublishingCachablePage">
+  <TypeSignature Language="C#" Value="public class PublishingCachablePage : Microsoft.SharePoint.WebPartPages.WebPartPage" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit PublishingCachablePage extends Microsoft.SharePoint.WebPartPages.WebPartPage" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.PublishingCachablePage" />
+  <TypeSignature Language="VB.NET" Value="Public Class PublishingCachablePage&#xA;Inherits WebPartPage" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PublishingCachablePage : Microsoft::SharePoint::WebPartPages::WebPartPage" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.WebPartPages.WebPartPage</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the base class used for all page layouts and .aspx pages that use new performance enhancements in the <see cref="N:Microsoft.SharePoint.Publishing" /> namespace.</summary>
+    <remarks>
+      <para>Enhancements include the ability to use the full page output cache feature of Microsoft ASP.NET 2.0 and the field control cache available in <b>Microsoft.SharePoint.Publishing</b>.</para>
+      <para>Additionally, Microsoft SharePoint Server 2010 enables caching functionality that is ordinarily prevented by Microsoft SharePoint Foundation. Because SharePoint Server 2010 relies on Microsoft ASP.NET 2.0 caching, it instructs SharePoint Foundation not to set <b>HttpContext.Response.Cache</b>. Specifically, SharePoint Foundation disables the &lt;% @ Output Cache&gt; directive by resetting values in <b>HttpContext.Response.Cache</b> that would ordinarily prevent other applications from using ASP.NET 2.0 caching in a SharePoint Foundation environment. SharePoint Foundation is then able to use ASP.NET 2.0 output caching.</para>
+      <para>SharePoint Foundation instructs ASP.NET 2.0 to get no more data than is necessary to support a caching operation.</para>
+      <para>To minimize latency and maximize page processing performance, SharePoint Foundation sets the following properties to get only the amount of data that is required:</para>
+      <list type="bullet">
+        <item>
+          <description>
+            <b>context.ListItemDisplayName</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>context.LineItemID</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>context.ListItemServerRelativeUrl</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>context.LoadContentTypes</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>context.FieldControlCacheGetCallback</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>context.FieldControlCacheSetCallback</b>
+          </description>
+        </item>
+      </list>
+      <para>Additional performance improvements have been made to reduce the overhead of initializing certain pieces of the <b>SPContext</b> object.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public PublishingCachablePage ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCachablePage.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; PublishingCachablePage();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.PublishingCache" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPreInit">
+      <MemberSignature Language="C#" Value="protected override void OnPreInit (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnPreInit(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCachablePage.OnPreInit(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreInit (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreInit(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">A <b>System.EventArgs</b> object that contains information about the event.</param>
+        <summary>Raises the pre-initialization event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderChildren">
+      <MemberSignature Language="C#" Value="protected override void RenderChildren (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void RenderChildren(class System.Web.UI.HtmlTextWriter writer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCachablePage.RenderChildren(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub RenderChildren (writer As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void RenderChildren(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">The <see cref="T:System.Web.UI.HtmlTextWriter" /> object</param>
+        <summary>Checks and validates to perform the last rendering.
+</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

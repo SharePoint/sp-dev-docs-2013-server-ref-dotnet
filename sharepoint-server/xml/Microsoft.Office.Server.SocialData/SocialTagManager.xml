@@ -1,0 +1,759 @@
+﻿<Type Name="SocialTagManager" FullName="Microsoft.Office.Server.SocialData.SocialTagManager">
+  <TypeSignature Language="C#" Value="public sealed class SocialTagManager : Microsoft.Office.Server.SocialData.SocialDataManager" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SocialTagManager extends Microsoft.Office.Server.SocialData.SocialDataManager" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.SocialData.SocialTagManager" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SocialTagManager&#xA;Inherits SocialDataManager" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SocialTagManager sealed : Microsoft::Office::Server::SocialData::SocialDataManager" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.Office.Server.SocialData.SocialDataManager</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Contains methods and properties used to manipulate social tag data. </summary>
+    <remarks>
+      <para>To access or add a social tag, call the <b>SocialTagManager</b> class to create a <see cref="T:Microsoft.Office.Server.SocialData.SocialTag" /> object.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SocialTagManager ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; SocialTagManager();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <b>SocialTagManager</b> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SocialTagManager (Microsoft.SharePoint.SPServiceContext serviceContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPServiceContext serviceContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.#ctor(Microsoft.SharePoint.SPServiceContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (serviceContext As SPServiceContext)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; SocialTagManager(Microsoft::SharePoint::SPServiceContext ^ serviceContext);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">To be added.</param>
+        <summary>Initializes a new instance of the <b>SocialTagManager</b> class using the specified service context.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddTag">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTag AddTag (Uri url, Microsoft.SharePoint.Taxonomy.Term term);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTag AddTag(class System.Uri url, class Microsoft.SharePoint.Taxonomy.Term term) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.AddTag(System.Uri,Microsoft.SharePoint.Taxonomy.Term)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::SocialData::SocialTag ^ AddTag(Uri ^ url, Microsoft::SharePoint::Taxonomy::Term ^ term);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTag</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.Uri" />
+        <Parameter Name="term" Type="Microsoft.SharePoint.Taxonomy.Term" />
+      </Parameters>
+      <Docs>
+        <param name="url">To be added.</param>
+        <param name="term">A <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object. The term must exist in the taxonomy that you are using.</param>
+        <summary>Creates a <see cref="T:Microsoft.Office.Server.SocialData.SocialTag" /> object with the specified <see cref="T:System.Uri" /> and <see cref="T:Microsoft.SharePoint.Taxonomy.Term" />. </summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>The social tag is external, and therefore visible to users other than the owner, by default.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>using (SPSite siteColl = new SPSite(&lt;span class="placeholder"&gt;url&lt;/span&gt;))
+{
+   SPServiceContext serviceContext = SPServiceContext.Current;
+   SocialTagManager mySocialTagManager = new SocialTagManager(serviceContext);
+ 
+   UserProfileManager myProfileManager = new UserProfileManager(serviceContext);
+   string myAccount = "&lt;span class="placeholder"&gt;mydomain\\myalias&lt;/span&gt;";
+   UserProfile myProfile = myProfileManager.GetUserProfile(myAccount);
+ 
+   System.Uri uri = new System.Uri("&lt;span class="placeholder"&gt;url&lt;/span&gt;");
+
+   TaxonomySession taxSession = mySocialTagManager.TaxonomySession;
+   TermStore termStore = taxSession.DefaultKeywordsTermStore;
+   Term term = termStore.KeywordsTermSet.CreateTerm(keyword, termStore.DefaultLanguage);
+
+   SocialTag newTag = mySocialTagManager.AddTag(uri, term);
+ 
+ 
+   SocialTag[] myTags = mySocialTagManager.GetTags(myProfile);
+ 
+   foreach (SocialTag aTag in myTags)
+   {
+      output.Write("&amp;lt;br/&amp;gt; Tag: " + " " + aTag.Url.ToString() + " " + aTag.Term.Name.ToString());
+   }
+ 
+}
+
+</code>
+          <code>Using siteColl As New SPSite(&lt;span class="placeholder"&gt;url&lt;/span&gt;)
+   Dim serviceContext As SPServiceContext = SPServiceContext.Current
+   Dim mySocialTagManager As New SocialTagManager(serviceContext)
+
+   Dim myProfileManager As New UserProfileManager(serviceContext)
+   Dim myAccount As String = "&lt;span class="placeholder"&gt;mydomain\myalias&lt;/span&gt;"
+   Dim myProfile As UserProfile = myProfileManager.GetUserProfile(myAccount)
+
+   Dim uri As New System.Uri("&lt;span class="placeholder"&gt;url&lt;/span&gt;")
+
+   Dim taxSession As TaxonomySession = mySocialTagManager.TaxonomySession
+   Dim termStore As TermStore = taxSession.DefaultKeywordsTermStore
+   Dim term As Term = termStore.KeywordsTermSet.CreateTerm(keyword, termStore.DefaultLanguage)
+
+   Dim newTag As SocialTag = mySocialTagManager.AddTag(uri, term)
+
+
+   Dim myTags() As SocialTag = mySocialTagManager.GetTags(myProfile)
+
+   For Each aTag As SocialTag In myTags
+       output.Write("&amp;lt;br/&amp;gt; Tag: " &amp;amp; " " &amp;amp; aTag.Url.ToString() &amp;amp; " " &amp;amp; aTag.Term.Name.ToString())
+   Next aTag
+
+End Using</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AddTag">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTag AddTag (Uri url, Microsoft.SharePoint.Taxonomy.Term term, string title);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTag AddTag(class System.Uri url, class Microsoft.SharePoint.Taxonomy.Term term, string title) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.AddTag(System.Uri,Microsoft.SharePoint.Taxonomy.Term,System.String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::SocialData::SocialTag ^ AddTag(Uri ^ url, Microsoft::SharePoint::Taxonomy::Term ^ term, System::String ^ title);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTag</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.Uri" />
+        <Parameter Name="term" Type="Microsoft.SharePoint.Taxonomy.Term" />
+        <Parameter Name="title" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="url">To be added.</param>
+        <param name="term">A <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object. The term must exist in the taxonomy that you are using.</param>
+        <param name="title">The title of the Web page whose URL is being tagged.</param>
+        <summary>Creates a <see cref="T:Microsoft.Office.Server.SocialData.SocialTag" /> object with the specified <see cref="T:System.Uri" />, <see cref="T:Microsoft.SharePoint.Taxonomy.Term" />, and <see cref="T:System.String" />. </summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>The social tag is external, and therefore visible to users other than the owner, by default.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddTag">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTag AddTag (Uri url, Microsoft.SharePoint.Taxonomy.Term term, string title, bool isPrivate);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTag AddTag(class System.Uri url, class Microsoft.SharePoint.Taxonomy.Term term, string title, bool isPrivate) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.AddTag(System.Uri,Microsoft.SharePoint.Taxonomy.Term,System.String,System.Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::SocialData::SocialTag ^ AddTag(Uri ^ url, Microsoft::SharePoint::Taxonomy::Term ^ term, System::String ^ title, bool isPrivate);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTag</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.Uri" />
+        <Parameter Name="term" Type="Microsoft.SharePoint.Taxonomy.Term" />
+        <Parameter Name="title" Type="System.String" />
+        <Parameter Name="isPrivate" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="url">To be added.</param>
+        <param name="term">A <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object. The term must exist in the taxonomy that you are using.</param>
+        <param name="title">The title of the Web page whose URL is being tagged.</param>
+        <param name="isPrivate">A Boolean value indicating whether the social tag is private. If it is not private, the tag will be visible to users other than the owner.</param>
+        <summary>Creates a <see cref="T:Microsoft.Office.Server.SocialData.SocialTag" /> with the specified <see cref="T:System.Uri" />, <see cref="T:Microsoft.SharePoint.Taxonomy.Term" />, <see cref="T:System.String" /> and <see cref="T:System.Boolean" />.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteTag">
+      <MemberSignature Language="C#" Value="public void DeleteTag (Uri url, Microsoft.SharePoint.Taxonomy.Term term);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteTag(class System.Uri url, class Microsoft.SharePoint.Taxonomy.Term term) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.DeleteTag(System.Uri,Microsoft.SharePoint.Taxonomy.Term)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteTag(Uri ^ url, Microsoft::SharePoint::Taxonomy::Term ^ term);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.Uri" />
+        <Parameter Name="term" Type="Microsoft.SharePoint.Taxonomy.Term" />
+      </Parameters>
+      <Docs>
+        <param name="url">To be added.</param>
+        <param name="term">To be added.</param>
+        <summary>Deletes a social tag for the specified <see cref="T:System.Uri" /> and <see cref="T:Microsoft.SharePoint.Taxonomy.Term" />.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteTags">
+      <MemberSignature Language="C#" Value="public void DeleteTags ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteTags() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.DeleteTags" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteTags ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteTags();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deletes all social tags.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteTags">
+      <MemberSignature Language="C#" Value="public void DeleteTags (Uri url);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteTags(class System.Uri url) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.DeleteTags(System.Uri)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteTags (url As Uri)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteTags(Uri ^ url);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.Uri" />
+      </Parameters>
+      <Docs>
+        <param name="url">To be added.</param>
+        <summary>Deletes all social tags on a specified URL.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetAllTerms ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetAllTerms() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetAllTerms" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAllTerms () As SocialTerm()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetAllTerms();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Retrieves an array of all <b>SocialTerm</b> objects in the term store.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetAllTerms (int maximumItemsToReturn);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetAllTerms(int32 maximumItemsToReturn) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetAllTerms(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAllTerms (maximumItemsToReturn As Integer) As SocialTerm()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetAllTerms(int maximumItemsToReturn);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="maximumItemsToReturn" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="maximumItemsToReturn">The maximum size of the array.</param>
+        <summary>Retrieves an array of <b>SocialTerm</b> objects in the term store.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetAllTerms (Uri urlFolder, int maximumItemsToReturn);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetAllTerms(class System.Uri urlFolder, int32 maximumItemsToReturn) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetAllTerms(System.Uri,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAllTerms (urlFolder As Uri, maximumItemsToReturn As Integer) As SocialTerm()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetAllTerms(Uri ^ urlFolder, int maximumItemsToReturn);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="urlFolder" Type="System.Uri" />
+        <Parameter Name="maximumItemsToReturn" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="urlFolder">A URL representing the location in the term store from which to retrieve the social terms.</param>
+        <param name="maximumItemsToReturn">The maximum size of the array.</param>
+        <summary>Retrieves an array of <b>SocialTerm</b> objects in the term store.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllUrls">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialUrl[] GetAllUrls (Microsoft.SharePoint.Taxonomy.Term term);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialUrl[] GetAllUrls(class Microsoft.SharePoint.Taxonomy.Term term) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetAllUrls(Microsoft.SharePoint.Taxonomy.Term)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialUrl ^&gt; ^ GetAllUrls(Microsoft::SharePoint::Taxonomy::Term ^ term);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialUrl[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="term" Type="Microsoft.SharePoint.Taxonomy.Term" />
+      </Parameters>
+      <Docs>
+        <param name="term">To be added.</param>
+        <summary>Retrieves an array of <b>SocialUrl</b> objects that have been tagged with the specified term.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCount">
+      <MemberSignature Language="C#" Value="public int GetCount (Microsoft.Office.Server.UserProfiles.UserProfile user);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetCount(class Microsoft.Office.Server.UserProfiles.UserProfile user) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetCount(Microsoft.Office.Server.UserProfiles.UserProfile)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCount (user As UserProfile) As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; int GetCount(Microsoft::Office::Server::UserProfiles::UserProfile ^ user);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="user" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+      </Parameters>
+      <Docs>
+        <param name="user">To be added.</param>
+        <summary>Gets a count of all <b>SocialTag</b> objects owned by the specified user.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTags">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTag[] GetTags (Microsoft.Office.Server.UserProfiles.UserProfile user);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTag[] GetTags(class Microsoft.Office.Server.UserProfiles.UserProfile user) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTags(Microsoft.Office.Server.UserProfiles.UserProfile)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTags (user As UserProfile) As SocialTag()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTag ^&gt; ^ GetTags(Microsoft::Office::Server::UserProfiles::UserProfile ^ user);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTag[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="user" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+      </Parameters>
+      <Docs>
+        <param name="user">To be added.</param>
+        <summary>Retrieves an array of <b>SocialTag</b> objects owned by the specified user.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTags">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTag[] GetTags (Uri url);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTag[] GetTags(class System.Uri url) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTags(System.Uri)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTags (url As Uri) As SocialTag()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTag ^&gt; ^ GetTags(Uri ^ url);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTag[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.Uri" />
+      </Parameters>
+      <Docs>
+        <param name="url">A <see cref="T:System.Uri" /> object.</param>
+        <summary>Retrieves an array of <b>SocialTag</b> objects that are owned by the current user and that contain the specified URL.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTags">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTag[] GetTags (Microsoft.Office.Server.UserProfiles.UserProfile user, int maximumItemsToReturn);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTag[] GetTags(class Microsoft.Office.Server.UserProfiles.UserProfile user, int32 maximumItemsToReturn) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTags(Microsoft.Office.Server.UserProfiles.UserProfile,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTags (user As UserProfile, maximumItemsToReturn As Integer) As SocialTag()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTag ^&gt; ^ GetTags(Microsoft::Office::Server::UserProfiles::UserProfile ^ user, int maximumItemsToReturn);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTag[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="user" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+        <Parameter Name="maximumItemsToReturn" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="user">To be added.</param>
+        <param name="maximumItemsToReturn">The maximum size of the array.</param>
+        <summary>Retrieves an array of <b>SocialTag</b> objects owned by the specified user.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTags">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTag[] GetTags (Microsoft.Office.Server.UserProfiles.UserProfile user, int maximumItemsToReturn, int startIndex);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTag[] GetTags(class Microsoft.Office.Server.UserProfiles.UserProfile user, int32 maximumItemsToReturn, int32 startIndex) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTags(Microsoft.Office.Server.UserProfiles.UserProfile,System.Int32,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTags (user As UserProfile, maximumItemsToReturn As Integer, startIndex As Integer) As SocialTag()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTag ^&gt; ^ GetTags(Microsoft::Office::Server::UserProfiles::UserProfile ^ user, int maximumItemsToReturn, int startIndex);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTag[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="user" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+        <Parameter Name="maximumItemsToReturn" Type="System.Int32" />
+        <Parameter Name="startIndex" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="user">To be added.</param>
+        <param name="maximumItemsToReturn">The maximum size of the array.</param>
+        <param name="startIndex">The index of the first <b>SocialTag</b> to be retrieved from the database.</param>
+        <summary>Retrieves an array of <b>SocialTag</b> objects owned by the specified user.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTerms" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTerms () As SocialTerm()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetTerms();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Retrieves an array of all <b>SocialTerm</b> objects owned by the current user.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms (Microsoft.Office.Server.UserProfiles.UserProfile user);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms(class Microsoft.Office.Server.UserProfiles.UserProfile user) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTerms(Microsoft.Office.Server.UserProfiles.UserProfile)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTerms (user As UserProfile) As SocialTerm()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetTerms(Microsoft::Office::Server::UserProfiles::UserProfile ^ user);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="user" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+      </Parameters>
+      <Docs>
+        <param name="user">To be added.</param>
+        <summary>Retrieves an array of all <b>SocialTerm</b> objects owned by the specified user.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms (int maximumItemsToReturn);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms(int32 maximumItemsToReturn) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTerms(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTerms (maximumItemsToReturn As Integer) As SocialTerm()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetTerms(int maximumItemsToReturn);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="maximumItemsToReturn" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="maximumItemsToReturn">The maximum size of the array.</param>
+        <summary>Retrieves an array of <b>SocialTerm</b> objects owned by the current user.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms (Uri url);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms(class System.Uri url) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTerms(System.Uri)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTerms (url As Uri) As SocialTerm()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetTerms(Uri ^ url);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.Uri" />
+      </Parameters>
+      <Docs>
+        <param name="url">To be added.</param>
+        <summary>Retrieves an array of all <b>SocialTerm</b> objects that have been associated with the specified URL by a <b>SocialTag</b>.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms (Microsoft.Office.Server.UserProfiles.UserProfile user, int maximumItemsToReturn);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms(class Microsoft.Office.Server.UserProfiles.UserProfile user, int32 maximumItemsToReturn) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTerms(Microsoft.Office.Server.UserProfiles.UserProfile,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTerms (user As UserProfile, maximumItemsToReturn As Integer) As SocialTerm()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetTerms(Microsoft::Office::Server::UserProfiles::UserProfile ^ user, int maximumItemsToReturn);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="user" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+        <Parameter Name="maximumItemsToReturn" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="user">To be added.</param>
+        <param name="maximumItemsToReturn">The maximum size of the array.</param>
+        <summary>Retrieves an array of <b>SocialTerm</b> objects owned by the specified user.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms (Uri url, int maximumItemsToReturn);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms(class System.Uri url, int32 maximumItemsToReturn) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTerms(System.Uri,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTerms (url As Uri, maximumItemsToReturn As Integer) As SocialTerm()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetTerms(Uri ^ url, int maximumItemsToReturn);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.Uri" />
+        <Parameter Name="maximumItemsToReturn" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="url">To be added.</param>
+        <param name="maximumItemsToReturn">The maximum size of the array.</param>
+        <summary>Retrieves an array of <b>SocialTerm</b> objects that have been associated with the specified URL by a <b>SocialTag</b>.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms (Microsoft.Office.Server.UserProfiles.UserProfile user, int maximumItemsToReturn, Microsoft.Office.Server.SocialData.SocialItemPrivacy socialItemPrivacy);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms(class Microsoft.Office.Server.UserProfiles.UserProfile user, int32 maximumItemsToReturn, valuetype Microsoft.Office.Server.SocialData.SocialItemPrivacy socialItemPrivacy) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTerms(Microsoft.Office.Server.UserProfiles.UserProfile,System.Int32,Microsoft.Office.Server.SocialData.SocialItemPrivacy)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetTerms(Microsoft::Office::Server::UserProfiles::UserProfile ^ user, int maximumItemsToReturn, Microsoft::Office::Server::SocialData::SocialItemPrivacy socialItemPrivacy);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="user" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+        <Parameter Name="maximumItemsToReturn" Type="System.Int32" />
+        <Parameter Name="socialItemPrivacy" Type="Microsoft.Office.Server.SocialData.SocialItemPrivacy" />
+      </Parameters>
+      <Docs>
+        <param name="user">To be added.</param>
+        <param name="maximumItemsToReturn">The maximum size of the array.</param>
+        <param name="socialItemPrivacy">To be added.</param>
+        <summary>Retrieves an array of <b>SocialTerm</b> objects owned by the specified user.</summary>
+        <returns>Returns <see cref="T:Microsoft.Office.Server.SocialData.SocialTerm" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms (Uri url, int maximumItemsToReturn, Microsoft.Office.Server.SocialData.SocialItemPrivacy socialItemPrivacy);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.SocialData.SocialTerm[] GetTerms(class System.Uri url, int32 maximumItemsToReturn, valuetype Microsoft.Office.Server.SocialData.SocialItemPrivacy socialItemPrivacy) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetTerms(System.Uri,System.Int32,Microsoft.Office.Server.SocialData.SocialItemPrivacy)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::SocialData::SocialTerm ^&gt; ^ GetTerms(Uri ^ url, int maximumItemsToReturn, Microsoft::Office::Server::SocialData::SocialItemPrivacy socialItemPrivacy);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.SocialData.SocialTerm[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.Uri" />
+        <Parameter Name="maximumItemsToReturn" Type="System.Int32" />
+        <Parameter Name="socialItemPrivacy" Type="Microsoft.Office.Server.SocialData.SocialItemPrivacy" />
+      </Parameters>
+      <Docs>
+        <param name="url">A URL representing the location in the term store from which to retrieve the social terms.</param>
+        <param name="maximumItemsToReturn">The maximum size of the array.</param>
+        <param name="socialItemPrivacy">The <b>SocialItemPrivacy</b> value that determines whether private tags will be returned.</param>
+        <summary>Retrieves an array of <b>SocialTerm</b> objects in the term store with the specified <b>SocialItemPrivacy</b>.</summary>
+        <returns>Returns <see cref="T:Microsoft.Office.Server.SocialData.SocialTerm" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUrls">
+      <MemberSignature Language="C#" Value="public Uri[] GetUrls (Microsoft.SharePoint.Taxonomy.Term term);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Uri[] GetUrls(class Microsoft.SharePoint.Taxonomy.Term term) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetUrls(Microsoft.SharePoint.Taxonomy.Term)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Uri ^&gt; ^ GetUrls(Microsoft::SharePoint::Taxonomy::Term ^ term);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="term" Type="Microsoft.SharePoint.Taxonomy.Term" />
+      </Parameters>
+      <Docs>
+        <param name="term">To be added.</param>
+        <summary>Retrieves an array of all URLs that are associated with a specified taxonomy term by a <b>SocialTag</b> object.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUrls">
+      <MemberSignature Language="C#" Value="public Uri[] GetUrls (Microsoft.SharePoint.Taxonomy.Term term, Microsoft.Office.Server.UserProfiles.UserProfile user);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Uri[] GetUrls(class Microsoft.SharePoint.Taxonomy.Term term, class Microsoft.Office.Server.UserProfiles.UserProfile user) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.SocialTagManager.GetUrls(Microsoft.SharePoint.Taxonomy.Term,Microsoft.Office.Server.UserProfiles.UserProfile)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Uri ^&gt; ^ GetUrls(Microsoft::SharePoint::Taxonomy::Term ^ term, Microsoft::Office::Server::UserProfiles::UserProfile ^ user);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="term" Type="Microsoft.SharePoint.Taxonomy.Term" />
+        <Parameter Name="user" Type="Microsoft.Office.Server.UserProfiles.UserProfile" />
+      </Parameters>
+      <Docs>
+        <param name="term">To be added.</param>
+        <param name="user">A <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" /> object.</param>
+        <summary>Retrieves an array of all URLs that are owned by the specified user and associated with a specified taxonomy term by a <b>SocialTag</b> object.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TaxonomySession">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TaxonomySession TaxonomySession { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.TaxonomySession TaxonomySession" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.SocialData.SocialTagManager.TaxonomySession" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TaxonomySession As TaxonomySession" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::TaxonomySession ^ TaxonomySession { Microsoft::SharePoint::Taxonomy::TaxonomySession ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TaxonomySession</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>TaxonomySession</b> associated with this <b>SocialTagManager</b> object. </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>This property enables you to interact with taxonomies without instantiating your own taxonomy session.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

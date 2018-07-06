@@ -1,0 +1,118 @@
+﻿<Type Name="IReportDataSource" FullName="Microsoft.Office.RecordsManagement.Reporting.IReportDataSource">
+  <TypeSignature Language="C#" Value="public interface IReportDataSource : IDisposable" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IReportDataSource implements class System.IDisposable" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.Reporting.IReportDataSource" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IReportDataSource&#xA;Implements IDisposable" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IReportDataSource : IDisposable" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Defines a reporting data source and its interaction with the reporting engine.</summary>
+    <remarks>
+      <para>When running a report, the reporting engine interacts with a reporting data source implementing the <see cref="T:Microsoft.Office.RecordsManagement.Reporting.IReportDataSource" /> interface and a report generator implementing the <see cref="T:Microsoft.Office.RecordsManagement.Reporting.IReportGenerator" /> interface.</para>
+      <para>The reporting engine calls the <see cref="T:Microsoft.Office.RecordsManagement.Reporting.IReportDataSource.StartQuery(Microsoft.SharePoint.SPSite,System.Collections.Hashtable)" /> interface to query for reporting data, followed by the <see cref="T:Microsoft.Office.RecordsManagement.Reporting.IReportDataSource.StartReport(System.Collections.Hashtable)" /> to start the report. Then, for each row defined in the report generator, it calls the <see cref="T:Microsoft.Office.RecordsManagement.Reporting.IReportDataSource.GetNextDataRow" /> to get data for the next row. When the report generator has reached maximum row limit, the reporting engine checks if there is more data to report by using the <see cref="M:Microsoft.Office.RecordsManagement.Reporting.IReportDataSource.HasMoreData" /> interface.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="GetNextDataRow">
+      <MemberSignature Language="C#" Value="public string[] GetNextDataRow ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string[] GetNextDataRow() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Reporting.IReportDataSource.GetNextDataRow" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetNextDataRow () As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::String ^&gt; ^ GetNextDataRow();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the next row of data.</summary>
+        <returns>Returns <see cref="T:System.String" />.</returns>
+        <remarks>
+          <para>The <b>GetNextDataRow</b> method corresponds to the <see cref="M:Microsoft.Office.RecordsManagement.Reporting.IReportGenerator.InjectDataRow()" /> method, which injects the row of data into report.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HasMoreData">
+      <MemberSignature Language="C#" Value="public bool HasMoreData { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool HasMoreData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.Reporting.IReportDataSource.HasMoreData" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property HasMoreData As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool HasMoreData { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Whether the data source has more data to report.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StartQuery">
+      <MemberSignature Language="C#" Value="public void StartQuery (Microsoft.SharePoint.SPSite site, System.Collections.Hashtable query);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void StartQuery(class Microsoft.SharePoint.SPSite site, class System.Collections.Hashtable query) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Reporting.IReportDataSource.StartQuery(Microsoft.SharePoint.SPSite,System.Collections.Hashtable)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub StartQuery (site As SPSite, query As Hashtable)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void StartQuery(Microsoft::SharePoint::SPSite ^ site, System::Collections::Hashtable ^ query);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="query" Type="System.Collections.Hashtable" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site to report on.</param>
+        <param name="query">The collection of query parameters in the form of a hash table.  Some well-known query parameter keys are defined in the <see cref="T:Microsoft.Office.RecordsManagement.Reporting.WellKnownQueryParameters" /> class.</param>
+        <summary>Starts a query for reporting data on a site.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StartReport">
+      <MemberSignature Language="C#" Value="public void StartReport (System.Collections.Hashtable parameters);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void StartReport(class System.Collections.Hashtable parameters) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Reporting.IReportDataSource.StartReport(System.Collections.Hashtable)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub StartReport (parameters As Hashtable)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void StartReport(System::Collections::Hashtable ^ parameters);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parameters" Type="System.Collections.Hashtable" />
+      </Parameters>
+      <Docs>
+        <param name="parameters">The collection of parameters that are used to initialize the report.</param>
+        <summary>Starts a report with the specified parameters.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

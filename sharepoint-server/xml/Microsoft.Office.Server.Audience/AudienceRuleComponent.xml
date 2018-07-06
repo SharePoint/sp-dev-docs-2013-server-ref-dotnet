@@ -1,0 +1,560 @@
+﻿<Type Name="AudienceRuleComponent" FullName="Microsoft.Office.Server.Audience.AudienceRuleComponent">
+  <TypeSignature Language="C#" Value="public class AudienceRuleComponent" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit AudienceRuleComponent extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.Audience.AudienceRuleComponent" />
+  <TypeSignature Language="VB.NET" Value="Public Class AudienceRuleComponent" />
+  <TypeSignature Language="C++ CLI" Value="public ref class AudienceRuleComponent" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents one rule in an audience.</summary>
+    <remarks>
+      <para>An audience can be composed of one or more rule components. Each rule is connected by an operator, such as <b>AND</b> or <b>OR</b>. Each rule component includes three parts: operand, operator, and value. </para>
+      <para>The <b>AudienceRuleComponent</b> class has public string fields to set the left content, operator, and right content values when creating a new audience rule for an audience. For all audience rules, a rule that is created against a property of type <b>DateTime</b> should have the value specified in an invariant culture format. For all other property types, such as <b>int</b>, <b>long</b>, <b>double</b>, and <b>float</b>, the site format is used to specify rule values. </para>
+      <para />
+    </remarks>
+    <example>
+      <para>The following code example adds complex rules for an audience named "John and Joe Connection". This example uses <b>AND</b>, <b>OR</b>, and <b>( and )</b> operators to combine multiple rules and to group rules. </para>
+      <para>
+        <b>Note</b>: If you create an audience with complex rules, you cannot view or edit its properties or delete it by using the user interface (UI). However, you can use the UI to view its membership.</para>
+      <para>Replace servername and other strings with actual values before running the code example. Also add the following references in your Microsoft Visual Studio project:</para>
+      <list type="bullet">
+        <item>
+          <description>Microsoft.Office.Server</description>
+        </item>
+        <item>
+          <description>Microsoft.SharePoint</description>
+        </item>
+        <item>
+          <description>System.Web</description>
+        </item>
+      </list>
+      <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.SharePoint.Administration;
+using Microsoft.Office.Server.Audience;
+using Microsoft.SharePoint;
+using Microsoft.Office.Server;
+using System.Web;
+using System.Collections;
+
+namespace AudienceConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                using (SPSite site = new SPSite("http://&lt;span class="placeholder"&gt;servername&lt;/span&gt;"))
+                {
+                    ServerContext context = ServerContext.GetContext(site);
+                    AudienceManager AudMgr = new AudienceManager(context);
+
+                    AudienceCollection ac = AudMgr.Audiences;
+                    Audience a = null;
+                    bool ruleListNotEmpty = false;
+
+                    try
+                    {
+                        a = AudMgr.Audiences["John and Joe Connection"];
+                    }
+                    catch (AudienceArgumentException ex)
+                    {
+                        // Your exception handling code here.
+                    }
+
+                    ArrayList aRules = a.AudienceRules;
+                    if (aRules == null)
+                    {
+                        aRules = new ArrayList();
+                    }
+                    else
+                    {
+                        ruleListNotEmpty = true;
+                    }
+
+
+                    try
+                    {
+                        // If the rule is not empty, start with a group operator 'AND' to append.
+                        if (ruleListNotEmpty)
+                        {
+                            aRules.Add(new AudienceRuleComponent(null, "AND", null));
+                        }
+
+                        AudienceRuleComponent r0 = new AudienceRuleComponent(null, "(", null);
+                        aRules.Add(r0);
+
+                        AudienceRuleComponent r1 = new AudienceRuleComponent("FirstName", "Contains", "John");
+                        aRules.Add(r1);
+
+                        AudienceRuleComponent r2 = new AudienceRuleComponent(null, "AND", null);
+                        aRules.Add(r2);
+
+                        AudienceRuleComponent r3 = new AudienceRuleComponent("WorkEmail", "Contains", "&lt;span class="placeholder"&gt;example.com&lt;/span&gt;");
+                        aRules.Add(r3);
+
+                        AudienceRuleComponent r4 = new AudienceRuleComponent(null, ")", null);
+                        aRules.Add(r4);
+
+                        AudienceRuleComponent r5 = new AudienceRuleComponent(null, "OR", null);
+                        aRules.Add(r5);
+
+                        AudienceRuleComponent r6 = new AudienceRuleComponent(null, "(", null);
+                        aRules.Add(r6);
+
+                        AudienceRuleComponent r7 = new AudienceRuleComponent("FirstName", "Contains", "Joe");
+                        aRules.Add(r7);
+
+                        AudienceRuleComponent r8 = new AudienceRuleComponent(null, "AND", null);
+                        aRules.Add(r8);
+
+                        AudienceRuleComponent r9 = new AudienceRuleComponent("WorkEmail", "Contains", "&lt;span class="placeholder"&gt;someexample.com&lt;/span&gt;");
+                        aRules.Add(r9);
+
+                        AudienceRuleComponent r10 = new AudienceRuleComponent(null, ")", null);
+                        aRules.Add(r10);
+                        a.AudienceRules = aRules;
+                        a.Commit();
+                    }
+                    catch (AudienceException e)
+                    {
+                        // Your exception handling code here.
+                    }
+                }
+            }
+
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                Console.Read();
+            }
+
+        }
+
+    }
+}</code>
+      <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports Microsoft.SharePoint.Administration
+Imports Microsoft.Office.Server.Audience
+Imports Microsoft.SharePoint
+Imports Microsoft.Office.Server
+Imports System.Web
+Imports System.Collections
+
+Namespace AudienceConsoleApp
+    Friend Class Program
+        Shared Sub Main(ByVal args() As String)
+            Try
+                Using site As New SPSite("http://servername")
+                    Dim context As ServerContext = ServerContext.GetContext(site)
+                    Dim AudMgr As New AudienceManager(context)
+
+                    Dim ac As AudienceCollection = AudMgr.Audiences
+                    Dim a As Audience = Nothing
+                    Dim ruleListNotEmpty As Boolean = False
+
+                    Try
+                        a = AudMgr.Audiences("John and Joe Connection")
+                    Catch ex As AudienceArgumentException
+                        ' Your exception handling code here.
+                    End Try
+
+                    Dim aRules As ArrayList = a.AudienceRules
+                    If aRules Is Nothing Then
+                        aRules = New ArrayList()
+                    Else
+                        ruleListNotEmpty = True
+                    End If
+
+
+                    Try
+                        ' If the rule is not empty, start with a group operator 'AND' to append.
+                        If ruleListNotEmpty Then
+                            aRules.Add(New AudienceRuleComponent(Nothing, "AND", Nothing))
+                        End If
+
+                        Dim r0 As New AudienceRuleComponent(Nothing, "(", Nothing)
+                        aRules.Add(r0)
+
+                        Dim r1 As New AudienceRuleComponent("FirstName", "Contains", "John")
+                        aRules.Add(r1)
+
+                        Dim r2 As New AudienceRuleComponent(Nothing, "AND", Nothing)
+                        aRules.Add(r2)
+
+                        Dim r3 As New AudienceRuleComponent("WorkEmail", "Contains", "example.com")
+                        aRules.Add(r3)
+
+                        Dim r4 As New AudienceRuleComponent(Nothing, ")", Nothing)
+                        aRules.Add(r4)
+
+                        Dim r5 As New AudienceRuleComponent(Nothing, "OR", Nothing)
+                        aRules.Add(r5)
+
+                        Dim r6 As New AudienceRuleComponent(Nothing, "(", Nothing)
+                        aRules.Add(r6)
+
+                        Dim r7 As New AudienceRuleComponent("FirstName", "Contains", "Joe")
+                        aRules.Add(r7)
+
+                        Dim r8 As New AudienceRuleComponent(Nothing, "AND", Nothing)
+                        aRules.Add(r8)
+
+                        Dim r9 As New AudienceRuleComponent("WorkEmail", "Contains", "someexample.com")
+                        aRules.Add(r9)
+
+                        Dim r10 As New AudienceRuleComponent(Nothing, ")", Nothing)
+                        aRules.Add(r10)
+                        a.AudienceRules = aRules
+                        a.Commit()
+                    Catch e As AudienceException
+                        ' Your exception handling code here.
+                    End Try
+                End Using
+
+            Catch exception As Exception
+                Console.WriteLine(exception.ToString())
+                Console.Read()
+            End Try
+
+        End Sub
+
+    End Class
+End Namespace</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AudienceRuleComponent ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceRuleComponent.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; AudienceRuleComponent();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.Audience.AudienceRuleComponent" /> class.</summary>
+        <remarks>
+          <para>This is the default constructor for the <see cref="T:Microsoft.Office.Server.Audience.AudienceRuleComponent" /> class.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AudienceRuleComponent (string leftContent, string ruleOperator, string rightContent);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string leftContent, string ruleOperator, string rightContent) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.AudienceRuleComponent.#ctor(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (leftContent As String, ruleOperator As String, rightContent As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; AudienceRuleComponent(System::String ^ leftContent, System::String ^ ruleOperator, System::String ^ rightContent);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="leftContent" Type="System.String" />
+        <Parameter Name="ruleOperator" Type="System.String" />
+        <Parameter Name="rightContent" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="leftContent">The operand portion of the audience rule.</param>
+        <param name="ruleOperator">The operator for the audience rule.</param>
+        <param name="rightContent">The value portion of the audience rule.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.Audience.AudienceRuleComponent" /> class with the operand, operator, and value for an audience rule.</summary>
+        <remarks>
+          <para>This overloaded version of the <see cref="T:Microsoft.Office.Server.Audience.AudienceRuleComponent" /> class constructor initializes the fields <b>LeftContent</b>, <b>Operator</b>, and <b>RightContent</b> with the specified values.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code example adds complex rules for an audience named "John and Joe Connection". This example uses <b>AND</b>, <b>OR</b>, and <b>( and )</b> operators to combine multiple rules and to group rules. </para>
+          <para>
+            <b>Note</b>: If you create an audience with complex rules, you cannot view or edit its properties or delete it by using the user interface (UI). However, you can use the UI to view its membership.</para>
+          <para>Replace servername and other strings with actual values before running the code example. Also add the following references in your Microsoft Visual Studio project:</para>
+          <list type="bullet">
+            <item>
+              <description>Microsoft.Office.Server</description>
+            </item>
+            <item>
+              <description>Microsoft.SharePoint</description>
+            </item>
+            <item>
+              <description>System.Web</description>
+            </item>
+          </list>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.SharePoint.Administration;
+using Microsoft.Office.Server.Audience;
+using Microsoft.SharePoint;
+using Microsoft.Office.Server;
+using System.Web;
+using System.Collections;
+
+namespace AudienceConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                using (SPSite site = new SPSite("http://&lt;span class="placeholder"&gt;servername&lt;/span&gt;"))
+                {
+                    ServerContext context = ServerContext.GetContext(site);
+                    AudienceManager AudMgr = new AudienceManager(context);
+
+                    AudienceCollection ac = AudMgr.Audiences;
+                    Audience a = null;
+                    bool ruleListNotEmpty = false;
+
+                    try
+                    {
+                        a = AudMgr.Audiences["John and Joe Connection"];
+                    }
+                    catch (AudienceArgumentException ex)
+                    {
+                        // Your exception handling code here.
+                    }
+
+                    ArrayList aRules = a.AudienceRules;
+                    if (aRules == null)
+                    {
+                        aRules = new ArrayList();
+                    }
+                    else
+                    {
+                        ruleListNotEmpty = true;
+                    }
+
+
+                    try
+                    {
+                        //If the rule is not empty, start with a group operator 'AND' to append.
+                        if (ruleListNotEmpty)
+                        {
+                            aRules.Add(new AudienceRuleComponent(null, "AND", null));
+                        }
+
+                        AudienceRuleComponent r0 = new AudienceRuleComponent(null, "(", null);
+                        aRules.Add(r0);
+
+                        AudienceRuleComponent r1 = new AudienceRuleComponent("FirstName", "Contains", "John");
+                        aRules.Add(r1);
+
+                        AudienceRuleComponent r2 = new AudienceRuleComponent(null, "AND", null);
+                        aRules.Add(r2);
+
+                        AudienceRuleComponent r3 = new AudienceRuleComponent("WorkEmail", "Contains", "&lt;span class="placeholder"&gt;example.com&lt;/span&gt;");
+                        aRules.Add(r3);
+
+                        AudienceRuleComponent r4 = new AudienceRuleComponent(null, ")", null);
+                        aRules.Add(r4);
+
+                        AudienceRuleComponent r5 = new AudienceRuleComponent(null, "OR", null);
+                        aRules.Add(r5);
+
+                        AudienceRuleComponent r6 = new AudienceRuleComponent(null, "(", null);
+                        aRules.Add(r6);
+
+                        AudienceRuleComponent r7 = new AudienceRuleComponent("FirstName", "Contains", "Joe");
+                        aRules.Add(r7);
+
+                        AudienceRuleComponent r8 = new AudienceRuleComponent(null, "AND", null);
+                        aRules.Add(r8);
+
+                        AudienceRuleComponent r9 = new AudienceRuleComponent("WorkEmail", "Contains", "&lt;span class="placeholder"&gt;someexample.com&lt;/span&gt;");
+                        aRules.Add(r9);
+
+                        AudienceRuleComponent r10 = new AudienceRuleComponent(null, ")", null);
+                        aRules.Add(r10);
+                        a.AudienceRules = aRules;
+                        a.Commit();
+                    }
+                    catch (AudienceException e)
+                    {
+                        //Your exception handling code here
+                    }
+                }
+            }
+
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                Console.Read();
+            }
+
+        }
+
+    }
+}</code>
+          <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports Microsoft.SharePoint.Administration
+Imports Microsoft.Office.Server.Audience
+Imports Microsoft.SharePoint
+Imports Microsoft.Office.Server
+Imports System.Web
+Imports System.Collections
+
+Namespace AudienceConsoleApp
+    Friend Class Program
+        Shared Sub Main(ByVal args() As String)
+            Try
+                Using site As New SPSite("http://servername")
+                    Dim context As ServerContext = ServerContext.GetContext(site)
+                    Dim AudMgr As New AudienceManager(context)
+
+                    Dim ac As AudienceCollection = AudMgr.Audiences
+                    Dim a As Audience = Nothing
+                    Dim ruleListNotEmpty As Boolean = False
+
+                    Try
+                        a = AudMgr.Audiences("John and Joe Connection")
+                    Catch ex As AudienceArgumentException
+                        ' Your exception handling code here.
+                    End Try
+
+                    Dim aRules As ArrayList = a.AudienceRules
+                    If aRules Is Nothing Then
+                        aRules = New ArrayList()
+                    Else
+                        ruleListNotEmpty = True
+                    End If
+
+
+                    Try
+                        'If the rule is not empty, start with a group operator 'AND' to append.
+                        If ruleListNotEmpty Then
+                            aRules.Add(New AudienceRuleComponent(Nothing, "AND", Nothing))
+                        End If
+
+                        Dim r0 As New AudienceRuleComponent(Nothing, "(", Nothing)
+                        aRules.Add(r0)
+
+                        Dim r1 As New AudienceRuleComponent("FirstName", "Contains", "John")
+                        aRules.Add(r1)
+
+                        Dim r2 As New AudienceRuleComponent(Nothing, "AND", Nothing)
+                        aRules.Add(r2)
+
+                        Dim r3 As New AudienceRuleComponent("WorkEmail", "Contains", "example.com")
+                        aRules.Add(r3)
+
+                        Dim r4 As New AudienceRuleComponent(Nothing, ")", Nothing)
+                        aRules.Add(r4)
+
+                        Dim r5 As New AudienceRuleComponent(Nothing, "OR", Nothing)
+                        aRules.Add(r5)
+
+                        Dim r6 As New AudienceRuleComponent(Nothing, "(", Nothing)
+                        aRules.Add(r6)
+
+                        Dim r7 As New AudienceRuleComponent("FirstName", "Contains", "Joe")
+                        aRules.Add(r7)
+
+                        Dim r8 As New AudienceRuleComponent(Nothing, "AND", Nothing)
+                        aRules.Add(r8)
+
+                        Dim r9 As New AudienceRuleComponent("WorkEmail", "Contains", "someexample.com")
+                        aRules.Add(r9)
+
+                        Dim r10 As New AudienceRuleComponent(Nothing, ")", Nothing)
+                        aRules.Add(r10)
+                        a.AudienceRules = aRules
+                        a.Commit()
+                    Catch e As AudienceException
+                        'Your exception handling code here
+                    End Try
+                End Using
+
+            Catch exception As Exception
+                Console.WriteLine(exception.ToString())
+                Console.Read()
+            End Try
+
+        End Sub
+
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="LeftContent">
+      <MemberSignature Language="C#" Value="public string LeftContent { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string LeftContent" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceRuleComponent.LeftContent" />
+      <MemberSignature Language="VB.NET" Value="Public Property LeftContent As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LeftContent { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Operator">
+      <MemberSignature Language="C#" Value="public string Operator { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Operator" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceRuleComponent.Operator" />
+      <MemberSignature Language="VB.NET" Value="Public Property Operator As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Operator { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RightContent">
+      <MemberSignature Language="C#" Value="public string RightContent { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string RightContent" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceRuleComponent.RightContent" />
+      <MemberSignature Language="VB.NET" Value="Public Property RightContent As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ RightContent { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

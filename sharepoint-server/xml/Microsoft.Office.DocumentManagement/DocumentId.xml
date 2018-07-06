@@ -1,0 +1,386 @@
+﻿<Type Name="DocumentId" FullName="Microsoft.Office.DocumentManagement.DocumentId">
+  <TypeSignature Language="C#" Value="public abstract class DocumentId" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit DocumentId extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.DocumentManagement.DocumentId" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class DocumentId" />
+  <TypeSignature Language="C++ CLI" Value="public ref class DocumentId abstract" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents a Document ID.</summary>
+    <remarks>
+      <para>Contains methods that enable or disable the capability to assign Document IDs to query Document ID feature and assignment status, and to query and set Document ID providers.</para>
+      <para>Provides methods for assigning Document Ids to documents, and provides methods to use lookup and search to get documents by their Document ID.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected DocumentId ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; DocumentId();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EnableAssignment">
+      <MemberSignature Language="C#" Value="public static void EnableAssignment (Microsoft.SharePoint.SPSite site, bool fEnable);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void EnableAssignment(class Microsoft.SharePoint.SPSite site, bool fEnable) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.EnableAssignment(Microsoft.SharePoint.SPSite,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub EnableAssignment (site As SPSite, fEnable As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void EnableAssignment(Microsoft::SharePoint::SPSite ^ site, bool fEnable);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="fEnable" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <b>true</b> if it enables <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> assignment; otherwise, <b>false</b></param>
+        <param name="fEnable">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object on which to enable or disable the assignment of a <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object</param>
+        <summary>Enables or disables the ability to assign <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> to a <see cref="T:Microsoft.SharePoint.SPSite" /> object.</summary>
+        <remarks>
+          <para>This overload of the DocumentId.EnableAssignment method always schedules the assignment timer job, never overwrites existing Ids,applies to all content types and sets no prefix for Ids.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object or its root <see cref="T:Microsoft.SharePoint.SPWeb" /> object properties are set to a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.InvalidOperationException">The Document ID feature is not activated for the target <see cref="T:Microsoft.SharePoint.SPSite" /> object.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="EnableAssignment">
+      <MemberSignature Language="C#" Value="public static void EnableAssignment (Microsoft.SharePoint.SPSite site, bool fEnable, bool fScheduleAssignment, bool fOverwriteExistingIds);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void EnableAssignment(class Microsoft.SharePoint.SPSite site, bool fEnable, bool fScheduleAssignment, bool fOverwriteExistingIds) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.EnableAssignment(Microsoft.SharePoint.SPSite,System.Boolean,System.Boolean,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub EnableAssignment (site As SPSite, fEnable As Boolean, fScheduleAssignment As Boolean, fOverwriteExistingIds As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void EnableAssignment(Microsoft::SharePoint::SPSite ^ site, bool fEnable, bool fScheduleAssignment, bool fOverwriteExistingIds);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="fEnable" Type="System.Boolean" />
+        <Parameter Name="fScheduleAssignment" Type="System.Boolean" />
+        <Parameter Name="fOverwriteExistingIds" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <b>true</b> if it enables assigning <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> objects; otherwise, <b>false</b>.</param>
+        <param name="fEnable">Site on which to enable or disable the ability to assign <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> objects.</param>
+        <param name="fScheduleAssignment">
+          <b>true</b> if overwriting existing <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> objects is permitted; otherwise, <b>false</b></param>
+        <param name="fOverwriteExistingIds">
+          <b>true</b> if it schedules the timer job; otherwise, <b>false</b></param>
+        <summary>Enables or disables <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> objects assigned on a <see cref="T:Microsoft.SharePoint.SPSite" /> site.</summary>
+        <remarks>
+          <para>Always applies to all content types, never sets a prefix for ids and allows control over scheduling and overwriting.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">The <see cref="T:Microsoft.SharePoint.SPSite" /> object value or the properties of its root <see cref="T:Microsoft.SharePoint.SPWeb" /> object are set to a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.InvalidOperationException">The Document ID feature is not activated on the target <see cref="T:Microsoft.SharePoint.SPSite" /> object.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="EnableAssignment">
+      <MemberSignature Language="C#" Value="public static void EnableAssignment (Microsoft.SharePoint.SPSite site, string prefix, bool fEnable, bool fScheduleAssignment, bool fOverwriteExistingIds, bool fDocsetCtUpdateOnly);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void EnableAssignment(class Microsoft.SharePoint.SPSite site, string prefix, bool fEnable, bool fScheduleAssignment, bool fOverwriteExistingIds, bool fDocsetCtUpdateOnly) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.EnableAssignment(Microsoft.SharePoint.SPSite,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub EnableAssignment (site As SPSite, prefix As String, fEnable As Boolean, fScheduleAssignment As Boolean, fOverwriteExistingIds As Boolean, fDocsetCtUpdateOnly As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void EnableAssignment(Microsoft::SharePoint::SPSite ^ site, System::String ^ prefix, bool fEnable, bool fScheduleAssignment, bool fOverwriteExistingIds, bool fDocsetCtUpdateOnly);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="prefix" Type="System.String" />
+        <Parameter Name="fEnable" Type="System.Boolean" />
+        <Parameter Name="fScheduleAssignment" Type="System.Boolean" />
+        <Parameter Name="fOverwriteExistingIds" Type="System.Boolean" />
+        <Parameter Name="fDocsetCtUpdateOnly" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <b>true</b> if it enables the assignment of <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> objects; otherwise <b>false</b></param>
+        <param name="prefix">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object on which to enable or disable the assignment of <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object</param>
+        <param name="fEnable">
+          <b>true</b> if overwriting existing <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> objects is allowed; otherwise, <b>false</b></param>
+        <param name="fScheduleAssignment">
+          <b>true</b> if the assignment timer job can be scheduled; othrewise, <b>false</b></param>
+        <param name="fOverwriteExistingIds">String used as a prefix for a <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object.</param>
+        <param name="fDocsetCtUpdateOnly">
+          <b>true</b> if the enable assignment operation applies only to Document Set content types; otherwise, <b>false</b>.</param>
+        <summary>Enables or disables the assignment of <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> objects on the specified <see cref="T:Microsoft.SharePoint.SPSite" /> object.</summary>
+        <remarks>
+          <para>Always schedules the assignment timer job, never overwrites existing Ids,applies to all content types, and sets no prefix for Ids.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">The <see cref="T:Microsoft.SharePoint.SPSite" /> object or the properties of its root <see cref="T:Microsoft.SharePoint.SPWeb" /> object are set to a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.InvalidOperationException">The Document ID feature is not activated on the target <see cref="T:Microsoft.SharePoint.SPSite" /> object.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="FindUrlById">
+      <MemberSignature Language="C#" Value="public static string FindUrlById (Microsoft.SharePoint.SPSite site, string docId, string versionLabel);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string FindUrlById(class Microsoft.SharePoint.SPSite site, string docId, string versionLabel) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.FindUrlById(Microsoft.SharePoint.SPSite,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function FindUrlById (site As SPSite, docId As String, versionLabel As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ FindUrlById(Microsoft::SharePoint::SPSite ^ site, System::String ^ docId, System::String ^ versionLabel);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="docId" Type="System.String" />
+        <Parameter Name="versionLabel" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="site">ID to search for</param>
+        <param name="docId">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object to search on</param>
+        <param name="versionLabel">Version of the label of the document for which to get the URL</param>
+        <summary>Finds the URL of a document with the specified <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> value and <paramref name="versionLabel" /> parameter value.</summary>
+        <returns>URL of the document as a <b>String</b>. a null reference (Nothing in Visual Basic) if the document is not found, or if more than one document is found</returns>
+        <remarks>
+          <para>If there is more than one result, this method will return a null reference (Nothing in Visual Basic). In that case, use the Microsoft.Office.DocumentManagement.DocumentId.FindUrlsById method.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object value is set to a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="FindUrlsById">
+      <MemberSignature Language="C#" Value="public static string[] FindUrlsById (Microsoft.SharePoint.SPSite site, string docId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string[] FindUrlsById(class Microsoft.SharePoint.SPSite site, string docId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.FindUrlsById(Microsoft.SharePoint.SPSite,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function FindUrlsById (site As SPSite, docId As String) As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;System::String ^&gt; ^ FindUrlsById(Microsoft::SharePoint::SPSite ^ site, System::String ^ docId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="docId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="site">ID to search for.</param>
+        <param name="docId">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object to search on.</param>
+        <summary> Finds the URLs of a document and all of its versions with a specified Id.</summary>
+        <returns>Array of strings that represents the URLs of all versions of the document found with the specified <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> value.</returns>
+        <remarks>
+          <para>An array of strings representing the URLs of all the versions of the document found with the specified Id. a null reference (Nothing in Visual Basic) and <b>0</b> length arrays mean no results were found.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <see cref="T:Microsoft.SharePoint.SPSite" /> object value is set to a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetProvider">
+      <MemberSignature Language="C#" Value="public static Microsoft.Office.DocumentManagement.DocumentIdProvider GetProvider (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Office.DocumentManagement.DocumentIdProvider GetProvider(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.GetProvider(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetProvider (site As SPSite) As DocumentIdProvider" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::DocumentManagement::DocumentIdProvider ^ GetProvider(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.DocumentIdProvider</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object from which to get the <see cref="T:Microsoft.Office.DocumentManagement.DocumentIdProvider" /> value.</param>
+        <summary>Gets the value of the <see cref="T:Microsoft.Office.DocumentManagement.DocumentIdProvider" /> object for a specified <see cref="T:Microsoft.SharePoint.SPSite" /> object.</summary>
+        <returns>A <see cref="T:Microsoft.Office.DocumentManagement.DocumentIdProvider" /> object for the specified <see cref="T:Microsoft.SharePoint.SPSite" /> object, or a null reference (Nothing in Visual Basic) if no object of that type is returned.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object value is set to a null reference (Nothing in Visual Basic).
+</exception>
+        <exception cref="T:System.NullReferenceException">There was a problem loading a custom provider.</exception>
+        <exception cref="T:System.Runtime.InteropServices.SEHException">There was a problem loading a custom provider.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAssignmentEnabled">
+      <MemberSignature Language="C#" Value="public static bool IsAssignmentEnabled (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsAssignmentEnabled(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.IsAssignmentEnabled(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsAssignmentEnabled (site As SPSite) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsAssignmentEnabled(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object to test for <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object assignment.</param>
+        <summary>Determines whether the <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object assignment is enabled on a <see cref="T:Microsoft.SharePoint.SPSite" /> object.</summary>
+        <returns>
+          <b>true</b> if assignment is enabled; otherwise <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object orthe properties of its root <see cref="T:Microsoft.SharePoint.SPWeb" /> properties are set to a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAssignmentEnabled">
+      <MemberSignature Language="C#" Value="public static bool IsAssignmentEnabled (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsAssignmentEnabled(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.IsAssignmentEnabled(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsAssignmentEnabled (web As SPWeb) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsAssignmentEnabled(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">
+          <see cref="T:Microsoft.SharePoint.SPWeb" /> object to test for <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object assignment.</param>
+        <summary>Checks whether the ability to assign <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> object values is enabled on a <see cref="T:Microsoft.SharePoint.SPWeb" /> object.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsFeatureEnabled">
+      <MemberSignature Language="C#" Value="public static bool IsFeatureEnabled (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsFeatureEnabled(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.IsFeatureEnabled(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsFeatureEnabled (site As SPSite) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsFeatureEnabled(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> collection that  is checked</param>
+        <summary>Gets the feature status in the specified <see cref="T:Microsoft.SharePoint.SPSite" /> collection.</summary>
+        <returns>
+          <b>true</b> if the Document ID feature is enabled; otherwise <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> is set to a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.ArgumentException">Site Features collection is set to a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetDefaultProvider">
+      <MemberSignature Language="C#" Value="public static void SetDefaultProvider (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SetDefaultProvider(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.SetDefaultProvider(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SetDefaultProvider (site As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SetDefaultProvider(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object on which to reset the <see cref="T:Microsoft.Office.DocumentManagement.DocumentIdProvider" /> value</param>
+        <summary>Resets the <see cref="T:Microsoft.Office.DocumentManagement.DocumentIdProvider" /> value of a <see cref="T:Microsoft.SharePoint.SPSite" /> to its default value.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> is set to a null reference (Nothing in Visual Basic)</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetProvider">
+      <MemberSignature Language="C#" Value="public static void SetProvider (Microsoft.SharePoint.SPSite site, Microsoft.Office.DocumentManagement.DocumentIdProvider iProvider);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SetProvider(class Microsoft.SharePoint.SPSite site, class Microsoft.Office.DocumentManagement.DocumentIdProvider iProvider) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentId.SetProvider(Microsoft.SharePoint.SPSite,Microsoft.Office.DocumentManagement.DocumentIdProvider)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SetProvider (site As SPSite, iProvider As DocumentIdProvider)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SetProvider(Microsoft::SharePoint::SPSite ^ site, Microsoft::Office::DocumentManagement::DocumentIdProvider ^ iProvider);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="iProvider" Type="Microsoft.Office.DocumentManagement.DocumentIdProvider" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <see cref="T:Microsoft.Office.DocumentManagement.DocumentIdProvider" /> object that is the provider of <see cref="T:Microsoft.Office.DocumentManagement.DocumentId" /> objects for the <see cref="T:Microsoft.SharePoint.SPSite" /> object</param>
+        <param name="iProvider">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object on which to set the <paramref name="iProvider" /> parameter value</param>
+        <summary>Sets a new <see cref="T:Microsoft.Office.DocumentManagement.DocumentIdProvider" /> value for the specified <see cref="T:Microsoft.SharePoint.SPSite" /> object.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">Either the <see cref="T:Microsoft.SharePoint.SPSite" /> object value or the value of the new <paramref name="iProvider" /> parameter is set to a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

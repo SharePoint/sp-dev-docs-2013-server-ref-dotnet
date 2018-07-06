@@ -1,0 +1,229 @@
+﻿<Type Name="EcmDocumentRoutingWeb" FullName="Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb">
+  <TypeSignature Language="C#" Value="public class EcmDocumentRoutingWeb" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit EcmDocumentRoutingWeb extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb" />
+  <TypeSignature Language="VB.NET" Value="Public Class EcmDocumentRoutingWeb" />
+  <TypeSignature Language="C++ CLI" Value="public ref class EcmDocumentRoutingWeb" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents a repository abstraction that can be configured to automatically organize and manage incoming content.</summary>
+    <remarks>
+      <para>This class represents a managed Web site that enables a single point of document submission. This site forms the end point of the document submission Web service.  See MS-OFFICIALFILE documentation on MSDN in SharePoint Products and Technologies Protocols for more information.</para>
+      <para>You can configure the content organizer with rules that specify the final location of a document. Only the owners of the site or users specified as <b>RouterOwners</b> for this site are allowed to configure the rules. Any document that cannot be organized by the specified rules will be placed in the drop-off library and is visible only to the submitter and the <b>RouterOwners</b>.</para>
+      <para>An <b>EcmDocumentRoutingWeb</b> can also specify whether folders are automatically created at the final location specified by the rule matching the document. The <b>EcmDocumentRoutingWeb</b> can be configured to create folders automatically after a threshold limit of documents has been reached at the final location.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public EcmDocumentRoutingWeb (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.#ctor(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (web As SPWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; EcmDocumentRoutingWeb(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">Web site that can be configured to organize documents automatically.</param>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb" /> object for the specified Web site.</summary>
+        <remarks>
+          <para>The <see cref="T:Microsoft.SharePoint.SPWeb" /> object has to be a valid content organizer-enabled site in order to perform the operations provided by the <b>EcmDocumentRoutingWeb</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddCustomRouter">
+      <MemberSignature Language="C#" Value="public void AddCustomRouter (string routerName, string assemblyName, string className);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddCustomRouter(string routerName, string assemblyName, string className) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.AddCustomRouter(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddCustomRouter (routerName As String, assemblyName As String, className As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddCustomRouter(System::String ^ routerName, System::String ^ assemblyName, System::String ^ className);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="routerName" Type="System.String" />
+        <Parameter Name="assemblyName" Type="System.String" />
+        <Parameter Name="className" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="routerName">Name of the custom router.</param>
+        <param name="assemblyName">Name of the assembly containing the implementation of the <b>ICustomRouter</b> interface.</param>
+        <param name="className">Name of the class that implements the <b>ICustomRouter</b> interface.</param>
+        <summary>Registers a custom router with the content organizer-enabled site</summary>
+        <remarks>
+          <para>Use a custom router to perform custom processing on incoming documents. Custom routers that are already registered with the <b>EcmDocumentRoutingWeb</b> can be specified in rules and will be run on documents matching that rule.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DropOffZone">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPList DropOffZone { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPList DropOffZone" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.DropOffZone" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DropOffZone As SPList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPList ^ DropOffZone { Microsoft::SharePoint::SPList ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPList</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the document library representing a single point of submission in the content organizer-enabled site.</summary>
+        <value>Returns <see cref="T:Microsoft.SharePoint.SPList" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DropOffZoneUrl">
+      <MemberSignature Language="C#" Value="public string DropOffZoneUrl { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DropOffZoneUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.DropOffZoneUrl" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DropOffZoneUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DropOffZoneUrl { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the absolute URL of the single point of submission in the content organizer-enabled site.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsEmailRoutingEnabled">
+      <MemberSignature Language="C#" Value="public bool IsEmailRoutingEnabled { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsEmailRoutingEnabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.IsEmailRoutingEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsEmailRoutingEnabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsEmailRoutingEnabled { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether the site is configured to organize e-mails.</summary>
+        <value>
+          <b>true</b> if the site is configured to organize e-mails; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsRoutingEnabled">
+      <MemberSignature Language="C#" Value="public bool IsRoutingEnabled { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsRoutingEnabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.IsRoutingEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsRoutingEnabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsRoutingEnabled { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether the Web site is a valid content organizer enabled site.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveCustomRouter">
+      <MemberSignature Language="C#" Value="public void RemoveCustomRouter (string routerName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveCustomRouter(string routerName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.RemoveCustomRouter(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RemoveCustomRouter (routerName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemoveCustomRouter(System::String ^ routerName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="routerName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="routerName">The name of the custom router to be removed.</param>
+        <summary>Removes a custom router registered with the content organizer-enabled site.</summary>
+        <remarks>
+          <para>A custom router can be used to perform custom processing on incoming documents. Custom routers that are already registered with the <b>EcmDocumentRoutingWeb</b> can be specified in rules and will be run for documents matching that rule.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Router">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter Router { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter Router" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.Router" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Router As EcmDocumentRouter" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::RecordsManagement::RecordsRepository::EcmDocumentRouter ^ Router { Microsoft::Office::RecordsManagement::RecordsRepository::EcmDocumentRouter ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the content organizer associated with this site.</summary>
+        <value>Returns <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter" />.</value>
+        <remarks>
+          <para>The <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter" /> object is the core of the content organizer which evaluates rules and places documents in the location configured for their metadata.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RoutingRuleCollection">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRuleCollection RoutingRuleCollection { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRuleCollection RoutingRuleCollection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb.RoutingRuleCollection" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property RoutingRuleCollection As EcmDocumentRouterRuleCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::RecordsManagement::RecordsRepository::EcmDocumentRouterRuleCollection ^ RoutingRuleCollection { Microsoft::Office::RecordsManagement::RecordsRepository::EcmDocumentRouterRuleCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRuleCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of rules that specifies the final location for incoming documents.</summary>
+        <value>Returns <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRuleCollection" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

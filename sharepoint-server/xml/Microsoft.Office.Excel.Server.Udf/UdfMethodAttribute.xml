@@ -1,0 +1,219 @@
+﻿<Type Name="UdfMethodAttribute" FullName="Microsoft.Office.Excel.Server.Udf.UdfMethodAttribute">
+  <TypeSignature Language="C#" Value="public sealed class UdfMethodAttribute : Attribute" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit UdfMethodAttribute extends System.Attribute" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Excel.Server.Udf.UdfMethodAttribute" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class UdfMethodAttribute&#xA;Inherits Attribute" />
+  <TypeSignature Language="C++ CLI" Value="public ref class UdfMethodAttribute sealed : Attribute" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Excel.Server.Udf</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Attribute</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.AttributeUsage(System.AttributeTargets.Method)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Marks a function as a user-defined function (UDF) method.</summary>
+    <remarks>
+      <para>To use custom functions in a class as Excel Services UDFs, you should mark your UDF methods with this attribute. Any methods that are not marked with this attribute in the UDF assembly are ignored by Excel Calculation Services. They are not considered Excel Services UDF methods.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using Microsoft.Office.Excel.Server.Udf;
+
+namespace MyExcelServicesUdf
+{
+    &lt;span class="label"&gt;[UdfClass]&lt;/span&gt;&lt;span class="label"&gt;public class MyUdfs&lt;/span&gt;
+    {
+        &lt;span class="label"&gt;[UdfMethod]&lt;/span&gt;public int MyFunction()
+        {
+            i = (i + 88) * 2;
+            return i;
+        }
+    }  
+}</code>
+      <code>Imports System
+Imports Microsoft.Office.Excel.Server.Udf
+
+Namespace MyExcelServicesUdf
+    &amp;lt;UdfClass&amp;gt;
+    Public Class MyUdfs
+        &amp;lt;UdfMethod&amp;gt;
+        Public Function MyFunction() As Integer
+            i = (i + 88) * 2
+            Return i
+        End Function
+    End Class
+End Namespace</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UdfMethodAttribute ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Excel.Server.Udf.UdfMethodAttribute.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; UdfMethodAttribute();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.Udf</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Excel.Server.Udf.UdfMethodAttribute" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsVolatile">
+      <MemberSignature Language="C#" Value="public bool IsVolatile { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsVolatile" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Excel.Server.Udf.UdfMethodAttribute.IsVolatile" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsVolatile As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsVolatile { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.Udf</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies whether a user-defined function (UDF) method is volatile or non-volatile.</summary>
+        <value>
+          <b>false</b> if the UDF is non-volatile; otherwise, <b>true</b>. The default is <b>false</b>.  </value>
+        <remarks>
+          <para>The <see cref="T:Microsoft.Office.Excel.Server.Udf.UdfMethodAttribute" />attribute has an <see cref="P:Microsoft.Office.Excel.Server.Udf.UdfMethodAttribute.IsVolatile" /> property. You use the <see cref="P:Microsoft.Office.Excel.Server.Udf.UdfMethodAttribute.IsVolatile" /> property to specify a UDF method as volatile or non-volatile. The <see cref="P:Microsoft.Office.Excel.Server.Udf.UdfMethodAttribute.IsVolatile" /> property takes a <b>Boolean</b> value. The default value is <b>false</b>, which means that particular UDF method is non-volatile. </para>
+          <para />
+        </remarks>
+        <example>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.Office.Excel.Server.Udf;
+
+namespace UdfWS
+{
+    [UdfClass]
+    public class MyUdfClass
+    {
+        string textToReturn = "Hello!";
+
+&lt;span class="label"&gt;        //&lt;/span&gt;&lt;span class="label"&gt;This method is declared as volatile.&lt;/span&gt;&lt;span class="label"&gt;[UdfMethod(IsVolatile = true)]&lt;/span&gt;public double MyDouble(double d)
+        {
+            return d * 9;
+        }
+
+&lt;span class="label"&gt;        //&lt;/span&gt;&lt;span class="label"&gt;This method is declared as non-volatile.&lt;/span&gt;&lt;span class="label"&gt;[UdfMethod]&lt;/span&gt;public string MyString()
+        {
+            return (this.textToReturn);
+        }
+    }
+}</code>
+          <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports Microsoft.Office.Excel.Server.Udf
+
+Namespace UdfWS
+    &amp;lt;UdfClass&amp;gt;
+    Public Class MyUdfClass
+        Private textToReturn As String = "Hello!"
+
+        ' This method is declared as volatile.
+        &amp;lt;UdfMethod(IsVolatile := True)&amp;gt;
+        Public Function MyDouble(ByVal d As Double) As Double
+            Return d * 9
+        End Function
+
+        ' This method is declared as non-volatile.
+        &amp;lt;UdfMethod&amp;gt;
+        Public Function MyString() As String
+            Return (Me.textToReturn)
+        End Function
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ReturnsPersonalInformation">
+      <MemberSignature Language="C#" Value="public bool ReturnsPersonalInformation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ReturnsPersonalInformation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Excel.Server.Udf.UdfMethodAttribute.ReturnsPersonalInformation" />
+      <MemberSignature Language="VB.NET" Value="Public Property ReturnsPersonalInformation As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ReturnsPersonalInformation { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.Udf</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies that the user-defined function (UDF) method may return information based on the current user executing the session. </summary>
+        <value>If <b>true</b>, Excel Calculation Services makes sure that the thread's current principal has the right value before calling the UDF. If <b>false</b>, Excel Calculation Services hides the user identity. The default is <b>false</b>.  </value>
+        <remarks>
+          <para>A UDF that sets this property to <b>true</b> can use the <b>Name</b> property of the <b>System.Threading.Thread.CurrentPrincipal.Identity</b> interface, to get the name of the user on whose behalf the code is running.</para>
+          <list type="bullet">
+            <item>
+              <description>For ReturnsPersonalInformation=false, Excel Calculation Services hides the user identity by setting the thread's current principal to an empty principal.</description>
+            </item>
+            <item>
+              <description>For ReturnsPersonalInformation=true, Excel Calculation Services ensures that the thread's current principal has the right value before calling the UDF. </description>
+            </item>
+          </list>
+          <para>For recalculation, a UDF that is marked as returning personal information (that is, ReturnsPersonalInformation=true) is always called again when previous results do not exist for the same user.</para>
+          <para>If you need to be able to access the identity of the user who is executing the request on a session (and thus executing the UDF) or the thread identity, set the <b>ReturnsPersonalInformation</b> property to <b>true</b>. </para>
+          <para>It is important to set this property to <b>true</b> even in cases where you are not explicitly referring to thread identity. For example, if you are acquiring personal information from a database using integrated security, or some other way to get user-specific information, you want the correct caching to be done, and therefore you should set this property to <b>true</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.Office.Excel.Server.Udf;
+using System.Web;
+using System.Security.Principal;
+
+namespace DatabaseAccessUdfsReturnPersonalInformation
+{
+    [UdfClass]
+    public class DatabaseAccessUdfs 
+    {
+        &lt;span class="label"&gt;[UdfMethod(ReturnsPersonalInformation=true)]&lt;/span&gt;
+        public string GetUserName()
+        {
+            return 
+              (System.Threading.Thread.CurrentPrincipal.Identity.Name);
+        }
+    }
+}</code>
+          <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports Microsoft.Office.Excel.Server.Udf
+Imports System.Web
+Imports System.Security.Principal
+
+Namespace DatabaseAccessUdfsReturnPersonalInformation
+    &amp;lt;UdfClass&amp;gt;
+    Public Class DatabaseAccessUdfs
+        &amp;lt;UdfMethod(ReturnsPersonalInformation:=True)&amp;gt;
+        Public Function GetUserName() As String
+            Return (System.Threading.Thread.CurrentPrincipal.Identity.Name)
+        End Function
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

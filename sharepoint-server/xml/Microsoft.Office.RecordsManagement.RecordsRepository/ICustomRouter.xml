@@ -1,0 +1,206 @@
+﻿<Type Name="ICustomRouter" FullName="Microsoft.Office.RecordsManagement.RecordsRepository.ICustomRouter">
+  <TypeSignature Language="C#" Value="public interface ICustomRouter" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ICustomRouter" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.RecordsRepository.ICustomRouter" />
+  <TypeSignature Language="VB.NET" Value="Public Interface ICustomRouter" />
+  <TypeSignature Language="C++ CLI" Value="public interface class ICustomRouter" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>Performs custom processing on documents before they are routed to the final location.</summary>
+    <remarks>
+      <para>The custom router can also cancel default behavior and route the documents.</para>
+      <para>This topic includes two code examples.</para>
+      <para>The first code example is a custom router that inspects the content of a text file that is being saved and checks it for sensitive information.</para>
+      <para>The second example registers the custom router to the content organizer-enabled site.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.Collections;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.IO;
+using Microsoft.SharePoint;
+using EcmDocumentRoutingWeb = Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb;
+using EcmDocumentRouter = Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter;
+using ICustomRouter = Microsoft.Office.RecordsManagement.RecordsRepository.ICustomRouter;
+using CustomRouterResult = Microsoft.Office.RecordsManagement.RecordsRepository.CustomRouterResult;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public class SampleDocumentRouter : ICustomRouter
+    {
+        /// &amp;lt;summary&amp;gt;
+        /// A sample custom router which inspects the content of a text file being saved for sensitive information
+        /// If sensitive information is found, then the information is masked and saved by the custom router.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;param name="contentOrganizerWeb"&amp;gt;The Content Organizer that invoked the custom router.&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="recordSeries"&amp;gt;Content type of the file being organized&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="userName"&amp;gt;The name of the user who created the file. Value can be empty if the user no longer exists.&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="fileContent"&amp;gt;Content of the file being saved.&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="properties"&amp;gt;Metadata for the file being saved.&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="finalFolder"&amp;gt;The final location that the content organizer determined for this file.&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="resultDetails"&amp;gt;Any details that the custom router wants to furnish for logging purposes.&amp;lt;/param&amp;gt;
+        /// &amp;lt;returns&amp;gt;Whether the content organizer should continue to save the file in the designated location&amp;lt;/returns&amp;gt;
+        CustomRouterResult ICustomRouter.OnSubmitFile(
+EcmDocumentRoutingWeb contentOrganizerWeb,
+string recordSeries, // Content type name
+string userName,
+Stream fileContent,
+Microsoft.SharePoint.RecordsRepositoryProperty[] properties,
+SPFolder finalFolder,
+ref string resultDetails)
+        {
+if (contentOrganizerWeb == null)
+    throw new ArgumentNullException("contentOrganizerWeb");
+// We should have a Content Organizer enabled web 
+if (!contentOrganizerWeb.IsRoutingEnabled)
+    throw new ArgumentException("Invalid content organizer.");
+
+//Change Domain\LoginName with the login name of a site user creating this file.
+const string submitterLoginName = "Domain\\LoginName";
+// Change MyFileName to the required file name. This will be used if this custom router needs to save the processed file to the final location.
+string modifiedFileName = "MyFileName.txt";
+// Read incoming content into a string so that we can look for ssn. 
+// Do not close the stream that was passed in.
+string fileContentString = string.Empty;
+StreamReader sr = new StreamReader(fileContent);
+{
+    fileContentString = sr.ReadToEnd();
+}
+// regular expression to match social security numbers in file content.
+Regex socialSecurityRegex = new Regex("([0-9]){3}-([0-9]){2}-([0-9]){4}");
+MatchCollection matches = socialSecurityRegex.Matches(fileContentString);
+if (matches.Count &amp;lt;= 0)
+{
+    // return a string which will be logged by the content organizer.
+    resultDetails = "File was inspected and no sensitive data was found.";
+    return CustomRouterResult.SuccessContinueProcessing;
+}
+else
+{
+    string submittingUserName = userName;
+    if (string.IsNullOrEmpty(userName))
+    {
+        // LoginName of the user creating the file
+        submittingUserName = submitterLoginName;
+    }
+    // We want to fix up the file content and save the file ourselves
+    using (SPSite site = new SPSite(contentOrganizerWeb.DropOffZoneUrl))
+    {
+        SPWeb web = site.OpenWeb();
+        // User creating the file
+        SPUser submittingUser = web.SiteUsers[submittingUserName];
+        string fileName = modifiedFileName;
+        // Create a Hashtable of properties which forms the metadata for the file
+        Hashtable fileProperties = EcmDocumentRouter.GetHashtableForRecordsRepositoryProperties(properties, recordSeries);
+        // Hide sensitive content in the file stream.
+        fileContentString = socialSecurityRegex.Replace(fileContentString, "***-**-****");
+        byte[] modifiedByteStream = Encoding.UTF8.GetBytes(fileContentString);
+        // Modify content as required and then save the modified content ourselves.
+        using (MemoryStream finalStm = new MemoryStream(modifiedByteStream))
+        {
+finalStm.Write(modifiedByteStream, 0, modifiedByteStream.Length);
+// Save the file here since we need to modify the file.
+EcmDocumentRouter.SaveFileToFinalLocation(contentOrganizerWeb,
+    finalFolder,
+    finalStm,
+    fileName,
+    "",
+    fileProperties,
+    submittingUser,
+    true /*override versioning settings on the content organizer and create a new file*/, "");
+        }
+
+        resultDetails = "File was inspected and sensitive data was found. File has been saved with a custom name.";
+        return CustomRouterResult.SuccessCancelFurtherProcessing;
+    }
+}
+        }
+    }
+
+}</code>
+      <code>using System;
+using Microsoft.SharePoint;
+using Microsoft.Office.RecordsManagement;
+using Microsoft.Office.RecordsManagement.RecordsRepository;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    /// &amp;lt;summary&amp;gt;
+    /// Sample code to register an ICustomRouter implementation in a content organizer enabled web site.    
+    /// &amp;lt;/summary&amp;gt;
+    public class CustomRouterRegistration
+    {
+        static void Main(string[] args)
+        {
+//Change http://SiteUrl to the absolute url of the content organizer enabled site where the custom router needs to be registered.
+const string absoluteSiteUrl = "http://SiteUrl";
+// Change Custom Router to the desired name to uniquely identify this custom router. 
+// The name can be using to remove the registered router from the site and will be available in the edit rule page when configuring a rule.
+const string customRouterName = "Custom Router";
+// Assembly name of the ICustomRouter implementation
+const string customRouterAssemblyName = "SampleDocumentRouter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=29af386697ceed40";
+// Name of the class that implements the ICustomRouter interface.
+const string customRouterClassName = "Microsoft.SDK.SharePointServer.Samples.SampleDocumentRouter";
+using (SPSite contentOrganizerSiteCollection = new SPSite(absoluteSiteUrl))
+{
+    using (SPWeb contentOrganizerSite = contentOrganizerSiteCollection.OpenWeb())
+    {
+        EcmDocumentRoutingWeb contentOrganizer = new EcmDocumentRoutingWeb(contentOrganizerSite);
+        contentOrganizer.AddCustomRouter(customRouterName, customRouterAssemblyName, customRouterClassName);
+    }
+}
+        }    
+    }
+
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="OnSubmitFile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.RecordsRepository.CustomRouterResult OnSubmitFile (Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb contentOrganizerWeb, string recordSeries, string userName, System.IO.Stream fileContent, Microsoft.SharePoint.RecordsRepositoryProperty[] properties, Microsoft.SharePoint.SPFolder finalFolder, ref string resultDetails);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype Microsoft.Office.RecordsManagement.RecordsRepository.CustomRouterResult OnSubmitFile(class Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb contentOrganizerWeb, string recordSeries, string userName, class System.IO.Stream fileContent, class Microsoft.SharePoint.RecordsRepositoryProperty[] properties, class Microsoft.SharePoint.SPFolder finalFolder, string&amp; resultDetails) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.ICustomRouter.OnSubmitFile(Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb,System.String,System.String,System.IO.Stream,Microsoft.SharePoint.RecordsRepositoryProperty[],Microsoft.SharePoint.SPFolder,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function OnSubmitFile (contentOrganizerWeb As EcmDocumentRoutingWeb, recordSeries As String, userName As String, fileContent As Stream, properties As RecordsRepositoryProperty(), finalFolder As SPFolder, ByRef resultDetails As String) As CustomRouterResult" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::RecordsManagement::RecordsRepository::CustomRouterResult OnSubmitFile(Microsoft::Office::RecordsManagement::RecordsRepository::EcmDocumentRoutingWeb ^ contentOrganizerWeb, System::String ^ recordSeries, System::String ^ userName, System::IO::Stream ^ fileContent, cli::array &lt;Microsoft::SharePoint::RecordsRepositoryProperty ^&gt; ^ properties, Microsoft::SharePoint::SPFolder ^ finalFolder, System::String ^ % resultDetails);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.RecordsRepository.CustomRouterResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contentOrganizerWeb" Type="Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb" />
+        <Parameter Name="recordSeries" Type="System.String" />
+        <Parameter Name="userName" Type="System.String" />
+        <Parameter Name="fileContent" Type="System.IO.Stream" />
+        <Parameter Name="properties" Type="Microsoft.SharePoint.RecordsRepositoryProperty[]" />
+        <Parameter Name="finalFolder" Type="Microsoft.SharePoint.SPFolder" />
+        <Parameter Name="resultDetails" Type="System.String&amp;" RefType="ref" />
+      </Parameters>
+      <Docs>
+        <param name="contentOrganizerWeb">Web site to which the document is being added.</param>
+        <param name="recordSeries">Content type of the document.</param>
+        <param name="userName">Login name of the user creating the file.</param>
+        <param name="fileContent">Content stream of the file being organized.</param>
+        <param name="properties">Metadata of the file being organized.</param>
+        <param name="finalFolder">Final location configured for the document being organized.</param>
+        <param name="resultDetails">Custom information that should be logged by the content organizer.</param>
+        <summary>Allows users to process and/or save documents that are sent or uploaded to a site where there content organizer is enabled. </summary>
+        <returns>Returns <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.CustomRouterResult" />.</returns>
+        <remarks>
+          <para>This method is invoked when documents in the drop-off library are being organized. Before calling the custom router, the content organizer calculates the final location configured for the document by the rule manager. The custom router can either allow the content organizer to continue to save the document content to the predetermined location, or save the document if the contents or the final location of the file need to be modified.The <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter" /> class provides an API to save the document to the site depending on the versioning settings configured for the content organizer. To prevent unexpected failures, the custom router must not close the content stream that is being passed in.</para>
+          <para>Documents that are submitted from an external connection will be saved to the drop-off library so that the custom call out can be run for the document. When documents are submitted from an external connection, the properties of the source document are also saved to the Original Properties (Field Guid = "{126CD502-6801-4ae4-9F56-BFC3488C4743}") column in the drop-off library.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

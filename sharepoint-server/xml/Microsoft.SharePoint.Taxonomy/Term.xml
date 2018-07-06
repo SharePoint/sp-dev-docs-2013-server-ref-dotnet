@@ -1,0 +1,1703 @@
+﻿<Type Name="Term" FullName="Microsoft.SharePoint.Taxonomy.Term">
+  <TypeSignature Language="C#" Value="public sealed class Term : Microsoft.SharePoint.Taxonomy.TermSetItem" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit Term extends Microsoft.SharePoint.Taxonomy.TermSetItem" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.Term" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class Term&#xA;Inherits TermSetItem" />
+  <TypeSignature Language="C++ CLI" Value="public ref class Term sealed : Microsoft::SharePoint::Taxonomy::TermSetItem" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Taxonomy.TermSetItem</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, FactoryType=typeof(Microsoft.SharePoint.Taxonomy.Internal.TaxonomyClientObjectFactory), ObjectIdentityPropertyName="CanonicalId", ServerTypeId="5B8C81B7-7CD2-40dc-8525-5ECA12A4EB73")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents a <b>Term</b> or a Keyword in a managed metadata hierarchy. </summary>
+    <remarks>
+      <para>A Term is stored as a <see cref="T:Microsoft.SharePoint.Taxonomy.TermSetItem" /> object in the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object. It containsreferences to the parts that define a term set item.</para>
+      <para>A Term can be reused under different parents. It may have custom properties associated with it. It may have multiple <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> objects associated with it for ifferent <b>LCID</b>.</para>
+      <para>When the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.IsKeyword" /> property is set to <b>true</b>, the <b>Term</b> represents a Keyword. A Keyword does not have any children and is stored in Keyword TermSet.</para>
+      <para>Initalize a new instance of this class by using the <see cref="M:Microsoft.SharePoint.Taxonomy.TermSetItem.CreateTerm" /> method, the static <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore.GetTerm" /> method, or by getting it from a <see cref="T:Microsoft.SharePoint.Taxonomy.TermCollection" /> object. </para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using System.Globalization;
+using System.Security.Principal;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Taxonomy;
+
+namespace Microsoft.SDK.SharePoint.Samples
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            if (args.Length &amp;lt; 1)
+            {
+                Console.WriteLine("Please add site url as an argument");
+                return;
+            }
+            SPSite site = new SPSite(args[0]);
+            if (site != null)
+            {
+                TermStore termStore = GetATermStore(site);
+
+                if (termStore != null)
+                {
+                    // creat a group
+                    Group group = termStore.CreateGroup("TestData");
+
+                    // test term properties
+                    TestTermCodeSamples.TestTermProperties(termStore, group);
+                    // test child terms and sort order
+                    TestTermCodeSamples.TestGetTerms(termStore, group);
+                    // test term operation
+                    TestTermCodeSamples.TestTermOperation(termStore, group);
+                }
+            }
+        }
+
+        static TermStore GetATermStore(SPSite site)
+        {
+            // Get a TaxonomySession from the site
+            TaxonomySession session = new TaxonomySession(site);
+            TermStore termStore = null;
+            // Get a TermStore from the session
+            if (session.TermStores != null &amp;amp;&amp;amp; session.TermStores.Count &amp;gt; 0)
+            {
+                termStore = session.TermStores[0];
+            }
+            return termStore;
+        }
+    }
+
+    static class TestTermCodeSamples
+    {
+        public static void TestGetTerms(TermStore termStore, Group group)
+        {
+            if (termStore == null)
+            {
+                throw new System.ArgumentNullException("termStore");
+            }
+            if (group == null)
+            {
+                throw new System.ArgumentNullException("group");
+            }
+
+            // get current thread lcid
+            int lcid = CultureInfo.CurrentCulture.LCID;
+
+            // create term set
+            TermSet termSet = group.CreateTermSet("Month");
+
+            // TermSetItem.DoesUserHavePermission method
+            // check if the current user has permission to edit the term set
+            bool doesUserHavePermission = termSet.DoesUserHavePermissions(TaxonomyRights.EditTermSet);
+            Console.WriteLine("The current user " +
+                WindowsIdentity.GetCurrent().Name.ToString() +
+                (doesUserHavePermission?" has":" does not have") +
+                " permission to edit the term set.");
+
+            // create term
+            // TermSetItem.CreateTerm(System.String,System.Int32)
+            Term term = termSet.CreateTerm("Week", lcid);
+
+            // Create terms
+            Term termFri = term.CreateTerm("Fri", lcid);
+            Term termMon = term.CreateTerm("Mon", lcid);
+            Term termSat = term.CreateTerm("Sat", lcid);
+            Term termSun = term.CreateTerm("Sun", lcid);
+            Term termThu = term.CreateTerm("Thu", lcid);
+            Term termTue = term.CreateTerm("Tue", lcid);
+            Term termWed = term.CreateTerm("Wed", lcid);
+
+            // print each term name and id
+            PrintTermCollection(term.Terms);
+
+            // define a custom sort order
+            // Term.CustomSortOrder
+            term.CustomSortOrder = termSun.Id.ToString() + ":" + 
+                termMon.Id.ToString() + ":" +
+                termTue.Id.ToString() + ":" +
+                termWed.Id.ToString() + ":" +
+                termThu.Id.ToString() + ":" +
+                termFri.Id.ToString() + ":" +
+                termSat.Id.ToString();
+
+            // commit term store changes
+            termStore.CommitAll();
+
+            // print child terms with paging of 5
+            // TermSetItem.GetTerms(int)
+            TermCollection retrievedTerms = term.GetTerms(5);
+            PrintTermCollection(retrievedTerms);
+
+            // get term starts with 'S'
+            // Term.GetTerms
+            retrievedTerms = term.GetTerms("S", lcid,
+                true /* search default label only */,
+                StringMatchOption.StartsWith,
+                5, /*maximum results returned*/
+                true /*trim term that is not available for tagging */);
+            PrintTermCollection(retrievedTerms);
+        }
+
+        public static void TestTermOperation(TermStore termStore, Group group)
+        {
+            if (termStore == null)
+            {
+                throw new System.ArgumentNullException("termStore");
+            }
+            if (group == null)
+            {
+                throw new System.ArgumentNullException("group");
+            }
+
+            // get current thread lcid
+            int lcid = CultureInfo.CurrentCulture.LCID;
+
+            // create term sets and terms
+            TermSet termSetA = group.CreateTermSet("A");
+            TermSet termSetB = group.CreateTermSet("B");
+
+            Term termA1 = termSetA.CreateTerm("A1", lcid);
+            Term termA2 = termSetA.CreateTerm("A2", lcid);
+            Term termB1 = termSetB.CreateTerm("B1", lcid);
+            Term termB2 = termSetB.CreateTerm("B2", lcid);
+
+            // Copy, created new term "Copy of A1" under the same parent
+            termA1.Copy(false);
+
+            // Move, term "A1" is moved to term set "B"
+            termA1.Move(termSetB);
+
+            // Reuse, term "B2" is reused as a child term of term "A2"
+            Term reusedCopyofTermB2 = termA2.ReuseTerm(termB2, false);
+            // then re-assign source term to the reused copy under term "B2"
+            termB2.ReassignSourceTerm(reusedCopyofTermB2);
+
+            // Merge, merge "A1" to "A2", the new merged term is called "A2", 
+            // and is reused under both term set "A" and "B"
+            Term mergedTerm = termA1.Merge(termA2);
+            termStore.CommitAll();
+
+            // Print merged term information
+            Console.WriteLine("Merged Terms:");
+            Console.WriteLine("Term: " + mergedTerm.Name + ", IsSource: " + 
+                mergedTerm.IsSourceTerm + ", Term Set:" + mergedTerm.TermSet.Name);
+            foreach (Term term in mergedTerm.ReusedTerms)
+            {
+                Console.WriteLine("Term: " + term.Name + ", IsSource: " +
+                    term.IsSourceTerm + ", Term Set:" + term.TermSet.Name);
+            }
+            // Print merged term Ids
+            foreach (Guid id in mergedTerm.MergedTermIds)
+            {
+                Console.WriteLine("MergedId: " + id);
+            }
+
+            PrintTermCollection(termSetA.Terms);
+            PrintTermCollection(termSetB.Terms);
+        }
+
+        public static void TestTermProperties(TermStore termStore, Group group)
+        {
+            if (termStore == null)
+            {
+                throw new System.ArgumentNullException("termStore");
+            }
+            if (group == null)
+            {
+                throw new System.ArgumentNullException("group");
+            }
+
+            // get current thread lcid
+            int lcid = CultureInfo.CurrentCulture.LCID;
+
+            TermSet termSet = group.CreateTermSet("Term Set");
+            try
+            {
+                Term term = termSet.CreateTerm("Term1", lcid, Guid.NewGuid());
+
+                // Set Description and label
+                term.SetDescription("This is the description for the term.", lcid);
+                term.CreateLabel("Term Label 1", lcid, false);
+
+                termStore.CommitAll();
+
+                Console.WriteLine("Term description: " + term.GetDescription());
+                Console.WriteLine("Term default label: " + term.GetDefaultLabel(lcid));
+
+                // print all term labels for an lcid, include both default and 
+                // non-default label
+                LabelCollection labels = term.GetAllLabels(lcid);
+                foreach (Label label in labels)
+                {
+                    Console.WriteLine("Term label " + label.Value);
+                }
+
+                Console.WriteLine("Term path: " + term.GetPath());
+                Console.WriteLine("IsKeyword:" + term.IsKeyword);
+                Console.WriteLine("IsRoot:" + term.IsRoot);
+                Console.WriteLine("IsAvailableForTagging:" + term.IsAvailableForTagging);
+            }
+            catch (TermStoreOperationException exp)
+            {
+                Console.WriteLine(exp.Message);
+            }
+        }
+
+        private static void PrintTermCollection(TermCollection terms)
+        {
+            if (terms == null)
+            {
+                throw new System.ArgumentNullException("terms");
+            }
+            Console.WriteLine("Print terms in the term collection ...");
+            foreach (Term term in terms)
+            {
+                Console.WriteLine(term.Name + ":" + term.Id);
+            }
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="AddAssociation">
+      <MemberSignature Language="C#" Value="public void AddAssociation (Guid termId, string userName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddAssociation(valuetype System.Guid termId, string userName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.AddAssociation(System.Guid,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddAssociation (termId As Guid, userName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddAssociation(Guid termId, System::String ^ userName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="termId" Type="System.Guid" />
+        <Parameter Name="userName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="termId">The ID of the term to be added.  </param>
+        <param name="userName">The name of the user who adds the term association.</param>
+        <summary>Associates a term with the current hash tag and saves the name of the user who makes the association.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Copy">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.Term Copy (bool doCopyChildren);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.Term Copy(bool doCopyChildren) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.Copy(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Copy (doCopyChildren As Boolean) As Term" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::Term ^ Copy(bool doCopyChildren);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.Term</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="doCopyChildren" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="doCopyChildren">Indicates whether to copy this <b>Term</b> with its child terms.</param>
+        <summary>Creates and returns a sibling copy of the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object within the current <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object.</summary>
+        <returns>The newly created copied <b>Term</b></returns>
+        <remarks>
+          <para>The copied <b>Term</b> will have the same properties as the current <b>Term</b>, except for the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.Name" /> property. If the term is copied with its child terms, the newly created child terms will have the same properties as the child terms of the current term including the Name property.The copied child terms will perserve the same hierarchy.</para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission in order to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms TermSet. The operation failed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateLabel">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.Label CreateLabel (string labelName, int lcid, bool isDefault);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.Label CreateLabel(string labelName, int32 lcid, bool isDefault) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.CreateLabel(System.String,System.Int32,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateLabel (labelName As String, lcid As Integer, isDefault As Boolean) As Label" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::Label ^ CreateLabel(System::String ^ labelName, int lcid, bool isDefault);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.Label</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="labelName" Type="System.String" />
+        <Parameter Name="lcid" Type="System.Int32" />
+        <Parameter Name="isDefault" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="labelName">new <b>Label</b> name</param>
+        <param name="lcid">The LCID to create the label for</param>
+        <param name="isDefault">Whether this <b>Label</b> will be the default <b>Label</b> of The lcid</param>
+        <summary>Creates a new <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> for this <see cref="T:Microsoft.SharePoint.Taxonomy.Term" />.</summary>
+        <returns>The new <b>Label</b> for the <b>Term</b></returns>
+        <remarks>
+          <para>The <paramref name="labelName" /> value will be normailized to trim consecutive spaces into one and replace the <b>&amp;</b> character with the wide character version of the character (<b>\uFF06</b>). It must be non-empty, cannot exceed 255 characters, and cannot contain any of the following characters <b>;</b><b>"</b><b>&lt;</b><b> &gt;</b><b>|</b><b>&amp;</b><b>tab</b></para>
+          <para>The name of the <b>Label</b> object is case-insensitive. If the name to be created is a non-default <b>Label</b>, it cannot have the same name as any existing <b>Label</b> of The lcid. If it is to be created as a default, then it can have the same name as existing <b>Label</b>. Instead of creating a new label, the existing label will become the default Label for the LCID.</para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permissions to use this method.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The user does not have sufficient permission to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms <b>TermSet</b>. The operation failed.</exception>
+        <exception cref="T:System.ArgumentException">The label will be created as a none default Label, and the name already exists for this lcid.</exception>
+        <exception cref="T:System.ArgumentNullException">The label name is a null reference (Nothing in Visual Basic) or an empty string.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">Call the M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll method to save this change to the database. is not valid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="CustomProperties">
+      <MemberSignature Language="C#" Value="public override Microsoft.SharePoint.Taxonomy.Generic.ReadOnlyDictionary&lt;string,string&gt; CustomProperties { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.Generic.ReadOnlyDictionary`2&lt;string, string&gt; CustomProperties" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.CustomProperties" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property CustomProperties As ReadOnlyDictionary(Of String, String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Taxonomy::Generic::ReadOnlyDictionary&lt;System::String ^, System::String ^&gt; ^ CustomProperties { Microsoft::SharePoint::Taxonomy::Generic::ReadOnlyDictionary&lt;System::String ^, System::String ^&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.Generic.ReadOnlyDictionary&lt;System.String,System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of custom property objects for the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object from the read-only dictionary.</summary>
+        <value>Returns a <see cref="T:Microsoft.SharePoint.Taxonomy.Generic.ReadOnlyDictionary`2" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CustomSortOrder">
+      <MemberSignature Language="C#" Value="public override string CustomSortOrder { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string CustomSortOrder" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.CustomSortOrder" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Property CustomSortOrder As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ CustomSortOrder { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the custom sort order of the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <value>The value is a string composed of the child Term Guids separated by '<b>:</b>'. When the custom sort order is a null reference (Nothing in Visual Basic) or empty, the child <b>Term</b> objects of the current <b>Term</b> are sorted alphabetically based on data in the working language of the current <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object.</value>
+        <remarks>
+          <para>If the custom sort order value contains an invalid Guid, or if one of the Guids does not belong to its child <b>Term</b> objects, then it is ignored. If any child Term Guid is not included, then it will be sorted alphabetically following the <b>Term</b> objects with custom sort order.</para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission in order to set this property. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object.The operation failed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Delete">
+      <MemberSignature Language="C#" Value="public override void Delete ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Delete() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.Delete" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Delete ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Delete();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, Name="DeleteObject")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deletes this <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object and its descendents from the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object.</summary>
+        <remarks>
+          <para>Deleting a source <b>Term</b> when it is still reused elsewhere will move the source term to the orphaned <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object, and the <b>Term</b> becomes an orphan. Orphan terms cannot be deleted directly. When all reused term objects are deleted, the orphan is automatically deleted.</para>
+          <para>Use of this method requires <b>TaxonomyRights.EditTerm</b> permissions. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms TermSet.The operation failed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteAllCustomProperties">
+      <MemberSignature Language="C#" Value="public override void DeleteAllCustomProperties ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void DeleteAllCustomProperties() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.DeleteAllCustomProperties" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub DeleteAllCustomProperties ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void DeleteAllCustomProperties();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deletes all shared custom properties.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">The term cannot be pinned.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">If this term is a reused term, the user must have the <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.EditTerm" /> permission to edit the source term as well to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteAllLocalCustomProperties">
+      <MemberSignature Language="C#" Value="public void DeleteAllLocalCustomProperties ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteAllLocalCustomProperties() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.DeleteAllLocalCustomProperties" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteAllLocalCustomProperties ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteAllLocalCustomProperties();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deletes all local custom properties.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The user must have the <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.EditTerm" /> permission to edit this term to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteCustomProperty">
+      <MemberSignature Language="C#" Value="public override void DeleteCustomProperty (string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void DeleteCustomProperty(string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.DeleteCustomProperty(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub DeleteCustomProperty (name As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void DeleteCustomProperty(System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="name">name of the custom property</param>
+        <summary>Deletes a shared custom property from the current <see cref="T:Microsoft.SharePoiint.Taxonomy.Term" /> object.</summary>
+        <remarks>
+          <para>The <paramref name="name" /> must be non-empty, cannot exceed 255 characters, and cannot contain any of the following characters: <b>;</b><b>"</b><b>&lt;</b><b>&gt;</b><b>|</b><b>&amp;</b><b>tab</b></para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission in order to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms TermSet.The operation failed.</exception>
+        <exception cref="T:System.ArgumentException"></exception>
+        <exception cref="T:System.ArgumentNullException">The custom property name is a null reference (Nothing in Visual Basic) or an empty string.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteLocalCustomProperty">
+      <MemberSignature Language="C#" Value="public void DeleteLocalCustomProperty (string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteLocalCustomProperty(string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.DeleteLocalCustomProperty(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteLocalCustomProperty (name As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteLocalCustomProperty(System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="name">The name of the custom property.</param>
+        <summary>Deletes a local custom property from  the current object. </summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The user must have the <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.EditTerm" /> permission to edit this term to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Deprecate">
+      <MemberSignature Language="C#" Value="public void Deprecate (bool doDeprecate);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Deprecate(bool doDeprecate) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.Deprecate(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Deprecate (doDeprecate As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Deprecate(bool doDeprecate);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="doDeprecate" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="doDeprecate">Whether to deprecate or enable this <b>Term</b>.</param>
+        <summary>Deprecates or enables the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <remarks>
+          <para>Use of this method requires <b>TaxonomyRights.EditTerm</b> permission. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object.The  operation failed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllLabels">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.LabelCollection GetAllLabels (int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.LabelCollection GetAllLabels(int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.GetAllLabels(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAllLabels (lcid As Integer) As LabelCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::LabelCollection ^ GetAllLabels(int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.LabelCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="lcid">The LCID that the <b>Label</b> objects are associated with</param>
+        <summary>Gets all of the <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> objects for the provided <paramref name="lcid" /> parameter.</summary>
+        <returns>The <see cref="T:Microsoft.SharePoint.Taxonomy.LabelCollection" /> of this <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object for the specified <paramref name="lcid" /> parameter.</returns>
+        <remarks>
+          <para>If <b>Label</b> objects exist for the specified <paramref name="lcid" />, the default <b>Label</b> is added first to the <see cref="T:Microsoft.SharePoint.Taxonomy.LabelCollection" /> object, followed by the non-default Labels.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="lcid" /> is not valid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDefaultLabel">
+      <MemberSignature Language="C#" Value="public string GetDefaultLabel (int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetDefaultLabel(int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.GetDefaultLabel(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetDefaultLabel (lcid As Integer) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetDefaultLabel(int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="lcid">The LCID the default Label is associated with</param>
+        <summary>Gets the default <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> for this <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> based on LCID.</summary>
+        <returns>The name of the default <b>Label</b> or an empty string when there is no default <b>Label</b> for the LCID.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException">The LCID is not valid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDescription">
+      <MemberSignature Language="C#" Value="public string GetDescription ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetDescription() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.GetDescription" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetDescription () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetDescription();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the description of the <see cref="T:Microsoft.SharePoint.Taxoomy.Term" /> object in the language (<see cref="P:Microsoft.SharePoint.Taxonomy.TermStore.WorkingLanguage" />) of the current <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object.</summary>
+        <returns>The description of the <b>Term</b> for the working language of the current <b>TermStore</b>, or an empty string if the <b>Term</b> has no description in that language.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDescription">
+      <MemberSignature Language="C#" Value="public string GetDescription (int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetDescription(int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.GetDescription(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetDescription (lcid As Integer) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetDescription(int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="lcid">The description of the LCID</param>
+        <summary>Gets the description of the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> in the LCID.</summary>
+        <returns>The description of the <b>Term</b> for the <paramref name="lcid" /> parameter, or an empty string if the <b>Term</b> has no LCID description.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException">The LCID is not valid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetIsDescendantOf">
+      <MemberSignature Language="C#" Value="public bool GetIsDescendantOf (Microsoft.SharePoint.Taxonomy.Term ancestorTerm);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetIsDescendantOf(class Microsoft.SharePoint.Taxonomy.Term ancestorTerm) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.GetIsDescendantOf(Microsoft.SharePoint.Taxonomy.Term)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetIsDescendantOf (ancestorTerm As Term) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool GetIsDescendantOf(Microsoft::SharePoint::Taxonomy::Term ^ ancestorTerm);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ancestorTerm" Type="Microsoft.SharePoint.Taxonomy.Term" />
+      </Parameters>
+      <Docs>
+        <param name="ancestorTerm">The <b>Term</b> to verify is or is not an ancestor</param>
+        <summary>Indicates whether the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object is a descendent <b>Term</b> of the specified <b>Term</b>.</summary>
+        <returns>
+          <b>true</b> if the <b>Term</b> is a descendent of the specified <b>Term</b>; otherwise, <b>false</b></returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <b>Term</b> to check is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPath">
+      <MemberSignature Language="C#" Value="public string GetPath ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetPath() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.GetPath" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetPath () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetPath();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the path for this <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object in the default language of the <see cref="T:Microsoft.SharePoint.TermStore" /> object.</summary>
+        <returns>The <b>Term</b> path</returns>
+        <remarks>
+          <para>The path is composed of the default <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> objects of ancestor Terms, separated by <b>;</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPath">
+      <MemberSignature Language="C#" Value="public string GetPath (int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetPath(int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.GetPath(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetPath (lcid As Integer) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetPath(int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="lcid">The LCID for the default <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> object</param>
+        <summary>Gets the path for the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> in the specified <paramref name="lcid" />.</summary>
+        <returns>The <b>Term</b> path.</returns>
+        <remarks>
+          <para>The path is composed of the default <b>Label</b> objects of ancestor <b>Term</b> objects, separated by: <b>;</b>.</para>
+          <para>If the <paramref name="lcid" /> is not a valid <b>TermStore</b> language, then the default language is used.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermCollection GetTerms (string termLabel, int lcid, bool defaultLabelOnly, Microsoft.SharePoint.Taxonomy.StringMatchOption stringMatchOption, int resultCollectionSize, bool trimUnavailable);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermCollection GetTerms(string termLabel, int32 lcid, bool defaultLabelOnly, valuetype Microsoft.SharePoint.Taxonomy.StringMatchOption stringMatchOption, int32 resultCollectionSize, bool trimUnavailable) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.GetTerms(System.String,System.Int32,System.Boolean,Microsoft.SharePoint.Taxonomy.StringMatchOption,System.Int32,System.Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermCollection ^ GetTerms(System::String ^ termLabel, int lcid, bool defaultLabelOnly, Microsoft::SharePoint::Taxonomy::StringMatchOption stringMatchOption, int resultCollectionSize, bool trimUnavailable);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="termLabel" Type="System.String" />
+        <Parameter Name="lcid" Type="System.Int32" />
+        <Parameter Name="defaultLabelOnly" Type="System.Boolean" />
+        <Parameter Name="stringMatchOption" Type="Microsoft.SharePoint.Taxonomy.StringMatchOption" />
+        <Parameter Name="resultCollectionSize" Type="System.Int32" />
+        <Parameter Name="trimUnavailable" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="termLabel">the term label to match against</param>
+        <param name="lcid">This method only searches labels in this lcid.</param>
+        <param name="defaultLabelOnly">whether to search only default Labels</param>
+        <param name="stringMatchOption">Whether the search is exact match or start with</param>
+        <param name="resultCollectionSize">maximum number of results returned</param>
+        <param name="trimUnavailable">whether to include not available for tagging term in the results</param>
+        <summary>Returns all Term instances that are descendants of the current Term with a label in the provided lcid matching the string provided. It only checks default Labels if defaultLabelOnly is provided to be true.</summary>
+        <returns>The TermCollection that matchs the search criteria</returns>
+        <remarks>
+          <para>The <paramref name="termLabel" /> value will be normailized to trim consecutive spaces into one and replace the &amp; character with the wide character version of the character (\uFF06). It must be non-empty and cannot exceed 255 characters, and cannot contain anyof the following characters; " &lt; &gt; | &amp; tab</para>
+          <para>The search results are directly from term store. It may not be in sync with whatever changes that has been made but not committed. To get bestresults, call CommitAll or RollbackAll before call this method.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException">Call the M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll method to save this change to the database. is not valid.</exception>
+        <exception cref="T:System.ArgumentException">The label name is not valid, it contains invalid characters or is too long.</exception>
+        <exception cref="T:System.ArgumentNullException">The label name is null or an empty string. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAvailableForTagging">
+      <MemberSignature Language="C#" Value="public override bool IsAvailableForTagging { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsAvailableForTagging" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.IsAvailableForTagging" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Property IsAvailableForTagging As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool IsAvailableForTagging { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the flag indicating whether a <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object can be used to tag in the tagging UI, but does not affect its visibility.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission to set this property. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms <see cref="T:Microsoft.Sharepoint.Taxonomy.TermSet" /> object.The operation failed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="IsDeprecated">
+      <MemberSignature Language="C#" Value="public bool IsDeprecated { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsDeprecated" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.IsDeprecated" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsDeprecated As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsDeprecated { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object has been deprecated.</summary>
+        <value>
+          <b>true</b> if the current <b>Term</b> is deprecated; otherwise, false</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsHashTag">
+      <MemberSignature Language="C#" Value="public bool IsHashTag { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsHashTag" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.IsHashTag" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsHashTag As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsHashTag { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that indicates whether this term  is a hash tag term. </summary>
+        <value>
+          <b>true</b> if the term is a hash tag term; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsKeyword">
+      <MemberSignature Language="C#" Value="public bool IsKeyword { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsKeyword" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.IsKeyword" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsKeyword As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsKeyword { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object is a keyword in the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomySession.KeywordTermSet" /> object.</summary>
+        <value>true if the current <b>Term</b> is a keyword; otherwise,<b>false</b></value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsPinned">
+      <MemberSignature Language="C#" Value="public bool IsPinned { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsPinned" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.IsPinned" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsPinned As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsPinned { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that indicates if this is a pinned object. </summary>
+        <value>
+          <b>true</b> if the object is pinned; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsPinnedRoot">
+      <MemberSignature Language="C#" Value="public bool IsPinnedRoot { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsPinnedRoot" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.IsPinnedRoot" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsPinnedRoot As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsPinnedRoot { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that indicates if this is a pinned object and the root of the pinned tree.</summary>
+        <value>
+          <b>true</b> if the object is pinned and the root of the pinned tree; otherwise, <b>false</b>. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsReused">
+      <MemberSignature Language="C#" Value="public bool IsReused { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsReused" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.IsReused" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsReused As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsReused { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object is a reused <b>Term</b>.</summary>
+        <value>
+          <b>true</b> if the current <b>Term</b> is a reused <b>Term</b>; otherwise, <b>false</b></value>
+        <remarks>
+          <para>If the current <b>Term</b> is reused, there will be at least one member in the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.ReusedTerms" /> collection.The current <b>Term</b> may be the source <b>Term</b> for reuse. Check the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.SourceTerm" /> property value to find out.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsRoot">
+      <MemberSignature Language="C#" Value="public bool IsRoot { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsRoot" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.IsRoot" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsRoot As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsRoot { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object is at the root of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object</summary>
+        <value>
+          <b>true</b> if the current <b>Term</b> is at the root of the <b>TermSet</b>; otherwise, false</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSourceTerm">
+      <MemberSignature Language="C#" Value="public bool IsSourceTerm { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSourceTerm" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.IsSourceTerm" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSourceTerm As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSourceTerm { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> is the source <b>Term</b> among reused terms</summary>
+        <value>
+          <b>true</b> if the current <b>Term</b> is the source <b>Term</b>; otherwise, <b>false</b></value>
+        <remarks>
+          <para>If the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.IsReused" /> property is set to <b>false</b>, the current <b>Term</b> is not reused and this property will always return <b>true</b>. If the current <b>Term</b> is reused (<see cref="P:Microsoft.SharePoint.Taxonomy.Term.IsReused" /> returns <b>true</b>), then this property will return <b>true</b> if it is the source <b>Term</b>. If it is not the source <b>Term</b>, the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.SourceTerm" /> property can be used to get the source <b>Term</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Labels">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.LabelCollection Labels { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.LabelCollection Labels" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.Labels" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Labels As LabelCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::LabelCollection ^ Labels { Microsoft::SharePoint::Taxonomy::LabelCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.LabelCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> objects for the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <value>A collection of <b>Label</b> objects for the current <b>Term</b></value>
+        <remarks>
+          <para>The collection of <b>Label</b> objects will be for all working languages defined by the <see cref="P:Microsoft.SharePoint.Taxonomy.TermStore.Languages" /> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LocalCustomProperties">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.Generic.ReadOnlyDictionary&lt;string,string&gt; LocalCustomProperties { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.Generic.ReadOnlyDictionary`2&lt;string, string&gt; LocalCustomProperties" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.LocalCustomProperties" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LocalCustomProperties As ReadOnlyDictionary(Of String, String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::Generic::ReadOnlyDictionary&lt;System::String ^, System::String ^&gt; ^ LocalCustomProperties { Microsoft::SharePoint::Taxonomy::Generic::ReadOnlyDictionary&lt;System::String ^, System::String ^&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.Generic.ReadOnlyDictionary&lt;System.String,System.String&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of local custom properties for this term.</summary>
+        <value>A read-only collection of key and value types.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Merge">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.Term Merge (Microsoft.SharePoint.Taxonomy.Term termToMerge);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.Term Merge(class Microsoft.SharePoint.Taxonomy.Term termToMerge) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.Merge(Microsoft.SharePoint.Taxonomy.Term)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Merge (termToMerge As Term) As Term" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::Term ^ Merge(Microsoft::SharePoint::Taxonomy::Term ^ termToMerge);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.Term</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="termToMerge" Type="Microsoft.SharePoint.Taxonomy.Term" />
+      </Parameters>
+      <Docs>
+        <param name="termToMerge">The current <b>Term</b></param>
+        <summary>Merge the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object with the specified <b>Term</b> and return the combined <b>Term</b>.</summary>
+        <returns>The merged <b>Term</b></returns>
+        <remarks>
+          <para>The current <b>Term</b> is the <b>Term</b> to merge from, and the <paramref name="termToMerge" /> is the <b>Term</b> to merge into (the target <b>Term</b>). After the <see cref="M:Microsoft.SharePoint.Taxonomy.Term.Merge" /> operation is complete, both <b>Term</b> objects become reused, and the <paramref name="targetTerm" /> becomes the source of the reused <b>Term</b> objects. The target <b>TermGUID</b> becomes the GUID of the merged <b>Term</b>. The current <b>Term</b> GUID is added to <see cref="P:Microsoft.SharePoint.Taxonomy.Term.MergedTermIds" /></para>
+          <para>The <b>Term GUID</b> in the custom sort order of the parents of the current <b>Term</b> or any of its reused copies is updated with the target <b>Term GUID</b>.</para>
+          <para>The custom sort order is merged in the following way: if the target <b>Term</b> has a custom sort order, then the source <b>Term</b> sort order is appended to it. Otherwise, if the target <b>Term</b> does not have a custom sort order but the source <b>Term</b> does, then a custom sort order is enforced based on alphabetical order in the current working language ( <see cref="P:Microsoft.SharePoint.Taxonomy.TermStore.WorkingLanguage" />), and the source <b>Term</b> custom sort order is appended to it. </para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission on both the current Term and the Term to merge into in order to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <b>Term</b> to merge into is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.ArgumentException">The <b>Term</b> to merge into is invalid.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">Merge is not allowed for the two specified <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects. The source <b>Term</b> and the target <b>Term</b> of merge are reused in the same <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object, and must be siblings in that <b>TermSet</b> in order to be mergeable.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="MergedTermIds">
+      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;Guid&gt; MergedTermIds { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;valuetype System.Guid&gt; MergedTermIds" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.MergedTermIds" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property MergedTermIds As ReadOnlyCollection(Of Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::ObjectModel::ReadOnlyCollection&lt;Guid&gt; ^ MergedTermIds { System::Collections::ObjectModel::ReadOnlyCollection&lt;Guid&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.ObjectModel.ReadOnlyCollection&lt;System.Guid&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a read-only collection of Term Ids. <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects identified by those Ids have been merged into the current <b>Term</b>.</summary>
+        <value>A read-only collection of Term Ids</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Move">
+      <MemberSignature Language="C#" Value="public void Move (Microsoft.SharePoint.Taxonomy.Term newParentTerm);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Move(class Microsoft.SharePoint.Taxonomy.Term newParentTerm) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.Move(Microsoft.SharePoint.Taxonomy.Term)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Move (newParentTerm As Term)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Move(Microsoft::SharePoint::Taxonomy::Term ^ newParentTerm);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="newParentTerm" Type="Microsoft.SharePoint.Taxonomy.Term" />
+      </Parameters>
+      <Docs>
+        <param name="newParentTerm">The new parent <b>Term</b></param>
+        <summary>Moves the current <b>T:Microsoft.SharePoint.Taxonomy.Term</b> object to be a child of a different <b>Term</b>.</summary>
+        <remarks>
+          <para>This operation moves the current <b>Term</b> to become a child of another <b>Term</b>. Use the <see cref="M:Microsoft.SharePoint.Taxonomy.Term.Move(TermSet)" /> method to move the <b>Term</b> to become a child of <b>TermSet</b>.</para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission on both the current <b>Term</b> and the new parent <b>Term</b> to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:System.ArgumentNullException">The new parent <b>Term</b> is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.ArgumentException">The new parent <b>Term</b> is invalid.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">Moving to a term set which has other reused instance of this <b>Term</b> is disallowed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Move">
+      <MemberSignature Language="C#" Value="public void Move (Microsoft.SharePoint.Taxonomy.TermSet parentTermSet);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Move(class Microsoft.SharePoint.Taxonomy.TermSet parentTermSet) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.Move(Microsoft.SharePoint.Taxonomy.TermSet)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Move (parentTermSet As TermSet)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Move(Microsoft::SharePoint::Taxonomy::TermSet ^ parentTermSet);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parentTermSet" Type="Microsoft.SharePoint.Taxonomy.TermSet" />
+      </Parameters>
+      <Docs>
+        <param name="parentTermSet">The parent <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object</param>
+        <summary>Moves the current <see cref="T:Microsoft.SharePoint.Term" /> object to the root of the specified <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object</summary>
+        <remarks>
+          <para>This operation moves the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object to become a child of <b>TermSet</b>. Use the <see cref="M:Microsoft.SharePoint.TaxonomyTerm.Move(T:Microsoft.SharePoint.Taxonomy.Term)" /> method to move the <b>Term</b> to become a child  of another <b>Term</b>.</para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission on both the current <b>Term</b> and the new parent <b>TermSet</b> to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:System.ArgumentNullException">The new parent <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object is a null reference (Nothing in Visual Basic)</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms <b>TermSet</b>.The operation failed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public override string Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.Name" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <value>Text for the <b>Term</b> name.</value>
+        <remarks>
+          <para>The name is the default <b>Label</b> of the working language (<see cref="P:Microsoft.SharePoint.Taxonomy.TermStore.WorkingLanguage" />) of the current <b>TermStore</b>.</para>
+          <para>The <paramref name="labelName" /> value will be normailized to trim consecutive spaces into one and replace the <b>&amp;</b> character with the wide character version of the character (<b>\uFF06</b>). It must be non-empty, cannot exceed 255 characters, and cannot contain any of the following characters: <b>;</b><b>"</b><b>&lt;</b><b>&gt;</b><b>|</b><b>&amp;</b><b>tab</b></para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission to set this property. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms <b>TermSet</b>.The  operation failed.</exception>
+        <exception cref="T:System.ArgumentException">The name is not valid, it contains invalid characters, or is too long.</exception>
+        <exception cref="T:System.ArgumentNullException">The name is a null reference (Nothing in Visual Basic) or an empty string.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Owner">
+      <MemberSignature Language="C#" Value="public override string Owner { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Owner" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.Owner" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Property Owner As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ Owner { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the user who is responsible for the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <value>Valid user name for <b>Term</b> owner</value>
+        <remarks>
+          <para>The owner must not be empty or a null reference (Nothing in Visual Basic), and must be a valid user name. The current user must have <b>TaxonomyRights.EditTerm</b> permission to set this property. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms <b>TermSet</b>. The  operation failed.</exception>
+        <exception cref="T:System.ArgumentNullException">The user name is a null reference (Nothing in Visual Basic) or not empty.</exception>
+        <exception cref="T:System.ArgumentException">The user name does not exist.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Parent">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.Term Parent { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.Term Parent" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.Parent" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Parent As Term" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::Term ^ Parent { Microsoft::SharePoint::Taxonomy::Term ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.Term</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the parent <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object of the current <b>Term</b>.</summary>
+        <value>The parent <b>Term</b> of the current <b>Term</b> or a null reference (Nothing in Visual Basic) if this is the root <b>Term</b> or if the user does not have permissions to the parent <b>Term</b>.</value>
+        <remarks>
+          <para>This value is specific to the current <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The current <b>Term</b> is in a bad state. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="PinSourceTermSet">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSet PinSourceTermSet { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.TermSet PinSourceTermSet" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.PinSourceTermSet" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PinSourceTermSet As TermSet" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::TermSet ^ PinSourceTermSet { Microsoft::SharePoint::Taxonomy::TermSet ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSet</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object that contains the term to which this object is pinned.</summary>
+        <value>The <b>TermSet</b> object if this object is pinned to a <b>TermSet</b> object; otherwise, a null reference (Nothing in Visual Basic).</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReassignSourceTerm">
+      <MemberSignature Language="C#" Value="public void ReassignSourceTerm (Microsoft.SharePoint.Taxonomy.Term reusedTerm);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ReassignSourceTerm(class Microsoft.SharePoint.Taxonomy.Term reusedTerm) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.ReassignSourceTerm(Microsoft.SharePoint.Taxonomy.Term)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub ReassignSourceTerm (reusedTerm As Term)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void ReassignSourceTerm(Microsoft::SharePoint::Taxonomy::Term ^ reusedTerm);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="reusedTerm" Type="Microsoft.SharePoint.Taxonomy.Term" />
+      </Parameters>
+      <Docs>
+        <param name="reusedTerm">One of the <b>Term</b> objects from the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.ReusedTerms" /> collection should become the new source term.</param>
+        <summary>Reassigns the source term status to one of the other reused instances of this <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <remarks>
+          <para>This method is only valid if the current <b>Term</b> is the source <b>Term</b>. It is expected that this method is used before attempting to delete a source <b>Term</b>.</para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission on the current <b>Term</b> and on the new source <b>Term</b> to use this method. With the exception where the source <b>Term</b> is in the orphaned <b>TermSet</b>, anyone with <b>TaxonomyRights.EditTerm</b> permission on the new source Term can use this method. If the source <b>Term</b> is in the orphaned <b>TermSet</b> and the operation succeeded, then the old source <b>Term</b> is removed from the orphaned <b>TermSet</b>. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> must be called to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:System.ArgumentNullException">The reused <b>Term</b> to become the new source is a null reference (Nothing in Visual Basic) or invalid.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">Cannot reassign the source <b>Term</b> to itself</exception>
+        <exception cref="T:System.ArgumentException">The <paramref name="reusedTerm" /> must be a member of the <b>ReusedTerms</b> collection for this <b>Term</b>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ReusedTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermCollection ReusedTerms { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.TermCollection ReusedTerms" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.ReusedTerms" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ReusedTerms As TermCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::TermCollection ^ ReusedTerms { Microsoft::SharePoint::Taxonomy::TermCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets all of the instances of the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object that are reused in other <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects.</summary>
+        <value>A collection of <b>Term</b> objects</value>
+        <remarks>
+          <para>The returned collection of <b>Term</b> objects does not include the current Termitself.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The current <b>Term</b> is in a bad state.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetCustomProperty">
+      <MemberSignature Language="C#" Value="public override void SetCustomProperty (string name, string value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void SetCustomProperty(string name, string value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.SetCustomProperty(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub SetCustomProperty (name As String, value As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void SetCustomProperty(System::String ^ name, System::String ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="name">the custom property name to set</param>
+        <param name="value">the value to set for the specified custom property</param>
+        <summary>Adds a new custom property or updates the value of an existing property</summary>
+        <remarks>
+          <para>This method tries to find the specified custom property name and set it with the specified value. The name match is not case-sensitive. If the custom property name does not exist, then a new property is created.</para>
+          <para>The <paramref name="name" /> must be non-empty, cannot exceed 255 characters, and cannot contain any of the following characters: <b>;</b><b>"</b><b>&lt;</b><b>&gt;</b><b>|</b><b>&amp;</b><b>tab</b></para>
+          <para>The <paramref name="value" /> cannot exceed 1000 characters.</para>
+          <para>The leading and trailing space of the custom property name and value will be trimmed.</para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms <b>TermSet</b>.The operation failed.</exception>
+        <exception cref="T:System.ArgumentException">The custom property name is not valid. It contains invalid characters or is too long.</exception>
+        <exception cref="T:System.ArgumentNullException">The custom property name is a null reference (Nothing in Visual Basic) or an empty string.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetDescription">
+      <MemberSignature Language="C#" Value="public void SetDescription (string description, int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetDescription(string description, int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.SetDescription(System.String,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetDescription (description As String, lcid As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetDescription(System::String ^ description, int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="description" Type="System.String" />
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="description">The new description</param>
+        <param name="lcid">The LCID to set description for</param>
+        <summary>Sets the LCID-specific description of this <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <remarks>
+          <para>The <paramref name="description" /> must be non-empty and cannot exceed 1000 characters, and cannot contain any of the following  characters: <b>[\t]</b>. </para>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException">The LCID is not valid.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">This operation is invalid in the orphaned terms <b>TermSet</b>.The operation failed.</exception>
+        <exception cref="T:System.ArgumentException">The description is invalid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetLocalCustomProperty">
+      <MemberSignature Language="C#" Value="public void SetLocalCustomProperty (string name, string value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetLocalCustomProperty(string name, string value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Term.SetLocalCustomProperty(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetLocalCustomProperty (name As String, value As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetLocalCustomProperty(System::String ^ name, System::String ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="name">The name of the property.</param>
+        <param name="value">The value of the property.</param>
+        <summary>Sets a new local custom property or updates the value of an existing local property.
+ </summary>
+        <remarks>
+          <para>Add a custom property by using <paramref name="name" /> if no local property exists for the <b>Term</b> object.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The user must have the <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.EditTerm" /> permission to edit this term to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SourceTerm">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.Term SourceTerm { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.Term SourceTerm" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.SourceTerm" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SourceTerm As Term" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::Term ^ SourceTerm { Microsoft::SharePoint::Taxonomy::Term ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.Term</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the source <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> if the current <b>Term</b> is a reused term.</summary>
+        <value>
+          <b>Term</b> object of the source <b>Term</b>; a null reference (Nothing in Visual Basic) if it is the current <b>Term</b> is not reused.</value>
+        <remarks>
+          <para>This method will return a null reference (Nothing in Visual Basic) if the user does not have permissions to access the source <b>Term</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Terms">
+      <MemberSignature Language="C#" Value="public override Microsoft.SharePoint.Taxonomy.TermCollection Terms { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.TermCollection Terms" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.Terms" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property Terms As TermCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Taxonomy::TermCollection ^ Terms { Microsoft::SharePoint::Taxonomy::TermCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of all immediate child <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects of the currrent <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <value>A collection of all immediate child <b>Term</b> objects of the current Term.</value>
+        <remarks>
+          <para>The returned collection of terms is sorted based on the custom sort order. If no custom sort order is defined, then it is sorted by <b>Label</b> based on the alphabetical order specified by the <see cref="P:Microsoft.SharePoint.Taxonomy.TermStore.WorkingLanguage" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TermsCount">
+      <MemberSignature Language="C#" Value="public int TermsCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 TermsCount" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.TermsCount" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TermsCount As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int TermsCount { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of child <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects.</summary>
+        <value>Integer for total number of child terms</value>
+        <remarks>
+          <para>No SQL roundtrip is needed to get this property value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TermSet">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSet TermSet { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.TermSet TermSet" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.TermSet" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TermSet As TermSet" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::TermSet ^ TermSet { Microsoft::SharePoint::Taxonomy::TermSet ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSet</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object for the current <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <value>
+          <b>TermSet</b> object.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <b>TermSet</b> of the <b>Term</b> is invalid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TermSets">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSetCollection TermSets { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.TermSetCollection TermSets" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Term.TermSets" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TermSets As TermSetCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::TermSetCollection ^ TermSets { Microsoft::SharePoint::Taxonomy::TermSetCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSetCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of all <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects where the current <see cref="T:Microsoft.SharePoint.Term" /> object is located.</summary>
+        <value>A collection of <b>TermSet</b> objects</value>
+        <remarks>
+          <para>The returned collection includes the <b>TermSet</b> object where the current <b>Term</b> is stored, and all <b>TermSet</b> objects in which the <b>Term</b> is reused.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">At least one of the <b>TermSet</b> objects where the <b>Term</b> is located is invalid.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

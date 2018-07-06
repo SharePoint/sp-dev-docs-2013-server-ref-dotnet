@@ -1,0 +1,374 @@
+﻿<Type Name="HoldSettings" FullName="Microsoft.Office.RecordsManagement.Preservation.HoldSettings">
+  <TypeSignature Language="C#" Value="public class HoldSettings" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit HoldSettings extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.Preservation.HoldSettings" />
+  <TypeSignature Language="VB.NET" Value="Public Class HoldSettings" />
+  <TypeSignature Language="C++ CLI" Value="public ref class HoldSettings" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Provides methods for managing eDiscovery holds within a site collection (<see cref="T:Microsoft.SharePoint.SPSite" />).</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public HoldSettings (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.#ctor(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (site As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; HoldSettings(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site collection in which this <b>HoldSettings</b> object will retrieve and persist hold data.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.RecordsManagement.Preservation.HoldSettings" /> object.</summary>
+        <remarks>
+          <para>Enables management of the holds within the provided <see cref="T:Microsoft.SharePoint.SPSite" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddToHold">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.Preservation.HoldStatus AddToHold (Guid caseId, Guid holdId, string serverRelativeUrl, string query, System.Globalization.CultureInfo culture, out Microsoft.Office.RecordsManagement.Preservation.HoldInfo hold, out string errorMessage);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype Microsoft.Office.RecordsManagement.Preservation.HoldStatus AddToHold(valuetype System.Guid caseId, valuetype System.Guid holdId, string serverRelativeUrl, string query, class System.Globalization.CultureInfo culture, [out] class Microsoft.Office.RecordsManagement.Preservation.HoldInfo&amp; hold, [out] string&amp; errorMessage) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.AddToHold(System.Guid,System.Guid,System.String,System.String,System.Globalization.CultureInfo,Microsoft.Office.RecordsManagement.Preservation.HoldInfo@,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AddToHold (caseId As Guid, holdId As Guid, serverRelativeUrl As String, query As String, culture As CultureInfo, ByRef hold As HoldInfo, ByRef errorMessage As String) As HoldStatus" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::RecordsManagement::Preservation::HoldStatus AddToHold(Guid caseId, Guid holdId, System::String ^ serverRelativeUrl, System::String ^ query, System::Globalization::CultureInfo ^ culture, [Runtime::InteropServices::Out] Microsoft::Office::RecordsManagement::Preservation::HoldInfo ^ % hold, [Runtime::InteropServices::Out] System::String ^ % errorMessage);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.Preservation.HoldStatus</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="caseId" Type="System.Guid" />
+        <Parameter Name="holdId" Type="System.Guid" />
+        <Parameter Name="serverRelativeUrl" Type="System.String" />
+        <Parameter Name="query" Type="System.String" />
+        <Parameter Name="culture" Type="System.Globalization.CultureInfo" />
+        <Parameter Name="hold" Type="Microsoft.Office.RecordsManagement.Preservation.HoldInfo&amp;" RefType="out" />
+        <Parameter Name="errorMessage" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="caseId">The case ID of the hold being added.</param>
+        <param name="holdId">The hold ID of the hold being added.</param>
+        <param name="serverRelativeUrl">The URL of the web to add the hold to.</param>
+        <param name="query">The query of the hold being added.</param>
+        <param name="culture">The culture for this hold.</param>
+        <param name="hold">The <b>HoldInfo</b> object created for this hold.</param>
+        <param name="errorMessage">To be added.</param>
+        <summary>Add a hold to the web pointed to by the URL with the specified case ID, hold ID, query, and QBE query. </summary>
+        <returns>Whether the action succeeded or failed, and the <b>HoldInfo</b> object that is created.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllHolds">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt; GetAllHolds ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.List`1&lt;class Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt; GetAllHolds() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.GetAllHolds" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAllHolds () As List(Of HoldInfo)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::Generic::List&lt;Microsoft::Office::RecordsManagement::Preservation::HoldInfo ^&gt; ^ GetAllHolds();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns all holds in the current site collection.</summary>
+        <returns>All holds in the current site collection.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAnyParentOnHold">
+      <MemberSignature Language="C#" Value="public bool IsAnyParentOnHold (string serverRelativeUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsAnyParentOnHold(string serverRelativeUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.IsAnyParentOnHold(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsAnyParentOnHold (serverRelativeUrl As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsAnyParentOnHold(System::String ^ serverRelativeUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serverRelativeUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="serverRelativeUrl">The server-relative URL of the web to check.</param>
+        <summary>Checks if any parent of the specified web is on hold.</summary>
+        <returns>
+          <b>true</b> if any parent of the specified web is on hold; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAnySubwebOnHold">
+      <MemberSignature Language="C#" Value="public bool IsAnySubwebOnHold (string serverRelativeUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsAnySubwebOnHold(string serverRelativeUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.IsAnySubwebOnHold(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsAnySubwebOnHold (serverRelativeUrl As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsAnySubwebOnHold(System::String ^ serverRelativeUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serverRelativeUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="serverRelativeUrl">The server-relative URL of the web to check.</param>
+        <summary>Checks whether any subweb of the specified web is on hold.</summary>
+        <returns>
+          <b>true</b> if any subweb of the specified web is on hold; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsOnHold">
+      <MemberSignature Language="C#" Value="public bool IsOnHold (string serverRelativeUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsOnHold(string serverRelativeUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.IsOnHold(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsOnHold (serverRelativeUrl As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsOnHold(System::String ^ serverRelativeUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serverRelativeUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="serverRelativeUrl">Server-relative URL of a web.</param>
+        <summary>Checks whether the specified URL is on hold and returns the date that the last hold was added.</summary>
+        <returns>The date that the last hold was added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsOnHold">
+      <MemberSignature Language="C#" Value="public bool IsOnHold (string serverRelativeUrl, out DateTime lastHoldAddedDate);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsOnHold(string serverRelativeUrl, [out] valuetype System.DateTime&amp; lastHoldAddedDate) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.IsOnHold(System.String,System.DateTime@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsOnHold (serverRelativeUrl As String, ByRef lastHoldAddedDate As DateTime) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsOnHold(System::String ^ serverRelativeUrl, [Runtime::InteropServices::Out] DateTime % lastHoldAddedDate);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serverRelativeUrl" Type="System.String" />
+        <Parameter Name="lastHoldAddedDate" Type="System.DateTime&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="serverRelativeUrl">server relative URL of a web</param>
+        <param name="lastHoldAddedDate">the DateTime the last hold is added</param>
+        <summary>Checks whether the given URL is on hold and gets the last hold added date.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsOnHold">
+      <MemberSignature Language="C#" Value="public bool IsOnHold (string serverRelativeUrl, out DateTime lastHoldAddedDate, out System.Collections.Generic.IList&lt;Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt; applicableHolds);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsOnHold(string serverRelativeUrl, [out] valuetype System.DateTime&amp; lastHoldAddedDate, [out] class System.Collections.Generic.IList`1&lt;class Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt;&amp; applicableHolds) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.IsOnHold(System.String,System.DateTime@,System.Collections.Generic.IList{Microsoft.Office.RecordsManagement.Preservation.HoldInfo}@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsOnHold (serverRelativeUrl As String, ByRef lastHoldAddedDate As DateTime, ByRef applicableHolds As IList(Of HoldInfo)) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsOnHold(System::String ^ serverRelativeUrl, [Runtime::InteropServices::Out] DateTime % lastHoldAddedDate, [Runtime::InteropServices::Out] System::Collections::Generic::IList&lt;Microsoft::Office::RecordsManagement::Preservation::HoldInfo ^&gt; ^ % applicableHolds);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serverRelativeUrl" Type="System.String" />
+        <Parameter Name="lastHoldAddedDate" Type="System.DateTime&amp;" RefType="out" />
+        <Parameter Name="applicableHolds" Type="System.Collections.Generic.IList&lt;Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt;&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="serverRelativeUrl">Server relative URL of a web.</param>
+        <param name="lastHoldAddedDate">The <b>DateTime</b> the last hold is added.</param>
+        <param name="applicableHolds">List of applicable holds.</param>
+        <summary>Checks whether the specified URL is on hold and gets the last hold added date with a list of applicable holds.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsOnHold">
+      <MemberSignature Language="C#" Value="public bool IsOnHold (string serverRelativeUrl, bool populateQuery, out DateTime lastHoldAddedDate, out System.Collections.Generic.IList&lt;Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt; applicableHolds, out DateTime lastHoldUpdatedDate);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsOnHold(string serverRelativeUrl, bool populateQuery, [out] valuetype System.DateTime&amp; lastHoldAddedDate, [out] class System.Collections.Generic.IList`1&lt;class Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt;&amp; applicableHolds, [out] valuetype System.DateTime&amp; lastHoldUpdatedDate) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.IsOnHold(System.String,System.Boolean,System.DateTime@,System.Collections.Generic.IList{Microsoft.Office.RecordsManagement.Preservation.HoldInfo}@,System.DateTime@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsOnHold (serverRelativeUrl As String, populateQuery As Boolean, ByRef lastHoldAddedDate As DateTime, ByRef applicableHolds As IList(Of HoldInfo), ByRef lastHoldUpdatedDate As DateTime) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsOnHold(System::String ^ serverRelativeUrl, bool populateQuery, [Runtime::InteropServices::Out] DateTime % lastHoldAddedDate, [Runtime::InteropServices::Out] System::Collections::Generic::IList&lt;Microsoft::Office::RecordsManagement::Preservation::HoldInfo ^&gt; ^ % applicableHolds, [Runtime::InteropServices::Out] DateTime % lastHoldUpdatedDate);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serverRelativeUrl" Type="System.String" />
+        <Parameter Name="populateQuery" Type="System.Boolean" />
+        <Parameter Name="lastHoldAddedDate" Type="System.DateTime&amp;" RefType="out" />
+        <Parameter Name="applicableHolds" Type="System.Collections.Generic.IList&lt;Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt;&amp;" RefType="out" />
+        <Parameter Name="lastHoldUpdatedDate" Type="System.DateTime&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="serverRelativeUrl">Server-relative URL of a web.</param>
+        <param name="populateQuery">Whether to populate query in applicable holds.</param>
+        <param name="lastHoldAddedDate">The <b>DateTime</b> the last hold is added.</param>
+        <param name="applicableHolds">List of applicable holds.</param>
+        <param name="lastHoldUpdatedDate">The <b>DateTime</b> the last hold is updated.</param>
+        <summary>Checks whether the specified URL is on hold and gets the date that the last hold was added with a list of applicable holds and the last hold updated date.</summary>
+        <returns>The date the last hold was added with a list of applicable holds and the date that the last hold was updated.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PopulateHoldQueryInfo">
+      <MemberSignature Language="C#" Value="public void PopulateHoldQueryInfo (System.Collections.Generic.IList&lt;Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt; applicableHolds, out DateTime lastHoldUpdatedDate);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void PopulateHoldQueryInfo(class System.Collections.Generic.IList`1&lt;class Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt; applicableHolds, [out] valuetype System.DateTime&amp; lastHoldUpdatedDate) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.PopulateHoldQueryInfo(System.Collections.Generic.IList{Microsoft.Office.RecordsManagement.Preservation.HoldInfo},System.DateTime@)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub PopulateHoldQueryInfo (applicableHolds As IList(Of HoldInfo), ByRef lastHoldUpdatedDate As DateTime)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void PopulateHoldQueryInfo(System::Collections::Generic::IList&lt;Microsoft::Office::RecordsManagement::Preservation::HoldInfo ^&gt; ^ applicableHolds, [Runtime::InteropServices::Out] DateTime % lastHoldUpdatedDate);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="applicableHolds" Type="System.Collections.Generic.IList&lt;Microsoft.Office.RecordsManagement.Preservation.HoldInfo&gt;" />
+        <Parameter Name="lastHoldUpdatedDate" Type="System.DateTime&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="applicableHolds">The list of holds to update.</param>
+        <param name="lastHoldUpdatedDate">The <see cref="T:System.DateTime" /> of the most recently updated hold in <paramref name="applicableHolds" />.</param>
+        <summary>Populates the given list of <see cref="T:Microsoft.Office.RecordsManagement.Preservation.HoldInfo" /> with hold queries, also get the last query updated date.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReleaseFromHold">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.Preservation.HoldStatus ReleaseFromHold (Guid caseId, Guid holdId, string serverRelativeUrl, string query, out string errorMessage);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype Microsoft.Office.RecordsManagement.Preservation.HoldStatus ReleaseFromHold(valuetype System.Guid caseId, valuetype System.Guid holdId, string serverRelativeUrl, string query, [out] string&amp; errorMessage) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.ReleaseFromHold(System.Guid,System.Guid,System.String,System.String,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ReleaseFromHold (caseId As Guid, holdId As Guid, serverRelativeUrl As String, query As String, ByRef errorMessage As String) As HoldStatus" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::RecordsManagement::Preservation::HoldStatus ReleaseFromHold(Guid caseId, Guid holdId, System::String ^ serverRelativeUrl, System::String ^ query, [Runtime::InteropServices::Out] System::String ^ % errorMessage);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.Preservation.HoldStatus</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="caseId" Type="System.Guid" />
+        <Parameter Name="holdId" Type="System.Guid" />
+        <Parameter Name="serverRelativeUrl" Type="System.String" />
+        <Parameter Name="query" Type="System.String" />
+        <Parameter Name="errorMessage" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="caseId">The case ID of the hold being released</param>
+        <param name="holdId">The hold ID of the hold being released</param>
+        <param name="serverRelativeUrl">The URL of the web to release the hold from</param>
+        <param name="query">The query of the hold being released</param>
+        <param name="errorMessage">To be added.</param>
+        <summary>Release a hold from the web pointed to by the URL with the specified case ID, hold ID, query, and QBE query. </summary>
+        <returns>Whether the action succeeded or failed, and return the <b>HoldInfo</b> object that is created.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Applies changes made to the hold settings object to the site collection.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateHold">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.Preservation.HoldStatus UpdateHold (Guid caseId, Guid holdId, string serverRelativeUrl, string query, System.Globalization.CultureInfo culture, out Microsoft.Office.RecordsManagement.Preservation.HoldInfo hold, out string errorMessage);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype Microsoft.Office.RecordsManagement.Preservation.HoldStatus UpdateHold(valuetype System.Guid caseId, valuetype System.Guid holdId, string serverRelativeUrl, string query, class System.Globalization.CultureInfo culture, [out] class Microsoft.Office.RecordsManagement.Preservation.HoldInfo&amp; hold, [out] string&amp; errorMessage) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Preservation.HoldSettings.UpdateHold(System.Guid,System.Guid,System.String,System.String,System.Globalization.CultureInfo,Microsoft.Office.RecordsManagement.Preservation.HoldInfo@,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function UpdateHold (caseId As Guid, holdId As Guid, serverRelativeUrl As String, query As String, culture As CultureInfo, ByRef hold As HoldInfo, ByRef errorMessage As String) As HoldStatus" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::RecordsManagement::Preservation::HoldStatus UpdateHold(Guid caseId, Guid holdId, System::String ^ serverRelativeUrl, System::String ^ query, System::Globalization::CultureInfo ^ culture, [Runtime::InteropServices::Out] Microsoft::Office::RecordsManagement::Preservation::HoldInfo ^ % hold, [Runtime::InteropServices::Out] System::String ^ % errorMessage);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.Preservation.HoldStatus</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="caseId" Type="System.Guid" />
+        <Parameter Name="holdId" Type="System.Guid" />
+        <Parameter Name="serverRelativeUrl" Type="System.String" />
+        <Parameter Name="query" Type="System.String" />
+        <Parameter Name="culture" Type="System.Globalization.CultureInfo" />
+        <Parameter Name="hold" Type="Microsoft.Office.RecordsManagement.Preservation.HoldInfo&amp;" RefType="out" />
+        <Parameter Name="errorMessage" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="caseId">The case ID of the hold being updated.</param>
+        <param name="holdId">The hold ID of the hold being updated.</param>
+        <param name="serverRelativeUrl">The URL of the hold being updated.</param>
+        <param name="query">The query of the hold being updated.</param>
+        <param name="culture">The culture of the hold being updated.</param>
+        <param name="hold">The <b>HoldInfo</b> object of the updated hold.</param>
+        <param name="errorMessage">To be added.</param>
+        <summary>Update the hold specified by the URL and hold ID with the specified case ID, hold ID, query, and QBE query.</summary>
+        <returns>Whether the action succeeded or failed, and return the <b>HoldInfo</b> object that is created.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

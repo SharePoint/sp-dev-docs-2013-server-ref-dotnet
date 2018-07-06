@@ -1,0 +1,1815 @@
+﻿<Type Name="Property" FullName="Microsoft.Office.Server.UserProfiles.Property">
+  <TypeSignature Language="C#" Value="public class Property : Microsoft.Office.Server.UserProfiles.IPrivacyPolicyItem" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Property extends System.Object implements class Microsoft.Office.Server.UserProfiles.IPrivacyPolicyItem" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.Property" />
+  <TypeSignature Language="VB.NET" Value="Public Class Property&#xA;Implements IPrivacyPolicyItem" />
+  <TypeSignature Language="C++ CLI" Value="public ref class Property : Microsoft::Office::Server::UserProfiles::IPrivacyPolicyItem" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.Office.Server.UserProfiles.IPrivacyPolicyItem</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Represents the definition for a user profile property.</summary>
+    <remarks>
+      <para>There are two types of user profile properties: </para>
+      <list type="bullet">
+        <item>
+          <description>Regular   Defines the property data type and the corresponding user profile flags. </description>
+        </item>
+        <item>
+          <description>Section   Property that serves as a separator for user interface grouping purposes.</description>
+        </item>
+      </list>
+      <para>In Microsoft SharePoint Server 2010, this type delegates most of its methods to <see cref="T:Microsoft.Office.Server.UserProfiles.CoreProperty" />, <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileTypeProperty" />, and <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileSubtypeProperty" />. Exceptions are thrown from these classes.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The following code example shows the use of the <see cref="T:Microsoft.Office.Server.UserProfiles.Property" /> class.</para>
+      <code>static public void PropertyTypeAndMappingSample()
+{
+ 
+  using (SPSite site = new SPSite("&lt;span class="placeholder"&gt;site url&lt;/span&gt;"))
+  {
+    SPServiceContext context = SPServiceContext.GetContext(site);
+//Initialize user profile config manager object.
+    UserProfileConfigManager upcm = new UserProfileConfigManager(context);
+    ConnectionManager cm = upcm.ConnectionManager;
+ 
+//Sample to get a property type.
+    PropertyDataTypeCollection pdtc = upcm.GetPropertyDataTypes();
+    PropertyDataType ptype = null;
+ 
+    foreach (PropertyDataType datatype in pdtc)
+    {
+      if (datatype.Name.Equals("string"))
+      {
+        ptype = datatype;
+        break;
+      }
+    }
+ 
+//Sample to create a new custom property.
+    ProfilePropertyManager ppm = upcm.ProfilePropertyManager;
+    CorePropertyManager cpm = ppm.GetCoreProperties();
+    ProfileTypePropertyManager ptpm = ppm.GetProfileTypeProperties(ProfileType.User);
+    ProfileSubtypeManager psm = ProfileSubtypeManager.Get(context);
+    ProfileSubtype ps = psm.GetProfileSubtype(ProfileSubtypeManager.GetDefaultProfileName(ProfileType.User));
+    ProfileSubtypePropertyManager pspm = ps.Properties;
+ 
+    CoreProperty coreProp = cpm.Create(false);
+    coreProp.Name = "division";
+    coreProp.DisplayName = "my custom division";
+    coreProp.Type = ptype.Name;
+    coreProp.Length = ptype.MaxCharCount;
+    coreProp.Commit();
+    ProfileTypeProperty profileTypeProp = ptpm.Create(coreProp);
+    profileTypeProp.IsVisibleOnEditor = true;
+    profileTypeProp.IsVisibleOnViewer = true;
+    profileTypeProp.Commit();
+    ProfileSubtypeProperty profileSubTypeProp = pspm.Create(profileTypeProp);
+    profileSubTypeProp.DefaultPrivacy = Privacy.Private;
+    profileSubTypeProp.IsUserEditable = true;
+    profileSubTypeProp.Commit();
+    pspm.SetDisplayOrderByPropertyName(profileSubTypeProp.Name, 1);
+    pspm.CommitDisplayOrder();
+ 
+//Edit property sample.
+    CoreProperty ptitle = cpm.GetPropertyByName(PropertyConstants.Title);
+// Or get property by URI.
+    ptitle = cpm.GetPropertyByURI(Property.URI_Title);
+    ptitle.DisplayName = "Designation";
+    ptitle.Commit();
+//Property map sample.
+    string connectionName = "Test Connection";
+    Connection connection = cm[connectionName];
+    PropertyMapCollection pmc = connection.PropertyMapping;
+    pmc.AddNewMapping(ProfileType.User, profileSubTypeProp.Name, "division");
+ 
+//Remove property sample.
+    cpm.RemovePropertyByName("division");
+    ptpm.RemovePropertyByName("division");
+    pspm.RemovePropertyByName("division");
+  }
+}
+</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="AllowPolicyOverride">
+      <MemberSignature Language="C#" Value="public bool AllowPolicyOverride { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowPolicyOverride" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.AllowPolicyOverride" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AllowPolicyOverride As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowPolicyOverride { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.Office.Server.UserProfiles.IPrivacyPolicyItem.AllowPolicyOverride</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Allow policy override on this property or not?             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ChoiceList">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ChoiceList ChoiceList { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.ChoiceList ChoiceList" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.ChoiceList" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ChoiceList As ChoiceList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::ChoiceList ^ ChoiceList { Microsoft::Office::Server::UserProfiles::ChoiceList ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Use CoreProperty's TermSet to retrieve taxonomic information for this property.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ChoiceList</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             The ChoiceList interface             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ChoiceType">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ChoiceTypes ChoiceType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Office.Server.UserProfiles.ChoiceTypes ChoiceType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.ChoiceType" />
+      <MemberSignature Language="VB.NET" Value="Public Property ChoiceType As ChoiceTypes" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::ChoiceTypes ChoiceType { Microsoft::Office::Server::UserProfiles::ChoiceTypes get(); void set(Microsoft::Office::Server::UserProfiles::ChoiceTypes value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Use CoreProperty's TermSet to retrieve taxonomic information for this property.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ChoiceTypes</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Commit">
+      <MemberSignature Language="C#" Value="public void Commit ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Commit() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.Property.Commit" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Commit ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Commit();" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.Office.Server.UserProfiles.IPrivacyPolicyItem.Commit</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Commits changes made to a property to the user profile database.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultPrivacy">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.Privacy DefaultPrivacy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Office.Server.UserProfiles.Privacy DefaultPrivacy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.DefaultPrivacy" />
+      <MemberSignature Language="VB.NET" Value="Public Property DefaultPrivacy As Privacy" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::Privacy DefaultPrivacy { Microsoft::Office::Server::UserProfiles::Privacy get(); void set(Microsoft::Office::Server::UserProfiles::Privacy value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.Office.Server.UserProfiles.IPrivacyPolicyItem.DefaultPrivacy</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.Privacy</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Default Privacy of this property             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Property Description             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DescriptionLocalized">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.LocalizedStringManager DescriptionLocalized { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.LocalizedStringManager DescriptionLocalized" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.DescriptionLocalized" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DescriptionLocalized As LocalizedStringManager" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::LocalizedStringManager ^ DescriptionLocalized { Microsoft::Office::Server::UserProfiles::LocalizedStringManager ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.LocalizedStringManager</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayName">
+      <MemberSignature Language="C#" Value="public string DisplayName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DisplayName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.DisplayName" />
+      <MemberSignature Language="VB.NET" Value="Public Property DisplayName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DisplayName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the display name of the user profile property.</summary>
+        <value>String that represents the display name of the user profile property.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayNameLocalized">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.LocalizedStringManager DisplayNameLocalized { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.LocalizedStringManager DisplayNameLocalized" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.DisplayNameLocalized" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DisplayNameLocalized As LocalizedStringManager" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::LocalizedStringManager ^ DisplayNameLocalized { Microsoft::Office::Server::UserProfiles::LocalizedStringManager ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.LocalizedStringManager</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayOrder">
+      <MemberSignature Language="C#" Value="public int DisplayOrder { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 DisplayOrder" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.DisplayOrder" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DisplayOrder As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int DisplayOrder { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the order in which user profile properties are displayed.</summary>
+        <value>The integer that represents the order in which user profile properties are displayed. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserInfoListField">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPField GetUserInfoListField (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.SPField GetUserInfoListField(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.Property.GetUserInfoListField(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUserInfoListField (site As SPSite) As SPField" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::SPField ^ GetUserInfoListField(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPField</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAdminEditable">
+      <MemberSignature Language="C#" Value="public bool IsAdminEditable { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsAdminEditable" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsAdminEditable" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsAdminEditable As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsAdminEditable { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether the administrator can edit this user profile property.</summary>
+        <value>
+          <b>true</b> if the administrator can edit this user profile property; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAlias">
+      <MemberSignature Language="C#" Value="public bool IsAlias { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsAlias" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsAlias" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsAlias As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsAlias { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether this user profile property serves as the alias of the user.</summary>
+        <value>
+          <b>true</b> if this user profile property is related to the user's name and account in portal operations and search results; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>Aliases are treated as equivalent to the user name and account name when searching for items authored by a user, targeting items to a user, or displaying items in the My Documents Web Part of the personal site for a user. Alias properties must be public.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsColleagueEventLog">
+      <MemberSignature Language="C#" Value="public bool IsColleagueEventLog { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsColleagueEventLog" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsColleagueEventLog" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsColleagueEventLog As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsColleagueEventLog { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Whether or not changes to this property are returned for colleague's change tracking             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsImported">
+      <MemberSignature Language="C#" Value="public bool IsImported { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsImported" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsImported" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsImported As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsImported { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether this user profile property is mapped to an Active Directory directory service property.</summary>
+        <value>
+          <b>true</b> if this user profile property is mapped to an Active Directory directory service property; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsMultivalued">
+      <MemberSignature Language="C#" Value="public bool IsMultivalued { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsMultivalued" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsMultivalued" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsMultivalued As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsMultivalued { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Is it multi-valued?             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsReplicable">
+      <MemberSignature Language="C#" Value="public bool IsReplicable { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsReplicable" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsReplicable" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsReplicable As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsReplicable { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Should this property be replicated to WSS sites?             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsRequired">
+      <MemberSignature Language="C#" Value="public bool IsRequired { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsRequired" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsRequired" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsRequired As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsRequired { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Is this a required property -- mandatory field.             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSearchable">
+      <MemberSignature Language="C#" Value="public bool IsSearchable { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSearchable" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsSearchable" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsSearchable As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSearchable { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Whether or not values of this property are indexed by search             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSection">
+      <MemberSignature Language="C#" Value="public bool IsSection { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsSection" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSection As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSection { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether this property is a section.</summary>
+        <value>
+          <b>true</b> if this property is a section; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSystem">
+      <MemberSignature Language="C#" Value="public bool IsSystem { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSystem" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsSystem" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSystem As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSystem { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether this user profile property is a system-reserved property.</summary>
+        <value>
+          <b>true</b> if this user profile property is a system-reserved property; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsTaxonomic">
+      <MemberSignature Language="C#" Value="public bool IsTaxonomic { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsTaxonomic" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsTaxonomic" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsTaxonomic As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsTaxonomic { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsUpgrade">
+      <MemberSignature Language="C#" Value="public bool IsUpgrade { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsUpgrade" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsUpgrade" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsUpgrade As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsUpgrade { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Did this property exist in a previously upgraded installation             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsUpgradePrivate">
+      <MemberSignature Language="C#" Value="public bool IsUpgradePrivate { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsUpgradePrivate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsUpgradePrivate" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsUpgradePrivate As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsUpgradePrivate { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Was this property private in a previously upgraded installation             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsUserEditable">
+      <MemberSignature Language="C#" Value="public bool IsUserEditable { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsUserEditable" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsUserEditable" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsUserEditable As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsUserEditable { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether a user can edit this user profile property.</summary>
+        <value>
+          <b>true</b> if a user can edit this user profile property; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>To appear on the Edit My Profile page, the <see cref="P:Microsoft.Office.Server.UserProfiles.Property.IsUserEditable" /> property must be set to <b>true</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsVisibleOnEditor">
+      <MemberSignature Language="C#" Value="public bool IsVisibleOnEditor { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsVisibleOnEditor" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsVisibleOnEditor" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsVisibleOnEditor As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsVisibleOnEditor { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether this user profile property is visible on the Edit My Profile page.</summary>
+        <value>
+          <b>true</b> if this user profile property is visible on the Edit My Profile page; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsVisibleOnViewer">
+      <MemberSignature Language="C#" Value="public bool IsVisibleOnViewer { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsVisibleOnViewer" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.IsVisibleOnViewer" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsVisibleOnViewer As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsVisibleOnViewer { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether this user profile property is displayed in the Details section of the user profile in the public view of each user's personal site.</summary>
+        <value>
+          <b>true</b> if this user profile property is displayed in the Details section of the user profile in the public view of each user's personal site; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>To have this user profile property displayed in the Details section of the user profile, the <b>DefaultPrivacy</b> value must be set to a value that permits the current user to see it.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Length">
+      <MemberSignature Language="C#" Value="public int Length { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Length" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.Length" />
+      <MemberSignature Language="VB.NET" Value="Public Property Length As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Length { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum data length of the property of the user profile.</summary>
+        <value>The maximum data length of the return value of the user profile property according to the data type.</value>
+        <remarks>
+          <para>The property type and length can be set for a new property only. Otherwise, an <b>UpdateReadOnlyFieldException</b> will be thrown.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ManagedPropertyName">
+      <MemberSignature Language="C#" Value="public string ManagedPropertyName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ManagedPropertyName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.ManagedPropertyName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ManagedPropertyName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ManagedPropertyName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaximumShown">
+      <MemberSignature Language="C#" Value="public int MaximumShown { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaximumShown" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.MaximumShown" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaximumShown As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaximumShown { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Multivalue Maximum shown             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.Name" />
+      <MemberSignature Language="VB.NET" Value="Public Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the property name that uniquely identifies this user profile property for this site and in the user profile database.</summary>
+        <value>The property name that uniquely identifies this user profile property for this site and in the user profile database. </value>
+        <remarks>
+          <para>For regular properties, the <see cref="P:Microsoft.Office.Server.UserProfiles.Property.Name" /> property can only be set at creation time. No further update is allowed. If there is an attempt to update a property, an <b>UpdateReadOnlyFieldException</b> is thrown. The <see cref="P:Microsoft.Office.Server.UserProfiles.Property.Name" /> property is used to compose the URI of the property. Therefore the name must be a valid URI schema name, otherwise, an <b>InvalidValueException</b> is thrown.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PrivacyPolicy">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.PrivacyPolicy PrivacyPolicy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Office.Server.UserProfiles.PrivacyPolicy PrivacyPolicy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.PrivacyPolicy" />
+      <MemberSignature Language="VB.NET" Value="Public Property PrivacyPolicy As PrivacyPolicy" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::PrivacyPolicy PrivacyPolicy { Microsoft::Office::Server::UserProfiles::PrivacyPolicy get(); void set(Microsoft::Office::Server::UserProfiles::PrivacyPolicy value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.Office.Server.UserProfiles.IPrivacyPolicyItem.PrivacyPolicy</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.PrivacyPolicy</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Privacy Policy             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PROFILEURI_PREFIX">
+      <MemberSignature Language="C#" Value="public const string PROFILEURI_PREFIX;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string PROFILEURI_PREFIX" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.PROFILEURI_PREFIX" />
+      <MemberSignature Language="VB.NET" Value="Public Const PROFILEURI_PREFIX As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ PROFILEURI_PREFIX;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Separator">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.MultiValueSeparator Separator { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Office.Server.UserProfiles.MultiValueSeparator Separator" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.Separator" />
+      <MemberSignature Language="VB.NET" Value="Public Property Separator As MultiValueSeparator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::MultiValueSeparator Separator { Microsoft::Office::Server::UserProfiles::MultiValueSeparator get(); void set(Microsoft::Office::Server::UserProfiles::MultiValueSeparator value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.MultiValueSeparator</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Multivalue UI sperator             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SubtypeName">
+      <MemberSignature Language="C#" Value="public string SubtypeName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SubtypeName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.SubtypeName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SubtypeName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SubtypeName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SubtypeProperty">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileSubtypeProperty SubtypeProperty { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.ProfileSubtypeProperty SubtypeProperty" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.SubtypeProperty" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SubtypeProperty As ProfileSubtypeProperty" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::ProfileSubtypeProperty ^ SubtypeProperty { Microsoft::Office::Server::UserProfiles::ProfileSubtypeProperty ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileSubtypeProperty</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Type">
+      <MemberSignature Language="C#" Value="public string Type { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Type" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.Type" />
+      <MemberSignature Language="VB.NET" Value="Public Property Type As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Type { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of the property data type of the user profile property.</summary>
+        <value>The friendly name of the type of the user profile property.</value>
+        <remarks>
+          <para>The property data type can be set for a new property only. Otherwise, an <b>UpdateReadOnlyFieldException</b> will be thrown. The <see cref="P:Microsoft.Office.Server.UserProfiles.Property.Type" /> property can contain one of the following data types: <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.BigInteger" />, <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Binary" />, <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Boolean" />, <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Date" />, <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.DateTime" />, <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Email" />, <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Float" />, <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.HTML" />, <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Integer" />, <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Person" />, <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.String" />, <b>unique identifier</b>, or <see cref="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.URL" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI">
+      <MemberSignature Language="C#" Value="public string URI { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string URI" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.URI" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property URI As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ URI { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Property URL             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_AboutMe">
+      <MemberSignature Language="C#" Value="public const string URI_AboutMe;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_AboutMe" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_AboutMe" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_AboutMe As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_AboutMe;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_AccountName">
+      <MemberSignature Language="C#" Value="public const string URI_AccountName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_AccountName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_AccountName" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_AccountName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_AccountName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_ADGUID">
+      <MemberSignature Language="C#" Value="public const string URI_ADGUID;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_ADGUID" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_ADGUID" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_ADGUID As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_ADGUID;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_BlogWebId">
+      <MemberSignature Language="C#" Value="public const string URI_BlogWebId;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_BlogWebId" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_BlogWebId" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_BlogWebId As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_BlogWebId;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_Department">
+      <MemberSignature Language="C#" Value="public const string URI_Department;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_Department" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_Department" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_Department As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_Department;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_DisplayOrder">
+      <MemberSignature Language="C#" Value="public const string URI_DisplayOrder;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_DisplayOrder" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_DisplayOrder" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_DisplayOrder As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_DisplayOrder;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_DistinguishedName">
+      <MemberSignature Language="C#" Value="public const string URI_DistinguishedName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_DistinguishedName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_DistinguishedName" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_DistinguishedName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_DistinguishedName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_Dottedline">
+      <MemberSignature Language="C#" Value="public const string URI_Dottedline;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_Dottedline" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_Dottedline" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_Dottedline As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_Dottedline;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_EmailOptin">
+      <MemberSignature Language="C#" Value="public const string URI_EmailOptin;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_EmailOptin" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_EmailOptin" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_EmailOptin As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_EmailOptin;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_FeedIdentifier">
+      <MemberSignature Language="C#" Value="public const string URI_FeedIdentifier;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_FeedIdentifier" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_FeedIdentifier" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_FeedIdentifier As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_FeedIdentifier;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_FirstName">
+      <MemberSignature Language="C#" Value="public const string URI_FirstName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_FirstName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_FirstName" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_FirstName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_FirstName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_FirstRunExperience">
+      <MemberSignature Language="C#" Value="public const string URI_FirstRunExperience;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_FirstRunExperience" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_FirstRunExperience" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_FirstRunExperience As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_FirstRunExperience;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_HashTags">
+      <MemberSignature Language="C#" Value="public const string URI_HashTags;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_HashTags" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_HashTags" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_HashTags As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_HashTags;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_Interests">
+      <MemberSignature Language="C#" Value="public const string URI_Interests;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_Interests" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_Interests" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_Interests As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_Interests;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_JobTitle">
+      <MemberSignature Language="C#" Value="public const string URI_JobTitle;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_JobTitle" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_JobTitle" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_JobTitle As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_JobTitle;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_LastName">
+      <MemberSignature Language="C#" Value="public const string URI_LastName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_LastName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_LastName" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_LastName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_LastName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_Location">
+      <MemberSignature Language="C#" Value="public const string URI_Location;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_Location" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_Location" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_Location As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_Location;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_Manager">
+      <MemberSignature Language="C#" Value="public const string URI_Manager;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_Manager" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_Manager" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_Manager As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_Manager;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_Office">
+      <MemberSignature Language="C#" Value="public const string URI_Office;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_Office" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_Office" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_Office As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_Office;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_Peers">
+      <MemberSignature Language="C#" Value="public const string URI_Peers;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_Peers" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_Peers" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_Peers As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_Peers;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PersonalSiteCapabilities">
+      <MemberSignature Language="C#" Value="public const string URI_PersonalSiteCapabilities;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PersonalSiteCapabilities" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PersonalSiteCapabilities" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PersonalSiteCapabilities As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PersonalSiteCapabilities;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PersonalSiteInstantiationState">
+      <MemberSignature Language="C#" Value="public const string URI_PersonalSiteInstantiationState;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PersonalSiteInstantiationState" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PersonalSiteInstantiationState" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PersonalSiteInstantiationState As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PersonalSiteInstantiationState;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PersonalSpace">
+      <MemberSignature Language="C#" Value="public const string URI_PersonalSpace;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PersonalSpace" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PersonalSpace" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PersonalSpace As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PersonalSpace;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PhoneticDisplayName">
+      <MemberSignature Language="C#" Value="public const string URI_PhoneticDisplayName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PhoneticDisplayName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PhoneticDisplayName" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PhoneticDisplayName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PhoneticDisplayName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PhoneticFirstName">
+      <MemberSignature Language="C#" Value="public const string URI_PhoneticFirstName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PhoneticFirstName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PhoneticFirstName" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PhoneticFirstName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PhoneticFirstName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PhoneticLastName">
+      <MemberSignature Language="C#" Value="public const string URI_PhoneticLastName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PhoneticLastName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PhoneticLastName" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PhoneticLastName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PhoneticLastName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PreferredName">
+      <MemberSignature Language="C#" Value="public const string URI_PreferredName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PreferredName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PreferredName" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PreferredName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PreferredName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PrivacyActivity">
+      <MemberSignature Language="C#" Value="public const string URI_PrivacyActivity;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PrivacyActivity" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PrivacyActivity" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PrivacyActivity As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PrivacyActivity;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PrivacyContent">
+      <MemberSignature Language="C#" Value="public const string URI_PrivacyContent;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PrivacyContent" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PrivacyContent" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PrivacyContent As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PrivacyContent;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PrivacyPeople">
+      <MemberSignature Language="C#" Value="public const string URI_PrivacyPeople;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PrivacyPeople" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PrivacyPeople" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PrivacyPeople As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PrivacyPeople;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_PublicSiteRedirect">
+      <MemberSignature Language="C#" Value="public const string URI_PublicSiteRedirect;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_PublicSiteRedirect" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_PublicSiteRedirect" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_PublicSiteRedirect As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_PublicSiteRedirect;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_ResourceAccountName">
+      <MemberSignature Language="C#" Value="public const string URI_ResourceAccountName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_ResourceAccountName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_ResourceAccountName" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_ResourceAccountName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_ResourceAccountName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_ResourceSID">
+      <MemberSignature Language="C#" Value="public const string URI_ResourceSID;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_ResourceSID" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_ResourceSID" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_ResourceSID As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_ResourceSID;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_Responsibility">
+      <MemberSignature Language="C#" Value="public const string URI_Responsibility;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_Responsibility" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_Responsibility" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_Responsibility As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_Responsibility;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_SID">
+      <MemberSignature Language="C#" Value="public const string URI_SID;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_SID" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_SID" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_SID As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_SID;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_Skills">
+      <MemberSignature Language="C#" Value="public const string URI_Skills;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_Skills" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_Skills" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_Skills As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_Skills;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_SourceObjectDN">
+      <MemberSignature Language="C#" Value="public const string URI_SourceObjectDN;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_SourceObjectDN" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_SourceObjectDN" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_SourceObjectDN As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_SourceObjectDN;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_SPSDepartment">
+      <MemberSignature Language="C#" Value="public const string URI_SPSDepartment;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_SPSDepartment" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_SPSDepartment" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_SPSDepartment As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_SPSDepartment;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_StatusNotes">
+      <MemberSignature Language="C#" Value="public const string URI_StatusNotes;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_StatusNotes" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_StatusNotes" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_StatusNotes As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_StatusNotes;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_TimeZone">
+      <MemberSignature Language="C#" Value="public const string URI_TimeZone;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_TimeZone" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_TimeZone" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_TimeZone As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_TimeZone;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_Title">
+      <MemberSignature Language="C#" Value="public const string URI_Title;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_Title" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_Title" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_Title As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_Title;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_UserGuid">
+      <MemberSignature Language="C#" Value="public const string URI_UserGuid;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_UserGuid" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_UserGuid" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_UserGuid As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_UserGuid;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_UserName">
+      <MemberSignature Language="C#" Value="public const string URI_UserName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_UserName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_UserName" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_UserName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_UserName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_WebSite">
+      <MemberSignature Language="C#" Value="public const string URI_WebSite;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_WebSite" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_WebSite" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_WebSite As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_WebSite;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_WorkEmail">
+      <MemberSignature Language="C#" Value="public const string URI_WorkEmail;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_WorkEmail" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_WorkEmail" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_WorkEmail As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_WorkEmail;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URI_WorkPhone">
+      <MemberSignature Language="C#" Value="public const string URI_WorkPhone;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URI_WorkPhone" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.Property.URI_WorkPhone" />
+      <MemberSignature Language="VB.NET" Value="Public Const URI_WorkPhone As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URI_WorkPhone;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserOverridePrivacy">
+      <MemberSignature Language="C#" Value="public bool UserOverridePrivacy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UserOverridePrivacy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.Property.UserOverridePrivacy" />
+      <MemberSignature Language="VB.NET" Value="Public Property UserOverridePrivacy As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UserOverridePrivacy { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.Office.Server.UserProfiles.IPrivacyPolicyItem.UserOverridePrivacy</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Allow user  to override privacy or not?             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

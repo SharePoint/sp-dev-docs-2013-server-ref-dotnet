@@ -1,0 +1,681 @@
+﻿<Type Name="ConsoleAction" FullName="Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction">
+  <TypeSignature Language="C#" Value="public abstract class ConsoleAction : System.Web.UI.WebControls.WebControl, System.Web.UI.IPostBackEventHandler" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ConsoleAction extends System.Web.UI.WebControls.WebControl implements class System.Web.UI.IPostBackEventHandler" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class ConsoleAction&#xA;Inherits WebControl&#xA;Implements IPostBackEventHandler" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ConsoleAction abstract : System::Web::UI::WebControls::WebControl, System::Web::UI::IPostBackEventHandler" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Web.UI.WebControls.WebControl</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Web.UI.IPostBackEventHandler</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Represents the base class which all specific console actions to be used in the ConsoleDataSource must inherit.</summary>
+    <remarks>
+      <para>The Editing Menu, Quick Access Menu, or Site Actions menu present various actions to the user. Each of these menus contains an instance of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleDataSource" /> object that provides a hierarchical collection of <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> objects, some of which implement the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> class. Each implementation of this class represents a specific action, such as Create Page, Publish, Show Version History, or Save and Stop Editing. </para>
+      <para>The code example presented here is simplified, but shows how a console action should be constructed. Running this sample application adds a "Save and Stop Editing" button to the Quick Access Menu. It requires that the page be in Edit mode and that the user have <b>EditListItem</b> permissions to this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object. The sample uses ECMAScript (JavaScript, JScript) to post back to this control, and when it raises a postback event, the event saves the current <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object and shows the saved page in display mode.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using Microsoft.SharePoint;
+using Microsoft.SharePoint.WebControls;
+using Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions;
+
+/// Assemblies that need to be referenced in this sample;
+///     Microsoft.SharePoint.dll
+///     Microsoft.SharePoint.Publishing.dll
+///     Microsoft.Web.CommandUI.dll
+namespace Microsoft.SDK.SharePointServer.Samples.Publishing.RteExtensions
+{
+    public class RteExtensionsAction : ConsoleAction
+    {
+        /// &amp;lt;summary&amp;gt;
+        /// This Console Action will include on the client a reference to RteExtension.js file 
+        /// on pages that have a Rich Text Editor.
+        /// &amp;lt;/summary&amp;gt;
+        public RteExtensionsAction()
+            : base()
+        {
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// Gets the rights required for this console action to be active on the page.
+        /// 
+        /// For this example, we will have the same value as the Publishing Rich Text Editor
+        /// which requires Edit List Item Right, since we want to activate under
+        /// the same circumstances.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;value&amp;gt;
+        /// The rights required for this console action to be active on the page.
+        /// &amp;lt;/value&amp;gt;
+        public override SPBasePermissions UserRights
+        {
+            get { return SPBasePermissions.EditListItems; }
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// The value returned by this function represents a list of Ribbon tabs, if these
+        /// ribbon tabs are currently shown, then this console action will be activate on this page.
+        /// 
+        /// For this example, we are specifying the Format Text tab, which is requested
+        /// when the Publishing Rich Text Editor is on the page. Also, we are adding a new
+        /// button to this tab, and hence we want to activate when that button is present on
+        /// the page.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;returns&amp;gt;
+        /// A list of ribbon tabs for which the ConsoleAction is activated.
+        /// &amp;lt;/returns&amp;gt;
+        public override string[] GetRibbonTabIdsWhereConsoleActionIsShown()
+        {
+            return new string[] { SPRibbon.EditTabId };
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// If the UserRights are met and the Ribbon Tabs have been found, then this method will be called.
+        /// This is where you register your appropriate ribbon files and send to the client data it requires.
+        /// 
+        /// For this example, we will tell SharePoint ScriptLink about the existance of RteExtensions.js.
+        /// This will allow code on the client to download it on demand. 
+        /// The second part will register a startup script that will download RteExtensions.js once the
+        /// SharePoint rich text editor file (sp.ui.rte.js) has finished downloaded.
+        /// &amp;lt;/summary&amp;gt;
+        public override void RegisterClientData()
+        {
+            // Register the extension script, such that it can be downloaded on demand.
+            ScriptLink.RegisterOnDemand(this.Page, "RteExtensions.js", false);
+
+            // Download the RteExtension script when the SharePoint RTE has finished downloaded.
+            string onDemandScript = @"
+// This method informs SharePoint to start downloading the Script On Demand
+// file that was registered on the server.
+function loadRteExtensions()
+{
+// Include the RteExtensions.js if it is not already on the page.
+var defd;
+try
+{
+defd = typeof(RteExtensions);
+}
+catch (e)
+{
+defd = 'undefined';
+}
+EnsureScript('RteExtensions.js', defd, null);
+}
+// This method is run when the body has finished loading.
+// Inform SharePoint to wait until the rich text editor has been 
+// downloaded on the page before including the rte extensions.
+function loadExtensionsDependencies()
+{
+ExecuteOrDelayUntilScriptLoaded(loadRteExtensions, 'sp.ui.rte.js');
+}
+// Add to the SharePoint array of functions to call when the 
+// body of the document has finished loading
+// Wait for the page to have completed to load
+// this will make sure that all script on demand information
+// has been processed by SharePoint.
+if (_spBodyOnLoadFunctionNames != null)
+{
+_spBodyOnLoadFunctionNames.push('loadExtensionsDependencies');
+}
+";
+            Page.ClientScript.RegisterStartupScript(typeof(RteExtensionsAction), "RteExtensionsAction", onDemandScript, true);
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected ConsoleAction ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; ConsoleAction();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public virtual string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The description text that should be displayed by default when this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object is used.</summary>
+        <value>A string that contains a description of this <b>ConsoleAction</b> object.</value>
+        <remarks>
+          <para>When this <b>ConsoleAction</b> object is used in conjunction with a  <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode" /> object, the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ConsoleNode.UseActionText" /> property should be set to <b>true</b> in order to make this <b>ConsoleAction.Description</b> property effective.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayText">
+      <MemberSignature Language="C#" Value="public virtual string DisplayText { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DisplayText" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.DisplayText" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property DisplayText As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ DisplayText { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the text to be displayed as part of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</summary>
+        <value>The text to be shown as part of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</value>
+        <remarks>
+          <para>When this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> appears in the UI, this text appears as part of what is displayed. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetConfirmJSWithPageHead">
+      <MemberSignature Language="C#" Value="protected string GetConfirmJSWithPageHead (string resourceKey, string postbackArgument);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance string GetConfirmJSWithPageHead(string resourceKey, string postbackArgument) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.GetConfirmJSWithPageHead(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Function GetConfirmJSWithPageHead (resourceKey As String, postbackArgument As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; System::String ^ GetConfirmJSWithPageHead(System::String ^ resourceKey, System::String ^ postbackArgument);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="resourceKey" Type="System.String" />
+        <Parameter Name="postbackArgument" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="resourceKey">To be added.</param>
+        <param name="postbackArgument">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetRibbonTabIdsWhereConsoleActionIsShown">
+      <MemberSignature Language="C#" Value="public virtual string[] GetRibbonTabIdsWhereConsoleActionIsShown ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string[] GetRibbonTabIdsWhereConsoleActionIsShown() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.GetRibbonTabIdsWhereConsoleActionIsShown" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetRibbonTabIdsWhereConsoleActionIsShown () As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual cli::array &lt;System::String ^&gt; ^ GetRibbonTabIdsWhereConsoleActionIsShown();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns a list of ribbon tab IDs in which a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object is shown.</summary>
+        <returns>A list of ribbon tab IDs.</returns>
+        <remarks>
+          <para>
+            <b>GetRibbonTabIdsWhereConsoleActionIsShown</b> is a base method.  It is overridden in subclasses that are shown on the ribbon. The list returns the IDs of all ribbon tabs in which the <b>ConsoleAction</b> object is shown.</para>
+          <para />
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ImageUrl">
+      <MemberSignature Language="C#" Value="public virtual string ImageUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ImageUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.ImageUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property ImageUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ ImageUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the URL of the image to be displayed when using this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</summary>
+        <value>The URL of the image to be displayed when using this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</value>
+        <remarks>
+          <para>In some user interfaces, an icon is shown as part of the console action. The value is the URL for that image.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsCurrentlyEnabled">
+      <MemberSignature Language="C#" Value="public virtual bool IsCurrentlyEnabled ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsCurrentlyEnabled() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.IsCurrentlyEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function IsCurrentlyEnabled () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool IsCurrentlyEnabled();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Determines whether the specified <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object is currently enabled.
+</summary>
+        <returns>
+          <b>true</b> if the <b>ConsoleAction</b> object is currently enabled; otherwise, <b>false</b>.</returns>
+        <remarks>
+          <para>The default return value for this method obtains the authoring state for the current page and invokes the <b>IsCurrentlyEnabled</b> method with the authoring state. Override the <b>IsCurrentlyEnabled</b> method when the authoring states are not required to make the call to determine whether the <b>ConsoleAction</b> object is enabled.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsCurrentlyEnabled">
+      <MemberSignature Language="C#" Value="public virtual bool IsCurrentlyEnabled (Microsoft.SharePoint.Publishing.WebControls.AuthoringStates currentState);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsCurrentlyEnabled(valuetype Microsoft.SharePoint.Publishing.WebControls.AuthoringStates currentState) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.IsCurrentlyEnabled(Microsoft.SharePoint.Publishing.WebControls.AuthoringStates)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function IsCurrentlyEnabled (currentState As AuthoringStates) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool IsCurrentlyEnabled(Microsoft::SharePoint::Publishing::WebControls::AuthoringStates currentState);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentState" Type="Microsoft.SharePoint.Publishing.WebControls.AuthoringStates" />
+      </Parameters>
+      <Docs>
+        <param name="currentState">Bitmask of <see cref="T:Microsoft.SharePoint.Publishing.WebControls.AuthoringStates" /> class that represents the current state of the page.</param>
+        <summary>Determines whether the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> is currently enabled.</summary>
+        <returns>
+          <b>True</b> if the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> is currently enabled; otherwise, <b>False</b>.</returns>
+        <remarks>
+          <para>The default return value for this method checks the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.RequiredStates" /> property against the current state of the page. In some situations, a bitwise <b>AND</b> of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.AuthoringStates" /> class does not adequately define exactly when a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object should be enabled. When this is the case, use this method to define the return Boolean value in a specific way.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NavigateUrl">
+      <MemberSignature Language="C#" Value="public virtual string NavigateUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string NavigateUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.NavigateUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property NavigateUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ NavigateUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <paramref name="href" /> value of a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</summary>
+        <value>Either a URL for navigation or ECMAScript that runs when a user clicks the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</value>
+        <remarks>
+          <para>When a user clicks a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object on the page, this property determines how the Web browser responds. If the property specifies a conventional URL, the user is directed to the page located by that URL. If the property specifies JavaScript, the Web browser executes the script. For example, the script executed can include script to post back to the same action for the purpose of saving the current page.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PagePreRenderComplete">
+      <MemberSignature Language="C#" Value="protected virtual void PagePreRenderComplete (object sender, EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void PagePreRenderComplete(object sender, class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.PagePreRenderComplete(System.Object,System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub PagePreRenderComplete (sender As Object, e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void PagePreRenderComplete(System::Object ^ sender, EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="sender">To be added.</param>
+        <param name="e">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RaisePostBackEvent">
+      <MemberSignature Language="C#" Value="public virtual void RaisePostBackEvent (string eventArgument);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RaisePostBackEvent(string eventArgument) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.RaisePostBackEvent(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub RaisePostBackEvent (eventArgument As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void RaisePostBackEvent(System::String ^ eventArgument);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="eventArgument" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="eventArgument">Standard <paramref name="eventArgument" /> submitted from the Web browser.</param>
+        <summary>Represents code that is executed on the server when this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object is clicked.</summary>
+        <remarks>
+          <para>When this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object is the target of a postback, this code is executed. This method is commonly used for actions that update the current <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> or <see cref="T:Microsoft.SharePoint.SPListItem" /> objects. Examples include Save, Approve, and Publish<b>ConsoleAction</b> objects.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RedirectToNavigateUrl">
+      <MemberSignature Language="C#" Value="protected void RedirectToNavigateUrl (string eventArgument, string postBackEventArgument);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void RedirectToNavigateUrl(string eventArgument, string postBackEventArgument) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.RedirectToNavigateUrl(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub RedirectToNavigateUrl (eventArgument As String, postBackEventArgument As String)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; void RedirectToNavigateUrl(System::String ^ eventArgument, System::String ^ postBackEventArgument);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="eventArgument" Type="System.String" />
+        <Parameter Name="postBackEventArgument" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="eventArgument">To be added.</param>
+        <param name="postBackEventArgument">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RefreshCurrentItemAfterUpdate">
+      <MemberSignature Language="C#" Value="public static void RefreshCurrentItemAfterUpdate ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void RefreshCurrentItemAfterUpdate() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.RefreshCurrentItemAfterUpdate" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub RefreshCurrentItemAfterUpdate ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void RefreshCurrentItemAfterUpdate();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Refreshes the <see cref="T:Microsoft.SharePoint.SPListItem" /> object that represents the current <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <remarks>
+          <para>Run this method at the end of a <see cref="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.RaisePostBackEvent(System.String)" /> override in which the current <see cref="T:Microsoft.SharePoint.SPListItem" /> object has been updated. When the current <b>SPListItem</b> is updated during a postback, it is necessary to refresh the item so that the page can be displayed correctly. If this is not done, the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object may have succeeded, but the page may appear as though the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> did not occur. </para>
+          <para>For example, the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> may be to check in a page. If the current item is not refreshed, the page still appears checked out immediately after the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> is executed, although it was actually checked in.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RegisterClientData">
+      <MemberSignature Language="C#" Value="public virtual void RegisterClientData ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RegisterClientData() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.RegisterClientData" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub RegisterClientData ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void RegisterClientData();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Registers client data such as JavaScript code of a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleAction" /> object.
+</summary>
+        <remarks>
+          <para>
+            <b>RegisterClientData</b> is a base method that is overridden when a <b>ConsoleAction</b> object needs to register client data, such as JavaScript code.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RegisterDefaultScript">
+      <MemberSignature Language="C#" Value="protected void RegisterDefaultScript ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void RegisterDefaultScript() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.RegisterDefaultScript" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub RegisterDefaultScript ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; void RegisterDefaultScript();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Registers the default script for this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderBeginTag">
+      <MemberSignature Language="C#" Value="public override void RenderBeginTag (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RenderBeginTag(class System.Web.UI.HtmlTextWriter writer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub RenderBeginTag (writer As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void RenderBeginTag(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">An <b>HtmlTextWriter</b> object that represents the output stream to render HTML content on the client.</param>
+        <summary>Overries the base <see cref="M:System.Web.UI.WebControls.WebControl.RenderBeginTag" /> method.
+</summary>
+        <remarks>
+          <para />
+          <para>This is the base <b>RenderBeginTag</b> method for the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleAction" /> object. It is for internal use only and is not meant to be called directly for your code. It is called by the ASP.NET framework.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderEndTag">
+      <MemberSignature Language="C#" Value="public override void RenderEndTag (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RenderEndTag(class System.Web.UI.HtmlTextWriter writer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub RenderEndTag (writer As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void RenderEndTag(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">An <b>HtmlTextWriter</b> object that represents the output stream to render HTML content on the client.</param>
+        <summary>Overrides the base <see cref="T:System.Web.UI.WebControls.WebControl.RenderEndTag" /> method.
+</summary>
+        <remarks>
+          <para>This is the base <b>RenderEndTag</b> method for the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleAction" /> object. It is for internal use only and is not meant to be called directly for your code. It is called by the ASP.NET framework.
+</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequiredStates">
+      <MemberSignature Language="C#" Value="public virtual Microsoft.SharePoint.Publishing.WebControls.AuthoringStates RequiredStates { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.AuthoringStates RequiredStates" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.RequiredStates" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property RequiredStates As AuthoringStates" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Publishing::WebControls::AuthoringStates RequiredStates { Microsoft::SharePoint::Publishing::WebControls::AuthoringStates get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.AuthoringStates</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets an object that represents the authoring states required for this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object to be enabled in the current context.</summary>
+        <value>The states required for this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object to be available.</value>
+        <remarks>
+          <para>When this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object appears in the user interface, the value of this property determines whether the action is enabled or disabled.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShouldRenderWithoutTabs">
+      <MemberSignature Language="C#" Value="protected virtual bool ShouldRenderWithoutTabs ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance bool ShouldRenderWithoutTabs() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.ShouldRenderWithoutTabs" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function ShouldRenderWithoutTabs () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual bool ShouldRenderWithoutTabs();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Indicates that the console action should render without tabs.
+</summary>
+        <returns>
+          <b>true</b> if the action is registered even when the ribbon tabs that are specified in <b>GetRibbonTabIdsWhereConsoleActionIsShown</b> are not available; otherwise, <b>false</b>.</returns>
+        <remarks>
+          <para>This method can be overridden by console actions to provide logic that enables the action to be registered even when the specified ribbon tabs are not available. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowError">
+      <MemberSignature Language="C#" Value="public virtual void ShowError (Exception e, Microsoft.SharePoint.Publishing.WebControls.ConsoleError myError);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ShowError(class System.Exception e, class Microsoft.SharePoint.Publishing.WebControls.ConsoleError myError) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.ShowError(System.Exception,Microsoft.SharePoint.Publishing.WebControls.ConsoleError)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub ShowError (e As Exception, myError As ConsoleError)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void ShowError(Exception ^ e, Microsoft::SharePoint::Publishing::WebControls::ConsoleError ^ myError);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.Exception" />
+        <Parameter Name="myError" Type="Microsoft.SharePoint.Publishing.WebControls.ConsoleError" />
+      </Parameters>
+      <Docs>
+        <param name="e">Exception that caused the error message to be displayed.</param>
+        <param name="myError">
+          <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ConsoleError" /> that represents the current error message and options.</param>
+        <summary>Causes the specified exception to display information about the error in the console error display.</summary>
+        <remarks>
+          <para>When a postback to this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object results in an error, you can use this method to provide useful error information to the current user.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserRights">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.SharePoint.SPBasePermissions UserRights { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.SPBasePermissions UserRights" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction.UserRights" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property UserRights As SPBasePermissions" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property Microsoft::SharePoint::SPBasePermissions UserRights { Microsoft::SharePoint::SPBasePermissions get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPBasePermissions</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets an object that represents the user rights to use this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.SPBasePermissions" /> rights mask representing the required rights.</value>
+        <remarks>
+          <para>This property must be implemented by all <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> objects.</para>
+          <para>When the current user does not have the specified rights, this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditingMenuActions.ConsoleAction" /> object does not appear in the user interface. The most restrictive value is <paramref name="SPBasePermissions.FullMask" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

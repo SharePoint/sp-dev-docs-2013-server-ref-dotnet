@@ -1,0 +1,305 @@
+﻿<Type Name="PublishingCatalogUtility" FullName="Microsoft.SharePoint.Publishing.PublishingCatalogUtility">
+  <TypeSignature Language="C#" Value="public static class PublishingCatalogUtility" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit PublishingCatalogUtility extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.PublishingCatalogUtility" />
+  <TypeSignature Language="VB.NET" Value="Public Class PublishingCatalogUtility" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PublishingCatalogUtility abstract sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Utilities that publish a list or a library as a publishing catalog for subscription from another site.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="GetCatalogConfiguration">
+      <MemberSignature Language="C#" Value="public static bool GetCatalogConfiguration (Microsoft.SharePoint.SPList list, out Microsoft.SharePoint.Publishing.CatalogShareSettings catalogSettings, out string selectedTaxonomyField);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool GetCatalogConfiguration(class Microsoft.SharePoint.SPList list, [out] class Microsoft.SharePoint.Publishing.CatalogShareSettings&amp; catalogSettings, [out] string&amp; selectedTaxonomyField) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.GetCatalogConfiguration(Microsoft.SharePoint.SPList,Microsoft.SharePoint.Publishing.CatalogShareSettings@,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetCatalogConfiguration (list As SPList, ByRef catalogSettings As CatalogShareSettings, ByRef selectedTaxonomyField As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool GetCatalogConfiguration(Microsoft::SharePoint::SPList ^ list, [Runtime::InteropServices::Out] Microsoft::SharePoint::Publishing::CatalogShareSettings ^ % catalogSettings, [Runtime::InteropServices::Out] System::String ^ % selectedTaxonomyField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="catalogSettings" Type="Microsoft.SharePoint.Publishing.CatalogShareSettings&amp;" RefType="out" />
+        <Parameter Name="selectedTaxonomyField" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="list">The <see cref="T:Microsoft.SharePoint.SPList" /> object for which configuration information is returned.</param>
+        <param name="catalogSettings">Configuration information for the shared publishing catalog.</param>
+        <param name="selectedTaxonomyField">Managed property name from the search schema of the default taxonomy field in the shared catalog. The <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> categories in this field can be used by a catalog subscriber to determine the navigation hierarchy that represents this catalog at a subscribing site.</param>
+        <summary>Gets catalog configuration information for a shared publishing catalog.</summary>
+        <returns>
+          <b>true</b> if this list is a shared catalog; otherwise, <b>false</b></returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetIsFieldValueFriendlyForUrl">
+      <MemberSignature Language="C#" Value="public static bool GetIsFieldValueFriendlyForUrl (Microsoft.SharePoint.SPField catalogItemCandidateKeyField);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool GetIsFieldValueFriendlyForUrl(class Microsoft.SharePoint.SPField catalogItemCandidateKeyField) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.GetIsFieldValueFriendlyForUrl(Microsoft.SharePoint.SPField)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetIsFieldValueFriendlyForUrl (catalogItemCandidateKeyField As SPField) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool GetIsFieldValueFriendlyForUrl(Microsoft::SharePoint::SPField ^ catalogItemCandidateKeyField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="catalogItemCandidateKeyField" Type="Microsoft.SharePoint.SPField" />
+      </Parameters>
+      <Docs>
+        <param name="catalogItemCandidateKeyField">The site column being tested.</param>
+        <summary>Gets a Boolean value that indicates whether the <see cref="T:Microsoft.SharePoint.SPField" /> is valid to use to create friendly URLs for items in this catalog.</summary>
+        <returns>A Boolean value that indicates whether the <b>SPField</b> object is valid to use to create friendly URLs for items in this catalog.</returns>
+        <remarks>
+          <para>Use this method to determine if a field being used to uniquely identify an item is also a valid component for friendly URLs that represent the item in a subscribing site. For example, fields of type <b>DateTime</b> will not provide clean, friendly URLs at a subscribing site.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetIsPublishingCatalog">
+      <MemberSignature Language="C#" Value="public static bool GetIsPublishingCatalog (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool GetIsPublishingCatalog(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.GetIsPublishingCatalog(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetIsPublishingCatalog (list As SPList) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool GetIsPublishingCatalog(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">The list or library that is being tested.</param>
+        <summary>Retrieves whether a <see cref="T:Microsoft.SharePoint.SPList" /> object or a library has been shared as a catalog.</summary>
+        <returns>A Boolean value that indicates whether a list or library has been shared as a catalog.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPublishingCatalog">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.CatalogConnectionSettings GetPublishingCatalog (Microsoft.SharePoint.SPSite site, string catalogPath);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.CatalogConnectionSettings GetPublishingCatalog(class Microsoft.SharePoint.SPSite site, string catalogPath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.GetPublishingCatalog(Microsoft.SharePoint.SPSite,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetPublishingCatalog (site As SPSite, catalogPath As String) As CatalogConnectionSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::CatalogConnectionSettings ^ GetPublishingCatalog(Microsoft::SharePoint::SPSite ^ site, System::String ^ catalogPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.CatalogConnectionSettings</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="catalogPath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="site">A site collection that is requesting shared catalog information from search.</param>
+        <param name="catalogPath">The absolute URL of the shared catalog.</param>
+        <summary>Retrieves a shared catalog that is available for subscription.</summary>
+        <returns>A shared catalog that is available for subscription.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPublishingCatalog">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.CatalogConnectionSettings GetPublishingCatalog (Microsoft.SharePoint.SPSite site, string catalogSitePath, Guid catalogId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.CatalogConnectionSettings GetPublishingCatalog(class Microsoft.SharePoint.SPSite site, string catalogSitePath, valuetype System.Guid catalogId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.GetPublishingCatalog(Microsoft.SharePoint.SPSite,System.String,System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetPublishingCatalog (site As SPSite, catalogSitePath As String, catalogId As Guid) As CatalogConnectionSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::CatalogConnectionSettings ^ GetPublishingCatalog(Microsoft::SharePoint::SPSite ^ site, System::String ^ catalogSitePath, Guid catalogId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.CatalogConnectionSettings</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="catalogSitePath" Type="System.String" />
+        <Parameter Name="catalogId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site collection that is requesting shared catalog information from search.</param>
+        <param name="catalogSitePath">The absolute URL of the site collection that contains the catalog.</param>
+        <param name="catalogId">The ID of the <see cref="T:Microsoft.SharePoint.SPList" /> object that is shared as a catalog.</param>
+        <summary>Retrieves a shared catalog that is available for subscription.</summary>
+        <returns>A shared catalog that is available for subscription.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPublishingCatalogs">
+      <MemberSignature Language="C#" Value="public static System.Collections.Generic.List&lt;Microsoft.SharePoint.Publishing.CatalogConnectionSettings&gt; GetPublishingCatalogs (Microsoft.SharePoint.SPSite site, int startRow, int numberOfRows, string filterText, out int totalNumberOfCatalogs);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.List`1&lt;class Microsoft.SharePoint.Publishing.CatalogConnectionSettings&gt; GetPublishingCatalogs(class Microsoft.SharePoint.SPSite site, int32 startRow, int32 numberOfRows, string filterText, [out] int32&amp; totalNumberOfCatalogs) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.GetPublishingCatalogs(Microsoft.SharePoint.SPSite,System.Int32,System.Int32,System.String,System.Int32@)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetPublishingCatalogs (site As SPSite, startRow As Integer, numberOfRows As Integer, filterText As String, ByRef totalNumberOfCatalogs As Integer) As List(Of CatalogConnectionSettings)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Collections::Generic::List&lt;Microsoft::SharePoint::Publishing::CatalogConnectionSettings ^&gt; ^ GetPublishingCatalogs(Microsoft::SharePoint::SPSite ^ site, int startRow, int numberOfRows, System::String ^ filterText, [Runtime::InteropServices::Out] int % totalNumberOfCatalogs);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.SharePoint.Publishing.CatalogConnectionSettings&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="startRow" Type="System.Int32" />
+        <Parameter Name="numberOfRows" Type="System.Int32" />
+        <Parameter Name="filterText" Type="System.String" />
+        <Parameter Name="totalNumberOfCatalogs" Type="System.Int32&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site collection that is requesting shared catalog information from search.</param>
+        <param name="startRow">The start location  in the search results. This parameter is used for paging.</param>
+        <param name="numberOfRows">The total number of search results that are available from the search index.</param>
+        <param name="filterText">Additional keywords to filter the shared catalogs that are returned.</param>
+        <param name="totalNumberOfCatalogs">Total number of search results that are available from the search index.</param>
+        <summary>Retrieves shared catalogs that are available for subscription.</summary>
+        <returns>Information about shared catalogs.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PublishCatalog">
+      <MemberSignature Language="C#" Value="public static void PublishCatalog (Microsoft.SharePoint.SPWeb parentWeb, Microsoft.SharePoint.SPList list, bool allowAnonymousAccess);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void PublishCatalog(class Microsoft.SharePoint.SPWeb parentWeb, class Microsoft.SharePoint.SPList list, bool allowAnonymousAccess) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.PublishCatalog(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.SPList,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub PublishCatalog (parentWeb As SPWeb, list As SPList, allowAnonymousAccess As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void PublishCatalog(Microsoft::SharePoint::SPWeb ^ parentWeb, Microsoft::SharePoint::SPList ^ list, bool allowAnonymousAccess);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parentWeb" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="allowAnonymousAccess" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="parentWeb">Parent web containing the list or library being shared.</param>
+        <param name="list">List or library being shared.</param>
+        <param name="allowAnonymousAccess">Whether the content of this catalog is anonymously accessible from the search service. Setting this property to true does not affect access to the list by using a content database that uses CAML queries. </param>
+        <summary>Shares (publishes) a list or library as a publishing catalog for subscription at another site.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PublishCatalog">
+      <MemberSignature Language="C#" Value="public static void PublishCatalog (Microsoft.SharePoint.SPWeb parentWeb, Microsoft.SharePoint.SPList list, Nullable&lt;bool&gt; allowAnonymousAccess, System.Collections.Generic.IEnumerable&lt;string&gt; furlFields, System.Collections.Generic.IEnumerable&lt;Microsoft.SharePoint.Publishing.CatalogTaxonomyFieldSettings&gt; taxFields);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void PublishCatalog(class Microsoft.SharePoint.SPWeb parentWeb, class Microsoft.SharePoint.SPList list, valuetype System.Nullable`1&lt;bool&gt; allowAnonymousAccess, class System.Collections.Generic.IEnumerable`1&lt;string&gt; furlFields, class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.SharePoint.Publishing.CatalogTaxonomyFieldSettings&gt; taxFields) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.PublishCatalog(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.SPList,System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Microsoft.SharePoint.Publishing.CatalogTaxonomyFieldSettings})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub PublishCatalog (parentWeb As SPWeb, list As SPList, allowAnonymousAccess As Nullable(Of Boolean), furlFields As IEnumerable(Of String), taxFields As IEnumerable(Of CatalogTaxonomyFieldSettings))" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void PublishCatalog(Microsoft::SharePoint::SPWeb ^ parentWeb, Microsoft::SharePoint::SPList ^ list, Nullable&lt;bool&gt; allowAnonymousAccess, System::Collections::Generic::IEnumerable&lt;System::String ^&gt; ^ furlFields, System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::Publishing::CatalogTaxonomyFieldSettings ^&gt; ^ taxFields);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parentWeb" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="allowAnonymousAccess" Type="System.Nullable&lt;System.Boolean&gt;" />
+        <Parameter Name="furlFields" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter Name="taxFields" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.SharePoint.Publishing.CatalogTaxonomyFieldSettings&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="parentWeb">The parent web that contains the list or library that is being shared.</param>
+        <param name="list">The list or library that is being shared.</param>
+        <param name="allowAnonymousAccess">Specifies whether the content of this catalog is anonymously accessible from the search service. Setting this property to <b>true</b> does not affect access to the list via the content database using CAML queries.</param>
+        <param name="furlFields">Auto-generated managed property names of a <see cref="T:Microsoft.SharePoint.SPField" /> object that can uniquely identify an item in the catalog. These properties can be used by a catalog subscriber to create friendly URLs for items in this catalog.</param>
+        <param name="taxFields">Managed property name from the search schema of the default taxonomy field in the shared catalog. The categories in this field can be used by a catalog subscriber to determine the navigation hierarchy representing this catalog at a subscribing site.</param>
+        <summary>Shares (publishes) a list or library as a publishing catalog for subscription at another site.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PublishCatalog">
+      <MemberSignature Language="C#" Value="public static void PublishCatalog (Microsoft.SharePoint.SPWeb parentWeb, Microsoft.SharePoint.SPList list, bool allowAnonymousAccess, System.Collections.Generic.IEnumerable&lt;Microsoft.SharePoint.SPField&gt; catalogItemKeyFields, System.Collections.Generic.IEnumerable&lt;Microsoft.SharePoint.Taxonomy.TaxonomyField&gt; allListCategoryFields, Microsoft.SharePoint.Taxonomy.TaxonomyField selectedCategoryField);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void PublishCatalog(class Microsoft.SharePoint.SPWeb parentWeb, class Microsoft.SharePoint.SPList list, bool allowAnonymousAccess, class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.SharePoint.SPField&gt; catalogItemKeyFields, class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.SharePoint.Taxonomy.TaxonomyField&gt; allListCategoryFields, class Microsoft.SharePoint.Taxonomy.TaxonomyField selectedCategoryField) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.PublishCatalog(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.SPList,System.Boolean,System.Collections.Generic.IEnumerable{Microsoft.SharePoint.SPField},System.Collections.Generic.IEnumerable{Microsoft.SharePoint.Taxonomy.TaxonomyField},Microsoft.SharePoint.Taxonomy.TaxonomyField)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub PublishCatalog (parentWeb As SPWeb, list As SPList, allowAnonymousAccess As Boolean, catalogItemKeyFields As IEnumerable(Of SPField), allListCategoryFields As IEnumerable(Of TaxonomyField), selectedCategoryField As TaxonomyField)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void PublishCatalog(Microsoft::SharePoint::SPWeb ^ parentWeb, Microsoft::SharePoint::SPList ^ list, bool allowAnonymousAccess, System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::SPField ^&gt; ^ catalogItemKeyFields, System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::Taxonomy::TaxonomyField ^&gt; ^ allListCategoryFields, Microsoft::SharePoint::Taxonomy::TaxonomyField ^ selectedCategoryField);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parentWeb" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="allowAnonymousAccess" Type="System.Boolean" />
+        <Parameter Name="catalogItemKeyFields" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.SharePoint.SPField&gt;" />
+        <Parameter Name="allListCategoryFields" Type="System.Collections.Generic.IEnumerable&lt;Microsoft.SharePoint.Taxonomy.TaxonomyField&gt;" />
+        <Parameter Name="selectedCategoryField" Type="Microsoft.SharePoint.Taxonomy.TaxonomyField" />
+      </Parameters>
+      <Docs>
+        <param name="parentWeb">Parent web containing the list or library being shared.</param>
+        <param name="list">List or library being shared.</param>
+        <param name="allowAnonymousAccess">Whether the content of the catalog is anonymously accessible from the search service. Setting the property to true does not affect access to the list by using a content database that uses CAML queries.</param>
+        <param name="catalogItemKeyFields">List columns in this catalog that would identify an item uniquely. For example, item ID, item number, etc. These are fields that catalog subscribers can use to create unique, friendly URLs for items in this catalog.</param>
+        <param name="allListCategoryFields">Taxonomy fields that are available in this catalog. 
+This list can be used by the catalog subscriber to determine the navigation hierarchy representing the catalog at a subscribing site.</param>
+        <param name="selectedCategoryField">The default taxonomy field that determines the navigation hierarchy that represents this catalog at a subscribing site. The categories in this field can be added to the navigation hierarchy of a subscribing site to create friendly URLs for items in this catalog.</param>
+        <summary>Shares (publishes) a list or library as a publishing catalog for subscription at another site.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UnPublishCatalog">
+      <MemberSignature Language="C#" Value="public static void UnPublishCatalog (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void UnPublishCatalog(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtility.UnPublishCatalog(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub UnPublishCatalog (list As SPList)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void UnPublishCatalog(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">The list or library to unpublish.</param>
+        <summary>Specifies a list or library to stop sharing as a publishing catalog..</summary>
+        <remarks>
+          <para>If a list or library is unpublished, it will no longer be available for subscription and it will no longer be accessible anonymously from search. Unpublishing a catalog impacts portals that render catalog content to anonymous users. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

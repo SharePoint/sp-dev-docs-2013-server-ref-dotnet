@@ -1,0 +1,369 @@
+﻿<Type Name="ContentDeploymentConfiguration" FullName="Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration">
+  <TypeSignature Language="C#" Value="public sealed class ContentDeploymentConfiguration : Microsoft.SharePoint.Administration.SPPersistedObject" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ContentDeploymentConfiguration extends Microsoft.SharePoint.Administration.SPPersistedObject" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class ContentDeploymentConfiguration&#xA;Inherits SPPersistedObject" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ContentDeploymentConfiguration sealed : Microsoft::SharePoint::Administration::SPPersistedObject" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Administration.SPPersistedObject</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Runtime.InteropServices.Guid("DEA1378B-1B52-4a63-A7B9-07FDC5273A41")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Contains farm-level settings that are used by the Content Deployment feature.</summary>
+    <remarks>
+      <para>A farm administrator can configure content deployment settings at the farm level. The <see cref="T:Microsoft.SharePoint.Publishing.Admnistration.ContentDeploymentConfiguration" /> class is the backend object that encapsulates these settings. It includes properties that are configurable, such as a way to determine whether incoming content deployment jobs can be accepted, and what temporary folder should be used to store content deployment logs.</para>
+      <para>SharePoint Server creates a <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration" /> object and uses the methods and properties in this class to determine whether a server is accepting incoming content deployment jobs, and to get or set the Web server that manages the export Web service for content deployment operations, timeout values, and security.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ContentDeploymentConfiguration ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ContentDeploymentConfiguration();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.
+Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration" /> object.</summary>
+        <remarks>
+          <para>This constructor should not be called directly.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AcceptIncomingJobs">
+      <MemberSignature Language="C#" Value="public bool AcceptIncomingJobs { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AcceptIncomingJobs" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.AcceptIncomingJobs" />
+      <MemberSignature Language="VB.NET" Value="Public Property AcceptIncomingJobs As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AcceptIncomingJobs { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value that determines whether the server accepts incoming content deployment Web service requests.</summary>
+        <value>
+          <b>true</b> if the server accepts incoming content deployment Web service requests; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>In order to deploy content to a target farm, set this property to <b>true</b> in the target farm.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BlockMultipleJobsPerPath">
+      <MemberSignature Language="C#" Value="public bool BlockMultipleJobsPerPath { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool BlockMultipleJobsPerPath" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.BlockMultipleJobsPerPath" />
+      <MemberSignature Language="VB.NET" Value="Public Property BlockMultipleJobsPerPath As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool BlockMultipleJobsPerPath { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether to disallow an execution of multiple <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> objects along the same <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object at the same time.</summary>
+        <value>
+          <b>true</b> if the execution of multiple content deployment jobs along the same content deployment path is disallowed; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>When the value is <b>true</b>, only a single <b>ContentDeploymentJob</b> can run for a specified <b>ContentDeploymentPath</b> at a specified time. That is, if an attempt is made to run a <b>ContentDeploymentJob</b> “A” while <b>Content DeploymentJob</b> “B” is already running along the same <b>ContentDeploymentPath</b>, then the execution of <b>ContentDeploymentJob</b> “A” would be cancelled.</para>
+          <para>The default value is <b>true</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CheckSourceStatus">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSourceError[] CheckSourceStatus (Uri siteUrl, int maxErrors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSourceError[] CheckSourceStatus(class System.Uri siteUrl, int32 maxErrors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.CheckSourceStatus(System.Uri,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CheckSourceStatus (siteUrl As Uri, maxErrors As Integer) As ContentDeploymentSourceError()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;Microsoft::SharePoint::Publishing::Administration::ContentDeploymentSourceError ^&gt; ^ CheckSourceStatus(Uri ^ siteUrl, int maxErrors);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSourceError[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="siteUrl" Type="System.Uri" />
+        <Parameter Name="maxErrors" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="siteUrl">The site collection URL.</param>
+        <param name="maxErrors">The maximum number of errors to be returned.</param>
+        <summary>Performs a content deployment source status check and returns errors.
+</summary>
+        <returns>Errors during status check.</returns>
+        <remarks>
+          <para>Use this method to check whether a site collection can act as a content deployment source. If there are errors during this check, content deployment fails.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultReportsPerJob">
+      <MemberSignature Language="C#" Value="public uint DefaultReportsPerJob { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 DefaultReportsPerJob" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.DefaultReportsPerJob" />
+      <MemberSignature Language="VB.NET" Value="Public Property DefaultReportsPerJob As UInteger" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::UInt32 DefaultReportsPerJob { System::UInt32 get(); void set(System::UInt32 value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value that determines the number of reports to retain for the content deployment jobs.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">System.ArgumentOutOfRangeException Invalid property value. This value should be between 0 and 99.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="EnableSourceStatusCheck">
+      <MemberSignature Language="C#" Value="public bool EnableSourceStatusCheck { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool EnableSourceStatusCheck" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.EnableSourceStatusCheck" />
+      <MemberSignature Language="VB.NET" Value="Public Property EnableSourceStatusCheck As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool EnableSourceStatusCheck { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether checks should be run on the source site collection before the creation of the content deployment path, or when running content deployment run.
+</summary>
+        <value>
+          <b>true</b> if checks should be run on the source site collection before the content deployment job; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExportWebServer">
+      <MemberSignature Language="C#" Value="public string ExportWebServer { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ExportWebServer" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.ExportWebServer" />
+      <MemberSignature Language="VB.NET" Value="Public Property ExportWebServer As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ExportWebServer { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the designated front-end Web server to use for the content deployment Web service export operations.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">Export server does not exist.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="FileMaxSize">
+      <MemberSignature Language="C#" Value="public int FileMaxSize { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 FileMaxSize" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.FileMaxSize" />
+      <MemberSignature Language="VB.NET" Value="Public Property FileMaxSize As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int FileMaxSize { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets file chunk size.</summary>
+        <value>The file chunk size, expressed in megabytes (MB). </value>
+        <remarks>
+          <para>The default value is 10 MB.</para>
+          <para>When a content deployment package is transferred to a remote server, it is split into chunks of a size less than or equal to the file chunk size that is specified by this property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetInstance">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration GetInstance ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration GetInstance() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.GetInstance" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetInstance () As ContentDeploymentConfiguration" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::Administration::ContentDeploymentConfiguration ^ GetInstance();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Retrieves the returned singleton <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration" /> object.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ImportWebServer">
+      <MemberSignature Language="C#" Value="public string ImportWebServer { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ImportWebServer" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.ImportWebServer" />
+      <MemberSignature Language="VB.NET" Value="Public Property ImportWebServer As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ImportWebServer { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the designated front-end Web server to use for the content deployment Web Service import operations.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">Import server does not exist.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RemotePollingInterval">
+      <MemberSignature Language="C#" Value="public int RemotePollingInterval { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 RemotePollingInterval" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.RemotePollingInterval" />
+      <MemberSignature Language="VB.NET" Value="Public Property RemotePollingInterval As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int RemotePollingInterval { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the time interval between pings for <b>RemoteImport</b> status. </summary>
+        <value>The time interval between pings, expressed in seconds.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoteTimeout">
+      <MemberSignature Language="C#" Value="public int RemoteTimeout { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 RemoteTimeout" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.RemoteTimeout" />
+      <MemberSignature Language="VB.NET" Value="Public Property RemoteTimeout As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int RemoteTimeout { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the remote import timeout. </summary>
+        <value>The remote import timeout, expressed in seconds.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequiresSecureConnection">
+      <MemberSignature Language="C#" Value="public bool RequiresSecureConnection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool RequiresSecureConnection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.RequiresSecureConnection" />
+      <MemberSignature Language="VB.NET" Value="Public Property RequiresSecureConnection As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool RequiresSecureConnection { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that determines whether the farm accepts requests that are not secure ..</summary>
+        <value>
+          <b>true</b> if the farm accepts requests that are not secure; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>Secure Sockets Layer (SSL) is one example of a supported secure communication.</para>
+          <para>If the farm is not set up with secure communication (SSL), this property must be set to <b>true</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TemporaryFolder">
+      <MemberSignature Language="C#" Value="public string TemporaryFolder { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string TemporaryFolder" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.TemporaryFolder" />
+      <MemberSignature Language="VB.NET" Value="Public Property TemporaryFolder As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ TemporaryFolder { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that determines the temporary local or remote folder to use for the content deployment jobs.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public override void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Updates the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration" /> object.</summary>
+        <remarks>
+          <para>The <b>Update</b> method also recreates the current <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> objects to reflect the changes made.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentException">ContentDeploymentException temporary folder does not exist.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

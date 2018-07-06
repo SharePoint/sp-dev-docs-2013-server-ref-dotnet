@@ -1,0 +1,232 @@
+﻿<Type Name="XsnFeatureReceiver" FullName="Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver">
+  <TypeSignature Language="C#" Value="public class XsnFeatureReceiver : Microsoft.SharePoint.SPFeatureReceiver" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XsnFeatureReceiver extends Microsoft.SharePoint.SPFeatureReceiver" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver" />
+  <TypeSignature Language="VB.NET" Value="Public Class XsnFeatureReceiver&#xA;Inherits SPFeatureReceiver" />
+  <TypeSignature Language="C++ CLI" Value="public ref class XsnFeatureReceiver : Microsoft::SharePoint::SPFeatureReceiver" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.SPFeatureReceiver</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Based on the <see cref="T:Microsoft.SharePoint.SPFeatureReceiver" /> class and used to trap the activation, deactivation, installation, or uninstallation of a SharePoint feature containing an InfoPath form template.</summary>
+    <remarks>
+      <para>Use the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver" /> class to trap events that are raised after an InfoPath form template installation, uninstallation, activation, or deactivation on the server. The assembly and class name used to trap these events must be referenced in the feature.xml file used to deploy the SharePoint feature containing one or more InfoPath form templates.</para>
+      <para>
+        <b>Note</b>: It is not possible to cancel installation or uninstallation through feature events.</para>
+      <para>Using the XsnFeatureReceiver Class</para>
+      <para>You can use the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver" /> class by directly referencing the class in your feature definition. For example, a form template named Example.xsn is located in a custom feature folder along with the Feature.xml and Elements.xml file. The custom feature folder is located at C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\TEMPLATE\FEATURES. The feature is deployed using the command line "stsadm -o installfeature -filename FeatureFolderName\feature.xml". The feature is then activated to a SharePoint site with the command line "stsadm -o activatefeature –filename FeatureFolderName\Feature.xml -url http://ServerName/".</para>
+      <para>
+        <b>Important</b>: The FeatureFolderName, ServerName, Feature Id, and File Name are placeholder values. Substitute values that pertain to your environment.</para>
+      <para>Feature.xml</para>
+      <code>&amp;lt;?xml version="1.0" encoding="us-ascii" standalone="yes"?&amp;gt;
+&amp;lt;Feature Id="2CCB7482-69D4-4084-AEC2-A867C91FEF88" 
+    Title="Simple Form Template" 
+    Description="This is simple form template" 
+    Version="1.0.0.0" 
+    Scope="Site" 
+    ReceiverClass="Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver" 
+    ReceiverAssembly="Microsoft.Office.InfoPath.Server, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" 
+    xmlns="http://schemas.microsoft.com/sharepoint/"&amp;gt;
+    &amp;lt;ElementManifests&amp;gt;
+        &amp;lt;ElementManifest Location="Elements.xml" /&amp;gt;
+        &amp;lt;ElementFile Location="Example.xsn" /&amp;gt;
+    &amp;lt;/ElementManifests&amp;gt;
+    &amp;lt;ActivationDependencies&amp;gt;
+        &amp;lt;ActivationDependency FeatureId="C88C4FF1-DBF5-4649-AD9F-C6C426EBCBF5" /&amp;gt;
+    &amp;lt;/ActivationDependencies&amp;gt;
+&amp;lt;/Feature&amp;gt;</code>
+      <para>Elements.xml</para>
+      <code>&amp;lt;?xml version="1.0" encoding="utf-8" standalone="yes"?&amp;gt;
+&amp;lt;Elements xmlns="http://schemas.microsoft.com/sharepoint/"&amp;gt;
+    &amp;lt;Module Name="XSN" Url="FormServerTemplates" RootWebOnly="TRUE"&amp;gt;
+        &amp;lt;File Url="Example.xsn" Name="Example.xsn" Type="GhostableInLibrary" /&amp;gt;
+    &amp;lt;/Module&amp;gt;
+&amp;lt;/Elements&amp;gt;</code>
+      <para>Extending the XsnFeatureReceiver Class</para>
+      <para>If you wish to extend the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver" /> class using code similar to the example below, the following example Feature.xml and Elements.xml files are required to deploy the feature with the command line "stsadm -o installfeature -filename FeatureFolderName\feature.xml". The feature is then activated to a SharePoint site with the command line "stsadm -o activatefeature –filename FeatureFolderName\Feature.xml -url http://ServerName/Sitecollection".</para>
+      <para>
+        <b>Important</b>: The FeatureFolderName, ServerName, Sitecollection, Feature Id, ReceiverAssembly, ReceiverClass, and File Name are placeholder values. Substitute the values that pertain to your environment and custom <see cref="T:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver" /> class.</para>
+      <para>Feature.xml</para>
+      <code>&amp;lt;?xml version="1.0"?&amp;gt;
+&amp;lt;Feature Id="E57DD3BD-C295-4f9d-A2F1-BB791257CCDC" Title="My Custom Page"
+    Description="This feature adds an aspx page with a hosted
+XmlFormView control" Version="1.0.0.0" Scope="Web"
+    ReceiverAssembly="Freceive, Version=1.0.0.0, Culture=neutral, PublicKeyToken=50b6d1f1666192d2"
+    ReceiverClass="Freceive.ReceivedXSN"
+    xmlns="http://schemas.microsoft.com/sharepoint/"&amp;gt;
+&amp;lt;ElementManifests&amp;gt;
+    &amp;lt;ElementManifest Location="Elements.xml"/&amp;gt;
+&amp;lt;/ElementManifests&amp;gt;
+&amp;lt;/Feature&amp;gt;</code>
+      <para>Elements.xml</para>
+      <code>&amp;lt;?xml version="1.0"?&amp;gt;
+&amp;lt;Elements xmlns="http://schemas.microsoft.com/sharepoint/"&amp;gt;
+    &amp;lt;Module&amp;gt;
+        &amp;lt;File Name="MyCustomPage.aspx" Type="GhostableInLibrary"/&amp;gt;
+    &amp;lt;/Module&amp;gt;
+&amp;lt;/Elements&amp;gt;</code>
+      <para />
+    </remarks>
+    <example>
+      <para>In the following example, a Windows class library is used to receive SharePoint feature events. The assembly must be signed and deployed to the Global Assembly Cache (GAC), much like other custom SharePoint assemblies.</para>
+      <para>[C#]</para>
+      <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Administration;
+using Microsoft.Office.InfoPath.Server.Administration;
+
+namespace Freceive
+{
+    public class ReceivedXSN : &lt;span class="label"&gt;XsnFeatureReceiver&lt;/span&gt;
+    {
+        public override void  FeatureActivated(Microsoft.SharePoint.SPFeatureReceiverProperties properties)
+        {
+            FeatureActivated(properties);
+            SPFeatureDefinition xsnDefinition = properties.Feature.Definition;
+            Guid xsnID = properties.Feature.DefinitionId;
+            Console.WriteLine("Freceive: Feature Definition is " + xsnDefinition);
+            Console.WriteLine("Freceive: Feature ID is " + xsnID);
+            Console.WriteLine("Press any key to continue");
+            Console.ReadLine();
+        }
+        public override void FeatureDeactivating(Microsoft.SharePoint.SPFeatureReceiverProperties properties)
+        {
+            base.FeatureDeactivating(properties);
+            Console.WriteLine("Freceive: Deactivated");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadLine();
+        }
+        public override void FeatureInstalled(Microsoft.SharePoint.SPFeatureReceiverProperties properties)
+        {
+            Console.WriteLine("Freceive: Installed");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadLine();
+        }
+        public override void FeatureUninstalling(Microsoft.SharePoint.SPFeatureReceiverProperties properties)
+        {
+            base.FeatureUninstalling(properties);
+            Console.WriteLine("Freceive: Uninstalling");
+            Console.WriteLine("Press any key to continue");
+            Console.ReadLine();
+        }</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public XsnFeatureReceiver ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; XsnFeatureReceiver();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FeatureActivated">
+      <MemberSignature Language="C#" Value="public override void FeatureActivated (Microsoft.SharePoint.SPFeatureReceiverProperties properties);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void FeatureActivated(class Microsoft.SharePoint.SPFeatureReceiverProperties properties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver.FeatureActivated(Microsoft.SharePoint.SPFeatureReceiverProperties)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub FeatureActivated (properties As SPFeatureReceiverProperties)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void FeatureActivated(Microsoft::SharePoint::SPFeatureReceiverProperties ^ properties);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="properties" Type="Microsoft.SharePoint.SPFeatureReceiverProperties" />
+      </Parameters>
+      <Docs>
+        <param name="properties">An <see cref="T:Microsoft.SharePoint.SPFeatureReceiverProperties" /> object that represents the properties of the event.</param>
+        <summary>Occurs after a SharePoint feature containing an InfoPath form template is activated.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FeatureDeactivating">
+      <MemberSignature Language="C#" Value="public override void FeatureDeactivating (Microsoft.SharePoint.SPFeatureReceiverProperties properties);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void FeatureDeactivating(class Microsoft.SharePoint.SPFeatureReceiverProperties properties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver.FeatureDeactivating(Microsoft.SharePoint.SPFeatureReceiverProperties)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub FeatureDeactivating (properties As SPFeatureReceiverProperties)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void FeatureDeactivating(Microsoft::SharePoint::SPFeatureReceiverProperties ^ properties);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="properties" Type="Microsoft.SharePoint.SPFeatureReceiverProperties" />
+      </Parameters>
+      <Docs>
+        <param name="properties">An <see cref="T:Microsoft.SharePoint.SPFeatureReceiverProperties" /> object that represents the properties of the event.</param>
+        <summary>Occurs when a SharePoint feature is deactivated.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FeatureInstalled">
+      <MemberSignature Language="C#" Value="public override void FeatureInstalled (Microsoft.SharePoint.SPFeatureReceiverProperties properties);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void FeatureInstalled(class Microsoft.SharePoint.SPFeatureReceiverProperties properties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver.FeatureInstalled(Microsoft.SharePoint.SPFeatureReceiverProperties)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub FeatureInstalled (properties As SPFeatureReceiverProperties)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void FeatureInstalled(Microsoft::SharePoint::SPFeatureReceiverProperties ^ properties);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="properties" Type="Microsoft.SharePoint.SPFeatureReceiverProperties" />
+      </Parameters>
+      <Docs>
+        <param name="properties">An <see cref="T:Microsoft.SharePoint.SPFeatureReceiverProperties" /> object that represents the properties of the event.</param>
+        <summary>Occurs after a SharePoint feature is installed.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FeatureUninstalling">
+      <MemberSignature Language="C#" Value="public override void FeatureUninstalling (Microsoft.SharePoint.SPFeatureReceiverProperties properties);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void FeatureUninstalling(class Microsoft.SharePoint.SPFeatureReceiverProperties properties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.XsnFeatureReceiver.FeatureUninstalling(Microsoft.SharePoint.SPFeatureReceiverProperties)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub FeatureUninstalling (properties As SPFeatureReceiverProperties)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void FeatureUninstalling(Microsoft::SharePoint::SPFeatureReceiverProperties ^ properties);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="properties" Type="Microsoft.SharePoint.SPFeatureReceiverProperties" />
+      </Parameters>
+      <Docs>
+        <param name="properties">An <see cref="T:Microsoft.SharePoint.SPFeatureReceiverProperties" /> object that represents the properties of the event.</param>
+        <summary>Occurs when a SharePoint feature is uninstalling.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

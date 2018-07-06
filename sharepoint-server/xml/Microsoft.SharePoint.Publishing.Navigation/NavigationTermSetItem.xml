@@ -1,0 +1,764 @@
+﻿<Type Name="NavigationTermSetItem" FullName="Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem">
+  <TypeSignature Language="C#" Value="public abstract class NavigationTermSetItem" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit NavigationTermSetItem extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class NavigationTermSetItem" />
+  <TypeSignature Language="C++ CLI" Value="public ref class NavigationTermSetItem abstract" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ServerTypeId="F99351D7-E3F3-4185-A0CA-D0426FF83FDE")</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Diagnostics.DebuggerDisplay("{DebugText}")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Provides an abstract base class for the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> and the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" />objects.</summary>
+    <remarks>
+      <para>This <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem" /> class is analogous to the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSetItem" /> class.</para>
+      <para>The <b>NavigationTerm</b> object and <b>NavigationTermSet</b> object have two modes: “editable” mode and “read-only” mode. See the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetAsEditable(Microsoft.SharePoint.Taxonomy.TaxonomySession)" /> method to learn more about modes.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CatalogTargetUrlForChildTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.CustomizableString CatalogTargetUrlForChildTerms { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.CustomizableString CatalogTargetUrlForChildTerms" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.CatalogTargetUrlForChildTerms" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CatalogTargetUrlForChildTerms As CustomizableString" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::CustomizableString ^ CatalogTargetUrlForChildTerms { Microsoft::SharePoint::Publishing::CustomizableString ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.CustomizableString</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the default value of the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.CatalogTargetUrl" /> property for child <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> objects.</summary>
+        <value>The default value of the <b>CatalogTargetUrl</b> property</value>
+        <remarks>
+          <para>This property is a <b>CustomizableString</b> object. The default value is inherited from the <b>CatalogTargetUrlForChildTerms.Value</b> property of the parent <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object, or the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> if there is no parent term. For the <b>NavigationTermSet</b> object, the default value is an empty string.</para>
+          <para>The property does not affect the catalog target URL for the current object. If not customized, the default is inherited from a parent node instead. To disable the <b>CatalogTargetUrl</b> default for child nodes, assign an empty string to the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetCustomizableStringCustomValue(System.Enum)" />.</para>
+          <para>The <b>CatalogTargetUrl</b> property is only meaningful when the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.LinkType" /> property is <see cref="F:Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType.FriendlyUrl" />.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>Consider a website with a navigation term set object that should contain this hierarchy of terms.</para>
+          <code>- About Us
+- Products 
+- Cars
+- Trucks
+- Motorcyles
+- ContactThe following code will configure the child terms /products/cars, /products/trucks, and /products/motorcycles to share a common target URL (Rollup.aspx) and a common catalog target URL (CatalogItem.aspx).void CreateProductsHierarchy(NavigationTermSet termSet)
+            {
+                NavigationTerm productsTerm = termSet.CreateTerm("Products", NavigationLinkType.FriendlyUrl);
+                productsTerm.TargetUrl.Value = "~site/Pages/Products.aspx";
+                productsTerm.TargetUrlForChildTerms.Value = "~site/Pages/Rollup.aspx";
+                productsTerm.CatalogTargetUrlForChildTerms.Value = "~site/Pages/CatalogItem.aspx";
+            
+                productsTerm.CreateTerm("Cars", NavigationLinkType.FriendlyUrl);
+                productsTerm.CreateTerm("Trucks", NavigationLinkType.FriendlyUrl);
+                productsTerm.CreateTerm("Motorcycles", NavigationLinkType.FriendlyUrl);
+            
+                termSet.GetTaxonomyTermStore().CommitAll();
+            }
+In this example, note that using the CatalogTargetUrlForChildTerms property avoids the need to assign the same value to the CatalogTargetUrl for each of the child terms. If a new term is created, it will automatically inherit this setting.</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTerm">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.NavigationTerm CreateTerm (string termName, Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType linkType);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Navigation.NavigationTerm CreateTerm(string termName, valuetype Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType linkType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.CreateTerm(System.String,Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateTerm (termName As String, linkType As NavigationLinkType) As NavigationTerm" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Navigation::NavigationTerm ^ CreateTerm(System::String ^ termName, Microsoft::SharePoint::Publishing::Navigation::NavigationLinkType linkType);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.NavigationTerm</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="termName" Type="System.String" />
+        <Parameter Name="linkType" Type="Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType" />
+      </Parameters>
+      <Docs>
+        <param name="termName">The initial value of the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.TaxonomyName" /> property.</param>
+        <param name="linkType">
+          <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.LinkType" /> property.</param>
+        <summary>Creates a new <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object that will be a child of this <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem" /> object.</summary>
+        <returns>The newly created <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object.</returns>
+        <remarks>
+          <para>This version of the method does not specify an ID for the new <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTerm">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.NavigationTerm CreateTerm (string termName, Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType linkType, Guid termId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Navigation.NavigationTerm CreateTerm(string termName, valuetype Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType linkType, valuetype System.Guid termId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.CreateTerm(System.String,Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType,System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateTerm (termName As String, linkType As NavigationLinkType, termId As Guid) As NavigationTerm" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Navigation::NavigationTerm ^ CreateTerm(System::String ^ termName, Microsoft::SharePoint::Publishing::Navigation::NavigationLinkType linkType, Guid termId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.NavigationTerm</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="termName" Type="System.String" />
+        <Parameter Name="linkType" Type="Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType" />
+        <Parameter Name="termId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="termName">The initial value for the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.TaxonomyName" /> property.</param>
+        <param name="linkType">The initial value for the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.LinkType" /> property.</param>
+        <param name="termId">The initial value for the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.Id" /> property.</param>
+        <summary>Creates a new <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object with the specified <paramref name="termName" />.</summary>
+        <returns>The newly created object.</returns>
+        <remarks>
+          <para>Similar in concept to the <see cref="M:Microsoft.SharePoint.Taxonomy.TermSetItem.CreateTerm(System.String,System.Int32)" /> method, this method creates a new navigation term with the specified name, link type, and taxonomy ID. The new term is a child of the current object.</para>
+          <para>The provided <paramref name="termName" /> parameter is used to determine the name of the underlying <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object, which is a localized value. The locale ID is determined by the current <see cref="P:Microsoft.SharePoint.Taxonomy.TermStore.WorkingLanguage" /> property, which for multilingual sites should be configured before by using  the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetNavigationLcidForWeb(Microsoft.SharePoint.SPWeb)" /> method. If the specified name is already in use by a sibling term, a suffix will automatically be appended to avoid this conflict. A suitable <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.FriendlyUrlSegment" /> will also be generated from this name, and in the same way, a suffix will be appended if necessary to avoid a sibling conflict. Where terms created using the <see cref="M:Microsoft.SharePoint.Taxonomy.TermSetItem.CreateTerm" /> are sorted alphabetically, the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSiteItem.CreateTerm" /> automatically updates the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.CustomSortOrder" /> property to ensure that this term appears after the other custom-sorted terms.</para>
+          <para>This method is not supported if the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.IsReadOnly" /> property equals <b>true</b>. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAsEditable">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem GetAsEditable (Microsoft.SharePoint.Taxonomy.TaxonomySession taxonomySession);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem GetAsEditable(class Microsoft.SharePoint.Taxonomy.TaxonomySession taxonomySession) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetAsEditable(Microsoft.SharePoint.Taxonomy.TaxonomySession)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::Navigation::NavigationTermSetItem ^ GetAsEditable(Microsoft::SharePoint::Taxonomy::TaxonomySession ^ taxonomySession);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="taxonomySession" Type="Microsoft.SharePoint.Taxonomy.TaxonomySession" />
+      </Parameters>
+      <Docs>
+        <param name="taxonomySession">The <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomySession" /> object for which to get a <b>Term</b> or <b>TermSet</b> object as editable.</param>
+        <summary>Returns an editable version of this <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object or <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> object.</summary>
+        <returns>An editable version of the  <see cref="T:Microsoft.SharePoint.Publishing.NavigationTerm" /> object or an editable version of the <see cref="T:Microsoft.SharePoint.Publishing.NavigationTermSet" /> object</returns>
+        <remarks>
+          <para>The <b>NavigationTerm</b> and <b>NavigationTermSet</b> objects have two modes that reflect the most common usage patterns. In the “editable” mode, the object acts as a wrapper for the underlying analogous object in the N:Microsoft.SharePoint.Taxonomy namespace, and the object can be freely modified. In the “read-only” mode, the object uses a limited lightweight representation that does not reference objects from a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomySession" /> object. The “read-only” mode enables efficient storage in the taxonomy navigation cache and supports some traversal optimizations that improve performance when these optimizations are used with the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomySiteMapProvider" /> object. The “read-only” mode is set by the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.IsReadOnly" /> property. </para>
+          <para>The <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetAsEditable(Microsoft.SharePoint.Taxonomy.TaxonomySession)" /> method is used when the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet.IsReadOnly" /> property equals <b>true</b>. It returns an editable version of this <b>NavigationTerm</b> object or <b>NavigationTermSet</b> object, which acts as a wrapper for the underlying <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> or <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object from the <b>TaxonomySession</b> object that is provided.</para>
+          <para>Use the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetAsEditable(Microsoft.SharePoint.Taxonomy.TaxonomySession)" /> when IsReadOnly=true.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>This example shows how to use the <b>GetAsEditable</b> method to add a new link to a <b>NavigationTermSet</b> object that was retrieved from the cache.</para>
+          <code>static void CreateSimpleLink(SPWeb web)
+            {
+                // Retrieve the active NavigationTermSet object from the taxonomy navigation cache.
+                NavigationTermSet readOnlyTermSet = TaxonomyNavigation.GetTermSetForWeb(web,
+                    "GlobalNavigationTaxonomyProvider", includeInheritedSettings: false);
+            
+                // This operation would fail because readOnlyTermSet.IsReadOnly=true:
+                //readOnlyTermSet.CreateTerm("Search The Web", NavigationLinkType.SimpleLink);
+            
+                // Get an editable version of the object.
+                TaxonomySession taxonomySession = new TaxonomySession(web, updateCache: true);
+                NavigationTermSet editableTermSet = readOnlyTermSet.GetAsEditable(taxonomySession);
+            
+                // Configure the Taxonomy working language.
+                TermStore termStore = editableTermSet.GetTaxonomyTermStore();
+                termStore.WorkingLanguage = TaxonomyNavigation.GetNavigationLcidForWeb(web);
+            
+                // Create the link by using the editable version of the object.
+                NavigationTerm editableTerm = editableTermSet.CreateTerm("Search The Web", NavigationLinkType.SimpleLink);
+                editableTerm.TargetUrl.Value = "http://www.bing.com/";
+            
+                // Commit the changes to the taxonomy service.
+                termStore.CommitAll();
+                
+                // Cause the cache to be updated immediately.  Without this, it may 
+                // take 5-10 seconds before this change is reflected in subsequent
+                // calls to GetTermSetForWeb().
+                TaxonomyNavigation.FlushTermSetFromCache(web, editableTermSet);
+            }</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAsEditableTermSetItem">
+      <MemberSignature Language="C#" Value="protected abstract Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem GetAsEditableTermSetItem (Microsoft.SharePoint.Taxonomy.TaxonomySession taxonomySession);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem GetAsEditableTermSetItem(class Microsoft.SharePoint.Taxonomy.TaxonomySession taxonomySession) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetAsEditableTermSetItem(Microsoft.SharePoint.Taxonomy.TaxonomySession)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract Microsoft::SharePoint::Publishing::Navigation::NavigationTermSetItem ^ GetAsEditableTermSetItem(Microsoft::SharePoint::Taxonomy::TaxonomySession ^ taxonomySession);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="taxonomySession" Type="Microsoft.SharePoint.Taxonomy.TaxonomySession" />
+      </Parameters>
+      <Docs>
+        <param name="taxonomySession">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCustomizableStringCustomValue">
+      <MemberSignature Language="C#" Value="protected abstract string GetCustomizableStringCustomValue (Enum propertyId);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance string GetCustomizableStringCustomValue(class System.Enum propertyId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetCustomizableStringCustomValue(System.Enum)" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Function GetCustomizableStringCustomValue (propertyId As Enum) As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract System::String ^ GetCustomizableStringCustomValue(Enum ^ propertyId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="propertyId" Type="System.Enum" />
+      </Parameters>
+      <Docs>
+        <param name="propertyId">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCustomizableStringDefaultValue">
+      <MemberSignature Language="C#" Value="protected abstract string GetCustomizableStringDefaultValue (Enum propertyId);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance string GetCustomizableStringDefaultValue(class System.Enum propertyId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetCustomizableStringDefaultValue(System.Enum)" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Function GetCustomizableStringDefaultValue (propertyId As Enum) As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract System::String ^ GetCustomizableStringDefaultValue(Enum ^ propertyId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="propertyId" Type="System.Enum" />
+      </Parameters>
+      <Docs>
+        <param name="propertyId">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCustomizableStringPropertyName">
+      <MemberSignature Language="C#" Value="protected static string GetCustomizableStringPropertyName (Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.CustomizablePropertyId customizablePropertyId);" />
+      <MemberSignature Language="ILAsm" Value=".method familystatic hidebysig string GetCustomizableStringPropertyName(valuetype Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem/CustomizablePropertyId customizablePropertyId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetCustomizableStringPropertyName(Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.CustomizablePropertyId)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; static System::String ^ GetCustomizableStringPropertyName(Microsoft::SharePoint::Publishing::Navigation::NavigationTermSetItem::CustomizablePropertyId customizablePropertyId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="customizablePropertyId" Type="Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem+CustomizablePropertyId" />
+      </Parameters>
+      <Docs>
+        <param name="customizablePropertyId">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetResolvedDisplayUrl">
+      <MemberSignature Language="C#" Value="public string GetResolvedDisplayUrl (string browserQueryString);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetResolvedDisplayUrl(string browserQueryString) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetResolvedDisplayUrl(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetResolvedDisplayUrl (browserQueryString As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetResolvedDisplayUrl(System::String ^ browserQueryString);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="browserQueryString" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="browserQueryString">Optional. If it is provided, this query string is used as the query string part of the resulting URL. If this parameter is not a null reference (Nothing in Visual Basic) or an empty string, it must be prefixed with the ? character.</param>
+        <summary>Returns the URL that is displayed in the navigation menus.</summary>
+        <returns>A server-relative URL or an empty string.</returns>
+        <remarks>
+          <para>
+            <b>Note</b>: To obtain the target page address for a friendly URL, use the<see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.GetResolvedTargetUrl(System.String,System.String[])" /> method instead. The returned URL is resolved by expanding any prefix tokens such as ~site/ or ~sitecollection/ which are used with properties such as <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.SimpleLinkUrl" /> and <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.TargetUrl" /> property.</para>
+          <para>The URL is derived differently depending on the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType" /> value. If the term is of type <see cref="F:Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType.SimpleLink" />, then the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.SimpleLinkUrl" /> property is used.  If the term is of type <see cref="F:Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType.FriendlyUrl" />, then the friendly URL is used. For all other cases, null is returned.
+</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTaxonomyTermStore">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermStore GetTaxonomyTermStore ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermStore GetTaxonomyTermStore() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetTaxonomyTermStore" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetTaxonomyTermStore () As TermStore" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermStore ^ GetTaxonomyTermStore();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ReturnObjectIdentity=true)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermStore</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the associated <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> if the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem" /> object is in the editable mode.</summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>If the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem" /> object is in editable mode, the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetTaxonomyTermStore" /> method returns the associated <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object. </para>
+          <para>This method is not supported in the read-only mode.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTermSetItemWithNewView">
+      <MemberSignature Language="C#" Value="protected abstract Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem GetTermSetItemWithNewView (Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView newView);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem GetTermSetItemWithNewView(class Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView newView) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetTermSetItemWithNewView(Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView)" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Function GetTermSetItemWithNewView (newView As NavigationTermSetView) As NavigationTermSetItem" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract Microsoft::SharePoint::Publishing::Navigation::NavigationTermSetItem ^ GetTermSetItemWithNewView(Microsoft::SharePoint::Publishing::Navigation::NavigationTermSetView ^ newView);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="newView" Type="Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView" />
+      </Parameters>
+      <Docs>
+        <param name="newView">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetValidatedPageUrl">
+      <MemberSignature Language="C#" Value="protected static string GetValidatedPageUrl (string value, string propertyName);" />
+      <MemberSignature Language="ILAsm" Value=".method familystatic hidebysig string GetValidatedPageUrl(string value, string propertyName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetValidatedPageUrl(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Shared Function GetValidatedPageUrl (value As String, propertyName As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; static System::String ^ GetValidatedPageUrl(System::String ^ value, System::String ^ propertyName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.String" />
+        <Parameter Name="propertyName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="value">To be added.</param>
+        <param name="propertyName">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetValidatedSimpleLink">
+      <MemberSignature Language="C#" Value="protected static string GetValidatedSimpleLink (string value, string propertyName);" />
+      <MemberSignature Language="ILAsm" Value=".method familystatic hidebysig string GetValidatedSimpleLink(string value, string propertyName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetValidatedSimpleLink(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Shared Function GetValidatedSimpleLink (value As String, propertyName As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; static System::String ^ GetValidatedSimpleLink(System::String ^ value, System::String ^ propertyName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.String" />
+        <Parameter Name="propertyName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="value">To be added.</param>
+        <param name="propertyName">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetValidatedUrl">
+      <MemberSignature Language="C#" Value="protected static string GetValidatedUrl (string value, string propertyName);" />
+      <MemberSignature Language="ILAsm" Value=".method familystatic hidebysig string GetValidatedUrl(string value, string propertyName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.GetValidatedUrl(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Shared Function GetValidatedUrl (value As String, propertyName As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; static System::String ^ GetValidatedUrl(System::String ^ value, System::String ^ propertyName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.String" />
+        <Parameter Name="propertyName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="value">To be added.</param>
+        <param name="propertyName">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Id">
+      <MemberSignature Language="C#" Value="public abstract Guid Id { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid Id" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.Id" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property Id As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property Guid Id { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.Id" /> property and <see cref="P:Microsoft.SharePoint.Taxonomy.TermSet.Id" /> property from the underlying taxonomy object. </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsReadOnly">
+      <MemberSignature Language="C#" Value="public abstract bool IsReadOnly { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsReadOnly" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.IsReadOnly" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property IsReadOnly As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property bool IsReadOnly { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that indicates whether the object is in “read-only” mode or “editable” mode.</summary>
+        <value>If the object is in the “read-only” mode, <b>true</b>; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>The <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object and the <see cref="T:Micrososoft.SharePoint.Publishing.NavigationTermSet" /> object have two modes:  an "editable" mode and a "read-only" mode.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LinkType">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType LinkType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType LinkType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.LinkType" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Property LinkType As NavigationLinkType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property Microsoft::SharePoint::Publishing::Navigation::NavigationLinkType LinkType { Microsoft::SharePoint::Publishing::Navigation::NavigationLinkType get(); void set(Microsoft::SharePoint::Publishing::Navigation::NavigationLinkType value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the type of link for this <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem" /> object. </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>For a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object, the value will be a friendly URL or a simple link (heading).</para>
+          <para>For a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> object, the value is always <see cref="F:Microsoft.SharePoint.Publishing.Navigation.NavigationLinkType.Root" />.</para>
+          <para>Certain navigation properties are readable, but not modifiable for some link types. When assigning properties, you must assign the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.LinkType" /> property before assigning properties such as <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.SimpleLinkUrl" /> or <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.FriendlyUrlSegment" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetCustomizableStringCustomValue">
+      <MemberSignature Language="C#" Value="protected abstract void SetCustomizableStringCustomValue (Enum propertyId, string customValue);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void SetCustomizableStringCustomValue(class System.Enum propertyId, string customValue) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.SetCustomizableStringCustomValue(System.Enum,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected MustOverride Sub SetCustomizableStringCustomValue (propertyId As Enum, customValue As String)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract void SetCustomizableStringCustomValue(Enum ^ propertyId, System::String ^ customValue);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="propertyId" Type="System.Enum" />
+        <Parameter Name="customValue" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="propertyId">To be added.</param>
+        <param name="customValue">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TargetUrlForChildTerms">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.CustomizableString TargetUrlForChildTerms { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.CustomizableString TargetUrlForChildTerms" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.TargetUrlForChildTerms" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TargetUrlForChildTerms As CustomizableString" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::CustomizableString ^ TargetUrlForChildTerms { Microsoft::SharePoint::Publishing::CustomizableString ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.CustomizableString</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a string that specifies the default value of the target URL for child <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> objects.</summary>
+        <value>A string that specifies the default value of the target URL for child nodes</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.TargetUrlForChildTerms" /> property does not affect the current node. </para>
+          <para>This property is a <b>CustomizableString</b> object. The default value is inherited from the <b>TargetUrlForChildTerms.Value</b> property of the parent <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object or the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> object if there is no parent term.  For the <b>NavigationTermSet</b> object, the default value is an empty string</para>
+          <para />
+          <para />
+        </remarks>
+        <example>
+          <para>Consider a website for which the <b>NavigationTermSet</b> should contain this hierarchy of terms:</para>
+          <code>- About Us
+- Products 
+- Cars
+- Trucks
+- Motorcyles
+- Contact
+The following code will configure the friendly URLs for /products/cars, /products/trucks, and /products/motorcycles to share a common target page--/Pages/Rollup.aspx (with search-driven content). The parent friendly URL /producs will use a separate target page.            void CreateProductsHierarchy(NavigationTermSet termSet)
+            {
+                NavigationTerm productsTerm = termSet.CreateTerm("Products", NavigationLinkType.FriendlyUrl);
+                productsTerm.TargetUrl.Value = "~site/Pages/Products.aspx";
+                productsTerm.TargetUrlForChildTerms.Value = "~site/Pages/Rollup.aspx";
+            
+                productsTerm.CreateTerm("Cars", NavigationLinkType.FriendlyUrl);
+                productsTerm.CreateTerm("Trucks", NavigationLinkType.FriendlyUrl);
+                productsTerm.CreateTerm("Motorcycles", NavigationLinkType.FriendlyUrl);
+            
+                termSet.GetTaxonomyTermStore().CommitAll();
+            }Note that in this example, using the TargetUrlForChildTerms property avoids the need to assign the same value to the TargetUrl for each of the child terms. If a new term is created, it will automatically inherit this setting.</code>
+          <code />
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="TaxonomyName">
+      <MemberSignature Language="C#" Value="public abstract string TaxonomyName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string TaxonomyName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.TaxonomyName" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property TaxonomyName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property System::String ^ TaxonomyName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="P:Microsoft.SharePoint.Taxonomy.Term.Name" /> property or a <see cref="P:Microsoft.SharePoint.Taxonomy.TermSet.Name" /> property from the underlying taxonomy object.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Taxonomy.Term.Name" /> property and the <see cref="P:Microsoft.SharePoint.Taxonomy.TermSet.Name" /> property support different localizations. If the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.IsReadOnly" /> property is equal to <b>false</b>, this corresponds to the associated <see cref="P:Microsoft.SharePoint.Taxonomy.TermStore.WorkingLanguage" /> property. Otherwise, the property uses the active localization from when the object was loaded, which is normally determined by the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.TaxonomyNavigation.GetNavigationLcidForWeb(Microsoft.SharePoint.SPWeb)" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Terms">
+      <MemberSignature Language="C#" Value="public abstract System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.SharePoint.Publishing.Navigation.NavigationTerm&gt; Terms { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;class Microsoft.SharePoint.Publishing.Navigation.NavigationTerm&gt; Terms" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.Terms" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property Terms As ReadOnlyCollection(Of NavigationTerm)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property System::Collections::ObjectModel::ReadOnlyCollection&lt;Microsoft::SharePoint::Publishing::Navigation::NavigationTerm ^&gt; ^ Terms { System::Collections::ObjectModel::ReadOnlyCollection&lt;Microsoft::SharePoint::Publishing::Navigation::NavigationTerm ^&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.SharePoint.Publishing.Navigation.NavigationTerm&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of all immediate child <see cref="T:Microsoft.Sharepoint.Publishing.Navigation.NavigationTerm" /> objects of this  <b>NavigationTerm</b> object or <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" /> object. </summary>
+        <value>A collection of child terms belonging to this <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem" /> object</value>
+        <remarks>
+          <para>If this object is <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" />, then the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.Parent" /> property for the child objects point to this object. If the object is a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet" />, then the <b>Parent</b> property is a null reference (Nothing in Visual Basic) for the top-level child terms.</para>
+          <para>The terms collection excludes some objects according to the trimming that is specified by the associated <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.View" /> property. For example, if <b>NavigationTermSetView.ExcludeDeprecatedTerms</b> is true, then objects will be trimmed (i.e., excluded) from the collection if their <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.IsDeprecated" /> property is <b>true</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Title">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.CustomizableString Title { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.CustomizableString Title" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.Title" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Title As CustomizableString" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::CustomizableString ^ Title { Microsoft::SharePoint::Publishing::CustomizableString ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.CustomizableString</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a navigation node title that is displayed in menus and breadcrumbs. </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.Title" /> property is a customizable string object. For a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm" /> object, the default value is based on the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.TaxonomyName" /> property. For a <see cref="T:Microsoft.Sharepoint.Publishing.Navigation.NavigationTermSet" /> object, this property cannot be customized: it is always the same as the associated <see cref="P:Microsoft.SharePoint.SPWeb.Title" /> property as indicated by the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.WebTitle" /> property for the current <b>View</b> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.ToString" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ ToString();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the string representation of a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem" /> object.</summary>
+        <returns>The <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.Title" /> property unless it is an empty string; otherwise, the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.TaxonomyName" /> property is used.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="View">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView View { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView View" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem.View" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property View As NavigationTermSetView" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Navigation::NavigationTermSetView ^ View { Microsoft::SharePoint::Publishing::Navigation::NavigationTermSetView ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView" /> object that is used for various purposes such as to resolve relative URLs. </summary>
+        <value>A <b>NavigationSetView</b> object</value>
+        <remarks>
+          <para>The view represents state that is obtained from the context of the <see cref="T:Microsoft.SharePoint.SPWeb" /> object that is using the term set for its navigation.</para>
+          <para>The <b>NavigationTermSetView</b> object is read-only. To modify the view, make the changes to a copy obtained via the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView.GetCopy" /> method, and then pass the new instance to the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTerm.GetWithNewView(Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView)" /> method or to the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSet.GetWithNewView(Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetView)" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

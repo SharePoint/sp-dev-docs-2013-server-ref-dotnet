@@ -1,0 +1,1209 @@
+﻿<Type Name="Hold" FullName="Microsoft.Office.RecordsManagement.Holds.Hold">
+  <TypeSignature Language="C#" Value="public sealed class Hold" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit Hold extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.Holds.Hold" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class Hold" />
+  <TypeSignature Language="C++ CLI" Value="public ref class Hold sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents specific properties of a hold. </summary>
+    <remarks>
+      <para>Holds can be placed on documents to exempt them from the enforcement of the expiration policy that is applied to them. You can also use them to prevent the modification and deletion of documents. Holds are stored as list items on a specified list in the Records Center site. As such, you can manipulate many of the properties of a hold programmatically by accessing the <see cref="T:Microsoft.SharePoint.SPListItem" /> object that represents that hold.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="AllowListDeletion">
+      <MemberSignature Language="C#" Value="public static void AllowListDeletion (Microsoft.SharePoint.SPList list, bool fAllow);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void AllowListDeletion(class Microsoft.SharePoint.SPList list, bool fAllow) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.AllowListDeletion(Microsoft.SharePoint.SPList,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub AllowListDeletion (list As SPList, fAllow As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void AllowListDeletion(Microsoft::SharePoint::SPList ^ list, bool fAllow);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="fAllow" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="list">Reserved for internal use.</param>
+        <param name="fAllow">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllHoldsForItem">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.SPFieldMultiChoiceValue GetAllHoldsForItem (Microsoft.SharePoint.SPListItem item);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.SPFieldMultiChoiceValue GetAllHoldsForItem(class Microsoft.SharePoint.SPListItem item) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetAllHoldsForItem(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetAllHoldsForItem (item As SPListItem) As SPFieldMultiChoiceValue" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::SPFieldMultiChoiceValue ^ GetAllHoldsForItem(Microsoft::SharePoint::SPListItem ^ item);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Use GetHolds to get a list of all hold items")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPFieldMultiChoiceValue</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="item">The item.</param>
+        <summary>Gets a list of URLS that is specific to the holds.</summary>
+        <returns>A list of URLs that is specific to the holds.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllHoldsLists">
+      <MemberSignature Language="C#" Value="public static System.Collections.Generic.Dictionary&lt;string,Microsoft.SharePoint.SPList&gt; GetAllHoldsLists (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.Dictionary`2&lt;string, class Microsoft.SharePoint.SPList&gt; GetAllHoldsLists(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetAllHoldsLists(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetAllHoldsLists (site As SPSite) As Dictionary(Of String, SPList)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Collections::Generic::Dictionary&lt;System::String ^, Microsoft::SharePoint::SPList ^&gt; ^ GetAllHoldsLists(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.Dictionary&lt;System.String,Microsoft.SharePoint.SPList&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site.</param>
+        <summary>Gets all holds lists in a specified site.</summary>
+        <returns>Returns <see cref="T:System.Collections.Generic.Dictionary`2" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllowListDeletion">
+      <MemberSignature Language="C#" Value="public static bool GetAllowListDeletion (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool GetAllowListDeletion(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetAllowListDeletion(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetAllowListDeletion (list As SPList) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool GetAllowListDeletion(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetApplicableHoldsLists">
+      <MemberSignature Language="C#" Value="public static System.Collections.Generic.List&lt;Microsoft.SharePoint.SPList&gt; GetApplicableHoldsLists (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.List`1&lt;class Microsoft.SharePoint.SPList&gt; GetApplicableHoldsLists(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetApplicableHoldsLists(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetApplicableHoldsLists (web As SPWeb) As List(Of SPList)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Collections::Generic::List&lt;Microsoft::SharePoint::SPList ^&gt; ^ GetApplicableHoldsLists(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.SharePoint.SPList&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">The web.</param>
+        <summary>Gets all of the applicable holds list accessible to the caller.</summary>
+        <returns>All of the applicable holds lists that are accessible to the caller.</returns>
+        <remarks>
+          <para>The applicable holds lists are the holds lists that satisfy the following conditions: 1.The caller has view rights on the holds lists. 2. The holds lists are present in the "web" or any parent web of "web" including the site collections root web.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEdiscoveryHub">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.SPSite GetEdiscoveryHub (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.SPSite GetEdiscoveryHub(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetEdiscoveryHub(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetEdiscoveryHub (site As SPSite) As SPSite" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::SPSite ^ GetEdiscoveryHub(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPSite</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site.</param>
+        <summary>Gets the hub of the site subscription of which the specified site belongs.</summary>
+        <returns>The hub of the site subscription of which the specified site belongs.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">Site is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.ArgumentException">Site subscription cannot be found.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHoldReportName">
+      <MemberSignature Language="C#" Value="public static string GetHoldReportName (Microsoft.SharePoint.SPListItem hold);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetHoldReportName(class Microsoft.SharePoint.SPListItem hold) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetHoldReportName(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetHoldReportName (hold As SPListItem) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetHoldReportName(Microsoft::SharePoint::SPListItem ^ hold);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="hold" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="hold">The document for which you want to get a holds report.</param>
+        <summary>Gets the most current holds report for the specified document.</summary>
+        <returns>A string that represents the most current holds report for the specified document.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHoldReports">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.SPListItemCollection GetHoldReports (Microsoft.SharePoint.SPListItem hold);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.SPListItemCollection GetHoldReports(class Microsoft.SharePoint.SPListItem hold) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetHoldReports(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetHoldReports (hold As SPListItem) As SPListItemCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::SPListItemCollection ^ GetHoldReports(Microsoft::SharePoint::SPListItem ^ hold);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPListItemCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="hold" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="hold">The hold.</param>
+        <summary>Gets a list of all the hold reports associated with the specified hold.</summary>
+        <returns>List item collection of reports.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHoldReportsList">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.SPList GetHoldReportsList (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.SPList GetHoldReportsList(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetHoldReportsList(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetHoldReportsList (web As SPWeb) As SPList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::SPList ^ GetHoldReportsList(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPList</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">The site for which you want the holds report.</param>
+        <summary>Gets a list of items currently on hold for the specified SharePoint site.</summary>
+        <returns>Gets an <see cref="T:Microsoft.SharePoint.SPList" /> object that represents a list of the items on hold for the specified site.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHolds">
+      <MemberSignature Language="C#" Value="public static System.Collections.Generic.List&lt;Microsoft.SharePoint.SPListItem&gt; GetHolds (Microsoft.SharePoint.SPListItem item);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.List`1&lt;class Microsoft.SharePoint.SPListItem&gt; GetHolds(class Microsoft.SharePoint.SPListItem item) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetHolds(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetHolds (item As SPListItem) As List(Of SPListItem)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Collections::Generic::List&lt;Microsoft::SharePoint::SPListItem ^&gt; ^ GetHolds(Microsoft::SharePoint::SPListItem ^ item);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.SharePoint.SPListItem&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="item">The item.</param>
+        <summary>Gets the list of holds for the specified item.</summary>
+        <returns>The list holds for the specified item.</returns>
+        <remarks>
+          <para>This API returns a List of <see cref="T:Microsoft.SharePoint.SPListItem" /> objects where each <b>SPListItem</b> is a hold. The API will returns the holds that meet the following criteria: 1. The item is on at least one hold.2. The caller has view rights on the holds list to which the hold belongs.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHoldsList">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.SPList GetHoldsList (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.SPList GetHoldsList(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetHoldsList(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetHoldsList (web As SPWeb) As SPList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::SPList ^ GetHoldsList(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPList</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">The Records Center for which you want the list where the holds are stored.</param>
+        <summary>Gets the list where the holds are stored for the specified Records Center.</summary>
+        <returns>Returns an <see cref="T:Microsoft.SharePoint.SPList" /> object that represents the list where the holds are stored for this Records Center.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetLockHoldItemsProperty">
+      <MemberSignature Language="C#" Value="public static bool GetLockHoldItemsProperty (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool GetLockHoldItemsProperty(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.GetLockHoldItemsProperty(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetLockHoldItemsProperty (site As SPSite) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool GetLockHoldItemsProperty(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> for which the setting is requested</param>
+        <summary>Gets the setting of whether items on hold should be locked (block edit) on a specified site.</summary>
+        <returns>The setting of whether items on hold should be locked.</returns>
+        <remarks>
+          <para>This setting is scoped to the site collection.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HoldECBItemFeatureGuid">
+      <MemberSignature Language="C#" Value="public static string HoldECBItemFeatureGuid { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string HoldECBItemFeatureGuid" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.Holds.Hold.HoldECBItemFeatureGuid" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property HoldECBItemFeatureGuid As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property System::String ^ HoldECBItemFeatureGuid { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HoldsListColumn_Description">
+      <MemberSignature Language="C#" Value="public static string HoldsListColumn_Description { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string HoldsListColumn_Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.Holds.Hold.HoldsListColumn_Description" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property HoldsListColumn_Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property System::String ^ HoldsListColumn_Description { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Holds are stored as list items; the list containing the holds has a Description column. To access the description of the hold, access the <see cref="T:Microsoft.SharePoint.SPListItem" /> object that represents that hold, and then access the field value for the Description column.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HoldsListColumn_HoldSearchQueries">
+      <MemberSignature Language="C#" Value="public static string HoldsListColumn_HoldSearchQueries { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string HoldsListColumn_HoldSearchQueries" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.Holds.Hold.HoldsListColumn_HoldSearchQueries" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property HoldsListColumn_HoldSearchQueries As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property System::String ^ HoldsListColumn_HoldSearchQueries { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Internal name of hold search queries.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HoldsListColumn_HoldStatusInternal">
+      <MemberSignature Language="C#" Value="public static string HoldsListColumn_HoldStatusInternal { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string HoldsListColumn_HoldStatusInternal" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.Holds.Hold.HoldsListColumn_HoldStatusInternal" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property HoldsListColumn_HoldStatusInternal As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property System::String ^ HoldsListColumn_HoldStatusInternal { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HoldsListColumn_ManagedBy">
+      <MemberSignature Language="C#" Value="public static string HoldsListColumn_ManagedBy { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string HoldsListColumn_ManagedBy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.Holds.Hold.HoldsListColumn_ManagedBy" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property HoldsListColumn_ManagedBy As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property System::String ^ HoldsListColumn_ManagedBy { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Holds are stored as list items; the list containing the holds has a Managed By column. To access the description of the hold, access the <see cref="T:Microsoft.SharePoint.SPListItem" /> object that represents that hold, and then access the field value for the Managed By column.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HoldsListColumn_ReportDateInternal">
+      <MemberSignature Language="C#" Value="public static string HoldsListColumn_ReportDateInternal { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string HoldsListColumn_ReportDateInternal" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.Holds.Hold.HoldsListColumn_ReportDateInternal" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property HoldsListColumn_ReportDateInternal As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property System::String ^ HoldsListColumn_ReportDateInternal { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HoldsPropertyInternalName">
+      <MemberSignature Language="C#" Value="public static string HoldsPropertyInternalName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string HoldsPropertyInternalName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.Holds.Hold.HoldsPropertyInternalName" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property HoldsPropertyInternalName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property System::String ^ HoldsPropertyInternalName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Field internal name of hold property.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HoldsRecordsStatusInternalName">
+      <MemberSignature Language="C#" Value="public static string HoldsRecordsStatusInternalName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property string HoldsRecordsStatusInternalName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.Holds.Hold.HoldsRecordsStatusInternalName" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property HoldsRecordsStatusInternalName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property System::String ^ HoldsRecordsStatusInternalName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>GUID of the hold record status.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsHoldEnabled">
+      <MemberSignature Language="C#" Value="public static bool IsHoldEnabled (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsHoldEnabled(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.IsHoldEnabled(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsHoldEnabled (list As SPList) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsHoldEnabled(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsHoldEnabled">
+      <MemberSignature Language="C#" Value="public static bool IsHoldEnabled (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsHoldEnabled(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.IsHoldEnabled(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsHoldEnabled (web As SPWeb) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsHoldEnabled(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsHoldEnabledForCurrentUser">
+      <MemberSignature Language="C#" Value="public static bool IsHoldEnabledForCurrentUser (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsHoldEnabledForCurrentUser(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.IsHoldEnabledForCurrentUser(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsHoldEnabledForCurrentUser (web As SPWeb) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsHoldEnabledForCurrentUser(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">The web.</param>
+        <summary>Gets whether hold is enabled on the specified web for current user.</summary>
+        <returns>Whether hold is enabled on the specified web for current user.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsHoldExclusion">
+      <MemberSignature Language="C#" Value="public static bool IsHoldExclusion (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsHoldExclusion(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.IsHoldExclusion(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsHoldExclusion (list As SPList) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsHoldExclusion(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsItemOnHold">
+      <MemberSignature Language="C#" Value="public static bool IsItemOnHold (Microsoft.SharePoint.SPListItem item);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsItemOnHold(class Microsoft.SharePoint.SPListItem item) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.IsItemOnHold(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsItemOnHold (item As SPListItem) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsItemOnHold(Microsoft::SharePoint::SPListItem ^ item);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="item">The document for which you want to determine if a hold has been applied.</param>
+        <summary>Returns a value that indicates if the item is on hold.</summary>
+        <returns>
+          <b>true</b> if the specified document currently has a hold applied to it; otherwise, <b>false</b>.</returns>
+        <remarks>
+          <para>To determine if a document has a specific hold applied to it, use the <see cref="M:Microsoft.Office.RecordsManagement.Holds.Hold.IsItemOnHold(Microsoft.SharePoint.SPListItem,System.Int32)" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsItemOnHold">
+      <MemberSignature Language="C#" Value="public static bool IsItemOnHold (Microsoft.SharePoint.SPListItem item, int holdID);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsItemOnHold(class Microsoft.SharePoint.SPListItem item, int32 holdID) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.IsItemOnHold(Microsoft.SharePoint.SPListItem,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsItemOnHold (item As SPListItem, holdID As Integer) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsItemOnHold(Microsoft::SharePoint::SPListItem ^ item, int holdID);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="holdID" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="item">The document for which you want to determine if the specified hold has been applied.</param>
+        <param name="holdID">The integer that identifies the list item that represents the hold.</param>
+        <summary>Returns a value that indicates if the item is on hold.</summary>
+        <returns>
+          <b>true</b> if the specified document currently has the specified hold applied to it; otherwise, <b>false</b>. If the document has a hold applied to it other than the specified hold, this method still returns <b>false</b>.</returns>
+        <remarks>
+          <para />
+          <para>To determine if a document has any holds applied to it, use the <see cref="M:Microsoft.Office.RecordsManagement.Holds.Hold.IsItemOnHold(Microsoft.SharePoint.SPListItem)" /> method.</para>
+          <para />
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NominateEdiscoverySuscriptionHub">
+      <MemberSignature Language="C#" Value="public static void NominateEdiscoverySuscriptionHub (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void NominateEdiscoverySuscriptionHub(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.NominateEdiscoverySuscriptionHub(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub NominateEdiscoverySuscriptionHub (site As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void NominateEdiscoverySuscriptionHub(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site which is to be nominated as the hub</param>
+        <summary>Nominates the specified site as the eDiscovery hub of the site subscription.</summary>
+        <remarks>
+          <para>This method does the following:1. Check that the site subscription actually exists.(without that you cannot nominate a hub). 2. Check if there is an existing hub (presumably which was nominated earlier.) 3. If there is an existing hub then we remove its nomination.4. Now in the Site Subscriptions Settings make and entry for the hub's site id. 5. On the Site's properties cache the fact that it is the hub.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">Site is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.ArgumentException">Site does not belong to a site subscription.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ProcessAndReport">
+      <MemberSignature Language="C#" Value="public static void ProcessAndReport (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ProcessAndReport(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.ProcessAndReport(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ProcessAndReport (web As SPWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ProcessAndReport(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ProcessAndReport">
+      <MemberSignature Language="C#" Value="public static void ProcessAndReport (Microsoft.SharePoint.SPWeb web, int holdID);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ProcessAndReport(class Microsoft.SharePoint.SPWeb web, int32 holdID) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.ProcessAndReport(Microsoft.SharePoint.SPWeb,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ProcessAndReport (web As SPWeb, holdID As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ProcessAndReport(Microsoft::SharePoint::SPWeb ^ web, int holdID);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Please use ProcessAndReport(SPWeb)")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="holdID" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="web">Reserved for internal use.</param>
+        <param name="holdID">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ProvisionList">
+      <MemberSignature Language="C#" Value="public static bool ProvisionList (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool ProvisionList(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.ProvisionList(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function ProvisionList (list As SPList) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool ProvisionList(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ProvisionWeb">
+      <MemberSignature Language="C#" Value="public static bool ProvisionWeb (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool ProvisionWeb(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.ProvisionWeb(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function ProvisionWeb (web As SPWeb) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool ProvisionWeb(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RegisterCustomHoldProcessor">
+      <MemberSignature Language="C#" Value="public static void RegisterCustomHoldProcessor (string strAssembly, string strClass, Microsoft.SharePoint.Administration.SPWebApplication webApp);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void RegisterCustomHoldProcessor(string strAssembly, string strClass, class Microsoft.SharePoint.Administration.SPWebApplication webApp) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.RegisterCustomHoldProcessor(System.String,System.String,Microsoft.SharePoint.Administration.SPWebApplication)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub RegisterCustomHoldProcessor (strAssembly As String, strClass As String, webApp As SPWebApplication)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void RegisterCustomHoldProcessor(System::String ^ strAssembly, System::String ^ strClass, Microsoft::SharePoint::Administration::SPWebApplication ^ webApp);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strAssembly" Type="System.String" />
+        <Parameter Name="strClass" Type="System.String" />
+        <Parameter Name="webApp" Type="Microsoft.SharePoint.Administration.SPWebApplication" />
+      </Parameters>
+      <Docs>
+        <param name="strAssembly">Strong name of the assembly containing the custom hold processor.</param>
+        <param name="strClass">Full class name of the custom hold handler.</param>
+        <param name="webApp">The web application.</param>
+        <summary>Registers custom hold handler on the specified web application.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReleaseHold">
+      <MemberSignature Language="C#" Value="public static void ReleaseHold (Microsoft.SharePoint.SPListItem hold, string comments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ReleaseHold(class Microsoft.SharePoint.SPListItem hold, string comments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.ReleaseHold(Microsoft.SharePoint.SPListItem,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ReleaseHold (hold As SPListItem, comments As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ReleaseHold(Microsoft::SharePoint::SPListItem ^ hold, System::String ^ comments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="hold" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="comments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="hold">The hold.</param>
+        <param name="comments">Comments about why the item was released from hold.</param>
+        <summary>Releases all items on the specified hold.</summary>
+        <remarks>
+          <para>Items on this specified hold are marked forasynchronous release from the specified hold.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">Hold is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ReleaseHold">
+      <MemberSignature Language="C#" Value="public static void ReleaseHold (int holdID, Microsoft.SharePoint.SPWeb web, string comments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ReleaseHold(int32 holdID, class Microsoft.SharePoint.SPWeb web, string comments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.ReleaseHold(System.Int32,Microsoft.SharePoint.SPWeb,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ReleaseHold (holdID As Integer, web As SPWeb, comments As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ReleaseHold(int holdID, Microsoft::SharePoint::SPWeb ^ web, System::String ^ comments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="holdID" Type="System.Int32" />
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="comments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="holdID">The integer that identifies the list item that represents the hold.</param>
+        <param name="web">The site on which the documents you want released from this hold are located.</param>
+        <param name="comments">Any comment you want to write to the audit log when the hold is released.</param>
+        <summary>Releases any documents on the specified SharePoint site from the specified hold.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveHold">
+      <MemberSignature Language="C#" Value="public static void RemoveHold (int holdID, Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void RemoveHold(int32 holdID, class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.RemoveHold(System.Int32,Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub RemoveHold (holdID As Integer, web As SPWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void RemoveHold(int holdID, Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Holds are released asynchronously via a timer job. Use ReleaseHold to mark a hold as pending release.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="holdID" Type="System.Int32" />
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="holdID">Reserved for internal use.</param>
+        <param name="web">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveHold">
+      <MemberSignature Language="C#" Value="public static void RemoveHold (Microsoft.SharePoint.SPListItem item, Microsoft.SharePoint.SPListItem hold, string comments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void RemoveHold(class Microsoft.SharePoint.SPListItem item, class Microsoft.SharePoint.SPListItem hold, string comments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.RemoveHold(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.SPListItem,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub RemoveHold (item As SPListItem, hold As SPListItem, comments As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void RemoveHold(Microsoft::SharePoint::SPListItem ^ item, Microsoft::SharePoint::SPListItem ^ hold, System::String ^ comments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="hold" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="comments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="item">The hold.</param>
+        <param name="hold">The item.</param>
+        <param name="comments">Comments about why the item was released from hold.</param>
+        <summary>Removes the specified item from the specified hold.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveHold">
+      <MemberSignature Language="C#" Value="public static bool RemoveHold (Microsoft.SharePoint.SPListItemCollection items, Microsoft.SharePoint.SPListItem hold, string comments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool RemoveHold(class Microsoft.SharePoint.SPListItemCollection items, class Microsoft.SharePoint.SPListItem hold, string comments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.RemoveHold(Microsoft.SharePoint.SPListItemCollection,Microsoft.SharePoint.SPListItem,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function RemoveHold (items As SPListItemCollection, hold As SPListItem, comments As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool RemoveHold(Microsoft::SharePoint::SPListItemCollection ^ items, Microsoft::SharePoint::SPListItem ^ hold, System::String ^ comments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="items" Type="Microsoft.SharePoint.SPListItemCollection" />
+        <Parameter Name="hold" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="comments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="items">The hold.</param>
+        <param name="hold">The items.</param>
+        <param name="comments">Comments about why the item was released from hold.</param>
+        <summary>Removes the specified items from the specified hold.</summary>
+        <returns>Whether any item in the collection failed to be released from the hold.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">Items or a hold is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveHold">
+      <MemberSignature Language="C#" Value="public static void RemoveHold (int holdID, Microsoft.SharePoint.SPListItem item, string comments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void RemoveHold(int32 holdID, class Microsoft.SharePoint.SPListItem item, string comments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.RemoveHold(System.Int32,Microsoft.SharePoint.SPListItem,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub RemoveHold (holdID As Integer, item As SPListItem, comments As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void RemoveHold(int holdID, Microsoft::SharePoint::SPListItem ^ item, System::String ^ comments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Use RemoveHold(item, hold, comments)")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="holdID" Type="System.Int32" />
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="comments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="holdID">The integer that identifies the list item that represents the hold.</param>
+        <param name="item">The document you want to releasethe specified hold from.</param>
+        <param name="comments">Any comment you want to write to the audit log when the hold is released for the specified document.</param>
+        <summary>Releases the specified document from the specified hold.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveHold">
+      <MemberSignature Language="C#" Value="public static bool RemoveHold (int holdID, Microsoft.SharePoint.SPListItemCollection items, string comments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool RemoveHold(int32 holdID, class Microsoft.SharePoint.SPListItemCollection items, string comments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.RemoveHold(System.Int32,Microsoft.SharePoint.SPListItemCollection,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function RemoveHold (holdID As Integer, items As SPListItemCollection, comments As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool RemoveHold(int holdID, Microsoft::SharePoint::SPListItemCollection ^ items, System::String ^ comments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Use RemoveHold(items, hold, comments")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="holdID" Type="System.Int32" />
+        <Parameter Name="items" Type="Microsoft.SharePoint.SPListItemCollection" />
+        <Parameter Name="comments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="holdID">The integer that identifies the list item that represents the hold.</param>
+        <param name="items">A collection of the list items from which you want to release the hold.</param>
+        <param name="comments">Any comment you want to write to the audit log when the hold is released for the specified documents.</param>
+        <summary>Releases all the specified items from the specified hold.</summary>
+        <returns>A Boolean value that represents whether the hold was successfully removed from the specified items.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetHold">
+      <MemberSignature Language="C#" Value="public static void SetHold (Microsoft.SharePoint.SPListItem item, Microsoft.SharePoint.SPListItem hold, string comments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SetHold(class Microsoft.SharePoint.SPListItem item, class Microsoft.SharePoint.SPListItem hold, string comments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.SetHold(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.SPListItem,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SetHold (item As SPListItem, hold As SPListItem, comments As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SetHold(Microsoft::SharePoint::SPListItem ^ item, Microsoft::SharePoint::SPListItem ^ hold, System::String ^ comments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="hold" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="comments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="item">The item.</param>
+        <param name="hold">The hold.</param>
+        <param name="comments">Comments about why the item was put on hold.</param>
+        <summary>Sets the item on the specified hold.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetHold">
+      <MemberSignature Language="C#" Value="public static bool SetHold (Microsoft.SharePoint.SPListItemCollection items, Microsoft.SharePoint.SPListItem hold, string comments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool SetHold(class Microsoft.SharePoint.SPListItemCollection items, class Microsoft.SharePoint.SPListItem hold, string comments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.SetHold(Microsoft.SharePoint.SPListItemCollection,Microsoft.SharePoint.SPListItem,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function SetHold (items As SPListItemCollection, hold As SPListItem, comments As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool SetHold(Microsoft::SharePoint::SPListItemCollection ^ items, Microsoft::SharePoint::SPListItem ^ hold, System::String ^ comments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="items" Type="Microsoft.SharePoint.SPListItemCollection" />
+        <Parameter Name="hold" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="comments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="items">The items.</param>
+        <param name="hold">The hold.</param>
+        <param name="comments">Comments about why the item was put on hold.</param>
+        <summary>Sets the items on the specified hold.</summary>
+        <returns>Whether any item in the collection failed to be added to the hold.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetHold">
+      <MemberSignature Language="C#" Value="public static void SetHold (int holdID, Microsoft.SharePoint.SPListItem item, string comments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SetHold(int32 holdID, class Microsoft.SharePoint.SPListItem item, string comments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.SetHold(System.Int32,Microsoft.SharePoint.SPListItem,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SetHold (holdID As Integer, item As SPListItem, comments As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SetHold(int holdID, Microsoft::SharePoint::SPListItem ^ item, System::String ^ comments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Use SetHold(item, hold, comments)")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="holdID" Type="System.Int32" />
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="comments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="holdID">The integer that identifies the list item that represents the hold.</param>
+        <param name="item">The document to which you want the specified hold applied.</param>
+        <param name="comments">Any comment you want to write to the audit log when the hold is applied to the specified document.</param>
+        <summary>Applies the specified hold to the specified document.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetHold">
+      <MemberSignature Language="C#" Value="public static bool SetHold (int holdID, Microsoft.SharePoint.SPListItemCollection items, string comments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool SetHold(int32 holdID, class Microsoft.SharePoint.SPListItemCollection items, string comments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.SetHold(System.Int32,Microsoft.SharePoint.SPListItemCollection,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function SetHold (holdID As Integer, items As SPListItemCollection, comments As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool SetHold(int holdID, Microsoft::SharePoint::SPListItemCollection ^ items, System::String ^ comments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Use SetHold(items, hold, comments)")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="holdID" Type="System.Int32" />
+        <Parameter Name="items" Type="Microsoft.SharePoint.SPListItemCollection" />
+        <Parameter Name="comments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="holdID">The integer that identifies the list item that represents the hold.</param>
+        <param name="items">A collection of the list items to which you want the specified hold applied.</param>
+        <param name="comments">Any comment you want to write to the audit log when the hold is applied to the specified documents.</param>
+        <summary>Applies the specified hold to all the specified items.</summary>
+        <returns>A Boolean value that represents whether the hold was successfully applied to the specified items.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetLockHoldItemsProperty">
+      <MemberSignature Language="C#" Value="public static void SetLockHoldItemsProperty (Microsoft.SharePoint.SPSite site, bool isLocked);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SetLockHoldItemsProperty(class Microsoft.SharePoint.SPSite site, bool isLocked) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.SetLockHoldItemsProperty(Microsoft.SharePoint.SPSite,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SetLockHoldItemsProperty (site As SPSite, isLocked As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SetLockHoldItemsProperty(Microsoft::SharePoint::SPSite ^ site, bool isLocked);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="isLocked" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> object for which the setting is requested.</param>
+        <param name="isLocked">A Boolean that indicates whether to set or reset the setting.</param>
+        <summary>Set the setting of whether items on hold in the specified site should be locked (block edit).</summary>
+        <remarks>
+          <para>This setting is scoped to the web application.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UnProvisionList">
+      <MemberSignature Language="C#" Value="public static bool UnProvisionList (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool UnProvisionList(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.UnProvisionList(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function UnProvisionList (list As SPList) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool UnProvisionList(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">Reserved for internal use.</param>
+        <summary>Reserved for internal use.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UnRegisterCustomHoldProcessor">
+      <MemberSignature Language="C#" Value="public static void UnRegisterCustomHoldProcessor (Microsoft.SharePoint.Administration.SPWebApplication webApp);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void UnRegisterCustomHoldProcessor(class Microsoft.SharePoint.Administration.SPWebApplication webApp) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.Hold.UnRegisterCustomHoldProcessor(Microsoft.SharePoint.Administration.SPWebApplication)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub UnRegisterCustomHoldProcessor (webApp As SPWebApplication)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void UnRegisterCustomHoldProcessor(Microsoft::SharePoint::Administration::SPWebApplication ^ webApp);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webApp" Type="Microsoft.SharePoint.Administration.SPWebApplication" />
+      </Parameters>
+      <Docs>
+        <param name="webApp">The web application.</param>
+        <summary>Unegisters custom hold handler in the specified web application.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,97 @@
+﻿<Type Name="CachedException" FullName="Microsoft.SharePoint.Publishing.CachedException">
+  <TypeSignature Language="C#" Value="public sealed class CachedException : Exception" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit CachedException extends System.Exception" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.CachedException" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class CachedException&#xA;Inherits Exception" />
+  <TypeSignature Language="C++ CLI" Value="public ref class CachedException sealed : Exception" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Exception</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Used by a cache to report a problem with an original cause that may have occurred in the past as part of a separate operation.</summary>
+    <remarks>
+      <para>For some caching strategies, it is advantageous to cache both the successfully fulfilled requests and the requests that failed due to an exception. The original exception is stored by the cache and rethrown when subsequent requests are made for the same object. Reusing the original exception object has some disadvantages: for example, the <see cref="P:System.Exception.StackTrace" /> property will be overwritten, the caller may attempt to handle the same problem twice, and there is no way to track the context where the original error occurred.</para>
+      <para>The <see cref="T:Microsoft.SharePoint.Publishing.CachedException" /> class solves these problems by encapsulating the shared object as its <b>InnerException</b> property, and tracking additional details such as the timestamp and correlation ID for the original HTTP request.</para>
+      <para>For example, if the taxonomy navigation system encounters an error when it is trying to read a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TermSet" /> object into the taxonomy navigation cache, subsequent attempts to fetch the object will throw <b>CachedException</b> instances instead of reattempting the operation.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="GetObjectData">
+      <MemberSignature Language="C#" Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CachedException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub GetObjectData (info As SerializationInfo, context As StreamingContext)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void GetObjectData(System::Runtime::Serialization::SerializationInfo ^ info, System::Runtime::Serialization::StreamingContext context);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="info" Type="System.Runtime.Serialization.SerializationInfo" />
+        <Parameter Name="context" Type="System.Runtime.Serialization.StreamingContext" />
+      </Parameters>
+      <Docs>
+        <param name="info">To be added.</param>
+        <param name="context">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OriginalCorrelationId">
+      <MemberSignature Language="C#" Value="public Guid OriginalCorrelationId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid OriginalCorrelationId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.CachedException.OriginalCorrelationId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property OriginalCorrelationId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid OriginalCorrelationId { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the SharePoint correlation ID of the request for when the original error occurred.</summary>
+        <value>If an original error occurred, the SharePoint correlation ID; otherwise, none</value>
+        <remarks>
+          <para>The property can be used to locate the original error event in the server logs.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OriginalUtcTime">
+      <MemberSignature Language="C#" Value="public DateTime OriginalUtcTime { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime OriginalUtcTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.CachedException.OriginalUtcTime" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property OriginalUtcTime As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime OriginalUtcTime { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the server time when the original error event occurred, inCoordinated Universal Time (UTC).</summary>
+        <value>The server time in UTC when the original error event occurred </value>
+        <remarks>
+          <para>The property can be used to locate the original error event in the server logs.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

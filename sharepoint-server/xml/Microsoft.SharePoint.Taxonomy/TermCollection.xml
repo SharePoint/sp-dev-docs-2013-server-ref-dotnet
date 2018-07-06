@@ -1,0 +1,84 @@
+﻿<Type Name="TermCollection" FullName="Microsoft.SharePoint.Taxonomy.TermCollection">
+  <TypeSignature Language="C#" Value="public sealed class TermCollection : Microsoft.SharePoint.Taxonomy.Generic.TaxonomyItemCollection&lt;Microsoft.SharePoint.Taxonomy.Term&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit TermCollection extends Microsoft.SharePoint.Taxonomy.Generic.TaxonomyItemCollection`1&lt;class Microsoft.SharePoint.Taxonomy.Term&gt;" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.TermCollection" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class TermCollection&#xA;Inherits TaxonomyItemCollection(Of Term)" />
+  <TypeSignature Language="C++ CLI" Value="public ref class TermCollection sealed : Microsoft::SharePoint::Taxonomy::Generic::TaxonomyItemCollection&lt;Microsoft::SharePoint::Taxonomy::Term ^&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Taxonomy.Generic.TaxonomyItemCollection&lt;Microsoft.SharePoint.Taxonomy.Term&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">Microsoft.SharePoint.Taxonomy.Term</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, CollectionChildItemType=typeof(Microsoft.SharePoint.Taxonomy.Term), ServerTypeId="AC6D0DA8-9769-4425-A395-6413A9A0367E")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents collection of <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects.</summary>
+    <remarks>
+      <para>This class provides standard support for the <see cref="T:System.Collections.IEnumerator" /> interface and the <see cref="T:System.Collections.ICollection" /> interface and an integer indexer through the GenericCollection base class. In addition it provides a string indexer based on the default <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> object of the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object and a GUID indexer based on the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.Id" /> property</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="MoveNext">
+      <MemberSignature Language="C#" Value="public bool MoveNext ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool MoveNext() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TermCollection.MoveNext" />
+      <MemberSignature Language="VB.NET" Value="Public Function MoveNext () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool MoveNext();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the next set of paged data in the collection.</summary>
+        <returns>
+          <b>true</b> if a new set of paged data is retrieved; <b>false</b> if no remaining paged data available</returns>
+        <remarks>
+          <para>This method populates the collection with the next subset of paged data available. The maximum size of the subset is based on the paging limit that was specified when the collection was initially created or retrieved. The values is available in the <see cref="P:Microsoft.SharePoint.Taxonomy.TermCollection.PagingLimit" />
+property.If this collection is not paged then the <see cref="P:Microsoft.SharePoint.Taxonomy.TermCollection.PagingLimit" /> property returns 0 and the <see cref="M:Microsoft.SharePoint.Taxonomy.TermCollection.MoveNext" /> method has no effect and returns <b>false</b>. In this case, the collection has already been retrieved in its entirety.
+</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PagingLimit">
+      <MemberSignature Language="C#" Value="public int PagingLimit { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 PagingLimit" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TermCollection.PagingLimit" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PagingLimit As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int PagingLimit { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the maximum number of items that can be contained in the current collection.</summary>
+        <value>The maximum number of items that can be contained in this collection if the collection is using data paging, or zero if the collection is not using data paging.</value>
+        <remarks>
+          <para>The <see cref="M:Microsoft.SharePoint.Taxonomy.TermCollection.MoveNext" /> method uses this property to determine the maximum number of items to get each time it is called.  This property can only be set when the collection is initially created or get by explicitly setting a parameter in the method used to get the collection.  Not all methods used to get collections support returning a paged collection.</para>
+          <para>If this collection is not paged then the <see cref="P:Microsoft.SharePoint.Taxonomy.TermCollection.PagingLimit" /> property returns 0 and the <see cref="M:Microsoft.SharePoint.Taxonomy.TermCollection.MoveNext" /> method has no effect and returns <b>false</b>. In this case, the collection has already been retrieved in its entirety.
+</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

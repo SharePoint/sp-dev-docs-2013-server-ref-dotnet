@@ -1,0 +1,566 @@
+﻿<Type Name="PropertyDataType" FullName="Microsoft.Office.Server.UserProfiles.PropertyDataType">
+  <TypeSignature Language="C#" Value="public sealed class PropertyDataType" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PropertyDataType extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.PropertyDataType" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PropertyDataType" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PropertyDataType sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the definition for the data types of a profile property.</summary>
+    <remarks>To be added.</remarks>
+    <example>
+      <para>The following code example shows how to use the <see cref="T:Microsoft.Office.Server.UserProfiles.PropertyDataType" /> class.</para>
+      <code>static public void PropertyTypeAndMappingSample()
+{
+ 
+  using (SPSite site = new SPSite("&lt;span class="placeholder"&gt;site url&lt;/span&gt;"))
+  {
+    SPServiceContext context = SPServiceContext.GetContext(site);
+//Initialize user profile config manager object.
+    UserProfileConfigManager upcm = new UserProfileConfigManager(context);
+    ConnectionManager cm = upcm.ConnectionManager;
+ 
+//Sample to get a property type.
+    PropertyDataTypeCollection pdtc = upcm.GetPropertyDataTypes();
+    PropertyDataType ptype = null;
+ 
+    foreach (PropertyDataType datatype in pdtc)
+    {
+      if (datatype.Name.Equals("string"))
+      {
+        ptype = datatype;
+        break;
+      }
+    }
+ 
+//Sample to create a new custom property.
+    ProfilePropertyManager ppm = upcm.ProfilePropertyManager;
+    CorePropertyManager cpm = ppm.GetCoreProperties();
+    ProfileTypePropertyManager ptpm = ppm.GetProfileTypeProperties(ProfileType.User);
+    ProfileSubtypeManager psm = ProfileSubtypeManager.Get(context);
+    ProfileSubtype ps = psm.GetProfileSubtype(ProfileSubtypeManager.GetDefaultProfileName(ProfileType.User));
+    ProfileSubtypePropertyManager pspm = ps.Properties;
+ 
+    CoreProperty coreProp = cpm.Create(false);
+    coreProp.Name = "division";
+    coreProp.DisplayName = "my custom division";
+    coreProp.Type = ptype.Name;
+    coreProp.Length = ptype.MaxCharCount;
+    coreProp.Commit();
+    ProfileTypeProperty profileTypeProp = ptpm.Create(coreProp);
+    profileTypeProp.IsVisibleOnEditor = true;
+    profileTypeProp.IsVisibleOnViewer = true;
+    profileTypeProp.Commit();
+    ProfileSubtypeProperty profileSubTypeProp = pspm.Create(profileTypeProp);
+    profileSubTypeProp.DefaultPrivacy = Privacy.Private;
+    profileSubTypeProp.IsUserEditable = true;
+    profileSubTypeProp.Commit();
+    pspm.SetDisplayOrderByPropertyName(profileSubTypeProp.Name, 1);
+    pspm.CommitDisplayOrder();
+ 
+//Edit property sample.
+    CoreProperty ptitle = cpm.GetPropertyByName(PropertyConstants.Title);
+// Or get property by URI.
+    ptitle = cpm.GetPropertyByURI(Property.URI_Title);
+    ptitle.DisplayName = "Designation";
+    ptitle.Commit();
+//Property map sample.
+    string connectionName = "Test Connection";
+    Connection connection = cm[connectionName];
+    PropertyMapCollection pmc = connection.PropertyMapping;
+    pmc.AddNewMapping(ProfileType.User, profileSubTypeProp.Name, "division");
+ 
+//Remove property sample.
+    cpm.RemovePropertyByName("division");
+    ptpm.RemovePropertyByName("division");
+    pspm.RemovePropertyByName("division");
+  }
+}
+</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="AllowMultiValue">
+      <MemberSignature Language="C#" Value="public bool AllowMultiValue;" />
+      <MemberSignature Language="ILAsm" Value=".field public bool AllowMultiValue" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.AllowMultiValue" />
+      <MemberSignature Language="VB.NET" Value="Public AllowMultiValue As Boolean " />
+      <MemberSignature Language="C++ CLI" Value="public: bool AllowMultiValue;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies whether the value of a property used for a user profile allows multiple values.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BigInteger">
+      <MemberSignature Language="C#" Value="public const string BigInteger;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string BigInteger" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.BigInteger" />
+      <MemberSignature Language="VB.NET" Value="Public Const BigInteger As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ BigInteger;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies big integer as the data type of a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Binary">
+      <MemberSignature Language="C#" Value="public const string Binary;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string Binary" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Binary" />
+      <MemberSignature Language="VB.NET" Value="Public Const Binary As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ Binary;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies binary as the data type of a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Boolean">
+      <MemberSignature Language="C#" Value="public const string Boolean;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string Boolean" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Boolean" />
+      <MemberSignature Language="VB.NET" Value="Public Const Boolean As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ Boolean;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a Boolean value as the data type of a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Date">
+      <MemberSignature Language="C#" Value="public const string Date;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string Date" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Date" />
+      <MemberSignature Language="VB.NET" Value="Public Const Date As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ Date;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the date for a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DateNoYear">
+      <MemberSignature Language="C#" Value="public const string DateNoYear;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string DateNoYear" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.DateNoYear" />
+      <MemberSignature Language="VB.NET" Value="Public Const DateNoYear As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ DateNoYear;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a date without year for a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DateTime">
+      <MemberSignature Language="C#" Value="public const string DateTime;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string DateTime" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.DateTime" />
+      <MemberSignature Language="VB.NET" Value="Public Const DateTime As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ DateTime;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies <b>DateTime</b> as the data type of a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayName">
+      <MemberSignature Language="C#" Value="public string DisplayName;" />
+      <MemberSignature Language="ILAsm" Value=".field public string DisplayName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.DisplayName" />
+      <MemberSignature Language="VB.NET" Value="Public DisplayName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ DisplayName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the display name of the user for the user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Email">
+      <MemberSignature Language="C#" Value="public const string Email;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string Email" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Email" />
+      <MemberSignature Language="VB.NET" Value="Public Const Email As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ Email;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the e-mail address of the user for the user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Float">
+      <MemberSignature Language="C#" Value="public const string Float;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string Float" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Float" />
+      <MemberSignature Language="VB.NET" Value="Public Const Float As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ Float;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies <b>float</b> as the data type of a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Guid">
+      <MemberSignature Language="C#" Value="public const string Guid;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string Guid" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Guid" />
+      <MemberSignature Language="VB.NET" Value="Public Const Guid As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ Guid;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the globally unique identifier (GUID) of a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HTML">
+      <MemberSignature Language="C#" Value="public const string HTML;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string HTML" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.HTML" />
+      <MemberSignature Language="VB.NET" Value="Public Const HTML As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ HTML;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies HTML format as the data type of a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Integer">
+      <MemberSignature Language="C#" Value="public const string Integer;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string Integer" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Integer" />
+      <MemberSignature Language="VB.NET" Value="Public Const Integer As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ Integer;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies <b>integer</b> as the data type of a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsEmail">
+      <MemberSignature Language="C#" Value="public bool IsEmail;" />
+      <MemberSignature Language="ILAsm" Value=".field public bool IsEmail" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.IsEmail" />
+      <MemberSignature Language="VB.NET" Value="Public IsEmail As Boolean " />
+      <MemberSignature Language="C++ CLI" Value="public: bool IsEmail;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a Boolean value indicating whether the data type of a property used for a user profile is in e-mail format.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsHTML">
+      <MemberSignature Language="C#" Value="public bool IsHTML;" />
+      <MemberSignature Language="ILAsm" Value=".field public bool IsHTML" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.IsHTML" />
+      <MemberSignature Language="VB.NET" Value="Public IsHTML As Boolean " />
+      <MemberSignature Language="C++ CLI" Value="public: bool IsHTML;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a Boolean value indicating whether the data type of a property used for a user profile is in HTML format.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsPerson">
+      <MemberSignature Language="C#" Value="public bool IsPerson;" />
+      <MemberSignature Language="ILAsm" Value=".field public bool IsPerson" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.IsPerson" />
+      <MemberSignature Language="VB.NET" Value="Public IsPerson As Boolean " />
+      <MemberSignature Language="C++ CLI" Value="public: bool IsPerson;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a Boolean value indicating whether the data type of a property used for a user profile refers to the user name of a person.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsURL">
+      <MemberSignature Language="C#" Value="public bool IsURL;" />
+      <MemberSignature Language="ILAsm" Value=".field public bool IsURL" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.IsURL" />
+      <MemberSignature Language="VB.NET" Value="Public IsURL As Boolean " />
+      <MemberSignature Language="C++ CLI" Value="public: bool IsURL;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a Boolean value indicating whether the data type of a property used for a user profile refers to a URL.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxCharCount">
+      <MemberSignature Language="C#" Value="public int MaxCharCount;" />
+      <MemberSignature Language="ILAsm" Value=".field public int32 MaxCharCount" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.MaxCharCount" />
+      <MemberSignature Language="VB.NET" Value="Public MaxCharCount As Integer " />
+      <MemberSignature Language="C++ CLI" Value="public: int MaxCharCount;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the maximum allowed character count for the value of a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name;" />
+      <MemberSignature Language="ILAsm" Value=".field public string Name" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Name" />
+      <MemberSignature Language="VB.NET" Value="Public Name As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ Name;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the name of the data type used as a property for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Person">
+      <MemberSignature Language="C#" Value="public const string Person;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string Person" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.Person" />
+      <MemberSignature Language="VB.NET" Value="Public Const Person As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ Person;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies that the data type of a property used for a user profile refers to the user name of a person.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="String">
+      <MemberSignature Language="C#" Value="public const string String;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string String" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.String" />
+      <MemberSignature Language="VB.NET" Value="Public Const String As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ String;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies <b>string</b> as the data type of a property used for a user profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StringMultiValue">
+      <MemberSignature Language="C#" Value="public const string StringMultiValue;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string StringMultiValue" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.StringMultiValue" />
+      <MemberSignature Language="VB.NET" Value="Public Const StringMultiValue As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ StringMultiValue;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StringSingleValue">
+      <MemberSignature Language="C#" Value="public const string StringSingleValue;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string StringSingleValue" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.StringSingleValue" />
+      <MemberSignature Language="VB.NET" Value="Public Const StringSingleValue As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ StringSingleValue;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimeZone">
+      <MemberSignature Language="C#" Value="public const string TimeZone;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string TimeZone" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.TimeZone" />
+      <MemberSignature Language="VB.NET" Value="Public Const TimeZone As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ TimeZone;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="URL">
+      <MemberSignature Language="C#" Value="public const string URL;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string URL" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Server.UserProfiles.PropertyDataType.URL" />
+      <MemberSignature Language="VB.NET" Value="Public Const URL As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ URL;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the URL of a property used for a user profile. </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

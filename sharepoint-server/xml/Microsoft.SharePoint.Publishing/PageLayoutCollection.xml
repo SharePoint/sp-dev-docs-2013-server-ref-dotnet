@@ -1,0 +1,311 @@
+﻿<Type Name="PageLayoutCollection" FullName="Microsoft.SharePoint.Publishing.PageLayoutCollection">
+  <TypeSignature Language="C#" Value="public class PageLayoutCollection : Microsoft.SharePoint.Publishing.QueryBasedCollection&lt;Microsoft.SharePoint.Publishing.PageLayout&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit PageLayoutCollection extends Microsoft.SharePoint.Publishing.QueryBasedCollection`1&lt;class Microsoft.SharePoint.Publishing.PageLayout&gt;" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.PageLayoutCollection" />
+  <TypeSignature Language="VB.NET" Value="Public Class PageLayoutCollection&#xA;Inherits QueryBasedCollection(Of PageLayout)" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PageLayoutCollection : Microsoft::SharePoint::Publishing::QueryBasedCollection&lt;Microsoft::SharePoint::Publishing::PageLayout ^&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.QueryBasedCollection&lt;Microsoft.SharePoint.Publishing.PageLayout&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">Microsoft.SharePoint.Publishing.PageLayout</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Creates a collection of <b>PageLayout</b> objects.</summary>
+    <remarks>
+      <para>This collection provides integer, string, and GUID indexer methods and supports <b>foreach</b> enumeration (<b>For Each</b> in Visual Basic) and a <b>Count</b> property that you can use when explicitly iterating over the collection. The <b>PageLayoutCollection</b> can be retrieved from methods such as <see cref="M:Microsoft.SharePoint.Publishing.PublishingSite.GetPageLayouts(Microsoft.SharePoint.SPContentType,System.Boolean)" />, <see cref="M:Microsoft.SharePoint.Publishing.PublishingSite.GetPageLayouts(System.Boolean)" />, and <see cref="P:Microsoft.SharePoint.Publishing.PublishingSite.PageLayouts" />. </para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PageLayout Add (string pageLayoutName, Microsoft.SharePoint.SPContentTypeId associatedContentTypeId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PageLayout Add(string pageLayoutName, valuetype Microsoft.SharePoint.SPContentTypeId associatedContentTypeId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PageLayoutCollection.Add(System.String,Microsoft.SharePoint.SPContentTypeId)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Add (pageLayoutName As String, associatedContentTypeId As SPContentTypeId) As PageLayout" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PageLayout ^ Add(System::String ^ pageLayoutName, Microsoft::SharePoint::SPContentTypeId associatedContentTypeId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PageLayout</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="pageLayoutName" Type="System.String" />
+        <Parameter Name="associatedContentTypeId" Type="Microsoft.SharePoint.SPContentTypeId" />
+      </Parameters>
+      <Docs>
+        <param name="pageLayoutName">Name of <b>PageLayout</b>.</param>
+        <param name="associatedContentTypeId">Identifier (ID) of the <b>SPContentType</b> that this <b>PageLayout</b> will be associated with.</param>
+        <summary>Creates and adds a new <b>PageLayout</b> object.</summary>
+        <returns>The newly created <b>PageLayout</b>.</returns>
+        <remarks>
+          <para>The <paramref name="pageLayoutName" /> parameter can either have no file name extension or an .aspx extension. The <paramref name="pageLayoutName " />value must not be empty and cannot exceed 128 characters. The name must also be unique within the master page gallery of the <b>SPSite.RootWeb</b> site. The <paramref name="pageLayoutName" /> value cannot contain any of the following invalid characters:<b />, <b>"</b>, <b>#</b>, <b>%</b>, <b>*</b>, <b>:</b>, <b>&lt;</b>, <b>&gt;</b>, <b>?</b>, <b>\</b>, <b>/</b>, <b>{</b>, <b>|</b>, <b>}</b> or an ampersand or ASCII character 0x7f. The <paramref name="associatedContentTypeId" /> value must identify a valid SPContentType on the SPSite.RootWeb site.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.SPException">The File or folder name "%1" contains characters that are not permitted. Please use a different name.</exception>
+        <exception cref="T:System.IO.PathTooLongException">The specified file or folder name is too long. The URL path for all files and folders must be 260 characters or less (and no more than 128 characters for any single file or folder name in the URL). Please type a shorter file or folder name.</exception>
+        <exception cref="T:System.ArgumentNullException">Indicates that one of the input parameters is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+        <exception cref="T:System.IO.FileLoadException">Indicates that another file with the same name already exists.</exception>
+        <exception cref="T:System.IO.DirectoryNotFoundException">Indicates a problem with the <paramref name="pageLayoutName" /> parameter.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PageLayout Add (string pageLayoutName, Microsoft.SharePoint.SPContentTypeId associatedContentTypeId, string pageMarkup);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PageLayout Add(string pageLayoutName, valuetype Microsoft.SharePoint.SPContentTypeId associatedContentTypeId, string pageMarkup) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PageLayoutCollection.Add(System.String,Microsoft.SharePoint.SPContentTypeId,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Add (pageLayoutName As String, associatedContentTypeId As SPContentTypeId, pageMarkup As String) As PageLayout" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PageLayout ^ Add(System::String ^ pageLayoutName, Microsoft::SharePoint::SPContentTypeId associatedContentTypeId, System::String ^ pageMarkup);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PageLayout</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="pageLayoutName" Type="System.String" />
+        <Parameter Name="associatedContentTypeId" Type="Microsoft.SharePoint.SPContentTypeId" />
+        <Parameter Name="pageMarkup" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="pageLayoutName">Name of <b>PageLayout</b>.</param>
+        <param name="associatedContentTypeId">The identifier (ID) of the <b>SPContentType</b> that this <b>PageLayout</b> will be associated with.</param>
+        <param name="pageMarkup">ASPX markup for the page layout, or a null reference (Nothing in Visual Basic) to indicate that markup from the template page layout should be used.</param>
+        <summary>Creates and adds a new <b>PageLayout</b> object.</summary>
+        <returns>The newly created <b>PageLayout</b> object.</returns>
+        <remarks>
+          <para>The <paramref name="pageLayoutName" /> parameter can either have no file name extension or an .aspx extension. The <paramref name="pageLayoutName" /> value must not be empty and cannot exceed 128 characters. The name must also be unique within the master page gallery of the <b>SPSite.RootWeb</b> site. The <paramref name="pageLayoutName" /> cannot contain any of the following invalid characters: <b>"</b>, <b>#</b>, <b>%</b>, <b>*</b>, <b>:</b>, <b>&lt;</b>, <b>&gt;</b>, <b>?</b>, <b>\</b>, <b>/</b>, <b>{</b>, <b>|</b>, <b>}</b>  or an ampersand or ASCII character 0x7f. The <paramref name="associatedContentTypeId" /> value must identify a valid <b>SPContentType</b> on the <b>SPSite.RootWeb</b> site.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.SPException">The File or folder name "%1" contains characters that are not permitted. Please use a different name.</exception>
+        <exception cref="T:System.IO.PathTooLongException">The specified file or folder name is too long. The URL path for all files and folders must be 260 characters or less (and no more than 128 characters for any single file or folder name in the URL). Please type a shorter file or folder name.</exception>
+        <exception cref="T:System.ArgumentNullException">Indicates that one of the input parameters is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.UnauthorizedAccessException">Current user does not have sufficient permissions to perform this action.</exception>
+        <exception cref="T:System.IO.FileLoadException">Indicates that another file with the same name already exists.</exception>
+        <exception cref="T:System.IO.DirectoryNotFoundException">Indicates a problem with the <paramref name="pageLayoutName" /> parameter.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Contains">
+      <MemberSignature Language="C#" Value="public bool Contains (string pageLayoutName, Microsoft.SharePoint.SPFolder folder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Contains(string pageLayoutName, class Microsoft.SharePoint.SPFolder folder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PageLayoutCollection.Contains(System.String,Microsoft.SharePoint.SPFolder)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Contains (pageLayoutName As String, folder As SPFolder) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool Contains(System::String ^ pageLayoutName, Microsoft::SharePoint::SPFolder ^ folder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="pageLayoutName" Type="System.String" />
+        <Parameter Name="folder" Type="Microsoft.SharePoint.SPFolder" />
+      </Parameters>
+      <Docs>
+        <param name="pageLayoutName">Name of the <b>PageLayout</b> to search for.</param>
+        <param name="folder">
+          <b>SPFolder</b> to search within for the <b>PageLayout</b>.</param>
+        <summary>Determines whether a <b>PageLayout</b> object with a specific name exists in the specified <b>SPFolder</b> object.</summary>
+        <returns>
+          <b>true</b> if a <b>PageLayout</b> with a specific name is found within the specified <b>SPFolder</b>; otherwise, <b>false</b>.</returns>
+        <remarks>
+          <para>The <paramref name="pageLayoutName" /> parameter must not be empty and must be a string that is not null. The <paramref name="folder" /> parameter must not be null.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">Indicates that one of the input parameters is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Delete">
+      <MemberSignature Language="C#" Value="public void Delete (string pageLayoutName, Microsoft.SharePoint.SPFolder folder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Delete(string pageLayoutName, class Microsoft.SharePoint.SPFolder folder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PageLayoutCollection.Delete(System.String,Microsoft.SharePoint.SPFolder)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Delete (pageLayoutName As String, folder As SPFolder)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Delete(System::String ^ pageLayoutName, Microsoft::SharePoint::SPFolder ^ folder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="pageLayoutName" Type="System.String" />
+        <Parameter Name="folder" Type="Microsoft.SharePoint.SPFolder" />
+      </Parameters>
+      <Docs>
+        <param name="pageLayoutName">Name of the <b>PageLayout</b> without a file name extension.</param>
+        <param name="folder">
+          <b>SPFolder</b> that contains the given <b>PageLayout</b>.</param>
+        <summary>Removes a <b>PageLayout</b> object from a given <b>SPFolder</b> object.</summary>
+        <remarks>
+          <para>The <paramref name="pageLayoutName" /> parameter must not be empty and must be a string that is not null. The <paramref name="folder" /> parameter must not be null.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+        <exception cref="T:System.ArgumentNullException">Indicates that one of the input parameters is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="FileExtension">
+      <MemberSignature Language="C#" Value="protected virtual string FileExtension { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FileExtension" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayoutCollection.FileExtension" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable ReadOnly Property FileExtension As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ FileExtension { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the default file name extension for <b>PageLayout</b> objects.</summary>
+        <value>A <b>String</b> that represents the default file name extension.</value>
+        <remarks>
+          <para>This is set to ".aspx" unless overridden.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetLayoutFileName">
+      <MemberSignature Language="C#" Value="protected string GetLayoutFileName (string nameWithNoExtention);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance string GetLayoutFileName(string nameWithNoExtention) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PageLayoutCollection.GetLayoutFileName(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Function GetLayoutFileName (nameWithNoExtention As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; System::String ^ GetLayoutFileName(System::String ^ nameWithNoExtention);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="nameWithNoExtention" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="nameWithNoExtention">A string that contains the page layout file name without an extension.</param>
+        <summary>Returns the file name with the default page layout file name extension appended.</summary>
+        <returns>A string that contains the file name with the default page layout file name extension appended.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LayoutsDocumentLibrary">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPDocumentLibrary LayoutsDocumentLibrary { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPDocumentLibrary LayoutsDocumentLibrary" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayoutCollection.LayoutsDocumentLibrary" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LayoutsDocumentLibrary As SPDocumentLibrary" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPDocumentLibrary ^ LayoutsDocumentLibrary { Microsoft::SharePoint::SPDocumentLibrary ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPDocumentLibrary</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>SPDocumentLibrary</b> where the <b>PageLayout</b> objects in this <b>PageLayoutCollection</b> are stored.</summary>
+        <value>An <b>SPDocumentLibrary</b> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MasterGalleryFolder">
+      <MemberSignature Language="C#" Value="protected Microsoft.SharePoint.SPFolder MasterGalleryFolder { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPFolder MasterGalleryFolder" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayoutCollection.MasterGalleryFolder" />
+      <MemberSignature Language="VB.NET" Value="Protected Property MasterGalleryFolder As SPFolder" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; property Microsoft::SharePoint::SPFolder ^ MasterGalleryFolder { Microsoft::SharePoint::SPFolder ^ get(); void set(Microsoft::SharePoint::SPFolder ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPFolder</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of the folder that contains the master page gallery.</summary>
+        <value>An <b>SPFolder</b> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PreviewImageFolder">
+      <MemberSignature Language="C#" Value="protected Microsoft.SharePoint.SPFolder PreviewImageFolder { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPFolder PreviewImageFolder" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayoutCollection.PreviewImageFolder" />
+      <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property PreviewImageFolder As SPFolder" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; property Microsoft::SharePoint::SPFolder ^ PreviewImageFolder { Microsoft::SharePoint::SPFolder ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPFolder</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of the folder that contains preview images.</summary>
+        <value>An <b>SPFolder</b> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Site">
+      <MemberSignature Language="C#" Value="protected Microsoft.SharePoint.SPSite Site { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPSite Site" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayoutCollection.Site" />
+      <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property Site As SPSite" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; property Microsoft::SharePoint::SPSite ^ Site { Microsoft::SharePoint::SPSite ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPSite</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of the site.</summary>
+        <value>An <b>SPSite</b> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToArray">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PageLayout[] ToArray ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PageLayout[] ToArray() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PageLayoutCollection.ToArray" />
+      <MemberSignature Language="VB.NET" Value="Public Function ToArray () As PageLayout()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::PageLayout ^&gt; ^ ToArray();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PageLayout[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates an array of the <b>PageLayout</b> objects in this <b>PageLayoutCollection</b> object.</summary>
+        <returns>An array of the <b>PageLayout</b> objects in this <b>PageLayoutCollection</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

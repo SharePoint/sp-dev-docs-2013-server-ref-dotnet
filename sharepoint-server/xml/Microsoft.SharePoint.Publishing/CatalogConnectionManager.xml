@@ -1,0 +1,491 @@
+﻿<Type Name="CatalogConnectionManager" FullName="Microsoft.SharePoint.Publishing.CatalogConnectionManager">
+  <TypeSignature Language="C#" Value="public sealed class CatalogConnectionManager" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit CatalogConnectionManager extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.CatalogConnectionManager" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class CatalogConnectionManager" />
+  <TypeSignature Language="C++ CLI" Value="public ref class CatalogConnectionManager sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Manages catalog connections that are used in a site collection. </summary>
+    <remarks>
+      <para>Catalog connections can be used to define result sources that can be used in the Content Search Web Part and other search-driven Web Parts. Catalog connections also define how URLs to items in a catalog are rewritten on a site.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The following example contains several methods that demonstrate using the <b>CatalogConnectionManager</b> class to create and connect to subscriptions to a catalog from a publishing site.</para>
+      <code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Publishing;
+
+namespace CatalogConnectionSample
+{
+    public class CatalogSubscriber
+    {
+        string portalSiteUrl;
+        string publishingCatalogUrl;
+        string subscribingWebServerRelativeUrl;
+        /// &amp;lt;summary&amp;gt;
+        /// creates a subscription to a catalog from a publishing site.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;param name="portalSiteUrl"&amp;gt;Absolute Url of the site where a catalog content is rendered&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="publishingCatalogUrl"&amp;gt;Url of the Library published as a catalog&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="subscribingWebServerRelativeUrl"&amp;gt;(Optional)Server relative url of a subweb where catalog content is rendered&amp;lt;/param&amp;gt;
+        public CatalogSubscriber(string publishingCatalogUrl, string portalSiteUrl, string subscribingWebServerRelativeUrl = "/")
+        {
+            if (string.IsNullOrWhiteSpace(portalSiteUrl) ||
+                string.IsNullOrWhiteSpace(publishingCatalogUrl))
+            {
+                throw new ArgumentNullException("A valid url must be provided for publishingCatalogUrl and portalSiteUrl");
+            }
+            this.portalSiteUrl = portalSiteUrl;
+            this.publishingCatalogUrl = publishingCatalogUrl;
+            this.subscribingWebServerRelativeUrl = subscribingWebServerRelativeUrl;
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// Connect without any settings
+        /// A result source will be created and the catalog will be available for content search webparts
+        /// but item urls will have the original path to the source catalog library.
+        /// &amp;lt;/summary&amp;gt;
+        public void ConnectToCatalog()
+        {
+            using (SPSite publishingPortalSite = new SPSite(this.portalSiteUrl))
+            {
+                // Get the connection manager for the site where the catalog content will be rendered.
+                CatalogConnectionManager manager = new CatalogConnectionManager(publishingPortalSite, createResultSource: true);
+                // Use "Contains" to check whether a connection exists.
+                if (manager.Contains(this.publishingCatalogUrl))
+                {
+                    throw new ArgumentException(string.Format("A connection to {0} already exists", this.publishingCatalogUrl));
+                }
+                // Get the catalog to connect to.
+                CatalogConnectionSettings settings = PublishingCatalogUtility.GetPublishingCatalog(publishingPortalSite, this.publishingCatalogUrl);
+                settings.ConnectedWebServerRelativeUrl = this.subscribingWebServerRelativeUrl;
+
+                manager.AddCatalogConnection(settings);
+                // Perform any other adds/Updates
+                // ...
+                // Finally commit connection changes to store.
+                manager.Update();
+            }
+        }
+
+        public void ConnectToCatalog(string[] orderedPropertiesForURLRewrite, string taxonomyFieldManagedProperty)
+        {
+
+            using (SPSite publishingPortalSite = new SPSite(this.portalSiteUrl))
+            {
+                // Get the connection manager for the site where the catalog content will be rendered.
+                CatalogConnectionManager manager = new CatalogConnectionManager(publishingPortalSite);
+                // Use "Contains" to check whether a connection exists.
+                if (manager.Contains(this.publishingCatalogUrl))
+                {
+                    throw new ArgumentException(string.Format("A connection to {0} already exists", this.publishingCatalogUrl));
+                }
+                // Get the catalog to connect to.
+                CatalogConnectionSettings settings = PublishingCatalogUtility.GetPublishingCatalog(publishingPortalSite, this.publishingCatalogUrl);
+
+                manager.AddCatalogConnection(settings,
+                    // If the items in the catalog should have rewritten urls, specify what properties should be used in rewriting the url.
+                    orderedPropertiesForURLRewrite,
+                    this.subscribingWebServerRelativeUrl,
+                    // The managed property which contains the category for the catalog item.
+                    // Typically starts with owstaxid, when created by the system.
+                    taxonomyFieldManagedProperty);
+                // Perform any other adds/Updates
+                // ...
+                // Finally commit connection changes to store.
+                manager.Update();
+            }
+        }
+
+        public void ConnectToCatalog(string newUrlTemplate, string taxonomyFieldManagedProperty, bool isCustomCatalogItemUrlRewriteTemplate)
+        {
+
+            using (SPSite publishingPortalSite = new SPSite(this.portalSiteUrl))
+            {
+                // Get the connection manager for the site where the catalog content will be rendered.
+                CatalogConnectionManager manager = new CatalogConnectionManager(publishingPortalSite);
+                // Use "Contains" to check whether a connection exists.
+                if (manager.Contains(this.publishingCatalogUrl))
+                {
+                    throw new ArgumentException(string.Format("A connection to {0} already exists", this.publishingCatalogUrl));
+                }
+                // Get the catalog to connect to.
+                CatalogConnectionSettings settings = PublishingCatalogUtility.GetPublishingCatalog(publishingPortalSite, this.publishingCatalogUrl);
+
+                manager.AddCatalogConnection(settings,
+                    // If the items in the catalog should have rewritten urls, specify what properties should be used in rewriting the url.
+                    newUrlTemplate,
+                    this.subscribingWebServerRelativeUrl,
+                    // The managed property which contains the category for the catalog item.
+                    // Typically starts with owstaxid, when created by the system.
+                    taxonomyFieldManagedProperty,
+                    isCustomCatalogItemUrlRewriteTemplate);
+                // Perform any other adds/Updates
+                // ...
+                // Finally commit connection changes to store.
+                manager.Update();
+            }
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// Update the url rewrite template for a catalog connection.
+        /// The url rewrite template provides the managed properties from the search schema used to rewrite urls to items from the catalog.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;param name="newUrlTemplate"&amp;gt;&amp;lt;/param&amp;gt;
+        public void UpdateCatalogUrlTemplate(string newUrlTemplate)
+        {
+            using (SPSite publishingPortalSite = new SPSite(this.portalSiteUrl))
+            {
+                // Get the connection manager for the site where the catalog content will be rendered.
+                CatalogConnectionManager manager = new CatalogConnectionManager(publishingPortalSite);
+                // Get the current settings
+                CatalogConnectionSettings settings = manager.GetCatalogConnectionSettings(this.publishingCatalogUrl);
+                if (settings == null)
+                {
+                    throw new ArgumentException(string.Format("This site is not connected to catalog {0}", this.publishingCatalogUrl));
+                }
+                settings.CatalogItemUrlRewriteTemplate = newUrlTemplate;
+                // Update in memory
+                manager.UpdateCatalogConnection(settings);
+                // Perform any other adds/Updates
+
+                // Finally Commit the update(s) to store.
+                manager.Update();
+            }
+        }
+
+        public void DeleteCatalog()
+        {
+            using (SPSite publishingPortalSite = new SPSite(this.portalSiteUrl))
+            {
+                // Get the connection manager for the site where the catalog content will be rendered.
+                CatalogConnectionManager manager = new CatalogConnectionManager(publishingPortalSite);
+                // Use "Contains" to check whether a connection exists.
+                if (manager.Contains(this.publishingCatalogUrl))
+                {
+                    // Get the current settings
+                    CatalogConnectionSettings settings = manager.GetCatalogConnectionSettings(this.publishingCatalogUrl);
+
+                    manager.DeleteCatalogConnection(this.publishingCatalogUrl);
+                    // Perform any other adds/Updates
+
+                    // Finally Commit the update(s) to store.
+                    manager.Update();
+                }
+            }
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public CatalogConnectionManager (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.#ctor(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (site As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; CatalogConnectionManager(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> object for which catalog connections are managed.</param>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.CatalogConnectionManager" /> object that manages catalogs that are used in the site collection as specified in the <paramref name="site" /> parameter.</summary>
+        <remarks>
+          <para>Manage catalogs used in the site collection that are specified by a site. Use this class to add, edit, or delete catalog connections in the site collection. When a new collection is added, a result source is automatically created.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public CatalogConnectionManager (Microsoft.SharePoint.SPSite site, bool createResultSource);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPSite site, bool createResultSource) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.#ctor(Microsoft.SharePoint.SPSite,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (site As SPSite, createResultSource As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; CatalogConnectionManager(Microsoft::SharePoint::SPSite ^ site, bool createResultSource);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="createResultSource" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="site">An <see cref="T:Microsoft.SharePoint.SPSite" /> object for which catalog connections are managed.</param>
+        <param name="createResultSource">Whether a result source is created for new catalog connections.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Publishing.CatalogConnectionManager" /> object that manages catalogs that are used in the site collection as specified by the <paramref name="site" /> parameter.</summary>
+        <remarks>
+          <para>Use <b>CatalogConnectManager</b> class to add, edit, or delete catalog connections within the site collection. When a new connection is added, a result source is created based on <paramref name="createResultSource" /> parameter.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddCatalogConnection">
+      <MemberSignature Language="C#" Value="public void AddCatalogConnection (Microsoft.SharePoint.Publishing.CatalogConnectionSettings catalogInfo);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddCatalogConnection(class Microsoft.SharePoint.Publishing.CatalogConnectionSettings catalogInfo) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.AddCatalogConnection(Microsoft.SharePoint.Publishing.CatalogConnectionSettings)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddCatalogConnection (catalogInfo As CatalogConnectionSettings)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddCatalogConnection(Microsoft::SharePoint::Publishing::CatalogConnectionSettings ^ catalogInfo);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="catalogInfo" Type="Microsoft.SharePoint.Publishing.CatalogConnectionSettings" />
+      </Parameters>
+      <Docs>
+        <param name="catalogInfo">Settings for the catalog that is being added.</param>
+        <summary>Add a catalog connection to the site that is specified in the constructor.</summary>
+        <remarks>
+          <para>Use the GetPublishingCatalog(Microsoft.SharePoint.SPSite,System.String) method to return catalog information and default settings.</para>
+          <para>The connection is committed to the term store when the <see cref="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.Update" /> method is called.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddCatalogConnection">
+      <MemberSignature Language="C#" Value="public void AddCatalogConnection (Microsoft.SharePoint.Publishing.CatalogConnectionSettings catalogInfo, string[] orderedPropertiesForUrlRewrite, string webUrl, string catalogTaxonomyManagedProperty);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddCatalogConnection(class Microsoft.SharePoint.Publishing.CatalogConnectionSettings catalogInfo, string[] orderedPropertiesForUrlRewrite, string webUrl, string catalogTaxonomyManagedProperty) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.AddCatalogConnection(Microsoft.SharePoint.Publishing.CatalogConnectionSettings,System.String[],System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddCatalogConnection (catalogInfo As CatalogConnectionSettings, orderedPropertiesForUrlRewrite As String(), webUrl As String, catalogTaxonomyManagedProperty As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddCatalogConnection(Microsoft::SharePoint::Publishing::CatalogConnectionSettings ^ catalogInfo, cli::array &lt;System::String ^&gt; ^ orderedPropertiesForUrlRewrite, System::String ^ webUrl, System::String ^ catalogTaxonomyManagedProperty);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="catalogInfo" Type="Microsoft.SharePoint.Publishing.CatalogConnectionSettings" />
+        <Parameter Name="orderedPropertiesForUrlRewrite" Type="System.String[]" />
+        <Parameter Name="webUrl" Type="System.String" />
+        <Parameter Name="catalogTaxonomyManagedProperty" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="catalogInfo">The connection settings to add. Settings to add should include the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogUrl" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogId" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogSiteUrl" /> property, which are returned by the PublishingCatalogUtility.GetPublishingCatalog method. This parameter should not be a null reference (Nothing in Visual Basic).</param>
+        <param name="orderedPropertiesForUrlRewrite">Catalog item key fields that are used to generate friendly URLs for items in this catalog. The URL will be rewritten by using these property values in the same order.</param>
+        <param name="webUrl">Server-relative URL of the web that form the base URL of the friendly URL for items in this catalog.</param>
+        <param name="catalogTaxonomyManagedProperty">Managed property name of the taxonomy field that contains category information for catalog items.</param>
+        <summary>Adds a catalog connection to the site that is specified in the constructor.</summary>
+        <remarks>
+          <para>Use the GetPublishingCatalog method to get catalog information.</para>
+          <para>The connection is added to the store when the <see cref="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.Update" /> method is called.
+</para>
+          <para>Throws a<b>ArgumentNullException</b> exception if the <paramref name="catalogInfo" /> parameter is a null reference (Nothing in Visual Basic). URL rewrite is enabled only if non-empty values for the <paramref name="orderedPropertiesForUrlRewrite" /> parameter, the <paramref name="webUrl" /> parameter, and the <paramref name="catalogTaxonomyManagedProperty" /> parameter are passed in.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddCatalogConnection">
+      <MemberSignature Language="C#" Value="public void AddCatalogConnection (Microsoft.SharePoint.Publishing.CatalogConnectionSettings catalogInfo, string catalogItemUrlRewriteTemplate, string webServerRelativeUrl, string catalogTaxonomyManagedProperty, bool isCustomCatalogItemUrlRewriteTemplate);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddCatalogConnection(class Microsoft.SharePoint.Publishing.CatalogConnectionSettings catalogInfo, string catalogItemUrlRewriteTemplate, string webServerRelativeUrl, string catalogTaxonomyManagedProperty, bool isCustomCatalogItemUrlRewriteTemplate) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.AddCatalogConnection(Microsoft.SharePoint.Publishing.CatalogConnectionSettings,System.String,System.String,System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddCatalogConnection (catalogInfo As CatalogConnectionSettings, catalogItemUrlRewriteTemplate As String, webServerRelativeUrl As String, catalogTaxonomyManagedProperty As String, isCustomCatalogItemUrlRewriteTemplate As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddCatalogConnection(Microsoft::SharePoint::Publishing::CatalogConnectionSettings ^ catalogInfo, System::String ^ catalogItemUrlRewriteTemplate, System::String ^ webServerRelativeUrl, System::String ^ catalogTaxonomyManagedProperty, bool isCustomCatalogItemUrlRewriteTemplate);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="catalogInfo" Type="Microsoft.SharePoint.Publishing.CatalogConnectionSettings" />
+        <Parameter Name="catalogItemUrlRewriteTemplate" Type="System.String" />
+        <Parameter Name="webServerRelativeUrl" Type="System.String" />
+        <Parameter Name="catalogTaxonomyManagedProperty" Type="System.String" />
+        <Parameter Name="isCustomCatalogItemUrlRewriteTemplate" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="catalogInfo">The connection settings to be added. This should include the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogUrl" /> property, the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogId" /> property, and the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.CatalogSiteUrl" /> property, which are returned by the PublishingCatalogUtility.GetPublishingCatalog method. This parameter should not be a null reference (Nothing in Visual Basic).</param>
+        <param name="catalogItemUrlRewriteTemplate">URL rewrite template to use to generate friendly URLs for items in this catalog. Any search managed property that is enclosed in "[", "]" are replaced dynamically. If isCustomCatalogItemUrlRewriteTemplate=true, then the template can be a web-relative page URL that can render different items based on a dynamic query parameter.</param>
+        <param name="webServerRelativeUrl">The server-relative URL of the web connecting to this catalog. If item URLs are rewritten by using managed navigation friendly URLs, the managed navigation settings for this <see cref="T:Microsoft.SharePoint.SPWeb" /> object will be used.</param>
+        <param name="catalogTaxonomyManagedProperty">The search managed property name of the taxonomy field that contains category information for catalog items.</param>
+        <param name="isCustomCatalogItemUrlRewriteTemplate">Indicates whether the URL rewrite template is based on structured navigation. This parameter sets the <see cref="P:Microsoft.SharePoint.Publishing.CatalogConnectionSettings.IsManualCatalogItemUrlRewriteTemplate" /> property.</param>
+        <summary>Adds a catalog connection to the site that is specified in the constructor. </summary>
+        <remarks>
+          <para>Use the <see cref="M:Microsoft.SharePoint.Publishing.PublishingCatalogUtillity.GetPublishingCatalog" /> method to get catalog information.</para>
+          <para>The connection is added to store when an <see cref="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.Update" /> method is called.</para>
+          <para>Throws an<b>ArgumentNullException</b> if the <paramref name="catalogInfo" /> parameter is a null reference (Nothing in Visual Basic).
+URL rewrite is enabled only if non-empty values for the <paramref name="orderedPropertiesForUrlRewrite" /> parameter, the <paramref name="webUrl" /> parameter, and the <paramref name="catalogTaxonomyManagedProperty" /> parameter are passed in.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConnectedPublishingCatalogs">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Microsoft.SharePoint.Publishing.CatalogConnectionSettings&gt; ConnectedPublishingCatalogs { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.List`1&lt;class Microsoft.SharePoint.Publishing.CatalogConnectionSettings&gt; ConnectedPublishingCatalogs" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.CatalogConnectionManager.ConnectedPublishingCatalogs" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ConnectedPublishingCatalogs As List(Of CatalogConnectionSettings)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::List&lt;Microsoft::SharePoint::Publishing::CatalogConnectionSettings ^&gt; ^ ConnectedPublishingCatalogs { System::Collections::Generic::List&lt;Microsoft::SharePoint::Publishing::CatalogConnectionSettings ^&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.SharePoint.Publishing.CatalogConnectionSettings&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Returns publishing catalogs that are connected to the site that is supplied to the constructor.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Contains">
+      <MemberSignature Language="C#" Value="public bool Contains (string catalogPath);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Contains(string catalogPath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.Contains(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Contains (catalogPath As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool Contains(System::String ^ catalogPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="catalogPath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="catalogPath">The URL that identifies the catalog as the URL is stored in the search index. If the catalog is a <see cref="T:Microsoft.SharePoint.SPList" /> object, then this is the absolute URL.</param>
+        <summary>Indicates whether a connection to the catalog exists in the site that is specified in the constructor.</summary>
+        <returns>
+          <b>true</b> if a connection to the catalog exists in the site that is specified in the constructor; otherwise, <b>false</b>.</returns>
+        <remarks>
+          <para>Committed to the term store when the <see cref="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.Update" /> method is called.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteCatalogConnection">
+      <MemberSignature Language="C#" Value="public void DeleteCatalogConnection (string catalogPath);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteCatalogConnection(string catalogPath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.DeleteCatalogConnection(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteCatalogConnection (catalogPath As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteCatalogConnection(System::String ^ catalogPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="catalogPath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="catalogPath">The URL that identifies the catalog that is being removed as the URL is stored in the search index. If the catalog is an <see cref="T:Microsoft.SharePoint.SPList" /> object, the URL is the absolute path.</param>
+        <summary>Removes a catalog connection and the associated search result source from the site specified in the constructor.</summary>
+        <remarks>
+          <para>Committed when the <see cref="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.Update" /> method is called.</para>
+          <para>If the catalog is configured to rewrite item URLs, then any Web Part that renders items from this catalog shows original URLs after the connection is removed.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCatalogConnectionSettings">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.CatalogConnectionSettings GetCatalogConnectionSettings (string catalogPath);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.CatalogConnectionSettings GetCatalogConnectionSettings(string catalogPath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.GetCatalogConnectionSettings(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCatalogConnectionSettings (catalogPath As String) As CatalogConnectionSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::CatalogConnectionSettings ^ GetCatalogConnectionSettings(System::String ^ catalogPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.CatalogConnectionSettings</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="catalogPath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="catalogPath">URL that identifies the catalog as the URL is stored in the search index. If the catalog is a <see cref="T:Microsoft.SharePoint.SPList" /> object, then this URL is the absolute URL.</param>
+        <summary>Gets the settings for a catalog that is connected to this site. </summary>
+        <returns>Configured settings for the connection.</returns>
+        <remarks>
+          <para>This method requires case-sensitive URLs.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Commits changes to the catalog connection settings for the site specified in the constructor.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateCatalogConnection">
+      <MemberSignature Language="C#" Value="public void UpdateCatalogConnection (Microsoft.SharePoint.Publishing.CatalogConnectionSettings catalogInfo);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void UpdateCatalogConnection(class Microsoft.SharePoint.Publishing.CatalogConnectionSettings catalogInfo) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.UpdateCatalogConnection(Microsoft.SharePoint.Publishing.CatalogConnectionSettings)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub UpdateCatalogConnection (catalogInfo As CatalogConnectionSettings)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void UpdateCatalogConnection(Microsoft::SharePoint::Publishing::CatalogConnectionSettings ^ catalogInfo);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="catalogInfo" Type="Microsoft.SharePoint.Publishing.CatalogConnectionSettings" />
+      </Parameters>
+      <Docs>
+        <param name="catalogInfo">The connection settings to be updated. Use the <see cref="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.GetCatalogConnectionSettings(System.String)" /> method to return the current settings for this catalog.</param>
+        <summary>Updates the catalog that is currently connected to the site that is specified in the constructor.</summary>
+        <remarks>
+          <para>Committed when the <see cref="M:Microsoft.SharePoint.Publishing.CatalogConnectionManager.Update" /> method is called.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

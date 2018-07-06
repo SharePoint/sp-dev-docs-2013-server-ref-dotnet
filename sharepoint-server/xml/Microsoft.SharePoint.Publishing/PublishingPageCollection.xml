@@ -1,0 +1,399 @@
+﻿<Type Name="PublishingPageCollection" FullName="Microsoft.SharePoint.Publishing.PublishingPageCollection">
+  <TypeSignature Language="C#" Value="public sealed class PublishingPageCollection : Microsoft.SharePoint.Publishing.QueryBasedCollection&lt;Microsoft.SharePoint.Publishing.PublishingPage&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PublishingPageCollection extends Microsoft.SharePoint.Publishing.QueryBasedCollection`1&lt;class Microsoft.SharePoint.Publishing.PublishingPage&gt;" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.PublishingPageCollection" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PublishingPageCollection&#xA;Inherits QueryBasedCollection(Of PublishingPage)" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PublishingPageCollection sealed : Microsoft::SharePoint::Publishing::QueryBasedCollection&lt;Microsoft::SharePoint::Publishing::PublishingPage ^&gt;" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.QueryBasedCollection&lt;Microsoft.SharePoint.Publishing.PublishingPage&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="T">Microsoft.SharePoint.Publishing.PublishingPage</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents a collection of <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> objects.</summary>
+    <remarks>
+      <para>The collection provides an integer indexer method, <b>foreach</b> enumeration support (<b>For Each</b> in Microsoft Visual Basic), and a <b>Count</b> property. These can all be used to explicitly iterate over the collection. </para>
+      <para>Additionally, this collection uses Collaborative Application Markup Language (CAML) to apply sorting and filtering, and it provides base class support through the <b>QueryBasedCollection</b> base class. </para>
+      <para>CAML defines a query to be used in a Microsoft SharePoint Foundation<see cref="T:Microsoft.SharePoint.SPQuery" /> object, which the <b>QueryBasedCollection</b> base class provides. The CAML query must be applied when the collection is initially created and retrieved. For example, the <see cref="M:Microsoft.SharePoint.Publishing.PublishingWeb.GetPublishingPages" /> method includes overloads that take a CAML string directly, as well as overloads that take an <see cref="T:Microsoft.SharePoint.SPQuery" /> instance which has an <see cref="P:Microsoft.SharePoint.SPQuery.Query" /> property. </para>
+      <para>
+        <b>PublishingPageCollection</b> also supports data paging, which makes it possible to retrieve subsets of the collection. The <b>QueryBasedCollection</b> base class provides this support. You must specify the maximum number of <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> objects that can be retrieved in each subset when you initially create or retrieve the collection. For example, the <b>PublishingWeb.GetPublishingPages</b> method has overloads which take a row limit, as well as overloads that take an <see cref="T:Microsoft.SharePoint.SPQuery" /> instance that has an <see cref="P:Microsoft.SharePoint.SPQuery.RowLimit" /> property.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingPage Add (string name, Microsoft.SharePoint.Publishing.PageLayout layout);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PublishingPage Add(string name, class Microsoft.SharePoint.Publishing.PageLayout layout) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPageCollection.Add(System.String,Microsoft.SharePoint.Publishing.PageLayout)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Add (name As String, layout As PageLayout) As PublishingPage" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PublishingPage ^ Add(System::String ^ name, Microsoft::SharePoint::Publishing::PageLayout ^ layout);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingPage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="layout" Type="Microsoft.SharePoint.Publishing.PageLayout" />
+      </Parameters>
+      <Docs>
+        <param name="name">URL name of the new <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /><b>.</b></param>
+        <param name="layout">
+          <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> instance that is used to render the new <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" />.</param>
+        <summary>Creates a new <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> in the <b>PublishingPageCollection</b> of the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object.</summary>
+        <returns>The newly created <b>PublishingPage</b>.</returns>
+        <remarks>
+          <para>The <b>name</b> value cannot be empty and cannot exceed 128 characters. If it exceeds the maximum number of characters, it will be trimmed. The name must also be unique within the parent <b>PublishingWeb</b>. </para>
+          <para>The <b>name</b> cannot contain any of the following invalid characters: ", #, %, *, :, &lt;, &gt;, ?, \, /, {, |, }, &amp;, or ASCII character 0x7f. </para>
+          <para>The <b>layout</b> value must be a <b>PageLayout</b> from the current site collection. Generally, the <b>PageLayout</b> should be a member of the <b>PageLayoutCollection</b> that is returned by the <b>Publishing.GetAvailablePageLayouts</b> method, but SharePoint 2010 does not enforce this. </para>
+          <para>The new <b>PublishingPage</b> has the following property values.</para>
+          <list type="table">
+            <item>
+              <term>
+                <b>PublishingPage.PublishingWeb</b>
+              </term>
+              <description>
+                <b>PublishingWeb</b> that contains the <b>PublishingPageCollection</b>.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.ContentType</b>
+              </term>
+              <description>
+                <b>AssociatedContentType</b> value for the layout. </description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.CreatedBy</b>
+              </term>
+              <description>User of <b>PublishingPage</b> at the date and time this method was called.</description>
+            </item>
+            <item>
+              <term>
+                <b>CreatedDate</b>
+              </term>
+              <description>Date and time this method was called.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.Description</b>
+              </term>
+              <description>None.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.EndDate</b>
+              </term>
+              <description>Never (<paramref name="null" />).</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.LastModifiedBy</b>
+              </term>
+              <description>Current user.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.LastModifiedDate</b>
+              </term>
+              <description>Date and time when this method was called.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.Layout</b>
+              </term>
+              <description>
+                <paramref name="layout" /> parameter value.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.ListItem</b>
+              </term>
+              <description>Underlying <b>SPListItem</b> of the <b>PublishingPage</b>.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.LocalContactEmail</b>
+              </term>
+              <description>None.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.LocalContactImage</b>
+              </term>
+              <description>None.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.LocalContactName</b>
+              </term>
+              <description>None.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.Name</b>
+              </term>
+              <description>
+                <paramref name="name" /> parameter value.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.Contact</b>
+              </term>
+              <description>Current user.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.StartDate</b>
+              </term>
+              <description>Immediate (<paramref name="null" />).</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.Title</b>
+              </term>
+              <description>None.</description>
+            </item>
+            <item>
+              <term>
+                <b>PublishingPage.Url</b>
+              </term>
+              <description>Server-relative URL for the new <b>PublishingPage</b>.</description>
+            </item>
+          </list>
+          <para>The user must have Add and Edit permissions in the <b>PublishingWeb</b>, specifically for items in the <b>PublishingWeb.PagesList</b>, to use this method.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentException">Extension that is not valid for <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> URL name. <b>PublishingPage</b> URL names must have the file name extension .aspx.</exception>
+        <exception cref="System.IO.PathTooLongException">Specified file or folder name is too long. The URL path for all files and folders must be 260 characters or fewer (and no more than 128 characters for any single file or folder name in the URL). Type a shorter file or folder name.</exception>
+        <exception cref="Microsoft.SharePoint.SPException">File or folder name x contains characters that are not permitted. Use a different name.</exception>
+        <exception cref="System.ArgumentNullException">One of the input parameters is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="System.UnauthorizedAccessException">Current user does not have sufficient permissions to perform this action.</exception>
+        <exception cref="System.IO.FileLoadException">Another file with the same name already exists.</exception>
+        <exception cref="System.IO.DirectoryNotFoundException">There is a problem with the <paramref name="name" /> parameter.</exception>
+        <example>
+          <para>This example creates a new <b>PublishingPage</b> object in a <b>PublishingWeb</b>.</para>
+          <para>Before compiling and running this example, verify that an <b>SPWeb</b> that is a <b>PublishingWeb</b> exists and is passed in as a Web parameter. </para>
+          <para>The <b>PageLayout</b> used for creating the page must be passed in.</para>
+          <code>using SPWeb = Microsoft.SharePoint.SPWeb;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCollectionCodeSamples
+    {
+        public static void CreateNewPage( SPWeb web, PageLayout pageLayout )
+        {
+            // TODO: Replace these variable values with your own
+            // values.
+            //
+            // The URL name of the new page
+            string newPageName = "Contoso.aspx";
+            //
+            // The comment to set when the page is checked in.
+            string checkInComment = "Your check in comments";
+
+            // Validate the input parameters.
+            if (null == web)
+            {
+                throw new System.ArgumentNullException("web");
+            }
+            if (null == pageLayout)
+            {
+                throw new System.ArgumentNullException("pageLayout");
+            }
+
+            // Get the PublishingWeb wrapper for the SPWeb
+            // that was passed in.
+            PublishingWeb publishingWeb = null;
+            if (PublishingWeb.IsPublishingWeb(web))
+            {
+                publishingWeb = PublishingWeb.GetPublishingWeb(web);
+            }
+            else
+            {
+                throw new System.ArgumentException("The SPWeb must be a PublishingWeb", "web");
+            }
+           
+            // Create the new page in the PublishingWeb.
+            PublishingPageCollection pages = publishingWeb.GetPublishingPages();
+            PublishingPage newPage = pages.Add(newPageName, pageLayout);
+
+            // Check the new page in so that other contributors
+            // can work on it.
+            newPage.CheckIn(checkInComment);          
+        }
+    }
+}</code>
+          <code>Imports SPWeb = Microsoft.SharePoint.SPWeb
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCollectionCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub CreateNewPage(ByVal web As SPWeb, ByVal pageLayout As PageLayout)
+            ' TODO: Replace these variable values with your own
+            ' values.
+            '
+            ' The URL name of the new page
+            Dim newPageName As String = "Contoso.aspx"
+            '
+            ' The comment to set when the page is checked in.
+            Dim checkInComment As String = "Your check in comments"
+
+            ' Validate the input parameters.
+            If Nothing Is web Then
+                Throw New System.ArgumentNullException("web")
+            End If
+            If Nothing Is pageLayout Then
+                Throw New System.ArgumentNullException("pageLayout")
+            End If
+
+            ' Get the PublishingWeb wrapper for the SPWeb
+            ' that was passed in.
+            Dim publishingWeb As PublishingWeb = Nothing
+            If PublishingWeb.IsPublishingWeb(web) Then
+                publishingWeb = PublishingWeb.GetPublishingWeb(web)
+            Else
+                Throw New System.ArgumentException("The SPWeb must be a PublishingWeb", "web")
+            End If
+
+            ' Create the new page in the PublishingWeb.
+            Dim pages As PublishingPageCollection = publishingWeb.GetPublishingPages()
+            Dim newPage As PublishingPage = pages.Add(newPageName, pageLayout)
+
+            ' Check the new page in so that other contributors
+            ' can work on it.
+            newPage.CheckIn(checkInComment)
+        End Sub
+    End Class
+End Namespace</code>
+          <para />
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingPage Add (string newPageName, Microsoft.SharePoint.SPFile fileToConvert, Guid transformerId, Microsoft.SharePoint.Publishing.PageConversionPriority priority);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PublishingPage Add(string newPageName, class Microsoft.SharePoint.SPFile fileToConvert, valuetype System.Guid transformerId, valuetype Microsoft.SharePoint.Publishing.PageConversionPriority priority) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPageCollection.Add(System.String,Microsoft.SharePoint.SPFile,System.Guid,Microsoft.SharePoint.Publishing.PageConversionPriority)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Add (newPageName As String, fileToConvert As SPFile, transformerId As Guid, priority As PageConversionPriority) As PublishingPage" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PublishingPage ^ Add(System::String ^ newPageName, Microsoft::SharePoint::SPFile ^ fileToConvert, Guid transformerId, Microsoft::SharePoint::Publishing::PageConversionPriority priority);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("This member is obsolete - use the specialized Office services instead", false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingPage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="newPageName" Type="System.String" />
+        <Parameter Name="fileToConvert" Type="Microsoft.SharePoint.SPFile" />
+        <Parameter Name="transformerId" Type="System.Guid" />
+        <Parameter Name="priority" Type="Microsoft.SharePoint.Publishing.PageConversionPriority" />
+      </Parameters>
+      <Docs>
+        <param name="newPageName">Name of the new <b>PublishingPage</b>.</param>
+        <param name="fileToConvert">File to convert to get the page content.</param>
+        <param name="transformerId">Document transformer ID to use for the conversion.</param>
+        <param name="priority">
+          <see cref="T:Microsoft.SharePoint.Publishing.PageConversionPriority" /> enumeration for the conversion. </param>
+        <summary>Creates a new <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> in the <b>PublishingPageCollection</b> of the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> by converting a source document.</summary>
+        <returns>The newly created <b>PublishingPage</b>.</returns>
+        <remarks>
+          <para>Uses the smart client authoring feature to add a page by converting a specified document to HTML. The smart client authoring feature specifies the settings to use, such as what page layout to use for the new page and which field to store the converted HTML in.</para>
+          <para>The return value and exceptions are identical to those for the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPageCollection.Add(stringname,PageLayoutlayout)" /> function that takes the new name and layout directly, with the addition of the <b>DocumentToPublishingPageConversionException</b> that is sometimes thrown.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.DocumentToPublishingPageConversionException">If the conversion fails or encounters problems that cause the converter to throw. For example, this exception appears when embedded images get dropped. This exception should always be caught by the caller.If the <b>PublishingPage</b> member of the thrown exception is not null, the issue that causes the exception is a converter warning, and the page can be used with the caveat that it may have potentially significant fidelity issues, depending on the converter warning.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingPage Add (string newPageName, Microsoft.SharePoint.SPFile fileToConvert, Guid transformerId, string configXml, Microsoft.SharePoint.Publishing.PageConversionPriority priority);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PublishingPage Add(string newPageName, class Microsoft.SharePoint.SPFile fileToConvert, valuetype System.Guid transformerId, string configXml, valuetype Microsoft.SharePoint.Publishing.PageConversionPriority priority) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPageCollection.Add(System.String,Microsoft.SharePoint.SPFile,System.Guid,System.String,Microsoft.SharePoint.Publishing.PageConversionPriority)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Add (newPageName As String, fileToConvert As SPFile, transformerId As Guid, configXml As String, priority As PageConversionPriority) As PublishingPage" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PublishingPage ^ Add(System::String ^ newPageName, Microsoft::SharePoint::SPFile ^ fileToConvert, Guid transformerId, System::String ^ configXml, Microsoft::SharePoint::Publishing::PageConversionPriority priority);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("This member is obsolete - use the specialized Office services instead", false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingPage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="newPageName" Type="System.String" />
+        <Parameter Name="fileToConvert" Type="Microsoft.SharePoint.SPFile" />
+        <Parameter Name="transformerId" Type="System.Guid" />
+        <Parameter Name="configXml" Type="System.String" />
+        <Parameter Name="priority" Type="Microsoft.SharePoint.Publishing.PageConversionPriority" />
+      </Parameters>
+      <Docs>
+        <param name="newPageName">Name of the new <b>PublishingPage</b>.</param>
+        <param name="fileToConvert">File to convert to get the page content.</param>
+        <param name="transformerId">Document transformer ID to use for the conversion.</param>
+        <param name="configXml">Settings to use for the conversion.</param>
+        <param name="priority">Priority level for the conversion. 0 indicates that the conversion happens immediately.</param>
+        <summary>Creates a new <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> in the <b>PublishingPageCollection</b> of the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> b by converting a source document according to the settings that are passed.</summary>
+        <returns>The newly created <b>PublishingPage</b>.</returns>
+        <remarks>
+          <para>Uses the smart client authoring feature to add a page by converting a specified document to HTML. The smart client authoring feature specifies the settings to use, such as what page layout to use for the new page and which field to store the converted HTML in.</para>
+          <para>This method is identical to <see cref="M:Microsoft.SharePoint.Publishing.PublishingPageCollection.Add(stringnewpageName,SPFilefileToConvert,GuidtranformerId,PageConversionPrioritypriority)" /> except that this version takes settings from the <paramref name="configXml" /> parameter and not from the configuration of the content type.</para>
+          <para>This method can throw all exceptions that <see cref="M:Microsoft.SharePoint.Publishing.PublishingPageCollection.Add(stringname,PageLayoutlayout)" /> throws plus <see cref="T:Microsoft.SharePoint.Publishing.DocumentToPublishingPageConversionException" />.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.DocumentToPublishingPageConversionException">If the conversion fails or encounters problems that cause the converter to issue a warning, such as when embedded images get dropped, it throws this exception. This exception should always be caught by the caller.If the <b>PublishingPage</b> member of this exception is not null, the issue that caused the exception is a converter warning. The page can be used with the caveat that it has potentially significant fidelity issues, depending on the converter warning.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="PubWeb">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingWeb PubWeb { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.PublishingWeb PubWeb" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPageCollection.PubWeb" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PubWeb As PublishingWeb" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::PublishingWeb ^ PubWeb { Microsoft::SharePoint::Publishing::PublishingWeb ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingWeb</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object that contains this <b>PublishingWeb</b> object.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object that contains this <b>PublishingPageCollection</b> object.</value>
+        <remarks>
+          <para>The publishing web is the parent web of the page list that populates this <b>PublishingPageCollection</b> object. It should not be a null reference (Nothing in Visual Basic).</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,200 @@
+﻿<Type Name="EditModePanel" FullName="Microsoft.SharePoint.Publishing.WebControls.EditModePanel">
+  <TypeSignature Language="C#" Value="public sealed class EditModePanel : System.Web.UI.WebControls.Panel, System.Web.UI.INamingContainer" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit EditModePanel extends System.Web.UI.WebControls.Panel implements class System.Web.UI.INamingContainer, class System.Web.UI.IParserAccessor" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.EditModePanel" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class EditModePanel&#xA;Inherits Panel&#xA;Implements INamingContainer" />
+  <TypeSignature Language="C++ CLI" Value="public ref class EditModePanel sealed : System::Web::UI::WebControls::Panel, System::Web::UI::INamingContainer" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Web.UI.WebControls.Panel</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Web.UI.INamingContainer</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.ComponentModel.Designer(typeof(Microsoft.SharePoint.Publishing.Internal.WebControls.EditModePanelDesigner))</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Web.UI.ParseChildren(false)</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Web.UI.ToolboxData("&lt;{0}:EditModePanel runat=server&gt;&lt;/{0}:EditModePanel&gt;")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Provides a container that shows or hides its child controls based on the mode of the page.</summary>
+    <remarks>
+      <para>When a page is viewed in a Web browser it will be in one of two page display modes: Edit mode or Display mode. Readers can only view pages in Display mode. Authors can view pages in either mode. You can use the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditModePanel" /> control to control the visibility of other controls in relation to the Display mode. For example, if you are a page designer, you can add a field to the page's content type that is only used to include business logic for page authors. You can use the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditModePanel" /> control to allow page authors to view and edit when the page is in Edit mode yet hide the information from readers when the page is in Display mode.</para>
+      <para>You can also use the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditModePanel" /> control to insert information only at display time while hiding it at edit time. For example, a page designer might have one set of cascading style sheet classes that should be used in Display mode and a different set that should be used only in Edit mode. The <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditModePanel" /><b>l </b>control has a custom run-time designer that is used when a page contains an <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditModePanel" /> control in Microsoft SharePoint Designer or Visual Studio. This control designer allows the user to edit the content inside of an <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditModePanelcontrol" /> in the same way that they would edit content contained within a <b>&lt;DIV&gt;</b> tag or a table cell.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>///In this example, the EditModePanel control is used to display and ///edit two fields which drive some of the business logic of the site.   &amp;lt;PublishingWebControls:EditModePanel runat="server" id="BusinessLogicArea" style="margin:5px; border:solid 1px black; background-color:#7ba2d6"&amp;gt; &amp;lt;table&amp;gt;     &amp;lt;tr&amp;gt;   &amp;lt;td colspan="2" style="color:white; font-size:18px; font-weight:bold;"&amp;gt;Product Properties&amp;lt;/td&amp;gt;     &amp;lt;/tr&amp;gt;     &amp;lt;tr&amp;gt;   &amp;lt;td style="vertical-align:top; padding-right: 20px;"&amp;gt; &amp;lt;SharePointWebControls:LookupField runat="server" id-="RelatedProduct" FieldName="Product Supplier" /&amp;gt;   &amp;lt;/td&amp;gt;   &amp;lt;td style="vertical-align:top;"&amp;gt; &amp;lt;SharePointWebControls:DropDownChoiceField runat="server" FieldName="Model Year" /&amp;gt;   &amp;lt;/td&amp;gt;     &amp;lt;/tr&amp;gt; &amp;lt;/table&amp;gt;   &amp;lt;/PublishingWebControls:EditModePanel&amp;gt;      ///In this example, the EditModePanel control is used to determine///whether the CSS file included is for display or editing.   &amp;lt;PublishingWebControls:EditModePanel runat="server" id="GetDisplayCss" PageDisplayMode="Display" SuppressTag="true"&amp;gt; &amp;lt;link rel="stylesheet" type="text/css" href="/MyStyles/Display.css" &amp;gt;   &amp;lt;/PublishingWebControls:EditModePanel&amp;gt;   &amp;lt;PublishingWebControls:EditModePanel runat="server" id="GetEditCss" PageDisplayMode="Edit" SuppressTag="true"&amp;gt; &amp;lt;link rel="stylesheet" type="text/css" href="/MyStyles/Edit.css" &amp;gt;   &amp;lt;/PublishingWebControls:EditModePanel&amp;gt;</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public EditModePanel ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; EditModePanel();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditModePanel" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddParsedSubObject">
+      <MemberSignature Language="C#" Value="protected override void AddParsedSubObject (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void AddParsedSubObject(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.AddParsedSubObject(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub AddParsedSubObject (obj As Object)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void AddParsedSubObject(System::Object ^ obj);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Web.UI.IParserAccessor.AddParsedSubObject(System.Object)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="obj">Parsed sub object to add to the control collection</param>
+        <summary>Adds parsed sub objects to the control collection only if the EditModePanel is going to render in the current mode</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PageDisplayMode">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.PageDisplayMode PageDisplayMode { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.PageDisplayMode PageDisplayMode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.PageDisplayMode" />
+      <MemberSignature Language="VB.NET" Value="Public Property PageDisplayMode As PageDisplayMode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::PageDisplayMode PageDisplayMode { Microsoft::SharePoint::Publishing::WebControls::PageDisplayMode get(); void set(Microsoft::SharePoint::Publishing::WebControls::PageDisplayMode value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("Important")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.PageDisplayMode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether this control is visible in Edit mode or Display mode.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.PageDisplayMode" /> property is used to determine whether the child controls are displayed in Edit mode or Display mode.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderBeginTag">
+      <MemberSignature Language="C#" Value="public override void RenderBeginTag (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RenderBeginTag(class System.Web.UI.HtmlTextWriter writer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub RenderBeginTag (writer As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void RenderBeginTag(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">A <see cref="T:System.Web.UI.HtmlTextWriterobject" /> that represents the output stream that renders HTML content on the client.</param>
+        <summary>Renders the HTML opening tag of the control to the specified writer if enabled.</summary>
+        <remarks>
+          <para>The base class renders an opening <b>&lt;DIV&gt;</b> tag before it outputs child controls. You can use the <see cref="M:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.RenderBeginTag(System.Web.UI.HtmlTextWriter)" /> method to override the <see cref="M:System.Web.UI.WebControls.WebControl.RenderBeginTag(System.Web.UI.HtmlTextWriter)" /> method from the base class and suppress this opening tag. If the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.SuppressTag" /> property is set to <b>true</b>, this method will suppress the generation of the opening tag. Otherwise, the opening tag will be generated by the base class.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderEndTag">
+      <MemberSignature Language="C#" Value="public override void RenderEndTag (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RenderEndTag(class System.Web.UI.HtmlTextWriter writer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub RenderEndTag (writer As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void RenderEndTag(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">A <see cref="T:System.Web.UI.HtmlTextWriter" /> that represents the output stream to render HTML content on the client.</param>
+        <summary>Renders the HTML closing tag of the control to the specified writer..</summary>
+        <remarks>
+          <para>The base class will render a closing <b>&lt;/DIV&gt;</b> tag after it outputs its child controls. You can use the <b>RenderEndTag</b> method to override the <see cref="M:System.Web.UI.WebControls.WebControl.RenderEndTag(System.Web.UI.HtmlTextWriter)" /> method from the base class in order to suppress this closing tag. If the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.SuppressTag" /> property is <b>true</b>, this method will suppress the generation of the closing tag. Otherwise, the closing tag will be generated by the base class.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SuppressTag">
+      <MemberSignature Language="C#" Value="public bool SuppressTag { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool SuppressTag" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.SuppressTag" />
+      <MemberSignature Language="VB.NET" Value="Public Property SuppressTag As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool SuppressTag { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("Appearance")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether this control will render an outer &lt;DIV&gt; element.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Because the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditModePanel" /> control derives from the ASP.NET Panel control, it will naturally emit <b>&lt;DIV&gt;</b> and <b>&lt;/DIV&gt;</b> tags around its child content. The <see cref="P:Microsoft.SharePoint.Publishing.WebControls.EditModePanel.SuppressTag" /> property enables you to suppress the generation of these opening and closing elements. One scenario in which this would be very useful is the <b>&lt;Head&gt;</b> section of the page where the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.EditModePanel" /> control is used to generate, for example, metatags, cascading style sheet links, or script links. The default value is <b>false</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

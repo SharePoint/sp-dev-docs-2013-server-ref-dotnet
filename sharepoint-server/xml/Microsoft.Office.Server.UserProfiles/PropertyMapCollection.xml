@@ -1,0 +1,373 @@
+﻿<Type Name="PropertyMapCollection" FullName="Microsoft.Office.Server.UserProfiles.PropertyMapCollection">
+  <TypeSignature Language="C#" Value="public class PropertyMapCollection" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit PropertyMapCollection extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.PropertyMapCollection" />
+  <TypeSignature Language="VB.NET" Value="Public Class PropertyMapCollection" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PropertyMapCollection" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents a collection of <see cref="T:Microsoft.Office.Server.UserProfiles.PropertyMap" /> objects. </summary>
+    <remarks>
+      <para>This class stores all property mappings for the data source.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The following code example shows the use of the <see cref="T:Microsoft.Office.Server.UserProfiles.PropertyMapCollection" /> class.</para>
+      <code>static public void PropertyTypeAndMappingSample()
+{
+ 
+  using (SPSite site = new SPSite("&lt;span class="placeholder"&gt;site url&lt;/span&gt;"))
+  {
+    SPServiceContext context = SPServiceContext.GetContext(site);
+//Initialize user profile config manager object.
+    UserProfileConfigManager upcm = new UserProfileConfigManager(context);
+    ConnectionManager cm = upcm.ConnectionManager;
+ 
+//Sample to get a property type.
+    PropertyDataTypeCollection pdtc = upcm.GetPropertyDataTypes();
+    PropertyDataType ptype = null;
+ 
+    foreach (PropertyDataType datatype in pdtc)
+    {
+      if (datatype.Name.Equals("string"))
+      {
+        ptype = datatype;
+        break;
+      }
+    }
+ 
+//Sample to create a new custom property.
+    ProfilePropertyManager ppm = upcm.ProfilePropertyManager;
+    CorePropertyManager cpm = ppm.GetCoreProperties();
+    ProfileTypePropertyManager ptpm = ppm.GetProfileTypeProperties(ProfileType.User);
+    ProfileSubtypeManager psm = ProfileSubtypeManager.Get(context);
+    ProfileSubtype ps = psm.GetProfileSubtype(ProfileSubtypeManager.GetDefaultProfileName(ProfileType.User));
+    ProfileSubtypePropertyManager pspm = ps.Properties;
+ 
+    CoreProperty coreProp = cpm.Create(false);
+    coreProp.Name = "division";
+    coreProp.DisplayName = "my custom division";
+    coreProp.Type = ptype.Name;
+    coreProp.Length = ptype.MaxCharCount;
+    coreProp.Commit();
+    ProfileTypeProperty profileTypeProp = ptpm.Create(coreProp);
+    profileTypeProp.IsVisibleOnEditor = true;
+    profileTypeProp.IsVisibleOnViewer = true;
+    profileTypeProp.Commit();
+    ProfileSubtypeProperty profileSubTypeProp = pspm.Create(profileTypeProp);
+    profileSubTypeProp.DefaultPrivacy = Privacy.Private;
+    profileSubTypeProp.IsUserEditable = true;
+    profileSubTypeProp.Commit();
+    pspm.SetDisplayOrderByPropertyName(profileSubTypeProp.Name, 1);
+    pspm.CommitDisplayOrder();
+ 
+//Edit property sample.
+    CoreProperty ptitle = cpm.GetPropertyByName(PropertyConstants.Title);
+// Or get property by URI.
+    ptitle = cpm.GetPropertyByURI(Property.URI_Title);
+    ptitle.DisplayName = "Designation";
+    ptitle.Commit();
+//Property map sample.
+    string connectionName = "Test Connection";
+    Connection connection = cm[connectionName];
+    PropertyMapCollection pmc = connection.PropertyMapping;
+    pmc.AddNewMapping(ProfileType.User, profileSubTypeProp.Name, "division");
+ 
+//Remove property sample.
+    cpm.RemovePropertyByName("division");
+    ptpm.RemovePropertyByName("division");
+    pspm.RemovePropertyByName("division");
+  }
+}
+</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public void Add (string connectionAttributeName, Microsoft.Office.Server.UserProfiles.ProfileTypeProperty property, bool import, bool export);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(string connectionAttributeName, class Microsoft.Office.Server.UserProfiles.ProfileTypeProperty property, bool import, bool export) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.Add(System.String,Microsoft.Office.Server.UserProfiles.ProfileTypeProperty,System.Boolean,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Add (connectionAttributeName As String, property As ProfileTypeProperty, import As Boolean, export As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Add(System::String ^ connectionAttributeName, Microsoft::Office::Server::UserProfiles::ProfileTypeProperty ^ property, bool import, bool export);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connectionAttributeName" Type="System.String" />
+        <Parameter Name="property" Type="Microsoft.Office.Server.UserProfiles.ProfileTypeProperty" />
+        <Parameter Name="import" Type="System.Boolean" />
+        <Parameter Name="export" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="connectionAttributeName">To be added.</param>
+        <param name="property">To be added.</param>
+        <param name="import">To be added.</param>
+        <param name="export">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public void Add (string connectionAttributeName, Microsoft.Office.Server.UserProfiles.ProfileTypeProperty property, bool import, bool export, string associationName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(string connectionAttributeName, class Microsoft.Office.Server.UserProfiles.ProfileTypeProperty property, bool import, bool export, string associationName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.Add(System.String,Microsoft.Office.Server.UserProfiles.ProfileTypeProperty,System.Boolean,System.Boolean,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Add (connectionAttributeName As String, property As ProfileTypeProperty, import As Boolean, export As Boolean, associationName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Add(System::String ^ connectionAttributeName, Microsoft::Office::Server::UserProfiles::ProfileTypeProperty ^ property, bool import, bool export, System::String ^ associationName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connectionAttributeName" Type="System.String" />
+        <Parameter Name="property" Type="Microsoft.Office.Server.UserProfiles.ProfileTypeProperty" />
+        <Parameter Name="import" Type="System.Boolean" />
+        <Parameter Name="export" Type="System.Boolean" />
+        <Parameter Name="associationName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="connectionAttributeName">To be added.</param>
+        <param name="property">To be added.</param>
+        <param name="import">To be added.</param>
+        <param name="export">To be added.</param>
+        <param name="associationName">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public void Add (string connectionAttributeName, Microsoft.Office.Server.UserProfiles.ProfileType type, string propertyName, bool import, bool export, string associationName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(string connectionAttributeName, valuetype Microsoft.Office.Server.UserProfiles.ProfileType type, string propertyName, bool import, bool export, string associationName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.Add(System.String,Microsoft.Office.Server.UserProfiles.ProfileType,System.String,System.Boolean,System.Boolean,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Add (connectionAttributeName As String, type As ProfileType, propertyName As String, import As Boolean, export As Boolean, associationName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Add(System::String ^ connectionAttributeName, Microsoft::Office::Server::UserProfiles::ProfileType type, System::String ^ propertyName, bool import, bool export, System::String ^ associationName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connectionAttributeName" Type="System.String" />
+        <Parameter Name="type" Type="Microsoft.Office.Server.UserProfiles.ProfileType" />
+        <Parameter Name="propertyName" Type="System.String" />
+        <Parameter Name="import" Type="System.Boolean" />
+        <Parameter Name="export" Type="System.Boolean" />
+        <Parameter Name="associationName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="connectionAttributeName">To be added.</param>
+        <param name="type">To be added.</param>
+        <param name="propertyName">To be added.</param>
+        <param name="import">To be added.</param>
+        <param name="export">To be added.</param>
+        <param name="associationName">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddNewExportMapping">
+      <MemberSignature Language="C#" Value="public void AddNewExportMapping (Microsoft.Office.Server.UserProfiles.ProfileType type, string mossPropertyName, string maAttributeName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddNewExportMapping(valuetype Microsoft.Office.Server.UserProfiles.ProfileType type, string mossPropertyName, string maAttributeName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.AddNewExportMapping(Microsoft.Office.Server.UserProfiles.ProfileType,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddNewExportMapping (type As ProfileType, mossPropertyName As String, maAttributeName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddNewExportMapping(Microsoft::Office::Server::UserProfiles::ProfileType type, System::String ^ mossPropertyName, System::String ^ maAttributeName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="type" Type="Microsoft.Office.Server.UserProfiles.ProfileType" />
+        <Parameter Name="mossPropertyName" Type="System.String" />
+        <Parameter Name="maAttributeName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="type">To be added.</param>
+        <param name="mossPropertyName">To be added.</param>
+        <param name="maAttributeName">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddNewMapping">
+      <MemberSignature Language="C#" Value="public void AddNewMapping (Microsoft.Office.Server.UserProfiles.ProfileType type, string mossPropertyName, string maAttributeName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddNewMapping(valuetype Microsoft.Office.Server.UserProfiles.ProfileType type, string mossPropertyName, string maAttributeName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.AddNewMapping(Microsoft.Office.Server.UserProfiles.ProfileType,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddNewMapping (type As ProfileType, mossPropertyName As String, maAttributeName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddNewMapping(Microsoft::Office::Server::UserProfiles::ProfileType type, System::String ^ mossPropertyName, System::String ^ maAttributeName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="type" Type="Microsoft.Office.Server.UserProfiles.ProfileType" />
+        <Parameter Name="mossPropertyName" Type="System.String" />
+        <Parameter Name="maAttributeName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="type">To be added.</param>
+        <param name="mossPropertyName">To be added.</param>
+        <param name="maAttributeName">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Connection">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.Connection Connection { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.Connection Connection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.Connection" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Connection As Connection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::Connection ^ Connection { Microsoft::Office::Server::UserProfiles::Connection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.Connection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Count">
+      <MemberSignature Language="C#" Value="public int Count { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Count" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.Count" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Count As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Count { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of user profile property maps for this collection.</summary>
+        <value>The number of user profile property maps for this collection.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEnumerator">
+      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.IEnumerator GetEnumerator() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.GetEnumerator" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetEnumerator () As IEnumerator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::IEnumerator ^ GetEnumerator();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.IEnumerator</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the enumerator for the <see cref="T:Microsoft.Office.Server.UserProfiles.PropertyMap" /> objects.</summary>
+        <returns>The that contains the enumerator for the <see cref="T:Microsoft.Office.Server.UserProfiles.PropertyMap" /> objects.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.PropertyMap this[Microsoft.Office.Server.UserProfiles.ProfileTypeProperty property] { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.PropertyMap Item(class Microsoft.Office.Server.UserProfiles.ProfileTypeProperty)" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.Item(Microsoft.Office.Server.UserProfiles.ProfileTypeProperty)" />
+      <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(property As ProfileTypeProperty) As PropertyMap" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::PropertyMap ^ default[Microsoft::Office::Server::UserProfiles::ProfileTypeProperty ^] { Microsoft::Office::Server::UserProfiles::PropertyMap ^ get(Microsoft::Office::Server::UserProfiles::ProfileTypeProperty ^ property); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.PropertyMap</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="property" Type="Microsoft.Office.Server.UserProfiles.ProfileTypeProperty" />
+      </Parameters>
+      <Docs>
+        <param name="property">To be added.</param>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.PropertyMap this[string propertyName] { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.PropertyMap Item(string)" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.Item(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(propertyName As String) As PropertyMap" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::PropertyMap ^ default[System::String ^] { Microsoft::Office::Server::UserProfiles::PropertyMap ^ get(System::String ^ propertyName); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.PropertyMap</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="propertyName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="propertyName">To be added.</param>
+        <summary>Gets the property map in the collection.</summary>
+        <value> The that contains the property map in the collection.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveAllExportMappingsForAttribute">
+      <MemberSignature Language="C#" Value="public void RemoveAllExportMappingsForAttribute (string mossPropertyName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveAllExportMappingsForAttribute(string mossPropertyName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.PropertyMapCollection.RemoveAllExportMappingsForAttribute(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RemoveAllExportMappingsForAttribute (mossPropertyName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemoveAllExportMappingsForAttribute(System::String ^ mossPropertyName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="mossPropertyName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="mossPropertyName">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,521 @@
+﻿<Type Name="EcmDocumentRouterRule" FullName="Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule">
+  <TypeSignature Language="C#" Value="public class EcmDocumentRouterRule" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit EcmDocumentRouterRule extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule" />
+  <TypeSignature Language="VB.NET" Value="Public Class EcmDocumentRouterRule" />
+  <TypeSignature Language="C++ CLI" Value="public ref class EcmDocumentRouterRule" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents a rule that defines document-routing behavior for the content organizer.</summary>
+    <remarks>To be added.</remarks>
+    <example>
+      <para>The following sample code creates a rule to organize documents of the “Contract” content type into a document library on the site. It exemplifies how to use the Content Organizer API to organize documents on the site.</para>
+      <code>using System;
+using System.Text;
+using Microsoft.SharePoint;
+using TaxonomyField = Microsoft.SharePoint.Taxonomy.TaxonomyField;
+using EcmDocumentRoutingWeb = Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRoutingWeb;
+using EcmDocumentRouterRule = Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule;
+using EcmDocumentRouter = Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouter;
+using DocumentRouterAutoFolderSettings = Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    class ContentOrganizerCodeSample
+    {
+        /// &amp;lt;summary&amp;gt;
+        /// Sample code to create a content organizer rule that organizes documents of the Contract content type to a document library within the site.
+        /// Also exemplifies usage of content organizer API to organize documents in the site.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;remarks&amp;gt;This code sample assumes that the site contains a content type called "Contract" derived from the Document content type.
+        /// The Contract content type contains a required TaxonomyField called "Business Division" &amp;lt;/remarks&amp;gt;
+        /// &amp;lt;param name="args"&amp;gt;&amp;lt;/param&amp;gt;
+        /// &amp;lt;see cref="SPContentType"/&amp;gt;
+        /// &amp;lt;see cref="SPField.Required"/&amp;gt;
+        /// &amp;lt;see cref="TaxonomyField"/&amp;gt;
+        /// &amp;lt;exception cref="System.ArgumentException"&amp;gt;List did not exist in the site&amp;lt;/exception&amp;gt;
+        static void Main(string[] args)
+        {
+            // Change http://SiteUrl to the absolute url of the content organizer enabled site where the custom router needs to be registered.
+            const string absoluteSiteUrl = "http://SiteUrl";
+            // Change Organize Documents to the desired name for the rule.
+            const string ruleName = "Organize Documents";
+            // Change "Sample rule to organize documents" to a description for the rule.
+            const string ruleDescription = "Sample rule to organize documents";
+            // Change My Documents to the desired library to which documents matching this rule should be organized.
+            const string ruleLibraryName = "My Documents";
+            // Change Contract to the name of the content type on which this rule should be based.
+            const string ruleContentTypeName = "Contract";
+
+            // Values for Condition on fields - See SPField class for more details
+            // Set conditionFieldId with the serialized Guid, Id property of the SPField used in the condition
+            const string conditionFieldId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
+            // Set conditionFieldInternalName with the InternalName property of the SPField
+            const string conditionFieldInternalName = "FieldInternalName";
+            // Set conditionFieldTitle with the Title property of the SPField.
+            const string conditionFieldTitle = "FieldTitle";
+            // Set conditionOperator with the operator used to evaluate whether a document matches this rule. 
+            // If conditionOperator is set to be a unary operator (IsEmpty or IsNotEmpty), it will be applied on the value of the condition field on the document.            
+            const string conditionOperator = "Contains";
+            // Set conditionFieldValue with the value used as an operand for "Op" if "Op" is a binary operator (Contains, Equal etc.,).
+            const string conditionFieldValue = "Restaurant";
+
+            // Values for automatic folder creation settings
+            // Change Business Division to the name of the managed metadata field on which automatic folder creation is based.
+            const string autoFolderPropertyName = "Business Division";
+            // Replace with a format of your choice. Place holder %1 will be replaced by the name of the field and %2 will be replaced by the value of the field for the document.
+            const string autoFolderNameFormat = "Contract %1 - %2";
+
+            // An empty title indicates absence of conditions.
+            string conditionXml = string.IsNullOrEmpty(conditionFieldTitle) ?
+                string.Empty :
+                String.Format(@"&amp;lt;Condition Column=""{0}|{1}|{2}"" Operator=""{3}"" Value=""{4}"" /&amp;gt;",
+                conditionFieldId, conditionFieldInternalName, conditionFieldTitle,
+                conditionOperator,
+                conditionFieldValue);
+
+            // The condition Xml can repeat 0-5 times depending on the number of conditions required for a document to match this rule.
+            string conditionsXml = String.Format("&amp;lt;Conditions&amp;gt;{0}&amp;lt;/Conditions&amp;gt;", conditionXml);
+
+            using (SPSite contentOrganizerSiteCollection = new SPSite(absoluteSiteUrl))
+            {
+                SPWeb contentOrganizerSite = contentOrganizerSiteCollection.OpenWeb();
+                EcmDocumentRoutingWeb contentOrganizerSiteWrapper = new EcmDocumentRoutingWeb(contentOrganizerSite);
+
+                // Ensure that the content type exists for this rule                
+                SPContentType ruleContentType = contentOrganizerSite.ContentTypes[ruleContentTypeName];
+
+                // Ensure that the final location exists for this rule.
+                SPList ruleLibrary = contentOrganizerSite.Lists[ruleLibraryName];
+                // Ensure that the final location contains the content type of the rule.
+                if (ruleLibrary.ContentTypes.BestMatch(ruleContentType.Id) == null)
+                {
+                    throw new ArgumentException(String.Format(
+                        "Ensure that the library {0} contains content type {1} before creating the rule",
+                        ruleLibraryName,
+                        ruleContentTypeName));
+                }
+                // Create a blank rule
+                EcmDocumentRouterRule organizeDocument = new EcmDocumentRouterRule(contentOrganizerSite);
+                // Configure the rule to specify conditions that match the rule and final location for documents matching this rule.
+                organizeDocument.Name = ruleName;
+                organizeDocument.Description = ruleDescription;
+                // Configure the rule so that it will be evaluated on documents of "Contract" content type
+                organizeDocument.ContentTypeString = ruleContentType.Name;
+                organizeDocument.RouteToExternalLocation = false;
+                // Set a priority for this rule which indicates the order in which rules are executed. This is a number between 0 and 9.
+                organizeDocument.Priority = "2";
+                // Specify where the documents that match this rule get saved to.
+                // To route documents externally, the TargetPath value can be set to one of the SendTo connections configured for this web application or site subscription.
+                // Example: organizeDocument.TargetPath = contentOrganizerSiteCollection.WebApplication.OfficialFileHosts[0];
+                organizeDocument.TargetPath = ruleLibrary.RootFolder.ServerRelativeUrl;
+
+                // Set the conditions string for this rule
+                organizeDocument.ConditionsString = conditionsXml;
+                // AutoFolder configuration: Optionally enable automatic folder creation for this rule based on a non-empty (required or boolean) field. 
+                // Folders will be created for each unique value of this field in the TargethPath and documents will be saved here.
+
+                // Ensure the SPField for the autofolder property
+                TaxonomyField autoFolderField = ruleContentType.Fields[autoFolderPropertyName] as TaxonomyField;
+                if (autoFolderField == null)
+                    throw new ArgumentException(String.Format("The field {0} is not a valid Taxonomy Field", autoFolderPropertyName));
+
+                // Get a handle to the rule auto folder settings.
+                DocumentRouterAutoFolderSettings autoFolderSettings = organizeDocument.AutoFolderSettings;
+                // Configure AutoFolderSettings for this rule based on the "Business Division" Taxonomy field.                 
+                autoFolderSettings.AutoFolderPropertyName = autoFolderField.Title;
+                autoFolderSettings.AutoFolderPropertyInternalName = autoFolderField.InternalName;
+                autoFolderSettings.AutoFolderPropertyId = autoFolderField.Id;
+                // Term store Id required to get the value of the field from the document. Required for TaxonomyField types.
+                autoFolderSettings.TaxTermStoreId = autoFolderField.SspId;
+                // Set a format for the name of the folder. 
+                autoFolderSettings.AutoFolderFolderNameFormat = autoFolderNameFormat;
+                // Enabled automatic folder creation for values of the "Business Division" field.
+                autoFolderSettings.Enabled = true;
+
+                // Update the rule and commit changes.
+                organizeDocument.Update();
+            }
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public EcmDocumentRouterRule (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.#ctor(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (web As SPWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; EcmDocumentRouterRule(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">The website for which to generate the document router rule.</param>
+        <summary>Initializes a new instance of an  object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Aliases">
+      <MemberSignature Language="C#" Value="public string Aliases { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Aliases" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.Aliases" />
+      <MemberSignature Language="VB.NET" Value="Public Property Aliases As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Aliases { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets aliases for an  object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AutoFolderPropertyName">
+      <MemberSignature Language="C#" Value="public string AutoFolderPropertyName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AutoFolderPropertyName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.AutoFolderPropertyName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AutoFolderPropertyName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AutoFolderPropertyName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of the AutoFolder property for the current  object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AutoFolderSettings">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings AutoFolderSettings { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings AutoFolderSettings" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.AutoFolderSettings" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AutoFolderSettings As DocumentRouterAutoFolderSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::RecordsManagement::RecordsRepository::DocumentRouterAutoFolderSettings ^ AutoFolderSettings { Microsoft::Office::RecordsManagement::RecordsRepository::DocumentRouterAutoFolderSettings ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.RecordsRepository.DocumentRouterAutoFolderSettings</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the AutoFolder settings for the current  object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConditionsString">
+      <MemberSignature Language="C#" Value="public string ConditionsString { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ConditionsString" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.ConditionsString" />
+      <MemberSignature Language="VB.NET" Value="Public Property ConditionsString As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ConditionsString { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the XML string representing the conditions that must be matched for this rule to execute.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Conditions configured for this rule determine whether the document is organized by this rule.</para>
+          <para>For a rule to organize a document into a library within the site or to another location, the metadata associated with the document must match the conditions defined by the rule. Each condition operates on a property of the rule's content type. The conditions of a rule are  well-formed XML defined by:</para>
+          <code>&amp;lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&amp;gt;
+   &amp;lt;xs:complexType name="Conditions"&amp;gt;
+      &amp;lt;xs:sequence&amp;gt;
+         &amp;lt;xs:element minOccurs="0" maxOccurs="5" name="Condition"&amp;gt;
+            &amp;lt;xs:complexType&amp;gt;
+               &amp;lt;xs:element minOccurs="1" maxOccurs="1" name="Column" type="xs:string" /&amp;gt;
+               &amp;lt;xs:element minOccurs="1" maxOccurs="1" name="Operator"&amp;gt;
+                  &amp;lt;xs:simpleType&amp;gt;
+                     &amp;lt;xs:restriction base="xs:string"&amp;gt;
+                        &amp;lt;xs:enumeration value="IsEqual" /&amp;gt;
+                        &amp;lt;xs:enumeration value="IsNotEqual" /&amp;gt;
+                        &amp;lt;xs:enumeration value="GreaterThan" /&amp;gt;
+                        &amp;lt;xs:enumeration value="LessThan" /&amp;gt;
+                        &amp;lt;xs:enumeration value="GreaterThanOrEqual" /&amp;gt;
+                        &amp;lt;xs:enumeration value="LessThanOrEqual" /&amp;gt;
+                        &amp;lt;xs:enumeration value="BeginsWith" /&amp;gt;
+                        &amp;lt;xs:enumeration value="NotBeginsWith" /&amp;gt;
+                        &amp;lt;xs:enumeration value="EndsWith" /&amp;gt;
+                        &amp;lt;xs:enumeration value="NotEndsWith" /&amp;gt;
+                        &amp;lt;xs:enumeration value="Contains" /&amp;gt;
+                        &amp;lt;xs:enumeration value="NotContains" /&amp;gt;
+                        &amp;lt;xs:enumeration value="EqualsOrIsAChildOf" /&amp;gt;
+                        &amp;lt;xs:enumeration value="NotEqualsOrIsAChildOf" /&amp;gt;
+                        &amp;lt;xs:enumeration value="IsEmpty" /&amp;gt;
+                        &amp;lt;xs:enumeration value="IsNotEmpty" /&amp;gt;
+                        &amp;lt;xs:enumeration value="ContainsAny" /&amp;gt;
+                        &amp;lt;xs:enumeration value="ContainsAnyOrChildOf" /&amp;gt;
+                        &amp;lt;xs:enumeration value="ContainsAllOrChildOf" /&amp;gt;
+                     &amp;lt;/xs:restriction&amp;gt;
+                  &amp;lt;/xs:simpleType&amp;gt;
+               &amp;lt;/xs:element&amp;gt;
+               &amp;lt;xs:element minOccurs="1" maxOccurs="1" name="Value"type="xs:string"/&amp;gt;
+            &amp;lt;/xs:complexType&amp;gt;
+         &amp;lt;/xs:element&amp;gt;
+      &amp;lt;/xs:sequence&amp;gt;
+   &amp;lt;/xs:complexType&amp;gt;</code>
+          <para>Column: A string representing the field on which the condition is based.  The value of the column element must be in the format:  <b>field id</b>|<b>field internal name</b>|<b>field title</b> where <b>field id</b> is the GUID for the <see cref="T:Microsoft.SharePoint.SPField" />, field internal name is the <see cref="P:Microsoft.SharePoint.SPField.InternalName" /> property of the <b>SPField</b>, and field title is the <see cref="P:Microsoft.SharePoint.SPField.Title" /> property of the <b>SPField</b>. User (<see cref="F:Microsoft.SharePoint.SPFieldType.User" />), URL (<see cref="F:Microsoft.SharePoint.SPFieldType.URL" />), calculated (<see cref="F:Microsoft.SharePoint.SPFieldType.Calculated" />), hidden, and read-only fields are not valid fields for conditions.</para>
+          <para>Operator: Operators supported for a field depend upon the type (<see cref="T:Microsoft.SharePoint.SPFieldType" />) of the field used in the condition. Fields of Boolean type support only the <b>IsEqual</b> and <b>IsNotEqual</b> operators. </para>
+          <para>Value: The field value used when evaluating this rule on an incoming document. This is used as an operand if a binary operator is used.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ContentTypeString">
+      <MemberSignature Language="C#" Value="public string ContentTypeString { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ContentTypeString" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.ContentTypeString" />
+      <MemberSignature Language="VB.NET" Value="Public Property ContentTypeString As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ContentTypeString { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of the <see cref="T:Microsoft.SharePoint.SPContentType" /> that is used for metadata matching against this rule's conditions.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Copy">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule Copy ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule Copy() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.Copy" />
+      <MemberSignature Language="VB.NET" Value="Public Function Copy () As EcmDocumentRouterRule" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::RecordsManagement::RecordsRepository::EcmDocumentRouterRule ^ Copy();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Copies a document router rule.</summary>
+        <returns>A copy of the rule.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CustomRouter">
+      <MemberSignature Language="C#" Value="public string CustomRouter { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string CustomRouter" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.CustomRouter" />
+      <MemberSignature Language="VB.NET" Value="Public Property CustomRouter As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ CustomRouter { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the custom router that should be executed in association with this rule.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Delete">
+      <MemberSignature Language="C#" Value="public void Delete ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Delete() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.Delete" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Delete ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Delete();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deletes a document router rule.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the description for the current  object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Enabled">
+      <MemberSignature Language="C#" Value="public bool Enabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Enabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.Enabled" />
+      <MemberSignature Language="VB.NET" Value="Public Property Enabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool Enabled { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value to indicate if the rule is enabled.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.Name" />
+      <MemberSignature Language="VB.NET" Value="Public Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of the current  object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Priority">
+      <MemberSignature Language="C#" Value="public string Priority { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Priority" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.Priority" />
+      <MemberSignature Language="VB.NET" Value="Public Property Priority As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Priority { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the priority of the current  object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RouteToExternalLocation">
+      <MemberSignature Language="C#" Value="public bool RouteToExternalLocation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool RouteToExternalLocation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.RouteToExternalLocation" />
+      <MemberSignature Language="VB.NET" Value="Public Property RouteToExternalLocation As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool RouteToExternalLocation { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that is <b>true</b> if the rule routes the object to a different location; otherwise, <b>false</b>.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.FormatException">The routing rule string format is invalid.</exception>
+        <exception cref="T:System.ArgumentNullException">The routing rule string is 
+    null
+   or empty.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TargetPath">
+      <MemberSignature Language="C#" Value="public string TargetPath { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string TargetPath" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.TargetPath" />
+      <MemberSignature Language="VB.NET" Value="Public Property TargetPath As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ TargetPath { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the server-relative path to the destination folder for the documents that match this rule. </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.EcmDocumentRouterRule.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Updates a document router rule.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

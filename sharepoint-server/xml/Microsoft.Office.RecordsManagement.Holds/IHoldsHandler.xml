@@ -1,0 +1,73 @@
+﻿<Type Name="IHoldsHandler" FullName="Microsoft.Office.RecordsManagement.Holds.IHoldsHandler">
+  <TypeSignature Language="C#" Value="public interface IHoldsHandler" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IHoldsHandler" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.Holds.IHoldsHandler" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IHoldsHandler" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IHoldsHandler" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>Provides an interface that a custom hold handler can implement to provide custom hold processing.</summary>
+    <remarks>
+      <para>When a list item is put on hold or removed from hold, a custom processing handler can be added by implementing the <see cref="M:Microsoft.Office.RecordsManagement.Holds.IHoldsHandler.OnSetHold(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.SPListItem)" /> and <see cref="M:Microsoft.Office.RecordsManagement.Holds.IHoldsHandler.OnRemoveHold(Microsoft.SharePoint.SPListItem,System.Collections.Generic.List{Microsoft.SharePoint.SPListItem})" /> methods in the <b>IHoldsHandler</b> interface. After the handler has processed the list item, it can choose to cancel, continue, or skip default processing by returning the corresponiding <see cref="T:Microsoft.Office.RecordsManagement.Holds.HoldHandlerResult" /> object.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="OnRemoveHold">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.Holds.HoldHandlerResult OnRemoveHold (Microsoft.SharePoint.SPListItem item, System.Collections.Generic.List&lt;Microsoft.SharePoint.SPListItem&gt; holds);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype Microsoft.Office.RecordsManagement.Holds.HoldHandlerResult OnRemoveHold(class Microsoft.SharePoint.SPListItem item, class System.Collections.Generic.List`1&lt;class Microsoft.SharePoint.SPListItem&gt; holds) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.IHoldsHandler.OnRemoveHold(Microsoft.SharePoint.SPListItem,System.Collections.Generic.List{Microsoft.SharePoint.SPListItem})" />
+      <MemberSignature Language="VB.NET" Value="Public Function OnRemoveHold (item As SPListItem, holds As List(Of SPListItem)) As HoldHandlerResult" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::RecordsManagement::Holds::HoldHandlerResult OnRemoveHold(Microsoft::SharePoint::SPListItem ^ item, System::Collections::Generic::List&lt;Microsoft::SharePoint::SPListItem ^&gt; ^ holds);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.Holds.HoldHandlerResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="holds" Type="System.Collections.Generic.List&lt;Microsoft.SharePoint.SPListItem&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="item">The item to process.</param>
+        <param name="holds">The holds from which to remove the item.</param>
+        <summary>Processes the item when it is removed from hold.</summary>
+        <returns>Returns <see cref="T:Microsoft.Office.RecordsManagement.Holds.HoldHandlerResult" /> to cancel, continue, or skip default processing.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnSetHold">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.Holds.HoldHandlerResult OnSetHold (Microsoft.SharePoint.SPListItem item, Microsoft.SharePoint.SPListItem hold);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype Microsoft.Office.RecordsManagement.Holds.HoldHandlerResult OnSetHold(class Microsoft.SharePoint.SPListItem item, class Microsoft.SharePoint.SPListItem hold) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Holds.IHoldsHandler.OnSetHold(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Function OnSetHold (item As SPListItem, hold As SPListItem) As HoldHandlerResult" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::RecordsManagement::Holds::HoldHandlerResult OnSetHold(Microsoft::SharePoint::SPListItem ^ item, Microsoft::SharePoint::SPListItem ^ hold);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.Holds.HoldHandlerResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="hold" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="item">The item to process.</param>
+        <param name="hold">The hold to put the item on.</param>
+        <summary>Processes the item when it is put on hold.</summary>
+        <returns>The <see cref="T:Microsoft.Office.RecordsManagement.Holds.HoldHandlerResult" /> to cancel, continue or skip default processing.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

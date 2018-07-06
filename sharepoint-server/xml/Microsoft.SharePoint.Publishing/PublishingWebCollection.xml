@@ -1,0 +1,176 @@
+﻿<Type Name="PublishingWebCollection" FullName="Microsoft.SharePoint.Publishing.PublishingWebCollection">
+  <TypeSignature Language="C#" Value="public sealed class PublishingWebCollection : Microsoft.SharePoint.Publishing.CollectionBase" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PublishingWebCollection extends Microsoft.SharePoint.Publishing.CollectionBase" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.PublishingWebCollection" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PublishingWebCollection&#xA;Inherits CollectionBase" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PublishingWebCollection sealed : Microsoft::SharePoint::Publishing::CollectionBase" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.CollectionBase</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents a collection of <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> objects.</summary>
+    <remarks>
+      <para>This collection provides integer and string indexer methods, <b>foreach</b> enumeration support (<b>For Each</b> in Microsoft Visual Basic), and a <b>Count</b> property that can be used when explicitly iterating the collection.</para>
+      <para>This collection also supports creating new <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> instances using the </para>
+      <para>
+        <see cref="M:Microsoft.SharePoint.Publishing.PublishingWebCollection.Add(System.String,System.UInt32,System.String)" /> method.</para>
+      <para>The <see cref="T:Microsoft.SharePoint.Publishing.PublishingWebCollection" /> object wraps a Windows SharePoint Services <see cref="T:Microsoft.SharePoint.SPWebCollection" /> object.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingWeb Add (string newPublishingWebUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PublishingWeb Add(string newPublishingWebUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingWebCollection.Add(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Add (newPublishingWebUrl As String) As PublishingWeb" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PublishingWeb ^ Add(System::String ^ newPublishingWebUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingWeb</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="newPublishingWebUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="newPublishingWebUrl">
+          <see cref="P:Microsoft.SharePoint.Publishing.PublishingWeb.Name" /> property for the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object to be created. This parameter maps directly to the syntax for the <see cref="T:Microsoft.SharePoint.SPWebCollection.Add(System.String)" /> object. The URL should not have a leading slash. The URL string should be site-relative.</param>
+        <summary>Creates a child <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object in the parent <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object of this collection.</summary>
+        <returns>A child <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object in the parent <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object of this collection.</returns>
+        <remarks>
+          <para>The new <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> inherits the language ID from the parent. Call the alternate <b>Add</b> method to provide a language ID explicitly. The Publishing Site Web template is always used for this <b>Add</b> method.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentNullException">The<paramref name=" newPublishingWebUrl" /> parameter must not be a null reference (Nothing in Visual Basic) or empty.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingWeb Add (string newPublishingWebUrl, uint languageId, string webTemplateName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PublishingWeb Add(string newPublishingWebUrl, unsigned int32 languageId, string webTemplateName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingWebCollection.Add(System.String,System.UInt32,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Add (newPublishingWebUrl As String, languageId As UInteger, webTemplateName As String) As PublishingWeb" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PublishingWeb ^ Add(System::String ^ newPublishingWebUrl, System::UInt32 languageId, System::String ^ webTemplateName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingWeb</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="newPublishingWebUrl" Type="System.String" />
+        <Parameter Name="languageId" Type="System.UInt32" />
+        <Parameter Name="webTemplateName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="newPublishingWebUrl">The <see cref="P:Microsoft.SharePoint.Publishing.PublishingWeb.Name" /> property for the new <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object that is to be created. The property maps directly to the syntax for the <see cref="M:Microsoft.SharePoint.SPWebCollection.Add" /> method. The URL should not have a leading slash. The URL string should be site-relative.</param>
+        <param name="languageId">An unsigned 32-bit integer that specifies the locale ID.</param>
+        <param name="webTemplateName">Represents the site definition.</param>
+        <summary>Creates a child <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object based on the specified Web template.</summary>
+        <returns>A child <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object based on the specified Web template. </returns>
+        <remarks>
+          <para>This method determines if the new Web site has <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object support. If not, this method activates the appropriate publishing features to make the newly created Web site a <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentNullException">The parameter cannot accept a a null reference (Nothing in Visual Basic) value.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Delete">
+      <MemberSignature Language="C#" Value="public void Delete (string url);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Delete(string url) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingWebCollection.Delete(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Delete (url As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Delete(System::String ^ url);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="url">Represents the site-relative URL to the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object.</param>
+        <summary>Deletes a <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object with the given URL from the parent <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /><b />object of this collection.</summary>
+        <remarks>
+          <para>This method wraps the <see cref="T:Microsoft.SharePoint.SPWebCollection.Delete(System.String)" /> method.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentNullException">The<paramref name=" url" /> parameter cannot be a null reference (Nothing in Visual Basic) or empty.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingWeb this[int index] { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.PublishingWeb Item(int32)" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingWebCollection.Item(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(index As Integer) As PublishingWeb" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::PublishingWeb ^ default[int] { Microsoft::SharePoint::Publishing::PublishingWeb ^ get(int index); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingWeb</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="index" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="index">A zero-based integer index used to retrieve a <b>PublishingWeb</b> object.</param>
+        <summary>Uses a zero-based integer index to get a <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object from this <see cref="T:Microsoft.SharePoint.Publishing.PublishingWebCollection" /> object.</summary>
+        <value>The <b>PublishingWeb</b> object to which the specified <paramref name="index" /> parameter refers.</value>
+        <remarks>
+          <para>The value of the <paramref name="index" /> parameter must be between <paramref name="0" /> and <paramref name="Count-1" />, inclusive.</para>
+          <para>In Microsoft Visual C#, this property is the indexer for the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWebCollection" /> class. </para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentOutOfRangeException">
+          <paramref name="Index" /> is less than zero or greater than or equal to <b>Count</b>.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Item">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingWeb this[string index] { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.PublishingWeb Item(string)" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingWebCollection.Item(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(index As String) As PublishingWeb" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::PublishingWeb ^ default[System::String ^] { Microsoft::SharePoint::Publishing::PublishingWeb ^ get(System::String ^ index); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingWeb</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="index" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="index">
+          <see cref="P:Microsoft.SharePoint.Publishing.PublishingWeb.Name" /> property of the <b>PublishingWeb</b> to retrieve.</param>
+        <summary>Gets a <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object from this <see cref="T:Microsoft.SharePoint.Publishing.PublishingWebCollection" /> object using a string index.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object with the specific name or a null reference (Nothing in Visual Basic) (<b>Nothing</b> in Visual Basic) if no such object exists.</value>
+        <remarks>
+          <para>In Microsoft Visual C#, this property is the indexer for the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWebCollection" /> class.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentOutOfRangeException">
+          <paramref name="index" /> parameter is invalid.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

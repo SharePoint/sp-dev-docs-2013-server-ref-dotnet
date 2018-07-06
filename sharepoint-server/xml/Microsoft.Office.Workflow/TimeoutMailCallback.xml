@@ -1,0 +1,34 @@
+﻿<Type Name="TimeoutMailCallback" FullName="Microsoft.Office.Workflow.TimeoutMailCallback">
+  <TypeSignature Language="C#" Value="public delegate bool TimeoutMailCallback(Guid taskId, SPWorkflowTaskProperties properties, out SPWeb web, out StringDictionary headers, out string body);" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed TimeoutMailCallback extends System.MulticastDelegate" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Workflow.TimeoutMailCallback" />
+  <TypeSignature Language="VB.NET" Value="Public Delegate Function TimeoutMailCallback(taskId As Guid, properties As SPWorkflowTaskProperties, ByRef web As SPWeb, ByRef headers As StringDictionary, ByRef body As String) As Boolean " />
+  <TypeSignature Language="C++ CLI" Value="public delegate bool TimeoutMailCallback(Guid taskId, SPWorkflowTaskProperties ^ properties, [Runtime::InteropServices::Out] SPWeb ^ % web, [Runtime::InteropServices::Out] StringDictionary ^ % headers, [Runtime::InteropServices::Out] System::String ^ % body);" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Workflow.Tasks</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Delegate</BaseTypeName>
+  </Base>
+  <Parameters>
+    <Parameter Name="taskId" Type="System.Guid" />
+    <Parameter Name="properties" Type="Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties" />
+    <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb&amp;" RefType="out" />
+    <Parameter Name="headers" Type="System.Collections.Specialized.StringDictionary&amp;" RefType="out" />
+    <Parameter Name="body" Type="System.String&amp;" RefType="out" />
+  </Parameters>
+  <ReturnValue>
+    <ReturnType>System.Boolean</ReturnType>
+  </ReturnValue>
+  <Docs>
+    <param name="taskId">The GUID of the workflow task.</param>
+    <param name="properties">An <b>SPWorkflowTaskProperties</b> object that contains information about the workflow task.</param>
+    <param name="web">An <b>SPWeb</b> object that is the container for the workflow task.</param>
+    <param name="headers">A <b>StringDictionary</b> object that contains the e-mail header information.</param>
+    <param name="body">A <b>string</b> that contains the body of the e-mail message.</param>
+    <summary>Called to generate the task e-mail body when the time allotted for the task has expired.</summary>
+    <returns>A Boolean value that indicates that the e-mail was generated and sent.</returns>
+    <remarks>To be added.</remarks>
+  </Docs>
+</Type>

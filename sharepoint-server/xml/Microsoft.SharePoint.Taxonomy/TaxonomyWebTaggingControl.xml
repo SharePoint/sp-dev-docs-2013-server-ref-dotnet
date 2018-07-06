@@ -1,0 +1,953 @@
+﻿<Type Name="TaxonomyWebTaggingControl" FullName="Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl">
+  <TypeSignature Language="C#" Value="public sealed class TaxonomyWebTaggingControl : System.Web.UI.WebControls.WebControl" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit TaxonomyWebTaggingControl extends System.Web.UI.WebControls.WebControl" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class TaxonomyWebTaggingControl&#xA;Inherits WebControl" />
+  <TypeSignature Language="C++ CLI" Value="public ref class TaxonomyWebTaggingControl sealed : System::Web::UI::WebControls::WebControl" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Web.UI.WebControls.WebControl</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.ComponentModel.DefaultProperty("Html")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents a generic Web control for picking managed metadata terms.</summary>
+    <remarks>
+      <para>A <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl" /> object is a Web control that can be added to a page so that a user can pick one or more taxonomy <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object  from a specific <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object or from an entire <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object.</para>
+      <para>This control ensures that all terms are valid, and if they are not, it requires validation from the user when it finds an invalid term. If the <b>TermStore</b> or <b>TermSet</b> connection cannot be established, the <b>TaxonomyWebTaggingControl</b> will be disabled.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.IO;
+using System.Globalization;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Taxonomy;
+
+namespace Microsoft.SDK.SharePointServer.Samples 
+{
+    public class TestTaxonomyWebTaggingControl : System.Web.UI.Page
+    {
+        // In order to place the TaxonomyWebTaggingControl on an aspx page use the following declaration:
+        // &amp;lt;Taxonomy:TaxonomyWebTaggingControl id="myTaxonomyControl" runat="server" /&amp;gt;
+        protected TaxonomyWebTaggingControl myTaxonomyControl;
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if (IsPostBack)
+            {
+                // since this is a PostBack we want to validate
+                string errorMessage = string.Empty;
+                if (myTaxonomyControl.Validate(out errorMessage))
+                {
+                    string value = myTaxonomyControl.Text;
+                    // now do what you want with the value returned from the control.
+                }
+                else
+                {
+                    // The data was not valid so you need to inform the user
+                    throw new Exception("The data entered was not valid");
+                }
+            }
+            else
+            {
+                TaxonomySession taxonomySession = new TaxonomySession(SPContext.Current.Site);
+
+                // This code assumes you have a term store and term set set up already (we are just taking the first one
+                myTaxonomyControl.SSPList = taxonomySession.TermStores[0].Id.ToString();
+                myTaxonomyControl.TermSetList = taxonomySession.TermStores[0].Groups[0].TermSets[0].Id.ToString();
+                myTaxonomyControl.GroupId = taxonomySession.TermStores[0].Groups[0].Id;
+                // This controls whether you can add new terms to the term set
+                myTaxonomyControl.AllowFillIn = false;
+                // This controls whether we use an anchor term or not (by setting it to Empty we are explicitly choosing
+                // not to)
+                myTaxonomyControl.AnchorId = Guid.Empty;
+                // Since we are bound to a specific term set and not spanning term sets the following property really does nothing
+                myTaxonomyControl.ExcludeKeyword = false;
+                // This controls whether unresolved terms will just be added to the termset or not
+                myTaxonomyControl.IsAddTerms = false;
+                // This setting allows you to browse the term set
+                myTaxonomyControl.IsDisplayPickerButton = true;
+                // This setting enables/disables validation highlighting
+                myTaxonomyControl.IsIgnoreFormatting = false;
+                myTaxonomyControl.IsIncludeDeprecated = false;
+                myTaxonomyControl.IsIncludeUnavailable = false;
+                // This setting modifies what is stored/returned from the control, if you want the GUIDS of parent terms
+                // then set this to true
+                myTaxonomyControl.IsIncludePathData = false;
+                // This setting will include term set name resolution as well if set
+                myTaxonomyControl.IsIncludeTermSetName = false;
+                // This allows or disallows multiple values to be selected
+                myTaxonomyControl.IsMulti = false;
+                // We are searching on a specific termset so set these to false
+                myTaxonomyControl.IsSpanTermSets = false;
+                myTaxonomyControl.IsSpanTermStores = false;
+                myTaxonomyControl.IsUseCommaAsDelimiter = false;
+                // This is the LCID of the language to resolve terms against
+                myTaxonomyControl.Language = taxonomySession.TermStores[0].DefaultLanguage;
+
+                // This has a default value, however, if you want to customize what web service it uses you can
+                // change the URL.
+                myTaxonomyControl.WebServiceUrl = new Uri(SPContext.Current.Web.Url + "/_vti_bin/TaxonomyInternalService.json");
+
+                myTaxonomyControl.SetCannotBeBlankErrorMessage("This control should not be blank");
+
+                // If you want to modify the width/height of the control you will need to use the WidthCss/HeightCss 
+                // properties and set them to a css class that defines the width/height properties.  The code would
+                // be:
+                // myTaxonomyControl.WidthCss = "my-css-class";
+                // myTaxonomyControl.HeightCss = "my-css-class";
+            }
+
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TaxonomyWebTaggingControl ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; TaxonomyWebTaggingControl();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowFillIn">
+      <MemberSignature Language="C#" Value="public bool AllowFillIn { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowFillIn" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.AllowFillIn" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowFillIn As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowFillIn { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this control will give the option of adding new <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects if the <see cref="P:Microsoft.SharePoint.Taxonomy.TermSet.Open" /> property is set.</summary>
+        <value>A Boolean that determines whether the control will give the option to create new <b>Term</b> objects</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AnchorId">
+      <MemberSignature Language="C#" Value="public Guid AnchorId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid AnchorId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.AnchorId" />
+      <MemberSignature Language="VB.NET" Value="Public Property AnchorId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid AnchorId { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Get or set the ID of the <see cref="T:Microsoft.SharePoint.Taxonomy" /> whose children will be used to validate against.</summary>
+        <value>ID of parent <b>Term</b> for any valid value in control</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ContainerId">
+      <MemberSignature Language="C#" Value="public string ContainerId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ContainerId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.ContainerId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ContainerId As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ContainerId { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Returns the client ID of the top level DOM element for the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl" /> object.</summary>
+        <value>Top level DOM element ID for the <b>TaxonomyWebTaggingControl</b></value>
+        <remarks>
+          <para>Use this method if you want to initialize a new instance of a <b>ControlObject</b> that uses the client-side JavaScript OM. The ID that is specified is the ID of the DOM element that needs to be passed into the <b>ControlObject</b> constructor.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateChildControls">
+      <MemberSignature Language="C#" Value="protected override void CreateChildControls ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void CreateChildControls() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.CreateChildControls" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub CreateChildControls ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void CreateChildControls();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Disabled">
+      <MemberSignature Language="C#" Value="public bool Disabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Disabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.Disabled" />
+      <MemberSignature Language="VB.NET" Value="Public Property Disabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool Disabled { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member has been deprecated and is not recommended for use in your code.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExcludeKeyword">
+      <MemberSignature Language="C#" Value="public bool ExcludeKeyword { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ExcludeKeyword" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.ExcludeKeyword" />
+      <MemberSignature Language="VB.NET" Value="Public Property ExcludeKeyword As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ExcludeKeyword { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets whether this control will resolve against keyword <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object or not.</summary>
+        <value>Whether this control will resolve against keyword <b>Term</b> objects</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FieldId">
+      <MemberSignature Language="C#" Value="public string FieldId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FieldId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.FieldId" />
+      <MemberSignature Language="VB.NET" Value="Public Property FieldId As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FieldId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member has been deprecated and is not recommended for use in your code.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FieldName">
+      <MemberSignature Language="C#" Value="public string FieldName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FieldName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.FieldName" />
+      <MemberSignature Language="VB.NET" Value="Public Property FieldName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FieldName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets the value that will be shown in the ToolTip on the client.</summary>
+        <value>Value of the ToolTip on the client</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetValidatedTerms">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Microsoft.SharePoint.Taxonomy.Term&gt; GetValidatedTerms ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.List`1&lt;class Microsoft.SharePoint.Taxonomy.Term&gt; GetValidatedTerms() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.GetValidatedTerms" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetValidatedTerms () As List(Of Term)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::Generic::List&lt;Microsoft::SharePoint::Taxonomy::Term ^&gt; ^ GetValidatedTerms();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.SharePoint.Taxonomy.Term&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the list of valid terms corresponding to the value of the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.Text" /> property.</summary>
+        <returns>A list of valid <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects.</returns>
+        <remarks>
+          <para>Only valid terms are returned. If no valid term are found, an empty list is returned. All new, invalid or unvalidated terms entered by the user are ignored.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GroupId">
+      <MemberSignature Language="C#" Value="public Guid GroupId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid GroupId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.GroupId" />
+      <MemberSignature Language="VB.NET" Value="Public Property GroupId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid GroupId { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets the IDs of the <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object that this control will validate against</summary>
+        <value>Group IDs that are used to resolve terms</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HeightCss">
+      <MemberSignature Language="C#" Value="public string HeightCss { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string HeightCss" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.HeightCss" />
+      <MemberSignature Language="VB.NET" Value="Public Property HeightCss As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ HeightCss { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets a CSS class that will be applied to the control which should specify the <b>heightCSS</b> property value that will be applied to the control.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAddTerms">
+      <MemberSignature Language="C#" Value="public bool IsAddTerms { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsAddTerms" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsAddTerms" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsAddTerms As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsAddTerms { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets whether this control will try to add unresolved <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects to the <see cref="T:Microsoft.SharePont.Taxonomy.TermSet" /> object.</summary>
+        <value>Whether this control will try to add unresolved terms to the <b>TermSet</b>.</value>
+        <remarks>
+          <para>If this property is set to <b>true</b> and an unvalidated Term is left in the control, the control will try to add it to the <b>TermSet</b> to validate it. This will only occur if the <b>TermSetId</b> count is set to <b>1</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsDisplayPickerButton">
+      <MemberSignature Language="C#" Value="public bool IsDisplayPickerButton { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsDisplayPickerButton" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsDisplayPickerButton" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsDisplayPickerButton As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsDisplayPickerButton { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this control will allow browsing with the picker.</summary>
+        <value>A Boolean that determines whether this control will allow browsing with the picker</value>
+        <remarks>
+          <para>If the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsSpanTermSets" /> property is set to <b>true</b> the control cannot allow browsing with the picker.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsIgnoreFormatting">
+      <MemberSignature Language="C#" Value="public bool IsIgnoreFormatting { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsIgnoreFormatting" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsIgnoreFormatting" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsIgnoreFormatting As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsIgnoreFormatting { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this control will format valid and invalid <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects or leave them as plain text.</summary>
+        <value>A Boolean that determines whether this control formats <b>Term</b> objects, or leaves them as plain text</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsIncludeDeprecated">
+      <MemberSignature Language="C#" Value="public bool IsIncludeDeprecated { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsIncludeDeprecated" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsIncludeDeprecated" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsIncludeDeprecated As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsIncludeDeprecated { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this control will resolve against deprecated <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects.</summary>
+        <value>A Boolean that determines whether this control will resolve against deprecated terms</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsIncludePathData">
+      <MemberSignature Language="C#" Value="public bool IsIncludePathData { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsIncludePathData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsIncludePathData" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsIncludePathData As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsIncludePathData { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this control will include the full GUID path for all <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects.</summary>
+        <value>Whether this control will include the full GUID path for all <b>Term</b> objects</value>
+        <remarks>
+          <para>When the <b>IsIncludePathData</b> property is set to <b>true</b> the values on the client-side JavaScript code will contain the full GUID path for each <b>Term</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsIncludeTermSetName">
+      <MemberSignature Language="C#" Value="public bool IsIncludeTermSetName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsIncludeTermSetName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsIncludeTermSetName" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsIncludeTermSetName As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsIncludeTermSetName { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets whether this control will resolve against the names of <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object names.</summary>
+        <value>Whether this control will resolve against <b>TermSet</b> names.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsIncludeUnavailable">
+      <MemberSignature Language="C#" Value="public bool IsIncludeUnavailable { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsIncludeUnavailable" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsIncludeUnavailable" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsIncludeUnavailable As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsIncludeUnavailable { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this control will resolve against unavailable <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects.</summary>
+        <value>A Boolean that determines whether this control will resolve against unavailable <b>Term</b> objects</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsMulti">
+      <MemberSignature Language="C#" Value="public bool IsMulti { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsMulti" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsMulti" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsMulti As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsMulti { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this control accepts multiple <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects.</summary>
+        <value>A Boolean that determines whether this control accepts multiple <b>Term</b> objects</value>
+        <remarks>
+          <para>If set to <b>false</b>, on subsequently typed <b>Term</b>s, this property will be marked invalid after the first <b>Term</b> is typed even if the <b>Term</b> does exist.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSpanTermSets">
+      <MemberSignature Language="C#" Value="public bool IsSpanTermSets { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSpanTermSets" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsSpanTermSets" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsSpanTermSets As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSpanTermSets { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets whether this control will resolve against all <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> objects or only the <b>TermSet</b> objects provided.</summary>
+        <value>A Boolean that determines whether this control will resolve against all <b>TermSet</b> objects</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsSpanTermStores">
+      <MemberSignature Language="C#" Value="public bool IsSpanTermStores { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsSpanTermStores" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsSpanTermStores" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsSpanTermStores As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSpanTermStores { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this control will resolve against all <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> objects or only the <b>TermStore</b> objects provided.</summary>
+        <value>A Boolean that determines whether this control will resolve against all <b>TermStore</b> objects</value>
+        <remarks>
+          <para>To resolve against all <b>TermStore</b> objects, the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsSpanTermSets" /> property must also be set to <b>true</b></para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsUIRightToLeft">
+      <MemberSignature Language="C#" Value="public bool IsUIRightToLeft { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsUIRightToLeft" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsUIRightToLeft" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsUIRightToLeft As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsUIRightToLeft { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member has been deprecated and is not recommended for use in your code.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsUseCommaAsDelimiter">
+      <MemberSignature Language="C#" Value="public bool IsUseCommaAsDelimiter { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsUseCommaAsDelimiter" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.IsUseCommaAsDelimiter" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsUseCommaAsDelimiter As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsUseCommaAsDelimiter { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this control will use a comma in addition to a semi-colon as a delimiter.</summary>
+        <value>Whether this control will use comma as a delimiter</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Language">
+      <MemberSignature Language="C#" Value="public int Language { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Language" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.Language" />
+      <MemberSignature Language="VB.NET" Value="Public Property Language As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Language { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the LCID representing the language this control will validate against.</summary>
+        <value>LCID of language this control is using</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnInit">
+      <MemberSignature Language="C#" Value="protected override void OnInit (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnInit(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.OnInit(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnInit (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnInit(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">event arguments</param>
+        <summary>Represents the initialization method for the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>Raises the <b>Load</b> event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPreRender">
+      <MemberSignature Language="C#" Value="protected override void OnPreRender (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnPreRender(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.OnPreRender(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreRender (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreRender(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>Raises the <b>PreRender</b> event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetCannotBeBlankErrorMessage">
+      <MemberSignature Language="C#" Value="public void SetCannotBeBlankErrorMessage (string errorMessage);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetCannotBeBlankErrorMessage(string errorMessage) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.SetCannotBeBlankErrorMessage(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetCannotBeBlankErrorMessage (errorMessage As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetCannotBeBlankErrorMessage(System::String ^ errorMessage);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="errorMessage" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="errorMessage">Error message to be shown if the field is empty</param>
+        <summary>Sets a message to be shown if the field is empty.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetValidatedTerms">
+      <MemberSignature Language="C#" Value="public bool SetValidatedTerms (System.Collections.Generic.List&lt;Microsoft.SharePoint.Taxonomy.Term&gt; terms, out string reason);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool SetValidatedTerms(class System.Collections.Generic.List`1&lt;class Microsoft.SharePoint.Taxonomy.Term&gt; terms, [out] string&amp; reason) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.SetValidatedTerms(System.Collections.Generic.List{Microsoft.SharePoint.Taxonomy.Term},System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function SetValidatedTerms (terms As List(Of Term), ByRef reason As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool SetValidatedTerms(System::Collections::Generic::List&lt;Microsoft::SharePoint::Taxonomy::Term ^&gt; ^ terms, [Runtime::InteropServices::Out] System::String ^ % reason);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="terms" Type="System.Collections.Generic.List&lt;Microsoft.SharePoint.Taxonomy.Term&gt;" />
+        <Parameter Name="reason" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="terms">A list of terms to be validated. The list can be empty, but this parameter must not be a null reference (Nothing in Visual Basic).</param>
+        <param name="reason">A localized string describing why the new <paramref name="terms" /> list failed to validate. If all the terms are valid, or if the <paramref name="terms" /> list is empty, this will contain <see cref="F:System.String.Empty" />.</param>
+        <summary>Sets the value of the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.Text" /> property to correspond to the <paramref name="terms" /> list, and triggers server-side validation of the new value.</summary>
+        <returns>
+          <see cref="true" /> if all of the terms specified in the <paramref name="terms" /> list are valid; otherwise, <see cref="false" />.</returns>
+        <remarks>
+          <para>The existing value of the control's <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.Text" /> property is overwritten, even when any terms in the <paramref name="terms" /> list are invalid. If the list is empty, the <b>Text</b> property will be set to <see cref="F:System.String.Empty" />.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="terms" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SspId">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Guid&gt; SspId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.List`1&lt;valuetype System.Guid&gt; SspId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.SspId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SspId As List(Of Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::List&lt;Guid&gt; ^ SspId { System::Collections::Generic::List&lt;Guid&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;System.Guid&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the IDs of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> objects that this control will validate against.</summary>
+        <value>Term store ID's that are used to resolve terms</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SSPList">
+      <MemberSignature Language="C#" Value="public string SSPList { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SSPList" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.SSPList" />
+      <MemberSignature Language="VB.NET" Value="Public Property SSPList As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SSPList { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets the IDs of the T:Microsoft.SharePoint.Taxonomy.TermStore objects that this control will validate against.</summary>
+        <value>Term store IDs that are used to resolve terms</value>
+        <remarks>
+          <para>The value passed into this method or returned from this method is a <b>;</b> delimited list of GUID's that are the <b>TermStore.Id</b> values of the <b>TermStore</b> objects that the control should resolve against.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TermSetId">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Guid&gt; TermSetId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.List`1&lt;valuetype System.Guid&gt; TermSetId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.TermSetId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TermSetId As List(Of Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::List&lt;Guid&gt; ^ TermSetId { System::Collections::Generic::List&lt;Guid&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;System.Guid&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the IDs of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object that this control will validate against.</summary>
+        <value>
+          <b>TermSet</b> IDs that are used to resolve terms</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TermSetList">
+      <MemberSignature Language="C#" Value="public string TermSetList { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string TermSetList" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.TermSetList" />
+      <MemberSignature Language="VB.NET" Value="Public Property TermSetList As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ TermSetList { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the IDs of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object that this control will validate against</summary>
+        <value>Term set IDs that are used to resolve terms</value>
+        <remarks>
+          <para>The value passed into this method or returned from this method is a <b>;</b> delimited list of GUIDs that are the <b>TermSet.Id</b> values of the <b>TermSet</b> objects that the control should resolve against.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Text">
+      <MemberSignature Language="C#" Value="public string Text { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Text" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.Text" />
+      <MemberSignature Language="VB.NET" Value="Public Property Text As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Text { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets input from and sets output to the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl" /> object.</summary>
+        <value>Label/GUID pairs that represent a <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object that is displayed in the control</value>
+        <remarks>
+          <para>Set values into this control as pairs of labels and GUIDs. The delimiter between a label and a GUID is the <b>|</b> character. When using multiple values, delimit them with a <b>;</b> character. Example: <b>term1|12345678-1234-1234-1234-123456789012;term2|87654321-4321-4321-4321-210987654321</b></para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Validate">
+      <MemberSignature Language="C#" Value="public bool Validate (out string reason);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Validate([out] string&amp; reason) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.Validate(System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Validate (ByRef reason As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool Validate([Runtime::InteropServices::Out] System::String ^ % reason);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="reason" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="reason">The message shown in the UI to the user if the data is not valid</param>
+        <summary>Checks whether the data in the current <b>TaxonomyWebTaggingControl</b> object is valid and tries to validate it if has not yet been validated.</summary>
+        <returns>
+          <b>true</b> if the data is valid; otherwise, <b>false</b></returns>
+        <remarks>
+          <para>If <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects appear that have not been validated on the client, this method tries to validate them. If it can find a single match to a <b>Term</b>, it will apply that <b>Term</b>. If it finds more than one match, it will return <b>false</b>. If it cannot find any matches and the control object is set up to create new <b>Term</b> objects, it will create a new <b>Term</b>. Running the <b>Validate(System.String@)</b> method can change the value of the <see cref="P:Microsoft.SharePoint.Taxnomy.TaxonomyWebTaggingControl.Text" /> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WebServiceUrl">
+      <MemberSignature Language="C#" Value="public Uri WebServiceUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri WebServiceUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.WebServiceUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property WebServiceUrl As Uri" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Uri ^ WebServiceUrl { Uri ^ get(); void set(Uri ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets the URL of the <b>TaxonomyInternalService</b> that will be used to resolve against.</summary>
+        <value>URL of the <b>TaxonomyInternalService</b> that will used to resolve against.</value>
+        <remarks>
+          <para>If this value is not set the <b>SPContext.Current.Web</b> will be used to determine the <b>TaxonomyInternalService</b> to be used.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WidthCss">
+      <MemberSignature Language="C#" Value="public string WidthCss { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string WidthCss" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.WidthCss" />
+      <MemberSignature Language="VB.NET" Value="Public Property WidthCss As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ WidthCss { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a CSS class that will be applied to the control that should specify a width CSS class.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>The width class in CSS should specify a width.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

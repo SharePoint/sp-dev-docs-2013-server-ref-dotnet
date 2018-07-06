@@ -1,0 +1,246 @@
+﻿<Type Name="PluggableSocialSecurityTrimmerManager" FullName="Microsoft.Office.Server.SocialData.PluggableSocialSecurityTrimmerManager">
+  <TypeSignature Language="C#" Value="public sealed class PluggableSocialSecurityTrimmerManager" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PluggableSocialSecurityTrimmerManager extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.SocialData.PluggableSocialSecurityTrimmerManager" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PluggableSocialSecurityTrimmerManager" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PluggableSocialSecurityTrimmerManager sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Instantiates registered security trimmers for social data.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public PluggableSocialSecurityTrimmerManager ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.PluggableSocialSecurityTrimmerManager.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; PluggableSocialSecurityTrimmerManager();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetRegisteredInfo">
+      <MemberSignature Language="C#" Value="public static System.Collections.Generic.Dictionary&lt;int,System.Collections.Generic.KeyValuePair&lt;string,System.Collections.Specialized.NameValueCollection&gt;&gt; GetRegisteredInfo (Guid userProfileApplicationProxyId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.Dictionary`2&lt;int32, valuetype System.Collections.Generic.KeyValuePair`2&lt;string, class System.Collections.Specialized.NameValueCollection&gt;&gt; GetRegisteredInfo(valuetype System.Guid userProfileApplicationProxyId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.PluggableSocialSecurityTrimmerManager.GetRegisteredInfo(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetRegisteredInfo (userProfileApplicationProxyId As Guid) As Dictionary(Of Integer, KeyValuePair(Of String, NameValueCollection))" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Collections::Generic::Dictionary&lt;int, System::Collections::Generic::KeyValuePair&lt;System::String ^, System::Collections::Specialized::NameValueCollection ^&gt;&gt; ^ GetRegisteredInfo(Guid userProfileApplicationProxyId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.Dictionary&lt;System.Int32,System.Collections.Generic.KeyValuePair&lt;System.String,System.Collections.Specialized.NameValueCollection&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="userProfileApplicationProxyId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="userProfileApplicationProxyId">A GUID representing the user profile application where the social data security trimmer is used.</param>
+        <summary>Retrieves the registered security trimmer identifiers, and the properties associated with each security trimmer, for the specified user profile application.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUrlFoldersRequiringTrim">
+      <MemberSignature Language="C#" Value="public static string[] GetUrlFoldersRequiringTrim (Microsoft.SharePoint.SPServiceContext serviceContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string[] GetUrlFoldersRequiringTrim(class Microsoft.SharePoint.SPServiceContext serviceContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.PluggableSocialSecurityTrimmerManager.GetUrlFoldersRequiringTrim(Microsoft.SharePoint.SPServiceContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetUrlFoldersRequiringTrim (serviceContext As SPServiceContext) As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;System::String ^&gt; ^ GetUrlFoldersRequiringTrim(Microsoft::SharePoint::SPServiceContext ^ serviceContext);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">A service application context.</param>
+        <summary>Gets the URLs associated with the security trimming heuristics.</summary>
+        <returns>The URLs associated with the security trimming heuristics.</returns>
+        <remarks>
+          <para>The social data whose URL values are hierarchical descendants of the value in the URL column of the results set must pass the security trimming heuristics before being included in any results set returned to a user.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="serviceContext" /> is 
+    null
+  .</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUrlFoldersToAlwaysAllow">
+      <MemberSignature Language="C#" Value="public static string[] GetUrlFoldersToAlwaysAllow (Microsoft.SharePoint.SPServiceContext serviceContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string[] GetUrlFoldersToAlwaysAllow(class Microsoft.SharePoint.SPServiceContext serviceContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.PluggableSocialSecurityTrimmerManager.GetUrlFoldersToAlwaysAllow(Microsoft.SharePoint.SPServiceContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetUrlFoldersToAlwaysAllow (serviceContext As SPServiceContext) As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;System::String ^&gt; ^ GetUrlFoldersToAlwaysAllow(Microsoft::SharePoint::SPServiceContext ^ serviceContext);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">A service application context.</param>
+        <summary>Gets the URLs that are always included in the results set returned to a user.</summary>
+        <returns>The URLs that are always included in the results set returned to a user.</returns>
+        <remarks>
+          <para>The social data whose URL values are hierarchical descendants of the value in the URL column of the results set do not need to pass the security trimming heuristics before being included in any results set returned to a user.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="serviceContext" /> is 
+    null
+  .</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RegisterPluggableSecurityTrimmer">
+      <MemberSignature Language="C#" Value="public static void RegisterPluggableSecurityTrimmer (Guid userProfileApplicationProxyId, int id, string fullyQualifiedTypeName, System.Collections.Specialized.NameValueCollection properties);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void RegisterPluggableSecurityTrimmer(valuetype System.Guid userProfileApplicationProxyId, int32 id, string fullyQualifiedTypeName, class System.Collections.Specialized.NameValueCollection properties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.PluggableSocialSecurityTrimmerManager.RegisterPluggableSecurityTrimmer(System.Guid,System.Int32,System.String,System.Collections.Specialized.NameValueCollection)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub RegisterPluggableSecurityTrimmer (userProfileApplicationProxyId As Guid, id As Integer, fullyQualifiedTypeName As String, properties As NameValueCollection)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void RegisterPluggableSecurityTrimmer(Guid userProfileApplicationProxyId, int id, System::String ^ fullyQualifiedTypeName, System::Collections::Specialized::NameValueCollection ^ properties);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="userProfileApplicationProxyId" Type="System.Guid" />
+        <Parameter Name="id" Type="System.Int32" />
+        <Parameter Name="fullyQualifiedTypeName" Type="System.String" />
+        <Parameter Name="properties" Type="System.Collections.Specialized.NameValueCollection" />
+      </Parameters>
+      <Docs>
+        <param name="userProfileApplicationProxyId">A GUID representing the user profile application where the social data security trimmer will be used.</param>
+        <param name="id">The security trimmer identifier (ID). This value is unique; if a security trimmer is registered with an ID that is already registered for another security trimmer, the registration for the first trimmer is overwritten with the registration for the second trimmer.</param>
+        <param name="fullyQualifiedTypeName">The strong name of the custom security trimmer assembly.</param>
+        <param name="properties">Optional. The name/value pairs that specify the configuration properties.</param>
+        <summary>Registers a pluggable security trimmer and saves it to the search service application.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetTrimmerSettings">
+      <MemberSignature Language="C#" Value="public static void SetTrimmerSettings (Microsoft.SharePoint.SPServiceContext serviceContext, bool enableTrimming);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SetTrimmerSettings(class Microsoft.SharePoint.SPServiceContext serviceContext, bool enableTrimming) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.PluggableSocialSecurityTrimmerManager.SetTrimmerSettings(Microsoft.SharePoint.SPServiceContext,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SetTrimmerSettings (serviceContext As SPServiceContext, enableTrimming As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SetTrimmerSettings(Microsoft::SharePoint::SPServiceContext ^ serviceContext, bool enableTrimming);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+        <Parameter Name="enableTrimming" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">The service application context.</param>
+        <param name="enableTrimming">
+          <b>true</b> to enable the security trimming heuristics for all social data; otherwise, <b>false</b>.</param>
+        <summary>Updates the trimmer setting.</summary>
+        <remarks>
+          <para>The <paramref name="enableTrimming" /> parameter specifies whether the security trimming heuristics are enabled. If the value is <b>true</b>, the security trimming heuristics must be enabled for all social data. If the value is <b>false</b>, the security trimming heuristics must be disabled for all social data.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="serviceContext" /> is 
+    null
+  .</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetTrimmerSettings">
+      <MemberSignature Language="C#" Value="public static void SetTrimmerSettings (Microsoft.SharePoint.SPServiceContext serviceContext, string[] urlFoldersRequiringTrim, string[] urlFoldersToAlwaysAllow);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SetTrimmerSettings(class Microsoft.SharePoint.SPServiceContext serviceContext, string[] urlFoldersRequiringTrim, string[] urlFoldersToAlwaysAllow) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.PluggableSocialSecurityTrimmerManager.SetTrimmerSettings(Microsoft.SharePoint.SPServiceContext,System.String[],System.String[])" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SetTrimmerSettings (serviceContext As SPServiceContext, urlFoldersRequiringTrim As String(), urlFoldersToAlwaysAllow As String())" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SetTrimmerSettings(Microsoft::SharePoint::SPServiceContext ^ serviceContext, cli::array &lt;System::String ^&gt; ^ urlFoldersRequiringTrim, cli::array &lt;System::String ^&gt; ^ urlFoldersToAlwaysAllow);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+        <Parameter Name="urlFoldersRequiringTrim" Type="System.String[]" />
+        <Parameter Name="urlFoldersToAlwaysAllow" Type="System.String[]" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">The service application context.</param>
+        <param name="urlFoldersRequiringTrim">The URLs associated with the security trimming heuristics.</param>
+        <param name="urlFoldersToAlwaysAllow">The URLs that are always included in the results set returned to a user.</param>
+        <summary>Updates the trimmer setting based on the URLs associated with the security trimming heuristics and the URLs that are always included in the results set returned to a user.</summary>
+        <remarks>
+          <para>This method sets the trimmer setting.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="serviceContext" /> is 
+    null
+  .</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="UnregisterPluggableSecurityTrimmer">
+      <MemberSignature Language="C#" Value="public static string[] UnregisterPluggableSecurityTrimmer (Guid userProfileApplicationProxyId, int id);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string[] UnregisterPluggableSecurityTrimmer(valuetype System.Guid userProfileApplicationProxyId, int32 id) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.PluggableSocialSecurityTrimmerManager.UnregisterPluggableSecurityTrimmer(System.Guid,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function UnregisterPluggableSecurityTrimmer (userProfileApplicationProxyId As Guid, id As Integer) As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;System::String ^&gt; ^ UnregisterPluggableSecurityTrimmer(Guid userProfileApplicationProxyId, int id);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="userProfileApplicationProxyId" Type="System.Guid" />
+        <Parameter Name="id" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="userProfileApplicationProxyId">To be added.</param>
+        <param name="id">The security trimmer ID.</param>
+        <summary>Removes a pluggable security trimmer from the search service application.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

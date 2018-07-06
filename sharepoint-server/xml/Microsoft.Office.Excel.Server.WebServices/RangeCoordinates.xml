@@ -1,0 +1,143 @@
+﻿<Type Name="RangeCoordinates" FullName="Microsoft.Office.Excel.Server.WebServices.RangeCoordinates">
+  <TypeSignature Language="C#" Value="public sealed class RangeCoordinates" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit RangeCoordinates extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Excel.Server.WebServices.RangeCoordinates" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class RangeCoordinates" />
+  <TypeSignature Language="C++ CLI" Value="public ref class RangeCoordinates sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>The four integer coordinates used to select a contiguous range.</summary>
+    <remarks>
+      <para>The coordinates include a top row, left column, height and width. Coordinates enable Excel ranges to be specified using direct integer indexing as an alternative to "A1" expressions.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>//Instantiate the Web service and range coordinate object
+ExcelService xlservices = new ExcelService();
+RangeCoordinates rangeCoordinates = new RangeCoordinates();
+
+//Prepare object to define range coordinates, 
+//and GetRange
+rangeCoordinates.Column = 8;
+rangeCoordinates.Row = 7;
+rangeCoordinates.Height = 15;
+rangeCoordinates.Width = 9;
+
+object[] rangeResult = xlservice.GetRange(sessionId, sheetName, rangeCoordinates, false, out outStatus);
+Console.WriteLine("Total Rows: " + rangeResult.Length);
+Console.WriteLine("Value in the range is: " + ((object[])rangeResult[17])[12]);</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public RangeCoordinates ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Excel.Server.WebServices.RangeCoordinates.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; RangeCoordinates();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Excel.Server.WebServices.RangeCoordinates" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Column">
+      <MemberSignature Language="C#" Value="public int Column { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Column" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Excel.Server.WebServices.RangeCoordinates.Column" />
+      <MemberSignature Language="VB.NET" Value="Public Property Column As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Column { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the left column (0-based).</summary>
+        <value>The left column.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Height">
+      <MemberSignature Language="C#" Value="public int Height { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Height" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Excel.Server.WebServices.RangeCoordinates.Height" />
+      <MemberSignature Language="VB.NET" Value="Public Property Height As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Height { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the number of rows.</summary>
+        <value>The corresponding number of rows.</value>
+        <remarks>
+          <para>To see a code sample, see the "How to: Set Values of Ranges" topic.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Row">
+      <MemberSignature Language="C#" Value="public int Row { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Row" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Excel.Server.WebServices.RangeCoordinates.Row" />
+      <MemberSignature Language="VB.NET" Value="Public Property Row As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Row { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the top row (0-based).</summary>
+        <value>The top row.</value>
+        <remarks>
+          <para>To see a code sample, see the "How to: Set Values of Ranges" topic.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Width">
+      <MemberSignature Language="C#" Value="public int Width { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Width" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Excel.Server.WebServices.RangeCoordinates.Width" />
+      <MemberSignature Language="VB.NET" Value="Public Property Width As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Width { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Excel.Server.WebServices</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the number of columns.</summary>
+        <value>The corresponding number of columns.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

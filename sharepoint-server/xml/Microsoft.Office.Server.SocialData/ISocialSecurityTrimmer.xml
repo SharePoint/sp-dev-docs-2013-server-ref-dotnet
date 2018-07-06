@@ -1,0 +1,167 @@
+﻿<Type Name="ISocialSecurityTrimmer" FullName="Microsoft.Office.Server.SocialData.ISocialSecurityTrimmer">
+  <TypeSignature Language="C#" Value="public interface ISocialSecurityTrimmer" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ISocialSecurityTrimmer" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.SocialData.ISocialSecurityTrimmer" />
+  <TypeSignature Language="VB.NET" Value="Public Interface ISocialSecurityTrimmer" />
+  <TypeSignature Language="C++ CLI" Value="public interface class ISocialSecurityTrimmer" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>Defines methods for security trimming lists that contain social data.</summary>
+    <remarks>
+      <para>The following code sample uses this interface to create a custom <see cref="T:Microsoft.Office.Server.SocialData.SearchSocialSecurityTrimmer" />.</para>
+      <code>using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Text.RegularExpressions;
+using Microsoft.Office.Server.SocialData;
+
+namespace CustomSecurityTrimmer
+{
+    public sealed class CustomSocialSecurityTrimmer : SearchSocialSecurityTrimmer
+    {
+        private const string C_KEY_EXCLUDEPATHS = "&lt;span class="placeholder"&gt;ExcludePaths&lt;/span&gt;";
+        private const string C_KEY_INCLUDEPATHS = "&lt;span class="placeholder"&gt;IncludePaths&lt;/span&gt;";
+
+        private static object syncRoot = new Object();
+        private static volatile List&amp;lt;Regex&amp;gt; m_excludePaths;
+        private static volatile List&amp;lt;Regex&amp;gt; m_includePaths;
+
+        #region ISocialSecurityTrimmer interface
+        public override void Initialize(NameValueCollection CustomProperty)
+        {
+            lock (syncRoot)
+            {
+                if (m_includePaths != null)
+                    return;
+
+                m_includePaths = new List&amp;lt;Regex&amp;gt;();
+                m_excludePaths = new List&amp;lt;Regex&amp;gt;();
+
+                // Cache parsed Url Regex objects's list onto static area to improve performance.
+                // If you change the properties, you need to restart IIS to clear cache.
+                string strIncludePaths = CustomProperty[C_KEY_INCLUDEPATHS];
+                string strExcludePaths = CustomProperty[C_KEY_EXCLUDEPATHS];
+
+                if (!String.IsNullOrEmpty(strIncludePaths))
+                {
+                    string[] strArray = strIncludePaths.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string strRegex in strArray)
+                    {
+                        m_includePaths.Add(new Regex(strRegex, RegexOptions.Singleline | RegexOptions.IgnoreCase));
+                    }
+                }
+
+               if (!String.IsNullOrEmpty(strExcludePaths))
+                {
+                    string[] strArray = strExcludePaths.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string strRegex in strArray)
+                    {
+                        m_excludePaths.Add(new Regex(strRegex, RegexOptions.Singleline | RegexOptions.IgnoreCase));
+                    }
+                }
+            }
+        }
+
+        public override List&amp;lt;Uri&amp;gt; Trim(List&amp;lt;Uri&amp;gt; uris)
+        {
+            List&amp;lt;Uri&amp;gt; resultUris = new List&amp;lt;Uri&amp;gt;();
+            List&amp;lt;Uri&amp;gt; toBeTrimmedUris = new List&amp;lt;Uri&amp;gt;();
+
+            foreach (Uri checkUri in uris)
+            {
+                if (IsUrlMatched(checkUri, m_includePaths))
+                {
+                    toBeTrimmedUris.Add(checkUri);
+                }
+                else if (IsUrlMatched(checkUri, m_excludePaths))
+                {
+                    resultUris.Add(checkUri);
+                }
+                else
+                {
+                    toBeTrimmedUris.Add(checkUri);
+                }
+            }
+
+            // Execute Security Trimming.
+            resultUris.AddRange(base.Trim(toBeTrimmedUris));
+
+            return resultUris;
+        }
+        #endregion
+
+        private static bool IsUrlMatched(Uri uri, List&amp;lt;Regex&amp;gt; strPatterns)
+        {
+            bool isMatch = false;
+
+            foreach (Regex strPattern in strPatterns)
+            {
+                if (strPattern.IsMatch(uri.AbsoluteUri))
+                {
+                    isMatch = true;
+                    break;
+                }
+            }
+            return isMatch;
+        }
+    }
+}
+
+</code>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Initialize">
+      <MemberSignature Language="C#" Value="public void Initialize (System.Collections.Specialized.NameValueCollection customProperties);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Initialize(class System.Collections.Specialized.NameValueCollection customProperties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.ISocialSecurityTrimmer.Initialize(System.Collections.Specialized.NameValueCollection)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Initialize (customProperties As NameValueCollection)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Initialize(System::Collections::Specialized::NameValueCollection ^ customProperties);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="customProperties" Type="System.Collections.Specialized.NameValueCollection" />
+      </Parameters>
+      <Docs>
+        <param name="customProperties">To be added.</param>
+        <summary>Obtains custom information that can be used for security trimming.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Trim">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Uri&gt; Trim (System.Collections.Generic.List&lt;Uri&gt; urls);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.List`1&lt;class System.Uri&gt; Trim(class System.Collections.Generic.List`1&lt;class System.Uri&gt; urls) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.SocialData.ISocialSecurityTrimmer.Trim(System.Collections.Generic.List{System.Uri})" />
+      <MemberSignature Language="VB.NET" Value="Public Function Trim (urls As List(Of Uri)) As List(Of Uri)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::Generic::List&lt;Uri ^&gt; ^ Trim(System::Collections::Generic::List&lt;Uri ^&gt; ^ urls);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;System.Uri&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="urls" Type="System.Collections.Generic.List&lt;System.Uri&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="urls">To be added.</param>
+        <summary>Security trims a list of URLs that represent pieces of social data.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

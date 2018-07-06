@@ -1,0 +1,56 @@
+﻿<Type Name="IProcess" FullName="Microsoft.Office.RecordsManagement.SearchAndProcess.IProcess">
+  <TypeSignature Language="C#" Value="public interface IProcess" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IProcess" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.SearchAndProcess.IProcess" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IProcess" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IProcess" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>The interface that must be implemented by an assembly to process items as part of a search and process operation.</summary>
+    <remarks>
+      <para>Search and process operations enable you to use Microsoft SharePoint Server 2010 to perform a search query, and then perform a specific, custom action upon each list item returned by the query. For example, you might need to identify a certain set of documents, based on specific document metadata, and then move those documents into a records repository.</para>
+      <para>This interface provides access to the processing to be done on each item in the return set of the search operation.</para>
+      <para>To perform a search and process operation, you must create a <see cref="M:Microsoft.Office.RecordsManagement.SearchAndProcess.IProcess.ProcessItem(Microsoft.SharePoint.SPListItem,System.String[],System.String@)" /> object, and then use the <see cref="M:Microsoft.Office.RecordsManagement.SearchAndProcess.SearchAndProcessItem.Add(Microsoft.SharePoint.SPWeb,System.DateTime,System.Guid,System.Int32,System.Boolean,System.Guid,System.Guid,System.Int32)" /> method to add the search and process operation to the SharePoint Server 2010 master timer job.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ProcessItem">
+      <MemberSignature Language="C#" Value="public bool ProcessItem (Microsoft.SharePoint.SPListItem item, string[] rgstrOtherArgs, out string strMessage);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ProcessItem(class Microsoft.SharePoint.SPListItem item, string[] rgstrOtherArgs, [out] string&amp; strMessage) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.SearchAndProcess.IProcess.ProcessItem(Microsoft.SharePoint.SPListItem,System.String[],System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ProcessItem (item As SPListItem, rgstrOtherArgs As String(), ByRef strMessage As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool ProcessItem(Microsoft::SharePoint::SPListItem ^ item, cli::array &lt;System::String ^&gt; ^ rgstrOtherArgs, [Runtime::InteropServices::Out] System::String ^ % strMessage);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="rgstrOtherArgs" Type="System.String[]" />
+        <Parameter Name="strMessage" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="item">The item to be processed.</param>
+        <param name="rgstrOtherArgs">Any optional arguments the user specified for SharePoint Server 2010 to pass to the assembly.</param>
+        <param name="strMessage">An output parameter for the assembly to return detailed processing information to SharePoint Server 2010.</param>
+        <summary>Performs custom processing on the specified item.</summary>
+        <returns>A Boolean that specifies whether the item was successfully processed.</returns>
+        <remarks>
+          <para>During a search and process operation, SharePoint Server 2010 calls the <b>ProcessItem</b> method once for each item in the search return set.</para>
+          <para>SharePoint Server 2010 stores the Boolean success indicator, as well as any detailed information returned from the <paramref name="strMessage" /> parameter, for each item processed. SharePoint Server 2010 includes this information in the search and process job summary report that is sent in e-mail to the specified users.</para>
+          <para>For more information about how SharePoint Server 2010 invokes the <see cref="T:Microsoft.Office.RecordsManagement.SearchAndProcess.IProcess" /> interface during search and process operations, see Search and Process Development Process.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

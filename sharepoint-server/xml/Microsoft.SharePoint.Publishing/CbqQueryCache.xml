@@ -1,0 +1,171 @@
+﻿<Type Name="CbqQueryCache" FullName="Microsoft.SharePoint.Publishing.CbqQueryCache">
+  <TypeSignature Language="C#" Value="public sealed class CbqQueryCache" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit CbqQueryCache extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.CbqQueryCache" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class CbqQueryCache" />
+  <TypeSignature Language="C++ CLI" Value="public ref class CbqQueryCache sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Caches the <see cref="T:Microsoft.SharePoint.Publishing.CbqQueryVersionInfo" /> for a specified Content Query Web Part. This class cannot be inherited.</summary>
+    <remarks>
+      <para>Use the FetchCbqQueryInfoFromCache method to instruct the Content Query Web Part to get the site, Web, page, or Web Part GUID and store it in the <see cref="P:Microsoft.SharePoint.Publishing.CbqQueryCache.UserQueryVersionInfo" /> property of this <b>CbqQueryCache</b> instance.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Microsoft.SharePoint.Publishing;
+using System.IO;
+
+public partial class CBQCachePage : System.Web.UI.Page
+{
+
+    protected override void OnLoad(EventArgs e)
+    {
+        // For this to work the page has to have the "web", "page", and "wp" query parameters passed to it
+        base.OnLoad(e);
+        string webUrl = Request.QueryString["web"];
+        Guid pageGuid = new Guid(Request.QueryString["page"]);
+        Guid webpartGuid = new Guid(Request.QueryString["wp"]);
+
+        CbqQueryVersionInfo queryVersionInfo = null;
+        try
+        {
+            // Try and create a new CbqQueryCache and get the Query from it and display it on the page
+            CbqQueryCache queryCache = new CbqQueryCache(this.Page.Cache, webUrl, pageGuid, webpartGuid, 120, Request.Url.Query);
+            this.queryLabel.Text = queryCache.UserQueryVersionInfo.VersionCrossListQueryInfo.Query;
+        }
+        catch (InvalidOperationException)
+        {
+            queryVersionInfo = null;
+        }
+        catch (FileNotFoundException)
+        {
+            queryVersionInfo = null;
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            queryVersionInfo = null;
+        }
+
+        // User either has no rights
+        // Or the web part does not exist
+        if (queryVersionInfo == null)
+        {
+            Response.StatusCode = 404;
+            Response.End();
+        }
+    }
+}using System;using System.Globalization;using System.Web;using System.Web.UI;using System.Web.UI.WebControls;using System.Data;using System.Collections.Generic;using Microsoft.SharePoint;using Microsoft.SharePoint.WebControls;using Microsoft.SharePoint.WebPartPages;using Microsoft.SharePoint.Utilities;using Microsoft.SharePoint.ApplicationPages;using Microsoft.SharePoint.Publishing.WebControls;using Microsoft.SharePoint.Publishing;namespace CodeSampleNamespace{    public class CodeSample : LayoutsPageBase    {        protected System.Web.UI.WebControls.Panel panel;        protected override void OnLoad(EventArgs e)        {base.OnLoad(e);// Example 1{    string webUrl = Request.QueryString["webUrl"];    Guid pageGuid = new Guid(Request.QueryString["pageUniqueId"]);    Guid webpartGuid = new Guid(Request.QueryString["wpStorageKey"]);    int cacheFeedTime = 800;    // Retrieve Content Query Web Part information from the  cache.    CbqQueryCache queryCache = new CbqQueryCache(this.Page.Cache, webUrl, pageGuid, webpartGuid, cacheFeedTime);    // Execute Query    CbqQueryVersionInfo userCbqQuery = queryCache.UserQueryVersionInfo;    CrossListQueryCache xlqCache = new CrossListQueryCache(userCbqQuery.VersionCrossListQueryInfo);    DataTable data =  xlqCache.GetSiteData(SPContext.Current.Site);    // Perform ProcessData delegate that is specified on this web part    if (userCbqQuery.ProcessDataDelegate != null)    {        data = userCbqQuery.ProcessDataDelegate(data);    }    // Create a new Content Query Web Part.    ContentByQueryWebPart cbq = new ContentByQueryWebPart();    // Store the data in the new Content By Query Web Part.    cbq.Data = data;    panel.Controls.Add(cbq);}// Example 2{    string webUrl = Request.QueryString["webUrl"];    Guid pageGuid = new Guid(Request.QueryString["pageUniqueId"]);    Guid webpartGuid = new Guid(Request.QueryString["wpStorageKey"]);    int cacheFeedTime = 800;    // Retrieve Content By Query Web Part information from the cache.    CbqQueryCache query = new CbqQueryCache(this.Page.Cache, webUrl, pageGuid, webpartGuid, cacheFeedTime);    // Retrieve Information about the current user query.    CbqQueryVersionInfo userCbqQuery = query.UserQueryVersionInfo;    // Set Query Information on a new CBQ web part    ContentByQueryWebPart cbq = new ContentByQueryWebPart();    cbq.FeedTitle = userCbqQuery.FeedTitle;    cbq.FeedDescription = userCbqQuery.FeedDescription;    cbq.UseCopyUtil = userCbqQuery.UseCopyUtil;    cbq.DataColumnRenames = userCbqQuery.DataColumnRenames;    cbq.ProcessDataDelegate = userCbqQuery.ProcessDataDelegate;    CrossListQueryInfo crossListInfo = userCbqQuery.VersionCrossListQueryInfo;    cbq.QueryOverride = crossListInfo.Query;    cbq.WebsOverride = crossListInfo.Webs;    cbq.ViewFieldsOverride = crossListInfo.ViewFields;    cbq.UseCache = crossListInfo.UseCache;    cbq.WebUrl = crossListInfo.WebUrl;    if (crossListInfo.RowLimit == uint.MaxValue)    {        cbq.ItemLimit = -1;    }    else    {        cbq.ItemLimit = (int)crossListInfo.RowLimit;    }    // The List Override takes a string.Format. Therefore, you must encode { and } before passing it back.    string listOverride = crossListInfo.Lists;    listOverride = listOverride.Replace("{", "{{");    listOverride = listOverride.Replace("}", "}}");    cbq.ListsOverride = listOverride;    // Set items that may affect Audience Targetting.    cbq.ShowUntargetedItems = crossListInfo.ShowUntargetedItems;    cbq.FilterByAudience = crossListInfo.FilterByAudience;    if (crossListInfo.GroupByAudience)    {        cbq.GroupBy = "{" + FieldId.AudienceTargeting.ToString() + "}";    }    if (crossListInfo.GroupByAscending)    {        cbq.GroupByDirection = ContentByQueryWebPart.SortDirection.Asc;    }    panel.Controls.Add(cbq);}      }</code>
+      <code>Imports SystemImports System.GlobalizationImports System.WebImports System.Web.UIImports System.Web.UI.WebControlsImports System.DataImports System.Collections.GenericImports Microsoft.SharePointImports Microsoft.SharePoint.WebControlsImports Microsoft.SharePoint.WebPartPagesImports Microsoft.SharePoint.UtilitiesImports Microsoft.SharePoint.ApplicationPagesImports Microsoft.SharePoint.Publishing.WebControlsImports Microsoft.SharePoint.PublishingNamespace CodeSampleNamespace    Public Class CodeSample        Inherits LayoutsPageBase        Protected panel As System.Web.UI.WebControls.Panel        Protected Overrides Sub OnLoad(ByVal e As EventArgs)MyBase.OnLoad(e)' Example 1    Dim webUrl As String = Request.QueryString("webUrl")    Dim pageGuid As New Guid(Request.QueryString("pageUniqueId"))    Dim webpartGuid As New Guid(Request.QueryString("wpStorageKey"))    Dim cacheFeedTime As Integer = 800    ' Retrieve Content Query Web Part information from the  cache.    Dim queryCache As New CbqQueryCache(Me.Page.Cache, webUrl, pageGuid, webpartGuid, cacheFeedTime)    ' Execute Query    Dim userCbqQuery As CbqQueryVersionInfo = queryCache.UserQueryVersionInfo    Dim xlqCache As New CrossListQueryCache(userCbqQuery.VersionCrossListQueryInfo)    Dim data As DataTable = xlqCache.GetSiteData(SPContext.Current.Site)    ' Perform ProcessData delegate that is specified on this web part    If userCbqQuery.ProcessDataDelegate IsNot Nothing Then        data = userCbqQuery.ProcessDataDelegate(data)    End If    ' Create a new Content Query Web Part.    Dim cbq As New ContentByQueryWebPart()    ' Store the data in the new Content By Query Web Part.    cbq.Data = data    panel.Controls.Add(cbq)' Example 2    Dim webUrl As String = Request.QueryString("webUrl")    Dim pageGuid As New Guid(Request.QueryString("pageUniqueId"))    Dim webpartGuid As New Guid(Request.QueryString("wpStorageKey"))    Dim cacheFeedTime As Integer = 800    ' Retrieve Content By Query Web Part information from the cache.    Dim query As New CbqQueryCache(Me.Page.Cache, webUrl, pageGuid, webpartGuid, cacheFeedTime)    ' Retrieve Information about the current user query.    Dim userCbqQuery As CbqQueryVersionInfo = query.UserQueryVersionInfo    ' Set Query Information on a new CBQ web part    Dim cbq As New ContentByQueryWebPart()    cbq.FeedTitle = userCbqQuery.FeedTitle    cbq.FeedDescription = userCbqQuery.FeedDescription    cbq.UseCopyUtil = userCbqQuery.UseCopyUtil    cbq.DataColumnRenames = userCbqQuery.DataColumnRenames    cbq.ProcessDataDelegate = userCbqQuery.ProcessDataDelegate    Dim crossListInfo As CrossListQueryInfo = userCbqQuery.VersionCrossListQueryInfo    cbq.QueryOverride = crossListInfo.Query    cbq.WebsOverride = crossListInfo.Webs    cbq.ViewFieldsOverride = crossListInfo.ViewFields    cbq.UseCache = crossListInfo.UseCache    cbq.WebUrl = crossListInfo.WebUrl    If crossListInfo.RowLimit = UInteger.MaxValue Then        cbq.ItemLimit = -1    Else        cbq.ItemLimit = CInt(Fix(crossListInfo.RowLimit))    End If    ' The List Override takes a string.Format. Therefore, you must encode { and } before passing it back.    Dim listOverride As String = crossListInfo.Lists    listOverride = listOverride.Replace("{", "{{")    listOverride = listOverride.Replace("}", "}}")    cbq.ListsOverride = listOverride    ' Set items that may affect Audience Targetting.    cbq.ShowUntargetedItems = crossListInfo.ShowUntargetedItems    cbq.FilterByAudience = crossListInfo.FilterByAudience    If crossListInfo.GroupByAudience Then        cbq.GroupBy = "{" &amp;amp; FieldId.AudienceTargeting.ToString() &amp;amp; "}"    End If    If crossListInfo.GroupByAscending Then        cbq.GroupByDirection = ContentByQueryWebPart.SortDirection.Asc    End If    panel.Controls.Add(cbq)        End Sub    End ClassEnd Namespace</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public CbqQueryCache (System.Web.Caching.Cache feed, string web, Guid page, Guid webpart, int cacheTime, string query);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Web.Caching.Cache feed, string web, valuetype System.Guid page, valuetype System.Guid webpart, int32 cacheTime, string query) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CbqQueryCache.#ctor(System.Web.Caching.Cache,System.String,System.Guid,System.Guid,System.Int32,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (feed As Cache, web As String, page As Guid, webpart As Guid, cacheTime As Integer, query As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; CbqQueryCache(System::Web::Caching::Cache ^ feed, System::String ^ web, Guid page, Guid webpart, int cacheTime, System::String ^ query);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="feed" Type="System.Web.Caching.Cache" />
+        <Parameter Name="web" Type="System.String" />
+        <Parameter Name="page" Type="System.Guid" />
+        <Parameter Name="webpart" Type="System.Guid" />
+        <Parameter Name="cacheTime" Type="System.Int32" />
+        <Parameter Name="query" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="feed">The <b>CbqQueryCache</b> object that the query and results are stored in.</param>
+        <param name="web">The server-relative URL of the Web of the page that the <b>ContentByQueryWebPart</b> is on.</param>
+        <param name="page">The ID of the CachedPage that the <b>ContentByQueryWebPart</b> is on.</param>
+        <param name="webpart">The ID of the <b>ContentByQueryWebPart</b>.</param>
+        <param name="cacheTime">The maximum time in seconds that data from a <b>ContentByQueryWebPart</b> should be valid in the cache.</param>
+        <param name="query">The query string of the RSS feed URL.</param>
+        <summary>Creates a <see cref="T:Microsoft.SharePoint.Publishing.CbqQueryCache" /> object used to access and cache queries and results of queries made by the RSS feed pageof a <see cref="T:Microsoft.SharePoint.Publishing.ContentByQueryWebPart" /> object.</summary>
+        <remarks>
+          <para>The <b>CbqQueryCache</b> class is used to get the <see cref="T:Microsoft.SharePoint.Publishing.CbqQueryVersionInfo" /> object and perform queries for the feed page of <b>ContentByQueryWebPart</b> objects.</para>
+          <para>When getting the <b>CbqQueryVersionInfo</b>, the <b>CbqQueryCache</b> first checks the <paramref name="feed cache" /> parameter. If the <b>CbqQueryVersionInfo</b> is in the feed cache parameter and the cached version has not exceeded the <paramref name="cacheTime" /> parameter, then this is returned.</para>
+          <para>The <b>ContentByQueryWebPart</b> can query a <b>ContentByQueryWebPart</b> RSS feed by calling the SPWeb.GetSiteData object.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>By default, the feed page requires these query parameters: </para>
+          <para>
+            <paramref name="string webUrl = Request.QueryString[&quot;web&quot;];Guid pageGuid = new Guid(Request.QueryString[&quot;page&quot;]);Guid webpartGuid = new Guid(Request.QueryString[&quot;wp&quot;]);CbqQueryCache cbqCache = new CbqQueryCache(HttpContext.Current.Cache, webUrl, pageGuid, webpartGuid, 120, Request.Url.Query);CbqQueryVersionInfo queryVersionInfo = cbqCache.UserQueryVersionInfo;" />
+          </para>
+        </example>
+        <exception cref="T:System.UnauthorizedAccessException">The current user is not authorized to get the page.</exception>
+        <exception cref="T:System.InvalidOperationException">The <b>ContentByQueryWebPart</b> does not have an RSS feed enabled.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteData">
+      <MemberSignature Language="C#" Value="public System.Data.DataTable GetSiteData (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Data.DataTable GetSiteData(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CbqQueryCache.GetSiteData(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteData (site As SPSite) As DataTable" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Data::DataTable ^ GetSiteData(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.DataTable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> object that is used to get the data.</param>
+        <summary>Gets the cache data based on the <see cref="T:Microsoft.SharePoint.Publishing.CrossListQueryInfo" /> specification.</summary>
+        <returns>Cache data that is based on the <b>CrossListQueryInfo</b> specification.</returns>
+        <remarks>
+          <para>The code in this example is part of a larger code example available in the <see cref="T:Microsoft.SharePoint.Publishing.CbqQueryCache" /> class topic. See the class topic to view the code in context.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Execute Query    CbqQueryVersionInfo userCbqQuery = queryCache.UserQueryVersionInfo;    CrossListQueryCache xlqCache = new CrossListQueryCache(userCbqQuery.VersionCrossListQueryInfo);    DataTable data =  xlqCache.GetSiteData(SPContext.Current.Site);</code>
+          <code>' Execute QueryDim userCbqQuery As CbqQueryVersionInfo = queryCache.UserQueryVersionInfoDim xlqCache As New CrossListQueryCache(userCbqQuery.VersionCrossListQueryInfo)Dim data As DataTable = xlqCache.GetSiteData(SPContext.Current.Site)</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="UserQueryVersionInfo">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.CbqQueryVersionInfo UserQueryVersionInfo { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.CbqQueryVersionInfo UserQueryVersionInfo" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.CbqQueryCache.UserQueryVersionInfo" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property UserQueryVersionInfo As CbqQueryVersionInfo" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::CbqQueryVersionInfo ^ UserQueryVersionInfo { Microsoft::SharePoint::Publishing::CbqQueryVersionInfo ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.CbqQueryVersionInfo</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Returns the version of the Content Query Web Part for the current user.</summary>
+        <value>
+          <b>CbqQueryVersion</b> for the current user.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

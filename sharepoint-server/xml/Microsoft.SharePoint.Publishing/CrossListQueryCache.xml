@@ -1,0 +1,470 @@
+﻿<Type Name="CrossListQueryCache" FullName="Microsoft.SharePoint.Publishing.CrossListQueryCache">
+  <TypeSignature Language="C#" Value="public sealed class CrossListQueryCache" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit CrossListQueryCache extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.CrossListQueryCache" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class CrossListQueryCache" />
+  <TypeSignature Language="C++ CLI" Value="public ref class CrossListQueryCache sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Manages the cache for the Cross List Query. </summary>
+    <remarks>
+      <para>This class cannot be inherited. This class caches data that is returned from the Cross List Query and applies audience targeting to the result set that is returned by the <see cref="P:Microsoft.SharePoint.Publishing.CbqQueryVersionInfo.VersionCrossListQueryInfo" /> property.  </para>
+      <para />
+    </remarks>
+    <example>
+      <para>The following code example demonstrates one way to use the <b>CrossListQueryCache</b> object, properties, and methods. This code views data in the <b>CrossListQueryCache</b> object, gets the data, and stores the data in a new Content By Query Web Part for viewing.</para>
+      <code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.SharePoint.Publishing;
+using Microsoft.SharePoint.Publishing.WebControls;
+using Microsoft.SharePoint;
+using System.Web;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // GetSiteDataResults(Microsoft.SharePoint.SPSite,System.Boolean)
+            ExampleOne();
+            // GetSiteDataResults(Microsoft.SharePoint.SPSite,System.String,System.Boolean)
+            ExampleTwo();
+            //GetSiteDataResults(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.SPSiteDataQuery,System.Boolean)
+            ExampleThree();
+            // GetSiteDataResults(Microsoft.SharePoint.SPWeb,System.Boolean)
+            ExampleFour();
+
+        }
+
+
+        //GetSiteDataResults(Microsoft.SharePoint.SPSite,System.Boolean)
+        // Returns the results of the current query on the specified site.  The query will be run against
+        // an SPList if useSpQueryOnList is set to true.  Otherwise the query will be run against a site or web
+
+        // This version of GetSiteDataResults uses the web url in this object's CrossListQueryInfo to determine
+        // either the web to query against or the web of the list being queried against depending on the value
+        // of useSpQueryOnList.
+        private static void ExampleOne()
+        {
+            using (SPSite site = new SPSite("http://adventure-works"))
+            {
+                //Get a CbqQueryVersionInfo object from a ContentByQueryWebPart and use it to get a CrossListQueryInfo
+                ContentByQueryWebPart cbq = new ContentByQueryWebPart();
+                CbqQueryVersionInfo versionInfo = cbq.BuildCbqQueryVersionInfo();
+                CrossListQueryInfo queryInfo = versionInfo.VersionCrossListQueryInfo;
+                // Create a new CrossListQueryCache object with the queryInfo we just got
+                CrossListQueryCache crossListCache = new CrossListQueryCache(queryInfo);
+
+                SiteDataResults results = crossListCache.GetSiteDataResults(site, false);
+            }
+        }
+
+
+        // GetSiteDataResults(Microsoft.SharePoint.SPSite,System.String,System.Boolean)
+        // Returns the results of the current query on the specified site.  The query will be run against
+        // an SPList if useSpQueryOnList is set to true.  Otherwise the query will be run against a site or web
+
+        // This version of GetSiteDataResults uses the webUrl parameter to determine
+        // either the web to query against or the web of the list being queried against depending on the value
+        // of useSpQueryOnList.
+        private static void ExampleTwo()
+        {
+            using (SPSite site = new SPSite("http://adventure-works"))
+            {
+                //Get a CbqQueryVersionInfo object from a ContentByQueryWebPart and use it to get a CrossListQueryInfo
+                ContentByQueryWebPart cbq = new ContentByQueryWebPart();
+                CbqQueryVersionInfo versionInfo = cbq.BuildCbqQueryVersionInfo();
+                CrossListQueryInfo queryInfo = versionInfo.VersionCrossListQueryInfo;
+                // Create a new CrossListQueryCache object with the queryInfo we just got
+                CrossListQueryCache crossListCache = new CrossListQueryCache(queryInfo);
+                // GetSiteDataResults(Microsoft.SharePoint.SPSite,System.String,System.Boolean)
+                SiteDataResults results = crossListCache.GetSiteDataResults(site, "/", false);
+            }
+        }
+
+
+        //GetSiteDataResults(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.SPSiteDataQuery,System.Boolean)
+        // Returns the results of the passed in query parameter on the specified web or list. The query will be run against
+        // an SPList if useSpQueryOnList is set to true.  Otherwise the query will be run against a web
+
+        // This version of GetSiteDataResults uses object's member SPSiteDataQuery
+        private static void ExampleThree()
+        {
+            using (SPSite site = new SPSite("http://adventure-works"))
+            {
+                //Get a CbqQueryVersionInfo object from a ContentByQueryWebPart and use it to get a CrossListQueryInfo
+                ContentByQueryWebPart cbq = new ContentByQueryWebPart();
+                CbqQueryVersionInfo versionInfo = cbq.BuildCbqQueryVersionInfo();
+                CrossListQueryInfo queryInfo = versionInfo.VersionCrossListQueryInfo;
+                // Create a new CrossListQueryCache object with the queryInfo we just got
+                CrossListQueryCache crossListCache = new CrossListQueryCache(queryInfo);
+                // Use the cossListCache to create an SPSiteDataQuery
+                SPSiteDataQuery query = new SPSiteDataQuery();
+                query.Query = queryInfo.Query;
+                query.Lists = queryInfo.Lists;
+                if (queryInfo.RowLimit != UInt32.MaxValue)
+                {
+                    query.RowLimit = queryInfo.RowLimit;
+                }
+                query.ViewFields = queryInfo.ViewFields;
+                query.Webs = queryInfo.Webs;
+                SiteDataResults results;
+
+                using (SPWeb web = site.OpenWeb("/"))
+                {
+                    //GetSiteDataResults(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.SPSiteDataQuery,System.Boolean)
+                    results = crossListCache.GetSiteDataResults(web, query, false);
+                }
+            }
+        }
+
+
+        // GetSiteDataResults(Microsoft.SharePoint.SPWeb,System.Boolean)
+        // Returns the results of the passed in query parameter on the specified web or list. The query will be run against
+        // an SPList if useSpQueryOnList is set to true.  Otherwise the query will be run against a web
+
+        // This version of GetSiteDataResults forgoes the object's member SPSiteDataQuery and uses the passed in SPSiteDataQuery
+        private static void ExampleFour()
+        {
+            using (SPSite site = new SPSite("http://adventure-works"))
+            {
+                //Get a CbqQueryVersionInfo object from a ContentByQueryWebPart and use it to get a CrossListQueryInfo
+                ContentByQueryWebPart cbq = new ContentByQueryWebPart();
+                CbqQueryVersionInfo versionInfo = cbq.BuildCbqQueryVersionInfo();
+                CrossListQueryInfo queryInfo = versionInfo.VersionCrossListQueryInfo;
+                // Create a new CrossListQueryCache object with the queryInfo we just got
+                CrossListQueryCache crossListCache = new CrossListQueryCache(queryInfo);
+                SiteDataResults results;
+
+                using (SPWeb web = site.OpenWeb("/"))
+                {
+                    // GetSiteDataResults(Microsoft.SharePoint.SPWeb,System.Boolean)
+                    results = crossListCache.GetSiteDataResults(web, false);
+                }
+            }
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public CrossListQueryCache (Microsoft.SharePoint.Publishing.CrossListQueryInfo queryCacheInfo);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.Publishing.CrossListQueryInfo queryCacheInfo) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.#ctor(Microsoft.SharePoint.Publishing.CrossListQueryInfo)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (queryCacheInfo As CrossListQueryInfo)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; CrossListQueryCache(Microsoft::SharePoint::Publishing::CrossListQueryInfo ^ queryCacheInfo);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="queryCacheInfo" Type="Microsoft.SharePoint.Publishing.CrossListQueryInfo" />
+      </Parameters>
+      <Docs>
+        <param name="queryCacheInfo">The data to retrieve.</param>
+        <summary>Creates a <see cref="T:Microsoft.SharePoint.Publishing.CrossListQueryCache" /> object that is based on the <see cref="T:Microsoft.SharePoint.Publishing.CrossListQueryInfo" /> class specification.</summary>
+        <remarks>
+          <para>This method adds data from the specified <b>CrossListQueryInfo</b> object to the constructor.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public CrossListQueryCache (Microsoft.SharePoint.Publishing.CrossListQueryInfo queryCacheInfo, string logInfo);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.Publishing.CrossListQueryInfo queryCacheInfo, string logInfo) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.#ctor(Microsoft.SharePoint.Publishing.CrossListQueryInfo,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (queryCacheInfo As CrossListQueryInfo, logInfo As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; CrossListQueryCache(Microsoft::SharePoint::Publishing::CrossListQueryInfo ^ queryCacheInfo, System::String ^ logInfo);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="queryCacheInfo" Type="Microsoft.SharePoint.Publishing.CrossListQueryInfo" />
+        <Parameter Name="logInfo" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="queryCacheInfo">The data to retrieve.</param>
+        <param name="logInfo">Additional information from the User Location Server (ULS) log files.</param>
+        <summary>Creates a <see cref="T:Microsoft.SharePoint.Publishing.CrossListQueryCache" /> object that is based on the <see cref="T:Microsoft.SharePoint.Publishing.CrossListQueryInfo" /> class specification.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ContextUrl">
+      <MemberSignature Language="C#" Value="public static string ContextUrl ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string ContextUrl() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.ContextUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function ContextUrl () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ ContextUrl();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the current URL.</summary>
+        <returns>The current URL.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteData">
+      <MemberSignature Language="C#" Value="public System.Data.DataTable GetSiteData (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Data.DataTable GetSiteData(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.GetSiteData(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteData (site As SPSite) As DataTable" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Data::DataTable ^ GetSiteData(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.DataTable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> object that is used to retrieve the data.</param>
+        <summary>Gets the cache data that is based on the <see cref="T:Microsoft.SharePoint.Publishing.CrossListQueryInfo" /> specification.</summary>
+        <returns>The cache data that is based on the <see cref="T:Microsoft.SharePoint.Publishing.CrossListQueryInfo" /> specification.</returns>
+        <remarks>
+          <para>Can be used only to query a single site collection. Using this object to query multiple site collections is not supported. If this function is called from a web part, it can only be used to query data from the site collection where the web part is deployed. </para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Execute QueryCbqQueryVersionInfo userCbqQuery = queryCache.UserQueryVersionInfo;CrossListQueryCache xlqCache = new CrossListQueryCache(userCbqQuery.VersionCrossListQueryInfo);DataTable data =  xlqCache.GetSiteData(SPContext.Current.Site);</code>
+          <code>' Execute QueryDim userCbqQuery As CbqQueryVersionInfo = queryCache.UserQueryVersionInfoDim xlqCache As New CrossListQueryCache(userCbqQuery.VersionCrossListQueryInfo)Dim data As DataTable = xlqCache.GetSiteData(SPContext.Current.Site)</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteData">
+      <MemberSignature Language="C#" Value="public System.Data.DataTable GetSiteData (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Data.DataTable GetSiteData(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.GetSiteData(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteData (web As SPWeb) As DataTable" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Data::DataTable ^ GetSiteData(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.DataTable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">The target <see cref="T:Microsoft.SharePoint.SPWeb" /> object to get cache data from.</param>
+        <summary>Gets the data from the <see cref="T:Microsoft.SharePoint.SPWeb" /> object.</summary>
+        <returns>The data the <b>SPWeb</b> object retrieves from the <paramref name="web" /> parameter.</returns>
+        <remarks>
+          <para>When you call this method, the <paramref name="webUrl" /> of the <see cref="T:Microsoft.SharePoint.Publishing.CrossListQueryInfo" /> property is ignored.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// Execute QueryCbqQueryVersionInfo userCbqQuery = queryCache.UserQueryVersionInfo;CrossListQueryCache xlqCache = new CrossListQueryCache(userCbqQuery.VersionCrossListQueryInfo);DataTable data =  xlqCache.GetSiteData(SPContext.Current.Site);</code>
+          <code>' Execute QueryDim userCbqQuery As CbqQueryVersionInfo = queryCache.UserQueryVersionInfoDim xlqCache As New CrossListQueryCache(userCbqQuery.VersionCrossListQueryInfo)Dim data As DataTable = xlqCache.GetSiteData(SPContext.Current.Site)</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteData">
+      <MemberSignature Language="C#" Value="public System.Data.DataTable GetSiteData (Microsoft.SharePoint.SPSite site, string webUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Data.DataTable GetSiteData(class Microsoft.SharePoint.SPSite site, string webUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.GetSiteData(Microsoft.SharePoint.SPSite,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteData (site As SPSite, webUrl As String) As DataTable" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Data::DataTable ^ GetSiteData(Microsoft::SharePoint::SPSite ^ site, System::String ^ webUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.DataTable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="webUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> from which data is retrieved.</param>
+        <param name="webUrl">The <paramref name="webUrl" /> of the web site to retrieve the data from.</param>
+        <summary>Gets the cache data from the specified <b>site</b> and from the specified <paramref name="webUrl" />.</summary>
+        <returns>The cache data that is retrieved from the <paramref name="webUrl" /> of the <b>SPSite</b> object. </returns>
+        <remarks>
+          <para>When this method is called, the <paramref name="webUrl" /> of the <see cref="T:Microsoft.SharePoint.Publishing.CrossListQueryInfo" /> property is ignored.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteData">
+      <MemberSignature Language="C#" Value="public System.Data.DataTable GetSiteData (Microsoft.SharePoint.SPWeb web, Microsoft.SharePoint.SPSiteDataQuery query);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Data.DataTable GetSiteData(class Microsoft.SharePoint.SPWeb web, class Microsoft.SharePoint.SPSiteDataQuery query) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.GetSiteData(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.SPSiteDataQuery)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteData (web As SPWeb, query As SPSiteDataQuery) As DataTable" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Data::DataTable ^ GetSiteData(Microsoft::SharePoint::SPWeb ^ web, Microsoft::SharePoint::SPSiteDataQuery ^ query);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.DataTable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="query" Type="Microsoft.SharePoint.SPSiteDataQuery" />
+      </Parameters>
+      <Docs>
+        <param name="web">The target <see cref="T:Microsoft.SharePoint.SPWeb" /> object to get cache data from.</param>
+        <param name="query">The <b>SPSiteDataQuery</b> object that is used to get data.</param>
+        <summary>Gets the data by using the specified <see cref="T:Microsoft.SharePoint.SPSiteDataQuery" /> object.</summary>
+        <returns>The data that is retrieved by using the specified <b>SPSiteDataQuery</b> object.</returns>
+        <remarks>
+          <para>The Collaborative Application Markup Language (CAML) of the <see cref="T:Microsoft.SharePoint.Publishing.CrossListQueryInfo" /> property is ignored when this method is called.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteDataResults">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.SiteDataResults GetSiteDataResults (Microsoft.SharePoint.SPSite site, bool useSpQueryOnList);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.SiteDataResults GetSiteDataResults(class Microsoft.SharePoint.SPSite site, bool useSpQueryOnList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.GetSiteDataResults(Microsoft.SharePoint.SPSite,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteDataResults (site As SPSite, useSpQueryOnList As Boolean) As SiteDataResults" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::SiteDataResults ^ GetSiteDataResults(Microsoft::SharePoint::SPSite ^ site, bool useSpQueryOnList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.SiteDataResults</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="useSpQueryOnList" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site to run the query in.</param>
+        <param name="useSpQueryOnList">Whether to run the query against a list.</param>
+        <summary>Gets the results of the current query on the specified site. The query will be run against an <see cref="T:Microsoft.SharePoint.SPList" /> if use <paramref name="SpQueryOnList" /> is set to <b>true</b>.  Otherwise, the query will be run against a site or Web.</summary>
+        <returns>A <b>SiteDataResults</b> object that contains the results of running the query.</returns>
+        <remarks>
+          <para>This version of <b>GetSiteDataResults</b> uses the web url in this object's <b>CrossListQueryInfo</b> to determine the Web to query against or the Web of the list being queried against depending on the value of <paramref name="useSpQueryOnList" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteDataResults">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.SiteDataResults GetSiteDataResults (Microsoft.SharePoint.SPWeb web, bool useSpQueryOnList);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.SiteDataResults GetSiteDataResults(class Microsoft.SharePoint.SPWeb web, bool useSpQueryOnList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.GetSiteDataResults(Microsoft.SharePoint.SPWeb,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteDataResults (web As SPWeb, useSpQueryOnList As Boolean) As SiteDataResults" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::SiteDataResults ^ GetSiteDataResults(Microsoft::SharePoint::SPWeb ^ web, bool useSpQueryOnList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.SiteDataResults</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="useSpQueryOnList" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="web">The <see cref="T:Microsoft.SharePoint.SPWeb" /> object to run the query in.</param>
+        <param name="useSpQueryOnList">Whether to run the query against a list.</param>
+        <summary>Gets the results of the passed in query parameter on the specified web or list.</summary>
+        <returns>A <b>SiteDataResults</b> object that contains the results of running the query.</returns>
+        <remarks>
+          <para>This version of <b>GetSiteDataResults</b> uses object's member <b>SPSiteDataQuery</b>.</para>
+          <para>The query will be run against an <see cref="T:Microsoft.SharePoint.SPList" /> object if the <paramref name="useSpQueryOnList" /> parameter is set to <b>true</b>.  Otherwise, the query will be run against a web.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteDataResults">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.SiteDataResults GetSiteDataResults (Microsoft.SharePoint.SPSite site, string webUrl, bool useSpQueryOnList);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.SiteDataResults GetSiteDataResults(class Microsoft.SharePoint.SPSite site, string webUrl, bool useSpQueryOnList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.GetSiteDataResults(Microsoft.SharePoint.SPSite,System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteDataResults (site As SPSite, webUrl As String, useSpQueryOnList As Boolean) As SiteDataResults" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::SiteDataResults ^ GetSiteDataResults(Microsoft::SharePoint::SPSite ^ site, System::String ^ webUrl, bool useSpQueryOnList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.SiteDataResults</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="webUrl" Type="System.String" />
+        <Parameter Name="useSpQueryOnList" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site to run the query in</param>
+        <param name="webUrl">The server-relative URL of the web to query against or the server-relative URL of the web that the list being queried against resides in.</param>
+        <param name="useSpQueryOnList">Whether to run the query against a list.</param>
+        <summary>Returns the results of the current query on the specified site.  </summary>
+        <returns>A <b>SiteDataResults</b> object that contains the results of running the query.</returns>
+        <remarks>
+          <para>The query will be run against an SPList object if <paramref name="useSpQueryOnList" /> parameter is set to <b>true</b>.  Otherwise, the query will be run against a site or web.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteDataResults">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.SiteDataResults GetSiteDataResults (Microsoft.SharePoint.SPWeb web, Microsoft.SharePoint.SPSiteDataQuery query, bool useSpQueryOnList);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.SiteDataResults GetSiteDataResults(class Microsoft.SharePoint.SPWeb web, class Microsoft.SharePoint.SPSiteDataQuery query, bool useSpQueryOnList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.CrossListQueryCache.GetSiteDataResults(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.SPSiteDataQuery,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteDataResults (web As SPWeb, query As SPSiteDataQuery, useSpQueryOnList As Boolean) As SiteDataResults" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::SiteDataResults ^ GetSiteDataResults(Microsoft::SharePoint::SPWeb ^ web, Microsoft::SharePoint::SPSiteDataQuery ^ query, bool useSpQueryOnList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.SiteDataResults</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="query" Type="Microsoft.SharePoint.SPSiteDataQuery" />
+        <Parameter Name="useSpQueryOnList" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="web">The <see cref="T:Microsoft.SharePoint.SPWeb" /> object to run the query in.</param>
+        <param name="query">The query to run.</param>
+        <param name="useSpQueryOnList">Whether to run the query against a list.</param>
+        <summary>Gets the results of the passed-in query parameter on the specified web or list.</summary>
+        <returns>A <b>SiteDataResults</b> object that contains the results of running the query.</returns>
+        <remarks>
+          <para>This version of <b>GetSiteDataResult</b>s forgoes the object's member <b>SPSiteDataQuery</b> and uses the passed-in <b>SPSiteDataQuery</b>.</para>
+          <para>The query will be run against an <see cref="T:Microsoft.SharePoint.SPList" /> object if the <paramref name="useSpQueryOnList" /> parameter is set to <b>true</b>.  Otherwise, the query will be run against a web.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

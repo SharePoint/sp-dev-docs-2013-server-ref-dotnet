@@ -1,0 +1,1176 @@
+﻿<Type Name="UserProfileManager" FullName="Microsoft.Office.Server.UserProfiles.UserProfileManager">
+  <TypeSignature Language="C#" Value="public class UserProfileManager : Microsoft.Office.Server.UserProfiles.ProfileManagerBase" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit UserProfileManager extends Microsoft.Office.Server.UserProfiles.ProfileManagerBase" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" />
+  <TypeSignature Language="VB.NET" Value="Public Class UserProfileManager&#xA;Inherits ProfileManagerBase" />
+  <TypeSignature Language="C++ CLI" Value="public ref class UserProfileManager : Microsoft::Office::Server::UserProfiles::ProfileManagerBase" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.Office.Server.UserProfiles.ProfileManagerBase</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents a collection of <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" /> objects that are used to access user profile data. To access a specific user profile, call the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> class to create a <b>UserProfile</b> object and then retrieve the corresponding data from the user profile database.</summary>
+    <remarks>
+      <para>You must create the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> object before you access a <see cref="T:Microsoft.Office.Server.UserProfiles.ObjectTypes.UserProfile" /> object. You can then retrieve the user profiles that the user can access. Full access to everyone's user profile requires "Manage User Profiles" rights. Full access to your own profile requires "Use Personal Features" rights. Everyone has read access to all profiles. </para>
+      <para>You must use the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileConfigManager" /> class object instead of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> object to manage metadata. The metadata access that the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> object provides is meant to be read-only. Only the users who are listed in the Permissions ACL of the User Profile Service Application can create an instance of a <b>UserProfileManager</b> object.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The following code example uses the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> class.</para>
+      <para>[Visual Basic]</para>
+      <code>      Public Sub UserProfileSample()
+         'get current service context
+         Dim strUrl As String = "http://SampleName"
+         Dim site as SPSite = new SPSite(strUrl)
+         Dim serviceContext As SPServiceContext = SPServiceContext.GetContext(site)
+
+         'initialize user profile config manager object
+         Dim upm As New UserProfileManager(serviceContext)
+         'create user sample
+         Dim sAccount As String = "mydomain\myalias"
+         If Not upm.UserExists(sAccount) Then
+            upm.CreateUserProfile(sAccount)
+         End If
+         'to set prop values on user profile
+         Dim u As UserProfile = upm.GetUserProfile(sAccount)
+         Dim sPropName As String = "PreferredName"
+         u(sPropName) = sAccount
+         u.Commit()
+
+         'remove user profile sample
+         upm.RemoveUserProfile(sAccount)
+      End Sub 'UserProfileSample
+
+
+      Public Sub CreatePersonalSiteSample()
+         'get current service context
+         Dim serviceContext As SPServiceContext = SPServiceContext.Current
+
+         'initialize user profile config manager object
+         Dim upm As New UserProfileManager(serviceContext)
+         Dim sAccount As String = "mydomain\myalias"
+         Dim u As UserProfile = upm.GetUserProfile(sAccount)
+         u.CreatePersonalSite()
+         Dim mysite As SPSite = u.PersonalSite
+         Dim myurl As String = u.PersonalUrl
+      End Sub 'CreatePersonalSiteSample</code>
+      <para>[C#]</para>
+      <code>public void UserProfileSample()
+{
+//get current service context
+strUrl = "http://SampleName";
+SPSite site = new SPSite(strUrl);
+SPServiceContext serviceContext = SPServiceContext.GetContext(site);
+
+//initialize user profile config manager object
+UserProfileManager upm = new UserProfileManager(serviceContext);
+//create user sample
+string sAccount = "mydomain\\myalias";
+if (!upm.UserExists(sAccount))
+upm.CreateUserProfile(sAccount);
+
+//to set prop values on user profile
+UserProfile u = upm.GetUserProfile(sAccount);
+string sPropName = "PreferredName";
+u[sPropName] = sAccount;
+u.Commit();
+
+//remove user profile sample
+upm.RemoveUserProfile(sAccount);
+}
+
+public void CreatePersonalSiteSample()
+{
+//get current service context
+SPServiceContext serviceContext = SPServiceContext.Current;
+
+//initialize user profile config manager object
+UserProfileManager upm = new UserProfileManager(serviceContext);
+string sAccount = "mydomain\\myalias";
+UserProfile u = upm.GetUserProfile(sAccount);
+u.CreatePersonalSite();
+SPSite mysite = u.PersonalSite;
+string myurl = u.PersonalUrl;
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UserProfileManager ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; UserProfileManager();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /><b />class.</summary>
+        <remarks>
+          <para>This constructor will use the current service context.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UserProfileManager (Microsoft.Office.Server.ServerContext serverContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.Office.Server.ServerContext serverContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.#ctor(Microsoft.Office.Server.ServerContext)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; UserProfileManager(Microsoft::Office::Server::ServerContext ^ serverContext);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("ServerContext parameter is obsolete, use SPServiceContext instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="serverContext" Type="Microsoft.Office.Server.ServerContext" />
+      </Parameters>
+      <Docs>
+        <param name="serverContext">..</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> class for the specified server context.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UserProfileManager (Microsoft.SharePoint.SPServiceContext serviceContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPServiceContext serviceContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.#ctor(Microsoft.SharePoint.SPServiceContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (serviceContext As SPServiceContext)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; UserProfileManager(Microsoft::SharePoint::SPServiceContext ^ serviceContext);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">To be added.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> class for the specified service context.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UserProfileManager (bool IgnoreUserPrivacy);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool IgnoreUserPrivacy) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.#ctor(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (IgnoreUserPrivacy As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; UserProfileManager(bool IgnoreUserPrivacy);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="IgnoreUserPrivacy" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="IgnoreUserPrivacy">When this parameter is true, administrators can load and access complete user records for any user profile objects. When this parameter is false, administrators work as regular users and can load only trimmed profile information based on the user profile’s privacy setting.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UserProfileManager (Microsoft.Office.Server.ServerContext serverContext, bool IgnoreUserPrivacy);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.Office.Server.ServerContext serverContext, bool IgnoreUserPrivacy) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.#ctor(Microsoft.Office.Server.ServerContext,System.Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; UserProfileManager(Microsoft::Office::Server::ServerContext ^ serverContext, bool IgnoreUserPrivacy);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("ServerContext parameter is obsolete, use SPServiceContext instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="serverContext" Type="Microsoft.Office.Server.ServerContext" />
+        <Parameter Name="IgnoreUserPrivacy" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="serverContext">..</param>
+        <param name="IgnoreUserPrivacy">When this parameter is true, administrators can load and access complete user records for any user profile objects. When this parameter is true, administrators work as regular users and can load only trimmed profile information based on the user profile’s privacy setting.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> class for the specified server context.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UserProfileManager (Microsoft.SharePoint.SPServiceContext serviceContext, bool IgnoreUserPrivacy);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPServiceContext serviceContext, bool IgnoreUserPrivacy) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.#ctor(Microsoft.SharePoint.SPServiceContext,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (serviceContext As SPServiceContext, IgnoreUserPrivacy As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; UserProfileManager(Microsoft::SharePoint::SPServiceContext ^ serviceContext, bool IgnoreUserPrivacy);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+        <Parameter Name="IgnoreUserPrivacy" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">To be added.</param>
+        <param name="IgnoreUserPrivacy">When this parameter is true, administrators can load and access complete user records for any user profile objects. When this parameter is true, administrators work as regular users and can load only trimmed profile information based on the user profile’s privacy setting.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> class for the specified service context.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UserProfileManager (Microsoft.Office.Server.ServerContext serverContext, bool IgnoreUserPrivacy, bool backwardCompatible);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.Office.Server.ServerContext serverContext, bool IgnoreUserPrivacy, bool backwardCompatible) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.#ctor(Microsoft.Office.Server.ServerContext,System.Boolean,System.Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; UserProfileManager(Microsoft::Office::Server::ServerContext ^ serverContext, bool IgnoreUserPrivacy, bool backwardCompatible);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("ServerContext parameter is obsolete, use SPServiceContext instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="serverContext" Type="Microsoft.Office.Server.ServerContext" />
+        <Parameter Name="IgnoreUserPrivacy" Type="System.Boolean" />
+        <Parameter Name="backwardCompatible" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="serverContext">..</param>
+        <param name="IgnoreUserPrivacy">When this parameter is true, administrators can load and access complete user records for any user profile objects. When this parameter is true, administrators work as regular users and can load only trimmed profile information based on the user profile’s privacy setting.</param>
+        <param name="backwardCompatible">This value is true by default. If this value is true, all user profile properties are initialized for users who are administrators.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> class for the specified server context.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public UserProfileManager (Microsoft.SharePoint.SPServiceContext serviceContext, bool IgnoreUserPrivacy, bool backwardCompatible);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPServiceContext serviceContext, bool IgnoreUserPrivacy, bool backwardCompatible) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.#ctor(Microsoft.SharePoint.SPServiceContext,System.Boolean,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (serviceContext As SPServiceContext, IgnoreUserPrivacy As Boolean, backwardCompatible As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; UserProfileManager(Microsoft::SharePoint::SPServiceContext ^ serviceContext, bool IgnoreUserPrivacy, bool backwardCompatible);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+        <Parameter Name="IgnoreUserPrivacy" Type="System.Boolean" />
+        <Parameter Name="backwardCompatible" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">To be added.</param>
+        <param name="IgnoreUserPrivacy">When this parameter is true, administrators can load and access complete user records for any user profile objects. When this parameter is true, administrators work as regular users and can load only trimmed profile information based on the user profile’s privacy setting.</param>
+        <param name="backwardCompatible">This value is true by default. If this value is true, all user profile properties are initialized for users who are administrators.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileManager" /> class for the specified service context.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddLeader">
+      <MemberSignature Language="C#" Value="public void AddLeader (string accountName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddLeader(string accountName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.AddLeader(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddLeader (accountName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddLeader(System::String ^ accountName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="accountName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="accountName">The account name of the leader to add.</param>
+        <summary>Adds a new leader to the user profile database.</summary>
+        <remarks>
+          <para>This method adds the leader specified by the <paramref name="accountName" /> parameter to the user profile database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="accountName" /> is 
+    null
+   or empty.</exception>
+        <exception cref="T:Microsoft.Office.Server.UserProfiles.DuplicateEntryException">The user specified by the <paramref name="accountName" /> parameter is already a leader.</exception>
+        <exception cref="T:Microsoft.Office.Server.UserProfiles.UserNotFoundException">The user specified by the <paramref name="accountName" /> parameter does not exist in the user profile database.</exception>
+        <exception cref="T:Microsoft.Office.Server.UserProfiles.AccountNotValidatedException">The user specified by the <paramref name="accountName" /> parameter has a manager.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Count">
+      <MemberSignature Language="C#" Value="public override long Count { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 Count" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.Count" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property Count As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property long Count { long get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the total number of user profiles contained in the database.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateUserProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile CreateUserProfile ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile CreateUserProfile() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.CreateUserProfile" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateUserProfile () As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ CreateUserProfile();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates a user profile.</summary>
+        <returns>  that represents a user profile.</returns>
+        <remarks>
+          <para>To create your own user profile you must have PortalRight.UseSubscription permission. To create a user profile for another user you must have PortalRight.ManageUserProfile permission. To create your own user profile on the Web you must pass a string containing "UsePersonalFeatures".</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateUserProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile CreateUserProfile (string strAccountName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile CreateUserProfile(string strAccountName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.CreateUserProfile(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateUserProfile (strAccountName As String) As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ CreateUserProfile(System::String ^ strAccountName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strAccountName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strAccountName">The account name of the user profile.</param>
+        <summary>Creates a user profile with the specified account name.</summary>
+        <returns>  that represents a user profile with the specified account name.</returns>
+        <remarks>
+          <para>To create your own user profile you must have PortalRight.UseSubscription permission. To create a user profile for another user you must have PortalRight.ManageUserProfile permission. To create your own user profile on the Web you must pass a string containing "UsePersonalFeatures".</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateUserProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile CreateUserProfile (string strAccountName, string strPreferredName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile CreateUserProfile(string strAccountName, string strPreferredName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.CreateUserProfile(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateUserProfile (strAccountName As String, strPreferredName As String) As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ CreateUserProfile(System::String ^ strAccountName, System::String ^ strPreferredName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strAccountName" Type="System.String" />
+        <Parameter Name="strPreferredName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strAccountName">The account name of the user profile.</param>
+        <param name="strPreferredName">The preferred name of the user profile.</param>
+        <summary>Creates a user profile with the specified account name and preferred name.</summary>
+        <returns>  that represents a user profile with the specified account name and preferred name.</returns>
+        <remarks>
+          <para>To create your own user profile you must have PortalRight.UseSubscription permission. To create a user profile for another user you must have PortalRight.ManageUserProfile permission. To create your own user profile on the Web you must pass a string containing "UsePersonalFeatures".</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public override Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetChanges" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChanges () As UserProfileChangeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::Office::Server::UserProfiles::UserProfileChangeCollection ^ GetChanges();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns all changes made to a user’s profile.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public override Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges (Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery changeQuery);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges(class Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery changeQuery) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetChanges(Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChanges (changeQuery As ProfileBaseChangeQuery) As UserProfileChangeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::Office::Server::UserProfiles::UserProfileChangeCollection ^ GetChanges(Microsoft::Office::Server::UserProfiles::ProfileBaseChangeQuery ^ changeQuery);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="changeQuery" Type="Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery" />
+      </Parameters>
+      <Docs>
+        <param name="changeQuery">A change query representing the requested types of changes and the location of the changes in the change log.</param>
+        <summary>Returns changes made to a user’s profile that are defined by the specified change query.</summary>
+        <returns>Returns <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public override Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges (Microsoft.Office.Server.UserProfiles.UserProfileChangeToken changeToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges(class Microsoft.Office.Server.UserProfiles.UserProfileChangeToken changeToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetChanges(Microsoft.Office.Server.UserProfiles.UserProfileChangeToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChanges (changeToken As UserProfileChangeToken) As UserProfileChangeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::Office::Server::UserProfiles::UserProfileChangeCollection ^ GetChanges(Microsoft::Office::Server::UserProfiles::UserProfileChangeToken ^ changeToken);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="changeToken" Type="Microsoft.Office.Server.UserProfiles.UserProfileChangeToken" />
+      </Parameters>
+      <Docs>
+        <param name="changeToken">..</param>
+        <summary>Returns changes made to a user’s profile from a specific location in the change logs that is represented by the specified change token.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetLeaders">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Microsoft.Office.Server.UserProfiles.Leader&gt; GetLeaders ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.List`1&lt;class Microsoft.Office.Server.UserProfiles.Leader&gt; GetLeaders() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetLeaders" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetLeaders () As List(Of Leader)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::Generic::List&lt;Microsoft::Office::Server::UserProfiles::Leader ^&gt; ^ GetLeaders();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.Office.Server.UserProfiles.Leader&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the leaders in the user profile database.</summary>
+        <returns>The leaders in the user profile database.</returns>
+        <remarks>
+          <para>This method gets all of the leaders that are contained in the user profile database.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMemberGroups">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.MemberGroupManager GetMemberGroups ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.MemberGroupManager GetMemberGroups() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetMemberGroups" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetMemberGroups () As MemberGroupManager" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::MemberGroupManager ^ GetMemberGroups();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.MemberGroupManager</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.Office.Server.UserProfiles.MemberGroupManager" /> for the current context.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPrivacyPolicy">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.PrivacyPolicyManager GetPrivacyPolicy ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.PrivacyPolicyManager GetPrivacyPolicy() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetPrivacyPolicy" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetPrivacyPolicy () As PrivacyPolicyManager" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::PrivacyPolicyManager ^ GetPrivacyPolicy();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.PrivacyPolicyManager</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the privacy policy for the current context.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetProfile">
+      <MemberSignature Language="C#" Value="public override Microsoft.Office.Server.UserProfiles.ProfileBase GetProfile (long recordId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.Office.Server.UserProfiles.ProfileBase GetProfile(int64 recordId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetProfile(System.Int64)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetProfile (recordId As Long) As ProfileBase" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::Office::Server::UserProfiles::ProfileBase ^ GetProfile(long recordId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileBase</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recordId" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="recordId">To be added.</param>
+        <summary>Gets the user profile with the specified record identifier.</summary>
+        <returns>Returns <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileBase" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetStringSinglePropertyValueForUser">
+      <MemberSignature Language="C#" Value="public static string GetStringSinglePropertyValueForUser (Microsoft.SharePoint.SPServiceContext serviceContext, string propertyName, string accountName);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetStringSinglePropertyValueForUser(class Microsoft.SharePoint.SPServiceContext serviceContext, string propertyName, string accountName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetStringSinglePropertyValueForUser(Microsoft.SharePoint.SPServiceContext,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetStringSinglePropertyValueForUser (serviceContext As SPServiceContext, propertyName As String, accountName As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetStringSinglePropertyValueForUser(Microsoft::SharePoint::SPServiceContext ^ serviceContext, System::String ^ propertyName, System::String ^ accountName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+        <Parameter Name="propertyName" Type="System.String" />
+        <Parameter Name="accountName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">The set of <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" /> objects to search for the specified account name.</param>
+        <param name="propertyName">The name of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" /> property to retrieve from the current <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" />.</param>
+        <param name="accountName">The account name of the requested user profile.</param>
+        <summary>Retrieves the single-valued property for the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" /> whose name matches the <paramref name="propertyName" /> parameter of the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" /> identified by the <paramref name="accountName" /> parameter.</summary>
+        <returns>A string representing a single-valued property.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="serviceContext" /> is a null reference (Nothing in Visual Basic).<paramref name="accountName" /> is a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.InvalidOperationException">
+          <paramref name="propertyName" /> is a null reference (Nothing in Visual Basic) or an empty string.<paramref name="accountName" /> is a null reference (Nothing in Visual Basic) or an empty string.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile (bool bCreateIfNotExist);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile(bool bCreateIfNotExist) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetUserProfile(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUserProfile (bCreateIfNotExist As Boolean) As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ GetUserProfile(bool bCreateIfNotExist);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="bCreateIfNotExist" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="bCreateIfNotExist">true if a user profile is created because it does not already exist in the user profile database; otherwise, false.</param>
+        <summary>Gets the <see cref="T:Microsoft.Office.Server.UserProfiles.ObjectTypes.UserProfile" /> object of the current user or creates one if the <see cref="T:Microsoft.Office.Server.UserProfiles.ObjectTypes.UserProfile" /> object does not already exist.</summary>
+        <returns>  that represents the user profile of the current user.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile (byte[] rgbySID);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile(unsigned int8[] rgbySID) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetUserProfile(System.Byte[])" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUserProfile (rgbySID As Byte()) As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ GetUserProfile(cli::array &lt;System::Byte&gt; ^ rgbySID);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rgbySID" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <param name="rgbySID">The <b>SID</b> of the user profile.</param>
+        <summary>Gets the <see cref="T:Microsoft.Office.Server.UserProfiles.ObjectTypes.UserProfile" /> object for the specified <b>SID</b> in <b>byte[]</b> format.</summary>
+        <returns>   that represents the user profile for the specified  in <b>byte[]</b> format.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile (Guid guid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile(valuetype System.Guid guid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetUserProfile(System.Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ GetUserProfile(Guid guid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="guid" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="guid">The unique identifier.</param>
+        <summary>Gets the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" /> object for the specified GUID.</summary>
+        <returns>   that represents a user profile.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile (long recordId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile(int64 recordId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetUserProfile(System.Int64)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUserProfile (recordId As Long) As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ GetUserProfile(long recordId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recordId" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="recordId">..</param>
+        <summary>Gets the <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" /> object for the specified record identifier.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile (string strAccountName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile(string strAccountName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetUserProfile(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUserProfile (strAccountName As String) As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ GetUserProfile(System::String ^ strAccountName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strAccountName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strAccountName">The account name of the user profile.</param>
+        <summary>Gets the <see cref="T:Microsoft.Office.Server.UserProfiles.ObjectTypes.UserProfile" /> object for the specified account name.</summary>
+        <returns>   that represents a user profile.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile (long recordId, bool doNotResolveToMasterAccount);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile(int64 recordId, bool doNotResolveToMasterAccount) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetUserProfile(System.Int64,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUserProfile (recordId As Long, doNotResolveToMasterAccount As Boolean) As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ GetUserProfile(long recordId, bool doNotResolveToMasterAccount);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recordId" Type="System.Int64" />
+        <Parameter Name="doNotResolveToMasterAccount" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="recordId">To be added.</param>
+        <param name="doNotResolveToMasterAccount">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>Returns <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUserProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile (string strAccountName, bool doNotResolveToMasterAccount);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.UserProfile GetUserProfile(string strAccountName, bool doNotResolveToMasterAccount) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.GetUserProfile(System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUserProfile (strAccountName As String, doNotResolveToMasterAccount As Boolean) As UserProfile" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Server::UserProfiles::UserProfile ^ GetUserProfile(System::String ^ strAccountName, bool doNotResolveToMasterAccount);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfile</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strAccountName" Type="System.String" />
+        <Parameter Name="doNotResolveToMasterAccount" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="strAccountName">To be added.</param>
+        <param name="doNotResolveToMasterAccount">To be added.</param>
+        <summary>             Retrieves the requested user's profile.             </summary>
+        <returns>Returns <see cref="T:Microsoft.Office.Server.UserProfiles.UserProfile" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GlobalPersonalSitesList">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.GlobalPersonalSitesListSyncedListLoader GlobalPersonalSitesList { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.GlobalPersonalSitesListSyncedListLoader GlobalPersonalSitesList" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.GlobalPersonalSitesList" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property GlobalPersonalSitesList As GlobalPersonalSitesListSyncedListLoader" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::GlobalPersonalSitesListSyncedListLoader ^ GlobalPersonalSitesList { Microsoft::Office::Server::UserProfiles::GlobalPersonalSitesListSyncedListLoader ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.GlobalPersonalSitesListSyncedListLoader</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a list of global personal site locations</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAvailable">
+      <MemberSignature Language="C#" Value="public static bool IsAvailable (Microsoft.SharePoint.SPServiceContext serviceContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsAvailable(class Microsoft.SharePoint.SPServiceContext serviceContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.IsAvailable(Microsoft.SharePoint.SPServiceContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsAvailable (serviceContext As SPServiceContext) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsAvailable(Microsoft::SharePoint::SPServiceContext ^ serviceContext);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="serviceContext" Type="Microsoft.SharePoint.SPServiceContext" />
+      </Parameters>
+      <Docs>
+        <param name="serviceContext">To be added.</param>
+        <summary>Gets a value indicating whether there is a working connection to a User Profile Application in the specified service context.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsClaimProvider">
+      <MemberSignature Language="C#" Value="public Nullable&lt;bool&gt; IsClaimProvider { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;bool&gt; IsClaimProvider" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.IsClaimProvider" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsClaimProvider As Nullable(Of Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Nullable&lt;bool&gt; IsClaimProvider { Nullable&lt;bool&gt; get(); void set(Nullable&lt;bool&gt; value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value determining whether to force explicit use or explicit non-use of user profile data for the purpose of providing claims.</summary>
+        <value>Returns <see cref="T:System.Nullable`1" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsPersonalSiteMultipleLanguage">
+      <MemberSignature Language="C#" Value="public bool IsPersonalSiteMultipleLanguage { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsPersonalSiteMultipleLanguage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.IsPersonalSiteMultipleLanguage" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsPersonalSiteMultipleLanguage As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsPersonalSiteMultipleLanguage { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether personal sites can be created in multiple languages.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MySiteEmailSenderName">
+      <MemberSignature Language="C#" Value="public string MySiteEmailSenderName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string MySiteEmailSenderName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.MySiteEmailSenderName" />
+      <MemberSignature Language="VB.NET" Value="Public Property MySiteEmailSenderName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ MySiteEmailSenderName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of the e-mail sender name for MySites in the current context.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MySiteHostCompatibilityLevel">
+      <MemberSignature Language="C#" Value="public int MySiteHostCompatibilityLevel { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MySiteHostCompatibilityLevel" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.MySiteHostCompatibilityLevel" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property MySiteHostCompatibilityLevel As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MySiteHostCompatibilityLevel { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MySiteHostMicrofeedEnabled">
+      <MemberSignature Language="C#" Value="public bool MySiteHostMicrofeedEnabled { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool MySiteHostMicrofeedEnabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.MySiteHostMicrofeedEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property MySiteHostMicrofeedEnabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool MySiteHostMicrofeedEnabled { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MySiteHostUrl">
+      <MemberSignature Language="C#" Value="public string MySiteHostUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string MySiteHostUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.MySiteHostUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property MySiteHostUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ MySiteHostUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL to the site which hosts MySites for the current context.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PersonalizationLinksList">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.PersonalizationLinksSyncedListLoader PersonalizationLinksList { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.PersonalizationLinksSyncedListLoader PersonalizationLinksList" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.PersonalizationLinksList" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PersonalizationLinksList As PersonalizationLinksSyncedListLoader" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::PersonalizationLinksSyncedListLoader ^ PersonalizationLinksList { Microsoft::Office::Server::UserProfiles::PersonalizationLinksSyncedListLoader ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.PersonalizationLinksSyncedListLoader</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a list of personalization sites for the current context.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PersonalSiteFormat">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.SiteNameFormat PersonalSiteFormat { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Office.Server.UserProfiles.SiteNameFormat PersonalSiteFormat" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.PersonalSiteFormat" />
+      <MemberSignature Language="VB.NET" Value="Public Property PersonalSiteFormat As SiteNameFormat" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::SiteNameFormat PersonalSiteFormat { Microsoft::Office::Server::UserProfiles::SiteNameFormat get(); void set(Microsoft::Office::Server::UserProfiles::SiteNameFormat value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.SiteNameFormat</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the naming format for personal sites (for example, domain_username or username).</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PersonalSiteInclusion">
+      <MemberSignature Language="C#" Value="public string PersonalSiteInclusion { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string PersonalSiteInclusion" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.PersonalSiteInclusion" />
+      <MemberSignature Language="VB.NET" Value="Public Property PersonalSiteInclusion As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ PersonalSiteInclusion { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Gets the inclusion under which personal sites are created.             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PersonalSiteReaders">
+      <MemberSignature Language="C#" Value="public string PersonalSiteReaders { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string PersonalSiteReaders" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.PersonalSiteReaders" />
+      <MemberSignature Language="VB.NET" Value="Public Property PersonalSiteReaders As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ PersonalSiteReaders { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a list of users who will be added as readers on new personal sites.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveLeader">
+      <MemberSignature Language="C#" Value="public void RemoveLeader (string accountName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveLeader(string accountName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.RemoveLeader(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RemoveLeader (accountName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemoveLeader(System::String ^ accountName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="accountName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="accountName">The account name of the leader to remove.</param>
+        <summary>Removes the specified leader from the user profile database.</summary>
+        <remarks>
+          <para>This method removes the leader specified by the <paramref name="accoutnName" /> parameter from the user profile database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="accountName" /> is 
+    null
+   or empty.</exception>
+        <exception cref="T:Microsoft.Office.Server.UserProfiles.RemoveUserFailedException">The remove operation failed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveProfile">
+      <MemberSignature Language="C#" Value="public override void RemoveProfile (Microsoft.Office.Server.UserProfiles.ProfileBase profile);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RemoveProfile(class Microsoft.Office.Server.UserProfiles.ProfileBase profile) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.RemoveProfile(Microsoft.Office.Server.UserProfiles.ProfileBase)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub RemoveProfile (profile As ProfileBase)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void RemoveProfile(Microsoft::Office::Server::UserProfiles::ProfileBase ^ profile);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="profile" Type="Microsoft.Office.Server.UserProfiles.ProfileBase" />
+      </Parameters>
+      <Docs>
+        <param name="profile">To be added.</param>
+        <summary>Removes the specified user profile from the database.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveUserProfile">
+      <MemberSignature Language="C#" Value="public void RemoveUserProfile (Guid guidDelete);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveUserProfile(valuetype System.Guid guidDelete) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.RemoveUserProfile(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RemoveUserProfile (guidDelete As Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemoveUserProfile(Guid guidDelete);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="guidDelete" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="guidDelete">The unique identifier for the user profile to be deleted from the user profile database.</param>
+        <summary>Removes the user profile, quick links, and alert data from the user profile database for the specified GUID.</summary>
+        <remarks>
+          <para>To remove your own user profile you must have PortalRight.UseSubscription permission. To remove a user profile for another user you must have PortalRight.ManageUserProfile permission. To remove your own user profile on the Web you must pass a string containing "UsePersonalFeatures".</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveUserProfile">
+      <MemberSignature Language="C#" Value="public void RemoveUserProfile (string strAccountName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveUserProfile(string strAccountName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.RemoveUserProfile(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RemoveUserProfile (strAccountName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemoveUserProfile(System::String ^ strAccountName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strAccountName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strAccountName">The account name for the user profile to be deleted from the user profile database.</param>
+        <summary>Removes the user profile, quick links, and alert data from the user profile database for the specified account name.</summary>
+        <remarks>
+          <para>To remove your own user profile you must have PortalRight.UseSubscription permission. To remove a user profile for another user you must have PortalRight.ManageUserProfile permission. To remove your own user profile on the Web you must pass a string containing "UsePersonalFeatures".</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserExists">
+      <MemberSignature Language="C#" Value="public bool UserExists (string strAccountName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool UserExists(string strAccountName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.UserProfileManager.UserExists(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function UserExists (strAccountName As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool UserExists(System::String ^ strAccountName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="strAccountName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="strAccountName">The account name for the user profile.</param>
+        <summary>Returns a value indicating whether the user for a specified account name has a user profile.</summary>
+        <returns>Boolean true if the user for the specified account name has a user profile; otherwise, false.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserProfileChangeJobSchedule">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPSchedule UserProfileChangeJobSchedule { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPSchedule UserProfileChangeJobSchedule" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.UserProfileManager.UserProfileChangeJobSchedule" />
+      <MemberSignature Language="VB.NET" Value="Public Property UserProfileChangeJobSchedule As SPSchedule" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPSchedule ^ UserProfileChangeJobSchedule { Microsoft::SharePoint::SPSchedule ^ get(); void set(Microsoft::SharePoint::SPSchedule ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPSchedule</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

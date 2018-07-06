@@ -1,0 +1,601 @@
+﻿<Type Name="ProjectPolicy" FullName="Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy">
+  <TypeSignature Language="C#" Value="public class ProjectPolicy" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ProjectPolicy extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy" />
+  <TypeSignature Language="VB.NET" Value="Public Class ProjectPolicy" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ProjectPolicy" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, FactoryType=typeof(Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicyObjectFactory), ObjectIdentityPropertyName="CanonicalId", ServerTypeId="EC5E0A70-0CC3-408f-A4DC-1BB3495AAC75")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ApplyProjectPolicy">
+      <MemberSignature Language="C#" Value="public static void ApplyProjectPolicy (Microsoft.SharePoint.SPWeb web, Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy projectPolicy);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ApplyProjectPolicy(class Microsoft.SharePoint.SPWeb web, class Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy projectPolicy) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.ApplyProjectPolicy(Microsoft.SharePoint.SPWeb,Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ApplyProjectPolicy(Microsoft::SharePoint::SPWeb ^ web, Microsoft::Office::RecordsManagement::InformationPolicy::ProjectPolicy ^ projectPolicy);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableExceptionConstraint(Condition="Web is null or ProjectPolicy is null.", ErrorType=typeof(System.ArgumentNullException), FixedId="ArgumentNullException")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+        <Parameter Name="projectPolicy" Type="Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="web">The site that will have the policy to be applied.</param>
+        <param name="projectPolicy">The policy that will be applied to the site.</param>
+        <summary>Applies the policy to the site.</summary>
+        <remarks>
+          <para>The policy must exist in the current site collection. If the site already has a policy applied, the new policy will replace the existing one.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="web" /> parameter or <paramref name="projectPolicy" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="CloseProject">
+      <MemberSignature Language="C#" Value="public static void CloseProject (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void CloseProject(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.CloseProject(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub CloseProject (web As SPWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void CloseProject(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableExceptionConstraint(Condition="Web is null.", ErrorType=typeof(System.ArgumentNullException), FixedId="ArgumentNullException")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="web">The site to be closed.</param>
+        <summary>Closes the site.</summary>
+        <remarks>
+          <para>The site must have a policy applied and the site is open.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="web" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.Description" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableProperty(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, SetProperty=false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the description of the policy.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DoesProjectHavePolicy">
+      <MemberSignature Language="C#" Value="public static bool DoesProjectHavePolicy (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool DoesProjectHavePolicy(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.DoesProjectHavePolicy(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function DoesProjectHavePolicy (web As SPWeb) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool DoesProjectHavePolicy(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableExceptionConstraint(Condition="Web is null.", ErrorType=typeof(System.ArgumentNullException), FixedId="ArgumentNullException")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, OperationType=Microsoft.SharePoint.Client.OperationType.Read)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="web">The site.</param>
+        <summary>Check whether the site has a policy applied.</summary>
+        <returns>
+          <b>true</b> if there is a policy applied on the site; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="web" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="EmailBody">
+      <MemberSignature Language="C#" Value="public string EmailBody { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string EmailBody" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.EmailBody" />
+      <MemberSignature Language="VB.NET" Value="Public Property EmailBody As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ EmailBody { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the body of the notification email if there is no site mailbox associated with the site.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The policy can be configured to send a notification email to the site owners in advance of the site expiration.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EmailBodyWithTeamMailbox">
+      <MemberSignature Language="C#" Value="public string EmailBodyWithTeamMailbox { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string EmailBodyWithTeamMailbox" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.EmailBodyWithTeamMailbox" />
+      <MemberSignature Language="VB.NET" Value="Public Property EmailBodyWithTeamMailbox As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ EmailBodyWithTeamMailbox { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the body of the notification email if there is a site mailbox associated with the site.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The policy can be configured to send a notification email to the site owners in advance of the site expiration.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EmailSubject">
+      <MemberSignature Language="C#" Value="public string EmailSubject { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string EmailSubject" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.EmailSubject" />
+      <MemberSignature Language="VB.NET" Value="Public Property EmailSubject As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ EmailSubject { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the  subject of the notification email.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The policy can be configured to send a notification email to the site owners in advance of the site expiration.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCurrentlyAppliedProjectPolicyOnWeb">
+      <MemberSignature Language="C#" Value="public static Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy GetCurrentlyAppliedProjectPolicyOnWeb (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy GetCurrentlyAppliedProjectPolicyOnWeb(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.GetCurrentlyAppliedProjectPolicyOnWeb(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetCurrentlyAppliedProjectPolicyOnWeb (web As SPWeb) As ProjectPolicy" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::RecordsManagement::InformationPolicy::ProjectPolicy ^ GetCurrentlyAppliedProjectPolicyOnWeb(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableExceptionConstraint(Condition="Web is null.", ErrorType=typeof(System.ArgumentNullException), FixedId="ArgumentNullException")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, OperationType=Microsoft.SharePoint.Client.OperationType.Read)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="web">The site.</param>
+        <summary>Returns the policy that is applied on the site.</summary>
+        <returns>The policy that is applied on the site. Null if there is no policy applied on the site.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="web" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetProjectCloseDate">
+      <MemberSignature Language="C#" Value="public static DateTime GetProjectCloseDate (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.DateTime GetProjectCloseDate(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.GetProjectCloseDate(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetProjectCloseDate (web As SPWeb) As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static DateTime GetProjectCloseDate(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableExceptionConstraint(Condition="Web is null.", ErrorType=typeof(System.ArgumentNullException), FixedId="ArgumentNullException")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, OperationType=Microsoft.SharePoint.Client.OperationType.Read)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="web">The site.</param>
+        <summary>Returns the close date of the site.</summary>
+        <returns>The date when the site was closed or will be closed.</returns>
+        <remarks>
+          <para>If the site does not have a close date, then it returns an implementation specific value that is less than 1970.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="web" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetProjectExpirationDate">
+      <MemberSignature Language="C#" Value="public static DateTime GetProjectExpirationDate (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.DateTime GetProjectExpirationDate(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.GetProjectExpirationDate(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetProjectExpirationDate (web As SPWeb) As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static DateTime GetProjectExpirationDate(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableExceptionConstraint(Condition="Web is null.", ErrorType=typeof(System.ArgumentNullException), FixedId="ArgumentNullException")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, OperationType=Microsoft.SharePoint.Client.OperationType.Read)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="web">The site.</param>
+        <summary>Returns the expiration date of the site.</summary>
+        <returns>The date when the site will be expired.</returns>
+        <remarks>
+          <para>If the site does not have the expiration date, then it returns an implementation specific value that is less than 1970.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="web" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetProjectPolicies">
+      <MemberSignature Language="C#" Value="public static System.Collections.Generic.List&lt;Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy&gt; GetProjectPolicies (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Collections.Generic.List`1&lt;class Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy&gt; GetProjectPolicies(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.GetProjectPolicies(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetProjectPolicies (web As SPWeb) As List(Of ProjectPolicy)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Collections::Generic::List&lt;Microsoft::Office::RecordsManagement::InformationPolicy::ProjectPolicy ^&gt; ^ GetProjectPolicies(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableExceptionConstraint(Condition="Web is null.", ErrorType=typeof(System.ArgumentNullException), FixedId="ArgumentNullException")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, OperationType=Microsoft.SharePoint.Client.OperationType.Read)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="web">The site.</param>
+        <summary>Returns all policies that are available on the site.</summary>
+        <returns>The collection of all available policies on the site.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="web" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="IsProjectClosed">
+      <MemberSignature Language="C#" Value="public static bool IsProjectClosed (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsProjectClosed(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.IsProjectClosed(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsProjectClosed (web As SPWeb) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsProjectClosed(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableExceptionConstraint(Condition="Web is null.", ErrorType=typeof(System.ArgumentNullException), FixedId="ArgumentNullException")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, OperationType=Microsoft.SharePoint.Client.OperationType.Read)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="web">The site.</param>
+        <summary>Check whether the site is closed.</summary>
+        <returns>
+          <b>true</b> if the site is closed; otherwise, <b>false</b>.</returns>
+        <remarks>
+          <para>If the site does not have a policy applied, then the site is not closed.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="web" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.Name" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableProperty(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, SetProperty=false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of the policy.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OpenProject">
+      <MemberSignature Language="C#" Value="public static void OpenProject (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void OpenProject(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.OpenProject(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub OpenProject (web As SPWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void OpenProject(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableExceptionConstraint(Condition="Web is null.", ErrorType=typeof(System.ArgumentNullException), FixedId="ArgumentNullException")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="web">The site to be opened.</param>
+        <summary>Open the site.</summary>
+        <remarks>
+          <para>The site must have a policy applied and the site is closed.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="web" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="PostponeProject">
+      <MemberSignature Language="C#" Value="public static void PostponeProject (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void PostponeProject(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.PostponeProject(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub PostponeProject (web As SPWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void PostponeProject(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableExceptionConstraint(Condition="Web is null.", ErrorType=typeof(System.ArgumentNullException), FixedId="ArgumentNullException")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb">
+          <Attributes>
+            <Attribute>
+              <AttributeName>Microsoft.SharePoint.Client.ClientCallableConstraint(Type=Microsoft.SharePoint.Client.ClientCallableConstraintType.NotNull)</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="web">The site to be postponed.</param>
+        <summary>Postpone the expiration date of the site based on the policy applied on the site.</summary>
+        <remarks>
+          <para>The site must has a policy applied and the site must have the expiration date.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="web" /> parameter is a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SavePolicy">
+      <MemberSignature Language="C#" Value="public void SavePolicy ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SavePolicy() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ProjectPolicy.SavePolicy" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SavePolicy ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SavePolicy();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Saves the changes that are made to the current policy.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
