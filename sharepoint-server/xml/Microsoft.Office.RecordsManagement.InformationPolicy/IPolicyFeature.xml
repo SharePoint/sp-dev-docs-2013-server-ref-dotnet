@@ -1,0 +1,622 @@
+﻿<Type Name="IPolicyFeature" FullName="Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature">
+  <TypeSignature Language="C#" Value="public interface IPolicyFeature" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IPolicyFeature" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IPolicyFeature" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IPolicyFeature" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>Specifies the interface that a class must implement to act as a policy feature.</summary>
+    <remarks>
+      <para>In addition to installing a valid Policy Feature Definition, each policy feature must also contain a class that implements the <b>IPolicyFeature</b> interface. This interface enables Microsoft SharePoint Server 2010 to call the code required to perform any initiation work the policy feature needs, as well as any code required to perform any tasks when a policy item that is associated with the policy feature is added, deleted, or changed for a content type.</para>
+      <para>For more information, see IPolicyFeature Interface Overview and Policy Feature Definitions. For an example of how to use this method, see the PolicyFeature.cs file and the EnterpriseContentManagementStarterKitSampleGuide document in the ECM Starter Kit code sample folders in the <a href="http://www.microsoft.com/downloads/en/details.aspx?displaylang=en&amp;FamilyID=f0c9daf3-4c54-45ed-9bde-7b4d83a8f26f">Microsoft Office SharePoint Server 2010 SDK download</a></para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="OnCustomDataChange">
+      <MemberSignature Language="C#" Value="public void OnCustomDataChange (Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem policyItem, Microsoft.SharePoint.SPContentType ct);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnCustomDataChange(class Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem policyItem, class Microsoft.SharePoint.SPContentType ct) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.OnCustomDataChange(Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem,Microsoft.SharePoint.SPContentType)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnCustomDataChange(Microsoft::Office::RecordsManagement::InformationPolicy::PolicyItem ^ policyItem, Microsoft::SharePoint::SPContentType ^ ct);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="policyItem" Type="Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem" />
+        <Parameter Name="ct" Type="Microsoft.SharePoint.SPContentType" />
+      </Parameters>
+      <Docs>
+        <param name="policyItem">Updated policy item.</param>
+        <param name="ct">Content type to which this policy applies.</param>
+        <summary>Called by the policy infrastructure when the custom data (for example, the Expiration policy feature) for a policy feature changes. Third-party developers who implement this method can decide whether or to perform an action when the custom data for a policy feature changes.</summary>
+        <remarks>
+          <para>Microsoft SharePoint Server 2010 calls the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.OnCustomDataChange(Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem,Microsoft.SharePoint.SPContentType)" /> method when a user changes the custom settings on a specific policy item.</para>
+          <para>For more information, see IPolicyFeature Interface Overview and Policy Feature Definitions.</para>
+          <para>For an example of how to implement the <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature" /> interface, see the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.ProcessListItem(Microsoft.SharePoint.SPSite,Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem,Microsoft.SharePoint.SPListItem)" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnGlobalCustomDataChange">
+      <MemberSignature Language="C#" Value="public void OnGlobalCustomDataChange (Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature feature);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnGlobalCustomDataChange(class Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature feature) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.OnGlobalCustomDataChange(Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub OnGlobalCustomDataChange (feature As PolicyFeature)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnGlobalCustomDataChange(Microsoft::Office::RecordsManagement::InformationPolicy::PolicyFeature ^ feature);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="feature" Type="Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature" />
+      </Parameters>
+      <Docs>
+        <param name="feature">Updated policy feature.</param>
+        <summary>Updates the policy feature state appropriately when the Central Administration settings for the policy feature change.</summary>
+        <remarks>
+          <para>SharePoint Server 2010 calls this method when a user changes the server farm-level settings for a policy feature.</para>
+          <para>For more information, see IPolicyFeature Interface Overview and Policy Feature Definitions. </para>
+          <para>For an example of how to implement the <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature" /> interface, see the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.ProcessListItem(Microsoft.SharePoint.SPSite,Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem,Microsoft.SharePoint.SPListItem)" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ProcessListItem">
+      <MemberSignature Language="C#" Value="public bool ProcessListItem (Microsoft.SharePoint.SPSite site, Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem policyItem, Microsoft.SharePoint.SPListItem listItem);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ProcessListItem(class Microsoft.SharePoint.SPSite site, class Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem policyItem, class Microsoft.SharePoint.SPListItem listItem) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.ProcessListItem(Microsoft.SharePoint.SPSite,Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem,Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool ProcessListItem(Microsoft::SharePoint::SPSite ^ site, Microsoft::Office::RecordsManagement::InformationPolicy::PolicyItem ^ policyItem, Microsoft::SharePoint::SPListItem ^ listItem);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="policyItem" Type="Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem" />
+        <Parameter Name="listItem" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="site">Site collection to which the information policy belongs.</param>
+        <param name="policyItem">Updated policy item.</param>
+        <param name="listItem">List item to which the policy applies.</param>
+        <summary>Returns a Boolean value that specifies whether Microsoft SharePoint Server 2010 continues to process the remaining list items. </summary>
+        <returns>If a policy feature returns<b> true</b>, SharePoint Server 2010 continues to process the remaining list items. If a policy feature returns <b>false</b>, SharePoint Server 2010 does not process the remaining items.</returns>
+        <remarks>
+          <para>When a policy changes, SharePoint Server 2010 calls the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.ProcessListItem(Microsoft.SharePoint.SPSite,Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem,Microsoft.SharePoint.SPListItem)" /> method for each list item that is affected by a policy change.</para>
+          <para>Policy changes include editing the policy currently assigned to the list, or assigning a different policy to the list. </para>
+          <para>If a policy feature returns <b>false</b>, SharePoint Server 2010 does not process the remaining items. This optimization prevents SharePoint Server 2010 from iterating through all the items on a list for policy features that are not involved with processing the item.</para>
+          <para>For more information, see IPolicyFeature Interface Overview and Policy Feature Definitions. </para>
+          <para>The following example shows how to implement the <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature" /> interface. The sample shows how to get certificates for items at appropriate events, and expose links to the user interface for verifying those certificates.</para>
+          <para>For more information about the sample, see the DocIntegrityPolicyFeature code sample folder and EnterpriseContentManagementStarterKitSampleGuide document in the ECM Starter Kit code sample folders in the <a href="http://www.microsoft.com/downloads/en/details.aspx?displaylang=en&amp;FamilyID=f0c9daf3-4c54-45ed-9bde-7b4d83a8f26f">Microsoft Office SharePoint Server 2010 SDK download</a></para>
+          <para />
+        </remarks>
+        <example>
+          <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.Office.RecordsManagement.InformationPolicy;
+using Microsoft.SharePoint;
+using System.Xml;
+using System.Security.Cryptography;
+
+namespace Microsoft.Office.Samples.ECM.RecordsManagement
+{
+    // The Document Integrity policy feature: This class does 
+    // the work of getting certificates for items 
+    // at appropriate events, and exposes links 
+    // to the user interface for verifying those certificates.
+    public class DocumentIntegrityFeature : 
+     Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature
+    {
+        #region Names of properties or fields created by this feature
+        
+        public static string sCertPropertyName = "IntegrityCertificate";
+        public static string sCertValidateFieldName = "Integrity Certificate";
+        
+        #endregion
+
+        #region Verify Certificate URL information
+        public static string sVerifyPageUrl =
+            "http://localhost:81/verifycertificate/verifycertificate.aspx";
+        public static string sWebUrlParamName = "WebUrl";
+        public static string sListIDParamName = "List";
+        public static string sItemParamName = "Item";
+        
+
+        // The getVerifyUrl helper method constructs the URL 
+        // used to verify the certificate for a list item, which 
+        // will be stored as a URL column on the list item.
+        public static string getVerifyUrl(SPListItem i)
+        {
+            StringBuilder s = new StringBuilder();
+            s.Append(sVerifyPageUrl);
+            s.Append("?");
+            s.Append(sWebUrlParamName + "=" + i.ParentList.ParentWeb.Url + "&amp;amp;");
+            s.Append(sListIDParamName + "=" + i.ParentList.ID.ToString() + "&amp;amp;");
+            s.Append(sItemParamName + "=" + i.ID.ToString());
+            return s.ToString();
+        }
+        #endregion
+
+        // The OnCustomDataChange method is not used in this 
+        // demonstration, but this method is used generally to update 
+        // the policy feature state appropriately 
+        // when the custom data for the policy feature changes. 
+        // For example, if the policy feature provides a user interface 
+        // or custom data for controlling when a policy item should get 
+        // a certificate, the code to register or unregister
+        // event receivers for those events 
+        // would be included in this function. 
+        public void OnCustomDataChange(PolicyItem policyItem, SPContentType ct)
+        {         
+        }
+
+        // The OnGlobalCustomDataChange method is also not used in this 
+        // demonstration, but this method is generally used to update 
+        // the policy feature state appropriately when the 
+        // Microsoft Office SharePoint Server 2007 
+        // Central Administration settings for the policy feature 
+        // change. For example, if the policy feature allows 
+        // the central administrator to provide the key used 
+        // to sign certificates, you can use this method to propagate 
+        // that information into the appropriate locations 
+        // or content types.
+        public void OnGlobalCustomDataChange(PolicyFeature feature)
+        {
+        }
+        
+        // The ProcessListItem method is called by the policy 
+        // framework on list items that were uploaded in a list before 
+        // the policy is applied to the list; that is, the ones that 
+        // might never be acted on by an event receiver.
+        public bool ProcessListItem(SPSite site, PolicyItem policyItem, SPListItem listItem)
+        {
+            // Check if the item already has
+            // an integrity certificate. 
+            string sCert = (string)listItem.Properties[sCertPropertyName];
+            if ((sCert == null) || (sCert == ""))
+            {
+                // If the call reaches here, then the item does not have 
+                // a certificate yet, so create one for it. 
+                IntegrityCertificateEvents.SetIntegrityCertificate(listItem);
+            }
+            return true;
+        }
+
+        // The ProcessListItemOnRemove method is also not used in this 
+        // demonstration. The policy framework calls this method 
+        // for list items that are no longer subjected 
+        // to the policy. So if there is any item-level 
+        // unregistration work you need to do, this is the place 
+        // to do it.
+        public bool ProcessListItemOnRemove(SPSite site, SPListItem listItem)
+        {
+            return true;
+        }
+
+        // The Register method is called on a content type when your 
+        // policy is added to that content type. It is where you 
+        // register event receivers, add fields to the content type, or 
+        // do any other work on a list or content type for 
+        // your feature.
+        public void Register(SPContentType ct)
+        {
+            // Step 1: Add the "ItemAdded" and "ItemUpdated" 
+            // event receivers to the content type.
+            IntegrityCertificateEvents.AddEventReceiver(ct, IntegrityCertificateEvents.sEventHandlerName, "Microsoft.Office.Samples.ECM.RecordsManagement.IntegrityCertificateEvents", SPEventReceiverType.ItemAdded, 111);
+            IntegrityCertificateEvents.AddEventReceiver(ct, IntegrityCertificateEvents.sEventHandlerName, "Microsoft.Office.Samples.ECM.RecordsManagement.IntegrityCertificateEvents", SPEventReceiverType.ItemUpdated, 111);
+
+            // Step 2: Add the "Validate" link field to the 
+            // content type. 
+            // Get the appropriate field collection, depending on 
+            // whether you are in a site or list content type. 
+            SPFieldCollection fields = (ct.ParentList == null) ? ct.ParentWeb.Fields : ct.ParentList.Fields;
+            SPField fldToAdd = null;
+            try
+            {
+                // Check if the field already exists. 
+                fldToAdd = fields[sCertValidateFieldName];
+            }
+            catch
+            {
+                // If the field doesn't exist, then create it, 
+                // and prevent the user from editing it.
+                string sInternalFldName = fields.Add(sCertValidateFieldName, SPFieldType.URL, false);
+                fields[sCertValidateFieldName].ShowInEditForm = false;
+                fields[sCertValidateFieldName].ShowInNewForm = false;
+                fields[sCertValidateFieldName].ShowInDisplayForm = true;
+                fields[sCertValidateFieldName].Update();
+
+                // Add to the content type.
+                SPFieldLink verifyFld = new SPFieldLink(fields[sCertValidateFieldName]);
+                ct.FieldLinks.Add(verifyFld);
+                ct.Update();
+
+                // If it is a list content type, and the field is not
+                // the default list view, then add it.
+                if ((ct.ParentList != null) &amp;amp;&amp;amp; ((ct.ParentList.DefaultView.ViewFields.Exists(sCertValidateFieldName) == false)))
+                {
+                    SPView listView = ct.ParentList.DefaultView;
+                    listView.ViewFields.Add(sCertValidateFieldName);
+                    listView.Update();
+                } //if
+                          
+            } //catch
+
+            // Make sure the Web site is not automatically 
+            // parsing files because this will invalidate certificates
+            // quickly.
+
+            SPWeb w = ct.ParentWeb;
+            if (w.ParserEnabled == true)
+            {
+                w.ParserEnabled = false;
+                w.Update();
+            }
+        }
+
+        // The UnRegister method is called on a content type when 
+        // your policy is removed from the content type. Here is where 
+        // you should undo anything you did 
+        // when you called the Register method
+        // that should no longer be applied.
+        public void UnRegister(SPContentType ct)
+        {
+            // Remove the event receivers so that the existing 
+            // certifcates can still be verified, but so that the new items
+            // do not get certificates. 
+            IntegrityCertificateEvents.RemoveEventReceiver(ct, IntegrityCertificateEvents.sEventHandlerName, SPEventReceiverType.ItemAdded);
+            IntegrityCertificateEvents.RemoveEventReceiver(ct, IntegrityCertificateEvents.sEventHandlerName, SPEventReceiverType.ItemUpdated);
+        }
+    }
+
+    public class IntegrityCertificateEvents : SPItemEventReceiver
+    {
+        // The name of your event receiver. 
+        // Find your event receiver in the set of 
+        // event receivers registered for any event.
+        public static string sEventHandlerName = "Integrity Certificate Policy Feature";
+
+        public override void ItemAdded(SPItemEventProperties properties)
+        {
+            DisableEventFiring();
+            base.ItemAdded(properties);
+            SPListItem li = properties.ListItem;
+            li[DocumentIntegrityFeature.sCertValidateFieldName] = DocumentIntegrityFeature.getVerifyUrl(li) + ", Verify...";
+            li.Update();
+            SetIntegrityCertificate(li);
+        }
+
+        public override void ItemUpdated(SPItemEventProperties properties)
+        {
+            DisableEventFiring();
+            SPListItem li = properties.ListItem;
+            // Check if the certificate has been generated 
+            // by checking if the link has been created.
+            if ((li[DocumentIntegrityFeature.sCertValidateFieldName] == null) || ( (string) li[DocumentIntegrityFeature.sCertValidateFieldName] == ""))
+            {
+                // Set the link and certificate for the 
+                // item.
+                li[DocumentIntegrityFeature.sCertValidateFieldName] = DocumentIntegrityFeature.getVerifyUrl(li) + ", Verify...";
+                li.Update();
+                SetIntegrityCertificate(li);
+            }
+        }
+        
+        #region Helper methods for adding event receivers
+        internal static void AddEventReceiver(SPContentType ct, string name, string className, SPEventReceiverType type, int sequenceNumber)
+        {
+           if (ct.ParentList != null)
+           {
+               AddEventReceiver(ct.ParentList, name, className, type, sequenceNumber);
+               return;
+           }
+           try
+           {
+               System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
+               SPEventReceiverDefinition sperd = ct.EventReceivers.Add();
+               sperd.Name = name;
+               sperd.Type = type;
+               sperd.SequenceNumber = sequenceNumber;
+               sperd.Assembly = a.FullName;
+               sperd.Class = className;
+               sperd.Update();
+           }
+           catch (System.ArgumentException)
+           {
+               // This means the handler already exists.
+           }
+       }
+
+        internal static void RemoveEventReceiver(SPContentType ct, string name, SPEventReceiverType type)
+       {
+           if (ct.ParentList != null)
+           {
+               RemoveEventReceiver(ct.ParentList, name, type);
+               return;
+           }
+
+           SPEventReceiverDefinitionCollection sperdcol = ct.EventReceivers;
+           for (int i = 0; i &amp;lt; sperdcol.Count; ++i)
+           {
+               SPEventReceiverDefinition sperd = sperdcol[i];
+               if (sperd.Name == name &amp;amp;&amp;amp; sperd.Type == type)
+               {
+                   sperd.Delete();
+               }
+           }
+       }
+       
+        internal static void AddEventReceiver(SPList list, string name, string className, SPEventReceiverType type, int sequenceNumber)
+       {
+           try
+           {
+               System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
+               SPEventReceiverDefinition sperd = list.EventReceivers.Add();
+               sperd.Name = name;
+               sperd.Type = type;
+               sperd.SequenceNumber = sequenceNumber;
+               sperd.Assembly = a.FullName;
+               sperd.Class = className;
+               sperd.Update();
+           }
+           catch (System.ArgumentException)
+           {
+               // This means the handler already exists.
+           }
+       }
+    
+        internal static void RemoveEventReceiver(SPList list, string name, SPEventReceiverType type)
+       {
+           SPEventReceiverDefinition sperd = null;
+           SPEventReceiverDefinitionCollection sperdcol = list.EventReceivers;
+           bool fFound = false;
+
+           for (int i = 0; i &amp;lt; sperdcol.Count; ++i)
+           {
+               sperd = sperdcol[i];
+               if (sperd.Name == name &amp;amp;&amp;amp; sperd.Type == type)
+               {
+                   fFound = true;
+                   break;
+               }
+           }
+
+           if (fFound)
+               sperd.Delete();
+       }
+        #endregion
+
+        // Use the SetIntegrityCertificate method to obtain an 
+        // integrity certificate for a list item (if it is a document), 
+        // and store it as a property on the item.
+        public static void SetIntegrityCertificate(SPListItem li)
+        {
+            try
+            {
+                byte[] b = li.File.OpenBinary();
+                IntegrityCertificate ic = new IntegrityCertificate(b);
+                string sCert = ic.ToString();
+                li.Properties.Add(DocumentIntegrityFeature.sCertPropertyName, sCert);
+                li.Update();
+            }
+            catch 
+            {
+                // Does nothing because this is a demonstration. 
+            }    
+        }
+       
+    }
+
+    // The IntegrityCertificate class generates and 
+    // verifies the integrity of the certificates for those files. 
+    public class IntegrityCertificate
+    {
+        // The time this certificate was created.
+        private DateTime dtGenerated;
+        
+        // The hash value of the item for which 
+        // this certificate was created.
+        private string sItemHash;
+
+        #region Accessors
+        // Public accessor for getting the date that the source event 
+        // was generated.
+        public  
+        {
+            get
+            {
+                return dtGenerated;
+            }
+        }
+
+        // Public accessor for getting the item's hash value.
+        public string Hash
+        {
+            get
+            {
+                return sItemHash;
+            }
+        }
+        #endregion
+
+        // Constructor 1: Takes a byte[], and creates 
+        // a new certificate for that byte array. It is used to 
+        // get a new certificate for a file, which will be stored 
+        // as a serialized string. 
+        public IntegrityCertificate(byte[] file)
+        {
+            this.dtGenerated = DateTime.Now;
+            this.sItemHash = ComputeHash(file);
+        }
+
+        // Constructor 2: Takes a serialized certificate, and creates 
+        // an instance of the class with the data in that certificate. 
+        // It is used to verify that a certificate stored with a file 
+        // still matches the file. 
+        public IntegrityCertificate(string sCert)
+        {
+            // Step 1: Construct the certificate object 
+            // using the string.
+            XmlDocument xd = new XmlDocument();
+            xd.LoadXml(sCert);
+
+            XmlNode xn = xd.DocumentElement.SelectSingleNode("/Certificate/Hash");
+            sItemHash = xn.FirstChild.Value;
+
+            xn = xd.DocumentElement.SelectSingleNode("/Certificate/DateGenerated");
+            dtGenerated = DateTime.Parse(xn.FirstChild.Value);
+        }
+
+        // The Verify method returns true if the file passed in 
+        // matches the hash value stored in the certificate.
+        public bool Verify(byte[] file)
+        {
+            string hash = ComputeHash(file);
+            int nVerify = String.Compare(hash, this.sItemHash);
+
+            if (nVerify == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        // The ComputeHash private helper method is used to 
+        // compute the hash value of a file.
+        private string ComputeHash(byte[] file)
+        {
+            SHA512Managed SHAHash = new SHA512Managed();
+            byte[] bHashValue = SHAHash.ComputeHash(file);
+              = new UnicodeEncoding();
+            return new string(ByteConverter.GetChars(bHashValue));
+        }
+
+        // The ToString method gets a string representation of the 
+        // certificate, which can be persisted and later used 
+        // to reconstruct the certificate.
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("&amp;lt;Certificate&amp;gt;");
+            sb.Append("&amp;lt;Hash&amp;gt;" + this.sItemHash + "&amp;lt;/Hash&amp;gt;");
+            sb.Append("&amp;lt;DateGenerated&amp;gt;" + this.dtGenerated.ToString() + "&amp;lt;/DateGenerated&amp;gt;");
+            sb.Append("&amp;lt;/Certificate&amp;gt;");
+            return sb.ToString();
+        }
+    }
+}</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ProcessListItemOnRemove">
+      <MemberSignature Language="C#" Value="public bool ProcessListItemOnRemove (Microsoft.SharePoint.SPSite site, Microsoft.SharePoint.SPListItem listItem);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ProcessListItemOnRemove(class Microsoft.SharePoint.SPSite site, class Microsoft.SharePoint.SPListItem listItem) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.ProcessListItemOnRemove(Microsoft.SharePoint.SPSite,Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ProcessListItemOnRemove (site As SPSite, listItem As SPListItem) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool ProcessListItemOnRemove(Microsoft::SharePoint::SPSite ^ site, Microsoft::SharePoint::SPListItem ^ listItem);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="listItem" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site collection to which the policy belongs.</param>
+        <param name="listItem">The list item to which the policy no longer applies.</param>
+        <summary>Returns a Boolean value that specifies whether or not Microsoft SharePoint Server 2010 continues to process the remaining list items. </summary>
+        <returns>If a policy feature returns <b>true</b>, SharePoint Server 2010 continues to process the remaining list items. If a policy feature returns <b>false</b>, SharePoint Server 2010 does not process the remaining items.</returns>
+        <remarks>
+          <para>This method is called when a policy item is removed from a policy for all affected list items. SharePoint Server 2010 calls the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.ProcessListItem(Microsoft.SharePoint.SPSite,Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem,Microsoft.SharePoint.SPListItem)" /> method on list items that are no longer subject to the specified policy item. </para>
+          <para>If the policy feature has not changed, SharePoint Server 2010 does not call any of its methods. This optimization prevents SharePoint Server 2010 from iterating through all the items on a list for policy features that are not involved with processing the item.</para>
+          <para>For more information, see IPolicyFeature Interface Overview and Policy Feature Definitions.</para>
+          <para>For an example of how to implement the <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature" /> interface, see the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.ProcessListItem(Microsoft.SharePoint.SPSite,Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem,Microsoft.SharePoint.SPListItem)" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Register">
+      <MemberSignature Language="C#" Value="public void Register (Microsoft.SharePoint.SPContentType ct);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Register(class Microsoft.SharePoint.SPContentType ct) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.Register(Microsoft.SharePoint.SPContentType)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Register (ct As SPContentType)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Register(Microsoft::SharePoint::SPContentType ^ ct);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ct" Type="Microsoft.SharePoint.SPContentType" />
+      </Parameters>
+      <Docs>
+        <param name="ct">Content type to which the policy applies.</param>
+        <summary>Performs any required initiation work, such as adding specific columns to the content type, or registering for events when a policy item is added to a policy.</summary>
+        <remarks>
+          <para>Microsoft SharePoint Server 2010 calls the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.Register(Microsoft.SharePoint.SPContentType)" /> method when a user adds a new policy item to a policy. SharePoint Server 2010 calls the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.Register(Microsoft.SharePoint.SPContentType)" /> method of the associated policy feature to perform any required initiation work. For more information, see IPolicyFeature Interface Overview and Policy Feature Definitions. </para>
+          <para>For an example of how to use this method, see the example in the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.ProcessListItem(Microsoft.SharePoint.SPSite,Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem,Microsoft.SharePoint.SPListItem)" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UnRegister">
+      <MemberSignature Language="C#" Value="public void UnRegister (Microsoft.SharePoint.SPContentType ct);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void UnRegister(class Microsoft.SharePoint.SPContentType ct) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.UnRegister(Microsoft.SharePoint.SPContentType)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub UnRegister (ct As SPContentType)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void UnRegister(Microsoft::SharePoint::SPContentType ^ ct);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ct" Type="Microsoft.SharePoint.SPContentType" />
+      </Parameters>
+      <Docs>
+        <param name="ct">Content type to which the policy applies.</param>
+        <summary>Performs any needed cleanup work when a policy item is removed from a policy.</summary>
+        <remarks>
+          <para>SharePoint Server 2010 calls the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.UnRegister(Microsoft.SharePoint.SPContentType)" /> method when an existing policy item is removed from a policy. If you delete a policy item from a policy, SharePoint Server 2010 calls the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.UnRegister(Microsoft.SharePoint.SPContentType)" /> method of the associated policy feature to perform any needed cleanup work. You use this method to undo anything you did when you called the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.Register(Microsoft.SharePoint.SPContentType)" /> method that no longer applies.</para>
+          <para>For more information, see IPolicyFeature Interface Overview and Policy Feature Definitions. </para>
+          <para>For an example of how to use this method, see the example in the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature.ProcessListItem(Microsoft.SharePoint.SPSite,Microsoft.Office.RecordsManagement.InformationPolicy.PolicyItem,Microsoft.SharePoint.SPListItem)" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

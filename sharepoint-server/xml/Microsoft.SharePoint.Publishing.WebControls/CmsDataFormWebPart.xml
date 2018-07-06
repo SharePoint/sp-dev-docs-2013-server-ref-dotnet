@@ -1,0 +1,916 @@
+﻿<Type Name="CmsDataFormWebPart" FullName="Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart">
+  <TypeSignature Language="C#" Value="public abstract class CmsDataFormWebPart : Microsoft.SharePoint.WebPartPages.DataFormWebPart" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit CmsDataFormWebPart extends Microsoft.SharePoint.WebPartPages.DataFormWebPart implements class Microsoft.SharePoint.WebControls.IDesignTimeHtmlProvider" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class CmsDataFormWebPart&#xA;Inherits DataFormWebPart" />
+  <TypeSignature Language="C++ CLI" Value="public ref class CmsDataFormWebPart abstract : Microsoft::SharePoint::WebPartPages::DataFormWebPart" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.WebPartPages.DataFormWebPart</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Extends the <b>DataFormWebPart</b> object with features that are common to the Publishing Web Parts.</summary>
+    <remarks>
+      <para>The <b>CmsDataFormWebPart</b> object provides a platform for the three Publishing Web Parts: Summary Links, Content By Query, and Table of Contents. You can customize the HTML output of publishing Web Parts by using XSL transformations. Web Parts that inherit from the <b>CmsDataFormWebPart</b> will have the benefit of a cached XSL transformation that increases performance.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected CmsDataFormWebPart (string defaultMainXsl, string defaultHeaderXsl, string defaultItemXsl);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(string defaultMainXsl, string defaultHeaderXsl, string defaultItemXsl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.#ctor(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New (defaultMainXsl As String, defaultHeaderXsl As String, defaultItemXsl As String)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; CmsDataFormWebPart(System::String ^ defaultMainXsl, System::String ^ defaultHeaderXsl, System::String ^ defaultItemXsl);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="defaultMainXsl" Type="System.String" />
+        <Parameter Name="defaultHeaderXsl" Type="System.String" />
+        <Parameter Name="defaultItemXsl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="defaultMainXsl">A string that contains the default style sheet for the main content.</param>
+        <param name="defaultHeaderXsl">A string that contains the default style sheet for the header content.</param>
+        <param name="defaultItemXsl">A string that contains the default style sheet for the items.</param>
+        <summary>Initializes a new instance of the <b>CmsDataFormWebPart</b> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AlignmentXsltArgument">
+      <MemberSignature Language="C#" Value="public const string AlignmentXsltArgument;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string AlignmentXsltArgument" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.AlignmentXsltArgument" />
+      <MemberSignature Language="VB.NET" Value="Public Const AlignmentXsltArgument As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ AlignmentXsltArgument;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a string constant that defines the name of alignment parameter added to the XSLT argument list prior to transformation.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowXSLTEditing">
+      <MemberSignature Language="C#" Value="public override bool AllowXSLTEditing { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowXSLTEditing" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.AllowXSLTEditing" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property AllowXSLTEditing As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool AllowXSLTEditing { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Do not allow Microsoft SharePoint Designer 2010 XSLT editing of this Web Part.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CmsDfwpCacheKey">
+      <MemberSignature Language="C#" Value="public const string CmsDfwpCacheKey;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string CmsDfwpCacheKey" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.CmsDfwpCacheKey" />
+      <MemberSignature Language="VB.NET" Value="Public Const CmsDfwpCacheKey As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ CmsDfwpCacheKey;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a string constant that defines the cache key for the <b>CmsDataFormWebPart</b>.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CmsDfwpCacheValue">
+      <MemberSignature Language="C#" Value="public const string CmsDfwpCacheValue;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string CmsDfwpCacheValue" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.CmsDfwpCacheValue" />
+      <MemberSignature Language="VB.NET" Value="Public Const CmsDfwpCacheValue As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ CmsDfwpCacheValue;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a string constant that defines the cache value for the <b>CmsDataFormWebPart</b>.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateToolPartToggleSwitch">
+      <MemberSignature Language="C#" Value="public static System.Web.UI.HtmlControls.HtmlGenericControl CreateToolPartToggleSwitch (System.Web.UI.Control toolPart, string expandToolTip, string collapseToolTip, string displayText, string id, string helpTopic, bool removeUserSectionTitleBorder);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Web.UI.HtmlControls.HtmlGenericControl CreateToolPartToggleSwitch(class System.Web.UI.Control toolPart, string expandToolTip, string collapseToolTip, string displayText, string id, string helpTopic, bool removeUserSectionTitleBorder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.CreateToolPartToggleSwitch(System.Web.UI.Control,System.String,System.String,System.String,System.String,System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CreateToolPartToggleSwitch (toolPart As Control, expandToolTip As String, collapseToolTip As String, displayText As String, id As String, helpTopic As String, removeUserSectionTitleBorder As Boolean) As HtmlGenericControl" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Web::UI::HtmlControls::HtmlGenericControl ^ CreateToolPartToggleSwitch(System::Web::UI::Control ^ toolPart, System::String ^ expandToolTip, System::String ^ collapseToolTip, System::String ^ displayText, System::String ^ id, System::String ^ helpTopic, bool removeUserSectionTitleBorder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.HtmlControls.HtmlGenericControl</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="toolPart" Type="System.Web.UI.Control" />
+        <Parameter Name="expandToolTip" Type="System.String" />
+        <Parameter Name="collapseToolTip" Type="System.String" />
+        <Parameter Name="displayText" Type="System.String" />
+        <Parameter Name="id" Type="System.String" />
+        <Parameter Name="helpTopic" Type="System.String" />
+        <Parameter Name="removeUserSectionTitleBorder" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="toolPart">The tool part for which the toggle switch is being created.</param>
+        <param name="expandToolTip">The tooltip text for the expand button.</param>
+        <param name="collapseToolTip">The tooltip text for the collapse button.</param>
+        <param name="displayText">The text displayed for the control.</param>
+        <param name="id">The ID of the control.</param>
+        <param name="helpTopic">The help topic associated with the toggle control.</param>
+        <param name="removeUserSectionTitleBorder">When <b>true</b>, removes the bottom border from the header.</param>
+        <summary>Creates the controls for toggling sections of a Tool Part.</summary>
+        <returns>The toggle controls for the tool part.</returns>
+        <remarks>
+          <para>Avoid a thick border with the default Web Part headers by setting the <paramref name="removeUserSectionTitleBorder" /> parameter to <b>true</b> for the last call to the <b>CreateToolPartToggleSwitch(System.Web.UI.Control,System.String,System.String,System.String,System.String,System.String,System.Boolean)</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultSampleData">
+      <MemberSignature Language="C#" Value="protected virtual string DefaultSampleData { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DefaultSampleData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.DefaultSampleData" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable ReadOnly Property DefaultSampleData As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ DefaultSampleData { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the default sample data that will be used by Microsoft SharePoint Designer 2010 when there is no real data available.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DfwpCacheRead">
+      <MemberSignature Language="C#" Value="protected override object DfwpCacheRead (Microsoft.SharePoint.WebPartPages.Storage storage, string key, bool forceSharedAppCache);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance object DfwpCacheRead(valuetype Microsoft.SharePoint.WebPartPages.Storage storage, string key, bool forceSharedAppCache) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.DfwpCacheRead(Microsoft.SharePoint.WebPartPages.Storage,System.String,System.Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Object ^ DfwpCacheRead(Microsoft::SharePoint::WebPartPages::Storage storage, System::String ^ key, bool forceSharedAppCache);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="storage" Type="Microsoft.SharePoint.WebPartPages.Storage" />
+        <Parameter Name="key" Type="System.String" />
+        <Parameter Name="forceSharedAppCache" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="storage">A <b>Storage</b> object.</param>
+        <param name="key">A string that contains the cache key.</param>
+        <param name="forceSharedAppCache">A <b>Boolean</b> value.</param>
+        <summary>Reads the data form cache.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DfwpCacheWrite">
+      <MemberSignature Language="C#" Value="protected override void DfwpCacheWrite (Microsoft.SharePoint.WebPartPages.Storage storage, string key, bool forceSharedAppCache, object value, int timeoutSecs);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DfwpCacheWrite(valuetype Microsoft.SharePoint.WebPartPages.Storage storage, string key, bool forceSharedAppCache, object value, int32 timeoutSecs) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.DfwpCacheWrite(Microsoft.SharePoint.WebPartPages.Storage,System.String,System.Boolean,System.Object,System.Int32)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void DfwpCacheWrite(Microsoft::SharePoint::WebPartPages::Storage storage, System::String ^ key, bool forceSharedAppCache, System::Object ^ value, int timeoutSecs);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="storage" Type="Microsoft.SharePoint.WebPartPages.Storage" />
+        <Parameter Name="key" Type="System.String" />
+        <Parameter Name="forceSharedAppCache" Type="System.Boolean" />
+        <Parameter Name="value" Type="System.Object" />
+        <Parameter Name="timeoutSecs" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="storage">A <b>Storage</b> object.</param>
+        <param name="key">A string that contains the cache key.</param>
+        <param name="forceSharedAppCache">A <b>Boolean</b> value.</param>
+        <param name="value">An object representing a value.</param>
+        <param name="timeoutSecs">A 32-bit signed integer representing the time in seconds until the request fails.</param>
+        <summary>Writes the data form cache.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FetchCustomizedXsl">
+      <MemberSignature Language="C#" Value="public override void FetchCustomizedXsl (out byte[] customizedXsl, out string hashKey);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void FetchCustomizedXsl([out] unsigned int8[]&amp; customizedXsl, [out] string&amp; hashKey) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.FetchCustomizedXsl(System.Byte[]@,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub FetchCustomizedXsl (ByRef customizedXsl As Byte(), ByRef hashKey As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void FetchCustomizedXsl([Runtime::InteropServices::Out] cli::array &lt;System::Byte&gt; ^ % customizedXsl, [Runtime::InteropServices::Out] System::String ^ % hashKey);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="customizedXsl" Type="System.Byte[]&amp;" RefType="out" />
+        <Parameter Name="hashKey" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="customizedXsl">Compiled XSL that is a delta of the customized XSL and the default XSL, and some protection code</param>
+        <param name="hashKey">A hash key that uniquely identifies the compiled delta XSL</param>
+        <summary>Retrieves cached compiled XSL that differs from the default XSL.</summary>
+        <remarks>
+          <para>In order to keep XSL transforms from taking down the server, if the default XSL has been changedin any way, SharePoint 2013 creates a delta between the original "safe" XSL and the new XSL. The delta, which possibly is unsafe, is compiled with some added code to protect against infinite loops. The <b>FetchCustomizedXsl(System.Byte[]@,System.String@)</b> method enables subclasses of the <see cref="T:Microsoft.SharePoint.WebPartPages.DataFormWebPart" /> class to cache the results of the compilation of the delta. If the compiled delta XSL is cached as a <see cref="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.SaveCustomizedXsl(System.Byte[],System.String)" /> method, then the compiled delta XSL is retrieved by the <b>FetchCustomizedXsl(System.Byte[]@,System.String@)</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDesignTimeHtml">
+      <MemberSignature Language="C#" Value="public override string GetDesignTimeHtml ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string GetDesignTimeHtml() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.GetDesignTimeHtml" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetDesignTimeHtml () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ GetDesignTimeHtml();" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.WebControls.IDesignTimeHtmlProvider.GetDesignTimeHtml</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Provides an HTML view of the Web Part when in design mode.</summary>
+        <returns>An HTML string that renders the Web Part when in design mode.</returns>
+        <remarks>
+          <para>This is a required method of the <see cref="T:Microsoft.SharePoint.WebControls.IDesignTimeHtmlProvider" /> interface.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDisplayName">
+      <MemberSignature Language="C#" Value="protected static string GetDisplayName (System.Web.UI.WebControls.ListControl ddl, string templateName);" />
+      <MemberSignature Language="ILAsm" Value=".method familystatic hidebysig string GetDisplayName(class System.Web.UI.WebControls.ListControl ddl, string templateName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.GetDisplayName(System.Web.UI.WebControls.ListControl,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Shared Function GetDisplayName (ddl As ListControl, templateName As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; static System::String ^ GetDisplayName(System::Web::UI::WebControls::ListControl ^ ddl, System::String ^ templateName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ddl" Type="System.Web.UI.WebControls.ListControl" />
+        <Parameter Name="templateName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="ddl">A ListControl object that represents the properties, methods, and events of the <b>CmsDataFormWebPart</b> component.</param>
+        <param name="templateName">A string that contains the name of the template for which to retrieve the display name.</param>
+        <summary>Returns the display name of the <b>CmsDataFormWebPart</b> component.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTemplateName">
+      <MemberSignature Language="C#" Value="protected static string GetTemplateName (System.Web.UI.WebControls.ListControl ddl, string displayName);" />
+      <MemberSignature Language="ILAsm" Value=".method familystatic hidebysig string GetTemplateName(class System.Web.UI.WebControls.ListControl ddl, string displayName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.GetTemplateName(System.Web.UI.WebControls.ListControl,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Shared Function GetTemplateName (ddl As ListControl, displayName As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; static System::String ^ GetTemplateName(System::Web::UI::WebControls::ListControl ^ ddl, System::String ^ displayName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ddl" Type="System.Web.UI.WebControls.ListControl" />
+        <Parameter Name="displayName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="ddl">A ListControl object that represents the properties, methods, and events of the <b>CmsDataFormWebPart</b> component.</param>
+        <param name="displayName">A string that contains the display name for which to retrieve the template name.</param>
+        <summary>Returns the template name of the <b>CmsDataFormWebPart</b> component.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetXPathNavigator">
+      <MemberSignature Language="C#" Value="protected override System.Xml.XPath.XPathNavigator GetXPathNavigator (string viewPath);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Xml.XPath.XPathNavigator GetXPathNavigator(string viewPath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.GetXPathNavigator(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetXPathNavigator (viewPath As String) As XPathNavigator" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Xml::XPath::XPathNavigator ^ GetXPathNavigator(System::String ^ viewPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Xml.XPath.XPathNavigator</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="viewPath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="viewPath">A string that contains the path used to build the <b>XPathNavigator</b> object.</param>
+        <summary>Creates an <b>XPathNavigator</b> object that contains the data to be rendered by the XSL.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetXslFile">
+      <MemberSignature Language="C#" Value="public static System.Xml.XmlDocument GetXslFile (string templateFileUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Xml.XmlDocument GetXslFile(string templateFileUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.GetXslFile(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetXslFile (templateFileUrl As String) As XmlDocument" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Xml::XmlDocument ^ GetXslFile(System::String ^ templateFileUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Xml.XmlDocument</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="templateFileUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="templateFileUrl">A string that contains the URL of the template file.</param>
+        <summary>Loads the specified XSL file. </summary>
+        <returns>An <b>XMLDocument</b> containing the style sheet.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HeaderXslLink">
+      <MemberSignature Language="C#" Value="public string HeaderXslLink { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string HeaderXslLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.HeaderXslLink" />
+      <MemberSignature Language="VB.NET" Value="Public Property HeaderXslLink As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ HeaderXslLink { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.ManagedLink(Fixup=true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("PublishingXslStyleSheets")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the server-relative URL for the Header XSL link.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsGhosted">
+      <MemberSignature Language="C#" Value="public override bool IsGhosted { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsGhosted" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.IsGhosted" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property IsGhosted As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool IsGhosted { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that returns <b>true</b> if the XSL files are shared on the SharePoint Server site and are not customized.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ItemXslLink">
+      <MemberSignature Language="C#" Value="public string ItemXslLink { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ItemXslLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.ItemXslLink" />
+      <MemberSignature Language="VB.NET" Value="Public Property ItemXslLink As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ItemXslLink { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.ManagedLink(Fixup=true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("PublishingXslStyleSheets")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the server-relative URL for the Item XSL link.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MainXslLink">
+      <MemberSignature Language="C#" Value="public string MainXslLink { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string MainXslLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.MainXslLink" />
+      <MemberSignature Language="VB.NET" Value="Public Property MainXslLink As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ MainXslLink { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.ManagedLink(Fixup=true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("PublishingXslStyleSheets")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the server-relative URL for the Main XSL link.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ModifyXsltArgumentList">
+      <MemberSignature Language="C#" Value="protected override void ModifyXsltArgumentList (Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper argList);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void ModifyXsltArgumentList(class Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper argList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.ModifyXsltArgumentList(Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub ModifyXsltArgumentList (argList As ArgumentClassWrapper)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void ModifyXsltArgumentList(Microsoft::SharePoint::WebPartPages::ArgumentClassWrapper ^ argList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="argList" Type="Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper" />
+      </Parameters>
+      <Docs>
+        <param name="argList">Argument list generated by the base class.</param>
+        <summary>Allows the XSL argument list generated by the base class to be changed before it is passed to the XSL file.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NameAttrib">
+      <MemberSignature Language="C#" Value="public const string NameAttrib;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string NameAttrib" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.NameAttrib" />
+      <MemberSignature Language="VB.NET" Value="Public Const NameAttrib As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ NameAttrib;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a string constant that defines the name of a derived <b>CmsDataFormWebPart</b>.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnInit">
+      <MemberSignature Language="C#" Value="protected override void OnInit (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnInit(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.OnInit(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnInit (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnInit(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">A <b>System.EventArgs</b> object that contains the event information.</param>
+        <summary>Raises the initialization event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">A <b>System.EventArgs</b> object that contains the event information.</param>
+        <summary>Raises the load event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PopulateFileHashDetails">
+      <MemberSignature Language="C#" Value="protected override bool PopulateFileHashDetails (System.Collections.Hashtable fileHashTable);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool PopulateFileHashDetails(class System.Collections.Hashtable fileHashTable) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.PopulateFileHashDetails(System.Collections.Hashtable)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function PopulateFileHashDetails (fileHashTable As Hashtable) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override bool PopulateFileHashDetails(System::Collections::Hashtable ^ fileHashTable);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="fileHashTable" Type="System.Collections.Hashtable" />
+      </Parameters>
+      <Docs>
+        <param name="fileHashTable">A <b>System.Collections.Hashtable</b> object that contains the key/value pairs to be populated.</param>
+        <summary>Populates the <b>CmsDataFormWebPart</b> control properties with the specified <b>HashTable</b> object contents.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PopulateHeaderDropDown">
+      <MemberSignature Language="C#" Value="public void PopulateHeaderDropDown (System.Web.UI.WebControls.DropDownList ddl, string selectedValue);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void PopulateHeaderDropDown(class System.Web.UI.WebControls.DropDownList ddl, string selectedValue) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.PopulateHeaderDropDown(System.Web.UI.WebControls.DropDownList,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub PopulateHeaderDropDown (ddl As DropDownList, selectedValue As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void PopulateHeaderDropDown(System::Web::UI::WebControls::DropDownList ^ ddl, System::String ^ selectedValue);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ddl" Type="System.Web.UI.WebControls.DropDownList" />
+        <Parameter Name="selectedValue" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="ddl">A <b>DropDownList</b> object containing the list values.</param>
+        <param name="selectedValue">A string that contains the value initially selected.</param>
+        <summary>Populates the header drop-down list.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PopulateItemDropDown">
+      <MemberSignature Language="C#" Value="public void PopulateItemDropDown (System.Web.UI.WebControls.DropDownList ddl, string selectedValue);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void PopulateItemDropDown(class System.Web.UI.WebControls.DropDownList ddl, string selectedValue) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.PopulateItemDropDown(System.Web.UI.WebControls.DropDownList,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub PopulateItemDropDown (ddl As DropDownList, selectedValue As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void PopulateItemDropDown(System::Web::UI::WebControls::DropDownList ^ ddl, System::String ^ selectedValue);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ddl" Type="System.Web.UI.WebControls.DropDownList" />
+        <Parameter Name="selectedValue" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="ddl">A <b>DropDownList</b> object containing the list values.</param>
+        <param name="selectedValue">A string that contains the value initially selected.</param>
+        <summary>Populates an item drop-down list.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Render">
+      <MemberSignature Language="C#" Value="protected override void Render (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Render(class System.Web.UI.HtmlTextWriter writer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.Render(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub Render (writer As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void Render(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">The <b>HtmlTextWriter</b> object that receives the server control content.</param>
+        <summary>Renders the control on the page.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SaveCustomizedXsl">
+      <MemberSignature Language="C#" Value="public override void SaveCustomizedXsl (byte[] customizedXsl, string hashKey);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void SaveCustomizedXsl(unsigned int8[] customizedXsl, string hashKey) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.SaveCustomizedXsl(System.Byte[],System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub SaveCustomizedXsl (customizedXsl As Byte(), hashKey As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void SaveCustomizedXsl(cli::array &lt;System::Byte&gt; ^ customizedXsl, System::String ^ hashKey);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="customizedXsl" Type="System.Byte[]" />
+        <Parameter Name="hashKey" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="customizedXsl">A compiled XSL that is a delta of the customized XSL and the default XSL, and some protection code.</param>
+        <param name="hashKey">A hash key that uniquely identifies the compiled delta XSL</param>
+        <summary>Saves the compiled XSL that differs from the default XSL.</summary>
+        <remarks>
+          <para>If the default XSL is changed in any way, a delta between the original safe XSL and the new XSL is created in order to keep XSL transforms from shutting down the server. The delta, which possibly is unsafe, is compiled with added code to protect against infinite loops. The <b>SaveCustomizedXsl(System.Byte[],System.String)</b> method allows subclasses of the <see cref="T:Microsoft.SharePoint.WebPartPages.DataFormWebPart" /> class to cache the results of the compilation of the delta. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ServerRelativeHeaderXslLink">
+      <MemberSignature Language="C#" Value="public string ServerRelativeHeaderXslLink { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ServerRelativeHeaderXslLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.ServerRelativeHeaderXslLink" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ServerRelativeHeaderXslLink As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ServerRelativeHeaderXslLink { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>HeaderXslLink</b> property or the default Header XSL Link for this Web Part if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.HeaderXslLink" /> property is empty.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ServerRelativeItemXslLink">
+      <MemberSignature Language="C#" Value="public string ServerRelativeItemXslLink { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ServerRelativeItemXslLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.ServerRelativeItemXslLink" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ServerRelativeItemXslLink As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ServerRelativeItemXslLink { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>ItemXslLink</b> property or the default Item XSL Link for this Web Part if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.ItemXslLink" /> property is empty.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ServerRelativeMainXslLink">
+      <MemberSignature Language="C#" Value="public string ServerRelativeMainXslLink { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ServerRelativeMainXslLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.ServerRelativeMainXslLink" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ServerRelativeMainXslLink As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ServerRelativeMainXslLink { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>MainXslLink</b> property or the default Main XSL Link for this Web Part if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.MainXslLink" /> property is empty.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShouldConsumeParameters">
+      <MemberSignature Language="C#" Value="public override bool ShouldConsumeParameters ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool ShouldConsumeParameters() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.ShouldConsumeParameters" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ShouldConsumeParameters () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override bool ShouldConsumeParameters();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Activates the connection interface of the <b>CmsDataFormWebPart</b> control when overridden.</summary>
+        <returns>Returns a default <see cref="T:System.Boolean" /> value of <b>false</b>.</returns>
+        <remarks>
+          <para>Effects the behavior of the <b>DataFormConsumerConnectionPoint</b> class.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShouldProvideRows">
+      <MemberSignature Language="C#" Value="public override bool ShouldProvideRows ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool ShouldProvideRows() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.ShouldProvideRows" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ShouldProvideRows () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override bool ShouldProvideRows();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Activates the connection interface of the <b>CmsDataFormWebPart</b> control when overridden.</summary>
+        <returns>Returns a default <see cref="T:System.Boolean" /> value of <b>false</b>.</returns>
+        <remarks>
+          <para>This method affects the behavior of the <b>DataFormProviderConnectionPoint</b> class.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Xsl">
+      <MemberSignature Language="C#" Value="public override string Xsl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Xsl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.Xsl" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Property Xsl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ Xsl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.RequiresDesignerPermission(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="XslNamespace">
+      <MemberSignature Language="C#" Value="public const string XslNamespace;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string XslNamespace" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart.XslNamespace" />
+      <MemberSignature Language="VB.NET" Value="Public Const XslNamespace As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ XslNamespace;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a string constant in the form of a URL that defines the namespace that identifies the elements serving as instructions for the XSLT processor.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

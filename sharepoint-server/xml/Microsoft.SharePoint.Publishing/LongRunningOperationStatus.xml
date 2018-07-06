@@ -1,0 +1,709 @@
+﻿<Type Name="LongRunningOperationStatus" FullName="Microsoft.SharePoint.Publishing.LongRunningOperationStatus">
+  <TypeSignature Language="C#" Value="public sealed class LongRunningOperationStatus" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit LongRunningOperationStatus extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.LongRunningOperationStatus" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class LongRunningOperationStatus" />
+  <TypeSignature Language="C++ CLI" Value="public ref class LongRunningOperationStatus sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the status of the job that is currently running. </summary>
+    <remarks>
+      <para>The primary consumer of this object is the status user interface (UI) page.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ErrorsEncountered">
+      <MemberSignature Language="C#" Value="public string ErrorsEncountered { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ErrorsEncountered" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.ErrorsEncountered" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ErrorsEncountered As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ErrorsEncountered { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets an XML string that contains a list of all errors encountered. </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>There is no fixed format for errors. The consumer of the errors must know how the creator of the errors encoded the data. If no errors are present, the XML still returns &lt;errors;&gt;&lt;/errors;&gt;.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GearsImageUrl">
+      <MemberSignature Language="C#" Value="public string GearsImageUrl { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string GearsImageUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.GearsImageUrl" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property GearsImageUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GearsImageUrl { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the image to use on the progress page.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>If this property is empty, the default gears image is used.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllJobs">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.LongRunningOperationStatus[] GetAllJobs (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.LongRunningOperationStatus[] GetAllJobs(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.GetAllJobs(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetAllJobs (site As SPSite) As LongRunningOperationStatus()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;Microsoft::SharePoint::Publishing::LongRunningOperationStatus ^&gt; ^ GetAllJobs(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.LongRunningOperationStatus[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">Site that the job is running on.</param>
+        <summary>Gets a <b>LongRunningOperationStatus</b> for each of the entries in the top-level Web site's long-running operation status list.</summary>
+        <returns>A reference to an array of <b>LongRunningOperationStatus</b> objects.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllJobsForCurrentUser">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.LongRunningOperationStatus[] GetAllJobsForCurrentUser (Microsoft.SharePoint.SPSite site, string jobType, string jobStatus, string userId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.LongRunningOperationStatus[] GetAllJobsForCurrentUser(class Microsoft.SharePoint.SPSite site, string jobType, string jobStatus, string userId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.GetAllJobsForCurrentUser(Microsoft.SharePoint.SPSite,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetAllJobsForCurrentUser (site As SPSite, jobType As String, jobStatus As String, userId As String) As LongRunningOperationStatus()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;Microsoft::SharePoint::Publishing::LongRunningOperationStatus ^&gt; ^ GetAllJobsForCurrentUser(Microsoft::SharePoint::SPSite ^ site, System::String ^ jobType, System::String ^ jobStatus, System::String ^ userId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.LongRunningOperationStatus[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="jobType" Type="System.String" />
+        <Parameter Name="jobStatus" Type="System.String" />
+        <Parameter Name="userId" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="site">The site on which to gather the user jobs.</param>
+        <param name="jobType">Can be a null reference (Nothing in Visual Basic) or <b>empty</b>.-All running jobs for the current user are returned.</param>
+        <param name="jobStatus">A string that contains a job status.</param>
+        <param name="userId">A string that contains the user identifier (ID) for the jobs to gather.</param>
+        <summary>Determines whether there are jobs initiated by a user that were terminated due to failures.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetJob">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.LongRunningOperationStatus GetJob (Microsoft.SharePoint.SPSite site, Guid jobId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.LongRunningOperationStatus GetJob(class Microsoft.SharePoint.SPSite site, valuetype System.Guid jobId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.GetJob(Microsoft.SharePoint.SPSite,System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetJob (site As SPSite, jobId As Guid) As LongRunningOperationStatus" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::LongRunningOperationStatus ^ GetJob(Microsoft::SharePoint::SPSite ^ site, Guid jobId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.LongRunningOperationStatus</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="jobId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <see cref="T:Microsoft.SharePoint.SPSite" /> object of the current site.</param>
+        <param name="jobId">Specifies the identifier (ID) of the job to retrieve status information about.</param>
+        <summary>Instantiates a new <b>LongRunningOperationStatus</b> list and populates it with the most current status information.</summary>
+        <returns>A reference to a <b>LongRunningOperationStatus</b> with the most current status.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HasTimedOut">
+      <MemberSignature Language="C#" Value="public bool HasTimedOut { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool HasTimedOut" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.HasTimedOut" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property HasTimedOut As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool HasTimedOut { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets  whether this job has timed out.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsActive">
+      <MemberSignature Language="C#" Value="public bool IsActive { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsActive" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.IsActive" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsActive As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsActive { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether the job currently running is active.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="JobId">
+      <MemberSignature Language="C#" Value="public Guid JobId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid JobId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.JobId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property JobId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid JobId { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the ID of the job that is currently running.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastUpdated">
+      <MemberSignature Language="C#" Value="public DateTime LastUpdated { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime LastUpdated" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.LastUpdated" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastUpdated As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime LastUpdated { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the time, in Coordinated Universal Time (UTC) format, when the status of this long-running operation was last updated.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NavigateWhenDoneUrl">
+      <MemberSignature Language="C#" Value="public string NavigateWhenDoneUrl { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string NavigateWhenDoneUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.NavigateWhenDoneUrl" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property NavigateWhenDoneUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ NavigateWhenDoneUrl { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the URL to navigate to after the job completes successfully.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Navigation may occur automatically or may require that the user clicks OK, depending on the value that is set on the <see cref="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.RedirectWhenFinished" /> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OperationsPerformed">
+      <MemberSignature Language="C#" Value="public int OperationsPerformed { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 OperationsPerformed" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.OperationsPerformed" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property OperationsPerformed As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int OperationsPerformed { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value that represents the total number of operations that can be performed. </summary>
+        <value>An int that represents the total number of operations that can be performed. For example, if x of y operations can be performed, this value is y, or the total number of operations. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OriginalJobId">
+      <MemberSignature Language="C#" Value="public Guid OriginalJobId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid OriginalJobId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.OriginalJobId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property OriginalJobId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid OriginalJobId { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the original identifier (ID) of the job that was retried. </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.PreviousJobId" /> points to the job that ran immediately before this job and failed; the <see cref="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.OriginalJobId" /> points to the job that originated the process.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PreviousJobId">
+      <MemberSignature Language="C#" Value="public Guid PreviousJobId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid PreviousJobId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.PreviousJobId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PreviousJobId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid PreviousJobId { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the ID of the job that ran previously and failed.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PurgeOldEntries">
+      <MemberSignature Language="C#" Value="public static void PurgeOldEntries (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void PurgeOldEntries(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.PurgeOldEntries(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub PurgeOldEntries (site As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void PurgeOldEntries(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <b>SPSite</b> object to purge.</param>
+        <summary>Removes status bucket entries from the <b>LongRunningOperationStatus</b> list at the top-level Web site.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RedirectWhenFinished">
+      <MemberSignature Language="C#" Value="public bool RedirectWhenFinished { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool RedirectWhenFinished" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.RedirectWhenFinished" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property RedirectWhenFinished As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool RedirectWhenFinished { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value that indicates whether to redirect to a different page when the job is finished.</summary>
+        <value>
+          <b>true</b> to redirect to the specified URL when the task is finished; otherwise, false.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Remove">
+      <MemberSignature Language="C#" Value="public void Remove (Microsoft.SharePoint.SPSite site);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Remove(class Microsoft.SharePoint.SPSite site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.Remove(Microsoft.SharePoint.SPSite)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Remove (site As SPSite)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Remove(Microsoft::SharePoint::SPSite ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+      </Parameters>
+      <Docs>
+        <param name="site">
+          <b>SPSite</b> object of the current site.</param>
+        <summary>Removes status information about this job from the database.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequestCancel">
+      <MemberSignature Language="C#" Value="public void RequestCancel ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RequestCancel() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.RequestCancel" />
+      <MemberSignature Language="VB.NET" Value="Public Sub RequestCancel ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void RequestCancel();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Requests cancellation of the job that is currently running. </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RetryInformation">
+      <MemberSignature Language="C#" Value="public string RetryInformation { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string RetryInformation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.RetryInformation" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property RetryInformation As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ RetryInformation { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets information about the failure of a job to be used in a retry operation.</summary>
+        <value>A string that contains the retry information.</value>
+        <remarks>
+          <para>The failed operation should write any information needed to retry an operation, so that the subsequent operation can continue.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RetryNavigateUrl">
+      <MemberSignature Language="C#" Value="public string RetryNavigateUrl { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string RetryNavigateUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.RetryNavigateUrl" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property RetryNavigateUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ RetryNavigateUrl { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the URL to navigate to if a failure occurs.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShouldBePurged">
+      <MemberSignature Language="C#" Value="public bool ShouldBePurged { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ShouldBePurged" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.ShouldBePurged" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ShouldBePurged As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShouldBePurged { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value that indicates whether or not a job should be purged.</summary>
+        <value>true if the job should be purged; otherwise, false.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Started">
+      <MemberSignature Language="C#" Value="public DateTime Started { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime Started" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.Started" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Started As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime Started { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the time, in Coordinated Universal Time (UTC) format, when this long-running operation started.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Status">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob.OperationStatus Status { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob/OperationStatus Status" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.Status" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Status As LongRunningOperationJob.OperationStatus" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Internal::LongRunningOperationJob::OperationStatus Status { Microsoft::SharePoint::Publishing::Internal::LongRunningOperationJob::OperationStatus get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob+OperationStatus</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the job status.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StatusAsString">
+      <MemberSignature Language="C#" Value="public string StatusAsString { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string StatusAsString" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.StatusAsString" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property StatusAsString As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ StatusAsString { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the job status as a string.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StatusDescription">
+      <MemberSignature Language="C#" Value="public string StatusDescription { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string StatusDescription" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.StatusDescription" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property StatusDescription As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ StatusDescription { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the description of job status. </summary>
+        <value>A string that contains the description of job status.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SuccessesEncountered">
+      <MemberSignature Language="C#" Value="public string SuccessesEncountered { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SuccessesEncountered" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.SuccessesEncountered" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SuccessesEncountered As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SuccessesEncountered { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the list of success events that were encountered during this operation.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Title">
+      <MemberSignature Language="C#" Value="public string Title { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Title" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.Title" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Title As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Title { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Returns the name of the long-running operation that was initiated.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TotalOperationsToBePerformed">
+      <MemberSignature Language="C#" Value="public int TotalOperationsToBePerformed { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 TotalOperationsToBePerformed" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.TotalOperationsToBePerformed" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TotalOperationsToBePerformed As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int TotalOperationsToBePerformed { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value that represents the total number of operations that can be performed. </summary>
+        <value>An int that specifies the number of operations to be attempted. For example, if x of y operations can be performed, this value is y, or the total number of operations.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TypeOfOperation">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob.OperationType TypeOfOperation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob/OperationType TypeOfOperation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.TypeOfOperation" />
+      <MemberSignature Language="VB.NET" Value="Public Property TypeOfOperation As LongRunningOperationJob.OperationType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Internal::LongRunningOperationJob::OperationType TypeOfOperation { Microsoft::SharePoint::Publishing::Internal::LongRunningOperationJob::OperationType get(); void set(Microsoft::SharePoint::Publishing::Internal::LongRunningOperationJob::OperationType value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Internal.LongRunningOperationJob+OperationType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the type of operation (move, copy, delete, spawn, or generic), for easy retrieval.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserCanCancel">
+      <MemberSignature Language="C#" Value="public bool UserCanCancel { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UserCanCancel" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.UserCanCancel" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property UserCanCancel As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UserCanCancel { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value that indicates if the user can cancel the job that is currently running.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserId">
+      <MemberSignature Language="C#" Value="public string UserId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string UserId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.UserId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property UserId As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ UserId { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of the user who initiated this job.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserRequestedCancel">
+      <MemberSignature Language="C#" Value="public bool UserRequestedCancel { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UserRequestedCancel" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.UserRequestedCancel" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property UserRequestedCancel As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UserRequestedCancel { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether the user requested that the job be canceled.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WaitMessage">
+      <MemberSignature Language="C#" Value="public string WaitMessage { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string WaitMessage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.LongRunningOperationStatus.WaitMessage" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property WaitMessage As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ WaitMessage { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the wait message displayed to the user.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

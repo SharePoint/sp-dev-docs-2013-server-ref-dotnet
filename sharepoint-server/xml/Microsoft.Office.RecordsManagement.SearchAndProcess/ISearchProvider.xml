@@ -1,0 +1,78 @@
+﻿<Type Name="ISearchProvider" FullName="Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchProvider">
+  <TypeSignature Language="C#" Value="public interface ISearchProvider" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ISearchProvider" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchProvider" />
+  <TypeSignature Language="VB.NET" Value="Public Interface ISearchProvider" />
+  <TypeSignature Language="C++ CLI" Value="public interface class ISearchProvider" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>Provides an abstraction for a search provider to implement a custom search provider that can be used to replace the default search provider only for the search and process timer job.</summary>
+    <remarks>
+      <para>If you need to add a custom search provider for the search and process timer job, implement this interface and register the SearchProvider. Registering the search provider by using the method <b>RegisterSearchEngine</b> will replace the default search provider with your custom search provider. Doing this will not generically replace the search provider for the whole system, but only for the search and process timer job.</para>
+      <para />
+    </remarks>
+    <example>
+      <para />
+      <code>public class CustomSearchEngine : ISearchProvider {to implement // Return a search iterator object that provides search results within the passedto implement // in SPWeb.to implement public ISearchEnumerator PerformSearch(ISearchParameters param, SPWeb web)to implement {to implementto implement  return new CustomSearchIterator(web);to implement }to implementto implement /// &amp;lt;summary&amp;gt;to implement /// place holder  implementation for GetSearchPageUrlto implement /// &amp;lt;/summary&amp;gt;to implement /// &amp;lt;param name="web"&amp;gt;Search web name&amp;lt;/param&amp;gt;to implement /// &amp;lt;returns&amp;gt;string&amp;lt;/returns&amp;gt;to implement public string GetSearchPageUrl(SPWeb web)to implement {to implementto implement  return "/_layouts/customsearch.aspx";to implement }}to implementpublic class CustomSearchIterator : ISearchEnumerator{to implement private SPList m_currentList = null;to implement private IEnumerator m_itemsIterator = null;to implementto implement /// &amp;lt;summary&amp;gt;to implement /// Constructor of the search iterator. Here we find a list in the SPWeb withto implement  /// the supplied title. All items in the list will be returned as search results.to implement /// &amp;lt;/summary&amp;gt;to implement public CustomSearchIterator(SPWeb web)to implement {to implementto implement  m_currentList = web.Lists["customlistforsearch"];to implementto implement  if (m_currentList != null)to implementto implement  {to implementm_itemsIterator = m_currentList.Items.GetEnumerator();to implementto implement  }to implement }to implementto implement /// &amp;lt;summary&amp;gt;to implement /// Move to the next item in the search results.to implement /// Essentially this method tells whether it's the end of search results.to implement /// &amp;lt;/summary&amp;gt;to implement /// &amp;lt;returns&amp;gt;Return false if it's the end of search results. Otherwise return true.&amp;lt;/returns&amp;gt;to implement public bool MoveNext()to implement {to implementto implement  return m_itemsIterator.MoveNext();to implement }to implementto implement // Never called. No need to implement.to implement public void Reset()to implement {to implement }to implementto implement /// &amp;lt;summary&amp;gt;to implement /// Return the current item in the search results.to implement /// Here we just return the full URL of current item from a SPListItemCollection enumerator.to implement /// &amp;lt;/summary&amp;gt;to implement public object Currentto implement {to implementto implement  getto implementto implement  {to implementSPListItem currentItem = (SPListItem) m_itemsIterator.Current;to implementstring itemUrl = SPUrlUtility.CombineUrl(currentItem.Web.Url, currentItem.Url);to implementreturn (object)itemUrl;to implementto implement  }to implement }to implementto implement /// &amp;lt;summary&amp;gt;to implement /// Whether the current item from search results is null.to implement /// &amp;lt;/summary&amp;gt;to implement public bool IsNullto implement {to implementto implement  getto implementto implement  {to implementreturn (Current == null);to implementto implement  }to implement }}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="GetSearchPageUrl">
+      <MemberSignature Language="C#" Value="public string GetSearchPageUrl (Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetSearchPageUrl(class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchProvider.GetSearchPageUrl(Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSearchPageUrl (web As SPWeb) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetSearchPageUrl(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="web">This can be used to specify a web-specific search page. </param>
+        <summary>This method returns the URL to the search page which can be used to make search queries. </summary>
+        <returns>Returns <see cref="T:System.String" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PerformSearch">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchEnumerator PerformSearch (Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchParameters param, Microsoft.SharePoint.SPWeb web);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchEnumerator PerformSearch(class Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchParameters param, class Microsoft.SharePoint.SPWeb web) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchProvider.PerformSearch(Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchParameters,Microsoft.SharePoint.SPWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Function PerformSearch (param As ISearchParameters, web As SPWeb) As ISearchEnumerator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::RecordsManagement::SearchAndProcess::ISearchEnumerator ^ PerformSearch(Microsoft::Office::RecordsManagement::SearchAndProcess::ISearchParameters ^ param, Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchEnumerator</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="param" Type="Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchParameters" />
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+      </Parameters>
+      <Docs>
+        <param name="param">The search query.</param>
+        <param name="web">Web-related properties like language. </param>
+        <summary>This is the method which will invoke the search provider with a query specified.</summary>
+        <returns>Returns <see cref="T:Microsoft.Office.RecordsManagement.SearchAndProcess.ISearchEnumerator" />.</returns>
+        <remarks>
+          <para>This method should implement the search provider and is responsible for doing all of the processing required for satisfying the search query. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

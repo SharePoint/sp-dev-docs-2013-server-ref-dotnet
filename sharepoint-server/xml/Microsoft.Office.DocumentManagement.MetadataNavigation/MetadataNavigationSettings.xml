@@ -1,0 +1,612 @@
+﻿<Type Name="MetadataNavigationSettings" FullName="Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings">
+  <TypeSignature Language="C#" Value="public class MetadataNavigationSettings" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit MetadataNavigationSettings extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" />
+  <TypeSignature Language="VB.NET" Value="Public Class MetadataNavigationSettings" />
+  <TypeSignature Language="C++ CLI" Value="public ref class MetadataNavigationSettings" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Configures which settings on a <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationItem" /> object  on an <see cref="T:Microsoft.SharePoint.SPList" /> object control the display of metadata hierarchies and filters on list views.</summary>
+    <remarks>
+      <para>Gets settings from and sets settings to an <see cref="T:Microsoft.SharePoint.SPList" /> object and persists them such that the list, site hierarchy tree, and filter controls can use them in the list view page UI. Always use the GetMetadataNavigationSettings static method to get settings from an <see cref="T:Microsoft.SharePoint.SPList" /> object when initializing new instances of the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object.</para>
+      <para>By default, all lists have settings where no key filters are configured and only the special folder  hierarchy type is configured, which shows only the <see cref="T:Microsoft.SharePoint.SPFolder" /> object in the tree. Use these methods to modify metadata hierarchy and key filter data in the tree. </para>
+      <list type="table">
+        <item>
+          <term>AddConfiguredHierarchy method to add additional metadata hierarchies and key filters to settings.</term>
+          <description>Adds metadata hierarchies to settings.</description>
+        </item>
+        <item>
+          <term>
+              AddConfiguredKeyFilter
+            </term>
+          <description>Adds key fliters to settings.</description>
+        </item>
+        <item>
+          <term>
+              FindConfiguredHierarchy
+            </term>
+          <description>Determines whether configured hierarchies exist in settings.Use the result on the original settings instead of creating a new hierarchy to ensure that the internal view settings are preserved. After adjusting the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object originally retrieved from the list, set the adjusted settings back on the list with the MetadataNavigationSettings.SetMetadataNavigationSettings object.</description>
+        </item>
+        <item>
+          <term>
+              FindConfiguredKeyFilter
+            </term>
+          <description>Determines whether configured items exist in the settings.</description>
+        </item>
+        <item>
+          <term>
+              ClearConfiguredHierarchies
+            </term>
+          <description>Empties settings and then adds new hierarchies in the desired order.</description>
+        </item>
+        <item>
+          <term>
+              ClearConfiguredKeyFilters
+            </term>
+          <description>Empties settings and then adds key filters in the desired order.</description>
+        </item>
+      </list>
+      <para />
+    </remarks>
+    <example>
+      <code>using SPWeb = Microsoft.SharePoint.SPWeb;
+using SPList = Microsoft.SharePoint.SPList;
+using SPField = Microsoft.SharePoint.SPField;
+
+using MetadataNavigationSettings = Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings;
+using MetadataNavigationHierarchy = Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationHierarchy;
+using MetadataNavigationKeyFilter = Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationKeyFilter;
+using MetadataNavigationContext = Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationContext;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class MetadataNavigationSettingsSamples
+    {
+        public static void AddFieldsToMDNSettings(SPList list)
+        {
+            // TODO: Replace these variable values and input parameters with your own values.
+            //
+            // internal name of the SPField to add into the key filters
+            string fieldNameKeyFilterToAdd = "Modified";
+
+            // Validate the input parameters.
+            //
+            if (null == list)
+            {
+                throw new System.ArgumentNullException("list");
+            }
+
+            // Get the MDN settings object for the SPList that was passed in.
+            //
+            MetadataNavigationSettings mdnSettings =
+                MetadataNavigationSettings.GetMetadataNavigationSettings(list);
+
+            // Add hiearchies into the settings if they are not already there
+            //
+            MetadataNavigationHierarchy folderHierarchyToAdd =
+                MetadataNavigationHierarchy.CreateFolderHierarchy();
+            if (null == mdnSettings.FindConfiguredHierarchy(folderHierarchyToAdd.FieldId))
+            {
+                mdnSettings.AddConfiguredHierarchy(folderHierarchyToAdd);
+            }
+
+            MetadataNavigationHierarchy contentTypeHierarchyToAdd =
+                MetadataNavigationHierarchy.CreateContentTypeHierarchy();
+            if (null == mdnSettings.FindConfiguredHierarchy(contentTypeHierarchyToAdd.FieldId))
+            {
+                mdnSettings.AddConfiguredHierarchy(contentTypeHierarchyToAdd);
+            }
+
+            // Add key filters into the settings if they are not already there
+            //
+            SPField newKeyFilterField = list.Fields[fieldNameKeyFilterToAdd];
+            if (null == mdnSettings.FindConfiguredKeyFilter(newKeyFilterField.Id))
+            {
+                mdnSettings.AddConfiguredKeyFilter(new MetadataNavigationKeyFilter(newKeyFilterField));
+            }
+
+            MetadataNavigationKeyFilter contentTypeKeyFilter =
+                MetadataNavigationKeyFilter.CreateContentTypeKeyFilter();
+            if (null == mdnSettings.FindConfiguredKeyFilter(contentTypeKeyFilter.FieldId))
+            {
+                mdnSettings.AddConfiguredKeyFilter(contentTypeKeyFilter);
+            }
+
+            // Set the MDN settings back into the list and automatically adjust indexing.
+            //
+            MetadataNavigationSettings.SetMetadataNavigationSettings(list, mdnSettings, true);
+        }
+    }
+}
+
+namespace Microsoft.SDK.SharePointServer.Samples.WebControls
+{
+
+    public static class MetadataNavigationSettingsWebSamples
+    {
+        public static void ToggleMDNSettingsStateInWebRequest(SPWeb web, System.Guid listId)
+        {
+            // Validate the input parameters.
+            //
+            if (null == web)
+            {
+                throw new System.ArgumentNullException("web");
+            }
+
+            // Ensure that there is a current context for these operations
+            //
+            if (null == MetadataNavigationContext.Current)
+            {
+                throw new System.InvalidOperationException("No current web context or MetadataNavigationContext");
+            }
+
+            // Get the MDN settings for the input web and list id using the cache
+            //
+            System.Guid listIdToUse = listId;
+            MetadataNavigationSettings mdnSettings =
+                MetadataNavigationSettings.GetMetadataNavigationSettings(web, listId);
+
+            // If no settings were retrieved then try the current context settings.
+            //
+            if (null == mdnSettings)
+            {
+                mdnSettings = MetadataNavigationSettings.Current;
+            }
+
+            if (null == mdnSettings)
+            {
+                throw new System.ArgumentException("Cannot retrieve setting from inputs or from current context");
+            }
+
+            if(System.Guid.Empty != MetadataNavigationContext.Current.ListId)
+            {
+                listIdToUse = MetadataNavigationContext.Current.ListId;
+            }
+
+            if (mdnSettings.IsEnabled)
+            {
+                // If the current settings are enabled then clear them back to default (which is only folder hierarchy)
+                mdnSettings.ClearConfiguredHierarchies();
+                mdnSettings.ClearConfiguredKeyFilters();
+                mdnSettings.AddConfiguredHierarchy(MetadataNavigationHierarchy.CreateFolderHierarchy());
+            }
+            else
+            {
+                // If they are not enabled then add a content type key filter and hierachy
+                mdnSettings.AddConfiguredHierarchy(MetadataNavigationHierarchy.CreateContentTypeHierarchy());
+                mdnSettings.AddConfiguredKeyFilter(MetadataNavigationKeyFilter.CreateContentTypeKeyFilter());
+            }
+
+            // Set the MDN settings back into the list.
+            //
+            SPList list = web.Lists[listIdToUse];
+            MetadataNavigationSettings.SetMetadataNavigationSettings(list, mdnSettings);
+        }
+
+    }
+}
+</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MetadataNavigationSettings ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; MetadataNavigationSettings();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MetadataNavigationSettings (string xmlMetadataNavigationSettings);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string xmlMetadataNavigationSettings) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.#ctor(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (xmlMetadataNavigationSettings As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; MetadataNavigationSettings(System::String ^ xmlMetadataNavigationSettings);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="xmlMetadataNavigationSettings" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="xmlMetadataNavigationSettings">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddConfiguredHierarchy">
+      <MemberSignature Language="C#" Value="public void AddConfiguredHierarchy (Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationHierarchy hierarchyToAdd);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddConfiguredHierarchy(class Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationHierarchy hierarchyToAdd) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.AddConfiguredHierarchy(Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationHierarchy)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddConfiguredHierarchy (hierarchyToAdd As MetadataNavigationHierarchy)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddConfiguredHierarchy(Microsoft::Office::DocumentManagement::MetadataNavigation::MetadataNavigationHierarchy ^ hierarchyToAdd);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="hierarchyToAdd" Type="Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationHierarchy" />
+      </Parameters>
+      <Docs>
+        <param name="hierarchyToAdd">Input hierachy to add to the settings</param>
+        <summary>Adds the input object to configured hierarchies.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddConfiguredKeyFilter">
+      <MemberSignature Language="C#" Value="public void AddConfiguredKeyFilter (Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationKeyFilter keyFilterToAdd);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddConfiguredKeyFilter(class Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationKeyFilter keyFilterToAdd) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.AddConfiguredKeyFilter(Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationKeyFilter)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddConfiguredKeyFilter (keyFilterToAdd As MetadataNavigationKeyFilter)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddConfiguredKeyFilter(Microsoft::Office::DocumentManagement::MetadataNavigation::MetadataNavigationKeyFilter ^ keyFilterToAdd);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="keyFilterToAdd" Type="Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationKeyFilter" />
+      </Parameters>
+      <Docs>
+        <param name="keyFilterToAdd">The input key filter to add to the settings</param>
+        <summary>Adds the input object to the configured key filters.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ClearConfiguredHierarchies">
+      <MemberSignature Language="C#" Value="public void ClearConfiguredHierarchies ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ClearConfiguredHierarchies() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.ClearConfiguredHierarchies" />
+      <MemberSignature Language="VB.NET" Value="Public Sub ClearConfiguredHierarchies ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void ClearConfiguredHierarchies();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Resets the list of configured hierarchies to an empty list.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ClearConfiguredKeyFilters">
+      <MemberSignature Language="C#" Value="public void ClearConfiguredKeyFilters ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ClearConfiguredKeyFilters() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.ClearConfiguredKeyFilters" />
+      <MemberSignature Language="VB.NET" Value="Public Sub ClearConfiguredKeyFilters ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void ClearConfiguredKeyFilters();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Resets the list of configured key filters to an empty list.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Current">
+      <MemberSignature Language="C#" Value="public static Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings Current { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings Current" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.Current" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property Current As MetadataNavigationSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::Office::DocumentManagement::MetadataNavigation::MetadataNavigationSettings ^ Current { Microsoft::Office::DocumentManagement::MetadataNavigation::MetadataNavigationSettings ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the active NavigationSettings object for the current list, or gets a null reference (Nothing in Visual Basic) if there is no current list.</summary>
+        <value>Returns <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" />.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.NullReferenceException">Thrown if set to a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="FindConfiguredHierarchy">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationHierarchy FindConfiguredHierarchy (Guid fieldId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationHierarchy FindConfiguredHierarchy(valuetype System.Guid fieldId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.FindConfiguredHierarchy(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Function FindConfiguredHierarchy (fieldId As Guid) As MetadataNavigationHierarchy" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::DocumentManagement::MetadataNavigation::MetadataNavigationHierarchy ^ FindConfiguredHierarchy(Guid fieldId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationHierarchy</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="fieldId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="fieldId">The field Id to search for in the settings</param>
+        <summary>Finds a configured hierarchy that matches the input <paramref name="fieldId" />.</summary>
+        <returns>The configured hierarchy object in this instance of the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object with a <see cref="FieldId" /> value that matches the value of the <paramref name="fieldId" /> parameter; otherwise a null reference (Nothing in Visual Basic).</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FindConfiguredKeyFilter">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationKeyFilter FindConfiguredKeyFilter (Guid fieldId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationKeyFilter FindConfiguredKeyFilter(valuetype System.Guid fieldId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.FindConfiguredKeyFilter(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Function FindConfiguredKeyFilter (fieldId As Guid) As MetadataNavigationKeyFilter" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::DocumentManagement::MetadataNavigation::MetadataNavigationKeyFilter ^ FindConfiguredKeyFilter(Guid fieldId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationKeyFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="fieldId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="fieldId">The field Id to search for in the settings</param>
+        <summary>Finds a configured key filter matching the input <paramref name="fieldId" />.</summary>
+        <returns>The configured key filter object in this instance of the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object with the <see cref="FieldId" /> value that matches the value of the <paramref name="fieldId" />; otherwise, a null reference (Nothing in Visual Basic)</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMetadataNavigationSettings">
+      <MemberSignature Language="C#" Value="public static Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings GetMetadataNavigationSettings (Microsoft.SharePoint.SPList sourceList);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings GetMetadataNavigationSettings(class Microsoft.SharePoint.SPList sourceList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.GetMetadataNavigationSettings(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetMetadataNavigationSettings (sourceList As SPList) As MetadataNavigationSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::DocumentManagement::MetadataNavigation::MetadataNavigationSettings ^ GetMetadataNavigationSettings(Microsoft::SharePoint::SPList ^ sourceList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sourceList" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="sourceList">The source list to get the settings from</param>
+        <summary>Gets the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object for a specified source list.</summary>
+        <returns>A new instance populated with the data configured for the specified <paramref name="sourceListId" /></returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The specified <see cref="T:Microsoft.SharePoint.SPList" /> object is set to a null reference (Nothing in Visual Basic)</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMetadataNavigationSettings">
+      <MemberSignature Language="C#" Value="public static Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings GetMetadataNavigationSettings (Microsoft.SharePoint.SPWeb web, Guid sourceListId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings GetMetadataNavigationSettings(class Microsoft.SharePoint.SPWeb web, valuetype System.Guid sourceListId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.GetMetadataNavigationSettings(Microsoft.SharePoint.SPWeb,System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetMetadataNavigationSettings (web As SPWeb, sourceListId As Guid) As MetadataNavigationSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::DocumentManagement::MetadataNavigation::MetadataNavigationSettings ^ GetMetadataNavigationSettings(Microsoft::SharePoint::SPWeb ^ web, Guid sourceListId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="sourceListId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="web">The <see cref="T:Microsoft.SharePoint.SPWeb" /> object that contains the source list for the settings.</param>
+        <param name="sourceListId">The Id of the source list for the settings.</param>
+        <summary>Gets the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object for a specified source list.</summary>
+        <returns>New instance populated with the data configured for the specified <paramref name="sourceListId" /> if a matching list for the specified Id exists; otherwise, a null reference (Nothing in Visual Basic)</returns>
+        <remarks>
+          <para>Uses cached values if possible.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">Specified <see cref="T:Microsoft.SharePoint.SPWeb" /> object is set to a null reference (Nothing in Visual Basic)</exception>
+        <exception cref="T:System.NullReferenceException">The <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object is called outside of an ASP.Net page request and MetadataNavigationContext.Current is set to a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="HierarchyNodeIdFieldRoot">
+      <MemberSignature Language="C#" Value="public const string HierarchyNodeIdFieldRoot;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string HierarchyNodeIdFieldRoot" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.HierarchyNodeIdFieldRoot" />
+      <MemberSignature Language="VB.NET" Value="Public Const HierarchyNodeIdFieldRoot As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ HierarchyNodeIdFieldRoot;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HierarchyNodeIdListRoot">
+      <MemberSignature Language="C#" Value="public const string HierarchyNodeIdListRoot;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string HierarchyNodeIdListRoot" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.HierarchyNodeIdListRoot" />
+      <MemberSignature Language="VB.NET" Value="Public Const HierarchyNodeIdListRoot As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ HierarchyNodeIdListRoot;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsEnabled">
+      <MemberSignature Language="C#" Value="public bool IsEnabled { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsEnabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.IsEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsEnabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsEnabled { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether any additional metadata hierarchy objects or key filter objects are configured.</summary>
+        <value>
+          <b>true</b> if there are any configured key filters or other hierarchy objects beyond the default special type for folders; otherwise <b>false</b></value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsMetadataNavConfigured">
+      <MemberSignature Language="C#" Value="public static bool IsMetadataNavConfigured (Microsoft.SharePoint.SPWeb web, Guid listId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsMetadataNavConfigured(class Microsoft.SharePoint.SPWeb web, valuetype System.Guid listId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.IsMetadataNavConfigured(Microsoft.SharePoint.SPWeb,System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsMetadataNavConfigured (web As SPWeb, listId As Guid) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsMetadataNavConfigured(Microsoft::SharePoint::SPWeb ^ web, Guid listId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="listId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="web">To be added.</param>
+        <param name="listId">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetMetadataNavigationSettings">
+      <MemberSignature Language="C#" Value="public static void SetMetadataNavigationSettings (Microsoft.SharePoint.SPList sourceList, Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings listNavSettings);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SetMetadataNavigationSettings(class Microsoft.SharePoint.SPList sourceList, class Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings listNavSettings) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.SetMetadataNavigationSettings(Microsoft.SharePoint.SPList,Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SetMetadataNavigationSettings (sourceList As SPList, listNavSettings As MetadataNavigationSettings)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SetMetadataNavigationSettings(Microsoft::SharePoint::SPList ^ sourceList, Microsoft::Office::DocumentManagement::MetadataNavigation::MetadataNavigationSettings ^ listNavSettings);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sourceList" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="listNavSettings" Type="Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" />
+      </Parameters>
+      <Docs>
+        <param name="sourceList">The list to update these settings on.</param>
+        <param name="listNavSettings">The new settings to update on the list</param>
+        <summary>Updates the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> object for a specified <see cref="T:Microsoft.SharePoint.SPList" /> object without automatically updating the list indexing.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">One of the input parameters is set to a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetMetadataNavigationSettings">
+      <MemberSignature Language="C#" Value="public static void SetMetadataNavigationSettings (Microsoft.SharePoint.SPList sourceList, Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings listNavSettings, bool updateListIndexing);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SetMetadataNavigationSettings(class Microsoft.SharePoint.SPList sourceList, class Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings listNavSettings, bool updateListIndexing) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.SetMetadataNavigationSettings(Microsoft.SharePoint.SPList,Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub SetMetadataNavigationSettings (sourceList As SPList, listNavSettings As MetadataNavigationSettings, updateListIndexing As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void SetMetadataNavigationSettings(Microsoft::SharePoint::SPList ^ sourceList, Microsoft::Office::DocumentManagement::MetadataNavigation::MetadataNavigationSettings ^ listNavSettings, bool updateListIndexing);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sourceList" Type="Microsoft.SharePoint.SPList" />
+        <Parameter Name="listNavSettings" Type="Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" />
+        <Parameter Name="updateListIndexing" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="sourceList">The list to update settings on</param>
+        <param name="listNavSettings">New settings to update to the list</param>
+        <param name="updateListIndexing">
+          <b>true</b> if making automatic list index changes after updating settings; otherwise, <b>false</b></param>
+        <summary>Updates the <see cref="T:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings" /> for a specified <see cref="T:Microsoft.SharePoint.SPList" /> and then automatically adjusts the list indexing.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">One of the input parameters is set to a null reference (Nothing in Visual Basic)</exception>
+        <exception cref="T:Microsoft.SharePoint.SPException">
+          <paramref name="updateListIndexing" /> is set to <b>true</b> and the maximum number of list indices is reached while automatically adjusting list indexing.</exception>
+        <exception cref="T:Microsoft.SharePoint.SPQueryThrottledException">
+          <paramref name="updateListIndexing" /> is set to <b>true</b> and the automatic index adjustment operation is throttled.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SettingsXml">
+      <MemberSignature Language="C#" Value="public string SettingsXml { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SettingsXml" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.MetadataNavigation.MetadataNavigationSettings.SettingsXml" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SettingsXml As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SettingsXml { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

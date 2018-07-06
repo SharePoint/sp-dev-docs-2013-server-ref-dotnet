@@ -1,0 +1,119 @@
+﻿<Type Name="DelegateTask" FullName="Microsoft.Office.Workflow.Actions.DelegateTask">
+  <TypeSignature Language="C#" Value="public class DelegateTask : System.Workflow.ComponentModel.Activity" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DelegateTask extends System.Workflow.ComponentModel.Activity" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Workflow.Actions.DelegateTask" />
+  <TypeSignature Language="VB.NET" Value="Public Class DelegateTask&#xA;Inherits Activity" />
+  <TypeSignature Language="C++ CLI" Value="public ref class DelegateTask : System::Workflow::ComponentModel::Activity" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Workflow.Actions</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Workflow.ComponentModel.Activity</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Workflow.ComponentModel.Compiler.ActivityValidator(typeof(Microsoft.Office.Workflow.Actions.TaskGuidAvailableDescendantValidator))</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>A workflow task that allows a user to designate a delegate to perform the task, while the original assigned user still maintains final approval rights.</summary>
+    <remarks>
+      <para>When a task is delegated, a new task is created for the delegate.  The original task remains with the original user, but a relationship is established between the original task and the delegate task.  Once the delegate task is complete, the original task owner will be able to approve the work completed.  </para>
+      <para>In the event that the delegate task is not approved, it is made active again so that the delegate can do the work specified and once finished, the original task will resume.</para>
+      <para>A task can be delegated to only one person, and the delegation cannot be removed.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DelegateTask ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Actions.DelegateTask.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; DelegateTask();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Workflow.Actions</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Workflow.Actions.DelegateTask" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Execute">
+      <MemberSignature Language="C#" Value="protected override System.Workflow.ComponentModel.ActivityExecutionStatus Execute (System.Workflow.ComponentModel.ActivityExecutionContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance valuetype System.Workflow.ComponentModel.ActivityExecutionStatus Execute(class System.Workflow.ComponentModel.ActivityExecutionContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Actions.DelegateTask.Execute(System.Workflow.ComponentModel.ActivityExecutionContext)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function Execute (context As ActivityExecutionContext) As ActivityExecutionStatus" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Workflow::ComponentModel::ActivityExecutionStatus Execute(System::Workflow::ComponentModel::ActivityExecutionContext ^ context);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Workflow.Actions</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Workflow.ComponentModel.ActivityExecutionStatus</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="System.Workflow.ComponentModel.ActivityExecutionContext" />
+      </Parameters>
+      <Docs>
+        <param name="context">An ActivityExecutionContext object representing the execution environment of an Activity. This class cannot be inherited.</param>
+        <summary>To be added.</summary>
+        <returns>Returns <see cref="T:System.Workflow.ComponentModel.ActivityExecutionStatus" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="User">
+      <MemberSignature Language="C#" Value="public string User { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string User" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Workflow.Actions.DelegateTask.User" />
+      <MemberSignature Language="VB.NET" Value="Public Property User As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ User { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Workflow.Actions</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Workflow.ComponentModel.Compiler.ValidationOption(System.Workflow.ComponentModel.Compiler.ValidationOption.Required)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>A string containing the username of the user that the task is being delegated to.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserProperty">
+      <MemberSignature Language="C#" Value="public static System.Workflow.ComponentModel.DependencyProperty UserProperty;" />
+      <MemberSignature Language="ILAsm" Value=".field public static class System.Workflow.ComponentModel.DependencyProperty UserProperty" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.Actions.DelegateTask.UserProperty" />
+      <MemberSignature Language="VB.NET" Value="Public Shared UserProperty As DependencyProperty " />
+      <MemberSignature Language="C++ CLI" Value="public: static System::Workflow::ComponentModel::DependencyProperty ^ UserProperty;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Workflow.Actions</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Workflow.ComponentModel.DependencyProperty</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>A DependencyProperty object used to promote the <see cref="P:Microsoft.Office.Workflow.Actions.DelegateTask.User" /> property.  </summary>
+        <remarks>
+          <para>Do not use this property directly. The DependencyProperty is registered as internal to Windows Workflow Foundation when using the value set in the <see cref="P:Microsoft.Office.Workflow.Actions.DelegateTask.User" /> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

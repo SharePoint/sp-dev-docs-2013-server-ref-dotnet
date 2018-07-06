@@ -1,0 +1,1135 @@
+﻿<Type Name="PageLayout" FullName="Microsoft.SharePoint.Publishing.PageLayout">
+  <TypeSignature Language="C#" Value="public sealed class PageLayout" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PageLayout extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.PageLayout" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PageLayout" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PageLayout sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents a Microsoft SharePoint Server 2010 page layout. This class cannot be inherited.</summary>
+    <remarks>
+      <para>The <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> class provides publishing-related behavior for page layouts within a site collection's master page gallery, where it is stored as a document list item. It defines the common look and feel for how <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> objects appear in the site.</para>
+      <para>The <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> class wraps the <see cref="T:Microsoft.SharePoint.SPListItem" /> class. It also exposes the underlying <see cref="T:Microsoft.SharePoint.SPListItem" /> directly through the <see cref="P:Microsoft.SharePoint.Publishing.PageLayout.ListItem" /> property so that additional <see cref="T:Microsoft.SharePoint.SPListItem" /> and <see cref="P:Microsoft.SharePoint.SPListItem.File" /> functionality can be accessed easily.</para>
+      <para>You can use the public constructor <see cref="M:Microsoft.SharePoint.Publishing.PageLayout(SPListItemlistItem)" /> to create an instance of a <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object. You can also instantiate a <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object by retrieving it from a <see cref="T:Microsoft.SharePoint.Publishing.PageLayoutCollection" /> collection.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public PageLayout (Microsoft.SharePoint.SPListItem listItem);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPListItem listItem) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PageLayout.#ctor(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (listItem As SPListItem)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; PageLayout(Microsoft::SharePoint::SPListItem ^ listItem);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="listItem" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="listItem">The <see cref="T:Microsoft.SharePoint.SPListItem" /> object that is constructed.</param>
+        <summary>Uses the <see cref="T:Microsoft.SharePoint.SPListItem" /> class to construct a <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> list item object in a document library.</summary>
+        <remarks>
+          <para>Use this method to instantiate a <b>PageLayout</b> instance that wraps an <b>SPListItem</b> object that you have already retrieved. The <b>SPListItem</b> should be an item in the master page gallery of the site collection.</para>
+          <para>The <b>listItem</b> must be an <b>SPListItem</b> instance and cannot be a null reference (Nothing in Visual Basic).</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">The <b>listItem</b> is a null reference (Nothing in Visual Basic), which is not valid.</exception>
+        <example>
+          <para>Before compiling and running this example, verify that the <b>SPListItem</b> object is a list item for a page layout that resides in the master page gallery on the top-level Web site.</para>
+          <para>This example assumes that the master page gallery that contains the <b>SPListItem</b> object requires content approval.</para>
+          <code>using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PageLayoutCodeSamples
+    {
+        // This method sets some properties on a PageLayout object,
+        // saves the new values, and publishes the PageLayout.
+        public static void SetPageLayoutPropertiesAndApprove(SPListItem layoutListItem)
+        {
+            // Replace these variable values and input
+            // parameters with your own values.
+            // New PageLayout.Title value
+            string newTitle = "your Title";
+            // New PageLayout.Description value
+            string newDescription = "your Description";
+            // The comment to set when the layout is checked in,
+            // published, and approved.
+            string checkInComment = "your comments";
+            // Validate the input parameters.
+            if (null == layoutListItem)
+            {
+                throw new System.ArgumentNullException("layoutListItem");
+            }
+
+            // Get the PageLayout wrapper for the SPListItem
+            // that is passed.
+            PageLayout pageLayout = new PageLayout(layoutListItem);
+
+            // Check out the PageLayout if it is not checked out yet.
+            if (pageLayout.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                pageLayout.ListItem.File.CheckOut();
+            }
+
+            // Set and save some properties on the PageLayout object.
+            pageLayout.Title = newTitle;
+            pageLayout.Description = newDescription;
+            pageLayout.Update();
+
+            // Publish the PageLayout and approve it so that the
+            // updated values are available on the published Web site.
+            pageLayout.ListItem.File.CheckIn(checkInComment);
+            SPFile layoutFile = pageLayout.ListItem.File;
+            layoutFile.Publish(checkInComment);
+            layoutFile.Approve(checkInComment);
+
+        }
+    }
+}
+</code>
+          <code>Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PageLayoutCodeSamples
+        ' This method sets some properties on a PageLayout object,
+        ' saves the new values, and publishes the PageLayout.
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPageLayoutPropertiesAndApprove(ByVal layoutListItem As SPListItem)
+            ' Replace these variable values and input
+            ' parameters with your own values.
+            ' New PageLayout.Title value
+            Dim newTitle As String = "your Title"
+            ' New PageLayout.Description value
+            Dim newDescription As String = "your Description"
+            ' The comment to set when the layout is checked in,
+            ' published, and approved.
+            Dim checkInComment As String = "your comments"
+            ' Validate the input parameters.
+            If Nothing Is layoutListItem Then
+                Throw New System.ArgumentNullException("layoutListItem")
+            End If
+
+            ' Get the PageLayout wrapper for the SPListItem
+            ' that is passed.
+            Dim pageLayout As New PageLayout(layoutListItem)
+
+            ' Check out the PageLayout if it is not checked out yet.
+            If pageLayout.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                pageLayout.ListItem.File.CheckOut()
+            End If
+
+            ' Set and save some properties on the PageLayout object.
+            pageLayout.Title = newTitle
+            pageLayout.Description = newDescription
+            pageLayout.Update()
+
+            ' Publish the PageLayout and approve it so that the
+            ' updated values are available on the published Web site.
+            pageLayout.ListItem.File.CheckIn(checkInComment)
+            Dim layoutFile As SPFile = pageLayout.ListItem.File
+            layoutFile.Publish(checkInComment)
+            layoutFile.Approve(checkInComment)
+
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AnonymousCacheProfileId">
+      <MemberSignature Language="C#" Value="public int AnonymousCacheProfileId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 AnonymousCacheProfileId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.AnonymousCacheProfileId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AnonymousCacheProfileId As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int AnonymousCacheProfileId { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the identifier of the anonymous cache profile in the Cache Profiles list.</summary>
+        <value>The identifier of the anonymous cache profile in the Cache Profiles list.</value>
+        <remarks>
+          <para>If the return value is -1, no profile is selected.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AssociatedContentType">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPContentType AssociatedContentType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPContentType AssociatedContentType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.AssociatedContentType" />
+      <MemberSignature Language="VB.NET" Value="Public Property AssociatedContentType As SPContentType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPContentType ^ AssociatedContentType { Microsoft::SharePoint::SPContentType ^ get(); void set(Microsoft::SharePoint::SPContentType ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPContentType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the associated <see cref="T:Microsoft.SharePoint.SPContentType" /> object that is used when creating a <see cref="T:Microsoft.SharePoint.PublishingPage" /> object with this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</summary>
+        <value>The page content type that is associated with this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</value>
+        <remarks>
+          <para>This property indicates the content that this <b>PageLayout</b> object can render.</para>
+          <para>When a <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object is created based on this <b>PageLayout</b> object, its <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ContentType" /> is set to the value of this <b>AssociatedContentType</b>, which allows the <b>PublishingPage</b> object to store data that this <b>PageLayout</b> object can render.</para>
+          <para>The page content type is used when creating a <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object that uses this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</para>
+          <para>If no <b>AssociatedContentType</b> has been specified in the <b>PageLayout</b> object, this value defaults to the base page <see cref="T:Microsoft.SharePoint.SPContentType" /> with ID equal to <b>ContentTypeId.Page</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>This example replaces the <b>PageLayout</b> object for all <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> objects in a Web to a new <b>PageLayout</b> that renders the same type of content.</para>
+          <para>Before compiling and running this example, verify that the <paramref name="oldPageLayout" /> and <paramref name="newPageLayout" /> parameters render the same content. They should use the same <b>AssociatedContentType</b> value.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+        public static void SwapPageLayout(PublishingWeb publishingWeb, 
+          PageLayout oldPageLayout, PageLayout newPageLayout)
+        {
+            // Replace these variable values and input parameters
+            // with your own values.
+            //
+            // The comment to set when the page is checked in, published,
+            // and approved.
+            string checkInComment = "Your comments";
+            //
+            // Validate the input parameters.
+            if (null == publishingWeb)
+            {
+                throw new System.ArgumentNullException("publishingWeb");
+            }
+            if (null == oldPageLayout)
+            {
+                throw new System.ArgumentNullException("oldPageLayout");
+            }
+            if (null == newPageLayout)
+            {
+                throw new System.ArgumentNullException("newPageLayout");
+            }
+            // Confirm that the oldPageLayout and newPageLayout are compatible.
+            if (oldPageLayout.AssociatedContentType.Id != 
+              newPageLayout.AssociatedContentType.Id)
+            {
+                throw new System.ArgumentException(
+                    "The page layouts must render the same type of content",
+                    "newPageLayout");
+            }
+
+            System.Guid oldPageLayoutId = oldPageLayout.ListItem.File.UniqueId;
+
+            // Set the new PageLayout for all pages that use the old PageLayout.
+            PublishingPageCollection publishingPages = 
+              publishingWeb.GetPublishingPages();
+            foreach (PublishingPage publishingPage in publishingPages)
+            {
+                if (publishingPage.Layout.ListItem.UniqueId == 
+                  oldPageLayoutId)
+                {
+                    if (publishingPage.ListItem.File.CheckOutStatus == 
+                      SPFile.SPCheckOutStatus.None)
+                    {
+                        publishingPage.CheckOut();
+                    }
+
+                    publishingPage.Layout = newPageLayout;
+                    publishingPage.Update();
+
+                    // The PublishingPage has the same SPContentType as its PageLayout.
+                    System.Diagnostics.Debug.Assert(
+                        publishingPage.ContentType.Parent.Id ==
+                        newPageLayout.AssociatedContentType.Id);
+
+                    publishingPage.CheckIn(checkInComment);
+                }
+            }
+
+        }
+
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub SwapPageLayout(ByVal publishingWeb As PublishingWeb, ByVal oldPageLayout As PageLayout, ByVal newPageLayout As PageLayout)
+            ' Replace these variable values and input parameters
+            ' with your own values.
+            '
+            ' The comment to set when the page is checked in, published,
+            ' and approved.
+            Dim checkInComment As String = "Your comments"
+            '
+            ' Validate the input parameters.
+            If Nothing Is publishingWeb Then
+                Throw New System.ArgumentNullException("publishingWeb")
+            End If
+            If Nothing Is oldPageLayout Then
+                Throw New System.ArgumentNullException("oldPageLayout")
+            End If
+            If Nothing Is newPageLayout Then
+                Throw New System.ArgumentNullException("newPageLayout")
+            End If
+            ' Confirm that the oldPageLayout and newPageLayout are compatible.
+            If oldPageLayout.AssociatedContentType.Id &amp;lt;&amp;gt; newPageLayout.AssociatedContentType.Id Then
+                Throw New System.ArgumentException("The page layouts must render the same type of content", "newPageLayout")
+            End If
+
+            Dim oldPageLayoutId As System.Guid = oldPageLayout.ListItem.File.UniqueId
+
+            ' Set the new PageLayout for all pages that use the old PageLayout.
+            Dim publishingPages As PublishingPageCollection = publishingWeb.GetPublishingPages()
+            For Each publishingPage As PublishingPage In publishingPages
+                If publishingPage.Layout.ListItem.UniqueId = oldPageLayoutId Then
+                    If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                        publishingPage.CheckOut()
+                    End If
+
+                    publishingPage.Layout = newPageLayout
+                    publishingPage.Update()
+
+                    ' The PublishingPage has the same SPContentType as its PageLayout.
+                    System.Diagnostics.Debug.Assert(publishingPage.ContentType.Parent.Id = newPageLayout.AssociatedContentType.Id)
+
+                    publishingPage.CheckIn(checkInComment)
+                End If
+            Next publishingPage
+
+        End Sub
+
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AuthenticatedCacheProfileId">
+      <MemberSignature Language="C#" Value="public int AuthenticatedCacheProfileId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 AuthenticatedCacheProfileId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.AuthenticatedCacheProfileId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AuthenticatedCacheProfileId As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int AuthenticatedCacheProfileId { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the identifier of the authenticated cache profile in the Cache Profiles list.</summary>
+        <value>The identifier of the authenticated cache profile in the Cache Profiles list.</value>
+        <remarks>
+          <para>If the return value is -1, no profile is selected.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreatedBy">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPUser CreatedBy { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPUser CreatedBy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.CreatedBy" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CreatedBy As SPUser" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPUser ^ CreatedBy { Microsoft::SharePoint::SPUser ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPUser</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.SPUser" /> object that represents the user who created this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.SPUser" /> object that represents the user who created this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" />.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PageLayout.CreatedBy" /> value is initialized when the <b>PageLayout</b> object is created; this value cannot be modified.</para>
+          <para>The user must have view permissions on the <b>PageLayout</b> object to retrieve the <b>PageLayout</b> object initially and to get any of its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreatedDate">
+      <MemberSignature Language="C#" Value="public DateTime CreatedDate { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime CreatedDate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.CreatedDate" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CreatedDate As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime CreatedDate { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>DateTime</b> when this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object was created.</summary>
+        <value>The <b>DateTime</b> when this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> was created.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PageLayout.CreatedDate" /> value is initialized when a <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> class is created; this value cannot be modified.</para>
+          <para>The user must have view permissions on the <b>PageLayout</b> object to retrieve it initially and to get any of its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets descriptive text for this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</summary>
+        <value>The text describing this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.The <b>Description</b> value can be an empty string. A a null reference (Nothing in Visual Basic) value is also treated as an empty string.</value>
+        <remarks>
+          <para>You must call <see cref="M:Microsoft.SharePoint.Publishing.PageLayout.Update" /> after setting this property to save changes.</para>
+          <para>The user must have edit permissions on the <b>PageLayout</b> object to set this value. The user must have view permissions on the <b>PageLayout</b> object to retrieve it initially and to get any of its property values.</para>
+          <para>If this property value is used in HTML and is rendered in a Web browser, you should encode the property value to avoid the possibility of scripting attacks.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">A property value that is not valid.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+        <example>
+          <para>Before compiling and running this example, verify that the <b>SPListItem</b> object is a list item for a page layout that resides in the master page gallery on the top-level Web site. </para>
+          <para>This example assumes that the master page gallery that contains the <b>SPListItem</b> object requires content approval.</para>
+          <code>using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PageLayoutCodeSamples
+    {
+        // This method sets some properties on a PageLayout object,
+        // saves the new values, and publishes the PageLayout.
+        public static void SetPageLayoutPropertiesAndApprove(SPListItem layoutListItem)
+        {
+            // Replace these variable values and input
+            // parameters with your own values.
+            // New PageLayout.Title value
+            string newTitle = "your Title";
+            // New PageLayout.Description value
+            string newDescription = "your Description";
+            // The comment to set when the layout is checked in,
+            // published, and approved.
+            string checkInComment = "your comments";
+            // Validate the input parameters.
+            if (null == layoutListItem)
+            {
+                throw new System.ArgumentNullException("layoutListItem");
+            }
+
+            // Get the PageLayout wrapper for the SPListItem
+            // that is passed in.
+            PageLayout pageLayout = new PageLayout(layoutListItem);
+
+            // Check out the PageLayout if it is not checked out yet.
+            if (pageLayout.ListItem.File.CheckOutStatus == 
+              SPFile.SPCheckOutStatus.None)
+            {
+                pageLayout.ListItem.File.CheckOut();
+            }
+
+            // Set and save some properties on the PageLayout.
+            pageLayout.Title = newTitle;
+            pageLayout.Description = newDescription;
+            pageLayout.Update();
+
+            // Publish the PageLayout and Approve it so that the
+            // updated values are available on the published Web site.
+            pageLayout.ListItem.File.CheckIn(checkInComment);
+            SPFile layoutFile = pageLayout.ListItem.File;
+            layoutFile.Publish(checkInComment);
+            layoutFile.Approve(checkInComment);
+
+        }
+    }
+}</code>
+          <code>Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PageLayoutCodeSamples
+        ' This method sets some properties on a PageLayout object,
+        ' saves the new values, and publishes the PageLayout.
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPageLayoutPropertiesAndApprove(ByVal layoutListItem As SPListItem)
+            ' Replace these variable values and input
+            ' parameters with your own values.
+            ' New PageLayout.Title value
+            Dim newTitle As String = "your Title"
+            ' New PageLayout.Description value
+            Dim newDescription As String = "your Description"
+            ' The comment to set when the layout is checked in,
+            ' published, and approved.
+            Dim checkInComment As String = "your comments"
+            ' Validate the input parameters.
+            If Nothing Is layoutListItem Then
+                Throw New System.ArgumentNullException("layoutListItem")
+            End If
+
+            ' Get the PageLayout wrapper for the SPListItem
+            ' that is passed in.
+            Dim pageLayout As New PageLayout(layoutListItem)
+
+            ' Check out the PageLayout if it is not checked out yet.
+            If pageLayout.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                pageLayout.ListItem.File.CheckOut()
+            End If
+
+            ' Set and save some properties on the PageLayout.
+            pageLayout.Title = newTitle
+            pageLayout.Description = newDescription
+            pageLayout.Update()
+
+            ' Publish the PageLayout and Approve it so that the
+            ' updated values are available on the published Web site.
+            pageLayout.ListItem.File.CheckIn(checkInComment)
+            Dim layoutFile As SPFile = pageLayout.ListItem.File
+            layoutFile.Publish(checkInComment)
+            layoutFile.Approve(checkInComment)
+
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Folder">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPFolder Folder { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPFolder Folder" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.Folder" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Folder As SPFolder" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPFolder ^ Folder { Microsoft::SharePoint::SPFolder ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPFolder</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.SPFolder" /> object in which this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object is located.</summary>
+        <value>The folder in which this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object is located.</value>
+        <remarks>
+          <para>This method wraps the <b>SPListItem.Folder</b> property.</para>
+          <para>The user must have view permissions on the <b>PageLayout</b> object to retrieve it initially and to get any of its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ListItem">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPListItem ListItem { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPListItem ListItem" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.ListItem" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ListItem As SPListItem" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPListItem ^ ListItem { Microsoft::SharePoint::SPListItem ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPListItem</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.SPListItem" /> object upon which this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> class is based.</summary>
+        <value>The underlying <see cref="T:Microsoft.SharePoint.SPListItem" /> object upon which this class is based.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PageLayout.ListItem" /> value is initialized when an instance of <b>PageLayout</b> is created and cannot be modified.</para>
+          <para>
+            <b>Note</b>: The user must have permission to view list items in this list to initially retrieve the listing and to get any of its property values.</para>
+          <para>This property is useful for accessing the additional <b>SPListItem</b> and <b>SPListItem.File</b> properties and methods that have not been wrapped by the <b>PageLayout</b> class.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>Before compiling and running this example, verify that the <b>SPListItem</b> object is a list item for a page layout that resides in the master page gallery on the top-level Web site.</para>
+          <para>This example assumes that the master page gallery that contains the <b>SPListItem</b> object requires content approval.</para>
+          <para>Do not use this property to access arbitrary fields of the <see cref="T:Microsoft.SharePoint.SPListItem" />. <see cref="T:Microsoft.SharePoint.Publishing.PageLayout.ListItem" /> applies only the following fields:</para>
+          <list type="bullet">
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.AnonymousCacheProfile" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.AuthenticatedCacheProfile" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.Author" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.ContentTypeId" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.Created" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.FSObjType" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.FileDirRef" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.FileLeafRef" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.FileRef" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.Id" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.MasterPageDescription" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.PublishingAssociatedContentType" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.PublishingAssociatedVariations" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.PublishingPreviewImage" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.ScopeId" />
+              </description>
+            </item>
+            <item>
+              <description>
+                <see cref="F:Microsoft.SharePoint.Publishing.FieldId.Title" />
+              </description>
+            </item>
+          </list>
+          <para>If there is a need to access other fields, use <see cref="T:Microsoft.SharePoint.SPQuery" /> to create a new <see cref="T:Microsoft.SharePoint.SPListItem" /> instance for use with other fields.</para>
+          <code>using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PageLayoutCodeSamples
+    {
+        // This method sets some properties on a PageLayout object,
+        // saves the new values, and publishes the PageLayout.
+        public static void SetPageLayoutPropertiesAndApprove(SPListItem layoutListItem)
+        {
+            // Replace these variable values and input
+            // parameters with your own values.
+            // New PageLayout.Title value
+            string newTitle = "your Title";
+            // New PageLayout.Description value
+            string newDescription = "your Description";
+            // The comment to set when the layout is checked in,
+            // published, and approved.
+            string checkInComment = "your comments";
+            // Validate the input parameters.
+            if (null == layoutListItem)
+            {
+                throw new System.ArgumentNullException("layoutListItem");
+            }
+
+            // Get the PageLayout wrapper for the SPListItem
+            // that is passed in.
+            PageLayout pageLayout = new PageLayout(layoutListItem);
+
+            // Check out the PageLayout if it is not checked out yet.
+            if (pageLayout.ListItem.File.CheckOutStatus == 
+              SPFile.SPCheckOutStatus.None)
+            {
+                pageLayout.ListItem.File.CheckOut();
+            }
+
+            // Set and save some properties on the PageLayout.
+            pageLayout.Title = newTitle;
+            pageLayout.Description = newDescription;
+            pageLayout.Update();
+
+            // Publish the PageLayout and Approve it so that the
+            // updated values are available on the published Web site.
+            pageLayout.ListItem.File.CheckIn(checkInComment);
+            SPFile layoutFile = pageLayout.ListItem.File;
+            layoutFile.Publish(checkInComment);
+            layoutFile.Approve(checkInComment);
+
+        }
+    }
+}</code>
+          <code>Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PageLayoutCodeSamples
+        ' This method sets some properties on a PageLayout object,
+        ' saves the new values, and publishes the PageLayout.
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPageLayoutPropertiesAndApprove(ByVal layoutListItem As SPListItem)
+            ' Replace these variable values and input
+            ' parameters with your own values.
+            ' New PageLayout.Title value
+            Dim newTitle As String = "your Title"
+            ' New PageLayout.Description value
+            Dim newDescription As String = "your Description"
+            ' The comment to set when the layout is checked in,
+            ' published, and approved.
+            Dim checkInComment As String = "your comments"
+            ' Validate the input parameters.
+            If Nothing Is layoutListItem Then
+                Throw New System.ArgumentNullException("layoutListItem")
+            End If
+
+            ' Get the PageLayout wrapper for the SPListItem
+            ' that is passed in.
+            Dim pageLayout As New PageLayout(layoutListItem)
+
+            ' Check out the PageLayout if it is not checked out yet.
+            If pageLayout.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                pageLayout.ListItem.File.CheckOut()
+            End If
+
+            ' Set and save some properties on the PageLayout.
+            pageLayout.Title = newTitle
+            pageLayout.Description = newDescription
+            pageLayout.Update()
+
+            ' Publish the PageLayout and Approve it so that the
+            ' updated values are available on the published Web site.
+            pageLayout.ListItem.File.CheckIn(checkInComment)
+            Dim layoutFile As SPFile = pageLayout.ListItem.File
+            layoutFile.Publish(checkInComment)
+            layoutFile.Approve(checkInComment)
+
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.Name" />
+      <MemberSignature Language="VB.NET" Value="Public Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</summary>
+        <value>The URL name for this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" />.</value>
+        <remarks>
+          <para>The <b>Name</b> value is initialized when a <b>PageLayout</b> object is created, and cannot be modified.</para>
+          <para>If this property value is used in HTML that is rendered in a Web browser, you should encode the property value to avoid the possibility of scripting attacks.</para>
+          <para>Another way to set the <b>Name</b> property is to use the <b>PageLayout.ListItem.File.MoveTo(string)</b> operation.</para>
+          <para>You must call <see cref="M:Microsoft.SharePoint.Publishing.PageLayout.Update" /> after setting this property to save the changes.</para>
+          <para>The user must have edit permissions on the <b>PageLayout</b> object to set this value. The user must have view permissions on the <b>PageLayout</b> object to retrieve it initially and to get any of its property values.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="PreviewImageUrl">
+      <MemberSignature Language="C#" Value="public string PreviewImageUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string PreviewImageUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.PreviewImageUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property PreviewImageUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ PreviewImageUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the fully qualified, or absolute, URL of an associated preview image for this <b>PageLayout</b> object.</summary>
+        <value>The fully qualified, or absolute, URL of an associated preview image for this <b>PageLayout</b> object.</value>
+        <remarks>
+          <para>This image is displayed in the user interface (UI) when users are creating a <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> and are selecting a <b>PageLayout</b> for it. This image helps identify the type of <b>PageLayout</b> that the user is selecting.</para>
+          <para>To save changes, you must call the <b>PageLayout.Update</b> method after setting this property.</para>
+          <para>The user must have edit permissions on the <b>PageLayout</b> object to set this value. The user must have view permissions on the <b>PageLayout</b> object to retrieve it initially and to get any of its property values.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ServerRelativeUrl">
+      <MemberSignature Language="C#" Value="public string ServerRelativeUrl { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ServerRelativeUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.ServerRelativeUrl" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ServerRelativeUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ServerRelativeUrl { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the server-relative URL of this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</summary>
+        <value>The server-relative URL of this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</value>
+        <remarks>
+          <para>The user must have permissions on the <b>PageLayout</b> object to retrieve it initially and to get any of its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Title">
+      <MemberSignature Language="C#" Value="public string Title { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Title" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PageLayout.Title" />
+      <MemberSignature Language="VB.NET" Value="Public Property Title As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Title { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the display title for this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</summary>
+        <value>The title to be displayed for this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.<b>Title</b> can be set to an empty string. A a null reference (Nothing in Visual Basic) value is saved as an empty string.</value>
+        <remarks>
+          <para>
+            <b>Title</b> cannot exceed 255 characters. Any excess characters cause an <b>SPException</b> to be thrown when <see cref="M:Microsoft.SharePoint.Publishing.PageLayout.Update" /> is called.</para>
+          <para>To save changes, the <b>PageLayout.Update</b> method must be called after setting this property.</para>
+          <para>The user must have edit permissions on the <b>PageLayout</b> object to set this value. The user must have view permissions on the <b>PageLayout</b> object to retrieve it initially and to get any of its property values.</para>
+          <para>If this property value is used in HTML that is rendered in a Web browser, you should encode the property value to avoid the possibility of scripting attacks.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException"> .</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+        <example>
+          <para>Before compiling and running this example, verify that the <b>SPListItem</b> object is a list item for a page layout that resides in the master page gallery on the top-level Web site. </para>
+          <para>This example assumes that the master page gallery that contains the <b>SPListItem</b> object requires content approval.</para>
+          <code>using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PageLayoutCodeSamples
+    {
+        // This method sets some properties on a PageLayout object,
+        // saves the new values, and publishes the PageLayout.
+        public static void SetPageLayoutPropertiesAndApprove(SPListItem layoutListItem)
+        {
+            // Replace these variable values and input
+            // parameters with your own values.
+            // New PageLayout.Title value
+            string newTitle = "your Title";
+            // New PageLayout.Description value
+            string newDescription = "your Description";
+            // The comment to set when the layout is checked in,
+            // published, and approved.
+            string checkInComment = "your comments";
+            // Validate the input parameters.
+            if (null == layoutListItem)
+            {
+                throw new System.ArgumentNullException("layoutListItem");
+            }
+
+            // Get the PageLayout wrapper for the SPListItem
+            // that is passed in.
+            PageLayout pageLayout = new PageLayout(layoutListItem);
+
+            // Check out the PageLayout if it is not checked out yet.
+            if (pageLayout.ListItem.File.CheckOutStatus == 
+              SPFile.SPCheckOutStatus.None)
+            {
+                pageLayout.ListItem.File.CheckOut();
+            }
+
+            // Set and save some properties on the PageLayout.
+            pageLayout.Title = newTitle;
+            pageLayout.Description = newDescription;
+            pageLayout.Update();
+
+            // Publish the PageLayout and Approve it so that the
+            // updated values are available on the published Web site.
+            pageLayout.ListItem.File.CheckIn(checkInComment);
+            SPFile layoutFile = pageLayout.ListItem.File;
+            layoutFile.Publish(checkInComment);
+            layoutFile.Approve(checkInComment);
+
+        }
+    }
+}</code>
+          <code>Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PageLayoutCodeSamples
+        ' This method sets some properties on a PageLayout object,
+        ' saves the new values, and publishes the PageLayout.
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPageLayoutPropertiesAndApprove(ByVal layoutListItem As SPListItem)
+            ' Replace these variable values and input
+            ' parameters with your own values.
+            ' New PageLayout.Title value
+            Dim newTitle As String = "your Title"
+            ' New PageLayout.Description value
+            Dim newDescription As String = "your Description"
+            ' The comment to set when the layout is checked in,
+            ' published, and approved.
+            Dim checkInComment As String = "your comments"
+            ' Validate the input parameters.
+            If Nothing Is layoutListItem Then
+                Throw New System.ArgumentNullException("layoutListItem")
+            End If
+
+            ' Get the PageLayout wrapper for the SPListItem
+            ' that is passed in.
+            Dim pageLayout As New PageLayout(layoutListItem)
+
+            ' Check out the PageLayout if it is not checked out yet.
+            If pageLayout.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                pageLayout.ListItem.File.CheckOut()
+            End If
+
+            ' Set and save some properties on the PageLayout.
+            pageLayout.Title = newTitle
+            pageLayout.Description = newDescription
+            pageLayout.Update()
+
+            ' Publish the PageLayout and Approve it so that the
+            ' updated values are available on the published Web site.
+            pageLayout.ListItem.File.CheckIn(checkInComment)
+            Dim layoutFile As SPFile = pageLayout.ListItem.File
+            layoutFile.Publish(checkInComment)
+            layoutFile.Approve(checkInComment)
+
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PageLayout.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Saves changes to this <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</summary>
+        <remarks>
+          <para>Saves changes made to this instance of the <b>PageLayout</b> object. Call this method after setting any values on the <b>PageLayout</b> object to persist the settings.</para>
+          <para>Any invalid values set in the <b>PageLayout</b> object before calling the <see cref="M:Microsoft.SharePoint.SPListItem.Update" /> method may cause an <b>SPException</b> to be thrown during the <see cref="M:Microsoft.SharePoint.Publishing.PageLayout.Update" /> call.</para>
+          <para>The user must have edit permissions on the <b>PageLayout</b> object to call this method.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.SPException">The update operation failed.</exception>
+        <example>
+          <para>Before compiling and running this example, verify that the <b>SPListItem</b> object is a list item for a page layout that resides in the master page gallery on the top-level Web site.</para>
+          <para>This example assumes that the master page gallery that contains the <b>SPListItem</b> object requires content approval.</para>
+          <code>using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PageLayoutCodeSamples
+    {
+        // This method sets some properties on a PageLayout object,
+        // saves the new values, and publishes the PageLayout.
+        public static void SetPageLayoutPropertiesAndApprove(SPListItem layoutListItem)
+        {
+            // Replace these variable values and input
+            // parameters with your own values.
+            // New PageLayout.Title value
+            string newTitle = "your Title";
+            // New PageLayout.Description value
+            string newDescription = "your Description";
+            // The comment to set when the layout is checked in,
+            // published, and approved.
+            string checkInComment = "your comments";
+            // Validate the input parameters.
+            if (null == layoutListItem)
+            {
+                throw new System.ArgumentNullException("layoutListItem");
+            }
+
+            // Get the PageLayout wrapper for the SPListItem
+            // that is passed in.
+            PageLayout pageLayout = new PageLayout(layoutListItem);
+
+            // Check out the PageLayout if it is not checked out yet.
+            if (pageLayout.ListItem.File.CheckOutStatus == 
+              SPFile.SPCheckOutStatus.None)
+            {
+                pageLayout.ListItem.File.CheckOut();
+            }
+
+            // Set and save some properties on the PageLayout.
+            pageLayout.Title = newTitle;
+            pageLayout.Description = newDescription;
+            pageLayout.Update();
+
+            // Publish the PageLayout and Approve it so that the
+            // updated values are available on the published Web site.
+            pageLayout.ListItem.File.CheckIn(checkInComment);
+            SPFile layoutFile = pageLayout.ListItem.File;
+            layoutFile.Publish(checkInComment);
+            layoutFile.Approve(checkInComment);
+
+        }
+    }
+}</code>
+          <code>Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PageLayoutCodeSamples
+        ' This method sets some properties on a PageLayout object,
+        ' saves the new values, and publishes the PageLayout.
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPageLayoutPropertiesAndApprove(ByVal layoutListItem As SPListItem)
+            ' Replace these variable values and input
+            ' parameters with your own values.
+            ' New PageLayout.Title value
+            Dim newTitle As String = "your Title"
+            ' New PageLayout.Description value
+            Dim newDescription As String = "your Description"
+            ' The comment to set when the layout is checked in,
+            ' published, and approved.
+            Dim checkInComment As String = "your comments"
+            ' Validate the input parameters.
+            If Nothing Is layoutListItem Then
+                Throw New System.ArgumentNullException("layoutListItem")
+            End If
+
+            ' Get the PageLayout wrapper for the SPListItem
+            ' that is passed in.
+            Dim pageLayout As New PageLayout(layoutListItem)
+
+            ' Check out the PageLayout if it is not checked out yet.
+            If pageLayout.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                pageLayout.ListItem.File.CheckOut()
+            End If
+
+            ' Set and save some properties on the PageLayout.
+            pageLayout.Title = newTitle
+            pageLayout.Description = newDescription
+            pageLayout.Update()
+
+            ' Publish the PageLayout and Approve it so that the
+            ' updated values are available on the published Web site.
+            pageLayout.ListItem.File.CheckIn(checkInComment)
+            Dim layoutFile As SPFile = pageLayout.ListItem.File
+            layoutFile.Publish(checkInComment)
+            layoutFile.Approve(checkInComment)
+
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

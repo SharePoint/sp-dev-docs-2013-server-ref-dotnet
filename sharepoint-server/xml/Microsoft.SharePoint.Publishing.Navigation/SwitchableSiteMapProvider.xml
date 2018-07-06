@@ -1,0 +1,655 @@
+﻿<Type Name="SwitchableSiteMapProvider" FullName="Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider">
+  <TypeSignature Language="C#" Value="public sealed class SwitchableSiteMapProvider : System.Web.SiteMapProvider, Microsoft.SharePoint.Navigation.IEditableSiteMapProvider" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SwitchableSiteMapProvider extends System.Web.SiteMapProvider implements class Microsoft.SharePoint.Navigation.IEditableSiteMapProvider" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SwitchableSiteMapProvider&#xA;Inherits SiteMapProvider&#xA;Implements IEditableSiteMapProvider" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SwitchableSiteMapProvider sealed : System::Web::SiteMapProvider, Microsoft::SharePoint::Navigation::IEditableSiteMapProvider" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Web.SiteMapProvider</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.SharePoint.Navigation.IEditableSiteMapProvider</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Provides a way for a site's navigation settings to determine the <b>SiteMapProvider</b> instance that should be used when rendering a page.</summary>
+    <remarks>
+      <para>The <see cref="T:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider" /> class enables the <b>SiteMapProvider</b> class to be redirected at runtime according to the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings" /> data that is stored in the properties of the <see cref="T:Microsoft.SharePoint.SPWeb" /> object.</para>
+      <para>The <b>SwitchableSiteMapProvider</b> provides a way for a single master page to support several different possible navigation configurations. When you are designing a master page for a specific web site, you may know which navigation provider will be used, and you can avoid a lot of complexity by specifying it directly in your master page. For example, your <b>AspMenu</b> control can bind to a data source such as the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapDataSource" /> control, which specifies a name such as "GlobalNavigation" that references a <b>SiteMapProvider</b> instance from the web.config file. This chain is represented in the master page markup and only involves two ASP.NET controls.</para>
+      <para>By contrast, the standard system master page relies on two different switching criteria to support three different navigation models. If the publishing navigation feature is active, the master page contains a <see cref="T:Microsoft.SharePoint.WebControls.DelegateControl" /> object that by default points to the navigation provider that is used for basic sites. If the feature is enabled, this <b>DelegateControl</b> object replaces its data source with the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapDataSource" /> control that is defined by the feature XML in the TEMPLATE\FEATURES\Navigation\NigationSiteSettings.xml file. </para>
+      <para>In previous versions of SharePoint Server, this new data source was bound to the <b>GlobalNavigationProvider</b>, which is an instance of the <b>PortalSiteMapProvider</b> object. In , a second switching criteria was introduced: each site can choose between a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.TaxonomySiteMapProvider" /> and a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" />. This is accomplished by binding the data source to the <b>SwitchableSiteMapProvider</b> object, which acts as a wrapper that reads the active settings, and then passes the calls through to the appropriate provider.</para>
+      <para>Since the provider types have very different behaviors and usage scenarios, they require different settings for properties such as <b>SiteMapDataSource.StartFromCurrentNode</b> and <b>SiteMapDataSource.ShowStartingNode</b>. The <see cref="T:Microsoft.SharePoint.Publishing.Navigation.SwitchableProperty" /> XML tag provides a way for the <b>PortalSiteMapDataSource</b> control to embed these alternate property values within the <b>PortalSiteMapDataSource</b> markup, by means of the ASP.NET<see cref="T:System.Web.UI.ParseChildrenAttribute" /> mechanism. A slightly different syntax is used to accomplish this in the limited feature XML language used by the <b>DelegateControl</b> object, but the concept is the same.</para>
+      <para>The active provider can be determined by calling the <see cref="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.GetCurrentWrappedProvider" /> method.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SwitchableSiteMapProvider ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; SwitchableSiteMapProvider();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentNode">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode CurrentNode { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Web.SiteMapNode CurrentNode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.CurrentNode" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property CurrentNode As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Web::SiteMapNode ^ CurrentNode { System::Web::SiteMapNode ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultTargetProviderName">
+      <MemberSignature Language="C#" Value="public string DefaultTargetProviderName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DefaultTargetProviderName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.DefaultTargetProviderName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DefaultTargetProviderName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DefaultTargetProviderName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a string value that is assigned via the web.config attribute.</summary>
+        <value>A string value that is assigned via the web.config attribute</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.DefaultTargetProviderName" /> property is used for backward compatibility; it specifies a default target provider name to use when the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.WebNavigationSettings" /> object is undefined for the current <see cref="T:Microsoft.SharePoint.SPWeb" /> object. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FindSiteMapNode">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode FindSiteMapNode (string rawUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNode FindSiteMapNode(string rawUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.FindSiteMapNode(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function FindSiteMapNode (rawUrl As String) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNode ^ FindSiteMapNode(System::String ^ rawUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rawUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="rawUrl">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FindSiteMapNode">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode FindSiteMapNode (System.Web.HttpContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNode FindSiteMapNode(class System.Web.HttpContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.FindSiteMapNode(System.Web.HttpContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function FindSiteMapNode (context As HttpContext) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNode ^ FindSiteMapNode(System::Web::HttpContext ^ context);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="System.Web.HttpContext" />
+      </Parameters>
+      <Docs>
+        <param name="context">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FindSiteMapNodeFromKey">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode FindSiteMapNodeFromKey (string key);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNode FindSiteMapNodeFromKey(string key) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.FindSiteMapNodeFromKey(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function FindSiteMapNodeFromKey (key As String) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNode ^ FindSiteMapNodeFromKey(System::String ^ key);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="key" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="key">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChildNodes">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNodeCollection GetChildNodes (System.Web.SiteMapNode node);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNodeCollection GetChildNodes(class System.Web.SiteMapNode node) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.GetChildNodes(System.Web.SiteMapNode)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChildNodes (node As SiteMapNode) As SiteMapNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNodeCollection ^ GetChildNodes(System::Web::SiteMapNode ^ node);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNodeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="System.Web.SiteMapNode" />
+      </Parameters>
+      <Docs>
+        <param name="node">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCurrentNodeAndHintAncestorNodes">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode GetCurrentNodeAndHintAncestorNodes (int higherLevel);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNode GetCurrentNodeAndHintAncestorNodes(int32 higherLevel) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.GetCurrentNodeAndHintAncestorNodes(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetCurrentNodeAndHintAncestorNodes (higherLevel As Integer) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNode ^ GetCurrentNodeAndHintAncestorNodes(int higherLevel);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="higherLevel" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="higherLevel">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCurrentNodeAndHintNeighborhoodNodes">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode GetCurrentNodeAndHintNeighborhoodNodes (int higherLevel, int downLevel);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNode GetCurrentNodeAndHintNeighborhoodNodes(int32 higherLevel, int32 downLevel) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.GetCurrentNodeAndHintNeighborhoodNodes(System.Int32,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetCurrentNodeAndHintNeighborhoodNodes (higherLevel As Integer, downLevel As Integer) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNode ^ GetCurrentNodeAndHintNeighborhoodNodes(int higherLevel, int downLevel);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="higherLevel" Type="System.Int32" />
+        <Parameter Name="downLevel" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="higherLevel">To be added.</param>
+        <param name="downLevel">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCurrentWrappedProvider">
+      <MemberSignature Language="C#" Value="public System.Web.SiteMapProvider GetCurrentWrappedProvider ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Web.SiteMapProvider GetCurrentWrappedProvider() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.GetCurrentWrappedProvider" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCurrentWrappedProvider () As SiteMapProvider" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Web::SiteMapProvider ^ GetCurrentWrappedProvider();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapProvider</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the wrapped <see cref="T:Microsoft.SharePoint.Publishing.Navigation.SiteMapProvider" /> object as specified by the navigation settings for the current <see cref="T:Microsoft.SharePoint.SPWeb" /> object (from the <see cref="T:Microsoft.SharePoint.SPContext" /> object).</summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>The target provider is fetched by name from the global <see cref="P:System.Web.SiteMap.Providers" /> table.</para>
+          <para>The <b>GetCurrentWrappedProvider</b> method never returns null. For minor configuration problems, it returns an “error site map” that contains the error message as its only <see cref="T:Microsoft.SharePoint.Publishing.Navigation.SiteMapNode" /> object. This behavior prevents a minor configuration error from bringing down the entire SharePoint site, including the control panels that could otherwise be used to fix the problem.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetParentNode">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode GetParentNode (System.Web.SiteMapNode node);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNode GetParentNode(class System.Web.SiteMapNode node) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.GetParentNode(System.Web.SiteMapNode)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetParentNode (node As SiteMapNode) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNode ^ GetParentNode(System::Web::SiteMapNode ^ node);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="System.Web.SiteMapNode" />
+      </Parameters>
+      <Docs>
+        <param name="node">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetParentNodeRelativeToCurrentNodeAndHintDownFromParent">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode GetParentNodeRelativeToCurrentNodeAndHintDownFromParent (int walkupLevels, int relativeDepthFromWalkup);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNode GetParentNodeRelativeToCurrentNodeAndHintDownFromParent(int32 walkupLevels, int32 relativeDepthFromWalkup) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.GetParentNodeRelativeToCurrentNodeAndHintDownFromParent(System.Int32,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetParentNodeRelativeToCurrentNodeAndHintDownFromParent (walkupLevels As Integer, relativeDepthFromWalkup As Integer) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNode ^ GetParentNodeRelativeToCurrentNodeAndHintDownFromParent(int walkupLevels, int relativeDepthFromWalkup);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="walkupLevels" Type="System.Int32" />
+        <Parameter Name="relativeDepthFromWalkup" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="walkupLevels">To be added.</param>
+        <param name="relativeDepthFromWalkup">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetParentNodeRelativeToNodeAndHintDownFromParent">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode GetParentNodeRelativeToNodeAndHintDownFromParent (System.Web.SiteMapNode node, int walkupLevels, int relativeDepthFromWalkup);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Web.SiteMapNode GetParentNodeRelativeToNodeAndHintDownFromParent(class System.Web.SiteMapNode node, int32 walkupLevels, int32 relativeDepthFromWalkup) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.GetParentNodeRelativeToNodeAndHintDownFromParent(System.Web.SiteMapNode,System.Int32,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetParentNodeRelativeToNodeAndHintDownFromParent (node As SiteMapNode, walkupLevels As Integer, relativeDepthFromWalkup As Integer) As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Web::SiteMapNode ^ GetParentNodeRelativeToNodeAndHintDownFromParent(System::Web::SiteMapNode ^ node, int walkupLevels, int relativeDepthFromWalkup);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="System.Web.SiteMapNode" />
+        <Parameter Name="walkupLevels" Type="System.Int32" />
+        <Parameter Name="relativeDepthFromWalkup" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="node">To be added.</param>
+        <param name="walkupLevels">To be added.</param>
+        <param name="relativeDepthFromWalkup">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetRootNodeCore">
+      <MemberSignature Language="C#" Value="protected override System.Web.SiteMapNode GetRootNodeCore ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Web.SiteMapNode GetRootNodeCore() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.GetRootNodeCore" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetRootNodeCore () As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Web::SiteMapNode ^ GetRootNodeCore();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUnderlyingProvider">
+      <MemberSignature Language="C#" Value="public static System.Web.SiteMapProvider GetUnderlyingProvider (System.Web.SiteMapProvider siteMapProvider);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Web.SiteMapProvider GetUnderlyingProvider(class System.Web.SiteMapProvider siteMapProvider) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.GetUnderlyingProvider(System.Web.SiteMapProvider)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Web::SiteMapProvider ^ GetUnderlyingProvider(System::Web::SiteMapProvider ^ siteMapProvider);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapProvider</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="siteMapProvider" Type="System.Web.SiteMapProvider" />
+      </Parameters>
+      <Docs>
+        <param name="siteMapProvider">To be added.</param>
+        <summary>If the specified <see cref="T:Microsoft.SharePoint.Publishing.Navigation.SiteMapProvider" /> object is a <see cref="T:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider" /> object, this method returns the wrapped provider.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HintAncestorNodes">
+      <MemberSignature Language="C#" Value="public override void HintAncestorNodes (System.Web.SiteMapNode node, int higherLevel);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void HintAncestorNodes(class System.Web.SiteMapNode node, int32 higherLevel) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.HintAncestorNodes(System.Web.SiteMapNode,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub HintAncestorNodes (node As SiteMapNode, higherLevel As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void HintAncestorNodes(System::Web::SiteMapNode ^ node, int higherLevel);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="System.Web.SiteMapNode" />
+        <Parameter Name="higherLevel" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="node">To be added.</param>
+        <param name="higherLevel">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HintNeighborhoodNodes">
+      <MemberSignature Language="C#" Value="public override void HintNeighborhoodNodes (System.Web.SiteMapNode node, int higherLevel, int downLevel);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void HintNeighborhoodNodes(class System.Web.SiteMapNode node, int32 higherLevel, int32 downLevel) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.HintNeighborhoodNodes(System.Web.SiteMapNode,System.Int32,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub HintNeighborhoodNodes (node As SiteMapNode, higherLevel As Integer, downLevel As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void HintNeighborhoodNodes(System::Web::SiteMapNode ^ node, int higherLevel, int downLevel);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="node" Type="System.Web.SiteMapNode" />
+        <Parameter Name="higherLevel" Type="System.Int32" />
+        <Parameter Name="downLevel" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="node">To be added.</param>
+        <param name="higherLevel">To be added.</param>
+        <param name="downLevel">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Initialize">
+      <MemberSignature Language="C#" Value="public override void Initialize (string name, System.Collections.Specialized.NameValueCollection attributes);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Initialize(string name, class System.Collections.Specialized.NameValueCollection attributes) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Initialize (name As String, attributes As NameValueCollection)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Initialize(System::String ^ name, System::Collections::Specialized::NameValueCollection ^ attributes);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="attributes" Type="System.Collections.Specialized.NameValueCollection" />
+      </Parameters>
+      <Docs>
+        <param name="name">To be added.</param>
+        <param name="attributes">To be added.</param>
+        <summary>Initializes the <see cref="T:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAccessibleToUser">
+      <MemberSignature Language="C#" Value="public override bool IsAccessibleToUser (System.Web.HttpContext context, System.Web.SiteMapNode node);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsAccessibleToUser(class System.Web.HttpContext context, class System.Web.SiteMapNode node) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.IsAccessibleToUser(System.Web.HttpContext,System.Web.SiteMapNode)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function IsAccessibleToUser (context As HttpContext, node As SiteMapNode) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override bool IsAccessibleToUser(System::Web::HttpContext ^ context, System::Web::SiteMapNode ^ node);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="System.Web.HttpContext" />
+        <Parameter Name="node" Type="System.Web.SiteMapNode" />
+      </Parameters>
+      <Docs>
+        <param name="context">To be added.</param>
+        <param name="node">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction">
+      <MemberSignature Language="C#" Value="string Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.Microsoft#SharePoint#Navigation#IEditableSiteMapProvider#EditLinksAlternateAction" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property EditLinksAlternateAction As String Implements IEditableSiteMapProvider.EditLinksAlternateAction" />
+      <MemberSignature Language="C++ CLI" Value="property System::String ^ Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.EditLinksAlternateAction</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.GetMenuState">
+      <MemberSignature Language="C#" Value="Microsoft.SharePoint.Navigation.EditableAspMenuState IEditableSiteMapProvider.GetMenuState (string startingNodeKey, int maximumDepth, System.Collections.Specialized.StringCollection customProperties);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class Microsoft.SharePoint.Navigation.EditableAspMenuState Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.GetMenuState(string startingNodeKey, int32 maximumDepth, class System.Collections.Specialized.StringCollection customProperties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.Microsoft#SharePoint#Navigation#IEditableSiteMapProvider#GetMenuState(System.String,System.Int32,System.Collections.Specialized.StringCollection)" />
+      <MemberSignature Language="VB.NET" Value="Function GetMenuState (startingNodeKey As String, maximumDepth As Integer, customProperties As StringCollection) As EditableAspMenuState Implements IEditableSiteMapProvider.GetMenuState" />
+      <MemberSignature Language="C++ CLI" Value=" virtual Microsoft::SharePoint::Navigation::EditableAspMenuState ^ Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.GetMenuState(System::String ^ startingNodeKey, int maximumDepth, System::Collections::Specialized::StringCollection ^ customProperties) = Microsoft::SharePoint::Navigation::IEditableSiteMapProvider::GetMenuState;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.GetMenuState(System.String,System.Int32,System.Collections.Specialized.StringCollection)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Navigation.EditableAspMenuState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="startingNodeKey" Type="System.String" />
+        <Parameter Name="maximumDepth" Type="System.Int32" />
+        <Parameter Name="customProperties" Type="System.Collections.Specialized.StringCollection" />
+      </Parameters>
+      <Docs>
+        <param name="startingNodeKey">To be added.</param>
+        <param name="maximumDepth">To be added.</param>
+        <param name="customProperties">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable">
+      <MemberSignature Language="C#" Value="bool Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.Microsoft#SharePoint#Navigation#IEditableSiteMapProvider#IsEditable" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property IsEditable As Boolean Implements IEditableSiteMapProvider.IsEditable" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.IsEditable</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth">
+      <MemberSignature Language="C#" Value="int Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.Microsoft#SharePoint#Navigation#IEditableSiteMapProvider#MaximumSupportedNodeDepth" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property MaximumSupportedNodeDepth As Integer Implements IEditableSiteMapProvider.MaximumSupportedNodeDepth" />
+      <MemberSignature Language="C++ CLI" Value="property int Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth { int get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.MaximumSupportedNodeDepth</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.SaveUpdatedMenuState">
+      <MemberSignature Language="C#" Value="void IEditableSiteMapProvider.SaveUpdatedMenuState (Microsoft.SharePoint.Navigation.EditableAspMenuState newState);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.SaveUpdatedMenuState(class Microsoft.SharePoint.Navigation.EditableAspMenuState newState) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.Microsoft#SharePoint#Navigation#IEditableSiteMapProvider#SaveUpdatedMenuState(Microsoft.SharePoint.Navigation.EditableAspMenuState)" />
+      <MemberSignature Language="VB.NET" Value="Sub SaveUpdatedMenuState (newState As EditableAspMenuState) Implements IEditableSiteMapProvider.SaveUpdatedMenuState" />
+      <MemberSignature Language="C++ CLI" Value=" virtual void Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.SaveUpdatedMenuState(Microsoft::SharePoint::Navigation::EditableAspMenuState ^ newState) = Microsoft::SharePoint::Navigation::IEditableSiteMapProvider::SaveUpdatedMenuState;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Navigation.IEditableSiteMapProvider.SaveUpdatedMenuState(Microsoft.SharePoint.Navigation.EditableAspMenuState)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="newState" Type="Microsoft.SharePoint.Navigation.EditableAspMenuState" />
+      </Parameters>
+      <Docs>
+        <param name="newState">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ParentProvider">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapProvider ParentProvider { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Web.SiteMapProvider ParentProvider" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.ParentProvider" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Property ParentProvider As SiteMapProvider" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Web::SiteMapProvider ^ ParentProvider { System::Web::SiteMapProvider ^ get(); void set(System::Web::SiteMapProvider ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapProvider</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RootNode">
+      <MemberSignature Language="C#" Value="public override System.Web.SiteMapNode RootNode { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Web.SiteMapNode RootNode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.SwitchableSiteMapProvider.RootNode" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property RootNode As SiteMapNode" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Web::SiteMapNode ^ RootNode { System::Web::SiteMapNode ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.SiteMapNode</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,562 @@
+﻿<Type Name="PublishingService" FullName="Microsoft.SharePoint.Publishing.WebServices.PublishingService">
+  <TypeSignature Language="C#" Value="public sealed class PublishingService : System.Web.Services.WebService" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PublishingService extends System.Web.Services.WebService" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebServices.PublishingService" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PublishingService&#xA;Inherits WebService" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PublishingService sealed : System::Web::Services::WebService" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Web.Services.WebService</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Web.Services.WebService(Namespace="http://schemas.microsoft.com/sharepoint/soap/")</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Web.Services.WebServiceBinding(ConformsTo=System.Web.Services.WsiProfiles.BasicProfile1_1)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>The SOAP interface for the Publishing Web Service.</summary>
+    <remarks>
+      <para>The Publishing Service is responsible for creating <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> objects, disconnecting <b>PageLayout</b> objects from <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> objects, and reconnecting those <b>PageLayout</b> objects to the <b>PublishingPage</b> objects to which they were connected. </para>
+      <para>Additionally, you can use this class to export or import <b>PublishingPage</b> objects between source and target <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> objects, get status of a publishing object or collection of publishing objects, and more.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public PublishingService ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; PublishingService();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Constructs an instance of the <b>PublishingObjectStatus</b><b>WebService</b> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreatePageLayout">
+      <MemberSignature Language="C#" Value="public string CreatePageLayout (string pageLayoutName, string associatedContentTypeId, string title, string description, string siteUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string CreatePageLayout(string pageLayoutName, string associatedContentTypeId, string title, string description, string siteUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.CreatePageLayout(System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreatePageLayout (pageLayoutName As String, associatedContentTypeId As String, title As String, description As String, siteUrl As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ CreatePageLayout(System::String ^ pageLayoutName, System::String ^ associatedContentTypeId, System::String ^ title, System::String ^ description, System::String ^ siteUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="pageLayoutName" Type="System.String" />
+        <Parameter Name="associatedContentTypeId" Type="System.String" />
+        <Parameter Name="title" Type="System.String" />
+        <Parameter Name="description" Type="System.String" />
+        <Parameter Name="siteUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="pageLayoutName">File name of the new page layout. It must have an .aspx extension. It should not include the path to the file.</param>
+        <param name="associatedContentTypeId">Associated content type ID string.</param>
+        <param name="title">Optional string value specifying the title of the page layout. This parameter may be a null reference (Nothing in Visual Basic).</param>
+        <param name="description">Optional string value specifying the description of the page layout. This parameter may be a null reference (Nothing in Visual Basic).</param>
+        <param name="siteUrl">Absolute URL of the site. The page layout is created in the page layout gallery on the root Web of the specified site.</param>
+        <summary>Creates a new <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</summary>
+        <returns>A string containing the absolute URL of the new <b>PageLayout</b> object.</returns>
+        <remarks>To be added.</remarks>
+        <example>
+          <code>using System;
+using System.Net;
+using PublishingServiceUtility.PublishingWebService;
+
+namespace PublishingServiceUtility
+{
+    public class Program
+    {
+
+        internal static void CreatePressReleasePageLayout()
+        {
+            // Add a Web reference to the Web service located at "http://&amp;lt;yourserver&amp;gt;/&amp;lt;yoursite&amp;gt;/_vti_bin/PublishingService.asmx"
+            // using the name PublishingWebService and Visual Studio to generate the PublishingService proxy object.
+
+            // Create and initialize the PublishingService proxy object.
+            PublishingService publishingService = new PublishingService();
+            publishingService.Url = "http://&amp;lt;yourserver&amp;gt;/&amp;lt;yoursite&amp;gt;/_vti_bin/PublishingService.asmx";
+            publishingService.AllowAutoRedirect = false;
+
+            // This sample uses the credentials of the current user. If you want to use the credentials of a different user
+            // then create a new NetworkCredential instance and use that instead of the DefaultCredentials used here.
+            publishingService.Credentials = CredentialCache.DefaultCredentials;
+
+            // Create the press release page layout.
+            publishingService.CreatePageLayout("PressReleaseSmallImage.aspx",
+                "0x010100C568DB52D9D0A14D9B2FDCC96666E9F2007948130EC3DB064584E219954237AF3900242457EFB8B24247815D688C526CD44D",
+                "Press Release with Small Image", "This page layout is for press releases that need a small image at the top",
+                "http://&amp;lt;yourserver&amp;gt;/&amp;lt;yoursite&amp;gt;");
+        }
+
+        public static void Main(string[] arguments)
+        {
+            CreatePressReleasePageLayout();
+        }
+
+    } // class Program
+</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="DisconnectPageLayout">
+      <MemberSignature Language="C#" Value="public void DisconnectPageLayout (string pageUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DisconnectPageLayout(string pageUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.DisconnectPageLayout(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DisconnectPageLayout (pageUrl As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DisconnectPageLayout(System::String ^ pageUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="pageUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="pageUrl">Server-relative URL of the page to be disconnected.</param>
+        <summary>Disconnect a <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object from its <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> to make its markup a copy of the page layout's markup.</summary>
+        <remarks>
+          <para>When a user navigates to a <b>PublishingPage</b>, the contents of its <b>PageLayout</b> object are used to render the page. Using the contents of the page layout allows page designers to change the markup of a single page layout and affect the display of every page that uses that page layout.</para>
+          <para>However, there are times when a Web designer needs to create a particular type of page and none of the available page layouts are appropriate. In this scenario, you can disconnect the page from its page layout. The <b>DisconnectPageLayout(System.String)</b> method places a copy of the page layout's markup in the markup of the <b>PublishingPage</b>. The Web designer can then make changes to the markup in the page without affecting any other pages of the same type. You must have the <see cref="P:Microsoft.SharePoint.SPBasePermissions.AddAndCustomizePages" /> permission to call this method.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>using System;
+using System.Net;
+
+using PublishingServiceUtility.PublishingWebService;
+
+namespace PublishingServiceUtility
+{
+    public class Program
+    {
+
+        internal static void DisconnectWidget()
+        {
+            // Add a Web reference to the Web service located at "http://&amp;lt;yourserver&amp;gt;/&amp;lt;yoursite&amp;gt;/_vti_bin/PublishingService.asmx"
+            // using the name PublishingWebService and Visual Studio to generate the PublishingService proxy object.
+
+            // Create and initialize the PublishingService proxy object.
+            PublishingService publishingService = new PublishingService();
+            publishingService.Url = "http://&amp;lt;yourserver&amp;gt;/&amp;lt;yoursite&amp;gt;/_vti_bin/PublishingService.asmx";
+            publishingService.AllowAutoRedirect = false;
+
+            // This sample uses the credentials of someone other than the current user. If you want to use the credentials of the
+            // current user then use CredentialCache.DefaultCredentials instead of the NetworkCredential instance used here.
+            publishingService.Credentials = new NetworkCredential("&amp;lt;username&amp;gt;", "&amp;lt;password&amp;gt;", "&amp;lt;domain&amp;gt;");
+
+            // Disconnect the page from it's page layout.
+            publishingService.DisconnectPageLayout("http://&amp;lt;yourserver&amp;gt;/&amp;lt;yoursite&amp;gt;/Pages/WidgetAnnouncement.aspx");
+        }
+
+        public static void Main(string[] arguments)
+        {
+            DisconnectWidget();
+        }
+    }
+}</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllContentSlices">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebServices.ContentSlice[] GetAllContentSlices ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.WebServices.ContentSlice[] GetAllContentSlices() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetAllContentSlices" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAllContentSlices () As ContentSlice()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::WebServices::ContentSlice ^&gt; ^ GetAllContentSlices();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebServices.ContentSlice[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns an array of <see cref="T:Microsoft.SharePoint.Publishing.WebServices.ContentSlice" /> objects—one for each of the content databases in the current web application.</summary>
+        <returns>One array of <b>ContentSlice</b> objects for each content database.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllFriendlyUrls">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl[] GetAllFriendlyUrls (Guid siteId, Guid webId, ref string pagingToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl[] GetAllFriendlyUrls(valuetype System.Guid siteId, valuetype System.Guid webId, string&amp; pagingToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetAllFriendlyUrls(System.Guid,System.Guid,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAllFriendlyUrls (siteId As Guid, webId As Guid, ByRef pagingToken As String) As FriendlyUrl()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::WebServices::FriendlyUrl ^&gt; ^ GetAllFriendlyUrls(Guid siteId, Guid webId, System::String ^ % pagingToken);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="siteId" Type="System.Guid" />
+        <Parameter Name="webId" Type="System.Guid" />
+        <Parameter Name="pagingToken" Type="System.String&amp;" RefType="ref" />
+      </Parameters>
+      <Docs>
+        <param name="siteId">ID of the <see cref="T:Microsoft.SharePoint.SPSite" /> object.</param>
+        <param name="webId">ID of the <b>SPWeb</b> object.</param>
+        <param name="pagingToken">There may be a large number of results that need to be returned. In that case, the results need to be chunked into pages. The <paramref name="pagingToken" /> parameter is an opaque token that SharePoint Server returns to the caller of the <see cref="T:Microsoft.SharePoint.Publishing.WebServices.PublishingService" /> web service. The caller keeps calling the <b>GetFriendlyUrlBasedWebs(System.Guid,System.String@)</b> method with the <paramref name="pagingToken" /> parameter, and SharePoint Server continues to update the paging token until the last page is reached. When the last page is reached, SharePoint Server sets it to an empty string. In the first call, the caller is supposed to set the <paramref name="pagingToken" /> parameter to an empty string.</param>
+        <summary>Returns a collection of <see cref="T:Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl" /> objects —one for each friendly URL and its associated properties in the specified <see cref="T:Microsoft.SharePoint.SPWeb" />.</summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>The call is paged by using the page token so that in any given call SharePoint Server return only one page (= PageSize) number of entries. If there are more, then the subsequent calls will have to be made by using this method with a new <paramref name="pagingToken" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChangedFriendlyUrlBasedWebs">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebServices.FriendlyUrlBasedWeb[] GetChangedFriendlyUrlBasedWebs (Guid contentPartitionId, string changeToken, ref string pagingToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.WebServices.FriendlyUrlBasedWeb[] GetChangedFriendlyUrlBasedWebs(valuetype System.Guid contentPartitionId, string changeToken, string&amp; pagingToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetChangedFriendlyUrlBasedWebs(System.Guid,System.String,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetChangedFriendlyUrlBasedWebs (contentPartitionId As Guid, changeToken As String, ByRef pagingToken As String) As FriendlyUrlBasedWeb()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::WebServices::FriendlyUrlBasedWeb ^&gt; ^ GetChangedFriendlyUrlBasedWebs(Guid contentPartitionId, System::String ^ changeToken, System::String ^ % pagingToken);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebServices.FriendlyUrlBasedWeb[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contentPartitionId" Type="System.Guid" />
+        <Parameter Name="changeToken" Type="System.String" />
+        <Parameter Name="pagingToken" Type="System.String&amp;" RefType="ref" />
+      </Parameters>
+      <Docs>
+        <param name="contentPartitionId">To be added.</param>
+        <param name="changeToken">An opaque token passed to the caller when the call to <b>GetAllContentPartitions</b> is made. The caller is supposed to pass
+that token to get a list of <see cref="T:Microsoft.SharePoint.SPWeb" /> objects that changed since the token was issued.</param>
+        <param name="pagingToken">Tracks the current page of result. </param>
+        <summary>Returns the list of webs that have changed after the last “changeToken”.</summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>There may be a large number of results that need to be returned. In that case, the results need to be chunked into pages. The <paramref name="pagingToken" /> parameter is an opaque token that SharePoint Server returns to the caller of the <see cref="T:Microsoft.SharePoint.Publishing.WebServices.PublishingService" /> web service. The caller keeps calling the <b>GetFriendlyUrlBasedWebs(System.Guid,System.String@)</b> method with the <paramref name="pagingToken" /> parameter, and SharePoint Server continues to update the paging token until the last page is reached. When the last page is reached, SharePoint Server sets it to an empty string. In the first call, the caller is supposed to set the <paramref name="pagingToken" /> parameter to an empty string.</para>
+          <para>The returned results are based on the following:</para>
+          <list type="number">
+            <item>
+              <description>If any web is deleted from the content database, SharePoint Server returns it.</description>
+            </item>
+            <item>
+              <description>Any web that has started or stopped using managed navigation is returned.</description>
+            </item>
+            <item>
+              <description>If there is any change in a <b>NavigationTermSet</b> object, then all of the webs that are associated with the <b>NavigationTermSet</b> are returned.  If the <paramref name="changeToken" /> pass is a null reference (Nothing in Visual Basic), it behaves exactly the same as the <b>GetAllWebs</b> method.</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChangedFriendlyUrls">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl[] GetChangedFriendlyUrls (Guid siteId, Guid webId, ref string pagingToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl[] GetChangedFriendlyUrls(valuetype System.Guid siteId, valuetype System.Guid webId, string&amp; pagingToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetChangedFriendlyUrls(System.Guid,System.Guid,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetChangedFriendlyUrls (siteId As Guid, webId As Guid, ByRef pagingToken As String) As FriendlyUrl()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::WebServices::FriendlyUrl ^&gt; ^ GetChangedFriendlyUrls(Guid siteId, Guid webId, System::String ^ % pagingToken);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="siteId" Type="System.Guid" />
+        <Parameter Name="webId" Type="System.Guid" />
+        <Parameter Name="pagingToken" Type="System.String&amp;" RefType="ref" />
+      </Parameters>
+      <Docs>
+        <param name="siteId">ID of the site for which to return friendly URLs.</param>
+        <param name="webId">ID of the <see cref="T:Microsoft.SharePoint.SPWeb" /> objects to pass to this method.</param>
+        <param name="pagingToken">There may be a large number of results that need to be returned. In that case, the results need to be chunked into pages. The <paramref name="pagingToken" /> parameter is an opaque token that SharePoint Server returns to the caller of the <see cref="T:Microsoft.SharePoint.Publishing.WebServices.PublishingService" /> web service. The caller keeps calling the <b>GetFriendlyUrlBasedWebs(System.Guid,System.String@)</b> method with the <paramref name="pagingToken" /> parameter, and SharePoint Server continues to update the paging token until the last page is reached. When the last page is reached, SharePoint Server sets it to an empty string. In the first call, the caller is supposed to set the <paramref name="pagingToken" /> parameter to an empty string.</param>
+        <summary>Returns a collection of the friendly URLs for the specified <paramref name="siteId" /> parameter, and <paramref name="webId" /> parameter values that have changed since the last search crawl.
+</summary>
+        <returns>A collection of <see cref="T:Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl" /> objects.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFriendlyUrl">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl GetFriendlyUrl (string url);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl GetFriendlyUrl(string url) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetFriendlyUrl(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetFriendlyUrl (url As String) As FriendlyUrl" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::WebServices::FriendlyUrl ^ GetFriendlyUrl(System::String ^ url);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="url" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="url">The URL of the friendly URL for each of the properties to be fetched.</param>
+        <summary>Retrieves all of the properties that are associated with the specified friendly URL that is represented by the <paramref name="url" /> that is passed in.</summary>
+        <returns>All of the properties that are associated with the specified friendly URL.</returns>
+        <remarks>
+          <para>The <see cref="T:Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl" /> object contains many properties that are obtained either from the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object or from the content database, depending on where the specific property is stored.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFriendlyUrlBasedWebs">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebServices.FriendlyUrlBasedWeb[] GetFriendlyUrlBasedWebs (Guid contentPartitionId, ref string pagingToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.WebServices.FriendlyUrlBasedWeb[] GetFriendlyUrlBasedWebs(valuetype System.Guid contentPartitionId, string&amp; pagingToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetFriendlyUrlBasedWebs(System.Guid,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetFriendlyUrlBasedWebs (contentPartitionId As Guid, ByRef pagingToken As String) As FriendlyUrlBasedWeb()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::WebServices::FriendlyUrlBasedWeb ^&gt; ^ GetFriendlyUrlBasedWebs(Guid contentPartitionId, System::String ^ % pagingToken);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebServices.FriendlyUrlBasedWeb[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contentPartitionId" Type="System.Guid" />
+        <Parameter Name="pagingToken" Type="System.String&amp;" RefType="ref" />
+      </Parameters>
+      <Docs>
+        <param name="contentPartitionId">The ID of the content database that is being queried.</param>
+        <param name="pagingToken">Tracks the current page results. </param>
+        <summary>Returns a collection of <see cref="T:Microsoft.SharePoint.Publishing.WebServices.FriendlyUrlBasedWeb" /> objects—one for each web that contains friendly URLs.</summary>
+        <returns>One collection of <b>FriendlyUrlBasedWeb</b> objects for each web that contains friendly URLs.</returns>
+        <remarks>
+          <para>There may be a large number of results that need to be returned. In that case, the results need to be chunked into pages. The <paramref name="pagingToken" /> parameter is an opaque token that SharePoint Server returns to the caller of the <see cref="T:Microsoft.SharePoint.Publishing.WebServices.PublishingService" /> web service. The caller keeps calling the <b>GetFriendlyUrlBasedWebs(System.Guid,System.String@)</b> method with the <paramref name="pagingToken" /> parameter, and SharePoint Server continues to update the paging token until the last page is reached. When the last page is reached, SharePoint Server sets it to an empty string. In the first call, the caller is supposed to set the <paramref name="pagingToken" /> parameter to an empty string.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetObjectStatus">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingObjectStatus GetObjectStatus (string objectUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PublishingObjectStatus GetObjectStatus(string objectUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetObjectStatus(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetObjectStatus (objectUrl As String) As PublishingObjectStatus" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PublishingObjectStatus ^ GetObjectStatus(System::String ^ objectUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingObjectStatus</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="objectUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="objectUrl">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetObjectStatusCollection">
+      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;Microsoft.SharePoint.Publishing.PublishingObjectStatus&gt; GetObjectStatusCollection (string[] objectUrls);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ObjectModel.Collection`1&lt;class Microsoft.SharePoint.Publishing.PublishingObjectStatus&gt; GetObjectStatusCollection(string[] objectUrls) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetObjectStatusCollection(System.String[])" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetObjectStatusCollection (objectUrls As String()) As Collection(Of PublishingObjectStatus)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ObjectModel::Collection&lt;Microsoft::SharePoint::Publishing::PublishingObjectStatus ^&gt; ^ GetObjectStatusCollection(cli::array &lt;System::String ^&gt; ^ objectUrls);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.ObjectModel.Collection&lt;Microsoft.SharePoint.Publishing.PublishingObjectStatus&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="objectUrls" Type="System.String[]" />
+      </Parameters>
+      <Docs>
+        <param name="objectUrls">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetObjectStatusCollectionWithExclusions">
+      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;Microsoft.SharePoint.Publishing.PublishingObjectStatus&gt; GetObjectStatusCollectionWithExclusions (string[] objectUrls, string thisPageUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ObjectModel.Collection`1&lt;class Microsoft.SharePoint.Publishing.PublishingObjectStatus&gt; GetObjectStatusCollectionWithExclusions(string[] objectUrls, string thisPageUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetObjectStatusCollectionWithExclusions(System.String[],System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetObjectStatusCollectionWithExclusions (objectUrls As String(), thisPageUrl As String) As Collection(Of PublishingObjectStatus)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ObjectModel::Collection&lt;Microsoft::SharePoint::Publishing::PublishingObjectStatus ^&gt; ^ GetObjectStatusCollectionWithExclusions(cli::array &lt;System::String ^&gt; ^ objectUrls, System::String ^ thisPageUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.ObjectModel.Collection&lt;Microsoft.SharePoint.Publishing.PublishingObjectStatus&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="objectUrls" Type="System.String[]" />
+        <Parameter Name="thisPageUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="objectUrls">To be added.</param>
+        <param name="thisPageUrl">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReconnectPageLayout">
+      <MemberSignature Language="C#" Value="public string ReconnectPageLayout (string pageUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string ReconnectPageLayout(string pageUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.ReconnectPageLayout(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ReconnectPageLayout (pageUrl As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ ReconnectPageLayout(System::String ^ pageUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Web.Services.WebMethod</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="pageUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="pageUrl">Server-relative URL of the <b>PublishingPage</b> to be reconnected.</param>
+        <summary>Use this method to reconnect a <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object to its <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object and replace its custom markup with default <b>PublishingPage</b> markup.</summary>
+        <returns>A <see cref="T:System.String" /> of the form <paramref name="ReturnCode,URL" />.A <b>ReturnCode</b> of 1 means that the <b>PublishingPage</b> is reconnected to the same <b>PageLayout</b> object specified in <b>URL</b> from which it was originally disconnected.A <b>ReturnCode</b> of 2 means that the <b>PublishingPage</b> was not reconnected to the same <b>PageLayout</b> object specified in <b>URL</b> from which it was originally disconnected. Instead, it was reconnected to one of the available <b>PageLayout</b> objects for the content type of this <b>PublishingPage</b>.</returns>
+        <remarks>
+          <para>This method first attempts to reconnect the page to the same page layout that was previously used. However, if that page layout no longer exists because it was renamed or deleted, the method uses the content type of the page to find the first <b>PageLayout</b> object it can find for that content type. The <b>PublishingPage</b> object then reconnects to that <b>PageLayout</b> object.</para>
+          <para>You must have the <see cref="P:Microsoft.SharePoint.SPBasePermissions.AddAndCustomizePages" /> permission to call this method.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>using System;
+using System.Net;
+using PublishingServiceUtility.PublishingWebService;
+
+namespace PublishingServiceUtility
+{
+    public class Program
+    {
+
+        internal static void ReconnectWidget()
+        {
+            // Add a Web reference to the Web service located at "http://&amp;lt;yourserver&amp;gt;/&amp;lt;yoursite&amp;gt;/_vti_bin/PublishingService.asmx"
+            // using the name PublishingWebService and Visual Studio to generate the PublishingService proxy object.
+
+            // Create and initialize the PublishingService proxy object.
+            PublishingService publishingService = new PublishingService();
+            publishingService.Url = "http://&amp;lt;yourserver&amp;gt;/&amp;lt;yoursite&amp;gt;/_vti_bin/PublishingService.asmx";
+            publishingService.AllowAutoRedirect = false;
+
+            // This sample uses the credentials of the current user. If you want to use the credentials of a different user
+            // then create a new NetworkCredential instance and use that instead of the DefaultCredentials used here.
+            publishingService.Credentials = CredentialCache.DefaultCredentials;
+
+            // Reconnect the page to its page layout.
+            publishingService.ReconnectPageLayout("http://&amp;lt;yourserver&amp;gt;/&amp;lt;yoursite&amp;gt;/Pages/WidgetAnnouncement.aspx");
+        }
+
+        public static void Main(string[] arguments)
+        {
+            ReconnectWidget();
+        }
+
+    } // class Program</code>
+        </example>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

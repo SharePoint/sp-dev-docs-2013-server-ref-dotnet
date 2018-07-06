@@ -1,0 +1,241 @@
+﻿<Type Name="DesignPackage" FullName="Microsoft.SharePoint.Publishing.DesignPackage">
+  <TypeSignature Language="C#" Value="public static class DesignPackage" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit DesignPackage extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.DesignPackage" />
+  <TypeSignature Language="VB.NET" Value="Public Class DesignPackage" />
+  <TypeSignature Language="C++ CLI" Value="public ref class DesignPackage abstract sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ServerTypeId="D21214D9-63F5-488b-A665-2B7F9ABC1604")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>A static class that is used to import and export a design package to and from a site collection.</summary>
+    <remarks>To be added.</remarks>
+    <example>
+      <para>The following example demonstrates how to export a design package from a source site collection and install it into another site collection.</para>
+      <code>using System.IO;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Publishing;
+
+namespace PackagingSample
+{
+    class Program
+    {
+        const string srcSiteUrl = "http://&amp;lt;Server&amp;gt;/sites/&amp;lt;SourceSiteURL&amp;gt;";
+        const string dstSiteUrl = "http://&amp;lt;Server&amp;gt;/sites/&amp;lt;DestinationSiteURL&amp;gt;";
+        const string packageName = "MyPackage";     // null to use the default name
+
+        static void Main(string[] args)
+        {
+            // Export a package from source site collection
+            SPSite srcSite = new SPSite(srcSiteUrl);
+            DesignPackageInfo info = DesignPackage.Export(srcSite, packageName, false);
+
+            // The package is exported to the solution gallery with the name format &amp;lt;PackageName&amp;gt;-&amp;lt;MajorVersion&amp;gt;.&amp;lt;MinorVersion&amp;gt;
+            string packageFileName = string.Format("{0}-{1}.{2}.wsp", info.PackageName, info.MajorVersion, info.MinorVersion);
+
+            // Download the exported package from the solution gallery
+            SPFile file = srcSite.RootWeb.GetFile(srcSiteUrl + "/_catalogs/solutions/" + packageFileName);
+            using (Stream fileStream = file.OpenBinaryStream())
+            {
+                using (Stream packageFileStream = File.Create(@"C:\" + packageFileName))
+                {
+                    fileStream.CopyTo(packageFileStream);
+                }
+            }
+            srcSite.Dispose();
+
+            // Import the package into another site collection
+            SPSite dstSite = new SPSite(dstSiteUrl);
+            using (Stream fileStream = File.Open(@"C:\" + packageFileName, FileMode.Open))
+            {
+                SPFile packageFile = dstSite.RootWeb.GetFolder(dstSiteUrl + "/Documents").Files.Add(packageFileName, fileStream);
+                DesignPackage.Install(dstSite, info, packageFile.Url);
+                DesignPackage.Apply(dstSite, info);
+            }
+            dstSite.Dispose();
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="Apply">
+      <MemberSignature Language="C#" Value="public static void Apply (Microsoft.SharePoint.SPSite site, Microsoft.SharePoint.Publishing.DesignPackageInfo info);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Apply(class Microsoft.SharePoint.SPSite site, class Microsoft.SharePoint.Publishing.DesignPackageInfo info) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.DesignPackage.Apply(Microsoft.SharePoint.SPSite,Microsoft.SharePoint.Publishing.DesignPackageInfo)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub Apply (site As SPSite, info As DesignPackageInfo)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void Apply(Microsoft::SharePoint::SPSite ^ site, Microsoft::SharePoint::Publishing::DesignPackageInfo ^ info);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="info" Type="Microsoft.SharePoint.Publishing.DesignPackageInfo" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> object into which to apply the design package.</param>
+        <param name="info">The design package to apply.</param>
+        <summary>Applies the specified design package to a site.</summary>
+        <remarks>
+          <para>The design package can only be applied after it is installed.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">Site parameter should not be null.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Export">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.DesignPackageInfo Export (Microsoft.SharePoint.SPSite site, bool includeSearchConfiguration);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.DesignPackageInfo Export(class Microsoft.SharePoint.SPSite site, bool includeSearchConfiguration) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.DesignPackage.Export(Microsoft.SharePoint.SPSite,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Export (site As SPSite, includeSearchConfiguration As Boolean) As DesignPackageInfo" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::DesignPackageInfo ^ Export(Microsoft::SharePoint::SPSite ^ site, bool includeSearchConfiguration);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, Name="ExportEnterprise")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.DesignPackageInfo</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="includeSearchConfiguration" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> object to be exported.</param>
+        <param name="includeSearchConfiguration">
+          <b>true</b> if the search configuration should be exported; otherwise, <b>false</b>.</param>
+        <summary>Exports the design of the root web of the specified site. </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">Site parameter should not be null.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Export">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.DesignPackageInfo Export (Microsoft.SharePoint.SPSite site, string packageName, bool includeSearchConfiguration);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.DesignPackageInfo Export(class Microsoft.SharePoint.SPSite site, string packageName, bool includeSearchConfiguration) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.DesignPackage.Export(Microsoft.SharePoint.SPSite,System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Export (site As SPSite, packageName As String, includeSearchConfiguration As Boolean) As DesignPackageInfo" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::DesignPackageInfo ^ Export(Microsoft::SharePoint::SPSite ^ site, System::String ^ packageName, bool includeSearchConfiguration);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableMethod(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, Name="ExportSmallBusiness")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.DesignPackageInfo</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="packageName" Type="System.String" />
+        <Parameter Name="includeSearchConfiguration" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> object to be exported.</param>
+        <param name="packageName">The name of the design.</param>
+        <param name="includeSearchConfiguration">
+          <b>true</b> if the search configuration should be exported; otherwise, <b>false</b>.</param>
+        <summary>Exports the design of the root web of the specified site.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Install">
+      <MemberSignature Language="C#" Value="public static void Install (Microsoft.SharePoint.SPSite site, Microsoft.SharePoint.Publishing.DesignPackageInfo info, string path);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Install(class Microsoft.SharePoint.SPSite site, class Microsoft.SharePoint.Publishing.DesignPackageInfo info, string path) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.DesignPackage.Install(Microsoft.SharePoint.SPSite,Microsoft.SharePoint.Publishing.DesignPackageInfo,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub Install (site As SPSite, info As DesignPackageInfo, path As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void Install(Microsoft::SharePoint::SPSite ^ site, Microsoft::SharePoint::Publishing::DesignPackageInfo ^ info, System::String ^ path);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="info" Type="Microsoft.SharePoint.Publishing.DesignPackageInfo" />
+        <Parameter Name="path" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> object into which to install the package.</param>
+        <param name="info">The design package information to be installed.</param>
+        <param name="path">The design package path to be installed.</param>
+        <summary>Installs a design package into a site.</summary>
+        <remarks>
+          <para>The <see cref="M:Microsoft.SharePoint.Publishing.DesignPackage.Install(Microsoft.SharePoint.SPSite,Microsoft.SharePoint.Publishing.DesignPackageInfo,System.String)" /> method imports a design package into a site. The design package must be applied to the target site after the installation is done.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">All of the parameters should not be null.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="UnInstall">
+      <MemberSignature Language="C#" Value="public static void UnInstall (Microsoft.SharePoint.SPSite site, Microsoft.SharePoint.Publishing.DesignPackageInfo info);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void UnInstall(class Microsoft.SharePoint.SPSite site, class Microsoft.SharePoint.Publishing.DesignPackageInfo info) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.DesignPackage.UnInstall(Microsoft.SharePoint.SPSite,Microsoft.SharePoint.Publishing.DesignPackageInfo)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub UnInstall (site As SPSite, info As DesignPackageInfo)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void UnInstall(Microsoft::SharePoint::SPSite ^ site, Microsoft::SharePoint::Publishing::DesignPackageInfo ^ info);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="info" Type="Microsoft.SharePoint.Publishing.DesignPackageInfo" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> object into which to apply the package.</param>
+        <param name="info">The package information to be uninstalled.</param>
+        <summary>Uninstalls a design package.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">All of the parameters passed should not be null.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,482 @@
+﻿<Type Name="ProfileManagerBase" FullName="Microsoft.Office.Server.UserProfiles.ProfileManagerBase">
+  <TypeSignature Language="C#" Value="public abstract class ProfileManagerBase" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ProfileManagerBase extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.ProfileManagerBase" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class ProfileManagerBase" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ProfileManagerBase abstract" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the abstract class for all profile manager objects (including <b>UserProfileManager</b> and <b>OrganizationProfileManager</b>).</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="AccountNameFormat">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserFormat AccountNameFormat { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Office.Server.UserProfiles.UserFormat AccountNameFormat" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.AccountNameFormat" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AccountNameFormat As UserFormat" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::UserFormat AccountNameFormat { Microsoft::Office::Server::UserProfiles::UserFormat get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserFormat</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the account name format.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Possible account name formats are the Windows Security Account Manager (SAM) format and the User Principal Name (UPN) format.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Count">
+      <MemberSignature Language="C#" Value="public abstract long Count { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 Count" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.Count" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property Count As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property long Count { long get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>             Returns the total number of profiles of a profile type.             </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentChangeToken">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.UserProfileChangeToken CurrentChangeToken { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.UserProfileChangeToken CurrentChangeToken" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.CurrentChangeToken" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CurrentChangeToken As UserProfileChangeToken" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::UserProfileChangeToken ^ CurrentChangeToken { Microsoft::Office::Server::UserProfiles::UserProfileChangeToken ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfileChangeToken</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the current change token for this profile type.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultProfileSubtypeProperties">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileSubtypePropertyManager DefaultProfileSubtypeProperties { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.ProfileSubtypePropertyManager DefaultProfileSubtypeProperties" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.DefaultProfileSubtypeProperties" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DefaultProfileSubtypeProperties As ProfileSubtypePropertyManager" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::ProfileSubtypePropertyManager ^ DefaultProfileSubtypeProperties { Microsoft::Office::Server::UserProfiles::ProfileSubtypePropertyManager ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileSubtypePropertyManager</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the default <b>ProfileSubtypePropertyManager</b>.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.GetChanges" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetChanges () As UserProfileChangeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract Microsoft::Office::Server::UserProfiles::UserProfileChangeCollection ^ GetChanges();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns all changes made to a profile type that are recorded in the user profile change logs.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges (Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery changeQuery);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges(class Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery changeQuery) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.GetChanges(Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetChanges (changeQuery As ProfileBaseChangeQuery) As UserProfileChangeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract Microsoft::Office::Server::UserProfiles::UserProfileChangeCollection ^ GetChanges(Microsoft::Office::Server::UserProfiles::ProfileBaseChangeQuery ^ changeQuery);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="changeQuery" Type="Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery" />
+      </Parameters>
+      <Docs>
+        <param name="changeQuery">To be added.</param>
+        <summary>Returns changes made to a profile type that are defined by a <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileBaseChangeQuery" /> object and recorded in the user profile change logs.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetChanges">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges (Microsoft.Office.Server.UserProfiles.UserProfileChangeToken changeToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection GetChanges(class Microsoft.Office.Server.UserProfiles.UserProfileChangeToken changeToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.GetChanges(Microsoft.Office.Server.UserProfiles.UserProfileChangeToken)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetChanges (changeToken As UserProfileChangeToken) As UserProfileChangeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract Microsoft::Office::Server::UserProfiles::UserProfileChangeCollection ^ GetChanges(Microsoft::Office::Server::UserProfiles::UserProfileChangeToken ^ changeToken);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.UserProfileChangeCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="changeToken" Type="Microsoft.Office.Server.UserProfiles.UserProfileChangeToken" />
+      </Parameters>
+      <Docs>
+        <param name="changeToken">To be added.</param>
+        <summary>Returns changes made to a profile type that are located at a specific location in the user profile change logs.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEnumerator">
+      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.IEnumerator GetEnumerator() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.GetEnumerator" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnumerator () As IEnumerator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::IEnumerator ^ GetEnumerator();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.IEnumerator</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns an <b>IEnumerator</b> that can be used to iterate through all profiles.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEnumerator">
+      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator GetEnumerator (long recordId, int pageSize);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.IEnumerator GetEnumerator(int64 recordId, int32 pageSize) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.GetEnumerator(System.Int64,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetEnumerator (recordId As Long, pageSize As Integer) As IEnumerator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::IEnumerator ^ GetEnumerator(long recordId, int pageSize);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.IEnumerator</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recordId" Type="System.Int64" />
+        <Parameter Name="pageSize" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="recordId">To be added.</param>
+        <param name="pageSize">To be added.</param>
+        <summary>Returns an <b>IEnumerator</b> that can be used to iterate through a specified number of profiles. </summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>The enumerator will start the iteration at the specified record identifier.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetProfile">
+      <MemberSignature Language="C#" Value="public abstract Microsoft.Office.Server.UserProfiles.ProfileBase GetProfile (long recordId);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Office.Server.UserProfiles.ProfileBase GetProfile(int64 recordId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.GetProfile(System.Int64)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetProfile (recordId As Long) As ProfileBase" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract Microsoft::Office::Server::UserProfiles::ProfileBase ^ GetProfile(long recordId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileBase</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recordId" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="recordId">To be added.</param>
+        <summary>Returns the profile associated with the specified record identifier.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Properties">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.PropertyCollection Properties { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.PropertyCollection Properties" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.Properties" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Properties As PropertyCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::PropertyCollection ^ Properties { Microsoft::Office::Server::UserProfiles::PropertyCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("PropertyCollection is replaced by ProfileSubtypePropertyManager. Use ProfilePropertyManager to retrieve proper ProfileSubtypePropertyManager.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.PropertyCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of defined profile properties, not including sections.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PropertiesWithSection">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.PropertyCollection PropertiesWithSection { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.Server.UserProfiles.PropertyCollection PropertiesWithSection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.PropertiesWithSection" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PropertiesWithSection As PropertyCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::UserProfiles::PropertyCollection ^ PropertiesWithSection { Microsoft::Office::Server::UserProfiles::PropertyCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("PropertyCollection is replaced by ProfileSubtypePropertyManager. Use ProfilePropertyManager to retrieve proper ProfileSubtypePropertyManager.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.PropertyCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of defined profile properties, including sections.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveProfile">
+      <MemberSignature Language="C#" Value="public abstract void RemoveProfile (Microsoft.Office.Server.UserProfiles.ProfileBase profile);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveProfile(class Microsoft.Office.Server.UserProfiles.ProfileBase profile) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.RemoveProfile(Microsoft.Office.Server.UserProfiles.ProfileBase)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Sub RemoveProfile (profile As ProfileBase)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract void RemoveProfile(Microsoft::Office::Server::UserProfiles::ProfileBase ^ profile);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="profile" Type="Microsoft.Office.Server.UserProfiles.ProfileBase" />
+      </Parameters>
+      <Docs>
+        <param name="profile">To be added.</param>
+        <summary>Removes the specified profile.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ResolveProfile">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileBase[] ResolveProfile (string searchPattern);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.ProfileBase[] ResolveProfile(string searchPattern) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.ResolveProfile(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ResolveProfile (searchPattern As String) As ProfileBase()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::UserProfiles::ProfileBase ^&gt; ^ ResolveProfile(System::String ^ searchPattern);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileBase[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="searchPattern" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="searchPattern">To be added.</param>
+        <summary>Returns an array of <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileBase" /> objects that match the specified search pattern.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Search">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileBase[] Search (string searchPattern);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.ProfileBase[] Search(string searchPattern) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.Search(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Search (searchPattern As String) As ProfileBase()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::UserProfiles::ProfileBase ^&gt; ^ Search(System::String ^ searchPattern);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileBase[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="searchPattern" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="searchPattern">To be added.</param>
+        <summary>Retrieves an array of <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileBase" /> objects of a particular profile type whose searchable properties match the specified search pattern.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Search">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileBase[] Search (string[] searchPattern);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.ProfileBase[] Search(string[] searchPattern) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.Search(System.String[])" />
+      <MemberSignature Language="VB.NET" Value="Public Function Search (searchPattern As String()) As ProfileBase()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::UserProfiles::ProfileBase ^&gt; ^ Search(cli::array &lt;System::String ^&gt; ^ searchPattern);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileBase[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="searchPattern" Type="System.String[]" />
+      </Parameters>
+      <Docs>
+        <param name="searchPattern">To be added.</param>
+        <summary>Retrieves an array of <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileBase" /> objects of a particular profile type whose searchable properties match the specified search patterns.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Search">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileBase[] Search (Microsoft.Office.Server.UserProfiles.OrganizationProfile org, string searchPattern);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.ProfileBase[] Search(class Microsoft.Office.Server.UserProfiles.OrganizationProfile org, string searchPattern) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.Search(Microsoft.Office.Server.UserProfiles.OrganizationProfile,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Search (org As OrganizationProfile, searchPattern As String) As ProfileBase()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::UserProfiles::ProfileBase ^&gt; ^ Search(Microsoft::Office::Server::UserProfiles::OrganizationProfile ^ org, System::String ^ searchPattern);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("This method is no longer supported.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileBase[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="org" Type="Microsoft.Office.Server.UserProfiles.OrganizationProfile" />
+        <Parameter Name="searchPattern" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="org">To be added.</param>
+        <param name="searchPattern">To be added.</param>
+        <summary>Retrieves an array of users and organizations (as <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileBase" /> objects) under the specified <b>OrganizationProfile</b> object whose searchable properties match a specified search pattern.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Search">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileBase[] Search (Microsoft.Office.Server.UserProfiles.OrganizationProfile org, string[] searchPattern);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.ProfileBase[] Search(class Microsoft.Office.Server.UserProfiles.OrganizationProfile org, string[] searchPattern) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.Search(Microsoft.Office.Server.UserProfiles.OrganizationProfile,System.String[])" />
+      <MemberSignature Language="VB.NET" Value="Public Function Search (org As OrganizationProfile, searchPattern As String()) As ProfileBase()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::UserProfiles::ProfileBase ^&gt; ^ Search(Microsoft::Office::Server::UserProfiles::OrganizationProfile ^ org, cli::array &lt;System::String ^&gt; ^ searchPattern);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("This method is no longer supported.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileBase[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="org" Type="Microsoft.Office.Server.UserProfiles.OrganizationProfile" />
+        <Parameter Name="searchPattern" Type="System.String[]" />
+      </Parameters>
+      <Docs>
+        <param name="org">To be added.</param>
+        <param name="searchPattern">To be added.</param>
+        <summary>Retrieves an array of users and organizations (as <see cref="T:Microsoft.Office.Server.UserProfiles.ProfileBase" /> objects) under the specified <b>OrganizationProfile</b> object whose searchable properties match the specified search patterns.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Search">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.UserProfiles.ProfileBase[] Search (string[] searchPattern, int nSubtypeId, Nullable&lt;bool&gt; bDeleted);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.Server.UserProfiles.ProfileBase[] Search(string[] searchPattern, int32 nSubtypeId, valuetype System.Nullable`1&lt;bool&gt; bDeleted) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ProfileManagerBase.Search(System.String[],System.Int32,System.Nullable{System.Boolean})" />
+      <MemberSignature Language="VB.NET" Value="Public Function Search (searchPattern As String(), nSubtypeId As Integer, bDeleted As Nullable(Of Boolean)) As ProfileBase()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::Office::Server::UserProfiles::ProfileBase ^&gt; ^ Search(cli::array &lt;System::String ^&gt; ^ searchPattern, int nSubtypeId, Nullable&lt;bool&gt; bDeleted);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.UserProfiles.ProfileBase[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="searchPattern" Type="System.String[]" />
+        <Parameter Name="nSubtypeId" Type="System.Int32" />
+        <Parameter Name="bDeleted" Type="System.Nullable&lt;System.Boolean&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="searchPattern">To be added.</param>
+        <param name="nSubtypeId">To be added.</param>
+        <param name="bDeleted">To be added.</param>
+        <summary>             Return profiles for specific subtypes, 0 means all subtypes.             </summary>
+        <returns>Returns <see cref="" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

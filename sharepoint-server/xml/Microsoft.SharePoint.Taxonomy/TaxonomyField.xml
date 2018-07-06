@@ -1,0 +1,1641 @@
+﻿<Type Name="TaxonomyField" FullName="Microsoft.SharePoint.Taxonomy.TaxonomyField">
+  <TypeSignature Language="C#" Value="public class TaxonomyField : Microsoft.SharePoint.SPFieldLookup" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit TaxonomyField extends Microsoft.SharePoint.SPFieldLookup" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" />
+  <TypeSignature Language="VB.NET" Value="Public Class TaxonomyField&#xA;Inherits SPFieldLookup" />
+  <TypeSignature Language="C++ CLI" Value="public ref class TaxonomyField : Microsoft::SharePoint::SPFieldLookup" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.SPFieldLookup</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ServerTypeId="0831C0F3-C1B9-4d8a-A339-0160F42257B4")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents a taxonomy field.</summary>
+    <remarks>
+      <para>The TaxonomyField class is a custom field class that inherits from the <see cref="T:Microsoft.SharePoint.SPFieldLookup" /> class. If you set the  properties of the <b>TaxonomyField</b> class, call the <see cref="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.Update" /> method for changes to take effect in the database.</para>
+      <para>The <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> class contains the field value for the <b>TaxonomyField</b> class.</para>
+      <para>Either the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl" /> object or the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl" /> object server controls can render a <b>TaxonomyField</b> object.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.IO;
+using System.Globalization;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Taxonomy;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    /// &amp;lt;summary&amp;gt;
+    /// This project requires the Microsoft.SharePoint.dll and the Microsoft.SharePoint.Taxonomy.dll as
+    /// references in order to work.
+    /// &amp;lt;/summary&amp;gt;
+    internal partial class TestTaxonomy
+    {
+        /// &amp;lt;summary&amp;gt;
+        /// This method will create a TaxonomyField on the given list and is bound
+        /// to the given term set and has the name columnName
+        /// &amp;lt;/summary&amp;gt;
+        private void TestTaxonomyFieldCreate(SPList list, TermSet termSet, string columnName)
+        {
+            if (list == null)
+            {
+                throw new ArgumentException("Parameter list cannot be null");
+            }
+
+            if (termSet == null)
+            {
+                throw new ArgumentException("Parameter termSet cannot be null");
+            }
+
+            // The constructor is not actually used
+            TaxonomyField taxonomyField = list.Fields.CreateNewField("TaxonomyFieldType", columnName) as TaxonomyField;
+            // Sets whether the field accepts multiple values or not
+            taxonomyField.AllowMultipleValues = false;
+            // If this is set to a GUID of a term only terms that are descendants of the term can
+            // be picked
+            taxonomyField.AnchorId = Guid.Empty;
+            // If this is set to true terms that are not validated will be created
+            taxonomyField.CreateValuesInEditForm = false;
+            // If this is set to true the user will be given the option to add new terms
+            taxonomyField.Open = false;
+            // Id of the term store 
+            taxonomyField.SspId = termSet.TermStore.Id;
+            // If this is set to a URL the items will link to that URL on display
+            taxonomyField.TargetTemplate = string.Empty;
+            // This assumes you have a group and term set created.  Normally you would pick the specific termset you want
+            taxonomyField.TermSetId = termSet.Id;
+
+            // After creating the taxonomy field you have to add it to the list
+            list.Fields.Add(taxonomyField);
+
+            Console.WriteLine("Field created");
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// This method will update an SPListItem taxonomy field with the given term
+        /// &amp;lt;/summary&amp;gt;
+        private void TestTaxonomyFieldUpdateFieldItem(Term term, SPListItem item, TaxonomyField taxonomyField)
+        {
+            if (taxonomyField == null)
+            {
+                throw new ArgumentException("Parameter taxonomyField cannot be null");
+            }
+            if (term == null)
+            {
+                throw new ArgumentException("Parameter term cannot be null");
+            }
+            if (item == null)
+            {
+                throw new ArgumentException("Parameter item cannot be null");
+            }
+            
+            if (item.Fields.Contains(taxonomyField.Id))
+            {
+                taxonomyField.SetFieldValue(item, term, CultureInfo.CurrentUICulture.LCID);
+            }
+            else
+            {
+                throw new ArgumentException("taxonomyField must exist on the list that item is from");
+            }
+            // Finally we have to actually update the item.
+            item.Update();
+
+            Console.WriteLine("Field updated with value " + term.Name);
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// This method will clear an SPListItem taxonomy field
+        /// &amp;lt;/summary&amp;gt;
+        private void TestTaxonomyFieldClearFieldItem(SPListItem item, TaxonomyField taxonomyField)
+        {
+            if (taxonomyField == null)
+            {
+                throw new ArgumentException("Parameter taxonomyField cannot be null");
+            }
+            if (item == null)
+            {
+                throw new ArgumentException("Parameter item cannot be null");
+            }
+
+            if (item.Fields.Contains(taxonomyField.Id))
+            {
+                if (taxonomyField.AllowMultipleValues)
+                {
+                    TaxonomyFieldValueCollection taxCollection = new TaxonomyFieldValueCollection(taxonomyField);
+                    taxonomyField.SetFieldValue(item, taxCollection);
+                }
+                else
+                {
+                    TaxonomyFieldValue taxValue = new TaxonomyFieldValue(taxonomyField);
+                    taxonomyField.SetFieldValue(item, taxValue);
+                }
+
+                // Finally we have to actually update the item.
+                item.Update();
+
+                Console.WriteLine("Field cleared");
+            }
+            else
+            {
+                throw new ArgumentException("taxonomyField must exist on the list that item is from");
+            }
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// This method will write out to the console the HTML value of the taxonomy field on the given
+        /// SPListItem
+        /// &amp;lt;/summary&amp;gt;
+        private void TestGetFieldValueAsHtml(SPListItem item, TaxonomyField taxonomyField)
+        {
+            if (taxonomyField == null)
+            {
+                throw new ArgumentException("Parameter taxonomyField cannot be null");
+            }
+            if (item == null)
+            {
+                throw new ArgumentException("Parameter item cannot be null");
+            }
+
+            if (item.Fields.Contains(taxonomyField.Id))
+            {
+                Console.WriteLine("The value as HTML is " + taxonomyField.GetFieldValueAsHtml(item[taxonomyField.Id]));
+            }
+            else
+            {
+                throw new ArgumentException("taxonomyField must exist on the list that item is from");
+            }
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// This method will write out to the console the text value of the taxonomy field on the given
+        /// SPListItem
+        /// &amp;lt;/summary&amp;gt;
+        private void TestGetFieldValueAsText(SPListItem item, TaxonomyField taxonomyField)
+        {
+            if (taxonomyField == null)
+            {
+                throw new ArgumentException("Parameter taxonomyField cannot be null");
+            }
+            if (item == null)
+            {
+                throw new ArgumentException("Parameter item cannot be null");
+            }
+
+            if (item.Fields.Contains(taxonomyField.Id))
+            {
+                Console.WriteLine("The value as text is " + taxonomyField.GetFieldValueAsText(item[taxonomyField.Id]));
+            }
+            else
+            {
+                throw new ArgumentException("taxonomyField must exist on the list that item is from");
+            }
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// This method will write out to the console the Wss Id values of the taxonomy term
+        /// on the given SPSite for the Enterprise Keywords
+        /// &amp;lt;/summary&amp;gt;
+        private void TestGetWssIdsOfKeywordTerm(SPSite site, Term term)
+        {
+            if (term == null)
+            {
+                throw new ArgumentException("Parameter term cannot be null");
+            }
+            if (site == null)
+            {
+                throw new ArgumentException("Parameter site cannot be null");
+            }
+
+            // We are trying to get all the Wss Id's of this term when used as a keyword
+            int[] wssIds = TaxonomyField.GetWssIdsOfKeywordTerm(site, term.Id, 500);
+            Console.Write("The wss ID's of your term are");
+            if (wssIds.Length == 0)
+            {
+                Console.Write(" empty");
+            }
+            else
+            {
+                foreach (int wssId in wssIds)
+                {
+                    Console.WriteLine(" " + wssId.ToString());
+                }
+            }
+
+            Console.WriteLine(".");
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// This method will write out to the console the Wss Id values of the taxonomy term
+        /// on the given SPSite
+        /// &amp;lt;/summary&amp;gt;
+        private void TestGetWssIdsOfTerm(SPSite site, Term term)
+        {
+            if (term == null)
+            {
+                throw new ArgumentException("Parameter term cannot be null");
+            }
+            if (site == null)
+            {
+                throw new ArgumentException("Parameter site cannot be null");
+            }
+
+            // We are trying to get all the Wss Id's of this term without it's children
+            int[] wssIds = TaxonomyField.GetWssIdsOfTerm(site, term.TermStore.Id, term.TermSet.Id, term.Id, false /*includeDescendants*/, 500);
+            Console.Write("The wss ID's of your term are");
+            if (wssIds.Length == 0)
+            {
+                Console.Write(" empty");
+            }
+            else
+            {
+                foreach (int wssId in wssIds)
+                {
+                    Console.Write(" " + wssId.ToString());
+                }
+            }
+
+            Console.WriteLine(".");
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TaxonomyField (Microsoft.SharePoint.SPFieldCollection fields, string fieldName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPFieldCollection fields, string fieldName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.#ctor(Microsoft.SharePoint.SPFieldCollection,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (fields As SPFieldCollection, fieldName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; TaxonomyField(Microsoft::SharePoint::SPFieldCollection ^ fields, System::String ^ fieldName);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="fields" Type="Microsoft.SharePoint.SPFieldCollection" />
+        <Parameter Name="fieldName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="fields">An <see cref="T:Microsoft.SharePoint.SPFieldCollection" /> object that represents the parent field collection.</param>
+        <param name="fieldName">A string that contains the name of the field.</param>
+        <summary>Initializes a new instance of the <b>TaxonomyField</b> object that is based on the specified field collection and name.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">There are no fields in the field collection that matches the parameter <paramref name="fieldName" />.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TaxonomyField (Microsoft.SharePoint.SPFieldCollection fields, string typeName, string displayName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPFieldCollection fields, string typeName, string displayName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.#ctor(Microsoft.SharePoint.SPFieldCollection,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (fields As SPFieldCollection, typeName As String, displayName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; TaxonomyField(Microsoft::SharePoint::SPFieldCollection ^ fields, System::String ^ typeName, System::String ^ displayName);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="fields" Type="Microsoft.SharePoint.SPFieldCollection" />
+        <Parameter Name="typeName" Type="System.String" />
+        <Parameter Name="displayName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="fields">An <see cref="T:Microsoft.SharePoint.SPFieldCollection" /> object that represents the parent field collection.</param>
+        <param name="typeName">A string that contains the type name</param>
+        <param name="displayName">A string that contains the display name of the field</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object that is based on the specified field collection, type name, and display name.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowMultipleValues">
+      <MemberSignature Language="C#" Value="public override bool AllowMultipleValues { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowMultipleValues" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.AllowMultipleValues" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Property AllowMultipleValues As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool AllowMultipleValues { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value that specifies whether multiple <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects can be used in the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</summary>
+        <value>
+          <b>true</b> to specify that multiple <b>Term</b> objects can be used in the <b>TaxonomyField</b>, otherwise <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AnchorId">
+      <MemberSignature Language="C#" Value="public Guid AnchorId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid AnchorId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.AnchorId" />
+      <MemberSignature Language="VB.NET" Value="Public Property AnchorId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid AnchorId { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the GUID of the anchor <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object for a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</summary>
+        <value>The GUID of the anchor <b>Term</b> for a <b>TaxonomyField</b> object.</value>
+        <remarks>
+          <para>An anchor <b>Term</b> is the <b>Term</b> in the hierarchical <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> that serves as the root node of the <see cref="Term" /> objects that are permissible for the current <b>TaxonomyField</b> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateValuesInEditForm">
+      <MemberSignature Language="C#" Value="public bool CreateValuesInEditForm { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool CreateValuesInEditForm" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.CreateValuesInEditForm" />
+      <MemberSignature Language="VB.NET" Value="Public Property CreateValuesInEditForm As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool CreateValuesInEditForm { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value that specifies whether the new <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects can be added to the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> while typing in the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> editor control.</summary>
+        <value>
+          <b>true</b> if new <b>Term</b> objects can be added to the <b>TermSet</b> while typing in the <b>TaxonomyField</b> editor control; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>If this property is <b>true</b> and the <b>TermSet</b> is open, then typing text in the taxonomy field editor control will display a Create New option in the Suggestions drop-down list if that <b>Term</b> does not already exist at the root level of the <b>TermSet</b>. Selecting the Create New option will create a new <b>Term</b> with that text as the default <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> object.</para>
+          <para>This property does not apply to the the Enterprise Keywords <b>TermSet</b>, since it always allows new <b>Term</b> objects to be added by selecting Create New in the Suggestions drop-down list.</para>
+          <para>It is not possible to create <b>Term</b> objects that are created by using the <b>Create New</b> at an arbitrary position in the hierarchy of <b>Term</b> objects in the <b>TermSet</b>. All <b>Term</b> objects created with this option are created at the root level of the <b>TermSet</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultValueTyped">
+      <MemberSignature Language="C#" Value="public override object DefaultValueTyped { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance object DefaultValueTyped" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.DefaultValueTyped" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property DefaultValueTyped As Object" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Object ^ DefaultValueTyped { System::Object ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the default <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> or the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> object.</summary>
+        <value>A <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> or <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> object that represents the default value object.</value>
+        <remarks>
+          <para>If the <b>DefaultValue</b> property is a null reference (Nothing in Visual Basic) or an empty string, this property returns a null reference (Nothing in Visual Basic).</para>
+          <para>Otherwise, if the AllowMultipleValues property is true, this property returns aTaxonomyFieldValueCollection object with the value set to the DefaultValue property.If the AllowMultipleValues property is false, this property returns a TaxonomyFieldValueobject with the value set to the DefaultValue property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FieldRenderingControl">
+      <MemberSignature Language="C#" Value="public override Microsoft.SharePoint.WebControls.BaseFieldControl FieldRenderingControl { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.WebControls.BaseFieldControl FieldRenderingControl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.FieldRenderingControl" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property FieldRenderingControl As BaseFieldControl" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::WebControls::BaseFieldControl ^ FieldRenderingControl { Microsoft::SharePoint::WebControls::BaseFieldControl ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.WebControls.BaseFieldControl</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl" /> object that can be used to render the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</summary>
+        <value>A <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl" /> object that can be used to render the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FieldRenderingMobileControl">
+      <MemberSignature Language="C#" Value="public override Microsoft.SharePoint.MobileControls.SPMobileBaseFieldControl FieldRenderingMobileControl { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.MobileControls.SPMobileBaseFieldControl FieldRenderingMobileControl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.FieldRenderingMobileControl" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property FieldRenderingMobileControl As SPMobileBaseFieldControl" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::MobileControls::SPMobileBaseFieldControl ^ FieldRenderingMobileControl { Microsoft::SharePoint::MobileControls::SPMobileBaseFieldControl ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.MobileControls.SPMobileBaseFieldControl</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the mobile control that is used to render the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object in mobile applications.</summary>
+        <value>A <see cref="T:Microsoft.SharePoint.Taxonomy.MobileTaxonomyField" /> object that represents the taxonomy control for use in mobile applications.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FieldValueType">
+      <MemberSignature Language="C#" Value="public override Type FieldValueType { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Type FieldValueType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.FieldValueType" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property FieldValueType As Type" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Type ^ FieldValueType { Type ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Type</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the type of the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</summary>
+        <value>A <see cref="T:System.Type" /> object that represents the taxonomy field value type. If the <b>AllowMultipleValues</b> property is <b>true</b>, the returned type is <see cref="T:Microsoft.SharePoint.Taxnomy.TaxonomyFieldValueCollection" />; otherwise, <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilteringJavascript">
+      <MemberSignature Language="C#" Value="public static string FilteringJavascript ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string FilteringJavascript() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.FilteringJavascript" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function FilteringJavascript () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ FilteringJavascript();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns a string containing the  that must be rendered on a page to display hierarchical filtering in the filter menu.</summary>
+        <returns>A string containing the ECMAScript (JavaScript, JScript) code without script blocks surrounding it.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFieldValue">
+      <MemberSignature Language="C#" Value="public override object GetFieldValue (string value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object GetFieldValue(string value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.GetFieldValue(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetFieldValue (value As String) As Object" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Object ^ GetFieldValue(System::String ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="value">A formatted string containing identifier, label, and path information to convert into a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> or a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object.</param>
+        <summary>Converts the specified string value into a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> or a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object.</summary>
+        <returns>A <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> object or a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object that represents the <paramref name="value" /> parameter.</returns>
+        <remarks>
+          <para>The <paramref name="value" /> parameter string must be formatted as a series of one or more string tokens separated by the <see cref="P:Microsoft.SharePoint.SPFieldMultiColumnValue.Delimiter" /> delimiter. Each token consists of an internal identifier, a label, and a path:. ID the internal identifier of the list item. LABEL is the default <b>Label</b> of the corresponding <b>Term</b> in the <b>TermStore</b>.<see cref="PATH" /> is a string of GUIDs delimited by a pipe (<b>|</b>) character and <b>Terminating</b> in the GUID that identifies the <b>Term</b>: <see cref="ROOT_TERM_GUID|...|PARENT_TERM_GUID|TERM_GUID" />.</para>
+          <para>For example, <see cref="id;#label|path" /> represents a single value. The string <see cref="id1;#label1|path1;#id2;#label2|path2;#id3;#label3|path3" /> represents three taxonomyfield values that can be parsed into a <b>TaxonomyFieldValueCollection</b> object.</para>
+          <para>The delimiters in the <paramref name="value" /> string representation are defined by the following properties:<see cref=";#" /> is returned by the <see cref="P:Microsoft.SharePoint.SPFieldMultiColumnValue.Delimiter" /> property, and <see cref="|" /> is returned by the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.TaxonomyGuidLabelDelimiter" /> property.</para>
+          <para>The <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.AllowMultipleValues" /> property deTermines whether the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object allows multiple values. If the <b>TaxonomyField</b> object does not allow multiple values, a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> object is returned. Otherwise a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" />object is returned even if the <paramref name="value" /> parameter represents a single value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFieldValueAsHtml">
+      <MemberSignature Language="C#" Value="public override string GetFieldValueAsHtml (object value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string GetFieldValueAsHtml(object value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.GetFieldValueAsHtml(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetFieldValueAsHtml (value As Object) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ GetFieldValueAsHtml(System::Object ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="value">An object of type <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" />or <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> that represents the value to convert.</param>
+        <summary>Returns the field value in HTML format in order to render the field valuedirectly on a page.</summary>
+        <returns>A string that contains the value in HTML format.</returns>
+        <remarks>
+          <para>If the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.AllowMultipleValues" /> property of the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object is <b>false</b>, the <paramref name="value" /> parameter is expected to be of type <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> or <see cref="T:Microsoft.SharePoint.SPFieldLookupValue" /> or have an accurate string representation returned by the <b>ToString</b> method.</para>
+          <para>If the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.AllowMultipleValues" /> property of the <b>TaxonomyField</b> object is <b>true</b>, the <paramref name="value" /> parameter is expected to be of type <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> or <see cref="T:Microsoft.SharePoint.SPFieldLookupValueCollection" /> or have an accurate string representation returned by the <b>ToString</b> method. The HTML returned by this method will contain each value in the collection separated by a semi-colon character.</para>
+          <para>If the <paramref name="value" /> parameter is a <see cref="T:Microsoft.SharePoint.SPFieldLookupValue" /> object or <see cref="T:Microsoft.SharePoint.SPFieldLookupValueCollection" /> object, the returned string will be HTML encoded.</para>
+          <para>If the <paramref name="value" /> parameter is a null reference (Nothing in Visual Basic), an empty string is returned.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFieldValueAsText">
+      <MemberSignature Language="C#" Value="public override string GetFieldValueAsText (object value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string GetFieldValueAsText(object value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.GetFieldValueAsText(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetFieldValueAsText (value As Object) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ GetFieldValueAsText(System::Object ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="value">An object of type <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> or<see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> that represents the value to convert.</param>
+        <summary>Returns a plain text representation of the field value.</summary>
+        <returns>A string that contains the value as plain text.</returns>
+        <remarks>
+          <para>If the <paramref name="value" /> parameter is of type <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" />, this method returns its label.</para>
+          <para />
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="value" /> parameter was of a type other than <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> and <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" />.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFieldValueForClientRender">
+      <MemberSignature Language="C#" Value="public override object GetFieldValueForClientRender (Microsoft.SharePoint.SPItem item, Microsoft.SharePoint.WebControls.SPControlMode mode);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object GetFieldValueForClientRender(class Microsoft.SharePoint.SPItem item, valuetype Microsoft.SharePoint.WebControls.SPControlMode mode) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.GetFieldValueForClientRender(Microsoft.SharePoint.SPItem,Microsoft.SharePoint.WebControls.SPControlMode)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetFieldValueForClientRender (item As SPItem, mode As SPControlMode) As Object" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Object ^ GetFieldValueForClientRender(Microsoft::SharePoint::SPItem ^ item, Microsoft::SharePoint::WebControls::SPControlMode mode);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPItem" />
+        <Parameter Name="mode" Type="Microsoft.SharePoint.WebControls.SPControlMode" />
+      </Parameters>
+      <Docs>
+        <param name="item">An <b>SPItem</b> object containing the <b>TaxonomyField</b> for which a value is to be rendered.</param>
+        <param name="mode">The mode for which the field value is rendered.</param>
+        <summary>Converts the field value into an object for use in Display, Edit and New item forms. </summary>
+        <returns>An object containing a representation of the field value used for client rendering.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFilteringHtml">
+      <MemberSignature Language="C#" Value="public static string GetFilteringHtml (string filterValues, Microsoft.SharePoint.SPField field, string queryStr);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetFilteringHtml(string filterValues, class Microsoft.SharePoint.SPField field, string queryStr) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.GetFilteringHtml(System.String,Microsoft.SharePoint.SPField,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetFilteringHtml (filterValues As String, field As SPField, queryStr As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetFilteringHtml(System::String ^ filterValues, Microsoft::SharePoint::SPField ^ field, System::String ^ queryStr);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="filterValues" Type="System.String" />
+        <Parameter Name="field" Type="Microsoft.SharePoint.SPField" />
+        <Parameter Name="queryStr" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="filterValues">A string containing the default HTML that will be rendered by SharePoint Foundation if this method is unable construct a custom HTML string.</param>
+        <param name="field">A <b>TaxonomyField</b> object that encapsulates the field to filter on.</param>
+        <param name="queryStr">The URL query string containing the GUID of the <b>Term</b> that is currently used as the filter and a flag indicating whether any of its descendants are to be included in the filter results.</param>
+        <summary>Constructs an HTML string that can be rendered to display a list of <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects that can be used to filter on the specified <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</summary>
+        <returns>An HTML string that can be rendered to display a list of <b>Term</b> objects that can be used to perform filtering on the specified <b>TaxonomyField</b> object.</returns>
+        <remarks>
+          <para>If the <paramref name="filterValues" /> parameter is a null reference (Nothing in Visual Basic) or empty, or the <paramref name="field" /> parameter is not of type <b>TaxonomyField</b>, or the <b>TaxonomyField</b> it encapsulates is an Enterprise Keywords field, the HTML string supplied bythe <paramref name="filterValues" /> parameter is returned. Otherwise a custom HTML string is returned that can be used to render the filter values.</para>
+          <para>If the <paramref name="queryStr" /> parameter contains both the key-value pairs matching "FilterField([0-9]+)=”" and  “FilterData([0-9]+)= for the specified field, the value from the second pair is assumed to be of the form <see cref="[0-1],GUID" />. If the first part is 1, then all descendants of the <b>Term</b> identified by GUID will be included in the filter results.</para>
+          <para>The constructed HTML string contains a single nested unordered list (<see cref="UL" />) that contains information about the filtering <b>Term</b> and the list item IDs of the filtered list items. Descendant <b>Term</b> objects will be included in the filtering if the <paramref name="queryStr" /> parameter indicates as such.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetJsonClientFormFieldSchema">
+      <MemberSignature Language="C#" Value="public override System.Collections.Generic.Dictionary&lt;string,object&gt; GetJsonClientFormFieldSchema (Microsoft.SharePoint.WebControls.SPControlMode mode);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Collections.Generic.Dictionary`2&lt;string, object&gt; GetJsonClientFormFieldSchema(valuetype Microsoft.SharePoint.WebControls.SPControlMode mode) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.GetJsonClientFormFieldSchema(Microsoft.SharePoint.WebControls.SPControlMode)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetJsonClientFormFieldSchema (mode As SPControlMode) As Dictionary(Of String, Object)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Collections::Generic::Dictionary&lt;System::String ^, System::Object ^&gt; ^ GetJsonClientFormFieldSchema(Microsoft::SharePoint::WebControls::SPControlMode mode);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.Dictionary&lt;System.String,System.Object&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="mode" Type="Microsoft.SharePoint.WebControls.SPControlMode" />
+      </Parameters>
+      <Docs>
+        <param name="mode">The mode for which the field schema will be generated. Can be one of <b>Display</b>, <b>Edit</b> or <b>New</b>.</param>
+        <summary>Returns the necessary field schema information for client-side rendering of this control.</summary>
+        <returns>A dictionary containing the schema information.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetValidatedString">
+      <MemberSignature Language="C#" Value="public override string GetValidatedString (object value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string GetValidatedString(object value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.GetValidatedString(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetValidatedString (value As Object) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ GetValidatedString(System::Object ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="value">An object of type <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> or <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> that represents the value to validate and serialize.</param>
+        <summary>Validates the field value object using logic specific to the <see cref="T:Microsoft.Sharepoint.Taxonomy.TaxonomyField" /> object, and returns a serialized string representation of the validated field value object.</summary>
+        <returns>A string that serializes the value object.</returns>
+        <remarks>
+          <para>If the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.AllowMultipleValues" /> property of the <b>TaxonomyField</b> object is <b>false</b>, the <paramref name="value" /> parameter is expected to be of type <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" />.</para>
+          <para>If the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.AllowMultipleValues" /> property of the <b>TaxonomyField</b> object is <b>true</b>, the <paramref name="value" /> parameter is expected to be of type <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> or <see cref="T:Microsoft.SharePoint.SPFieldLookupValueCollection" />.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.SPFieldValidationException">The <paramref name="value" /> parameter contains a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> object with an invalid Term GUID.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetWssIdsOfKeywordTerm">
+      <MemberSignature Language="C#" Value="public static int[] GetWssIdsOfKeywordTerm (Microsoft.SharePoint.SPSite site, Guid termId, int limit);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig int32[] GetWssIdsOfKeywordTerm(class Microsoft.SharePoint.SPSite site, valuetype System.Guid termId, int32 limit) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.GetWssIdsOfKeywordTerm(Microsoft.SharePoint.SPSite,System.Guid,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetWssIdsOfKeywordTerm (site As SPSite, termId As Guid, limit As Integer) As Integer()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;int&gt; ^ GetWssIdsOfKeywordTerm(Microsoft::SharePoint::SPSite ^ site, Guid termId, int limit);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="termId" Type="System.Guid" />
+        <Parameter Name="limit" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePont.SPSite" /> object that contains the taxonomy hidden list.</param>
+        <param name="termId">A <see cref="T:System.Guid" /> that uniquely identifies the <b>Term</b>.</param>
+        <param name="limit">The maximum number of list item IDs to return</param>
+        <summary>Gets an array of the list item IDs of all the list items in the taxonomy hidden list where the Enterprise Keywords field contains the specified <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <returns>An array of list item IDs of all the list items in the taxonomy hidden list of the specifiedSPSite that contain the specified keyword.</returns>
+        <remarks>
+          <para>If the <paramref name="site" /> parameter is a null reference (Nothing in Visual Basic) or the <paramref name="limit" /> parameter is negative, the method will return an empty array.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetWssIdsOfTerm">
+      <MemberSignature Language="C#" Value="public static int[] GetWssIdsOfTerm (Microsoft.SharePoint.SPSite site, Guid termStoreId, Guid termSetId, Guid termId, bool includeDescendants, int limit);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig int32[] GetWssIdsOfTerm(class Microsoft.SharePoint.SPSite site, valuetype System.Guid termStoreId, valuetype System.Guid termSetId, valuetype System.Guid termId, bool includeDescendants, int32 limit) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.GetWssIdsOfTerm(Microsoft.SharePoint.SPSite,System.Guid,System.Guid,System.Guid,System.Boolean,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetWssIdsOfTerm (site As SPSite, termStoreId As Guid, termSetId As Guid, termId As Guid, includeDescendants As Boolean, limit As Integer) As Integer()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;int&gt; ^ GetWssIdsOfTerm(Microsoft::SharePoint::SPSite ^ site, Guid termStoreId, Guid termSetId, Guid termId, bool includeDescendants, int limit);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="site" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="termStoreId" Type="System.Guid" />
+        <Parameter Name="termSetId" Type="System.Guid" />
+        <Parameter Name="termId" Type="System.Guid" />
+        <Parameter Name="includeDescendants" Type="System.Boolean" />
+        <Parameter Name="limit" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="site">The <see cref="T:Microsoft.SharePoint.SPSite" /> object that contains the taxonomy hidden list.</param>
+        <param name="termStoreId">A <see cref="T:System.Guid" /> object that uniquely identifies the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object.</param>
+        <param name="termSetId">A <see cref="T:System.Guid" /> object that uniquely identifies the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object.</param>
+        <param name="termId">A <see cref="T:System.Guid" /> object that uniquely identifies the <b>Term</b>.</param>
+        <param name="includeDescendants">A Boolean value that must be set to true if you would like the list item Ids of descendant <b>Term</b> objects to also be included in the results.</param>
+        <param name="limit">The maximum number of list item IDs to return.</param>
+        <summary>Gets an array of the list item IDs for all of the list items in the taxonomy hidden list that contain the specified <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</summary>
+        <returns>An array of list item IDs of all the list items in the taxonomy hidden list of the specified site that contain the specified <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object.</returns>
+        <remarks>
+          <para>If the <paramref name="TermSetId" /> parameter is set to <see cref="F:System.Guid.Empty" /> and the<paramref name="includeDescendendants" /> parameter is set to <b>false</b>, the method will consider the<b>Term</b> to be an Enterprise Keyword and only search the corresponding field in the taxonomy hidden list.</para>
+          <para>If the <paramref name="site" /> parameter is a null reference (Nothing in Visual Basic) or the <paramref name="limit" /> parameter is negative, the method will return an empty array.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="includeDescendants" /> parameter must be <b>false</b> on keyword searches (i.e. if the <paramref name="TermSetId" /> parameter is <see cref="F:System.Guid.Empty" />).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="HasValue">
+      <MemberSignature Language="C#" Value="protected override bool HasValue (object value);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool HasValue(object value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.HasValue(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function HasValue (value As Object) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override bool HasValue(System::Object ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="value">
+          <see cref="T:System.Object" /> value that the <b>TaxonomyField</b> has</param>
+        <summary>Represents whether the current <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object has a value.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsAnchorValid">
+      <MemberSignature Language="C#" Value="public bool IsAnchorValid { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsAnchorValid" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.IsAnchorValid" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsAnchorValid As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsAnchorValid { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that specifies whether the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object identified by the T:Microsoft.SharePoint.Taxonomy.TaxonomyField.AnchorId property is valid.</summary>
+        <value>
+          <b>true</b> if the <b>Term</b> identified by the <b>AnchorId</b> property is valid; otherwise, <b>false</b></value>
+        <remarks>
+          <para>This property always returns <b>true</b> if the <b>TaxonomyField</b> points to the Enterprise Keywords <b>TermSet</b>, or if the <b>TaxonomyField</b> points to the entire <b>TermSet</b> (i.e., if the <b>AnchorId</b> property returns <see cref="F:System.Guid.Empty" />).</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsKeyword">
+      <MemberSignature Language="C#" Value="public bool IsKeyword { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsKeyword" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.IsKeyword" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsKeyword As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsKeyword { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value that indicates whether the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> value points to the Enterprise Keywords <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object.</summary>
+        <value>
+          <b>true</b> if the <b>TaxonomyField</b> object points to the Enterprise Keywords <b>TermSet</b>; otherwise, false</value>
+        <remarks>
+          <para>The Enterprise Keywords <b>TermSet</b> is always open and cannot contain hierarchical taxonomies. A <b>TaxonomyField</b> object that points to the Enterprise Keywords <b>TermSet</b> allows multiple values by default.</para>
+          <para>When editing a <b>TaxonomyField</b> object with this property set to <b>true</b>, new <b>Term</b> objects can be added to the Enterprise Keywords <b>TermSet</b> by selecting Create New in the Suggestions drop-down window in the <b>TaxonomyField</b> editor control.</para>
+          <para>Since the <b>TermSet</b> doesn't support hierarchical taxonomies, the   Term Picker dialog box cannot be launched to pick <b>Term</b> objects for a <b>TaxonomyField</b> that has this property set to <b>true</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsPathRendered">
+      <MemberSignature Language="C#" Value="public bool IsPathRendered { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsPathRendered" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.IsPathRendered" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsPathRendered As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsPathRendered { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value that specifies whether the default <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> objects of all the parent <b>Term</b> objects of a <b>Term</b> in the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object will be rendered in addition to the default label of that <b>Term</b>.</summary>
+        <value>
+          <b>true</b> if the default labels of all the parent <b>Term</b> objects of a <b>Term</b> in the <b>TaxonomyField</b> will be rendered in addition to The default <b>Label</b> of that <b>Term</b>.</value>
+        <remarks>
+          <para>If this property is set to <b>true</b>, the <b>TaxonomyField</b> is rendered as a series of default labels separated by colon characters:</para>
+          <para>RootLabel:...:ParentLabel:Label</para>
+          <para>If this property is set to <b>false</b>, only the default <b>Label</b> of each <b>Term</b> is rendered.</para>
+          <para>If you set the <b>IsPathRendered</b> property you must call the <b>Update</b> method for changes to take effect in the database.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsTermSetValid">
+      <MemberSignature Language="C#" Value="public bool IsTermSetValid { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsTermSetValid" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.IsTermSetValid" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsTermSetValid As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsTermSetValid { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that specifies whether the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object identified by the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.TermSetId" /> property exists and is available for tagging.</summary>
+        <value>
+          <b>true</b> if the <b>TermSet</b> identified by the <b>TermSetId</b> property exists and is available for tagging; otherwise, <b>false</b></value>
+        <remarks>
+          <para>This property always returns <b>true</b> if the <b>TermSetId</b> property points to the Enterprise Keywords <b>TermSet</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="JSLink">
+      <MemberSignature Language="C#" Value="public override string JSLink { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string JSLink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.JSLink" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property JSLink As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ JSLink { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a string containing a list, delimited with the '|' character, of all Javascript files required for the client-side rendering of <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> values.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Script-on-demand files are individually suffixed with "(d)"</para>
+          <para>The JSLink property is not supported on Survey or Events lists. A SharePoint calendar is an Events list.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnAdded">
+      <MemberSignature Language="C#" Value="public override void OnAdded (Microsoft.SharePoint.SPAddFieldOptions op);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void OnAdded(valuetype Microsoft.SharePoint.SPAddFieldOptions op) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.OnAdded(Microsoft.SharePoint.SPAddFieldOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub OnAdded (op As SPAddFieldOptions)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void OnAdded(Microsoft::SharePoint::SPAddFieldOptions op);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="op" Type="Microsoft.SharePoint.SPAddFieldOptions" />
+      </Parameters>
+      <Docs>
+        <param name="op">An <see cref="T:Microsoft.SharePoint.SPAddFieldOptions" /> value that specifies an option that is implemented after the field is created.</param>
+        <summary>Occurs after a TaxonomyField object is added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnAddingToContentType">
+      <MemberSignature Language="C#" Value="public override void OnAddingToContentType (Microsoft.SharePoint.SPContentType contentType);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void OnAddingToContentType(class Microsoft.SharePoint.SPContentType contentType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.OnAddingToContentType(Microsoft.SharePoint.SPContentType)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub OnAddingToContentType (contentType As SPContentType)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void OnAddingToContentType(Microsoft::SharePoint::SPContentType ^ contentType);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contentType" Type="Microsoft.SharePoint.SPContentType" />
+      </Parameters>
+      <Docs>
+        <param name="contentType">A <see cref="T:Microsoft.SharePoint.SPContentType" /> object that represents the content type.</param>
+        <summary>Occurs when a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object is added to a specified content type.</summary>
+        <remarks>
+          <para>If the <paramref name="contentType" /> parameter is a null reference (Nothing in Visual Basic), or its <see cref="T:Microsoft.SharePoint.SPContentType.FieldLinks" /> property is <b>null,</b> or its <see cref="T:Microsoft.SharePoint.SPWeb.ParentWeb" /> object has no available fields, this method has no effect.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnDeleting">
+      <MemberSignature Language="C#" Value="public override void OnDeleting ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void OnDeleting() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.OnDeleting" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub OnDeleting ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void OnDeleting();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Occurs when a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object is being deleted.</summary>
+        <remarks>
+          <para>This method removes the <b>TaxonomyField</b> object, and any event receivers and timer jobs associated with the <see cref="TaxonomyField" /> from the list.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnDeletingFromContentType">
+      <MemberSignature Language="C#" Value="public override void OnDeletingFromContentType (Microsoft.SharePoint.SPContentType contentType);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void OnDeletingFromContentType(class Microsoft.SharePoint.SPContentType contentType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.OnDeletingFromContentType(Microsoft.SharePoint.SPContentType)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub OnDeletingFromContentType (contentType As SPContentType)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void OnDeletingFromContentType(Microsoft::SharePoint::SPContentType ^ contentType);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="contentType" Type="Microsoft.SharePoint.SPContentType" />
+      </Parameters>
+      <Docs>
+        <param name="contentType">A <see cref="T:Microsoft.SharePoint.SPContentType" /> object that represents the content type.</param>
+        <summary>Occurs when a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object is deleted from a specified content type.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Open">
+      <MemberSignature Language="C#" Value="public bool Open { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Open" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.Open" />
+      <MemberSignature Language="VB.NET" Value="Public Property Open As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool Open { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value that specifies whether the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object is linked to an open <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object or a closed <b>TermSet</b>.</summary>
+        <value>
+          <b>true</b> if the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object is linked to an open <b>TermSet</b>; otherwise, false</value>
+        <remarks>
+          <para>A <b>TermSet</b> is open if new <b>Term</b> objects can be added to it. It is closed if new terms cannot be added to it.</para>
+          <para>If the user is the term store administrator, group manager, or a term set owner, users can always use the term store manager page to add new <b>Term</b> objects to a <b>TermSet</b> object regardless of whether the <b>TermSet</b> is open or closed. </para>
+          <para>If the <b>TermSet</b> is open, use the Add new term link in the Term picker dialog box in the Web tagging user interface to add new <b>Term</b> objects.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderFieldValueAsJson">
+      <MemberSignature Language="C#" Value="public override string RenderFieldValueAsJson (object value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string RenderFieldValueAsJson(object value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.RenderFieldValueAsJson(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function RenderFieldValueAsJson (value As Object) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ RenderFieldValueAsJson(System::Object ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="value">To be added.</param>
+        <summary> Renders the field value as a serialized JavaScript Object Notation (JSON) string.</summary>
+        <returns>The field value in a serialized JSON format of the form (for single-value fields): {"TermID": "guid", "Label": "label"}or (for multivalued fields):                  [{"TermID": "guid1", "Label": "label1"},{"TermID": "guid2", "Label": "label2"}, ...]</returns>
+        <remarks>
+          <para>The client-side rendering (CSR) framework calls the <b>TaxonomyField.RenderFieldValueAsJson(System.Object)</b> method to get the field value as a JSON object that the framework can serialize and send to the client. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetFieldValue">
+      <MemberSignature Language="C#" Value="public void SetFieldValue (Microsoft.SharePoint.SPListItem item, Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue taxValue);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetFieldValue(class Microsoft.SharePoint.SPListItem item, class Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue taxValue) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.SetFieldValue(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetFieldValue (item As SPListItem, taxValue As TaxonomyFieldValue)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetFieldValue(Microsoft::SharePoint::SPListItem ^ item, Microsoft::SharePoint::Taxonomy::TaxonomyFieldValue ^ taxValue);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, Name="SetFieldValueByValue")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="taxValue" Type="Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" />
+      </Parameters>
+      <Docs>
+        <param name="item">The <see cref="T:Microsoft.SharePoint.SPListItem" /> object whose field is to be updated.</param>
+        <param name="taxValue">The <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> object whose value is to be used to update this field.</param>
+        <summary>Sets the value of the corresponding field in the list item to the value of the specified <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> object.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">One or more of the arguments to this method are a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetFieldValue">
+      <MemberSignature Language="C#" Value="public void SetFieldValue (Microsoft.SharePoint.SPListItem item, Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection taxValueCollection);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetFieldValue(class Microsoft.SharePoint.SPListItem item, class Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection taxValueCollection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.SetFieldValue(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetFieldValue (item As SPListItem, taxValueCollection As TaxonomyFieldValueCollection)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetFieldValue(Microsoft::SharePoint::SPListItem ^ item, Microsoft::SharePoint::Taxonomy::TaxonomyFieldValueCollection ^ taxValueCollection);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, Name="SetFieldValueByValueCollection")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="taxValueCollection" Type="Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" />
+      </Parameters>
+      <Docs>
+        <param name="item">The <see cref="T:Microsoft.SharePoint.SPListItem" /> object whose field is to be updated.</param>
+        <param name="taxValueCollection">The <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object whose valueis to be used to update this field.</param>
+        <summary>Sets the value of the corresponding multi-valued field in the list item to the value of the specified <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">One or more of the arguments to this method are a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="T:System.NotSupportedException">The field is not multi-valued.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetFieldValue">
+      <MemberSignature Language="C#" Value="public void SetFieldValue (Microsoft.SharePoint.SPListItem item, Microsoft.SharePoint.Taxonomy.Term term);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetFieldValue(class Microsoft.SharePoint.SPListItem item, class Microsoft.SharePoint.Taxonomy.Term term) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.SetFieldValue(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.Taxonomy.Term)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetFieldValue(Microsoft::SharePoint::SPListItem ^ item, Microsoft::SharePoint::Taxonomy::Term ^ term);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="term" Type="Microsoft.SharePoint.Taxonomy.Term" />
+      </Parameters>
+      <Docs>
+        <param name="item">The <see cref="T:Microsoft.SharePoint.SPListItem" /> object whose field is to be updated.</param>
+        <param name="term">The <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object whose properties are used to update the field value.</param>
+        <summary>Sets the value of the corresponding field in the list item to the properties of the specified <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object in the default language of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object.</summary>
+        <remarks>
+          <para>A <b>Term</b> has a maximum of one default <b>Label</b> for every language in the <b>TermStore</b> object. This method uses the same default <b>Label</b> (in the default language of the <b>TermStore</b> object )that the <b>Term</b> object uses by default </para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">One or more arguments of this method are a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetFieldValue">
+      <MemberSignature Language="C#" Value="public void SetFieldValue (Microsoft.SharePoint.SPListItem item, Microsoft.SharePoint.Taxonomy.TermCollection terms);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetFieldValue(class Microsoft.SharePoint.SPListItem item, class Microsoft.SharePoint.Taxonomy.TermCollection terms) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.SetFieldValue(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.Taxonomy.TermCollection)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetFieldValue (item As SPListItem, terms As TermCollection)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetFieldValue(Microsoft::SharePoint::SPListItem ^ item, Microsoft::SharePoint::Taxonomy::TermCollection ^ terms);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="terms" Type="Microsoft.SharePoint.Taxonomy.TermCollection" />
+      </Parameters>
+      <Docs>
+        <param name="item">The <see cref="T:Microsoft.SharePoint.SPListItem" /> object whose field is to be updated.</param>
+        <param name="terms">The collection of <b>Term</b> objects whose properties are to be used to update the field value.</param>
+        <summary>Sets the value of the corresponding multi-value field in the list item to the properties of the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects in the specified collection.</summary>
+        <remarks>
+          <para>Each <b>Term</b> has a maximum of one default label for every language in the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object. For each <b>Term</b>, The default <b>Label</b> in the default language of the <b>TermStore</b> is used.</para>
+          <para>The field will be assigned a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">One or more arguments to this method are a null reference (Nothing in Visual Basic), or the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object does not allow multiple values.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetFieldValue">
+      <MemberSignature Language="C#" Value="public void SetFieldValue (Microsoft.SharePoint.SPListItem item, System.Collections.Generic.ICollection&lt;Microsoft.SharePoint.Taxonomy.Term&gt; terms);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetFieldValue(class Microsoft.SharePoint.SPListItem item, class System.Collections.Generic.ICollection`1&lt;class Microsoft.SharePoint.Taxonomy.Term&gt; terms) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.SetFieldValue(Microsoft.SharePoint.SPListItem,System.Collections.Generic.ICollection{Microsoft.SharePoint.Taxonomy.Term})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetFieldValue (item As SPListItem, terms As ICollection(Of Term))" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetFieldValue(Microsoft::SharePoint::SPListItem ^ item, System::Collections::Generic::ICollection&lt;Microsoft::SharePoint::Taxonomy::Term ^&gt; ^ terms);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="terms" Type="System.Collections.Generic.ICollection&lt;Microsoft.SharePoint.Taxonomy.Term&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="item">The <see cref="T:Microsoft.SharePoint.SPListItem" /> object whose field is to be updated.</param>
+        <param name="terms">The collection of <b>Term</b> objects whose properties are to be used to update the field value.</param>
+        <summary>Sets the value of the corresponding multi-value field in the list item to the properties of the T:Microsoft.SharePoint.Taxonomy.Term objects  in the specified collection.</summary>
+        <remarks>
+          <para>Each <b>Term</b> has a maximum of one default label for every language in the <b>TermStore</b> object. For each <b>Term</b>, the default <b>Label</b> in the default language of the <b>TermStore</b> is used.</para>
+          <para>The field will be assigned a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">One or more arguments to this method are a null reference (Nothing in Visual Basic), or the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object does not allow multiple values.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetFieldValue">
+      <MemberSignature Language="C#" Value="public void SetFieldValue (Microsoft.SharePoint.SPListItem item, Microsoft.SharePoint.Taxonomy.Term term, int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetFieldValue(class Microsoft.SharePoint.SPListItem item, class Microsoft.SharePoint.Taxonomy.Term term, int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.SetFieldValue(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.Taxonomy.Term,System.Int32)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetFieldValue(Microsoft::SharePoint::SPListItem ^ item, Microsoft::SharePoint::Taxonomy::Term ^ term, int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, Name="SetFieldValueByTerm")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="term" Type="Microsoft.SharePoint.Taxonomy.Term" />
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="item">The <see cref="T:Microsoft.SharePoint.SPListItem" /> object whose field is to be updated.</param>
+        <param name="term">The <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object whose properties are used to update the field value.</param>
+        <param name="lcid">The language code identifier (LCID) of the language of the default <b>Label</b> to use.</param>
+        <summary>Sets the value of the corresponding field in the list item to the properties of the specified Term in the specified language.</summary>
+        <remarks>
+          <para>A <b>Term</b> has a maximum of one default <b>Label</b> for every new language in the <b>TermStore</b> object. The default <b>Label</b> used by this method is The default <b>Label</b> of the <b>Term</b> in the language specified by the <paramref name="lcid" /> parameter, if one exists, otherwise the default language of the <b>TermStore</b> is used.</para>
+          <para>If the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.AllowMultipleValues" /> property is <b>true</b>, the field will be assigned a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object. Otherwise, it will be assigned a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> object.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">One or more arguments to this method are a null reference (Nothing in Visual Basic).</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetFieldValue">
+      <MemberSignature Language="C#" Value="public void SetFieldValue (Microsoft.SharePoint.SPListItem item, Microsoft.SharePoint.Taxonomy.TermCollection terms, int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetFieldValue(class Microsoft.SharePoint.SPListItem item, class Microsoft.SharePoint.Taxonomy.TermCollection terms, int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.SetFieldValue(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.Taxonomy.TermCollection,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetFieldValue (item As SPListItem, terms As TermCollection, lcid As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetFieldValue(Microsoft::SharePoint::SPListItem ^ item, Microsoft::SharePoint::Taxonomy::TermCollection ^ terms, int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, Name="SetFieldValueByTermCollection")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="terms" Type="Microsoft.SharePoint.Taxonomy.TermCollection" />
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="item">The <see cref="T:Microsoft.SharePoint.SPListItem" /> object whose field is to be updated.</param>
+        <param name="terms">The collection of <b>Term</b> object whose properties are to be used to update the field value.</param>
+        <param name="lcid">The language code identifier (LCID) of the language of the default <b>Label</b> objects to use.</param>
+        <summary>Sets the value of the corresponding multi-value field in the list item to the properties of the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects in the specified collection, in the specified language.</summary>
+        <remarks>
+          <para>Each <b>Term</b> has a maximum of one default <b>Label</b> for every language in the <b>TermStore</b> object. For each <b>Term</b>, The default <b>Label</b> in the default language of the <b>TermStore</b> is used.</para>
+          <para>The field will be assigned a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">One or more arguments to this method are a null reference (Nothing in Visual Basic), or the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object does not allow multiple values.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetFieldValue">
+      <MemberSignature Language="C#" Value="public void SetFieldValue (Microsoft.SharePoint.SPListItem item, System.Collections.Generic.ICollection&lt;Microsoft.SharePoint.Taxonomy.Term&gt; terms, int lcid);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetFieldValue(class Microsoft.SharePoint.SPListItem item, class System.Collections.Generic.ICollection`1&lt;class Microsoft.SharePoint.Taxonomy.Term&gt; terms, int32 lcid) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.SetFieldValue(Microsoft.SharePoint.SPListItem,System.Collections.Generic.ICollection{Microsoft.SharePoint.Taxonomy.Term},System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetFieldValue (item As SPListItem, terms As ICollection(Of Term), lcid As Integer)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetFieldValue(Microsoft::SharePoint::SPListItem ^ item, System::Collections::Generic::ICollection&lt;Microsoft::SharePoint::Taxonomy::Term ^&gt; ^ terms, int lcid);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="terms" Type="System.Collections.Generic.ICollection&lt;Microsoft.SharePoint.Taxonomy.Term&gt;" />
+        <Parameter Name="lcid" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="item">The <see cref="T:Microsoft.SharePoint.SPListItem" /> object whose field is to be updated.</param>
+        <param name="terms">The collection of <b>Term</b> object whose properties are to be used to update the field value.</param>
+        <param name="lcid">The language code identifier (LCID) of the language of the default <b>Label</b> objects to use.</param>
+        <summary>Sets the value of the corresponding multi-value field in the list item to the properties of the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects in the specified collection, in the specified language.</summary>
+        <remarks>
+          <para>Each <b>Term</b> has a maximum of one default <b>Label</b> for every language in the <b>TermStore</b> object. For each <b>Term</b>, the default <b>Label</b> in the default language of the <b>TermStore</b> object is used.</para>
+          <para>The field will be assigned a<see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">One or more arguments to this method are a null reference (Nothing in Visual Basic), or the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object does not allow multiple values.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SspId">
+      <MemberSignature Language="C#" Value="public Guid SspId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid SspId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.SspId" />
+      <MemberSignature Language="VB.NET" Value="Public Property SspId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid SspId { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the GUID that identifies the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object, which contains the Enterprise Keywords for the site that the current <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> belongs to.</summary>
+        <value>A <see cref="T:System.Guid" /> struct that identifies the <b>TermStore</b> which contains the Enterprise Keywords for the site that this <b>TaxonomyField</b> belongs to.</value>
+        <remarks>
+          <para>If the GUID that identifies the <b>TermStore</b> could not be found, a <see cref="F:System.Guid.Empty" /> object is returned.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TargetTemplate">
+      <MemberSignature Language="C#" Value="public string TargetTemplate { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string TargetTemplate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.TargetTemplate" />
+      <MemberSignature Language="VB.NET" Value="Public Property TargetTemplate As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ TargetTemplate { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Web-relative URL of the target page that is used to construct the hyperlink on each <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object when the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object is rendered.</summary>
+        <value>The Web-relative URL of the target page that is used to construct the hyperlink on each <b>Term</b> when the <b>TaxonomyField</b> is rendered.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TaxonomyGuidLabelDelimiter">
+      <MemberSignature Language="C#" Value="public static char TaxonomyGuidLabelDelimiter { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property char TaxonomyGuidLabelDelimiter" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.TaxonomyGuidLabelDelimiter" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property TaxonomyGuidLabelDelimiter As Char" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property char TaxonomyGuidLabelDelimiter { char get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Char</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the character that is used to delimit GUIDs and labels in the string representation of the value of a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</summary>
+        <value>The character used to delimit GUIDs and labels in the string representation of the value of a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TaxonomyMultipleTermDelimiter">
+      <MemberSignature Language="C#" Value="public static char TaxonomyMultipleTermDelimiter { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property char TaxonomyMultipleTermDelimiter" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.TaxonomyMultipleTermDelimiter" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property TaxonomyMultipleTermDelimiter As Char" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property char TaxonomyMultipleTermDelimiter { char get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Char</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the character used to delimit multiple <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects in the string representation of a taxonomy field value collection.</summary>
+        <value>The character used to delimit multiple <b>Term</b> objects in the string representation of a taxonomy field value collection.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TaxonomyTermPathDelimiter">
+      <MemberSignature Language="C#" Value="public static char TaxonomyTermPathDelimiter { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property char TaxonomyTermPathDelimiter" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.TaxonomyTermPathDelimiter" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property TaxonomyTermPathDelimiter As Char" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static property char TaxonomyTermPathDelimiter { char get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Char</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the character used to delimit Term labels in the path string returned by the <see cref="M:Microsoft.SharePoint.Taxonomy.Term.GetPath" /> method.</summary>
+        <value>The character used to delimit Term labels in the path string returned by the <see cref="M:Microsoft.SharePoint.Taxonomy.Term.GetPath" /> method.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TermSetId">
+      <MemberSignature Language="C#" Value="public Guid TermSetId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid TermSetId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.TermSetId" />
+      <MemberSignature Language="VB.NET" Value="Public Property TermSetId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid TermSetId { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the GUID of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object that contains the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects used by the current <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</summary>
+        <value>The GUID of the <see cref="TermSet" /> that contains the <see cref="Term" /> objects used by the current <b>TaxonomyField</b> object.</value>
+        <remarks>
+          <para>If the <see cref="T:Microsoft.SharePoint.SPSite" /> object, the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomySession" /> object, the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object, or <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object cannot be found, the property returns a <see cref="F:System.Guid.Empty" /> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TextField">
+      <MemberSignature Language="C#" Value="public Guid TextField { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid TextField" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.TextField" />
+      <MemberSignature Language="VB.NET" Value="Public Property TextField As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid TextField { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallableProperty(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, SetProperty=false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the GUID that identifies the hidden text field in an item.</summary>
+        <value>A <see cref="T:System.Guid" /> object that identifies the hidden text field in an item.</value>
+        <remarks>
+          <para>Every <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object contains a related hidden text field that contains a string representation of the taxonomy field value. The hidden text field is identifiedby the GUID returned by this property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public override void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Updates the database with changes that are made to the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserCreated">
+      <MemberSignature Language="C#" Value="public bool UserCreated { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UserCreated" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyField.UserCreated" />
+      <MemberSignature Language="VB.NET" Value="Public Property UserCreated As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UserCreated { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value that specifies whether the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object is linked to a customized <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object.</summary>
+        <value>
+          <b>true</b> if the <b>TaxonomyField</b> is linked to a customized <b>TermSet</b>; otherwise, <b>false</b></value>
+        <remarks>
+          <para>A <b>TermSet</b> is customized if it was created with the Customize your TermSet option selected at the time the field was created.</para>
+          <para>
+            <b>Term</b> objects in a customized <b>TermSet</b> are available to other users in the site collection, but they are not offered as suggestions in enterprise keywords columns.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateAndParseValue">
+      <MemberSignature Language="C#" Value="public override object ValidateAndParseValue (Microsoft.SharePoint.SPListItem item, string value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object ValidateAndParseValue(class Microsoft.SharePoint.SPListItem item, string value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyField.ValidateAndParseValue(Microsoft.SharePoint.SPListItem,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ValidateAndParseValue (item As SPListItem, value As String) As Object" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Object ^ ValidateAndParseValue(Microsoft::SharePoint::SPListItem ^ item, System::String ^ value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+        <Parameter Name="value" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="item">The item containing the <b>TaxonomyField</b> for which the value is to be updated.</param>
+        <param name="value">The field value in the same format as the <see cref="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue.PopulateFromLabelGuidPair(System.String)" /> method (for single-value fields) or the <see cref="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection.PopulateFromLabelGuidPairs(System.String)" /> method (for multi-value fields).</param>
+        <summary>Parses the field value and returns a validated object.</summary>
+        <returns>A parsed and validated <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> or <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object. </returns>
+        <remarks>
+          <para>This method is called by the client-side rendering framework when a field value needs to be updated.</para>
+          <para>A <b>TaxonomyField</b> is unique because it requires its value to be set using <b>TaxonomyField.SetFieldValue</b> method, instead of the more direct way of setting SPListItem["fieldName"]=value. Since the caller has no knowledge of this requirement, this method automatically calls the <b>TaxonomyField.SetFieldValue</b> method. You need to be aware that this method does more than just validate and parse the field value, but only for <b>TaxonomyField</b> objects.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

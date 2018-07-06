@@ -1,0 +1,456 @@
+﻿<Type Name="PortalNavigation" FullName="Microsoft.SharePoint.Publishing.Navigation.PortalNavigation">
+  <TypeSignature Language="C#" Value="public sealed class PortalNavigation" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PortalNavigation extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PortalNavigation" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PortalNavigation sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents navigation for portal pages and other portal navigation objects.</summary>
+    <remarks>
+      <para>The following code example configures portal navigation for a specified site.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>/ Assemblies that need to be referenced in this sample:
+//     Microsoft.SharePoint.dll
+//     Microsoft.SharePoint.Publishing.dll
+
+using System;
+
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Publishing;
+using Microsoft.SharePoint.Publishing.Navigation;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            // Configure the portal navigation settings for a particular site.
+            using (SPSite siteCollection = new SPSite("http://yourServer"))
+            {
+                using (SPWeb site = siteCollection.OpenWeb("/site1"))
+                {
+                    PublishingWeb pubSite = PublishingWeb.GetPublishingWeb(site);
+                    PortalNavigation portalNav = pubSite.Navigation;
+
+                    // Show pages in the current navigation (on the left for LTR languages using SharePoint's
+                    // default Master Pages).
+                    portalNav.CurrentIncludePages = true;
+
+                    // Increase the number of dynamic children in the current navigation to 50.
+                    portalNav.CurrentDynamicChildLimit = 50;
+
+                    // Disable global navigation inheritance, establishing the site as the new global navigation root
+                    // for any sites below it; also disable the sibling display behavior for the current navigation.
+                    portalNav.InheritGlobal = false;
+                    portalNav.ShowSiblings = false;
+
+                    // Enable automatic sorting for all of the site's navigation items.
+                    portalNav.OrderingMethod = OrderingMethod.Automatic;
+
+                    using (SPWeb siteToHide = siteCollection.OpenWeb("/site1/site2"))
+                    {
+                        // Hide a specific sub-site from display in global navigation.
+                        portalNav.ExcludeFromNavigation(true, siteToHide.ID);
+
+                        // Hide a specific sub-site from display in current navigation.
+                        portalNav.ExcludeFromNavigation(false, siteToHide.ID);
+                    }
+
+                    // Save the changes to the store.
+                    pubSite.Update();
+                }
+            }
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="AutomaticSortingMethod">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.AutomaticSortingMethod AutomaticSortingMethod { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.AutomaticSortingMethod AutomaticSortingMethod" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.AutomaticSortingMethod" />
+      <MemberSignature Language="VB.NET" Value="Public Property AutomaticSortingMethod As AutomaticSortingMethod" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::AutomaticSortingMethod AutomaticSortingMethod { Microsoft::SharePoint::Publishing::AutomaticSortingMethod get(); void set(Microsoft::SharePoint::Publishing::AutomaticSortingMethod value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.AutomaticSortingMethod</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Controls the property to use when automatically sorting navigation items owned by this site.</summary>
+        <value>Returns <see cref="T:Microsoft.SharePoint.Publishing.AutomaticSortingMethod" />.</value>
+        <remarks>
+          <para>This property is useful only when <b>PortalNavigation.OrderingMethod</b> is set to one of the automatic sorting options.To save changes after setting this property, call the <b>PublishingWeb.Update</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentDynamicChildLimit">
+      <MemberSignature Language="C#" Value="public int CurrentDynamicChildLimit { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 CurrentDynamicChildLimit" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.CurrentDynamicChildLimit" />
+      <MemberSignature Language="VB.NET" Value="Public Property CurrentDynamicChildLimit As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int CurrentDynamicChildLimit { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum number of "dynamic" child items to show beneath this site in the current navigation.
+
+</summary>
+        <value>An integer that represents the maximum number of dynamic child items to return.</value>
+        <remarks>
+          <para>Dynamic children are sub-sites (represented by <see cref="T:Microsoft.SharePoint.SPWeb" /> objects) and publishing pages.The default value of the returned integer is 20. Setting the value to 0 removes the limit.The value of the <see cref="P:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider.DynamicPageLimit" /> property on the associated <see cref="T:Microsoft.SharePoint.Publishing.Navigation.PortalSiteMapProvider" /> object takes precedence over this setting unless the <b>PortalSiteMapProvider.DynamicPageLimit</b> property is set to 0, which is the default. You can use this property to limit the effect of poor navigation management. When a site has a large number of sub-sites or pages, and the <b>CurrentIncludeSubSites</b> and <b>CurrentIncludePages</b> properties are set to <b>true</b>, all of the items are displayed in the navigation menus. Showing large numbers of items in the navigation menus is not useful and can have a negative impact on performance.To save changes after setting this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingWeb.Update" /> method.
+</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentIncludePages">
+      <MemberSignature Language="C#" Value="public bool CurrentIncludePages { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool CurrentIncludePages" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.CurrentIncludePages" />
+      <MemberSignature Language="VB.NET" Value="Public Property CurrentIncludePages As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool CurrentIncludePages { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether publishing pages in this site will be automatically included in its current navigation.</summary>
+        <value>
+          <b>true</b> if pages are automatically included in current navigation; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>This property affects only a valid publishing site with a Pages list.
+To save changes after setting this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingWeb.Update" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentIncludeSubSites">
+      <MemberSignature Language="C#" Value="public bool CurrentIncludeSubSites { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool CurrentIncludeSubSites" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.CurrentIncludeSubSites" />
+      <MemberSignature Language="VB.NET" Value="Public Property CurrentIncludeSubSites As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool CurrentIncludeSubSites { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether sub-sites of this site will be included automatically in its current navigation. </summary>
+        <value>
+          <b>true</b> if sub-sites are included automatically in current navigation; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>To save changes after setting this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingWeb.Update" /> method. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentNavigationNodes">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Navigation.SPNavigationNodeCollection CurrentNavigationNodes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Navigation.SPNavigationNodeCollection CurrentNavigationNodes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.CurrentNavigationNodes" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CurrentNavigationNodes As SPNavigationNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Navigation::SPNavigationNodeCollection ^ CurrentNavigationNodes { Microsoft::SharePoint::Navigation::SPNavigationNodeCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Navigation.SPNavigationNodeCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a collection of <see cref="T:Microsoft.SharePoint.Navigation.SPNavigationNode" /> objects that get included in the current navigation of the associated site. </summary>
+        <value>An <b>SPNavigationNodeCollection</b> object that corresponds to the SharePoint Quick Launch.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExcludeFromNavigation">
+      <MemberSignature Language="C#" Value="public void ExcludeFromNavigation (bool useGlobal, Guid item);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ExcludeFromNavigation(bool useGlobal, valuetype System.Guid item) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.ExcludeFromNavigation(System.Boolean,System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub ExcludeFromNavigation (useGlobal As Boolean, item As Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void ExcludeFromNavigation(bool useGlobal, Guid item);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="useGlobal" Type="System.Boolean" />
+        <Parameter Name="item" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="useGlobal">A Boolean value that controls whether global or current navigation is affected.</param>
+        <param name="item">GUID representing the unique ID of the item to exclude.</param>
+        <summary>Explicitly excludes a specific subsite or page from being displayed in navigation.</summary>
+        <remarks>
+          <para>To save changes after setting this property, call the <b>PublishingWeb.Update</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GlobalDynamicChildLimit">
+      <MemberSignature Language="C#" Value="public int GlobalDynamicChildLimit { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 GlobalDynamicChildLimit" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.GlobalDynamicChildLimit" />
+      <MemberSignature Language="VB.NET" Value="Public Property GlobalDynamicChildLimit As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int GlobalDynamicChildLimit { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Controls the maximum number of "dynamic" child items to show beneath this site in global navigation.Dynamic children are sub-sites (represented by <b>SPWeb</b> objects) and publishing pages.</summary>
+        <value>Returns <see cref="T:System.Int32" />.</value>
+        <remarks>
+          <para>The default value is <b>20</b>. Setting the value to <b>0</b> removes the limit.The value of the <b>DynamicPageLimit</b> property on the associated <b>PortalSiteMapProvider</b> takes precedence over this setting unless <b>PortalSiteMapProviader.DynamicPageLimit</b> is set to <b>0</b>, which is the default. You can use this property to limit the effect of poor navigation management. When a site has a large number of sub-sites or pages, and the <b>GlobalIncludeSubSites</b> and <b>GlobalIncludePages</b> properties are set to <b>true</b>, all the items are displayed in the the navigation menus. Showing large numbers of items in the navigation menus is not useful and can have a negative impact on performance.To save changes after setting this property, call the <b>PublishingWeb.Update</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GlobalIncludePages">
+      <MemberSignature Language="C#" Value="public bool GlobalIncludePages { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool GlobalIncludePages" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.GlobalIncludePages" />
+      <MemberSignature Language="VB.NET" Value="Public Property GlobalIncludePages As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool GlobalIncludePages { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Controls whether publishing pages in this site will be automatically included in global navigation.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>This property affects only a valid publishing site with a Pages list.To save changes after setting this property, call the <b>PublishingWeb.Update</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GlobalIncludeSubSites">
+      <MemberSignature Language="C#" Value="public bool GlobalIncludeSubSites { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool GlobalIncludeSubSites" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.GlobalIncludeSubSites" />
+      <MemberSignature Language="VB.NET" Value="Public Property GlobalIncludeSubSites As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool GlobalIncludeSubSites { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Controls whether sub-site's of this site will be automatically included in its global navigation.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>To save changes after setting this property, call the <b>PublishingWeb.Update</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GlobalNavigationNodes">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Navigation.SPNavigationNodeCollection GlobalNavigationNodes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Navigation.SPNavigationNodeCollection GlobalNavigationNodes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.GlobalNavigationNodes" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property GlobalNavigationNodes As SPNavigationNodeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Navigation::SPNavigationNodeCollection ^ GlobalNavigationNodes { Microsoft::SharePoint::Navigation::SPNavigationNodeCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Navigation.SPNavigationNodeCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>A collection of <b>SPNavigationNode</b> objects that get included in the global navigation of the associated site. </summary>
+        <value>Returns <see cref="T:Microsoft.SharePoint.Navigation.SPNavigationNodeCollection" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeInNavigation">
+      <MemberSignature Language="C#" Value="public void IncludeInNavigation (bool useGlobal, Guid item);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void IncludeInNavigation(bool useGlobal, valuetype System.Guid item) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.IncludeInNavigation(System.Boolean,System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub IncludeInNavigation (useGlobal As Boolean, item As Guid)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void IncludeInNavigation(bool useGlobal, Guid item);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="useGlobal" Type="System.Boolean" />
+        <Parameter Name="item" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="useGlobal">A Boolean value that controls whether global or current navigation is affected.</param>
+        <param name="item">GUID representing the unique ID of the item to include.</param>
+        <summary>Explicitly includes a specific subsite or page for display in navigation. </summary>
+        <remarks>
+          <para>To save changes after setting this property, call the <b>PublishingWeb.Update</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="InheritCurrent">
+      <MemberSignature Language="C#" Value="public bool InheritCurrent { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool InheritCurrent" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.InheritCurrent" />
+      <MemberSignature Language="VB.NET" Value="Public Property InheritCurrent As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool InheritCurrent { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Controls whether the associated site should display its own current navigation or should use the current navigation of its parent.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>Set to true to display the same current navigation as the parent of this site. Set to false to displaythe navigation items from this site.This property affects the starting node for current navigation. By default, sites do not inherit current navigation, anchoring the starting node at the current site.To save changes after setting this property, call the <b>PublishingWeb.Update</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="InheritGlobal">
+      <MemberSignature Language="C#" Value="public bool InheritGlobal { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool InheritGlobal" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.InheritGlobal" />
+      <MemberSignature Language="VB.NET" Value="Public Property InheritGlobal As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool InheritGlobal { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Controls whether the associated site should display its own global navigation or whether it should use the global navigation of its parent.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>Set to <b>true</b> to display the same global navigation as the parent of this site. Set to <b>false</b> to establisha new global navigation root for all sites beneath this one.This property affects the starting node for global navigation. By default, all non-root sites inherit global navigation, anchoring the starting node at the root site. This way, the root site and those beneath it are displayed even when a user is visiting a site further down the hierarchy. Setting this value to <b>false</b> on a specific sub site will cause global navigation to be re-anchored for this site and any beneath it.To save changes after setting this property, call the <b>PublishingWeb.Update</b> method.This property is a pass-through to the <b>SPNavigation.UseShared</b> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OrderingMethod">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.OrderingMethod OrderingMethod { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.OrderingMethod OrderingMethod" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.OrderingMethod" />
+      <MemberSignature Language="VB.NET" Value="Public Property OrderingMethod As OrderingMethod" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::OrderingMethod OrderingMethod { Microsoft::SharePoint::Publishing::OrderingMethod get(); void set(Microsoft::SharePoint::Publishing::OrderingMethod value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.OrderingMethod</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Controls the ordering of navigation items owned by this site.</summary>
+        <value>Returns <see cref="T:Microsoft.SharePoint.Publishing.OrderingMethod" />.</value>
+        <remarks>
+          <para>To save changes after setting this property, call the <b>PublishingWeb.Update</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowSiblings">
+      <MemberSignature Language="C#" Value="public bool ShowSiblings { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ShowSiblings" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.ShowSiblings" />
+      <MemberSignature Language="VB.NET" Value="Public Property ShowSiblings As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShowSiblings { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Controls whether this site should display its sibling items in the current navigation.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>Defaults to <b>true</b> for publishing sites. Defaults to <b>false</b> for other site templates. Current navigation is normally anchored at the current site and shows the items beneath that site.  This property forces the starting node up one level so that the siblings of the current site are displayed. Any children of the sibling nodes are automatically trimmed. To save changes after setting this property, call the <b>PublishingWeb.Update</b> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SortAscending">
+      <MemberSignature Language="C#" Value="public bool SortAscending { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool SortAscending" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Navigation.PortalNavigation.SortAscending" />
+      <MemberSignature Language="VB.NET" Value="Public Property SortAscending As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool SortAscending { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Sorts items in a portal navigation in ascending alphanumeric order.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

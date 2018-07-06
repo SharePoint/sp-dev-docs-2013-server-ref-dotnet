@@ -1,0 +1,216 @@
+﻿<Type Name="AddonDataHandler" FullName="Microsoft.Office.Visio.Server.AddonDataHandler">
+  <TypeSignature Language="C#" Value="public abstract class AddonDataHandler" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit AddonDataHandler extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Visio.Server.AddonDataHandler" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class AddonDataHandler" />
+  <TypeSignature Language="C++ CLI" Value="public ref class AddonDataHandler abstract" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.CLSCompliant(true)</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>An abstract base class from which all implementations for data modules must derive.</summary>
+    <remarks>
+      <para>Data modules are adapters used by the data extensibility mechanism to query data sources for which the server does not have built-in support. A data module is represented by a public class that derives from <see cref="T:Microsoft.Office.Visio.Server.AddonDataHandler" /> and implements its abstract methods: <see cref="M:Microsoft.Office.Visio.Server.AddonDataHandler.BeginGetData(System.Web.HttpContext,System.AsyncCallback,System.Object)" />, <see cref="M:Microsoft.Office.Visio.Server.AddonDataHandler.EndGetData(System.IAsyncResult)" />, and <see cref="M:Microsoft.Office.Visio.Server.AddonDataHandler.Cancel" />. A data module class is dynamically loaded, instantiated, and used to query the corresponding data source. This only works if the data module is correctly deployed and registered with the server.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected AddonDataHandler ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Visio.Server.AddonDataHandler.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; AddonDataHandler();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of this class.</summary>
+        <remarks>
+          <para>A derived class must provide a default constructor.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BeginGetData">
+      <MemberSignature Language="C#" Value="public abstract IAsyncResult BeginGetData (System.Web.HttpContext context, AsyncCallback callback, object asyncState);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginGetData(class System.Web.HttpContext context, class System.AsyncCallback callback, object asyncState) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Visio.Server.AddonDataHandler.BeginGetData(System.Web.HttpContext,System.AsyncCallback,System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function BeginGetData (context As HttpContext, callback As AsyncCallback, asyncState As Object) As IAsyncResult" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract IAsyncResult ^ BeginGetData(System::Web::HttpContext ^ context, AsyncCallback ^ callback, System::Object ^ asyncState);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IAsyncResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="System.Web.HttpContext" />
+        <Parameter Name="callback" Type="System.AsyncCallback" />
+        <Parameter Name="asyncState" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="context">An <see cref="T:System.Web.HttpContext" /> object that provides references to intrinsic server objects that are used to service HTTP requests.</param>
+        <param name="callback">The <see cref="T:System.AsyncCallback" /> delegate to call when the asynchronous operation is complete.</param>
+        <param name="asyncState">Any extra data needed to process the request.</param>
+        <summary>An implementation of this method initiates an asynchronous request to the data source.</summary>
+        <returns>An <see cref="T:System.IAsyncResult" /> object that contains information about the status of the operation.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Cancel">
+      <MemberSignature Language="C#" Value="public abstract void Cancel ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Cancel() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Visio.Server.AddonDataHandler.Cancel" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Sub Cancel ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract void Cancel();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>An implementation of this method cancels the asynchronous request.</summary>
+        <remarks>
+          <para>This method is called on all the data modules that did not complete the request operation in time.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConnectionString">
+      <MemberSignature Language="C#" Value="public string ConnectionString { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ConnectionString" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Visio.Server.AddonDataHandler.ConnectionString" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ConnectionString As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ConnectionString { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the connection string used to connect to the data source.</summary>
+        <value>The connection string.</value>
+        <remarks>
+          <para>The data extensibility framework sets this property before <see cref="M:Microsoft.Office.Visio.Server.AddonDataHandler.BeginGetData(System.Web.HttpContext,System.AsyncCallback,System.Object)" /> is invoked based on information from the DataConnection XML part of the requested document.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Data">
+      <MemberSignature Language="C#" Value="public System.Data.DataSet Data { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.DataSet Data" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Visio.Server.AddonDataHandler.Data" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Data As DataSet" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Data::DataSet ^ Data { System::Data::DataSet ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.DataSet</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="T:System.Data.DataSet" /> that describes the structure of the data requested by the server.</summary>
+        <value>A <see cref="T:System.Data.DataSet" /> object.</value>
+        <remarks>
+          <para>The data extensibility framework sets this property before <see cref="M:Microsoft.Office.Visio.Server.AddonDataHandler.BeginGetData(System.Web.HttpContext,System.AsyncCallback,System.Object)" /> is invoked based on information from the DataBinding XML Part of the requested document. The <see cref="T:System.Data.DataSet" /> contains one <see cref="T:System.Data.DataTable" />. Each <see cref="T:System.Data.DataColumn" /> of the <see cref="T:System.Data.DataTable" /> specifies the name of a column and the type of data on that column. The <see cref="T:System.Data.DataTable" /> has no System.Data.DataRows.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EndGetData">
+      <MemberSignature Language="C#" Value="public abstract System.Data.DataSet EndGetData (IAsyncResult result);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Data.DataSet EndGetData(class System.IAsyncResult result) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Visio.Server.AddonDataHandler.EndGetData(System.IAsyncResult)" />
+      <MemberSignature Language="VB.NET" Value="Public MustOverride Function EndGetData (result As IAsyncResult) As DataSet" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::Data::DataSet ^ EndGetData(IAsyncResult ^ result);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.DataSet</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="result" Type="System.IAsyncResult" />
+      </Parameters>
+      <Docs>
+        <param name="result">An <see cref="T:System.IAsyncResult" /> object that contains information about the status of the operation.</param>
+        <summary>An implementation of this method ends the asynchronous request.</summary>
+        <returns>A <see cref="T:System.Data.DataSet" /> that contains the data retrieved from the data source.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Error">
+      <MemberSignature Language="C#" Value="public Exception Error { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Exception Error" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Visio.Server.AddonDataHandler.Error" />
+      <MemberSignature Language="VB.NET" Value="Public Property Error As Exception" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Exception ^ Error { Exception ^ get(); void set(Exception ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Exception</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the exception that specifies the error that occurred while trying to retrieve data.</summary>
+        <value>An <see cref="T:System.Exception" /> object that describes the error.</value>
+        <remarks>
+          <para>A data module implementation must set this property if the request to the data sources failed.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="QueryString">
+      <MemberSignature Language="C#" Value="public string QueryString { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string QueryString" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Visio.Server.AddonDataHandler.QueryString" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property QueryString As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ QueryString { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the query string used to request source data.</summary>
+        <value>The query string.</value>
+        <remarks>
+          <para>The data extensibility framework sets this property before <see cref="M:Microsoft.Office.Visio.Server.AddonDataHandler.BeginGetData(System.Web.HttpContext,System.AsyncCallback,System.Object)" /> is invoked based on information from the DataConnection XML part of the requested document.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

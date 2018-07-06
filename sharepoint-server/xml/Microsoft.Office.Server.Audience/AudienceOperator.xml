@@ -1,0 +1,216 @@
+﻿<Type Name="AudienceOperator" FullName="Microsoft.Office.Server.Audience.AudienceOperator">
+  <TypeSignature Language="C#" Value="public class AudienceOperator" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit AudienceOperator extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.Audience.AudienceOperator" />
+  <TypeSignature Language="VB.NET" Value="Public Class AudienceOperator" />
+  <TypeSignature Language="C++ CLI" Value="public ref class AudienceOperator" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the definition of an audience operator. </summary>
+    <remarks>
+      <para>The <b>AudienceOperator</b> class represents an individual operator that is allowed as part of a rule definition. The list of allowed operators includes "<b>=</b>," "<b>&gt;</b>," "<b>&gt;=</b>," "<b>&lt;</b>," "&lt;=," "Contains," "Reports Under," "&lt;&gt;," "Not contains," "AND," "OR," "(," ")," and "Member of." New operators require the following information: the display name (if operator is used from the user interface), the operator name used by the audience objects, and whether the operator can be applied to a group or whether it is a "NOT" operator. Valid group operations are determined by the <see cref="T:Microsoft.Office.Server.Audience.AudienceGroupOperation" /> enumeration, and include "AND," "OR," "(," and ")."</para>
+      <para>This object can be instantiated only by the <see cref="T:Microsoft.Office.Server.Audience.AudienceManager" /> object. Use the <see cref="P:Microsoft.Office.Server.Audience.AudienceManager.AudienceOperatorList" /> property to retrieve the correct <see cref="T:Microsoft.Office.Server.Audience.AudienceOperator" /> object.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The following code example adds complex rules for an audience called "John and Joe Connection". This example uses AND, OR, and ( and ) operators to combine multiple rules and to group rules. </para>
+      <para>
+        <b>Note</b>: If you create an audience with complex rules, you cannot view or edit its properties or delete it by using the user interface. However, you can use the user interface to view its membership.</para>
+      <para>Replace servername and other strings with actual values before running the code example. Also add the following references in your Microsoft Visual Studio project:</para>
+      <list type="bullet">
+        <item>
+          <description>Microsoft.Office.Server</description>
+        </item>
+        <item>
+          <description>Microsoft.SharePoint</description>
+        </item>
+        <item>
+          <description>System.Web</description>
+        </item>
+      </list>
+      <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.SharePoint.Administration;
+using Microsoft.Office.Server.Audience;
+using Microsoft.SharePoint;
+using Microsoft.Office.Server;
+using System.Web;
+using System.Collections;
+
+namespace AudienceConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                using (SPSite site = new SPSite("http://&lt;span class="placeholder"&gt;servername&lt;/span&gt;"))
+                {
+                    ServerContext context = ServerContext.GetContext(site);
+                    AudienceManager AudMgr = new AudienceManager(context);
+
+                    AudienceCollection ac = AudMgr.Audiences;
+                    Audience a = null;
+                    bool ruleListNotEmpty = false;
+
+                    try
+                    {
+                        a = AudMgr.Audiences["John and Joe Connection"];
+                    }
+                    catch (AudienceArgumentException ex)
+                    {
+                        //your exception handling code here
+                    }
+
+                    ArrayList aRules = a.AudienceRules;
+                    if (aRules == null)
+                    {
+                        aRules = new ArrayList();
+                    }
+                    else
+                    {
+                        ruleListNotEmpty = true;
+                    }
+
+
+                    try
+                    {
+                        //if the rule is not emply, start with a group operator 'AND' to append
+                        if (ruleListNotEmpty)
+                        {
+                            aRules.Add(new AudienceRuleComponent(null, "AND", null));
+                        }
+
+                        AudienceRuleComponent r0 = new AudienceRuleComponent(null, "(", null);
+                        aRules.Add(r0);
+
+                        AudienceRuleComponent r1 = new AudienceRuleComponent("FirstName", "Contains", "John");
+                        aRules.Add(r1);
+
+                        AudienceRuleComponent r2 = new AudienceRuleComponent(null, "AND", null);
+                        aRules.Add(r2);
+
+                        AudienceRuleComponent r3 = new AudienceRuleComponent("WorkEmail", "Contains", "&lt;span class="placeholder"&gt;example.com&lt;/span&gt;");
+                        aRules.Add(r3);
+
+                        AudienceRuleComponent r4 = new AudienceRuleComponent(null, ")", null);
+                        aRules.Add(r4);
+
+                        AudienceRuleComponent r5 = new AudienceRuleComponent(null, "OR", null);
+                        aRules.Add(r5);
+
+                        AudienceRuleComponent r6 = new AudienceRuleComponent(null, "(", null);
+                        aRules.Add(r6);
+
+                        AudienceRuleComponent r7 = new AudienceRuleComponent("FirstName", "Contains", "Joe");
+                        aRules.Add(r7);
+
+                        AudienceRuleComponent r8 = new AudienceRuleComponent(null, "AND", null);
+                        aRules.Add(r8);
+
+                        AudienceRuleComponent r9 = new AudienceRuleComponent("WorkEmail", "Contains", "&lt;span class="placeholder"&gt;someexample.com&lt;/span&gt;");
+                        aRules.Add(r9);
+
+                        AudienceRuleComponent r10 = new AudienceRuleComponent(null, ")", null);
+                        aRules.Add(r10);
+                        a.AudienceRules = aRules;
+                        a.Commit();
+                    }
+                    catch (AudienceException e)
+                    {
+                        //Your exception handling code here
+                    }
+                }
+            }
+
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                Console.Read();
+            }
+
+        }
+
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="bGroupOperator">
+      <MemberSignature Language="C#" Value="public bool bGroupOperator { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool bGroupOperator" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceOperator.bGroupOperator" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property bGroupOperator As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool bGroupOperator { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a flag that indicates whether the operator portion of the audience rule is a group operator or a "NOT" operator.</summary>
+        <value>A Boolean value. <b>true</b> if the operator is a group operator; <b>false</b> if the operator is a "NOT" operator.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.Office.Server.Audience.AudienceOperator.bGroupOperator" /> property is read-only. Valid group operations are contained in the <see cref="T:Microsoft.Office.Server.Audience.AudienceGroupOperation" /> enumeration, and include "AND," "OR," "(," and ")."</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OperatorDisplayName">
+      <MemberSignature Language="C#" Value="public string OperatorDisplayName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string OperatorDisplayName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceOperator.OperatorDisplayName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property OperatorDisplayName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ OperatorDisplayName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the display name for the audience operator that appears in the user interface (UI).</summary>
+        <value>A string that gets the display name for the audience operator.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OperatorName">
+      <MemberSignature Language="C#" Value="public string OperatorName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string OperatorName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.AudienceOperator.OperatorName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property OperatorName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ OperatorName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of the operator portion of the audience rule.</summary>
+        <value>
+          <b>String</b> that represents the operator name.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.Office.Server.Audience.AudienceOperator.OperatorName" /> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

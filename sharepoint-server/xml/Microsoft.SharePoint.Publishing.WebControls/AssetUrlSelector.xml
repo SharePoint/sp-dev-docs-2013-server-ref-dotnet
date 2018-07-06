@@ -1,0 +1,1547 @@
+﻿<Type Name="AssetUrlSelector" FullName="Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector">
+  <TypeSignature Language="C#" Value="public sealed class AssetUrlSelector : System.Web.UI.WebControls.WebControl, Microsoft.SharePoint.Publishing.WebControls.ICompositeInputControl, System.Web.UI.INamingContainer, System.Web.UI.IPostBackEventHandler" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit AssetUrlSelector extends System.Web.UI.WebControls.WebControl implements class Microsoft.SharePoint.Publishing.WebControls.ICompositeInputControl, class System.Web.UI.INamingContainer, class System.Web.UI.IPostBackEventHandler" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class AssetUrlSelector&#xA;Inherits WebControl&#xA;Implements ICompositeInputControl, INamingContainer, IPostBackEventHandler" />
+  <TypeSignature Language="C++ CLI" Value="public ref class AssetUrlSelector sealed : System::Web::UI::WebControls::WebControl, Microsoft::SharePoint::Publishing::WebControls::ICompositeInputControl, System::Web::UI::INamingContainer, System::Web::UI::IPostBackEventHandler" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Web.UI.WebControls.WebControl</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.SharePoint.Publishing.WebControls.ICompositeInputControl</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Web.UI.INamingContainer</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Web.UI.IPostBackEventHandler</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Web.UI.ValidationProperty("AssetUrl")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Renders an HTML input field and button or generates ECMAScript that opens the Asset Picker dialog box used to select a link or image URL from a site collection.</summary>
+    <remarks>
+      <para>You can use an object of this class as a simple server control that provides a text box and a browser button HTML user interface (UI). You can use the object to select a URL that points to an object in the current site collection. The <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" /> property of the server control shows the current value of the URL selected in the text box. </para>
+      <para>You can customize the behavior and appearance of the dialog box and change the display of the text box and button by setting the control's properties. By default, the Asset Picker dialog box opens to enable the user to select a link URL, and points to either the current <b>AssetUrl</b> location or the last-stored location from which the user selected a link URL in an Asset Picker. If there is no current or stored location, then the Asset Picker defaults to any <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DefaultOpenLocationUrl" /> property that was specified, or to the known locations for the current site and site collection that is presented in the Look In section on the left side of the Asset Picker dialog box. By default, when the user selects or types a URL in the Asset Picker dialog box and closes it, the URL is added to the <b>AssetUrlSelector</b> text box.</para>
+      <para>You can use the <b>AssetUrl</b> property to get this value from the Asset Picker dialog box after a postback event. This class can also be used to open the Asset Picker dialog box from an HTML element other than the button provided. In this case, you can set the  <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.Visible" />, <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetPickerButtonVisible" />, or <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> property to <b>false</b> and use the <see cref="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.GetClientLaunchPickerReference" /> method to return an ECMAScript (JavaScript, JScript) string you can use to open the Asset Picker dialog box with an HTML element client <b>onClick</b> function or ECMAScript (JavaScript, JScript) function. You must call the <b>GetClientLaunchPickerReference</b> method before or during the <b>OnPreRender</b> phase of the page life cycle, and you must set properties before calling this method for the correct client ECMAScript (JavaScript, JScript) to register in the page.</para>
+      <para>Any changes to the control properties after calling the <b>GetClientLaunchPickerReference</b> method do not affect dialog box behavior because the client script that is controlling the dialog box is already registered in the page. You can instantiate an object of this class by adding it to the ASPX page, or by using the <b>AssetUrlSelector</b> constructor and adding it to the child controls for a <b>Control</b> or <b>Page</b> object.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The code examples for this class can be added into any Microsoft Visual C# Web control or code-behind project. They require references to <b>System.Web</b> and <b>Microsoft.SharePoint.Publishing</b>.</para>
+      <para>This example demonstrates <b>AddVisibleAssetUrlSelectorControl</b> and <b>GenerateAssetUrlSelectorLaunchScript</b>. Each example demonstrates properties and methods available in this class.</para>
+      <list type="bullet">
+        <item>
+          <description>The <b>AddVisibleAssetUrlSelectorControl</b> example creates an <b>AssetUrlSelector</b> control, defines its properties and on-event behaviors, and adds the control to the Asset Picker dialog box. </description>
+        </item>
+        <item>
+          <description>The <b>GenerateAssetUrlSelectorLaunchScript</b> example creates a script that generates an <b>AssetUrlSelector</b> object and adds text boxes to a control collection on a site.</description>
+        </item>
+      </list>
+      <code>using Control = System.Web.UI.Control;
+using TextBox = System.Web.UI.WebControls.TextBox;
+using ButtonType = System.Web.UI.WebControls.ButtonType;
+using AssetUrlSelector = Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{public static class AssetUrlSelectorSamples{
+// You can change any of the following default const data
+//  used in the AssetUrlSelector samples.
+
+// These values control the appearance of the text box
+// and button for the control
+private const bool SampleAssetPickerButtonVisible = true;
+private const bool SampleAssetUrlTextBoxVisible = true;
+private const ButtonType SampleButtonType = ButtonType.Image;
+private const string SampleCssTextBox = "sample-textbox-css";
+private const string SamplePickerButtonImage = "/_layouts/images/icdoc.gif";
+private const string SamplePickerButtonText = "Sample Button Text";
+
+private const bool SampleAutoPostBack = true;
+private const bool SampleDecodeUrlPath = true;
+private const int SampleMaxLength = 100;
+private const bool SampleValidateUrl = true;
+private const bool SampleIsUrlRequired = true;
+private const bool SampleAllowExternalUrls = false;
+
+// These values control the appearance and behavior
+// of the Asset Picker dialog box.
+private const string SampleDefaultOpenLocationUrl = "~Site/Pages/";
+private const bool SampleDefaultToLastUsedLocation = false;
+private const bool SampleDisplayLookInSection = false;
+private const bool SampleUseImageAssetPicker = false;
+private const string SampleOverrideDialogDescription = "This is a sample description";
+private const string SampleOverrideDialogFeatures = "resizable: yes; status: yes; scroll: yes; help: no; 
+dialogWidth:730px; dialogHeight:500px;";
+private const string SampleOverrideDialogImageUrl = "/_layouts/images/icdoc.gif";
+private const string SampleOverrideDialogTitle = "Sample Selection Dialog Title";
+
+// These values control the complex client script behaviors.
+// This must be ECMAScript returning a function object.
+private const string ScriptClientCallback = "function(newAssetUrl, newAssetText, 
+configObject, returnedValue) { window.alert('Client callback with returned url value: ' + newAssetUrl); }";
+   // This must be ECMAScript returning a string   // value for asset URL data.
+private const string ScriptGetAssetUrlValue = "window.location.href";
+
+// AddVisibleAssetUrlSelectorControl - 
+// This sample constructs an AssetUrlSelector with 
+// various settings and adds it to a control collection
+// in a Web page.  The sample function takes in one
+// required argument:
+//
+// containerControl: The control for which the created
+// AssetUrlSelector is added as a child control
+public static void AddVisibleAssetUrlSelectorControl(Control containerControl)
+{if (null == containerControl){
+throw new System.ArgumentNullException("containerControl", 
+"The containerControl argument must not be null");}
+if (null == containerControl.Page){
+throw new System.ArgumentException
+("The containerControl argument must be a control in a System.Web.UI.Page control tree");}
+// Create the AssetUrlSelectorAssetUrlSelector assetSelector = new AssetUrlSelector();
+// Set values for the appearance of the text box and // button for the control.assetSelector.AssetPickerButtonVisible = SampleAssetPickerButtonVisible;assetSelector.AssetUrlTextBoxVisible = SampleAssetUrlTextBoxVisible;assetSelector.ButtonType = SampleButtonType;assetSelector.CssTextBox = SampleCssTextBox;assetSelector.PickerButtonImage = SamplePickerButtonImage;assetSelector.PickerButtonText = SamplePickerButtonText;
+// Set values for the behavior and validation// for the text box.assetSelector.AutoPostBack = SampleAutoPostBack;assetSelector.DecodeUrlPath = SampleDecodeUrlPath;assetSelector.MaxLength = SampleMaxLength;assetSelector.ValidateUrl = SampleValidateUrl;assetSelector.IsUrlRequired = SampleIsUrlRequired;assetSelector.AllowExternalUrls = SampleAllowExternalUrls;
+// Set values for the appearance and behavior of the Asset Picker dialog box.assetSelector.DefaultOpenLocationUrl = SampleDefaultOpenLocationUrl;assetSelector.DefaultToLastUsedLocation = SampleDefaultToLastUsedLocation;assetSelector.DisplayLookInSection = SampleDisplayLookInSection;assetSelector.OverrideDialogDescription = SampleOverrideDialogDescription;assetSelector.OverrideDialogFeatures = SampleOverrideDialogFeatures;assetSelector.OverrideDialogImageUrl = SampleOverrideDialogImageUrl;assetSelector.OverrideDialogTitle = SampleOverrideDialogTitle;assetSelector.UseImageAssetPicker = SampleUseImageAssetPicker;
+// Sets an event handler for when the AssetUrl value changes on a postback.assetSelector.AssetUrlChanged += 
+delegate(object sender, System.EventArgs ev)
+{ string newAssetUrlValue = ((AssetUrlSelector)sender).AssetUrl;
+// Perform event handling operations based on the newAssetUrlValue. 
+};
+// Add the configured assetSelector to the controls on the page.containerControl.Controls.Add(assetSelector);
+}
+
+// GenerateAssetUrlSelectorLaunchScript
+// This sample constructs an AssetUrlSelector with
+// various settings and adds visible text boxes to a control
+// collection on a Web 
+// page, setting their double-click ECMAScript 
+// events to open an Asset Picker dialog box. The sample function
+// takes in one required argument and one optional argument:
+//
+// containerControl: The control for which the created
+//TextBox controls are added as a child control
+//
+// launchPickerWithCurrentBrowserUrl: Determines
+// whether the current AssetUrl property value or the
+// current browser URL 
+// value should be used when launching the Asset Picker.
+public static string GenerateAssetUrlSelectorLaunchScript(Control containerControl,bool launchPickerWithCurrentBrowserUrl)
+{if (null == containerControl){
+throw new System.ArgumentNullException("containerControl", 
+"The containerControl argument must not be null");}
+if (null == containerControl.Page){
+throw new System.ArgumentException("The containerControl argument must be a 
+valid control in a System.Web.UI.Page control tree");}
+TextBox assetUrlControl = new TextBox();TextBox assetTextControl = new TextBox();
+// Add these text boxes to the container control so that// they get a completed ClientID property for // their container control.//  containerControl.Controls.Add(assetUrlControl);containerControl.Controls.Add(assetTextControl);
+AssetUrlSelector assetSelector = new AssetUrlSelector();
+// Setting the Page and ID properties is required when the// AssetUrlSelector control is not added to the page// control tree because// the AssetUrlSelector.GetClientLaunchPickerReference()// method needs to register script in the pageassetSelector.Page = containerControl.Page;assetSelector.ID = "SampleGenerateAssetUrlSelectorLaunchScript";
+// Uses text box client ID to connect the Asset// Picker to the text boxes for the resulting//  URL and default text values returned from the// Asset Picker dialog box.assetSelector.AssetUrlClientID = assetUrlControl.ClientID;assetSelector.AssetTextClientID = assetTextControl.ClientID;
+// Set the ECMAScript to perform after populating the text boxes // with the returned valuesassetSelector.ClientCallback = ScriptClientCallback;
+
+string clientLaunchPickerScript;if(launchPickerWithCurrentBrowserUrl){
+// Use a client launch script that calculates
+// the current asset URL with custom ECMAScript
+// which in this example always is the current browser location URL
+clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference(ScriptGetAssetUrlValue);}else{
+// Use the default client launch script that gets the
+// current asset URL value based on the AssetUrlClientID
+clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference();}
+// Add the client launch script as an ondoubleclick handler for the two text boxesassetUrlControl.Attributes["ondblclick"] = clientLaunchPickerScript + "; return false;";assetTextControl.Attributes["ondblclick"] = clientLaunchPickerScript + "; return false;";
+// Return the client launch script, which can be added to other ECMAScript on the pagereturn clientLaunchPickerScript;
+}}
+}</code>
+      <code>Imports Control = System.Web.UI.Control
+Imports TextBox = System.Web.UI.WebControls.TextBox
+Imports ButtonType = System.Web.UI.WebControls.ButtonType
+Imports AssetUrlSelector = Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector
+
+Namespace Microsoft.SDK.SharePointServer.SamplesPublic NotInheritable Class AssetUrlSelectorSamples
+' You can change any of the following default const data
+'  used in the AssetUrlSelector samples.
+
+' These values control the appearance of the text box
+' and button for the control
+Private Const SampleAssetPickerButtonVisible As Boolean = True
+Private Const SampleAssetUrlTextBoxVisible As Boolean = True
+Private Const SampleButtonType As ButtonType = ButtonType.Image
+Private Const SampleCssTextBox As String = "sample-textbox-css"
+Private Const SamplePickerButtonImage As String = "/_layouts/images/icdoc.gif"
+Private Const SamplePickerButtonText As String = "Sample Button Text"
+
+Private Const SampleAutoPostBack As Boolean = True
+Private Const SampleDecodeUrlPath As Boolean = True
+Private Const SampleMaxLength As Integer = 100
+Private Const SampleValidateUrl As Boolean = True
+Private Const SampleIsUrlRequired As Boolean = True
+Private Const SampleAllowExternalUrls As Boolean = False
+
+' These values control the appearance and behavior
+' of the Asset Picker dialog box.
+Private Const SampleDefaultOpenLocationUrl As String = "~Site/Pages/"
+Private Const SampleDefaultToLastUsedLocation As Boolean = False
+Private Const SampleDisplayLookInSection As Boolean = False
+Private Const SampleUseImageAssetPicker As Boolean = False
+Private Const SampleOverrideDialogDescription As String = "This is a sample description"
+Private Const SampleOverrideDialogFeatures As String = "resizable: yes; status: yes; scroll: yes; help: no; dialogWidth:730px; dialogHeight:500px;"
+Private Const SampleOverrideDialogImageUrl As String = "/_layouts/images/icdoc.gif"
+Private Const SampleOverrideDialogTitle As String = "Sample Selection Dialog Title"
+
+' These values control the complex client script behaviors.
+' This must be ECMAScript returning a function object.
+Private Const ScriptClientCallback As String = "function(newAssetUrl, newAssetText, configObject, returnedValue) { window.alert('Client callback with returned url value: ' + newAssetUrl); }"
+   ' This must be ECMAScript returning a string   ' value for asset URL data.
+Private Const ScriptGetAssetUrlValue As String = "window.location.href"
+
+' AddVisibleAssetUrlSelectorControl - 
+' This sample constructs an AssetUrlSelector with 
+' various settings and adds it to a control collection
+' in a Web page.  The sample function takes in one
+' required argument:
+'
+' containerControl: The control for which the created
+' AssetUrlSelector is added as a child control
+Private Sub New()
+End Sub
+Public Shared Sub AddVisibleAssetUrlSelectorControl(ByVal containerControl As Control)If Nothing Is containerControl Then
+Throw New System.ArgumentNullException("containerControl", "The containerControl argument must not be null")End If
+If Nothing Is containerControl.Page Then
+Throw New System.ArgumentException ("The containerControl argument must be a control in a System.Web.UI.Page control tree")End If
+' Create the AssetUrlSelectorDim assetSelector As New AssetUrlSelector()
+' Set values for the appearance of the text box and ' button for the control.assetSelector.AssetPickerButtonVisible = SampleAssetPickerButtonVisibleassetSelector.AssetUrlTextBoxVisible = SampleAssetUrlTextBoxVisibleassetSelector.ButtonType = SampleButtonTypeassetSelector.CssTextBox = SampleCssTextBoxassetSelector.PickerButtonImage = SamplePickerButtonImageassetSelector.PickerButtonText = SamplePickerButtonText
+' Set values for the behavior and validation' for the text box.assetSelector.AutoPostBack = SampleAutoPostBackassetSelector.DecodeUrlPath = SampleDecodeUrlPathassetSelector.MaxLength = SampleMaxLengthassetSelector.ValidateUrl = SampleValidateUrlassetSelector.IsUrlRequired = SampleIsUrlRequiredassetSelector.AllowExternalUrls = SampleAllowExternalUrls
+' Set values for the appearance and behavior of the Asset Picker dialog box.assetSelector.DefaultOpenLocationUrl = SampleDefaultOpenLocationUrlassetSelector.DefaultToLastUsedLocation = SampleDefaultToLastUsedLocationassetSelector.DisplayLookInSection = SampleDisplayLookInSectionassetSelector.OverrideDialogDescription = SampleOverrideDialogDescriptionassetSelector.OverrideDialogFeatures = SampleOverrideDialogFeaturesassetSelector.OverrideDialogImageUrl = SampleOverrideDialogImageUrlassetSelector.OverrideDialogTitle = SampleOverrideDialogTitleassetSelector.UseImageAssetPicker = SampleUseImageAssetPicker
+' Sets an event handler for when the AssetUrl value changes on a postback.AddHandler assetSelector.AssetUrlChanged, Sub(sender As Object, ev As System.EventArgs) Dim newAssetUrlValue As String = (CType(sender, AssetUrlSelector)).AssetUrl
+' Add the configured assetSelector to the controls on the page.containerControl.Controls.Add(assetSelector)
+End Sub
+
+' GenerateAssetUrlSelectorLaunchScript
+' This sample constructs an AssetUrlSelector with
+' various settings and adds visible text boxes to a control
+' collection on a Web 
+' page, setting their double-click ECMAScript 
+' events to open an Asset Picker dialog box. The sample function
+' takes in one required argument and one optional argument:
+'
+' containerControl: The control for which the created
+'TextBox controls are added as a child control
+'
+' launchPickerWithCurrentBrowserUrl: Determines
+' whether the current AssetUrl property value or the
+' current browser URL 
+' value should be used when launching the Asset Picker.
+Public Shared Function GenerateAssetUrlSelectorLaunchScript(ByVal containerControl As Control, ByVal launchPickerWithCurrentBrowserUrl As Boolean) As StringIf Nothing Is containerControl Then
+Throw New System.ArgumentNullException("containerControl", "The containerControl argument must not be null")End If
+If Nothing Is containerControl.Page Then
+Throw New System.ArgumentException("The containerControl argument must be a valid control in a System.Web.UI.Page control tree")End If
+Dim assetUrlControl As New TextBox()Dim assetTextControl As New TextBox()
+' Add these text boxes to the container control so that' they get a completed ClientID property for ' their container control.'  containerControl.Controls.Add(assetUrlControl)containerControl.Controls.Add(assetTextControl)
+Dim assetSelector As New AssetUrlSelector()
+' Setting the Page and ID properties is required when the' AssetUrlSelector control is not added to the page' control tree because' the AssetUrlSelector.GetClientLaunchPickerReference()' method needs to register script in the pageassetSelector.Page = containerControl.PageassetSelector.ID = "SampleGenerateAssetUrlSelectorLaunchScript"
+' Uses text box client ID to connect the Asset' Picker to the text boxes for the resulting'  URL and default text values returned from the' Asset Picker dialog box.assetSelector.AssetUrlClientID = assetUrlControl.ClientIDassetSelector.AssetTextClientID = assetTextControl.ClientID
+' Set the ECMAScript to perform after populating the text boxes ' with the returned valuesassetSelector.ClientCallback = ScriptClientCallback
+
+Dim clientLaunchPickerScript As StringIf launchPickerWithCurrentBrowserUrl Then
+' Use a client launch script that calculates
+' the current asset URL with custom ECMAScript
+' which in this example always is the current browser location URL
+clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference(ScriptGetAssetUrlValue)Else
+' Use the default client launch script that gets the
+' current asset URL value based on the AssetUrlClientID
+clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference()End If
+' Add the client launch script as an ondoubleclick handler for the two text boxesassetUrlControl.Attributes("ondblclick") = clientLaunchPickerScript &amp;amp; "; return false;"assetTextControl.Attributes("ondblclick") = clientLaunchPickerScript &amp;amp; "; return false;"
+' Return the client launch script, which can be added to other ECMAScript on the pageReturn clientLaunchPickerScript
+End FunctionEnd Class
+End Namespace</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AssetUrlSelector ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; AssetUrlSelector();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AccessibilityName">
+      <MemberSignature Language="C#" Value="public string AccessibilityName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AccessibilityName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AccessibilityName" />
+      <MemberSignature Language="VB.NET" Value="Public Property AccessibilityName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AccessibilityName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the string that appears as the Microsoft Active Accessibility (MSAA) name used by Web user interface (UI) accessibility tools.</summary>
+        <value>The string that appears as the MSAA name used by Web user interface (UI) accessibility tools.Default is an empty string.</value>
+        <remarks>
+          <para>This property has no effect if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> property is set to <b>false</b>. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowExternalUrls">
+      <MemberSignature Language="C#" Value="public bool AllowExternalUrls { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowExternalUrls" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AllowExternalUrls" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowExternalUrls As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowExternalUrls { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>A flag that determines whether the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrl" /> value is validated to ensure that it is in the current site collection.</summary>
+        <value>
+          <b>true</b> if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrl" /> value is validated to ensure that it is in the current site collection; the default value is <b>false</b>.</value>
+        <remarks>
+          <para>The context of the current page request determines which site collection the <b>AssetUrl</b> is restricted to. Do not set this property to <b>true</b> if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> property or <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.ValidateUrl" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control.
+private const bool SampleAllowExternalUrls = false;</code>
+          <code>' These values control the appearance of the text box
+' and button for the control.
+Private Const SampleAllowExternalUrls As Boolean = False</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AssetPickerButtonVisible">
+      <MemberSignature Language="C#" Value="public bool AssetPickerButtonVisible { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AssetPickerButtonVisible" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetPickerButtonVisible" />
+      <MemberSignature Language="VB.NET" Value="Public Property AssetPickerButtonVisible As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AssetPickerButtonVisible { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines whether the button control used to open the Asset Picker dialog box is rendered.</summary>
+        <value>
+          <b>true</b> to render the button control used to open the Asset Picker dialog box; otherwise <b>false</b>.</value>
+        <remarks>
+          <para>If set to <b>false</b>, a button control is not rendered, and cannot be used to open the Asset Picker dialog box. In this case, use the <see cref="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.GetClientLaunchPickerReference" /> method to get an ECMAScript (JavaScript, JScript) string that opens the Asset Picker.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box.
+// and button for the control
+private const bool SampleAssetPickerButtonVisible = true;
+
+// AddVisibleAssetUrlSelectorControl // Set values for the appearance of the text box and // button for the control.assetSelector.AssetPickerButtonVisible = SampleAssetPickerButtonVisible;</code>
+          <code>' These values control the appearance of the text box.
+' and button for the control
+Private Const SampleAssetPickerButtonVisible As Boolean = True
+
+' AddVisibleAssetUrlSelectorControl 
+' Set values for the appearance of the text box and 
+' button for the control.
+assetSelector.AssetPickerButtonVisible =  SampleAssetPickerButtonVisible</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AssetTextClientID">
+      <MemberSignature Language="C#" Value="public string AssetTextClientID { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AssetTextClientID" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetTextClientID" />
+      <MemberSignature Language="VB.NET" Value="Public Property AssetTextClientID As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AssetTextClientID { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the client identifier (ID) used to find the HTML element for the URL value returned from the Asset Picker dialog box. </summary>
+        <value>An empty string (the default).</value>
+        <remarks>
+          <para>By default, this property is empty and the default text that the Asset Picker dialog box returns is not captured. If this property is set and a value is returned in the dialog box, the application uses the <b>AssetTextClientID</b> property to retrieve an HTML element with the specified ID from the HTML document. </para>
+          <para>If an HTML element with the specified ID is found, its "value" property is set to the default text returned from the Asset Picker dialog box. </para>
+          <para>If the HTML element found is an input field and it is visible, the returned default text value from the Asset Picker dialog box appears in the control, and the text value can be retrieved from the control's posted values. You can use the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.ClientCallback" /> property to perform more ECMAScript (JavaScript, JScript) operations after the default text value is captured in the HTML element.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>    // The application uses the text box client ID to connect// the Asset Picker to the text boxes for the resulting URL// and default text values returned from the Asset Picker // dialog box.assetSelector.AssetUrlClientID = assetUrlControl.ClientID;assetSelector.AssetTextClientID = assetTextControl.ClientID;</code>
+          <code>' The application uses the text box client ID to connect
+' the Asset Picker to the text boxes for the resulting URL
+' and default text values returned from the Asset Picker 
+' dialog box.
+assetSelector.AssetUrlClientID = assetUrlControl.ClientID
+assetSelector.AssetTextClientID = assetTextControl.ClientID</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AssetUrl">
+      <MemberSignature Language="C#" Value="public string AssetUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AssetUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property AssetUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AssetUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL that the user has typed or selected and enters it in the Asset URL text box. </summary>
+        <value>An empty string (the default).</value>
+        <remarks>
+          <para>The <b>AssetUrl</b> value is validated or the URL decoded on postback if appropriate control properties are set. This property does not contain the selected URL on postback if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>       // This must be ECMAScript returning a string   // value for asset URL data.
+private const string ScriptGetAssetUrlValue = "window.location.href";
+
+// Sets an event handler for when the AssetUrl value changes on a postback.assetSelector.AssetUrlChanged += 
+delegate(object sender, System.EventArgs ev)
+{ string newAssetUrlValue = ((AssetUrlSelector)sender).AssetUrl;
+// Perform event handling operations based on the newAssetUrlValue. 
+};</code>
+          <code>' This must be ECMAScript returning a string
+' value for asset URL data.
+Private Const ScriptGetAssetUrlValue As String = "window.location.href"
+
+' Sets an event handler for when the AssetUrl value changes on a postback.
+AddHandler assetSelector.AssetUrlChanged, Sub(sender As Object, ev As System.EventArgs)  Dim newAssetUrlValue As String = (CType(sender, AssetUrlSelector)).AssetUrl  'Perform event handling operations based on the newAssetUrlValue. 
+  End Sub</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AssetUrlChanged">
+      <MemberSignature Language="C#" Value="public event EventHandler AssetUrlChanged;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler AssetUrlChanged" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlChanged" />
+      <MemberSignature Language="VB.NET" Value="Public Custom Event AssetUrlChanged As EventHandler " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; event EventHandler ^ AssetUrlChanged;" />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Event that occurs when the Asset Picker dialog box returns a value and <b>AutoPostBack</b> is set to <b>true</b>.</summary>
+        <remarks>
+          <para>This event only occurs when the <b>AutoPostBack</b> property is set to <b>true</b> and the Asset Picker dialog box is opened and returns a value or when <b>AssetUrlTextBoxVisible</b> is set to <b>true</b> and the text box contents change during postback.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>    // Sets an event handler for when the AssetUrl value changes on a postback.assetSelector.AssetUrlChanged += 
+delegate(object sender, System.EventArgs ev)
+{ string newAssetUrlValue = ((AssetUrlSelector)sender).AssetUrl;
+// Perform event handling operations based on the newAssetUrlValue. 
+};
+// Add the configured assetSelector to the controls on the page.containerControl.Controls.Add(assetSelector);
+}</code>
+          <code>' Sets an event handler for when the AssetUrl value changes on a postback.
+AddHandler assetSelector.AssetUrlChanged, Sub(sender As Object, ev As System.EventArgs)  Dim newAssetUrlValue As String = (CType(sender, AssetUrlSelector)).AssetUrl  'Perform event handling operations based on the newAssetUrlValue. 
+  End Sub
+' Add the configured assetSelector to the controls on the page.
+containerControl.Controls.Add(assetSelector)</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AssetUrlClientID">
+      <MemberSignature Language="C#" Value="public string AssetUrlClientID { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AssetUrlClientID" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlClientID" />
+      <MemberSignature Language="VB.NET" Value="Public Property AssetUrlClientID As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AssetUrlClientID { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the client identifier (ID) used to find the HTML element for the URL value returned from the Asset Picker dialog box. </summary>
+        <value>Defaults to the client ID of the Asset URL text box control.</value>
+        <remarks>
+          <para>If this property is set, the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" /> property does not contain the value selected in the dialog box. After a value is returned in the dialog box, the application uses the <b>AssetUrlClientID</b> property to retrieve an HTML element with a specified ID from the HTML document. </para>
+          <para>If an HTML element with the specified ID is found, its "value" property is set to the returned URL from the Asset Picker dialog box. </para>
+          <para>If the HTML element found is an input field and is visible, the returned value from the dialog box appears in the control and the URL value can be retrieved from that control's posted values. The <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.ClientCallback" /> property can be used to perform further ECMAScript (JavaScript, JScript) operations after the URL value is captured in the HTML element.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>    // Uses text box client ID to connect the Asset// Picker to the text boxes for the resulting// URL and default text values returned from the// Asset Picker dialog box.assetSelector.AssetUrlClientID = assetUrlControl.ClientID;assetSelector.AssetTextClientID = assetTextControl.ClientID;
+</code>
+          <code>' Uses text box client ID to connect the Asset
+' Picker to the text boxes for the resulting
+' URL and default text values returned from the
+' Asset Picker dialog box.
+assetSelector.AssetUrlClientID = assetUrlControl.ClientID
+assetSelector.AssetTextClientID = assetTextControl.ClientID</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AssetUrlTextBoxVisible">
+      <MemberSignature Language="C#" Value="public bool AssetUrlTextBoxVisible { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AssetUrlTextBoxVisible" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" />
+      <MemberSignature Language="VB.NET" Value="Public Property AssetUrlTextBoxVisible As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AssetUrlTextBoxVisible { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines whether the text box for the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" /> property is rendered. </summary>
+        <value>
+          <b>true</b> if the control has rendered correctly; otherwise, <b>false</b>. </value>
+        <remarks>
+          <para>If set to <b>false</b>, the <b>AssetUrl</b> property does not contain the value selected in the dialog box. You can use the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlClientID" /> property or the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.ClientCallback" /> property to capture the value returned from the Asset Picker dialog box in another control or input field on the client side, and any <b>AssetUrl</b> value can be retrieved from that control's posted values.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control.
+private const bool SampleAssetUrlTextBoxVisible = true;   // Set values for the appearance of the text box and // button for the control.assetSelector.AssetUrlTextBoxVisible = SampleAssetUrlTextBoxVisible;</code>
+          <code>' These values control the appearance of the text box
+' and button for the control.
+Private Const SampleAssetUrlTextBoxVisible As Boolean = True
+
+' Set values for the appearance of the text box and 
+' button for the control.
+assetSelector.AssetUrlTextBoxVisible = SampleAssetUrlTextBoxVisible</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AutoPostBack">
+      <MemberSignature Language="C#" Value="public bool AutoPostBack { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AutoPostBack" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AutoPostBack" />
+      <MemberSignature Language="VB.NET" Value="Public Property AutoPostBack As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AutoPostBack { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines whether the page automatically posts information back to the server whenever the Asset Picker dialog box returns a value or when the user presses the ENTER or TAB key in the Asset URL text box.</summary>
+        <value>
+          <b>true</b> if the page automatically posts back to the server whenever the Asset Picker dialog box returns a value or the user presses the ENTER or TAB key while the Asset URL text box has the focus.</value>
+        <remarks>
+          <para>When the Asset Picker dialog box is closed, the <b>AutoPostBack</b> happens only if the value that the Asset Picker dialog box returns differs from the value that was already in the input field. The postback occurs after the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlClientID" />, <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetTextClientID" />, and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.ClientCallback" /> handling functions are complete.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control.
+private const bool SampleAutoPostBack = true;
+
+// Set values for the behavior and validation
+// for the text box.
+assetSelector.AutoPostBack = SampleAutoPostBack;
+</code>
+          <code>' These values control the appearance of the text box
+' and button for the control.
+Private Const SampleAutoPostBack As Boolean = True
+
+' Set values for the behavior and validation
+' for the text box.
+assetSelector.AutoPostBack = SampleAutoPostBack</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ButtonType">
+      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.ButtonType ButtonType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Web.UI.WebControls.ButtonType ButtonType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.ButtonType" />
+      <MemberSignature Language="VB.NET" Value="Public Property ButtonType As ButtonType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Web::UI::WebControls::ButtonType ButtonType { System::Web::UI::WebControls::ButtonType get(); void set(System::Web::UI::WebControls::ButtonType value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.WebControls.ButtonType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the style for the Asset Picker button. </summary>
+        <value>Either <b>ButtonType.Image</b> or <b>ButtonType.Button</b>.</value>
+        <remarks>
+          <para>If set to <b>ButtonType.Image</b>, you can use the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.PickerButtonImage" /> property to specify the URL for the button image. This property has no effect if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetPickerButtonVisible" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.InvalidOperationException">The value set in this property is not <b>ButtonType.Image</b> or <b>ButtonType.Button</b>, or else the property was set after child controls were already created.</exception>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control.
+private const bool SampleAssetPickerButtonVisible = true;
+private const ButtonType SampleButtonType = ButtonType.Image;
+private const string SamplePickerButtonImage = "/_layouts/images/icdoc.gif";
+private const string SamplePickerButtonText = "Sample Button Text";
+// Set values for the appearance of the text box and // button for the control.assetSelector.AssetPickerButtonVisible = SampleAssetPickerButtonVisible;assetSelector.ButtonType = SampleButtonType;assetSelector.PickerButtonImage = SamplePickerButtonImage;assetSelector.PickerButtonText = SamplePickerButtonText;</code>
+          <code>' These values control the appearance of the text box
+' and button for the control.
+Private Const SampleAssetPickerButtonVisible As Boolean = True
+Private Const SampleButtonType As ButtonType = ButtonType.Image
+Private Const SamplePickerButtonImage As String = "/_layouts/images/icdoc.gif"
+Private Const SamplePickerButtonText As String = "Sample Button Text"
+
+' Set values for the appearance of the text box and 
+' button for the control.
+assetSelector.AssetPickerButtonVisible = SampleAssetPickerButtonVisible
+assetSelector.ButtonType = SampleButtonType
+assetSelector.PickerButtonImage = SamplePickerButtonImage
+assetSelector.PickerButtonText = SamplePickerButtonText</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ClientCallback">
+      <MemberSignature Language="C#" Value="public string ClientCallback { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ClientCallback" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.ClientCallback" />
+      <MemberSignature Language="VB.NET" Value="Public Property ClientCallback As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ClientCallback { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a client ECMAScript (JavaScript, JScript) string that specifies a function to call when the Asset Picker dialog box returns a value. </summary>
+        <value>A string; the default is an empty string.</value>
+        <remarks>
+          <para>If this property is set to a value, the value is emitted into the registered client ECMAScript (JavaScript, JScript) for this control and the application uses the client value of this ECMAScript (JavaScript, JScript) to specify the callback function for the Asset Picker dialog box. This client callback function is called after the Asset Picker dialog box returns a value and the returned URL and default text are stored in any HTML elements specified by <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlClientID" /> and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetTextClientID" />. This <b>ClientCallback</b> property is called whether the Asset Picker dialog box is opened by using an Asset Picker button or from ECMAScript (JavaScript, JScript) retrieved by the <see cref="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.GetClientLaunchPickerReference" /> method. If the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AutoPostBack" /> property is set to <b>true</b>, the <b>AutoPostBack</b> happens after the call to the <b>ClientCallback</b> function is complete. </para>
+          <para>The string for this property can be the name of an appropriate ECMAScript (JavaScript, JScript) function available in the page, a global variable with an appropriate function reference stored in it, or an explicitly defined anonymous ECMAScript (JavaScript, JScript) function string such as the following. </para>
+          <code>function(newAssetUrl, newAssetText, configObject, returnValue)
+{
+//Perform client side script operations with the new asset URL value
+}
+// Set the ECMAScript to perform after populating the text boxes with the returned values.assetSelector.ClientCallback = ScriptClientCallback;</code>
+          <code>Private Function [function](ByVal newAssetUrl As String, ByVal newAssetText As String, ByVal configObject As Object, ByVal returnValue As String) As String
+ 'Perform client side script operations with the new asset URL value
+End Function
+' Set the ECMAScript to perform after populating the text boxes with the returned values.
+assetSelector.ClientCallback = ScriptClientCallback</code>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateChildControls">
+      <MemberSignature Language="C#" Value="protected override void CreateChildControls ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void CreateChildControls() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.CreateChildControls" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub CreateChildControls ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void CreateChildControls();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates the child controls.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CssTextBox">
+      <MemberSignature Language="C#" Value="public string CssTextBox { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string CssTextBox" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.CssTextBox" />
+      <MemberSignature Language="VB.NET" Value="Public Property CssTextBox As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ CssTextBox { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the cascading style sheets (CSS) class for the Asset URL text box.</summary>
+        <value>The CSS class for the Asset URL text box.</value>
+        <remarks>
+          <para>This property has no effect if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control.
+private const string SampleCssTextBox = "sample-textbox-css";
+
+// Set values for the appearance of the text box and 
+// button for the control
+assetSelector.CssTextBox = SampleCssTextBox;</code>
+          <code>' These values control the appearance of the text box
+' and button for the control.
+Private Const SampleCssTextBox As String = "sample-textbox-css"
+
+' Set values for the appearance of the text box and 
+' button for the control
+assetSelector.CssTextBox = SampleCssTextBox</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="DecodeUrlPath">
+      <MemberSignature Language="C#" Value="public bool DecodeUrlPath { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool DecodeUrlPath" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DecodeUrlPath" />
+      <MemberSignature Language="VB.NET" Value="Public Property DecodeUrlPath As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool DecodeUrlPath { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines if the path of the URL value, up to any number sign (<b>#</b>) or question mark (<b>?</b>) character, is URL-decoded before the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" /> property returns it.</summary>
+        <value>If set to <b>true</b>, the path of the URL value, up to any number sign (<b>#</b>) or question mark (<b>?</b>) character, is URL-decoded before the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" /> property returns it. Otherwise, the path is not URL-decoded.The default is <b>true</b>.</value>
+        <remarks>
+          <para>This property has no effect if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control
+private const bool SampleDecodeUrlPath = true;
+// Set values for the appearance of the text box and // button for the controlassetSelector.DecodeUrlPath = SampleDecodeUrlPath;</code>
+          <code>' These values control the appearance of the text box
+' and button for the control
+Private Const SampleDecodeUrlPath As Boolean = True
+
+' Set values for the appearance of the text box and 
+' button for the control
+assetSelector.DecodeUrlPath = SampleDecodeUrlPath</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultOpenLocationUrl">
+      <MemberSignature Language="C#" Value="public string DefaultOpenLocationUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DefaultOpenLocationUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DefaultOpenLocationUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property DefaultOpenLocationUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DefaultOpenLocationUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL to a location in this site collection to add to the top of the Look In section of the Asset Picker dialog box. </summary>
+        <value>Defaults to an empty string.</value>
+        <remarks>
+          <para>This URL should begin with either <paramref name="&quot;~SiteCollection/&quot;" /> or <paramref name="&quot;~Site/&quot;" /> followed by the URL relative to the desired SharePoint site location. If this URL refers to a valid SharePoint location and one of the authoring users has permission to access it, it is displayed in the Look In section on the left side of the Asset Picker dialog box. </para>
+          <para>When <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DisplayLookInSection" /> and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DefaultToLastUsedLocation" /> are both set to <b>false</b>, the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DefaultOpenLocationUrl" /> property has a valid location, and there is no current <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" /> property, the Asset Picker dialog box opens in this location and does not display any other locations on its left side. This behavior encourages the user to select a URL from the provided location.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance and behavior
+// of the Asset Picker dialog box.
+private const string SampleDefaultOpenLocationUrl = "~Site/Pages/";
+
+// Set values for the appearance and behavior of the Asset Picker dialog box.
+   assetSelector.DefaultOpenLocationUrl = SampleDefaultOpenLocationUrl;</code>
+          <code>' These values control the appearance and behavior
+' of the Asset Picker dialog box.
+Private Const SampleDefaultOpenLocationUrl As String = "~Site/Pages/"
+
+' Set values for the appearance and behavior of the Asset Picker dialog box.
+   assetSelector.DefaultOpenLocationUrl = SampleDefaultOpenLocationUrl</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultToLastUsedLocation">
+      <MemberSignature Language="C#" Value="public bool DefaultToLastUsedLocation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool DefaultToLastUsedLocation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DefaultToLastUsedLocation" />
+      <MemberSignature Language="VB.NET" Value="Public Property DefaultToLastUsedLocation As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool DefaultToLastUsedLocation { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines whether the last stored location is used to determine the initial location when the Asset Picker dialog box opens.</summary>
+        <value>Defaults to <b>true</b>.If set to <b>true</b>, the last stored location is ignored when determining the dialog box's initial location when the Asset Picker dialog box opens. If set to <b>false</b>, when there is no current <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" /> property value, the Asset Picker  dialog box opens at the location of any <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DefaultOpenLocationUrl" /> property that is specified or at the known locations for the current site and site collection that are displayed in the Look In section on the left side of the Asset Picker dialog box.</value>
+        <remarks>To be added.</remarks>
+        <example>
+          <code>// These values control the appearance and behavior
+// of the Asset Picker dialog box.
+private const bool SampleDefaultToLastUsedLocation = false;
+// Set values for the appearance and behavior of the Asset Picker dialog box.assetSelector.DefaultToLastUsedLocation = SampleDefaultToLastUsedLocation;</code>
+          <code>' These values control the appearance and behavior
+' of the Asset Picker dialog box.
+Private Const SampleDefaultToLastUsedLocation As Boolean = False
+
+' Set values for the appearance and behavior of the Asset Picker dialog box.
+assetSelector.DefaultToLastUsedLocation = SampleDefaultToLastUsedLocation</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayLookInSection">
+      <MemberSignature Language="C#" Value="public bool DisplayLookInSection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool DisplayLookInSection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DisplayLookInSection" />
+      <MemberSignature Language="VB.NET" Value="Public Property DisplayLookInSection As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool DisplayLookInSection { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines whether the Look In section is hidden when the Asset Picker dialog box is opened. </summary>
+        <value>
+          <b>true</b> to show the Look In section when the Asset Picker dialog box is opened; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>By default, the current <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" /> property value, last remembered location, <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DefaultOpenLocationUrl" /> property, and known publishing library locations are used to determine where the Asset Picker opens, even if this flag is set to <b>false </b> and the Look In section does not appear in the dialog box. The value for <b>UseImageAssetPicker</b> determines which set of known publishing document libraries appears in the Look In section when it is displayed. When the <b>DisplayLookInSection</b> and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.DefaultToLastUsedLocation" /> properties are both set to <b>false</b> and the <b>DefaultOpenLocationUrl</b> has a valid location, the Asset Picker opens in that location when there is no current <b>AssetUrl</b> value. It does not display any other locations on the left side of the dialog box, which encourages the user to select a URL from the provided location.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance and behavior
+// of the Asset Picker dialog box.
+private const bool SampleDisplayLookInSection = false;
+// Set values for the appearance and behavior of the Asset Picker dialog box.assetSelector.DisplayLookInSection = SampleDisplayLookInSection;
+</code>
+          <code>' These values control the appearance and behavior
+' of the Asset Picker dialog box.
+Private Const SampleDisplayLookInSection As Boolean = False
+' Set values for the appearance and behavior of the Asset Picker dialog box.
+assetSelector.DisplayLookInSection = SampleDisplayLookInSection</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetClientLaunchPickerReference">
+      <MemberSignature Language="C#" Value="public string GetClientLaunchPickerReference ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetClientLaunchPickerReference() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.GetClientLaunchPickerReference" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetClientLaunchPickerReference () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetClientLaunchPickerReference();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Generates a client ECMAScript (JavaScript, JScript) string that opens the Asset Picker dialog box with the configuration specified by the properties of this control.</summary>
+        <returns>A client ECMAScript (JavaScript, JScript) string that opens the Asset Picker dialog box with the configuration specified by the properties of this control.</returns>
+        <remarks>
+          <para>The current value passed to the Asset Asset Picker dialog box is determined from the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" />  property value or the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlClientID" /> property value You can use this method if the Asset Picker dialog box is opened from an HTML element other than the provided button. You can set properties on this control, and the <b>Visible</b>, <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetPickerButtonVisible" />, or <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlTextBoxVisible" /> properties can be set to <b>false</b>. You can use the ECMAScript string returned from this function in an HTML element client <b>onclick</b> function or an emitted ECMAScript block to oopen the Asset Picker dialog box.</para>
+          <para>The <see cref="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.GetClientLaunchPickerReference(System.String)" /> method must be called before or during the <b>OnPreRender</b> phase of the page life cycle and you must set properties before calling this method to register the correct client ECMAScript on the page. Any changes to the control's properties after the call to the <b>GetClientLaunchPickerReference</b> method do not affect the Asset Picker dialog box behavior because the client script controlling the dialog box is already registered on the page.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.NullReferenceException">A a null reference (Nothing in Visual Basic) reference exception is thrown if the <b>Page</b> and <b>ID</b> properties of this control are not set to a valid <b>System.Web.UI.Page</b> object for registering the required ECMAScript. Either add the control into a control collection on the page or directly set the <b>Page</b> and <b>ID</b> properties.</exception>
+        <example>
+          <code>    // Setting the Page and ID properties is required when the// AssetUrlSelector control is not added to the page// control tree because// the AssetUrlSelector.GetClientLaunchPickerReference()// method must register script in the page.assetSelector.Page = containerControl.Page;assetSelector.ID = "SampleGenerateAssetUrlSelectorLaunchScript";
+// Uses text box client ID to connect the Asset// Picker to the text boxes for the resulting//  URL and default text values returned from the// Asset Picker dialog box.assetSelector.AssetUrlClientID = assetUrlControl.ClientID;assetSelector.AssetTextClientID = assetTextControl.ClientID;
+// Set the ECMAScript to perform after populating the text boxes with the returned values.assetSelector.ClientCallback = ScriptClientCallback;
+
+string clientLaunchPickerScript;if(launchPickerWithCurrentBrowserUrl){
+// Use a client launch script that calculates
+// the current asset URL with custom ECMAScript
+// that in this sample is always the current browser location URL.
+clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference(ScriptGetAssetUrlValue);}else{
+// Use the default client launch script that gets the
+// current asset URL value based on the AssetUrlClientID
+clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference();}
+// Add the client launch script as an ondoubleclick handler for the two text boxes.assetUrlControl.Attributes["ondblclick"] = clientLaunchPickerScript + "; return false;";assetTextControl.Attributes["ondblclick"] = clientLaunchPickerScript + "; return false;";
+// Return the client launch script, which can be added to other ECMAScript on the page.return clientLaunchPickerScript;</code>
+          <code>' Setting the Page and ID properties is required when the
+' AssetUrlSelector control is not added to the page
+' control tree because
+' the AssetUrlSelector.GetClientLaunchPickerReference()
+' method must register script in the page.
+assetSelector.Page = containerControl.Page
+assetSelector.ID = "SampleGenerateAssetUrlSelectorLaunchScript"
+
+' Uses text box client ID to connect the Asset
+' Picker to the text boxes for the resulting
+'  URL and default text values returned from the
+' Asset Picker dialog box.
+assetSelector.AssetUrlClientID = assetUrlControl.ClientID
+assetSelector.AssetTextClientID = assetTextControl.ClientID
+
+' Set the ECMAScript to perform after populating the text boxes with the returned values.
+assetSelector.ClientCallback = ScriptClientCallback
+
+
+Dim clientLaunchPickerScript As String
+If launchPickerWithCurrentBrowserUrl Then' Use a client launch script that calculates' the current asset URL with custom ECMAScript' that in this sample is always the current browser location URL.clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference(ScriptGetAssetUrlValue)
+Else' Use the default client launch script that gets the' current asset URL value based on the AssetUrlClientIDclientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference()
+End If
+
+' Add the client launch script as an ondoubleclick handler for the two text boxes.
+assetUrlControl.Attributes("ondblclick") = clientLaunchPickerScript &amp;amp; "; return false;"
+assetTextControl.Attributes("ondblclick") = clientLaunchPickerScript &amp;amp; "; return false;"
+
+' Return the client launch script, which can be added to other ECMAScript on the page.
+Return clientLaunchPickerScript</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetClientLaunchPickerReference">
+      <MemberSignature Language="C#" Value="public string GetClientLaunchPickerReference (string currentAssetUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetClientLaunchPickerReference(string currentAssetUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.GetClientLaunchPickerReference(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetClientLaunchPickerReference (currentAssetUrl As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetClientLaunchPickerReference(System::String ^ currentAssetUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="currentAssetUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="currentAssetUrl">Client ECMAScript (JavaScript, JScript) string that evaluates a string value to be passed to the Asset Picker dialog box as the current value.</param>
+        <summary>Generates a client ECMAScript (JavaScript, JScript) string used to open the Asset Picker dialog box with the configuration specified by the properties of this control.</summary>
+        <returns>A client ECMAScript (JavaScript, JScript) string used to open the Asset Picker dialog box with the configuration specified by the properties of this control.</returns>
+        <remarks>
+          <para>The <paramref name="currentAssetUrl" />ECMAScript (JavaScript, JScript) parameter determines the current value passed to the Asset Picker dialog box. You can use this method if the Asset Picker dialog box is opened from an HTML element other than the button provided. You can set properties on this control and the <b>Visible</b>, <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetPickerButtonVisible" />, and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> properties to <b>false</b>. You can use the ECMAScript string returned from this function in an HTML element client <b>onclick</b> function or an emitted ECMAScript (JavaScript, JScript) block to open the Asset Picker dialog box. You must call the <see cref="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.GetClientLaunchPickerReference" /> method during or before the <b>OnPreRender</b> phase of the page life cycle and you must set properties before calling this method for the page to register the correct client ECMAScript (JavaScript, JScript). Any changes to the control's properties after the call to <b>GetClientLaunchPickerReference</b> do not affect the dialog box behavior because the client script controlling the dialog box is already registered in the page.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.NullReferenceException">A a null reference (Nothing in Visual Basic) reference exception is thrown if the <b>Page</b> property of this control is not set to a valid <b>System.Web.UI.Page</b> object to register the required ECMAScript (JavaScript, JScript). Either add the control to a control collection on the page or directly set the <b>Page</b> property.</exception>
+        <example>
+          <code>    // Set the ECMAScript to perform after populating the text boxes with the returned values.assetSelector.ClientCallback = ScriptClientCallback;
+string clientLaunchPickerScript;if(launchPickerWithCurrentBrowserUrl){
+// Use a client launch script that calculates
+// the current asset URL with custom ECMAScript
+// which in this example always is the current browser location URL.
+clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference(ScriptGetAssetUrlValue);}else{
+// Use the default client launch script that gets the
+// current asset URL value based on the AssetUrlClientID.
+clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference();}
+// Add the client launch script as an ondoubleclick handler for the two text boxes.assetUrlControl.Attributes["ondblclick"] = clientLaunchPickerScript + "; return false;";assetTextControl.Attributes["ondblclick"] = clientLaunchPickerScript + "; return false;";
+// Return the client launch script, which can be added to other ECMAScript on the pagereturn clientLaunchPickerScript;</code>
+          <code>' Set the ECMAScript to perform after populating the text boxes with the returned values.
+assetSelector.ClientCallback = ScriptClientCallback
+
+Dim clientLaunchPickerScript As String
+If launchPickerWithCurrentBrowserUrl Then' Use a client launch script that calculates' the current asset URL with custom ECMAScript' which in this example always is the current browser location URL.clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference(ScriptGetAssetUrlValue)
+Else' Use the default client launch script that gets the' current asset URL value based on the AssetUrlClientID.clientLaunchPickerScript = assetSelector.GetClientLaunchPickerReference()
+End If
+
+' Add the client launch script as an ondoubleclick handler for the two text boxes.
+assetUrlControl.Attributes("ondblclick") = clientLaunchPickerScript &amp;amp; "; return false;"
+assetTextControl.Attributes("ondblclick") = clientLaunchPickerScript &amp;amp; "; return false;"
+
+' Return the client launch script, which can be added to other ECMAScript on the page
+Return clientLaunchPickerScript</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="IsUrlRequired">
+      <MemberSignature Language="C#" Value="public bool IsUrlRequired { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsUrlRequired" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.IsUrlRequired" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsUrlRequired As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsUrlRequired { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines if the <b>AssetUrl</b> value is validated to ensure that it is not empty. </summary>
+        <value>
+          <b>true</b> to validate the <b>AssetUrl</b> value to ensure that it is not empty; otherwise, <b>false</b> (the default).</value>
+        <remarks>
+          <para>Do not set this property to <b>true</b> if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> or <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.ValidateUrl" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control.
+private const bool SampleIsUrlRequired = true;
+// Set values for the behavior and validation// for the text box.assetSelector.IsUrlRequired = SampleIsUrlRequired;
+</code>
+          <code>' These values control the appearance of the text box
+' and button for the control.
+Private Const SampleIsUrlRequired As Boolean = True
+
+' Set values for the behavior and validation
+' for the text box.
+assetSelector.IsUrlRequired = SampleIsUrlRequired</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxLength">
+      <MemberSignature Language="C#" Value="public int MaxLength { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxLength" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.MaxLength" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxLength As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaxLength { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum character length for the asset URL text box. </summary>
+        <value>Defaults to a value of <paramref name="0" />, which indicates unlimited character length.The maximum character length for the Asset URL text box or <paramref name="0" /> to indicate no limit.</value>
+        <remarks>
+          <para>When this property value is set to a value greater than <paramref name="0" />, the HTML input text box does not allow input greater than the specified character length and the posted value is validated to ensure that it does not exceed that length. This property has no effect if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control.
+private const int SampleMaxLength = 100;
+// Set values for the behavior and validation// for the text box.assetSelector.MaxLength = SampleMaxLength;</code>
+          <code>' These values control the appearance of the text box
+' and button for the control.
+Private Const SampleMaxLength As Integer = 100
+
+' Set values for the behavior and validation
+' for the text box.
+assetSelector.MaxLength = SampleMaxLength</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">Event arguments.</param>
+        <summary>Overrides base onload and adds <b>CssRegistration</b>.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPreRender">
+      <MemberSignature Language="C#" Value="protected override void OnPreRender (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnPreRender(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.OnPreRender(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreRender (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreRender(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">Event arguments.</param>
+        <summary>Initializes the child controls and registers client-side script.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OverrideDialogDescription">
+      <MemberSignature Language="C#" Value="public string OverrideDialogDescription { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string OverrideDialogDescription" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.OverrideDialogDescription" />
+      <MemberSignature Language="VB.NET" Value="Public Property OverrideDialogDescription As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ OverrideDialogDescription { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets instructional description text displayed in the upper area of the Asset Picker dialog box. </summary>
+        <value>Defaults to an empty string.</value>
+        <remarks>
+          <para>This description text is HTML-encoded before being displayed on the page. If no value is set for this property, default instructional description text is used.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance and behavior
+// of the Asset Picker dialog box.
+private const string SampleOverrideDialogDescription = "This is a sample description for the Asset Picker dialog box instructional header";</code>
+          <code>' These values control the appearance and behavior
+' of the Asset Picker dialog box.
+Private Const SampleOverrideDialogDescription As String = "This is a sample description for the Asset Picker dialog box instructional header"</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="OverrideDialogFeatures">
+      <MemberSignature Language="C#" Value="public string OverrideDialogFeatures { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string OverrideDialogFeatures" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.OverrideDialogFeatures" />
+      <MemberSignature Language="VB.NET" Value="Public Property OverrideDialogFeatures As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ OverrideDialogFeatures { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the window features string used when the Asset Picker dialog box opens. </summary>
+        <value>Defaults to an empty string.The URL to the window features string used when opening the Asset Picker dialog box. </value>
+        <remarks>
+          <para>If no value is set in this property then the asset picker default window features are used.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>    // Set values for the appearance and behavior of the Asset Picker dialog box.assetSelector.OverrideDialogFeatures = SampleOverrideDialogFeatures;
+</code>
+          <code>' Set values for the appearance and behavior of the Asset Picker dialog box.
+assetSelector.OverrideDialogFeatures = SampleOverrideDialogFeatures</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="OverrideDialogImageUrl">
+      <MemberSignature Language="C#" Value="public string OverrideDialogImageUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string OverrideDialogImageUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.OverrideDialogImageUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property OverrideDialogImageUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ OverrideDialogImageUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL to the image that appears at the top of the Asset Picker dialog box. </summary>
+        <value>Defaults to an empty string.The URL to the image that appears at the top of the Asset Picker dialog box. </value>
+        <remarks>
+          <para>If no value is set in this property then a default image is used, depending on the value of the <b>UseImageAssetPicker</b> property.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>    // Set values for the appearance and behavior of the Asset Picker dialog box.assetSelector.OverrideDialogImageUrl = SampleOverrideDialogImageUrl;
+</code>
+          <code>' Set values for the appearance and behavior of the Asset Picker dialog box.
+assetSelector.OverrideDialogImageUrl = SampleOverrideDialogImageUrl</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="OverrideDialogTitle">
+      <MemberSignature Language="C#" Value="public string OverrideDialogTitle { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string OverrideDialogTitle" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.OverrideDialogTitle" />
+      <MemberSignature Language="VB.NET" Value="Public Property OverrideDialogTitle As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ OverrideDialogTitle { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the title text of the Asset Picker dialog box. </summary>
+        <value>Defaults to an empty string.The title text of the Asset Picker dialog box. </value>
+        <remarks>
+          <para>If no value is set in this property then default title text is used, depending on the value of the <b>UseImageAssetPicker</b> property.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance and behavior
+// of the Asset Picker dialog box.
+private const string SampleOverrideDialogTitle = "Sample Selection Dialog Title";
+</code>
+          <code>' These values control the appearance and behavior
+' of the Asset Picker dialog box.
+Private Const SampleOverrideDialogTitle As String = "Sample Selection Dialog Title"</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="PickerButtonImage">
+      <MemberSignature Language="C#" Value="public string PickerButtonImage { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string PickerButtonImage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.PickerButtonImage" />
+      <MemberSignature Language="VB.NET" Value="Public Property PickerButtonImage As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ PickerButtonImage { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets the URL for the image when <b>ButtonType</b> is set to <b>ButtonType.Image</b>. Uses a default image when none is specified.</summary>
+        <value>The URL for the image when <b>ButtonType</b> is set to <b>ButtonType.Image</b>.</value>
+        <remarks>
+          <para>This property has no effect if the <b>AssetPickerButtonVisible</b> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control.
+private const bool SampleAssetPickerButtonVisible = true;
+private const bool SampleAssetUrlTextBoxVisible = true;
+private const ButtonType SampleButtonType = ButtonType.Image;
+private const string SamplePickerButtonImage = "/_layouts/images/icdoc.gif";
+
+// These values control the appearance and behavior
+// of the Asset Picker dialog box.
+private const bool SampleUseImageAssetPicker = false;
+private const string SampleOverrideDialogImageUrl = "/_layouts/images/icdoc.gif";
+
+// AddVisibleAssetUrlSelectorControl - 
+// This sample constructs an AssetUrlSelector with 
+// various settings and adds it to a control collection
+// in a Web page.  // Set values for the appearance of the text box and // button for the controlassetSelector.AssetPickerButtonVisible = SampleAssetPickerButtonVisible;assetSelector.AssetUrlTextBoxVisible = SampleAssetUrlTextBoxVisible;assetSelector.ButtonType = SampleButtonType;assetSelector.PickerButtonImage = SamplePickerButtonImage;assetSelector.PickerButtonText = SamplePickerButtonText;</code>
+          <code>' These values control the appearance of the text box
+' and button for the control.
+Private Const SampleAssetPickerButtonVisible As Boolean = True
+Private Const SampleAssetUrlTextBoxVisible As Boolean = True
+Private Const SampleButtonType As ButtonType = ButtonType.Image
+Private Const SamplePickerButtonImage As String = "/_layouts/images/icdoc.gif"
+
+' These values control the appearance and behavior
+' of the Asset Picker dialog box.
+Private Const SampleUseImageAssetPicker As Boolean = False
+Private Const SampleOverrideDialogImageUrl As String = "/_layouts/images/icdoc.gif"
+
+' AddVisibleAssetUrlSelectorControl - 
+' This sample constructs an AssetUrlSelector with 
+' various settings and adds it to a control collection
+' in a Web page.  
+' Set values for the appearance of the text box and 
+' button for the control
+assetSelector.AssetPickerButtonVisible = SampleAssetPickerButtonVisible
+assetSelector.AssetUrlTextBoxVisible = SampleAssetUrlTextBoxVisible
+assetSelector.ButtonType = SampleButtonType
+assetSelector.PickerButtonImage = SamplePickerButtonImage
+assetSelector.PickerButtonText = SamplePickerButtonText</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="PickerButtonText">
+      <MemberSignature Language="C#" Value="public string PickerButtonText { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string PickerButtonText" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.PickerButtonText" />
+      <MemberSignature Language="VB.NET" Value="Public Property PickerButtonText As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ PickerButtonText { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the text for the button used to open the Asset Picker dialog box. </summary>
+        <value>The text for the button used to open the Asset Pickerdialog box. Uses default text if none is specified.</value>
+        <remarks>
+          <para>This property uses default text if none is specified.</para>
+          <para>It has no effect if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetPickerButtonVisible" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control.
+private const string SamplePickerButtonText = "Sample Button Text";
+
+// These values control the appearance and behavior
+// of the Asset Picker dialog box.
+// Set values for the appearance of the text box and 
+// button for the control
+assetSelector.AssetPickerButtonVisible = SampleAssetPickerButtonVisible;
+assetSelector.AssetUrlTextBoxVisible = SampleAssetUrlTextBoxVisible;
+assetSelector.ButtonType = SampleButtonType;
+assetSelector.PickerButtonText = SamplePickerButtonText;</code>
+          <code>' These values control the appearance of the text box
+' and button for the control.
+Private Const SamplePickerButtonText As String = "Sample Button Text"
+
+' These values control the appearance and behavior
+' of the Asset Picker dialog box.
+' Set values for the appearance of the text box and 
+' button for the control
+assetSelector.AssetPickerButtonVisible = SampleAssetPickerButtonVisible
+assetSelector.AssetUrlTextBoxVisible = SampleAssetUrlTextBoxVisible
+assetSelector.ButtonType = SampleButtonType
+assetSelector.PickerButtonText = SamplePickerButtonText</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="PickerTextBoxWidth">
+      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.Unit PickerTextBoxWidth { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Web.UI.WebControls.Unit PickerTextBoxWidth" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.PickerTextBoxWidth" />
+      <MemberSignature Language="VB.NET" Value="Public Property PickerTextBoxWidth As Unit" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Web::UI::WebControls::Unit PickerTextBoxWidth { System::Web::UI::WebControls::Unit get(); void set(System::Web::UI::WebControls::Unit value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.WebControls.Unit</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the width of the picker text box.</summary>
+        <value>An <b>Unit</b> object that represents the width of the text box.</value>
+        <remarks>
+          <para>Use this property to override the auto-assigned width which has the value of <b>Width</b> property.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following example demonstrates how to ensure the width of the text box is at least 200 pixels.</para>
+          <code>
+            AssetUrlSelector selector = new AssetUrlSelector();
+            Unit minWidth = Unit.Pixel(200);
+            if(selector.PickerTextBoxWidth &amp;lt; minWidth)
+            {
+                selector.PickerTextBoxWidth = minWidth;
+            }
+            </code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="PrimaryInputControl">
+      <MemberSignature Language="C#" Value="public System.Web.UI.Control PrimaryInputControl { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Web.UI.Control PrimaryInputControl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.PrimaryInputControl" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PrimaryInputControl As Control" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Web::UI::Control ^ PrimaryInputControl { System::Web::UI::Control ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Publishing.WebControls.ICompositeInputControl.PrimaryInputControl</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Web.UI.Control</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderContents">
+      <MemberSignature Language="C#" Value="protected override void RenderContents (System.Web.UI.HtmlTextWriter writer);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void RenderContents(class System.Web.UI.HtmlTextWriter writer) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.RenderContents(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub RenderContents (writer As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void RenderContents(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="writer">To be added.</param>
+        <summary>Renders contents written by the <see cref="T:System.Web.UI.HtmlTextWriter" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="System.Web.UI.IPostBackEventHandler.RaisePostBackEvent">
+      <MemberSignature Language="C#" Value="void IPostBackEventHandler.RaisePostBackEvent (string eventArgument);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(string eventArgument) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.System#Web#UI#IPostBackEventHandler#RaisePostBackEvent(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Sub RaisePostBackEvent (eventArgument As String) Implements IPostBackEventHandler.RaisePostBackEvent" />
+      <MemberSignature Language="C++ CLI" Value=" virtual void System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System::String ^ eventArgument) = System::Web::UI::IPostBackEventHandler::RaisePostBackEvent;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="eventArgument" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="eventArgument">A string containing the name of the event.</param>
+        <summary>Called by ASP.NET when the <b>AssetUrlSelector</b> control raises a postback event on the client.</summary>
+        <remarks>
+          <para>There is currently only one event, so the <b>eventArgument</b> parameter is ignored.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseImageAssetPicker">
+      <MemberSignature Language="C#" Value="public bool UseImageAssetPicker { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseImageAssetPicker" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.UseImageAssetPicker" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseImageAssetPicker As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseImageAssetPicker { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines if the Asset Picker dialog box is opened for the purpose of selecting an image URL.</summary>
+        <value>
+          <b>true</b> if the Asset Pickerdialog box is opened for the purpose of selecting an image URL; otherwise <b>false</b> (the default).</value>
+        <remarks>
+          <para>If set to <b>true</b>, the Look In section on the left side of the dialog box shows known locations for publishing image document libraries and the user is warned if the selected URL does not have a known image file extension.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance and behavior
+// of the Asset Picker dialog box.
+private const bool SampleUseImageAssetPicker = false;
+// Set values for the appearance and behavior of the Asset Picker dialog box.assetSelector.UseImageAssetPicker = SampleUseImageAssetPicker;
+</code>
+          <code>' These values control the appearance and behavior
+' of the Asset Picker dialog box.
+Private Const SampleUseImageAssetPicker As Boolean = False
+' Set values for the appearance and behavior of the Asset Picker dialog box.
+assetSelector.UseImageAssetPicker = SampleUseImageAssetPicker</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateUrl">
+      <MemberSignature Language="C#" Value="public bool ValidateUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ValidateUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.ValidateUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property ValidateUrl As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ValidateUrl { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrl" /> property value is validated to ensure that it is safe and valid.</summary>
+        <value>
+          <b>True</b> if the <b>AssetUrl</b> property value is validated to ensure that is is valid; otherwise; <b>False</b>.</value>
+        <remarks>
+          <para>The validation checks to ensure that the URL has an allowed protocol or is a server-relative or internal anchor URL reference. It also uses the <see cref="M:Microsoft.SharePoint.Publishing.Fields.HtmlValidationContext.ValidateLinkValue" /> method to ensure that the URL is in a safe and acceptable format. If this property is set to <b>false</b>, you cannot use the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AllowExternalUrls" /> and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.IsUrlRequired" /> properties. The <b>ValidateUrl</b> property should not be set to <b>true</b> if the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.AssetUrlSelector.AssetUrlTextBoxVisible" /> property is set to <b>false</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// These values control the appearance of the text box
+// and button for the control.
+private const bool SampleValidateUrl = true;
+// Set values for the behavior and validation// for the text box.assetSelector.ValidateUrl = SampleValidateUrl;</code>
+          <code>' These values control the appearance of the text box
+' and button for the control.
+Private Const SampleValidateUrl As Boolean = True
+
+' Set values for the behavior and validation
+' for the text box.
+assetSelector.ValidateUrl = SampleValidateUrl</code>
+        </example>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,673 @@
+﻿<Type Name="DataConnectionFile" FullName="Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile">
+  <TypeSignature Language="C#" Value="public sealed class DataConnectionFile : Microsoft.SharePoint.Administration.SPPersistedObject, Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit DataConnectionFile extends Microsoft.SharePoint.Administration.SPPersistedObject implements class Microsoft.SharePoint.Administration.Backup.IBackupRestore, class Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class DataConnectionFile&#xA;Inherits SPPersistedObject&#xA;Implements IBackupRestoreConfiguration" />
+  <TypeSignature Language="C++ CLI" Value="public ref class DataConnectionFile sealed : Microsoft::SharePoint::Administration::SPPersistedObject, Microsoft::SharePoint::Administration::Backup::IBackupRestoreConfiguration" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Administration.SPPersistedObject</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Runtime.InteropServices.Guid("09E0DD52-6224-4ccd-9017-74C9FC061282")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents a Universal Data Connection (UDC) file located in the central data connection store on a server farm.</summary>
+    <remarks>
+      <para>The UDC files that are available on the server farm are listed on the Manage Data Connection Files page of the Central Administration site. A version 2 UDC file with the *.udcx file extension is designed for use by browser-enabled form templates that render in the browser or open in the InfoPath editor. Form templates that are not browser-enabled can also use UDC connection files.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>In the following example, the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFileCollection" /> collection is used to loop through every UDC file on the server farm and write its display name to the console. Then the total number of UDC files on the server is written to the console.</para>
+      <code>    Dim LocalFormsService As FormsService
+    Dim LocalFarm As SPFarm
+    Dim UdcCollection As DataConnectionFileCollection
+    Dim UdcConnection As &lt;span class="label"&gt;DataConnectionFile&lt;/span&gt;
+    Dim CountUdcFiles As Integer = 0
+    Try
+        LocalFarm = SPFarm.Local
+        LocalFormsService = LocalFarm.Services.GetValue(Of FormsService)(FormsService.ServiceName)
+        UdcCollection = LocalFormsService.DataConnectionFiles
+        For Each UdcConnection In UdcCollection
+            CountUdcFiles = CountUdcFiles + 1
+            Console.WriteLine("UDC file # " + CountUdcFiles.ToString() + ": " + UdcConnection.DisplayName.ToString())
+        Next
+        Console.WriteLine("Total UDC files on server: " + CountUdcFiles.ToString())
+        Console.Write("Press Enter to Continue")
+        Console.ReadLine()
+    Catch ex As Exception
+        Console.WriteLine("Error: " + ex.Message)
+        Console.Write("Press Enter to Continue")
+        Console.ReadLine()
+    End Try</code>
+      <code>    FormsService localFormsService;
+    SPFarm localFarm = SPFarm.Local;
+    int countUdcs = 0;
+    try
+    {
+        localFormsService = localFarm.Services.GetValue&amp;lt;FormsService&amp;gt;(FormsService.ServiceName);
+        DataConnectionFileCollection udcCollection = localFormsService.DataConnectionFiles;
+        string[] enumUdc = udcCollection.Enumerate("All");
+        foreach(DataConnectionFile udcConnection in udcCollection)
+        {
+            countUdcs++;
+            Console.WriteLine("UDC file # " + countUdcs.ToString() + ": " + udcConnection.DisplayName.ToString());
+        }
+        Console.WriteLine("Total UDC files on server: " + countUdcs.ToString());
+        Console.Write("Press Enter to Continue");
+        Console.ReadLine();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Error: " + ex.Message);
+        Console.Write("Press Enter to Continue");
+        Console.ReadLine();
+    }</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DataConnectionFile ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; DataConnectionFile();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Category">
+      <MemberSignature Language="C#" Value="public string Category { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Category" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Category" />
+      <MemberSignature Language="VB.NET" Value="Public Property Category As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Category { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the category of a Universal Data Connection (UDC) file located in the central data connection store on a server farm.</summary>
+        <value>A <b>string</b> representing the category to which the data connection file is assigned.</value>
+        <remarks>
+          <para>There are no built-in categories, but assigning categories can be useful if you intend to manage many UDC files that connect to various data stores.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DataConnectionFileName">
+      <MemberSignature Language="C#" Value="public string DataConnectionFileName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DataConnectionFileName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.DataConnectionFileName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DataConnectionFileName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DataConnectionFileName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of the Universal Data Connection (UDC) file represented by the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile" /> object.</summary>
+        <value>The name of the Universal Data Connection (UDC) file.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the description of a Universal Data Connection (UDC) file located in a SharePoint Data Connection Library.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Description" /> property is an optional field and may be blank.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayName">
+      <MemberSignature Language="C#" Value="public string DisplayName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DisplayName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.DisplayName" />
+      <MemberSignature Language="VB.NET" Value="Public Property DisplayName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DisplayName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name displayed in the library of a Universal Data Connection (UDC) file located in the data connection library.</summary>
+        <value>A string representing the display name of the data connection file.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.DisplayName" /> property is a required field.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EnumerateDependants">
+      <MemberSignature Language="C#" Value="public string[] EnumerateDependants ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string[] EnumerateDependants() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.EnumerateDependants" />
+      <MemberSignature Language="VB.NET" Value="Public Function EnumerateDependants () As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::String ^&gt; ^ EnumerateDependants();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Enumerates all dependant form templates of a Universal Data Connection (UDC) file located in the central data connection store on a server farm.</summary>
+        <returns>A one dimensional array of strings representing the file names of the form templates that are dependants of the UDC file.</returns>
+        <remarks>
+          <para>Use the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.HasDependants" /> property to determine if a UDC file has dependant form templates.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HasDependants">
+      <MemberSignature Language="C#" Value="public bool HasDependants { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool HasDependants" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.HasDependants" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property HasDependants As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool HasDependants { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value that indicates whether any form templates on the server are dependant on the Universal Data Connection (UDC) file located in the central data connection store.</summary>
+        <value>A <b>boolean</b> value indicating whether the data connection file is dependant on other data connection files.</value>
+        <remarks>
+          <para>Use the <see cref="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.EnumerateDependants" /> method to determine the specific dependant form templates.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.AddBackupObjects">
+      <MemberSignature Language="C#" Value="void IBackupRestore.AddBackupObjects (Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject parent);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void Microsoft.SharePoint.Administration.Backup.IBackupRestore.AddBackupObjects(class Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject parent) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#AddBackupObjects(Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject)" />
+      <MemberSignature Language="VB.NET" Value="Sub AddBackupObjects (parent As SPBackupRestoreObject) Implements IBackupRestore.AddBackupObjects" />
+      <MemberSignature Language="C++ CLI" Value=" virtual void Microsoft.SharePoint.Administration.Backup.IBackupRestore.AddBackupObjects(Microsoft::SharePoint::Administration::Backup::SPBackupRestoreObject ^ parent) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::AddBackupObjects;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.AddBackupObjects(Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parent" Type="Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject" />
+      </Parameters>
+      <Docs>
+        <param name="parent">The backup object to which the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> objects are added.</param>
+        <summary>Adds the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object and its child <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> objects to the specified backup object. </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore">
+      <MemberSignature Language="C#" Value="bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#CanRenameOnRestore" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property CanRenameOnRestore As Boolean Implements IBackupRestore.CanRenameOnRestore" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value that indicates whether the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object can be renamed when it is restored. </summary>
+        <value>
+          <b>true</b> if renaming is allowed; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup">
+      <MemberSignature Language="C#" Value="bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#CanSelectForBackup" />
+      <MemberSignature Language="VB.NET" Value=" Property CanSelectForBackup As Boolean Implements IBackupRestore.CanSelectForBackup" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether the content component that is represented by the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object can be selected for backup, independently of its parent component, in the Central Administration user interface or some other UI. </summary>
+        <value>
+          <b>true</b> if the object can be selected for backup; otherwise, <b>false</b>. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore">
+      <MemberSignature Language="C#" Value="bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#CanSelectForRestore" />
+      <MemberSignature Language="VB.NET" Value=" Property CanSelectForRestore As Boolean Implements IBackupRestore.CanSelectForRestore" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether the content component that is represented by the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object can be selected for restoration in the Central Administration user interface or some other UI. </summary>
+        <value>
+          <b>true</b> if the object can be selected for restoration; otherwise, <b>false</b>. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired">
+      <MemberSignature Language="C#" Value="ulong Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int64 Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#DiskSizeRequired" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property DiskSizeRequired As ULong Implements IBackupRestore.DiskSizeRequired" />
+      <MemberSignature Language="C++ CLI" Value="property System::UInt64 Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired { System::UInt64 get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the amount of disk space, in bytes, that is required to store a backup of the content represented by the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object. </summary>
+        <value>The size, in bytes, that is needed on the storage device to save the data.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.Id">
+      <MemberSignature Language="C#" Value="Guid Microsoft.SharePoint.Administration.Backup.IBackupRestore.Id { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid Microsoft.SharePoint.Administration.Backup.IBackupRestore.Id" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#Id" />
+      <MemberSignature Language="VB.NET" Value=" Property Id As Guid Implements IBackupRestore.Id" />
+      <MemberSignature Language="C++ CLI" Value="property Guid Microsoft.SharePoint.Administration.Backup.IBackupRestore.Id { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.Id</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets an ID for the content component. </summary>
+        <value>The ID of the content component that is represented by the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name">
+      <MemberSignature Language="C#" Value="string Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#Name" />
+      <MemberSignature Language="VB.NET" Value=" Property Name As String Implements IBackupRestore.Name" />
+      <MemberSignature Language="C++ CLI" Value="property System::String ^ Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a name, for use in a UI, for the content component.</summary>
+        <value>The name of the content component that is represented by the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnAbort (object sender, Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort(object sender, class Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnAbort(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnAbort (sender As Object, args As SPBackupRestoreInformation) As Boolean Implements IBackupRestore.OnAbort" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupRestoreInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnAbort;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that calls <see cref="M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation)" />. </param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation" /> object that contains data about the operation.</param>
+        <summary>Assists in a graceful termination when a user cancels a backup or restore operation. </summary>
+        <returns>
+          <b>true</b> in all cases.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackup">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnBackup (object sender, Microsoft.SharePoint.Administration.Backup.SPBackupInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackup(object sender, class Microsoft.SharePoint.Administration.Backup.SPBackupInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnBackup (sender As Object, args As SPBackupInformation) As Boolean Implements IBackupRestore.OnBackup" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackup(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnBackup;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPBackupInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that initiated the backup operation. </param>
+        <param name="args">To be added.</param>
+        <summary>Creates and stores the backup copy of the content component.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnBackupComplete (object sender, Microsoft.SharePoint.Administration.Backup.SPBackupInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete(object sender, class Microsoft.SharePoint.Administration.Backup.SPBackupInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnBackupComplete(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnBackupComplete (sender As Object, args As SPBackupInformation) As Boolean Implements IBackupRestore.OnBackupComplete" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnBackupComplete;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPBackupInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that calls <see cref="M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />.</param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPBackupInformation" /> object that contains data about the operation.</param>
+        <summary>Provides post backup processing.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnPostRestore (object sender, Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore(object sender, class Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnPostRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnPostRestore (sender As Object, args As SPRestoreInformation) As Boolean Implements IBackupRestore.OnPostRestore" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnPostRestore;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that calls <see cref="M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />.</param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" /> object that contains data about the operation.</param>
+        <summary>Provides post restore processing. </summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPrepareBackup">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnPrepareBackup (object sender, Microsoft.SharePoint.Administration.Backup.SPBackupInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPrepareBackup(object sender, class Microsoft.SharePoint.Administration.Backup.SPBackupInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnPrepareBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnPrepareBackup (sender As Object, args As SPBackupInformation) As Boolean Implements IBackupRestore.OnPrepareBackup" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPrepareBackup(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnPrepareBackup;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPrepareBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPBackupInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that initiated the backup operation.</param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPBackupInformation" /> object that contains data about the operation.  </param>
+        <summary>Creates and stores the backup copy of the content component.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnPreRestore (object sender, Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore(object sender, class Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnPreRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnPreRestore (sender As Object, args As SPRestoreInformation) As Boolean Implements IBackupRestore.OnPreRestore" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnPreRestore;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that calls <see cref="M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />.</param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" /> object that contains data about the operation.</param>
+        <summary>Provides restore preparation processing.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnRestore (object sender, Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(object sender, class Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnRestore (sender As Object, args As SPRestoreInformation) As Boolean Implements IBackupRestore.OnRestore" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnRestore;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that called <see cref="M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />.</param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" /> object that contains data about the operation.</param>
+        <summary>Reads the backed up content and copies it to the target destination of the restore operation.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration">
+      <MemberSignature Language="C#" Value="bool Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Microsoft#SharePoint#Administration#Backup#IBackupRestoreConfiguration#CanBackupRestoreAsConfiguration" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property CanBackupRestoreAsConfiguration As Boolean Implements IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value that indicates whether the component can be included in a configuration-only backup or restore. </summary>
+        <value>
+          <b>true</b> if users should be given the option to include the component in a configuration-only backup or restore; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WebAccessible">
+      <MemberSignature Language="C#" Value="public bool WebAccessible { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool WebAccessible" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.WebAccessible" />
+      <MemberSignature Language="VB.NET" Value="Public Property WebAccessible As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool WebAccessible { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether Microsoft InfoPath clients can access the data connection file using the HTTP protocol.</summary>
+        <value>A <b>boolean</b> value indicating whether the data connection file is accessible via HTTP.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Xml">
+      <MemberSignature Language="C#" Value="public string Xml { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Xml" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Xml" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Xml As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Xml { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the XML string of a Universal Data Connection (UDC) file located in the data connection library.</summary>
+        <value>An XML <b>string</b> representing the XML of the data connection file.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

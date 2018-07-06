@@ -1,0 +1,335 @@
+﻿<Type Name="ListPolicySettings" FullName="Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings">
+  <TypeSignature Language="C#" Value="public class ListPolicySettings" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ListPolicySettings extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings" />
+  <TypeSignature Language="VB.NET" Value="Public Class ListPolicySettings" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ListPolicySettings" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Manages location-based retention policy settings on a list and its subfolders.</summary>
+    <remarks>
+      <para>In Microsoft SharePoint Server 2010, retention policy can now be location-based in addition to content type based. A list, folder, or subfolder can inherit from a parent’s policy, define its own policy, or not follow any policy.</para>
+      <para>Initialize a new instance of this class by using the constructor new <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.#ctor(Microsoft.SharePoint.SPList)" />. The root folder and each subfolder's retention schedule can be obtained by using the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettingsGetRetentionSchedule(System.String)" /> method. The root folder's retention schedule can be set by using the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.GetRetentionSchedule(System.String,System.String)" /> method. Set the retention schedule for subfolders by using the <see cref="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.SetRetentionSchedule(System.String,System.String,System.String)" /> method.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ListPolicySettings (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.#ctor(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (list As SPList)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ListPolicySettings(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">The target <b>SPList</b>.</param>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings" /> object based on the target <see cref="T:Microsoft.SharePoint.SPList" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FolderHasUniquePolicy">
+      <MemberSignature Language="C#" Value="public bool FolderHasUniquePolicy (string folderUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool FolderHasUniquePolicy(string folderUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.FolderHasUniquePolicy(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function FolderHasUniquePolicy (folderUrl As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool FolderHasUniquePolicy(System::String ^ folderUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folderUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folderUrl">The server-relative url of the folder, a null reference (Nothing in Visual Basic) for the root folder.</param>
+        <summary>Determines whether the folder has a retention schedule specified.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>
+          <para>An implicit inherited schedule will return <b>false</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetRetentionSchedule">
+      <MemberSignature Language="C#" Value="public string GetRetentionSchedule (string folderUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetRetentionSchedule(string folderUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.GetRetentionSchedule(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetRetentionSchedule (folderUrl As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetRetentionSchedule(System::String ^ folderUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folderUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folderUrl">A <see cref="T:System.String" /> that represents the target folder URL.</param>
+        <summary>Gets the unique retention schedule based on the target folder URL.</summary>
+        <returns>Returns <see cref="T:System.String" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUniquePolicyParentUrl">
+      <MemberSignature Language="C#" Value="public string GetUniquePolicyParentUrl (string leafUrl, out string retentionPolicy);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetUniquePolicyParentUrl(string leafUrl, [out] string&amp; retentionPolicy) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.GetUniquePolicyParentUrl(System.String,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUniquePolicyParentUrl (leafUrl As String, ByRef retentionPolicy As String) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetUniquePolicyParentUrl(System::String ^ leafUrl, [Runtime::InteropServices::Out] System::String ^ % retentionPolicy);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="leafUrl" Type="System.String" />
+        <Parameter Name="retentionPolicy" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="leafUrl">The server-relative URL of the folder to look up from.</param>
+        <param name="retentionPolicy">The XML for the policy associated with the parent folder/root folder.</param>
+        <summary>Finds the unique parent folder with a policy above the specified folder.</summary>
+        <returns>Returns the URL of the parent folder with a unique retention schedule, if one exists; otherwise, returns an empty <see cref="T:System.String" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ListHasPolicy">
+      <MemberSignature Language="C#" Value="public bool ListHasPolicy { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ListHasPolicy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.ListHasPolicy" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ListHasPolicy As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ListHasPolicy { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether the list has a location-based retention policy anywhere in its hierarchy.</summary>
+        <value>Returns <see cref="T:System.Boolean" />. true if the target list has a policy; otherwise, false.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveRetentionSchedule">
+      <MemberSignature Language="C#" Value="public bool RemoveRetentionSchedule ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool RemoveRetentionSchedule() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.RemoveRetentionSchedule" />
+      <MemberSignature Language="VB.NET" Value="Public Function RemoveRetentionSchedule () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RemoveRetentionSchedule();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Removes retention schedule for the list's root folder.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoveRetentionSchedule">
+      <MemberSignature Language="C#" Value="public bool RemoveRetentionSchedule (string folderUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool RemoveRetentionSchedule(string folderUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.RemoveRetentionSchedule(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function RemoveRetentionSchedule (folderUrl As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RemoveRetentionSchedule(System::String ^ folderUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folderUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folderUrl">The server-relative URL of the folder.</param>
+        <summary>Removes the retention schedule for a specified folder.</summary>
+        <returns>Returns <b>true</b> if a schedule is removed; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetRetentionSchedule">
+      <MemberSignature Language="C#" Value="public void SetRetentionSchedule (string retentionXml, string description);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetRetentionSchedule(string retentionXml, string description) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.SetRetentionSchedule(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetRetentionSchedule (retentionXml As String, description As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetRetentionSchedule(System::String ^ retentionXml, System::String ^ description);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="retentionXml" Type="System.String" />
+        <Parameter Name="description" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="retentionXml">The custom retention schedule similar to the retention XML from the expiration policy feature; a valid XML fragment.</param>
+        <param name="description">The description of the custom retention schedule.</param>
+        <summary>Sets the retention schedule for the information policy based on the retention XML file name and description provided.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetRetentionSchedule">
+      <MemberSignature Language="C#" Value="public void SetRetentionSchedule (string folderUrl, string retentionXml, string description);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetRetentionSchedule(string folderUrl, string retentionXml, string description) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.SetRetentionSchedule(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetRetentionSchedule (folderUrl As String, retentionXml As String, description As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetRetentionSchedule(System::String ^ folderUrl, System::String ^ retentionXml, System::String ^ description);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folderUrl" Type="System.String" />
+        <Parameter Name="retentionXml" Type="System.String" />
+        <Parameter Name="description" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folderUrl">The server-relative URL of the folder.</param>
+        <param name="retentionXml">The custom retention schedule similar to the retention XML from the expiration policy feature; a valid XML fragment.</param>
+        <param name="description">The description of the custom retention schedule.</param>
+        <summary>Sets the retention schedule for the root folder only of the information policy based on the folder URL, retention XML file name, and description provided.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetRetentionScheduleInherit">
+      <MemberSignature Language="C#" Value="public void SetRetentionScheduleInherit (string folder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetRetentionScheduleInherit(string folder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.SetRetentionScheduleInherit(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetRetentionScheduleInherit (folder As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetRetentionScheduleInherit(System::String ^ folder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folder" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folder">The server-relative URL of the folder.</param>
+        <summary>Sets the specified folder to have an inherited schedule.</summary>
+        <remarks>
+          <para>An inherited schedule is a schedule that has has the same schedule as its parent folder or root folder.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">When the folder is the root folder, you cannot set the root folder to have an inherited schedule.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetRetentionScheduleNone">
+      <MemberSignature Language="C#" Value="public void SetRetentionScheduleNone (string folder);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetRetentionScheduleNone(string folder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.SetRetentionScheduleNone(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetRetentionScheduleNone (folder As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetRetentionScheduleNone(System::String ^ folder);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="folder" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="folder">The server-relative URL of the folder or the root folder.</param>
+        <summary>Sets the list's root folder or a specified folder to have the schedule set to None.</summary>
+        <remarks>
+          <para>When schedule is set to None, the contents in this folder do not follow location-based retention policy.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Updates changes to the location-based policies settings on the list.</summary>
+        <remarks>
+          <para>It is necessary to call this method to commit any changes made to location-based policy settings. Policy schedule will be saved to file only if policy changes were made. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseListPolicy">
+      <MemberSignature Language="C#" Value="public bool UseListPolicy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseListPolicy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.ListPolicySettings.UseListPolicy" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseListPolicy As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseListPolicy { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether the list should follow location-based policy.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

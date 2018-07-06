@@ -1,0 +1,176 @@
+﻿<Type Name="ChoiceList" FullName="Microsoft.Office.Server.UserProfiles.ChoiceList">
+  <TypeSignature Language="C#" Value="public class ChoiceList" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ChoiceList extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.UserProfiles.ChoiceList" />
+  <TypeSignature Language="VB.NET" Value="Public Class ChoiceList" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ChoiceList" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Obsolete("Use CoreProperty TermSet to load the taxonomy for a Profile property.")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Provides methods to search, remove, and rename vocabulary terms for user profile properties. </summary>
+    <remarks>
+      <para>After you define a user profile property with a choice list, you cannot redefine it so it does not have the list, nor can you add a list to a property that is not defined with one.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ChoiceList (Microsoft.Office.Server.UserProfiles.Property property);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.Office.Server.UserProfiles.Property property) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ChoiceList.#ctor(Microsoft.Office.Server.UserProfiles.Property)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ChoiceList(Microsoft::Office::Server::UserProfiles::Property ^ property);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="property" Type="Microsoft.Office.Server.UserProfiles.Property" />
+      </Parameters>
+      <Docs>
+        <param name="property">The user profile property that has a choice list associated with it.</param>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.Office.Server.UserProfiles.ChoiceList" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public void Add (string newTerm);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(string newTerm) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ChoiceList.Add(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Add (newTerm As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Add(System::String ^ newTerm);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="newTerm" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="newTerm">The new vocabulary item to add.</param>
+        <summary>Adds a vocabulary item to the choice list.</summary>
+        <remarks>
+          <para>Values are not case-sensitive.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FindTerms">
+      <MemberSignature Language="C#" Value="public string[] FindTerms (string search, Microsoft.Office.Server.UserProfiles.ChoiceListSearchOption option);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string[] FindTerms(string search, valuetype Microsoft.Office.Server.UserProfiles.ChoiceListSearchOption option) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ChoiceList.FindTerms(System.String,Microsoft.Office.Server.UserProfiles.ChoiceListSearchOption)" />
+      <MemberSignature Language="VB.NET" Value="Public Function FindTerms (search As String, option As ChoiceListSearchOption) As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::String ^&gt; ^ FindTerms(System::String ^ search, Microsoft::Office::Server::UserProfiles::ChoiceListSearchOption option);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="search" Type="System.String" />
+        <Parameter Name="option" Type="Microsoft.Office.Server.UserProfiles.ChoiceListSearchOption" />
+      </Parameters>
+      <Docs>
+        <param name="search">The string to search for.</param>
+        <param name="option">One of the following:<b>ChoiceListSearchOption.Contains </b><b>ChoiceListSearchOption.StartsWith</b><b>ChoiceListSearchOption.ExactMatch</b></param>
+        <summary>Searches for vocabulary items that match the specified pattern.</summary>
+        <returns>An array of vocabulary items that match the specified pattern.</returns>
+        <remarks>
+          <para>When you use the <b>Contains</b> option, Microsoft Office SharePoint Server 2007 searches for the following pattern: search = "%" + search + "%";</para>
+          <para>When you use the <b>StartsWith</b> option, Microsoft Office SharePoint Server 2007 searches for the following pattern: search = search + "%";</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllTerms">
+      <MemberSignature Language="C#" Value="public string[] GetAllTerms (bool refresh);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string[] GetAllTerms(bool refresh) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ChoiceList.GetAllTerms(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAllTerms (refresh As Boolean) As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::String ^&gt; ^ GetAllTerms(bool refresh);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="refresh" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="refresh">Indicates whether the items should be refreshed from the user profile store.</param>
+        <summary>Gets all vocabulary terms in this choice list. Optionally refreshes the list from the user profile store.</summary>
+        <returns>An array of all vocabulary terms in this choice list.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Remove">
+      <MemberSignature Language="C#" Value="public void Remove (string oldTerm);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Remove(string oldTerm) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ChoiceList.Remove(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Remove (oldTerm As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Remove(System::String ^ oldTerm);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="oldTerm" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="oldTerm">The vocabulary item to delete.</param>
+        <summary>Deletes the specified vocabulary item from the choice list.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Rename">
+      <MemberSignature Language="C#" Value="public void Rename (string oldTerm, string newTerm);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Rename(string oldTerm, string newTerm) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.UserProfiles.ChoiceList.Rename(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Rename (oldTerm As String, newTerm As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Rename(System::String ^ oldTerm, System::String ^ newTerm);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="oldTerm" Type="System.String" />
+        <Parameter Name="newTerm" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="oldTerm">The vocabulary item to rename.</param>
+        <param name="newTerm">The new name for the vocabulary item.</param>
+        <summary>Renames a vocabulary item with the new name.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

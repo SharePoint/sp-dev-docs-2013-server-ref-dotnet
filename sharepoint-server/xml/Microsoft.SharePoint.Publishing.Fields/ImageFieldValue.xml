@@ -1,0 +1,632 @@
+﻿<Type Name="ImageFieldValue" FullName="Microsoft.SharePoint.Publishing.Fields.ImageFieldValue">
+  <TypeSignature Language="C#" Value="public class ImageFieldValue : Microsoft.SharePoint.Publishing.Fields.HtmlTagValue" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ImageFieldValue extends Microsoft.SharePoint.Publishing.Fields.HtmlTagValue" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" />
+  <TypeSignature Language="VB.NET" Value="Public Class ImageFieldValue&#xA;Inherits HtmlTagValue" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ImageFieldValue : Microsoft::SharePoint::Publishing::Fields::HtmlTagValue" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.Fields.HtmlTagValue</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>A field value class for an <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageField" /> object that represents an IMG tag and specific key attributes for that tag.</summary>
+    <remarks>
+      <para>This value object wraps an HTML string for an image and allows you to get and set certain value object properties and then get the resulting &lt;IMG&gt; tag HTML markup string. If the <see cref="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ImageUrl" /> property does not have a value, then the <see cref="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ToString" /> method returns an empty string. In other cases, the <b>ToString</b> method returns a string of HTML that contains an &lt;IMG&gt; tag, possibly enclosed in an &lt;A&gt; tag hyperlink, depending on the values of its <see cref="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.Hyperlink" /> property. Only certain properties are recognized on the &lt;A&gt; and &lt;IMG&gt; tags and are used to generate the HTML string.</para>
+      <para>For the &lt;A&gt; tag:</para>
+      <list type="bullet">
+        <item>
+          <description>
+            <b>Href</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>Target</b> (only "_blank" is allowed)</description>
+        </item>
+      </list>
+      <para>For the &lt;IMG&gt; tag:</para>
+      <list type="bullet">
+        <item>
+          <description>
+            <b>Src (required)</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>Align</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>Alt</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>Border</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>Height</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>Hspace</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>Vspace</b>
+          </description>
+        </item>
+        <item>
+          <description>
+            <b>width</b>
+          </description>
+        </item>
+      </list>
+      <para>For an <b>ImageField</b> column, instances are usually retrieved from an <see cref="T:Microsoft.SharePoint.SPListItem" /> field value. <b>SPListItem</b> is also used to store the posted value in a <b>RichImageField</b> and <b>RichImageSelector</b> control. Additionally, you can construct a new instance directly as an empty value or a value based on an HTML string that conforms to the basic pattern of an &lt;IMG&gt; tag optionally enclosed in an &lt;A&gt; tag. After you retrieve this value from an <b>SPListItem</b> field and change any properties on this object, you must set the value object back to the <b>SPListItem</b> field value and update it to store the value.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using SPListItem = Microsoft.SharePoint.SPListItem;
+using ImageFieldValue = Microsoft.SharePoint.Publishing.Fields.ImageFieldValue;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class ImageFieldValueSamples
+    {
+    // You can change any of the following data that are set into the ImageFieldValue
+    private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+    private const string NewHyperlink = "/Pages/SamplePage.aspx";
+    private const bool NewOpenHyperlinkInNewWindow = true;
+    private const string NewAlignment = "right";
+    private const string NewAlternateText = "Sample alternate text for the image";
+    private const int NewBorderWidth = 4;
+    private const int NewHeight = 100;
+    private const int NewWidth = 150;
+    private const int NewHorizontalSpacing = 10;
+    private const int NewVerticalSpacing = 15;
+
+    // You can change the following default ImageFieldValue HTML
+    private const string DefaultImageFieldValueHtml = "&amp;lt;A href=\"/Pages/SamplePage.aspx\"&amp;gt;&amp;lt;IMG src=\"/SiteCollectionImages/SampleImage.jpg\" alt=\"Default ALT attribute value\"&amp;gt;&amp;lt;/a&amp;gt;";
+
+    public static string GetAndSetImageFieldValue(
+    SPListItem listItemWithImageField,
+    string imageFieldName)
+    {
+      if (null == listItemWithImageField)
+      {
+        throw new System.ArgumentNullException("listItemWithImageField", "The listItemWithImageField argument must be a valid SPListItem");
+      }
+
+      if (string.IsNullOrEmpty(imageFieldName))
+      {
+         throw new System.ArgumentNullException("imageFieldName", "The imageFieldName argument must be a valid image field name on the SPListItem");
+      }
+
+      // Retrieve the current value from an SPListItem with a
+      // column of the ImageField type with the name imageFieldName
+      ImageFieldValue currentFieldValue = 
+      listItemWithImageField[imageFieldName] as ImageFieldValue;
+
+      // If there is no current value then construct a new empty value
+      if (null == currentFieldValue)
+      {
+         currentFieldValue = new ImageFieldValue();
+      }
+
+      // If this property is not set to a value then the ToString() for
+      // the ImageFieldValue returns String.Empty and nothing is stored
+      // in the field value when it is set back into the SPListItem.
+      currentFieldValue.ImageUrl = NewImageUrl;
+
+      // These properties are all optional for an ImageFieldValue
+      currentFieldValue.Hyperlink = NewHyperlink;
+      currentFieldValue.OpenHyperlinkInNewWindow = NewOpenHyperlinkInNewWindow;
+      currentFieldValue.Alignment = NewAlignment;
+      currentFieldValue.AlternateText = NewAlternateText;
+      currentFieldValue.BorderWidth = NewBorderWidth;
+      currentFieldValue.Height = NewHeight;
+      currentFieldValue.Width = NewWidth;
+      currentFieldValue.HorizontalSpacing = NewHorizontalSpacing;
+      currentFieldValue.VerticalSpacing = NewVerticalSpacing;
+
+      // The changes to the properties of the ImageFieldValue object are
+      // local to this specific object instance and not stored in the SPListItem.
+      // To store the changes the value must be set back in to the SPListItem field value.
+     listItemWithImageField[imageFieldName] = currentFieldValue;
+     listItemWithImageField.Update();
+
+     // The ToString() returns the HTML that reflects the new ImageFieldValue properties
+     return currentFieldValue.ToString();
+    }
+  }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ImageFieldValue ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ImageFieldValue();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Constructs a new empty instance of a <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ImageFieldValue (string inputHtml);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string inputHtml) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.#ctor(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (inputHtml As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ImageFieldValue(System::String ^ inputHtml);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="inputHtml" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="inputHtml">HTML string containing an <b>&lt;IMG&gt;</b> tag with a src attribute. Optionally includes other recognized attributes.</param>
+        <summary>Constructs a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> object using an &lt;IMG&gt; tag in the <paramref name="inputHTML" /> parameter.</summary>
+        <remarks>To be added.</remarks>
+        <example>
+          <code>using SPListItem = Microsoft.SharePoint.SPListItem;
+using ImageFieldValue = Microsoft.SharePoint.Publishing.Fields.ImageFieldValue;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+   public static ImageFieldValue GetImageFieldValueFromHtml(string htmlMarkupForImage)
+        {
+            string htmlForImageFieldValue = htmlMarkupForImage;
+            if (string.IsNullOrEmpty(htmlMarkupForImage))
+            {
+                htmlForImageFieldValue = DefaultImageFieldValueHtml;
+            }
+
+            ImageFieldValue newImageFieldValue = new ImageFieldValue(htmlForImageFieldValue);
+
+            // The ImageUrl, AlternateText, Hyperlink and other properties will 
+            // reflect any recognized properties values from the tags in the html markup
+
+            return newImageFieldValue;
+        }
+    }
+}</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Alignment">
+      <MemberSignature Language="C#" Value="public string Alignment { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Alignment" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.Alignment" />
+      <MemberSignature Language="VB.NET" Value="Public Property Alignment As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Alignment { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the alignment of the Image object in relation to other elements on the Web page.</summary>
+        <value>The alignment of the Image in relation to other elements on the Web page.Default is an empty string.</value>
+        <remarks>
+          <para>The value of this property is the <paramref name="align" /> attribute in the &lt;IMG&gt; tag in the <see cref="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ToString" /> method output.</para>
+          <para>Valid values for alignment include <paramref name="right" />, <paramref name="left" />, <paramref name="top" />, and <paramref name="bottom" />.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that are set into the ImageFieldValue
+private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+private const string NewHyperlink = "/Pages/SamplePage.aspx";
+private const bool NewOpenHyperlinkInNewWindow = true;
+private const string NewAlignment = "right";
+private const string NewAlternateText = "Sample alternate text for the image";
+private const int NewBorderWidth = 4;
+private const int NewHeight = 100;
+private const int NewWidth = 150;
+private const int NewHorizontalSpacing = 10;
+private const int NewVerticalSpacing = 15;</code>
+          <para>
+            <b>Note</b>: This example is part of the larger <b>ImageFieldValue</b> sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AlternateText">
+      <MemberSignature Language="C#" Value="public string AlternateText { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AlternateText" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.AlternateText" />
+      <MemberSignature Language="VB.NET" Value="Public Property AlternateText As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AlternateText { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the alternate text that appears as an image tooltip or when the image is unavailable.</summary>
+        <value>Default is an empty string.</value>
+        <remarks>
+          <para>The value of this property is the <paramref name="alt" /> attribute in the &lt;IMG&gt; tag in the <see cref="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ToString" /> method output.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that are set into the ImageFieldValue
+private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+private const string NewHyperlink = "/Pages/SamplePage.aspx";
+private const bool NewOpenHyperlinkInNewWindow = true;
+private const string NewAlignment = "right";
+private const string NewAlternateText = "Sample alternate text for the image";
+private const int NewBorderWidth = 4;
+private const int NewHeight = 100;
+private const int NewWidth = 150;
+private const int NewHorizontalSpacing = 10;
+private const int NewVerticalSpacing = 15</code>
+          <para>
+            <b>Note</b>: This example is part of the larger <b>ImageFieldValue</b> sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="BorderWidth">
+      <MemberSignature Language="C#" Value="public int BorderWidth { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 BorderWidth" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.BorderWidth" />
+      <MemberSignature Language="VB.NET" Value="Public Property BorderWidth As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int BorderWidth { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the width of the border around the image.</summary>
+        <value>The width of the border around the image. The default is 0.</value>
+        <remarks>
+          <para>If this value is greater than 0, a solid border of the specified width is rendered around the image. </para>
+          <para>The value of this property is the <paramref name="border" /> attribute in the &lt;IMG&gt; tag in the <see cref="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ToString" /> method output.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that are set into the ImageFieldValue
+private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+private const string NewHyperlink = "/Pages/SamplePage.aspx";
+private const bool NewOpenHyperlinkInNewWindow = true;
+private const string NewAlignment = "right";
+private const string NewAlternateText = "Sample alternate text for the image";
+private const int NewBorderWidth = 4;
+private const int NewHeight = 100;
+private const int NewWidth = 150;
+private const int NewHorizontalSpacing = 10;
+private const int NewVerticalSpacing = 15</code>
+          <para>
+            <b>Note</b>: This example is part of the larger <b>ImageFieldValue</b> sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Height">
+      <MemberSignature Language="C#" Value="public int Height { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Height" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.Height" />
+      <MemberSignature Language="VB.NET" Value="Public Property Height As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Height { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the explicit height, in pixels, used to allow a Web browser to scale the image. </summary>
+        <value>Default is 0.</value>
+        <remarks>
+          <para>If this value is greater than 0, then a height attribute is added to the &lt;IMG&gt; tag. If the value is set to 0 or less, no height attribute is used and the image retains its default height.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that are set into the ImageFieldValue
+private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+private const string NewHyperlink = "/Pages/SamplePage.aspx";
+private const bool NewOpenHyperlinkInNewWindow = true;
+private const string NewAlignment = "right";
+private const string NewAlternateText = "Sample alternate text for the image";
+private const int NewBorderWidth = 4;
+private const int NewHeight = 100;
+private const int NewWidth = 150;
+private const int NewHorizontalSpacing = 10;
+private const int NewVerticalSpacing = 15</code>
+          <para>
+            <b>Note</b>: This example is part of the larger <b>ImageFieldValue</b> sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="HorizontalSpacing">
+      <MemberSignature Language="C#" Value="public int HorizontalSpacing { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 HorizontalSpacing" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.HorizontalSpacing" />
+      <MemberSignature Language="VB.NET" Value="Public Property HorizontalSpacing As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int HorizontalSpacing { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the horizontal spacing, in pixels, on the right and left side of the image.</summary>
+        <value>The horizontal spacing on the left and right, in pixels. Default is 0.</value>
+        <remarks>
+          <para>The value of this property is the <paramref name="hspace" /> attribute of the &lt;IMG&gt; tag in the <see cref="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ToString" /> method output.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that are set into the ImageFieldValue
+private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+private const string NewHyperlink = "/Pages/SamplePage.aspx";
+private const bool NewOpenHyperlinkInNewWindow = true;
+private const string NewAlignment = "right";
+private const string NewAlternateText = "Sample alternate text for the image";
+private const int NewBorderWidth = 4;
+private const int NewHeight = 100;
+private const int NewWidth = 150;
+private const int NewHorizontalSpacing = 10;
+private const int NewVerticalSpacing = 15</code>
+          <para>
+            <b>Note</b>: This example is part of the larger <b>ImageFieldValue</b> sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Hyperlink">
+      <MemberSignature Language="C#" Value="public string Hyperlink { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Hyperlink" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.Hyperlink" />
+      <MemberSignature Language="VB.NET" Value="Public Property Hyperlink As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Hyperlink { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL for the optional hyperlink on this image.</summary>
+        <value>The URL for a hyperlink around this image.Default is an empty string, which means that the image has no hyperlink &lt;A&gt; tag.</value>
+        <remarks>
+          <para>You can set the URL in this property to any URL reference, although some invalid values may be removed when the value is stored in a <see cref="T:Microsoft.SharePoint.SPListItem" /> field value.</para>
+          <para>The value of this property is the <paramref name="href" /> attribute of an &lt;A&gt; tag that surrounds an &lt;IMG&gt; tag in the <see cref="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ToString" /> method output.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that are set into the ImageFieldValue
+private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+private const string NewHyperlink = "/Pages/SamplePage.aspx";
+private const bool NewOpenHyperlinkInNewWindow = true;
+private const string NewAlignment = "right";
+private const string NewAlternateText = "Sample alternate text for the image";
+private const int NewBorderWidth = 4;
+private const int NewHeight = 100;
+private const int NewWidth = 150;
+private const int NewHorizontalSpacing = 10;
+private const int NewVerticalSpacing = 15</code>
+          <para>
+            <b>Note</b>: This example is part of the larger <b>ImageFieldValue</b> sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ImageUrl">
+      <MemberSignature Language="C#" Value="public string ImageUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ImageUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ImageUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property ImageUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ImageUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URL of the image for this <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> object.</summary>
+        <value>The URL of the image for this <b>ImageFieldValue</b> object. Default is an empty string, which means that the entire value is considered empty.The value of this property is the <paramref name="src" /> attribute of the &lt;IMG&gt; tag in the <b>ToString</b> output.</value>
+        <remarks>
+          <para>This property can be any absolute or server-relative image reference, although some invalid values may be removed when the value is stored in an <see cref="T:Microsoft.SharePoint.SPListItem" /> field value.</para>
+          <para>This is the primary data element for this field value. If this URL does not have a value, all other data in this object is ignored and the <see cref="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ToString" /> method returns an empty string. </para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that are set into the ImageFieldValue
+private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+private const string NewHyperlink = "/Pages/SamplePage.aspx";
+private const bool NewOpenHyperlinkInNewWindow = true;
+private const string NewAlignment = "right";
+private const string NewAlternateText = "Sample alternate text for the image";
+private const int NewBorderWidth = 4;
+private const int NewHeight = 100;
+private const int NewWidth = 150;
+private const int NewHorizontalSpacing = 10;
+private const int NewVerticalSpacing = 15</code>
+          <para>
+            <b>Note</b>: This example is part of the larger <b>ImageFieldValue</b> sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="OpenHyperlinkInNewWindow">
+      <MemberSignature Language="C#" Value="public bool OpenHyperlinkInNewWindow { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool OpenHyperlinkInNewWindow" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.OpenHyperlinkInNewWindow" />
+      <MemberSignature Language="VB.NET" Value="Public Property OpenHyperlinkInNewWindow As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool OpenHyperlinkInNewWindow { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value that determines whether to open an image hyperlink URL in a new window when the link is clicked.</summary>
+        <value>A Boolean value that determines whether any image hyperlink URL opens in a new window.If set to <b>True,</b> any image hyperlink URL opens in a new window. Otherwise, set to <b>False</b>.Default is <b>False</b>.</value>
+        <remarks>
+          <para>A True value means that a <paramref name="target=&quot;_blank&quot;" /> attribute appears on any hyperlink <b>&lt;A&gt;</b> tag in the <see cref="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ToString" /> method output.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that are set into the ImageFieldValue
+private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+private const string NewHyperlink = "/Pages/SamplePage.aspx";
+private const bool NewOpenHyperlinkInNewWindow = true;
+private const string NewAlignment = "right";
+private const string NewAlternateText = "Sample alternate text for the image";
+private const int NewBorderWidth = 4;
+private const int NewHeight = 100;
+private const int NewWidth = 150;
+private const int NewHorizontalSpacing = 10;
+private const int NewVerticalSpacing = 15</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ImageFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ToString" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ ToString();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns an HTML string with an &lt;IMG&gt; tag with properties as they are currently set in this object.</summary>
+        <returns>An HTML string with an &lt;IMG&gt; tag with properties as they are currently set in this object.</returns>
+        <remarks>
+          <para>If the <see cref="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ImageUrl" /> property does not have a value, this method returns an empty string. Otherwise, this method returns an HTML string that contains an &lt;IMG&gt; tag, possibly enclosed in an &lt;A&gt; tag hyperlink, depending on the values of the <b>Hyperlink</b> property. Only certain properties are recognized on the &lt;A&gt; and &lt;IMG&gt; tags and used to generate the HTML string.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// The ToString() returns the HTML that reflects the new
+// ImageFieldValue properties.
+return currentFieldValue.ToString()</code>
+          <para>
+            <b>Note</b>: This example is part of the larger <b>ImageFieldValue</b> sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="VerticalSpacing">
+      <MemberSignature Language="C#" Value="public int VerticalSpacing { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 VerticalSpacing" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.VerticalSpacing" />
+      <MemberSignature Language="VB.NET" Value="Public Property VerticalSpacing As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int VerticalSpacing { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the vertical spacing, in pixels, on the top and bottom of the image.</summary>
+        <value>The vertical spacing on the top and bottom of the image, in pixels. Default is 0.</value>
+        <remarks>
+          <para>The value of this property is the <paramref name="vspace" /> attribute of the &lt;IMG&gt; tag in the output of the <see cref="M:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.ToString" /> method.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that are set into the ImageFieldValue
+private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+private const string NewHyperlink = "/Pages/SamplePage.aspx";
+private const bool NewOpenHyperlinkInNewWindow = true;
+private const string NewAlignment = "right";
+private const string NewAlternateText = "Sample alternate text for the image";
+private const int NewBorderWidth = 4;
+private const int NewHeight = 100;
+private const int NewWidth = 150;
+private const int NewHorizontalSpacing = 10;
+private const int NewVerticalSpacing = 15</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ImageFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Width">
+      <MemberSignature Language="C#" Value="public int Width { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Width" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue.Width" />
+      <MemberSignature Language="VB.NET" Value="Public Property Width As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Width { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the explicit width, in pixels, that can be used to allow a Web browser to scale the image.</summary>
+        <value>The explicit width in pixels used to allow a Web browser to scale the image. Default is 0.</value>
+        <remarks>
+          <para>If this value is greater than 0, a <paramref name="width" /> attribute is added to the &lt;IMG&gt; tag that is output. If it is set to 0 or less, no width attribute is used and the image retains its default width.</para>
+          <para />
+        </remarks>
+        <example>
+          <code>// You can change any of the following data that are set into the ImageFieldValue
+private const string NewImageUrl = "/SiteCollectionImages/SampleImage.jpg";
+private const string NewHyperlink = "/Pages/SamplePage.aspx";
+private const bool NewOpenHyperlinkInNewWindow = true;
+private const string NewAlignment = "right";
+private const string NewAlternateText = "Sample alternate text for the image";
+private const int NewBorderWidth = 4;
+private const int NewHeight = 100;
+private const int NewWidth = 150;
+private const int NewHorizontalSpacing = 10;
+private const int NewVerticalSpacing = 15</code>
+          <para>
+            <b>Note</b>: This example is part of the larger ImageFieldValue sample in the <see cref="T:Microsoft.SharePoint.Publishing.Fields.ImageFieldValue" /> topic.</para>
+        </example>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

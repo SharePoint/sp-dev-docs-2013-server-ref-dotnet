@@ -1,0 +1,110 @@
+﻿<Type Name="ImportManager" FullName="Microsoft.SharePoint.Taxonomy.ImportManager">
+  <TypeSignature Language="C#" Value="public sealed class ImportManager" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ImportManager extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.ImportManager" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class ImportManager" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ImportManager sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>The ImportManager class is used to import individual TermSet instances into
+a Group.</summary>
+    <remarks>
+      <para>The data for the import is specified in a *.csv that must follow a well known format.This class can be retrieved from the method <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.GetImportManager" />.This is a useful class for bootstrapping a TermStore with individual term sets, but for more complex data it is recommended that the writable APIs for Group, TermSet and Term be used to import data.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="BatchSize">
+      <MemberSignature Language="C#" Value="public int BatchSize { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 BatchSize" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.ImportManager.BatchSize" />
+      <MemberSignature Language="VB.NET" Value="Public Property BatchSize As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int BatchSize { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the batch size of each commit operation.</summary>
+        <value>An integer indicating the batch size of each commit operation</value>
+        <remarks>
+          <para>When the <see cref="M:Microsoft.SharePoint.Taxonomy.ImportManager.ImportTermSet(Microsoft.SharePoint.Taxonomy.Group,System.IO.TextReader,System.Boolean@,System.String@)" /> method executes, it imports multiple <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects into a <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object. The <b>BatchSize</b> value determines how often to commit (save) these items.  For example, if the BatchSize value is 1000 then the changes will be committed after each1000 terms are imported.</para>
+          <para>The default value of this property is 1000. This property should be set prior to calling the <see cref="M:Microsoft.SharePoint.Taxonomy.ImportManager.ImportTermSet(Microsoft.SharePoint.Taxonomy.Group,System.IO.TextReader,System.Boolean@,System.String@)" />
+method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ImportTermSet">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermSet ImportTermSet (Microsoft.SharePoint.Taxonomy.Group parentGroup, System.IO.TextReader reader, out bool allTermsAdded, out string errorMessage);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Taxonomy.TermSet ImportTermSet(class Microsoft.SharePoint.Taxonomy.Group parentGroup, class System.IO.TextReader reader, [out] bool&amp; allTermsAdded, [out] string&amp; errorMessage) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.ImportManager.ImportTermSet(Microsoft.SharePoint.Taxonomy.Group,System.IO.TextReader,System.Boolean@,System.String@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ImportTermSet (parentGroup As Group, reader As TextReader, ByRef allTermsAdded As Boolean, ByRef errorMessage As String) As TermSet" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Taxonomy::TermSet ^ ImportTermSet(Microsoft::SharePoint::Taxonomy::Group ^ parentGroup, System::IO::TextReader ^ reader, [Runtime::InteropServices::Out] bool % allTermsAdded, [Runtime::InteropServices::Out] System::String ^ % errorMessage);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermSet</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parentGroup" Type="Microsoft.SharePoint.Taxonomy.Group" />
+        <Parameter Name="reader" Type="System.IO.TextReader" />
+        <Parameter Name="allTermsAdded" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="errorMessage" Type="System.String&amp;" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="parentGroup">A <see cref="T:Microsoft.SharePoint.Taxonomy.Group" /> object to be the parent group of the term set.</param>
+        <param name="reader">TextReader for a .csv file containing term set data</param>
+        <param name="allTermsAdded">A Boolean output parameter indicating whether all terms were added</param>
+        <param name="errorMessage">A string output parameter indicating all error messages occuring during the import operation</param>
+        <summary>Imports a <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object into the <paramref name="parentGroup" /> from a .csv file.</summary>
+        <returns>A <see cref="T:Microsot.SharePoint.Taxonomy.TermSet" /> object generated from the input data</returns>
+        <remarks>
+          <para>When this method returns, the <paramref name="allTermsAdded" /> output parameter is set to true if <b>true</b> if all terms in the .csv file are added; otherwise, <b>false</b>.
+</para>
+          <para>When this method returns, the <paramref name="errorMessage" /> output parameter will be empty if there were no errors during the import. If there were errors during the import, the parameter contains information about all of the errors that occurred.</para>
+          <para>The <paramref name="parentGroup" /> parameter value cannot be the system group.The .csv file opened by the <paramref name="reader" /> parameter should adhere to standard .csv file format.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="reader" /> is a null reference (Nothing in Visual Basic)</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">Creating a term set in system Group is disallowed.</exception>
+        <exception cref="T:System.ArgumentException">The term set .csv import file does not adhere to the correct format.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TermStore">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.TermStore TermStore { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.TermStore TermStore" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.ImportManager.TermStore" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TermStore As TermStore" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::TermStore ^ TermStore { Microsoft::SharePoint::Taxonomy::TermStore ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TermStore</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Taxonomy.TermStore" /> object in which to import.</summary>
+        <value>The term store in which to import</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

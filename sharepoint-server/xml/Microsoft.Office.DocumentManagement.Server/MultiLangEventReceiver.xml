@@ -1,0 +1,147 @@
+﻿<Type Name="MultiLangEventReceiver" FullName="Microsoft.Office.DocumentManagement.Server.MultiLangEventReceiver">
+  <TypeSignature Language="C#" Value="public sealed class MultiLangEventReceiver : Microsoft.SharePoint.SPItemEventReceiver" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit MultiLangEventReceiver extends Microsoft.SharePoint.SPItemEventReceiver" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.DocumentManagement.Server.MultiLangEventReceiver" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class MultiLangEventReceiver&#xA;Inherits SPItemEventReceiver" />
+  <TypeSignature Language="C++ CLI" Value="public ref class MultiLangEventReceiver sealed : Microsoft::SharePoint::SPItemEventReceiver" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.SPItemEventReceiver</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Receives item events for multilanguage document libraries.</summary>
+    <remarks>
+      <para>For more information about trapping events that occur to items, see the <see cref="T:Microsoft.SharePoint.SPItemEventReceiver" />.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public MultiLangEventReceiver ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.Server.MultiLangEventReceiver.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; MultiLangEventReceiver();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.DocumentManagement.Server.MultiLangEventReceiver" /> class.</summary>
+        <remarks>
+          <para>For more information about trapping events that occur to items, see the <see cref="T:Microsoft.SharePoint.SPItemEventReceiver" /> class. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ItemDeleting">
+      <MemberSignature Language="C#" Value="public override void ItemDeleting (Microsoft.SharePoint.SPItemEventProperties properties);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ItemDeleting(class Microsoft.SharePoint.SPItemEventProperties properties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.Server.MultiLangEventReceiver.ItemDeleting(Microsoft.SharePoint.SPItemEventProperties)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub ItemDeleting (properties As SPItemEventProperties)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void ItemDeleting(Microsoft::SharePoint::SPItemEventProperties ^ properties);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="properties" Type="Microsoft.SharePoint.SPItemEventProperties" />
+      </Parameters>
+      <Docs>
+        <param name="properties">An <see cref="T:Microsoft.SharePoint.SPItemEventProperties" /> object that represents properties of the event handler.</param>
+        <summary>Occurs before an existing item is completely deleted.</summary>
+        <remarks>
+          <para>When a placeholder document is deleted, this method also deletes the tasks associated with it and deletes the user's alerts for the base document.</para>
+          <para>For more information about trapping events that occur to items, see the <see cref="T:Microsoft.SharePoint.SPItemEventReceiver" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ItemFileMoved">
+      <MemberSignature Language="C#" Value="public override void ItemFileMoved (Microsoft.SharePoint.SPItemEventProperties properties);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ItemFileMoved(class Microsoft.SharePoint.SPItemEventProperties properties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.Server.MultiLangEventReceiver.ItemFileMoved(Microsoft.SharePoint.SPItemEventProperties)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub ItemFileMoved (properties As SPItemEventProperties)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void ItemFileMoved(Microsoft::SharePoint::SPItemEventProperties ^ properties);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="properties" Type="Microsoft.SharePoint.SPItemEventProperties" />
+      </Parameters>
+      <Docs>
+        <param name="properties">An <see cref="T:Microsoft.SharePoint.SPItemEventProperties" /> object that represents properties of the event handler. </param>
+        <summary>Occurs after a file is moved. </summary>
+        <remarks>
+          <para>This class ensures that the moved files have valid base document and translation settings.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ItemUpdated">
+      <MemberSignature Language="C#" Value="public override void ItemUpdated (Microsoft.SharePoint.SPItemEventProperties properties);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ItemUpdated(class Microsoft.SharePoint.SPItemEventProperties properties) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.Server.MultiLangEventReceiver.ItemUpdated(Microsoft.SharePoint.SPItemEventProperties)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub ItemUpdated (properties As SPItemEventProperties)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void ItemUpdated(Microsoft::SharePoint::SPItemEventProperties ^ properties);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="properties" Type="Microsoft.SharePoint.SPItemEventProperties" />
+      </Parameters>
+      <Docs>
+        <param name="properties">An <see cref="T:Microsoft.SharePoint.SPItemEventProperties" /> object that represents properties of the event handler.</param>
+        <summary>Occurs after an existing item is changed, for example, when the user changes data in one or more fields.</summary>
+        <remarks>
+          <para>Enables the workflow (which runs under the SHAREPOINT\System account) to change properties that the translation workflow is associated with, but prevents any other user from changing these properties.</para>
+          <para />
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Register">
+      <MemberSignature Language="C#" Value="public static void Register (Microsoft.SharePoint.SPList list);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Register(class Microsoft.SharePoint.SPList list) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.Server.MultiLangEventReceiver.Register(Microsoft.SharePoint.SPList)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub Register (list As SPList)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void Register(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="list" Type="Microsoft.SharePoint.SPList" />
+      </Parameters>
+      <Docs>
+        <param name="list">A list on a <see cref="T:Microsoft.SharePoint.SPSite" /> object.</param>
+        <summary>Registers the multilanguage event receiver for the specified list.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

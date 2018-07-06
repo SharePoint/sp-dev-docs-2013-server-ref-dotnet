@@ -1,0 +1,381 @@
+﻿<Type Name="TaxonomyFieldControl" FullName="Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl">
+  <TypeSignature Language="C#" Value="public sealed class TaxonomyFieldControl : Microsoft.SharePoint.WebControls.BaseFieldControl" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit TaxonomyFieldControl extends Microsoft.SharePoint.WebControls.BaseFieldControl" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class TaxonomyFieldControl&#xA;Inherits BaseFieldControl" />
+  <TypeSignature Language="C++ CLI" Value="public ref class TaxonomyFieldControl sealed : Microsoft::SharePoint::WebControls::BaseFieldControl" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.WebControls.BaseFieldControl</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Provides the edit experience for a Microsoft.SharePoint.TaxonomyField object.</summary>
+    <remarks>
+      <para>The taxonomy field control contains a taxonomy Web tagging control. It is reponsiblefor initializing a new instance of the Web tagging control with all of the properties for the <b>TaxonomyField</b> object. It also initializes the taxonomy Web tagging control with its initial value, and then updates the <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object with the selected value after edit.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.IO;
+using System.Globalization;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Taxonomy;
+
+// To build this file, create a Console project and add the following .NET assembly references:
+// Microsoft.SharePoint
+// Microsoft.SharePoint.Taxonomy
+
+namespace Microsoft.SDK.SharePoint.Taxonomy.Samples
+{
+    public class TestTaxonomyFieldControl
+    {
+        private void TestGetTaxonomyCollection()
+        {
+            // These test strings contain label-path pairs:
+            // input1 contains a single label-path pair (a path is a sequence of 1 or more GUIDs)
+            // input2 contains two label-path pairs
+            string input1 = "label1|B5EE7261-FD7C-47D2-9DB9-D499640EED01|BA3EBBB7-9C3E-414C-9625-8BCE5F422818";
+            string input2 = "label2|E87A3A52-365A-4E6B-8F37-F6DCED9F8EDD;label3|1CCB014A-5647-493F-B366-6D9F99FD7894";
+            
+            Console.WriteLine("input1 = {0}", input1);
+            Console.WriteLine("input2 = {0}", input2);
+
+            // Parse the test string for a single taxonomy field value
+            TaxonomyFieldValue taxValue1 = TaxonomyFieldControl.GetTaxonomyValue(input1);
+
+            // Prints:
+            //      label1 - BA3EBBB7-9C3E-414C-9625-8BCE5F422818
+            Console.WriteLine("\nGetTaxonomyValue(input1):");
+            Console.WriteLine("{0} - {1}", taxValue1.Label, taxValue1.TermGuid);
+            
+            // Parse the test string for a taxonomy field value collection
+            TaxonomyFieldValueCollection taxFieldValueCollection1 = TaxonomyFieldControl.GetTaxonomyCollection(input1);
+            TaxonomyFieldValueCollection taxFieldValueCollection2 = TaxonomyFieldControl.GetTaxonomyCollection(input2);
+
+            // Prints:
+            //      label1 - BA3EBBB7-9C3E-414C-9625-8BCE5F422818
+            Console.WriteLine("\nGetTaxonomyCollection(input1):");
+            foreach (TaxonomyFieldValue fv in taxFieldValueCollection1)
+            {
+                Console.WriteLine("{0} - {1}", fv.Label, fv.TermGuid);
+            }
+
+            // Prints:
+            //      label2 - E87A3A52-365A-4E6B-8F37-F6DCED9F8EDD
+            //      label3 - 1CCB014A-5647-493F-B366-6D9F99FD7894
+            Console.WriteLine("\nGetTaxonomyCollection(input2):");
+            foreach (TaxonomyFieldValue fv in taxFieldValueCollection2)
+            {
+                Console.WriteLine("{0} - {1}", fv.Label, fv.TermGuid);
+            }
+
+            // Convert the field value collections back into a string representation
+            string output1 = TaxonomyFieldControl.GetMultipleValueText(taxFieldValueCollection1);
+            string output2 = TaxonomyFieldControl.GetMultipleValueText(taxFieldValueCollection2);
+
+            // Prints:
+            //      label1|BA3EBBB7-9C3E-414C-9625-8BCE5F422818
+            //      label2|E87A3A52-365A-4E6B-8F37-F6DCED9F8EDD;label3|1CCB014A-5647-493F-B366-6D9F99FD7894
+            Console.WriteLine("\nString representations:");
+            Console.WriteLine(output1);
+            Console.WriteLine(output2);
+        }
+    }
+}</code>
+      <code>using System;
+using System.IO;
+using System.Globalization;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Taxonomy;
+
+// To build this file, add the following .NET assembly references to the project:
+// System.Web
+// Microsoft.SharePoint
+// Microsoft.SharePoint.Taxonomy
+
+namespace Microsoft.SDK.SharePoint.Taxonomy.Samples
+{
+    public class TestTaxonomyFieldControlOnPage : System.Web.UI.Page
+    {
+        // Use the following declaration to place the TaxonomyFieldControl on a custom layouts ASPX page:
+        // &amp;lt;Taxonomy:TaxonomyFieldControl id="myTaxonomyFieldControl" ControlMode="display" runat="server" /&amp;gt;
+        protected TaxonomyFieldControl myTaxonomyFieldControl;
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if (!IsPostBack)
+            {
+                // Assume we have a List with a taxonomy field called "Categories"
+                // Add List=GUID to the URL parameters of the custom aspx page used to view this list,
+                // where GUID is the ID of the list.
+
+                // Binds the TaxonomyFieldControl to the specified field
+                myTaxonomyFieldControl.FieldName = "Categories";
+
+                // A custom target template must be specified for the EmptyValueDescriptionForTargetTemplate property to have any effect
+                TaxonomyField taxField = myTaxonomyFieldControl.Field as TaxonomyField;
+                taxField.TargetTemplate = "_layouts/TestTaxonomyFieldControl.aspx";
+
+                // Sets the default text to be rendered if the taxonomy field has an empty value and TargetTemplate is specified.
+                // This property only takes effect if the ControlMode="display".
+                myTaxonomyFieldControl.EmptyValueDescriptionForTargetTemplate = "No categories have been defined.";
+            }
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TaxonomyFieldControl ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; TaxonomyFieldControl();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <b>TaxonomyFieldControl</b> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateChildControls">
+      <MemberSignature Language="C#" Value="protected override void CreateChildControls ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void CreateChildControls() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.CreateChildControls" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub CreateChildControls ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void CreateChildControls();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates a child <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl" /> object for the current <b>TaxonomyFieldControl</b> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EmptyValueDescriptionForTargetTemplate">
+      <MemberSignature Language="C#" Value="public string EmptyValueDescriptionForTargetTemplate { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string EmptyValueDescriptionForTargetTemplate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.EmptyValueDescriptionForTargetTemplate" />
+      <MemberSignature Language="VB.NET" Value="Public Property EmptyValueDescriptionForTargetTemplate As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ EmptyValueDescriptionForTargetTemplate { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the message that will be displayed in Display mode when the Taxonomy field has an empty value and the TargetTemplate is specified.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMultipleValueText">
+      <MemberSignature Language="C#" Value="public static string GetMultipleValueText (Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection taxCollection);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string GetMultipleValueText(class Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection taxCollection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.GetMultipleValueText(Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetMultipleValueText (taxCollection As TaxonomyFieldValueCollection) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetMultipleValueText(Microsoft::SharePoint::Taxonomy::TaxonomyFieldValueCollection ^ taxCollection);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="taxCollection" Type="Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" />
+      </Parameters>
+      <Docs>
+        <param name="taxCollection">The collection of <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> objects that will be returned as a string.</param>
+        <summary>Converts a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object into a string that can be used to apply to the <see cref="P:Microsoft.SharePoint.Taxonomy.TaxonomyWebTaggingControl.Text" /> property or to the Taxonomy TextField of a list item.</summary>
+        <returns>String representing the collection of <b>Term</b> objects passed in.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTaxonomyCollection">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection GetTaxonomyCollection (string text);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection GetTaxonomyCollection(string text) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.GetTaxonomyCollection(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetTaxonomyCollection (text As String) As TaxonomyFieldValueCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Taxonomy::TaxonomyFieldValueCollection ^ GetTaxonomyCollection(System::String ^ text);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="text">String to be converted into a <b>TaxonomyFieldValueCollection</b> object.</param>
+        <summary>Converts a string to a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object,</summary>
+        <returns>A <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> object that is created from the string text</returns>
+        <remarks>
+          <para>The string that is passed in must be formatted with a label and its GUID must be delimited with a | character. You can repeat the format more than one time and delimit it with a ; character,</para>
+          <para>This method can also be used with a full GUID path. For example, if you have the <b>Term</b> object named X with the GUID 12345678-1234-1234-1234-123456789012, and you have the parent <b>Term</b> named Y at the root of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object with the GUID 87654321-4321-4321-4321-210987654321, you can use either of the following values: X|12345678-1234-1234-1234-123456789012, or X|87654321-4321-4321-4321-210987654321|123456789-1234-1234-1234-123456789012.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetTaxonomyValue">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue GetTaxonomyValue (string text);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue GetTaxonomyValue(string text) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.GetTaxonomyValue(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetTaxonomyValue (text As String) As TaxonomyFieldValue" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Taxonomy::TaxonomyFieldValue ^ GetTaxonomyValue(System::String ^ text);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="text">String to be converted into a <b>TaxonomyFieldValue</b> object</param>
+        <summary>Converts a string to a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValue" /> object.</summary>
+        <returns>The <b>TaxonomyFieldValue</b> object that is created from the string text</returns>
+        <remarks>
+          <para>The string that is passed in must be formatted with a label and its GUID must be delimited with a | character. You can repeat the format more than one time and delimit it with a ; character,This method can also be used with a full GUID path. For example, if you have the <b>Term</b> object named X with the GUID 12345678-1234-1234-1234-123456789012, and you have the parent <b>Term</b> named Y at the root of the <see cref="T:Microsoft.SharePoint.Taxonomy.TermSet" /> object with the GUID 87654321-4321-4321-4321-210987654321, you can use either of the following values: X|12345678-1234-1234-1234-123456789012, or X|87654321-4321-4321-4321-210987654321|123456789-1234-1234-1234-123456789012.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">If a null or empty string is passed in, an argument exception is thrown.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">event arguments</param>
+        <summary>Raises <b>Load</b> event.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RenderFieldForDisplay">
+      <MemberSignature Language="C#" Value="protected override void RenderFieldForDisplay (System.Web.UI.HtmlTextWriter output);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void RenderFieldForDisplay(class System.Web.UI.HtmlTextWriter output) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.RenderFieldForDisplay(System.Web.UI.HtmlTextWriter)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub RenderFieldForDisplay (output As HtmlTextWriter)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void RenderFieldForDisplay(System::Web::UI::HtmlTextWriter ^ output);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="output" Type="System.Web.UI.HtmlTextWriter" />
+      </Parameters>
+      <Docs>
+        <param name="output">The character or text output stream from the <see cref="T:System.Web.UI.HtmlTextWriter" /> object to render for display in the field</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateFieldValueInItem">
+      <MemberSignature Language="C#" Value="public override void UpdateFieldValueInItem ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void UpdateFieldValueInItem() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.UpdateFieldValueInItem" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub UpdateFieldValueInItem ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void UpdateFieldValueInItem();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Overrides the base field control implemenation of <b>UpdateFieldValueInItem</b> and ensures that the taxonoym field is updated along with its corresponding <b>TextField</b>.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.MissingMemberException">Occurs when this.Field property associated with this control is not a <b>TaxonomyField</b> object.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Validate">
+      <MemberSignature Language="C#" Value="public override void Validate ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Validate() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.Validate" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Validate ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Validate();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Overrides the <b>BaseFieldControl.Validate</b> method to ensure that all taxonomy data is valid.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Value">
+      <MemberSignature Language="C#" Value="public override object Value { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance object Value" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl.Value" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Property Value As Object" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Object ^ Value { System::Object ^ get(); void set(System::Object ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value of the current <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldControl" /> object.</summary>
+        <value>Value of <b>TaxonomyFieldControl</b> object</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.MissingMemberException">The field that this control is bound to is not a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyField" /> object.</exception>
+        <exception cref="T:System.ArgumentException">The current control is bound to a multivalue <b>TaxonomyField</b>, it uses a <b>TaxonomyFieldValue</b> object, or the control is bound to a single value <b>TaxonomyField</b> and uses a <see cref="T:Microsoft.SharePoint.Taxonomy.TaxonomyFieldValueCollection" /> object.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

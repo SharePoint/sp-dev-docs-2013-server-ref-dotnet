@@ -1,0 +1,851 @@
+﻿<Type Name="IWebCloudService" FullName="Microsoft.Web.Hosting.Administration.IWebCloudService">
+  <TypeSignature Language="C#" Value="public interface IWebCloudService" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IWebCloudService" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Web.Hosting.Administration.IWebCloudService" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IWebCloudService" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IWebCloudService" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.ServiceModel.ServiceContract</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CheckSiteExists">
+      <MemberSignature Language="C#" Value="public bool CheckSiteExists (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool CheckSiteExists(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.CheckSiteExists(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CheckSiteExists (subscriptionName As String, webspaceName As String, name As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool CheckSiteExists(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Checks site exists.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}?exists")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateDevSite">
+      <MemberSignature Language="C#" Value="public void CreateDevSite (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CreateDevSite(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.CreateDevSite(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub CreateDevSite (subscriptionName As String, webspaceName As String, name As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void CreateDevSite(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Creates a development site in a site's repository")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="POST", UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/repository/dev")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateSite">
+      <MemberSignature Language="C#" Value="public Microsoft.Web.Hosting.Administration.Site CreateSite (string subscriptionName, string webspaceName, Microsoft.Web.Hosting.Administration.Site site);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Web.Hosting.Administration.Site CreateSite(string subscriptionName, string webspaceName, class Microsoft.Web.Hosting.Administration.Site site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.CreateSite(System.String,System.String,Microsoft.Web.Hosting.Administration.Site)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Web::Hosting::Administration::Site ^ CreateSite(System::String ^ subscriptionName, System::String ^ webspaceName, Microsoft::Web::Hosting::Administration::Site ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Adds a new site")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="POST", UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Web.Hosting.Administration.Site</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="site" Type="Microsoft.Web.Hosting.Administration.Site" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="site">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateSiteRepository">
+      <MemberSignature Language="C#" Value="public void CreateSiteRepository (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CreateSiteRepository(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.CreateSiteRepository(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub CreateSiteRepository (subscriptionName As String, webspaceName As String, name As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void CreateSiteRepository(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Creates a repository for a site")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="POST", UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/repository")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteDevSite">
+      <MemberSignature Language="C#" Value="public void DeleteDevSite (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DeleteDevSite(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.DeleteDevSite(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteDevSite (subscriptionName As String, webspaceName As String, name As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteDevSite(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Deletes a development site in a site's repository")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="DELETE", UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/repository/dev")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteSite">
+      <MemberSignature Language="C#" Value="public void DeleteSite (string subscriptionName, string webspaceName, string name, string deleteMetrics);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DeleteSite(string subscriptionName, string webspaceName, string name, string deleteMetrics) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.DeleteSite(System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteSite (subscriptionName As String, webspaceName As String, name As String, deleteMetrics As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteSite(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name, System::String ^ deleteMetrics);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Deletes an existing site.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="DELETE", UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}?deleteMetrics={deleteMetrics}")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="deleteMetrics" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <param name="deleteMetrics">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteSiteRepository">
+      <MemberSignature Language="C#" Value="public void DeleteSiteRepository (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DeleteSiteRepository(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.DeleteSiteRepository(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub DeleteSiteRepository (subscriptionName As String, webspaceName As String, name As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteSiteRepository(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Deletes a site's repository")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="DELETE", UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/repository")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAuditLogs">
+      <MemberSignature Language="C#" Value="public Microsoft.Web.Hosting.Administration.AuditLogs GetAuditLogs (string subscriptionName, string webspaceName, string name, string startTime, string endTime);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Web.Hosting.Administration.AuditLogs GetAuditLogs(string subscriptionName, string webspaceName, string name, string startTime, string endTime) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetAuditLogs(System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetAuditLogs (subscriptionName As String, webspaceName As String, name As String, startTime As String, endTime As String) As AuditLogs" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Web::Hosting::Administration::AuditLogs ^ GetAuditLogs(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name, System::String ^ startTime, System::String ^ endTime);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Returns the audit logs for a particular site.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/auditlogs?startTime={startTime}&amp;endTime={endTime}")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Web.Hosting.Administration.AuditLogs</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="startTime" Type="System.String" />
+        <Parameter Name="endTime" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <param name="startTime">To be added.</param>
+        <param name="endTime">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDevSite">
+      <MemberSignature Language="C#" Value="public Microsoft.Web.Hosting.Administration.SiteRepositoryDev GetDevSite (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Web.Hosting.Administration.SiteRepositoryDev GetDevSite(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetDevSite(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetDevSite (subscriptionName As String, webspaceName As String, name As String) As SiteRepositoryDev" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Web::Hosting::Administration::SiteRepositoryDev ^ GetDevSite(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Gets a development site in a site's repository")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/repository/dev")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Web.Hosting.Administration.SiteRepositoryDev</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetLastAuditLog">
+      <MemberSignature Language="C#" Value="public Microsoft.Web.Hosting.Administration.AuditLog GetLastAuditLog (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Web.Hosting.Administration.AuditLog GetLastAuditLog(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetLastAuditLog(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetLastAuditLog (subscriptionName As String, webspaceName As String, name As String) As AuditLog" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Web::Hosting::Administration::AuditLog ^ GetLastAuditLog(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Returns the last audit log for a particular site, if exists.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/lastauditlog")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Web.Hosting.Administration.AuditLog</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMetrics">
+      <MemberSignature Language="C#" Value="public Microsoft.Web.Hosting.Administration.MetricSets GetMetrics (string subscriptionName, string webspaceName, string name, string metrics, string startTime, string endTime);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Web.Hosting.Administration.MetricSets GetMetrics(string subscriptionName, string webspaceName, string name, string metrics, string startTime, string endTime) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetMetrics(System.String,System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetMetrics (subscriptionName As String, webspaceName As String, name As String, metrics As String, startTime As String, endTime As String) As MetricSets" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Web::Hosting::Administration::MetricSets ^ GetMetrics(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name, System::String ^ metrics, System::String ^ startTime, System::String ^ endTime);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Returns the usage metrics for a particular site.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/metrics?names={metrics}&amp;startTime={startTime}&amp;endTime={endTime}")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Web.Hosting.Administration.MetricSets</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="metrics" Type="System.String" />
+        <Parameter Name="startTime" Type="System.String" />
+        <Parameter Name="endTime" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <param name="metrics">To be added.</param>
+        <param name="startTime">To be added.</param>
+        <param name="endTime">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPublishingProfileXml">
+      <MemberSignature Language="C#" Value="public System.Xml.XmlElement GetPublishingProfileXml (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Xml.XmlElement GetPublishingProfileXml(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetPublishingProfileXml(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetPublishingProfileXml (subscriptionName As String, webspaceName As String, name As String) As XmlElement" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Xml::XmlElement ^ GetPublishingProfileXml(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Returns the publishing profile xml for a particular site.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/publishxml")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Xml.XmlElement</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSite">
+      <MemberSignature Language="C#" Value="public Microsoft.Web.Hosting.Administration.Site GetSite (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Web.Hosting.Administration.Site GetSite(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetSite(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSite (subscriptionName As String, webspaceName As String, name As String) As Site" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Web::Hosting::Administration::Site ^ GetSite(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Returns the details of a particular site.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Web.Hosting.Administration.Site</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteConfig">
+      <MemberSignature Language="C#" Value="public Microsoft.Web.Hosting.Administration.SiteConfig GetSiteConfig (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Web.Hosting.Administration.SiteConfig GetSiteConfig(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetSiteConfig(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteConfig (subscriptionName As String, webspaceName As String, name As String) As SiteConfig" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Web::Hosting::Administration::SiteConfig ^ GetSiteConfig(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Gets site's configuration settings")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/config")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Web.Hosting.Administration.SiteConfig</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteRepositoryUri">
+      <MemberSignature Language="C#" Value="public Uri GetSiteRepositoryUri (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Uri GetSiteRepositoryUri(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetSiteRepositoryUri(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteRepositoryUri (subscriptionName As String, webspaceName As String, name As String) As Uri" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Uri ^ GetSiteRepositoryUri(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Gets a site's repository URI")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/repository")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSites">
+      <MemberSignature Language="C#" Value="public Microsoft.Web.Hosting.Administration.Sites GetSites (string subscriptionName, string webspaceName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Web.Hosting.Administration.Sites GetSites(string subscriptionName, string webspaceName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetSites(System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSites (subscriptionName As String, webspaceName As String) As Sites" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Web::Hosting::Administration::Sites ^ GetSites(System::String ^ subscriptionName, System::String ^ webspaceName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Returns all the sites for a given subscription and webspace.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Web.Hosting.Administration.Sites</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSitesPerSubscription">
+      <MemberSignature Language="C#" Value="public Microsoft.Web.Hosting.Administration.Sites GetSitesPerSubscription (string subscriptionName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Web.Hosting.Administration.Sites GetSitesPerSubscription(string subscriptionName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetSitesPerSubscription(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSitesPerSubscription (subscriptionName As String) As Sites" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Web::Hosting::Administration::Sites ^ GetSitesPerSubscription(System::String ^ subscriptionName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Returns all the sites for a given subscription.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/sites")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Web.Hosting.Administration.Sites</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetUsages">
+      <MemberSignature Language="C#" Value="public Microsoft.Web.Hosting.Administration.Usages GetUsages (string subscriptionName, string webspaceName, string name);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.Web.Hosting.Administration.Usages GetUsages(string subscriptionName, string webspaceName, string name) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.GetUsages(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetUsages (subscriptionName As String, webspaceName As String, name As String) As Usages" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Web::Hosting::Administration::Usages ^ GetUsages(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Returns the quota usage for a particular site.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebGet(UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/usages")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.Web.Hosting.Administration.Usages</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsHostNameAvailable">
+      <MemberSignature Language="C#" Value="public bool IsHostNameAvailable (string subDomain);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsHostNameAvailable(string subDomain) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.IsHostNameAvailable(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsHostNameAvailable (subDomain As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsHostNameAvailable(System::String ^ subDomain);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Checks whether the hostname is available.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="GET", UriTemplate="ishostnameavailable/{subDomain}")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subDomain" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subDomain">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SwapSite">
+      <MemberSignature Language="C#" Value="public void SwapSite (string subscriptionName, string webspaceName, string name, string command, string otherSiteName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SwapSite(string subscriptionName, string webspaceName, string name, string command, string otherSiteName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.SwapSite(System.String,System.String,System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SwapSite (subscriptionName As String, webspaceName As String, name As String, command As String, otherSiteName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SwapSite(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name, System::String ^ command, System::String ^ otherSiteName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Swaps traffic of an existing site with another site.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="POST", UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}?Command={command}&amp;OtherSiteName={otherSiteName}")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="command" Type="System.String" />
+        <Parameter Name="otherSiteName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <param name="command">To be added.</param>
+        <param name="otherSiteName">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateDevSite">
+      <MemberSignature Language="C#" Value="public void UpdateDevSite (string subscriptionName, string webspaceName, string name, Microsoft.Web.Hosting.Administration.SiteRepositoryDev repositoryDevSite);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void UpdateDevSite(string subscriptionName, string webspaceName, string name, class Microsoft.Web.Hosting.Administration.SiteRepositoryDev repositoryDevSite) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.UpdateDevSite(System.String,System.String,System.String,Microsoft.Web.Hosting.Administration.SiteRepositoryDev)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub UpdateDevSite (subscriptionName As String, webspaceName As String, name As String, repositoryDevSite As SiteRepositoryDev)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void UpdateDevSite(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name, Microsoft::Web::Hosting::Administration::SiteRepositoryDev ^ repositoryDevSite);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Updates a development site in a site's repository")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="PUT", UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/repository/dev")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="repositoryDevSite" Type="Microsoft.Web.Hosting.Administration.SiteRepositoryDev" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <param name="repositoryDevSite">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateSite">
+      <MemberSignature Language="C#" Value="public void UpdateSite (string subscriptionName, string webspaceName, string name, Microsoft.Web.Hosting.Administration.Site site);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void UpdateSite(string subscriptionName, string webspaceName, string name, class Microsoft.Web.Hosting.Administration.Site site) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.UpdateSite(System.String,System.String,System.String,Microsoft.Web.Hosting.Administration.Site)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void UpdateSite(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name, Microsoft::Web::Hosting::Administration::Site ^ site);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Updates an existing site")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="PUT", UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="site" Type="Microsoft.Web.Hosting.Administration.Site" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <param name="site">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateSiteConfig">
+      <MemberSignature Language="C#" Value="public void UpdateSiteConfig (string subscriptionName, string webspaceName, string name, Microsoft.Web.Hosting.Administration.SiteConfig siteConfig);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void UpdateSiteConfig(string subscriptionName, string webspaceName, string name, class Microsoft.Web.Hosting.Administration.SiteConfig siteConfig) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Web.Hosting.Administration.IWebCloudService.UpdateSiteConfig(System.String,System.String,System.String,Microsoft.Web.Hosting.Administration.SiteConfig)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void UpdateSiteConfig(System::String ^ subscriptionName, System::String ^ webspaceName, System::String ^ name, Microsoft::Web::Hosting::Administration::SiteConfig ^ siteConfig);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Description("Updates site's configuration settings")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="PUT", UriTemplate="subscriptions/{subscriptionName}/webspaces/{webspaceName}/sites/{name}/config")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="subscriptionName" Type="System.String" />
+        <Parameter Name="webspaceName" Type="System.String" />
+        <Parameter Name="name" Type="System.String" />
+        <Parameter Name="siteConfig" Type="Microsoft.Web.Hosting.Administration.SiteConfig" />
+      </Parameters>
+      <Docs>
+        <param name="subscriptionName">To be added.</param>
+        <param name="webspaceName">To be added.</param>
+        <param name="name">To be added.</param>
+        <param name="siteConfig">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,526 @@
+﻿<Type Name="Audience" FullName="Microsoft.Office.Server.Audience.Audience">
+  <TypeSignature Language="C#" Value="public class Audience" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Audience extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.Audience.Audience" />
+  <TypeSignature Language="VB.NET" Value="Public Class Audience" />
+  <TypeSignature Language="C++ CLI" Value="public ref class Audience" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents an audience on a SharePoint site. </summary>
+    <remarks>
+      <para>Audiences are groups of users determined by their memberships in Microsoft Exchange distribution lists (DL) or SharePoint groups, or by rules configured by a portal administrator. For example, you can set up new employees, executives, salespeople, or people from a specified city as audiences. You can base the audience rules on information in the user profile, on membership in an Active Directory directory service security group or an Exchange distribution list, or on the organization's reporting structure (if this information is kept in Active Directory).</para>
+      <para>Audiences allow organizations to target content to users based on their job or task, as defined by their membership in a SharePoint group or distribution list, by the organizational reporting structure, or by the public properties in their user profiles. </para>
+      <para>You can target based on audience, SharePoint groups, and DL memberships. In addition, you can target the list-item level, rather than just the list level.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>This code example shows how to create a rules-based audience to which you can target content. </para>
+      <para>
+        <b>Note</b>: The audience is only created here; it is not compiled, and rules have not been added. You can add rules by using the user interface or the object model, and then compile the audience by using the user interface. Compiling audiences is not supported in the object model. </para>
+      <para>Replace servername and other strings with actual values before running the code example. Also add the following references in your Visual Studio project:</para>
+      <list type="bullet">
+        <item>
+          <description>Microsoft.Office.Server</description>
+        </item>
+        <item>
+          <description>Microsoft.SharePoint</description>
+        </item>
+        <item>
+          <description>System.Web</description>
+        </item>
+      </list>
+      <code>using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.SharePoint.Administration;
+using Microsoft.Office.Server.Audience;
+using Microsoft.SharePoint;
+using Microsoft.Office.Server;
+using System.Web;
+
+namespace AudienceConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                using (SPSite site = new SPSite("http://&lt;span class="placeholder"&gt;servername&lt;/span&gt;"))
+                {
+                    ServerContext context = ServerContext.GetContext(site);
+                    AudienceManager audManager = new AudienceManager(context);
+
+                    AudienceCollection ac = audManager.Audiences;
+                    Audience a = null;
+                    string sAudName = "Customer Connection";
+                    string sDescription = "Members of the Customer Connection v-team";
+
+                    try
+                    {
+                        a = ac.Create(sAudName, sDescription);
+                    }
+                    catch (AudienceDuplicateNameException e)
+                    {
+                        //Add your exception handling code here.
+                    }
+                    catch (AudienceException e1)
+                    {
+                        //Add your exception handling code here.
+                    }
+                }
+
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString());
+                Console.Read();
+            }
+
+        }
+    }
+}</code>
+      <code>Imports System
+Imports System.Collections.Generic
+Imports System.Text
+Imports Microsoft.SharePoint.Administration
+Imports Microsoft.Office.Server.Audience
+Imports Microsoft.SharePoint
+Imports Microsoft.Office.Server
+Imports System.Web
+
+Namespace AudienceConsoleApp
+    Module Program
+        Sub Main(ByVal args() As String)
+            Try
+                Using site As New SPSite("http://servername")
+                    Dim context As ServerContext = ServerContext.GetContext(site)
+                    Dim audManager As New AudienceManager(context)
+
+                    Dim ac As AudienceCollection = audManager.Audiences
+                    Dim a As Audience = Nothing
+                    Dim sAudName As String = "Customer Connection"
+                    Dim sDescription As String = "Members of the Customer Connection v-team"
+
+                    Try
+                        a = ac.Create(sAudName, sDescription)
+                    Catch e As AudienceDuplicateNameException
+                        'Add your exception handling code here.
+                    Catch e1 As AudienceException
+                        'Add your exception handling code here.
+                    End Try
+                End Using
+
+            Catch exception As Exception
+                Console.WriteLine(exception.ToString())
+                Console.Read()
+            End Try
+
+        End Sub
+    End Module
+End Namespace</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="AudienceDescription">
+      <MemberSignature Language="C#" Value="public string AudienceDescription { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AudienceDescription" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.AudienceDescription" />
+      <MemberSignature Language="VB.NET" Value="Public Property AudienceDescription As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AudienceDescription { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the description for this audience.</summary>
+        <value>A string containing a description for this audience.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AudienceID">
+      <MemberSignature Language="C#" Value="public Guid AudienceID { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid AudienceID" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.AudienceID" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AudienceID As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid AudienceID { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the GUID for this audience.</summary>
+        <value>An object that represents the GUID for this audience.</value>
+        <remarks>
+          <para>The <b>AudienceID</b> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AudienceName">
+      <MemberSignature Language="C#" Value="public string AudienceName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AudienceName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.AudienceName" />
+      <MemberSignature Language="VB.NET" Value="Public Property AudienceName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AudienceName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of this audience.</summary>
+        <value>A <b>string</b> that represents the name of this audience.</value>
+        <remarks>
+          <para>The <b>AudienceName</b> property is read/write.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AudienceRules">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList AudienceRules { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ArrayList AudienceRules" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.AudienceRules" />
+      <MemberSignature Language="VB.NET" Value="Public Property AudienceRules As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::ArrayList ^ AudienceRules { System::Collections::ArrayList ^ get(); void set(System::Collections::ArrayList ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets an array of <see cref="T:Microsoft.Office.Server.Audience.AudienceRuleComponent" /> objects that represents rules that define this audience.</summary>
+        <value>An <b>ArrayList</b> object that contains a list of rules that define this audience. Each item in the list contains the rule operand, operator, and value.</value>
+        <remarks>
+          <para>If a user adds an audience rule by calling <b>Audience.AudienceRules.Add</b> directly, and then calls the <see cref="M:Microsoft.Office.Server.Audience.Audience.Commit" /> method of the <see cref="T:Microsoft.Office.Server.Audience.Audience" /> class, the new rule is not saved. The <b>AudienceRules</b> property must be set before calling the <see cref="M:Microsoft.Office.Server.Audience.Audience.Commit" /> method. To avoid this problem, create a new <b>ArrayList</b> of rules and set <b>Audience.AudienceRules = newArrayListOfRules</b>. Setting the <b>AudienceRules</b> property in this way sets an internal flag that indicates to the <see cref="M:Microsoft.Office.Server.Audience.Audience.Commit" /> method that the rule has changed since the last call to <see cref="M:Microsoft.Office.Server.Audience.Audience.Commit" />. If you call <b>Audience.AudienceRules.Add</b> directly, this internal flag is never set and <see cref="M:Microsoft.Office.Server.Audience.Audience.Commit" /> does not save any changes. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AudienceSite">
+      <MemberSignature Language="C#" Value="public string AudienceSite { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AudienceSite" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.AudienceSite" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AudienceSite As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AudienceSite { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("AudienceSite property is obsolete")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the URL for the portal site associated with this audience.</summary>
+        <value>A <b>string</b> that represents the site URL for this audience.</value>
+        <remarks>
+          <para>The <b>AudienceSite</b> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Commit">
+      <MemberSignature Language="C#" Value="public void Commit ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Commit() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.Audience.Commit" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Commit ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Commit();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Saves all changes to audience data in the database, such as updated name, description, and operator list.</summary>
+        <remarks>
+          <para>You must set the <see cref="P:Microsoft.Office.Server.Audience.Audience.AudienceRules" /> property before calling the <see cref="M:Microsoft.Office.Server.Audience.Audience.Commit" /> method. Setting <see cref="P:Microsoft.Office.Server.Audience.Audience.AudienceRules" /> indicates that the rule has changed since the last commit.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTime">
+      <MemberSignature Language="C#" Value="public DateTime CreateTime { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime CreateTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.CreateTime" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CreateTime As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime CreateTime { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the date when this audience was created.</summary>
+        <value>A value that represents when the audience was created.</value>
+        <remarks>
+          <para>The <b>CreateTime</b> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMembership">
+      <MemberSignature Language="C#" Value="public System.Collections.ArrayList GetMembership ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.ArrayList GetMembership() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.Audience.GetMembership" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetMembership () As ArrayList" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ArrayList ^ GetMembership();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ArrayList</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets an <b>ArrayList</b> of <see cref="T:Microsoft.Office.Server.Audience.UserInfo" /> objects that contains membership information for this audience.</summary>
+        <returns>An object that represents the list of <see cref="T:Microsoft.Office.Server.Audience.UserInfo" /> objects that contain membership information.</returns>
+        <remarks>
+          <para>The <see cref="M:Microsoft.Office.Server.Audience.Audience.GetMembership" /> method may also throw an <see cref="T:Microsoft.Office.Server.Audience.AudienceExecutionException" /> exception containing Microsoft SQL Server errors, if a database error occurs during data retrieval.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GroupOperation">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.Server.Audience.AudienceGroupOperation GroupOperation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Office.Server.Audience.AudienceGroupOperation GroupOperation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.GroupOperation" />
+      <MemberSignature Language="VB.NET" Value="Public Property GroupOperation As AudienceGroupOperation" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::Server::Audience::AudienceGroupOperation GroupOperation { Microsoft::Office::Server::Audience::AudienceGroupOperation get(); void set(Microsoft::Office::Server::Audience::AudienceGroupOperation value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.Server.Audience.AudienceGroupOperation</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a member of the <see cref="T:Microsoft.Office.Server.Audience.AudienceGroupOperation" /> enumeration that indicates the group operation that applies to this audience.</summary>
+        <value>An enumeration that indicates the group operation that applies to this audience.</value>
+        <remarks>
+          <para>The <b>GroupOperation</b> property is read/write.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsMember">
+      <MemberSignature Language="C#" Value="public bool IsMember (string AccountNameOrg);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsMember(string AccountNameOrg) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.Audience.IsMember(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsMember (AccountNameOrg As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsMember(System::String ^ AccountNameOrg);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="AccountNameOrg" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="AccountNameOrg">The account name of the user.</param>
+        <summary>Determines whether a user is a member of this audience.</summary>
+        <returns>
+          <b>true</b> if the user is a member; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastCompilation">
+      <MemberSignature Language="C#" Value="public DateTime LastCompilation { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime LastCompilation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.LastCompilation" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastCompilation As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime LastCompilation { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the date when the rules for this audience were last compiled.</summary>
+        <value>A value that represents the date when rules for this audience were last compiled.</value>
+        <remarks>
+          <para>The <b>LastCompilation</b> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastError">
+      <MemberSignature Language="C#" Value="public string LastError { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string LastError" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.LastError" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastError As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LastError { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets last error message that occurred during rule compilation.</summary>
+        <value>A <b>string</b> that represents the last error message that occurred during rule compilation.</value>
+        <remarks>
+          <para>The <b>LastError</b> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastPropertyUpdate">
+      <MemberSignature Language="C#" Value="public DateTime LastPropertyUpdate { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime LastPropertyUpdate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.LastPropertyUpdate" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastPropertyUpdate As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime LastPropertyUpdate { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the date when the audience properties were last changed.</summary>
+        <value>A value representing when the audience properties were last changed.</value>
+        <remarks>
+          <para>The <b>LastPropertyUpdate</b> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastRuleUpdate">
+      <MemberSignature Language="C#" Value="public DateTime LastRuleUpdate { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime LastRuleUpdate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.LastRuleUpdate" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastRuleUpdate As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime LastRuleUpdate { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the date when the rules for this audience were last updated.</summary>
+        <value>A value that represents the date when the rules for this audience were last updated.</value>
+        <remarks>
+          <para>The <b>LastRuleUpate</b> property is read-only.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MemberShipCount">
+      <MemberSignature Language="C#" Value="public int MemberShipCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MemberShipCount" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.MemberShipCount" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property MemberShipCount As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MemberShipCount { int get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the membership count for this audience.</summary>
+        <value>A 32-bit integer that contains the membership count for this audience.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OwnerAccountName">
+      <MemberSignature Language="C#" Value="public string OwnerAccountName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string OwnerAccountName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.Audience.Audience.OwnerAccountName" />
+      <MemberSignature Language="VB.NET" Value="Public Property OwnerAccountName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ OwnerAccountName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the owner account name for this audience.</summary>
+        <value>A <b>string</b> that represents the owner account name for this audience.</value>
+        <remarks>
+          <para>The <b>OwnerAccountName</b> property is read/write.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReloadMembership">
+      <MemberSignature Language="C#" Value="public void ReloadMembership ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ReloadMembership() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.Audience.Audience.ReloadMembership" />
+      <MemberSignature Language="VB.NET" Value="Public Sub ReloadMembership ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void ReloadMembership();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Causes the server to reload the membership information for this audience.</summary>
+        <remarks>
+          <para>The <see cref="M:Microsoft.Office.Server.Audience.Audience.ReloadMembership" /> method triggers the <see cref="M:Microsoft.Office.Server.Audience.Audience.GetMembership" /> method to reload membership data instead of returned cached data.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,54 @@
+﻿<Type Name="IWebPartVariationUpdate" FullName="Microsoft.SharePoint.Publishing.IWebPartVariationUpdate">
+  <TypeSignature Language="C#" Value="public interface IWebPartVariationUpdate" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IWebPartVariationUpdate" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.IWebPartVariationUpdate" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IWebPartVariationUpdate" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IWebPartVariationUpdate" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>An interface that is implemented by using Web Parts. Use this interface when you need to update properties for a Web Part control that is copied to a Variation site.</summary>
+    <remarks>
+      <para>A Web Part control that is included in a Variation page may inherit certain Variation-specific properties from the source page, such as the URL of the root site from which to take content. When a Variation page is created from a source page that includes such a Web Part, the Web Part retains the property values of the Variation page unless they are explicitly changed.</para>
+      <para>In a Variation scenario, it is common to change a Web Part's URL so that it points to another locale. For example, when you create a Variation page, you may want the Web Part URL to point to http://server/FR/ instead of http://server/EN/.</para>
+      <para>To do this, use the <b>IWebPartVariationUpdate</b> interface, which calls the <see cref="M:Microsoft.SharePoint.Publishing.IWebPartVariationUpdate.Update(Microsoft.SharePoint.Publishing.PublishingWeb)" /> method and updates the Web Part's URL.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update (Microsoft.SharePoint.Publishing.PublishingWeb ownerWeb);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Update(class Microsoft.SharePoint.Publishing.PublishingWeb ownerWeb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.IWebPartVariationUpdate.Update(Microsoft.SharePoint.Publishing.PublishingWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update (ownerWeb As PublishingWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update(Microsoft::SharePoint::Publishing::PublishingWeb ^ ownerWeb);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ownerWeb" Type="Microsoft.SharePoint.Publishing.PublishingWeb" />
+      </Parameters>
+      <Docs>
+        <param name="ownerWeb">Owner of the <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /></param>
+        <summary>Updates any properties within a Web Part control that are dependent on the location of the page in the server hierarchy.</summary>
+        <remarks>To be added.</remarks>
+        <example>
+          <code>String oldAnchor = this.WebAnchorLocation;
+//"this" is a Web Part class
+this.WebAnchorLocation = ownerWeb.GetVariationUrlFromSourceUrl(oldAnchor);</code>
+          <code>Dim oldAnchor As String = Me.WebAnchorLocation
+'"this" is a Web Part class
+Me.WebAnchorLocation = ownerWeb.GetVariationUrlFromSourceUrl(oldAnchor)</code>
+        </example>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

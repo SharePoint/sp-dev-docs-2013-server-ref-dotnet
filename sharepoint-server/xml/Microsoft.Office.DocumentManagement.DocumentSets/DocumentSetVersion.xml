@@ -1,0 +1,605 @@
+﻿<Type Name="DocumentSetVersion" FullName="Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion">
+  <TypeSignature Language="C#" Value="public class DocumentSetVersion" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DocumentSetVersion extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion" />
+  <TypeSignature Language="VB.NET" Value="Public Class DocumentSetVersion" />
+  <TypeSignature Language="C++ CLI" Value="public ref class DocumentSetVersion" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents metadata that is associated with a major or minor version of the <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> object and its files.</summary>
+    <remarks>
+      <para>A DocumentSetVersion stores two main snapshot aspects for the document set at the time of capture: the set of metadata fields and corresponding values, and the list of versions for the items in the <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> object.</para>
+      <para>For the fields, only those belonging to the content type of a <b>DocumentSet</b> are captured. Hidden or read-only fields are not captured. The following types in a <see cref="T:Microsoft.SharePoint.SPFieldType" /> enumeration are not captured: Attachments, Calculated, Computed, and PageSeparator.</para>
+      <para>As for the items, a <b>DocumentSetVersion</b> object is a snapshot because only the version labels for the items are stored. When restoring a <b>DocumentSet</b> to the specified <b>DocumentSetVersion</b>, the system uses the item’s underlying <see cref="T:Microsoft.SharePoint.SPListItemVersionCollection" /> object to retrieve the version. So, if the item or the <b>SPListItemVersion</b> that corresponds to the stored label was deleted, the current item will not be restored.</para>
+      <para>
+        <see cref="DocumentSetVersion" /> objects must be retrieved from a <see cref="DocumentSetVersionCollection" /> object.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.Collections;
+using System.Collections.Generic;
+
+using Microsoft.SharePoint;
+using Microsoft.Office.DocumentManagement.DocumentSets;
+
+// Required project references: 
+//  * Microsoft.Sharepoint
+//  * Microsoft.Office.DocumentManagement
+// Assumptions:
+//  - SPSite exists on site specified by siteUrl
+//  - SPDocumentLibrary exists on the above site with title specified by listName
+//  - Aformentioned library has document set content type enable with the name specified by docSetContentTypeName
+//  - There is at least one document set in the specified library
+//  - There are at least a few documents in the aformentioned document set
+//  - User running the code has contributor permisisons, specifically SPBasePermissions.EditListItems permissions.
+namespace Microsoft.SDK.Office.DocumentManagement.DocumentSet.Samples
+{
+    /// &amp;lt;summary&amp;gt;
+    /// This class provides code samples that demonstrate use of
+    /// DocumentSetVersion and DocumentSetVersionCollection classes.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;remarks&amp;gt;
+    /// In Main function, uncomment:
+    /// - DocumentSetVersionSample to run the sample for DocumentSetVersion
+    /// - DocumentSetVersionCollectionSample to run the sample for DocumentSetVersionCollectionSample
+    /// &amp;lt;/remarks&amp;gt;
+    class Program
+    {
+        const string siteUrl = "http://localhost";
+        const string listName = "Shared Documents";
+        const string docSetContentTypeName = "Document Set";
+
+        static void Main(string[] args)
+        {
+            //DocumentSetVersionSample();
+            DocumentSetVersionCollectionSample();
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// The following code sample covers retrieving an instance
+        /// of DocumentSetVersion as well as common operations:
+        /// - accessing common properties
+        /// - displaying its metadata
+        /// - displaying its items
+        /// - deleting the instance from the collection
+        /// &amp;lt;/summary&amp;gt;
+        static void DocumentSetVersionSample()
+        {
+            using (SPSite site = new SPSite(siteUrl))
+            {
+                using (SPWeb web = site.RootWeb)
+                {
+                    SPList list = web.Lists[listName];
+                    EnsureVersioningOnList(list);
+                    SPContentType docsetCT = list.ContentTypes[docSetContentTypeName];
+                    // Find and perform sample actions on the first available Document Set
+                    foreach (SPFolder subFolder in list.RootFolder.SubFolders)
+                    {
+                        if (subFolder.Item != null &amp;amp;&amp;amp; subFolder.Item.ContentType.Id == docsetCT.Id)
+                        {
+                            Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet docSet = 
+                                Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet.GetDocumentSet(subFolder);
+                            try
+                            {
+                                DocumentSetVersionCollection snapshots = docSet.VersionCollection;
+                                // We need at least one snapshot to work with the sample
+                                if (docSet.VersionCollection.Count == 0)
+                                {
+                                    Console.WriteLine("Capturing a sample Document Set version snapshot...\n");
+                                    docSet.VersionCollection.Add(true, "A version for DocumentSetVersion API code sample.");
+                                }
+
+                                DocumentSetVersion snapshot = docSet.VersionCollection[0];
+                                // The following example demonstrates the use of common properties
+                                Console.WriteLine("Snapshot version {0} was captured by {1} on {2}.",
+                                    snapshot.VersionLabel,
+                                    snapshot.CreatedBy,
+                                    snapshot.Created);
+                                Console.WriteLine("It captured latest checked-in {0} versions.",
+                                    snapshot.IsLastMajor ? "major" : "minor or major");
+                                if (!string.IsNullOrEmpty(snapshot.Comments))
+                                {
+                                    Console.WriteLine("Captured with the comment: {0}.", snapshot.Comments);
+                                }
+
+                                // The following example displays the metadata fields for the
+                                // snapshot. Only fields that are still defined in the document
+                                // set are output:
+                                Console.WriteLine();
+                                Console.WriteLine("Metadata field(s) for snapshot version {0}:", snapshot.VersionLabel);
+                                foreach (DocumentSetVersionField field in snapshot.GetDisplayFields())
+                                {
+                                    if (field.IsFieldFound)
+                                    {
+                                        Console.WriteLine("Field \"{0}\" had value \"{1}\".", field.Title, field.Value);
+                                    }
+                                }
+
+                                // The following example displays the item versions captured in the
+                                // snapshot. The information displayed contains the item name
+                                // without extension and version captured. The URL to the item's
+                                // latest version is also provided:
+                                Console.WriteLine();
+                                Console.WriteLine("Item(s) captured in this version:");
+                                foreach (DocumentSetVersionItem item in snapshot.GetDisplayContents())
+                                {
+                                    if (item.IsItemFound)
+                                    {
+                                        System.Console.Write("Item \"{0}\" was at version \"{1}\". ", item.Title, item.VersionLabel);
+                                        System.Console.WriteLine("The latest version of the item is at {0}", item.ItemUrl);
+                                    }
+                                }
+
+                                // The following example deletes the snapshot from the collection,
+                                // if it exists:
+                                Console.WriteLine();
+                                Console.WriteLine("There {0} {1} snapshot{2} before deleting the above. Deleting...",
+                                    snapshots.Count == 1 ? "is" : "are",
+                                    snapshots.Count,
+                                    snapshots.Count == 1 ? "" : "s");
+                                snapshot.Delete();
+                                Console.WriteLine("After deletion, there {0} {1} snapshot{2} left.",
+                                    snapshots.Count == 1 ? "is" : "are",
+                                    snapshots.Count,
+                                    snapshots.Count == 1 ? "" : "s");
+                            }
+                            catch (InvalidOperationException ioe)
+                            {
+                                Console.WriteLine("Unable to perfrom the action because: {0}", ioe.ToString());
+                            }
+                            catch (ArgumentException ae) // Also catches subset of ArgumentOutOfRangeException
+                            {
+                                Console.WriteLine("Unable to perfrom the action because: {0}", ae.ToString());
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("Unexpected error: {0}", ex.ToString());
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// The following code sample covers retrieving an instance
+        /// of DocumentSetVersionCollection as well as common operations:
+        /// - accessing common properties
+        /// - capturing a snapshot
+        /// - retrieving the latest snapshot and using indexers
+        /// - restoring Document Set metadata and items using snapshots
+        /// - using the restore point snapshot captured before restoring
+        /// - using the DocumentSetVersionCollection enumertor to list snapshots
+        /// - deleting all snapshots
+        /// &amp;lt;/summary&amp;gt;
+        public static void DocumentSetVersionCollectionSample()
+        {
+            using (SPSite site = new SPSite(siteUrl))
+            {
+               using (SPWeb web = site.RootWeb)
+               {
+                   SPList list = web.Lists[listName];
+                   EnsureVersioningOnList(list);
+                   SPContentType docsetCT = list.ContentTypes[docSetContentTypeName];
+                   foreach (SPFolder subFolder in list.RootFolder.SubFolders)
+                   {
+                       if (subFolder.Item != null &amp;amp;&amp;amp; subFolder.Item.ContentType.Id == docsetCT.Id)
+                       {
+                           Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet docSet =
+                                Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet.GetDocumentSet(subFolder);
+                           
+                           try
+                           {
+                               DocumentSetVersionCollection snapshots = docSet.VersionCollection;
+
+                               // The following example demonstrates use of Folder and List
+                               // properties of DocumentSetVersionCollection:
+                               Console.WriteLine("DocumentSet \"{0}\" found in list \"{1}\".",
+                                   snapshots.Folder.Name, snapshots.List.Title);
+
+                               // The following example demonstrates how to capture a snapshot.
+                               // Note that we can only capture major version if minor versions
+                               // are disabled:
+                               Console.WriteLine();
+                               Console.WriteLine("Capturing a sample Document Set version snapshot...");
+                               bool captureMajorOnly = !snapshots.List.EnableMinorVersions;
+                               snapshots.Add(captureMajorOnly, "A version for DocumentSetVersionCollection API code sample.");
+
+                               string docSetUrl = snapshots.Folder.Url;
+                               RefreshDocSetAndVersions(list, docSetUrl, false,
+                                    ref docSet, ref snapshots);
+
+                               // The following example demonstrates how to use the Item
+                               // and Count properties to retrieve the latest version:
+                               DocumentSetVersion latestSnapshot = snapshots[0];
+                               string originalVersionLabel = latestSnapshot.VersionLabel;
+                               Console.WriteLine("Latest snapshot version (captured above) is {0}.", 
+                                   originalVersionLabel);
+
+                               // The following example demonstrates how to use the Item
+                               // indexer via the label. It retrieves the latest snapshot:
+                               latestSnapshot = snapshots[latestSnapshot.VersionLabel];
+
+                               // The following example demonstrates how to restore document
+                               // set metadata and items:
+
+                                    // First, change the document set title:
+                               string originalDocSetTitle = docSet.Item.Title;
+                               string newDocSetTile = string.Format("Title at {0}",
+                                   DateTime.Now.ToString()); 
+                               docSet.Item["Title"] = newDocSetTile;
+                               RefreshDocSetAndVersions(list, docSetUrl, true,
+                                   ref docSet, ref snapshots);
+                               Console.WriteLine();
+                               Console.WriteLine("Changed Document Set title from \"{0}\" to \"{1}\".",
+                                   originalDocSetTitle, docSet.Item.Title);
+
+                                    // Second, restore document set to values in the original snapshot:
+                               Console.WriteLine("Now restoring documet set to version {0}. Title should become \"{1}\"...", 
+                                   originalVersionLabel,
+                                   originalDocSetTitle);
+                               Hashtable unrestoredItems = snapshots.Restore(originalVersionLabel);
+                               DisplayUnrestoredItems(unrestoredItems);
+                               RefreshDocSetAndVersions(list, docSetUrl, false,
+                                   ref docSet, ref snapshots);
+                               Console.WriteLine("Now Document Set title is \"{0}\".",
+                                   docSet.Item.Title);
+
+                               // The following example demonstrates use of enumerator (descending order) to 
+                               // show that when Restore() runs, it creates a restore point as the latest version:
+                               Console.WriteLine();
+                               Console.Write("Document Set has snapshot version(s): ");
+                               string oldestSnapshotLabel = snapshots[snapshots.Count - 1].VersionLabel;
+                               foreach (DocumentSetVersion snapshot in snapshots)
+                               {
+                                   Console.Write("{0}{1}", 
+                                       snapshot.VersionLabel,
+                                       // add separator for all but last snapshot
+                                       snapshot.VersionLabel == oldestSnapshotLabel ? ".\n" : ", ");
+                               }
+
+                               // The following example demonstrates use of restore
+                               // point to reset document set title to the new value:
+                               string restorePointVersionLabel = snapshots[0].VersionLabel;
+                               Console.WriteLine();
+                               Console.WriteLine("Restoring documet set to restore point - version {0}...",
+                                   restorePointVersionLabel);
+                               unrestoredItems.Clear();
+                               unrestoredItems = snapshots.Restore(restorePointVersionLabel);
+                               DisplayUnrestoredItems(unrestoredItems);
+                               RefreshDocSetAndVersions(list, docSetUrl, false,
+                                   ref docSet, ref snapshots);
+                               Console.WriteLine("Restored Document Set title to \"{0}\" and the expected was \"{1}\".",
+                                   docSet.Item.Title, newDocSetTile);
+
+                               // The following example demonstrates how to delete all the versions
+                               // and check whether a certain version exists in the collection:
+                               Console.WriteLine();
+                               Console.WriteLine("Deleting all snapshots...");
+                               snapshots.DeleteAll();
+                               Console.Write("There are {0} snapshots left. ", snapshots.Count);
+                               Console.WriteLine("Restore point version {0} is in the collection: {1}",
+                                   restorePointVersionLabel,
+                                   snapshots.Contains(restorePointVersionLabel));
+                           }
+                           catch (InvalidOperationException ioe)
+                           {
+                               Console.WriteLine("Unable to perfrom the action because: {0}", ioe.ToString());
+                           }
+                           catch (ArgumentException ae) // Also catches ArgumentOutOfRangeException, ArgumentNullException
+                           {
+                               Console.WriteLine("Unable to perfrom the action because: {0}", ae.ToString());
+                           }
+                           catch (KeyNotFoundException knfe)
+                           {
+                               Console.WriteLine("Unable to retrieve an item because: {0}", knfe.ToString());
+                           }
+                           catch (Exception ex)
+                           {
+                               Console.WriteLine("Unexpected error: {0}", ex.ToString());
+                           }
+                       }
+                   }
+               }
+            }
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// Ensures the list has versioning enabled.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;remarks&amp;gt;
+        /// To use DocumentSetVersionCollection, the list must have
+        /// versioning enabled.
+        /// &amp;lt;/remarks&amp;gt;
+        /// &amp;lt;param name="list"&amp;gt;
+        /// An SPList representing list where versioning must
+        /// be ensured.
+        /// &amp;lt;/param&amp;gt;
+        private static void EnsureVersioningOnList(SPList list)
+        {
+            if (!list.EnableVersioning)
+            {
+                list.EnableVersioning = true;
+                list.Update();
+                Console.WriteLine("Enabled versioning to use DocumentSetVersionCollection.");
+            }
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// Refetches the documenst set and its snapshots
+        /// from the document set at url specified by &amp;lt;paramref name="docSetUrl"/&amp;gt;
+        /// parameter in the list specified by &amp;lt;paramref name="list"/&amp;gt; parameter.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;param name="list"&amp;gt;
+        /// An SPList representing the list where the document set resides.
+        /// &amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="docSetUrl"&amp;gt;
+        /// A DocumentSet.Folder.Url string representing the folder url
+        /// of the document set.
+        /// &amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="updateDocSet"&amp;gt;
+        /// A boolean that when true calls SPListItem.Update() on the
+        /// document set before refetching; otherwise no changes before
+        /// refetching are done.
+        /// &amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="docSet"&amp;gt;
+        /// A DocumentSet which will be set after refetching the document set.
+        /// &amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="snapshots"&amp;gt;
+        /// A DocumentSetVersionCollection which will be set after 
+        /// refetching the document set.
+        /// &amp;lt;/param&amp;gt;
+        private static void RefreshDocSetAndVersions(
+            SPList list,
+            string docSetUrl,
+            bool updateDocSet,
+            ref Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet docSet, 
+            ref DocumentSetVersionCollection snapshots)
+        {
+            if (updateDocSet)
+            {
+                docSet.Item.SystemUpdate();
+            }
+            SPListItem docSetItem = list.Items[docSet.Item.UniqueId];
+            docSet = Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet.GetDocumentSet(docSetItem.Folder);
+            snapshots = docSet.VersionCollection;
+        }
+
+        /// &amp;lt;summary&amp;gt;
+        /// Displays the document set items that failed to restore
+        /// as specified by &amp;lt;paramref name="unrestoredItems"/&amp;gt;
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;param name="unrestoredItems"&amp;gt;
+        /// Result of DocumentSetVersionCollection.Restore(sting) call,
+        /// representing collection of items that failed to restore.
+        /// &amp;lt;/param&amp;gt;
+        private static void DisplayUnrestoredItems(Hashtable unrestoredItems)
+        {
+            if (unrestoredItems == null || unrestoredItems.Count == 0)
+            {
+                Console.WriteLine("All Document Set items restored successfully.");
+                return;
+            }
+
+            foreach (DictionaryEntry item in unrestoredItems)
+            {
+                Console.WriteLine("Failed to restore \"{0}\" because {1}.",
+                    item.Key, item.Value);
+            }
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="Comments">
+      <MemberSignature Language="C#" Value="public string Comments { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Comments" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion.Comments" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Comments As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Comments { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the comments for the snapshot.</summary>
+        <value>Text entered as comments when the snapshot is captured.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Created">
+      <MemberSignature Language="C#" Value="public DateTime Created { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime Created" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion.Created" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Created As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime Created { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets when the snapshot was captured.</summary>
+        <value>Returns <see cref="T:System.DateTime" />.</value>
+        <remarks>
+          <para>The date and time are in UTC format.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreatedBy">
+      <MemberSignature Language="C#" Value="public string CreatedBy { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string CreatedBy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion.CreatedBy" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CreatedBy As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ CreatedBy { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="P:Microsoft.SharePoint.SPUser.LoginName" /> of the Microsoft.SharePoint.SPUser object that captured the snapshot.</summary>
+        <value>An <see cref="P:Microsoft.SharePoint.SPUser.LoginName" /> value of that represents the user who captured the snapshot.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Delete">
+      <MemberSignature Language="C#" Value="public void Delete ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Delete() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion.Delete" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Delete ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Delete();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deletes the snapshot of the document set version (<see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion" /> object).</summary>
+        <remarks>
+          <para>Deletes the snapshot from the parent collection and invalidates the current <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion" /> object such that the properties and methods no longer hold past information.</para>
+          <para>Uses with Contributor role permissions can use this method. Specifically, these users must have <b>SPBasePermissions.EditListItems</b> permissions.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.InvalidOperationException">There is no such object in the collection. (When calling this method on a snapshot that has already been deleted.)</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDisplayContents">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionItem&gt; GetDisplayContents ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.List`1&lt;valuetype Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionItem&gt; GetDisplayContents() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion.GetDisplayContents" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetDisplayContents () As List(Of DocumentSetVersionItem)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::Generic::List&lt;Microsoft::Office::DocumentManagement::DocumentSets::DocumentSetVersionItem&gt; ^ GetDisplayContents();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionItem&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets information about the snapshot items.</summary>
+        <returns>A list of <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionItem" /> objects for every <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> object captured in the snapshot.</returns>
+        <remarks>
+          <para>Call this method to get the document set item information for subsequent output to the user. This method sets the <b>DocumentSetVersionItem.Title</b> property to the item's file name without extension. It also sets the <b>DocumentSetVersionItem.ItemUrl</b> property to the item's <b>Url</b> property. If the item that was originally captured by this snapshot has been deleted since capture, the aforementioned <b>DocumentSetVersionItem</b> properties will not be set.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDisplayFields">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionField&gt; GetDisplayFields ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.List`1&lt;valuetype Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionField&gt; GetDisplayFields() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion.GetDisplayFields" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetDisplayFields () As List(Of DocumentSetVersionField)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::Generic::List&lt;Microsoft::Office::DocumentManagement::DocumentSets::DocumentSetVersionField&gt; ^ GetDisplayFields();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.List&lt;Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionField&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the document set snapshot metadata fields with titles and values formatted to the locale.</summary>
+        <returns>A list of <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionField" /> objects for every document set metadata field captured in the snapshot as formatted to the current locale.</returns>
+        <remarks>
+          <para>Call this method to get the document set metadata for subsequent output to the user. This method formats the titles and values specifically for the current locale. If the field that was originally captured by this snapshot has been deleted since, no formatting will occur.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsLastMajor">
+      <MemberSignature Language="C#" Value="public bool IsLastMajor { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsLastMajor" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion.IsLastMajor" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsLastMajor As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsLastMajor { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets whether only the latest checked in major versions of a <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> object are captured by this snapshot.</summary>
+        <value>
+          <b>true</b> if the snapshot captured the latest checked-in major versions; <b>false</b>, when the captured versions are the latest checked in minor or major versions</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ParentCollection">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionCollection ParentCollection { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionCollection ParentCollection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion.ParentCollection" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ParentCollection As DocumentSetVersionCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::DocumentManagement::DocumentSets::DocumentSetVersionCollection ^ ParentCollection { Microsoft::Office::DocumentManagement::DocumentSets::DocumentSetVersionCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSet" /> objects to which this document set snapshot belongs.</summary>
+        <value>A <see cref="T:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersionCollection" /> object that represents the collection of document set snapshots to which this snapshot belongs.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="VersionLabel">
+      <MemberSignature Language="C#" Value="public string VersionLabel { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string VersionLabel" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.DocumentManagement.DocumentSets.DocumentSetVersion.VersionLabel" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property VersionLabel As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ VersionLabel { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the version number of the snapshot.</summary>
+        <value>A <see cref="T:System.String" /> object that contains an integer number.</value>
+        <remarks>
+          <para>The value is auto-assigned by the parent collection when snapshot is captured.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

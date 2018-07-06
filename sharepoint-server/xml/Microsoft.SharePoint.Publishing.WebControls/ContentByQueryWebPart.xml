@@ -1,0 +1,2725 @@
+﻿<Type Name="ContentByQueryWebPart" FullName="Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart">
+  <TypeSignature Language="C#" Value="public class ContentByQueryWebPart : Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart, Microsoft.SharePoint.Publishing.IWebPartVariationUpdate" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ContentByQueryWebPart extends Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart implements class Microsoft.SharePoint.Publishing.IWebPartVariationUpdate, class System.Web.UI.INamingContainer" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart" />
+  <TypeSignature Language="VB.NET" Value="Public Class ContentByQueryWebPart&#xA;Inherits CmsDataFormWebPart&#xA;Implements IWebPartVariationUpdate" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ContentByQueryWebPart : Microsoft::SharePoint::Publishing::WebControls::CmsDataFormWebPart, Microsoft::SharePoint::Publishing::IWebPartVariationUpdate" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.SharePoint.Publishing.IWebPartVariationUpdate</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.CLSCompliant(false)</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Xml.Serialization.XmlRoot(Namespace="urn:schemas-microsoft-com:ContentByQueryWebPart")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>A Web Part object that is used to retrieve dynamic information.</summary>
+    <remarks>
+      <para>A <b>ContentByQueryWebPart</b> object uses the CrossListQueryCache object to retrieve data. The data retrieved is cleaned and then sent to the XSLT engine. The XSLT engine uses the defaultHeader.xsl, defaultItem.xsl, and defaultMain.xsl files to translate the data into HTML markup that is presented to the user. You can customize the HTML output of the <b>ContentByQueryWebPart</b> by using the XSL transform. The <b>DataProcessDelegate </b>allows you to retrieve data to be modified before it is sent to the XSLT engine. If the P<see cref=":Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.Data" /> property of this Web Part is specified, the data is not retrieved and the specified data is used instead. The <b>ContentByQueryWebPar</b>t object derives from the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.CmsDataFormWebPart" /> object that caches XSLT transforms.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ContentByQueryWebPart ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ContentByQueryWebPart();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a Content Query Web Part object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public ContentByQueryWebPart (string defaultMainXsl, string defaultHeaderXsl, string defaultItemXsl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string defaultMainXsl, string defaultHeaderXsl, string defaultItemXsl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.#ctor(System.String,System.String,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (defaultMainXsl As String, defaultHeaderXsl As String, defaultItemXsl As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ContentByQueryWebPart(System::String ^ defaultMainXsl, System::String ^ defaultHeaderXsl, System::String ^ defaultItemXsl);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="defaultMainXsl" Type="System.String" />
+        <Parameter Name="defaultHeaderXsl" Type="System.String" />
+        <Parameter Name="defaultItemXsl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="defaultMainXsl">Header XSL to use if <b>HeaderXslLink</b> is not specified.</param>
+        <param name="defaultHeaderXsl">Item XSL to use if <b>ItemXslLink</b> is not specified.</param>
+        <param name="defaultItemXsl">Main XSL to use if <b>MainXslLink</b> is not specified.</param>
+        <summary>Initializes a new instance of a Content Query Web Part object with default XSL.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AdditionalFilterFields">
+      <MemberSignature Language="C#" Value="public string AdditionalFilterFields { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AdditionalFilterFields" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.AdditionalFilterFields" />
+      <MemberSignature Language="VB.NET" Value="Public Property AdditionalFilterFields As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AdditionalFilterFields { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Additional filter fields to show in the tool pane.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Additional filter fields are separated by a semicolon and have one of the following formats: </para>
+          <list type="bullet">
+            <item>
+              <description>"internalName"</description>
+            </item>
+            <item>
+              <description>"internalName,DisplayName"</description>
+            </item>
+            <item>
+              <description>"Guid"</description>
+            </item>
+            <item>
+              <description>"Guid,DisplayName." </description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+        <example>
+          <para>"Tasks;Approv_Status,Manager Status."</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="AdditionalGroupAndSortFields">
+      <MemberSignature Language="C#" Value="public string AdditionalGroupAndSortFields { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AdditionalGroupAndSortFields" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.AdditionalGroupAndSortFields" />
+      <MemberSignature Language="VB.NET" Value="Public Property AdditionalGroupAndSortFields As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AdditionalGroupAndSortFields { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Additional group and sortable fields to show in the tool pane.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Additional group and sortable fields are separated by a semicolon and have one of the following formats: </para>
+          <list type="bullet">
+            <item>
+              <description>"internalName"</description>
+            </item>
+            <item>
+              <description>"internalName,DisplayName"</description>
+            </item>
+            <item>
+              <description>"Guid"</description>
+            </item>
+            <item>
+              <description>"Guid,DisplayName,"</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BaseType">
+      <MemberSignature Language="C#" Value="public string BaseType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string BaseType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.BaseType" />
+      <MemberSignature Language="VB.NET" Value="Public Property BaseType As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ BaseType { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The base type number to query for.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Represent the parent list type.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BuildCbqQueryVersionInfo">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.CbqQueryVersionInfo BuildCbqQueryVersionInfo ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.CbqQueryVersionInfo BuildCbqQueryVersionInfo() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.BuildCbqQueryVersionInfo" />
+      <MemberSignature Language="VB.NET" Value="Public Function BuildCbqQueryVersionInfo () As CbqQueryVersionInfo" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::CbqQueryVersionInfo ^ BuildCbqQueryVersionInfo();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.CbqQueryVersionInfo</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns a <see cref="T:Microsoft.SharePoint.Publishing.CbqQueryVersionInfo" /> object that is based on this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart" /> object.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CommonViewFields">
+      <MemberSignature Language="C#" Value="public string CommonViewFields { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string CommonViewFields" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.CommonViewFields" />
+      <MemberSignature Language="VB.NET" Value="Public Property CommonViewFields As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ CommonViewFields { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>CommonViewFields</b> property for this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart" /> object.</summary>
+        <value>Additional fields for use by the <b>ContentQueryWebPart</b> object.</value>
+        <remarks>
+          <para>CommonViewFields are additional fields that you can request when retrieving data. You can format the fields as either "internalName" or "Guid", separated by semicolons. You can specify the field types by placing a comma after the internal name or the GUID.</para>
+          <para />
+          <para />
+        </remarks>
+        <example>
+          <para>An example of CommonViewFields property format:</para>
+          <para>"Title,Text;ID,Counter;Editor,User."</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ConnectToDataSourceControl">
+      <MemberSignature Language="C#" Value="protected override bool ConnectToDataSourceControl ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool ConnectToDataSourceControl() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ConnectToDataSourceControl" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function ConnectToDataSourceControl () As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override bool ConnectToDataSourceControl();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Override the base class because a customized data source control was created during the Microsoft Office SharePoint Designer 2007 Data Form Web Part lifecycle.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ContentTypeBeginsWithId">
+      <MemberSignature Language="C#" Value="public string ContentTypeBeginsWithId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ContentTypeBeginsWithId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ContentTypeBeginsWithId" />
+      <MemberSignature Language="VB.NET" Value="Public Property ContentTypeBeginsWithId As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ContentTypeBeginsWithId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the content type ID.</summary>
+        <value>An integer representing this content type.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ContentTypeName">
+      <MemberSignature Language="C#" Value="public string ContentTypeName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ContentTypeName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ContentTypeName" />
+      <MemberSignature Language="VB.NET" Value="Public Property ContentTypeName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ContentTypeName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>ContentTypeName</b> property.</summary>
+        <value>A string representing the name of this content type.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentQueryScope">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.QueryScope CurrentQueryScope ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart/QueryScope CurrentQueryScope() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.CurrentQueryScope" />
+      <MemberSignature Language="VB.NET" Value="Public Function CurrentQueryScope () As ContentByQueryWebPart.QueryScope" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::QueryScope CurrentQueryScope();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart+QueryScope</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the current query scope of this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPartobject." /></summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Data">
+      <MemberSignature Language="C#" Value="public System.Data.DataTable Data { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.DataTable Data" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.Data" />
+      <MemberSignature Language="VB.NET" Value="Public Property Data As DataTable" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Data::DataTable ^ Data { System::Data::DataTable ^ get(); void set(System::Data::DataTable ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.WebPartStorage(Microsoft.SharePoint.WebPartPages.Storage.None)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Data.DataTable</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Data to use for the XSL transform.</summary>
+        <value>Data to use for the XSL transform.</value>
+        <remarks>
+          <para>Setting this property to <b>Null</b> causes the Web Part to retrieve the data.</para>
+          <para>Setting this property to a data table causes the Web Part to use the data provided.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DataColumnRenames">
+      <MemberSignature Language="C#" Value="public string DataColumnRenames { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DataColumnRenames" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.DataColumnRenames" />
+      <MemberSignature Language="VB.NET" Value="Public Property DataColumnRenames As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DataColumnRenames { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Column to rename after the data has been retrieved.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>Column renames are separated by semicolons and are in the format "originalName,newName." </para>
+          <para>A new Column name must not be present in the data or the rename is not performed,</para>
+          <para />
+        </remarks>
+        <example>
+          <para>This example is valid:</para>
+          <para>"originalName,newName."</para>
+          <para>This example is not valid:</para>
+          <para>"originalName1,newName1;originalName2,newName2."</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="DataMappings">
+      <MemberSignature Language="C#" Value="public string DataMappings { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DataMappings" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.DataMappings" />
+      <MemberSignature Language="VB.NET" Value="Public Property DataMappings As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DataMappings { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the data mappings.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>A string that represents the data mappings.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DataMappingViewFields">
+      <MemberSignature Language="C#" Value="public string DataMappingViewFields { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DataMappingViewFields" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.DataMappingViewFields" />
+      <MemberSignature Language="VB.NET" Value="Public Property DataMappingViewFields As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DataMappingViewFields { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the view fields for data mapping.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>A string that represents the fields that are requested by data mapping when retrieving data. The fields can be either "internalName" or "GUID", and they are separated by semicolons. You can specify the field types using a comma after the "internalName" or the "GUID" of the field.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultSampleData">
+      <MemberSignature Language="C#" Value="protected override string DefaultSampleData { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DefaultSampleData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.DefaultSampleData" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides ReadOnly Property DefaultSampleData As String" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ DefaultSampleData { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the default sample data that is not used by Microsoft SharePoint Designer when there is no real data available.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayColumns">
+      <MemberSignature Language="C#" Value="public int DisplayColumns { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 DisplayColumns" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.DisplayColumns" />
+      <MemberSignature Language="VB.NET" Value="Public Property DisplayColumns As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int DisplayColumns { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(1)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the number of columns that are displayed.</summary>
+        <value>An integer representing the number of columns that are displayed.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EnsureList">
+      <MemberSignature Language="C#" Value="protected override void EnsureList ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void EnsureList() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.EnsureList" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub EnsureList ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void EnsureList();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FeedDescription">
+      <MemberSignature Language="C#" Value="public string FeedDescription { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FeedDescription" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FeedDescription" />
+      <MemberSignature Language="VB.NET" Value="Public Property FeedDescription As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FeedDescription { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The description of the data feed.</summary>
+        <value>A string representing the description of the data feed.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FeedEnabled">
+      <MemberSignature Language="C#" Value="public bool FeedEnabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool FeedEnabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FeedEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public Property FeedEnabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool FeedEnabled { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Enable the feed for this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart" /> object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FeedTitle">
+      <MemberSignature Language="C#" Value="public string FeedTitle { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FeedTitle" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FeedTitle" />
+      <MemberSignature Language="VB.NET" Value="Public Property FeedTitle As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FeedTitle { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The title of this data feed.</summary>
+        <value>A string representing the title of this data feed.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Filter1ChainingOperator">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterChainingOperator Filter1ChainingOperator { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart/FilterChainingOperator Filter1ChainingOperator" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.Filter1ChainingOperator" />
+      <MemberSignature Language="VB.NET" Value="Public Property Filter1ChainingOperator As ContentByQueryWebPart.FilterChainingOperator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterChainingOperator Filter1ChainingOperator { Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterChainingOperator get(); void set(Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterChainingOperator value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart+FilterChainingOperator</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the filter chaining operator for the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.Filter1" /> property.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Filter1IsCustomValue">
+      <MemberSignature Language="C#" Value="public bool Filter1IsCustomValue { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Filter1IsCustomValue" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.Filter1IsCustomValue" />
+      <MemberSignature Language="VB.NET" Value="Public Property Filter1IsCustomValue As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool Filter1IsCustomValue { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>Filter1IsCustomValue</b> property value.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>A Boolean to indicate whether the current filter is based on a custom value. A custom value means the filter is based on a value of a field of the page or a query string parameter's value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Filter2ChainingOperator">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterChainingOperator Filter2ChainingOperator { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart/FilterChainingOperator Filter2ChainingOperator" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.Filter2ChainingOperator" />
+      <MemberSignature Language="VB.NET" Value="Public Property Filter2ChainingOperator As ContentByQueryWebPart.FilterChainingOperator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterChainingOperator Filter2ChainingOperator { Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterChainingOperator get(); void set(Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterChainingOperator value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart+FilterChainingOperator</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the filter chaining operator for the <b>FilterField2</b> property.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Filter2IsCustomValue">
+      <MemberSignature Language="C#" Value="public bool Filter2IsCustomValue { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Filter2IsCustomValue" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.Filter2IsCustomValue" />
+      <MemberSignature Language="VB.NET" Value="Public Property Filter2IsCustomValue As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool Filter2IsCustomValue { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>Filter2IsCustomValue</b> property value.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>A Boolean to indicate whether the current filter is based on a custom value. A custom value means the filter is based on a value of a field of the page or a query string parameter's value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Filter3IsCustomValue">
+      <MemberSignature Language="C#" Value="public bool Filter3IsCustomValue { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Filter3IsCustomValue" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.Filter3IsCustomValue" />
+      <MemberSignature Language="VB.NET" Value="Public Property Filter3IsCustomValue As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool Filter3IsCustomValue { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>Filter3IsCustomValue</b> property value.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>A Boolean to indicate whether the current filter is based on a custom value. A custom value means the filter is based on a value of a field of the page or a query string parameter's value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterByAudience">
+      <MemberSignature Language="C#" Value="public bool FilterByAudience { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool FilterByAudience" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterByAudience" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterByAudience As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool FilterByAudience { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Determines whether to filter by audience.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>This property is only applicable if audience targeting is enabled.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterByContextTerm">
+      <MemberSignature Language="C#" Value="public bool FilterByContextTerm { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool FilterByContextTerm" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterByContextTerm" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterByContextTerm As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool FilterByContextTerm { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that indicates whether to filter items with the current page context term.</summary>
+        <value>
+          <b>true</b> if filter items are to be shown with the current context term; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>This property only applies if the Web Part is scoped to a list that contains a Managed Metadata or Enterprise Keywords field.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterDisplayValue1">
+      <MemberSignature Language="C#" Value="public string FilterDisplayValue1 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterDisplayValue1" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterDisplayValue1" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterDisplayValue1 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterDisplayValue1 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterDisplayValue1</b> property value.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>Specifies the filter display value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterDisplayValue2">
+      <MemberSignature Language="C#" Value="public string FilterDisplayValue2 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterDisplayValue2" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterDisplayValue2" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterDisplayValue2 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterDisplayValue2 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterDisplayValue2</b> property value.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>Specifies the filter display value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterDisplayValue3">
+      <MemberSignature Language="C#" Value="public string FilterDisplayValue3 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterDisplayValue3" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterDisplayValue3" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterDisplayValue3 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterDisplayValue3 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterDisplayValue3</b> property value.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>Specifies the filter display value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterField1">
+      <MemberSignature Language="C#" Value="public string FilterField1 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterField1" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterField1" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterField1 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterField1 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterField1</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterField2">
+      <MemberSignature Language="C#" Value="public string FilterField2 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterField2" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterField2" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterField2 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterField2 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterField2</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterField3">
+      <MemberSignature Language="C#" Value="public string FilterField3 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterField3" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterField3" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterField3 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterField3 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterField3</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterIncludeChildren1">
+      <MemberSignature Language="C#" Value="public bool FilterIncludeChildren1 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool FilterIncludeChildren1" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterIncludeChildren1" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterIncludeChildren1 As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool FilterIncludeChildren1 { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterIncludeChildren1</b> property value.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>A Boolean that indicates whether the current filter includes child terms when the current filter is filtered on the managed term field. This corresponds to the whether the checkbox underneath the field control is checked.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterIncludeChildren2">
+      <MemberSignature Language="C#" Value="public bool FilterIncludeChildren2 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool FilterIncludeChildren2" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterIncludeChildren2" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterIncludeChildren2 As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool FilterIncludeChildren2 { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterIncludeChildren2</b> property value.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>A Boolean that indicates whether the current filter includes child terms when the current filter is filtered on the managed term field. This corresponds to the whether the checkbox underneath the field control is checked.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterIncludeChildren3">
+      <MemberSignature Language="C#" Value="public bool FilterIncludeChildren3 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool FilterIncludeChildren3" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterIncludeChildren3" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterIncludeChildren3 As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool FilterIncludeChildren3 { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterIncludeChildren3</b> property value.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>A Boolean to indicate whether the current filter includes child terms when the current filter is filtered on the managed term field. This corresponds to the whether the checkbox underneath the field control is checked.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterOperator1">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterFieldQueryOperator FilterOperator1 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart/FilterFieldQueryOperator FilterOperator1" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterOperator1" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterOperator1 As ContentByQueryWebPart.FilterFieldQueryOperator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterFieldQueryOperator FilterOperator1 { Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterFieldQueryOperator get(); void set(Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterFieldQueryOperator value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart+FilterFieldQueryOperator</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterOperator1</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterOperator2">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterFieldQueryOperator FilterOperator2 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart/FilterFieldQueryOperator FilterOperator2" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterOperator2" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterOperator2 As ContentByQueryWebPart.FilterFieldQueryOperator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterFieldQueryOperator FilterOperator2 { Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterFieldQueryOperator get(); void set(Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterFieldQueryOperator value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart+FilterFieldQueryOperator</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterOperator2</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterOperator3">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterFieldQueryOperator FilterOperator3 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart/FilterFieldQueryOperator FilterOperator3" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterOperator3" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterOperator3 As ContentByQueryWebPart.FilterFieldQueryOperator" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterFieldQueryOperator FilterOperator3 { Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterFieldQueryOperator get(); void set(Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::FilterFieldQueryOperator value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart+FilterFieldQueryOperator</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterOperator3</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterType1">
+      <MemberSignature Language="C#" Value="public string FilterType1 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterType1" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterType1" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterType1 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterType1 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterType1</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterType2">
+      <MemberSignature Language="C#" Value="public string FilterType2 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterType2" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterType2" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterType2 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterType2 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterType2</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterType3">
+      <MemberSignature Language="C#" Value="public string FilterType3 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterType3" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterType3" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterType3 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterType3 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterType3</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterValue1">
+      <MemberSignature Language="C#" Value="public string FilterValue1 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterValue1" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterValue1" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterValue1 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterValue1 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterValue1</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterValue2">
+      <MemberSignature Language="C#" Value="public string FilterValue2 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterValue2" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterValue2" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterValue2 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterValue2 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterValue2</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FilterValue3">
+      <MemberSignature Language="C#" Value="public string FilterValue3 { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FilterValue3" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.FilterValue3" />
+      <MemberSignature Language="VB.NET" Value="Public Property FilterValue3 As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterValue3 { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>FilterValue3</b> property value.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetToolParts">
+      <MemberSignature Language="C#" Value="public override Microsoft.SharePoint.WebPartPages.ToolPart[] GetToolParts ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.SharePoint.WebPartPages.ToolPart[] GetToolParts() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.GetToolParts" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetToolParts () As ToolPart()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override cli::array &lt;Microsoft::SharePoint::WebPartPages::ToolPart ^&gt; ^ GetToolParts();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.WebPartPages.ToolPart[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Return the tool panes that configure this <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart" /> object..</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetXPathNavigator">
+      <MemberSignature Language="C#" Value="protected override System.Xml.XPath.XPathNavigator GetXPathNavigator (string viewPath);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Xml.XPath.XPathNavigator GetXPathNavigator(string viewPath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.GetXPathNavigator(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetXPathNavigator (viewPath As String) As XPathNavigator" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Xml::XPath::XPathNavigator ^ GetXPathNavigator(System::String ^ viewPath);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Xml.XPath.XPathNavigator</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="viewPath" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="viewPath">To be added.</param>
+        <summary>Creates an <b>XPathNavigator</b> object containing the data that is rendered by the XSL transform.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GroupBy">
+      <MemberSignature Language="C#" Value="public string GroupBy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string GroupBy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.GroupBy" />
+      <MemberSignature Language="VB.NET" Value="Public Property GroupBy As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupBy { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the list field name used to group the set of list items.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GroupByDirection">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.SortDirection GroupByDirection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart/SortDirection GroupByDirection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.GroupByDirection" />
+      <MemberSignature Language="VB.NET" Value="Public Property GroupByDirection As ContentByQueryWebPart.SortDirection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::SortDirection GroupByDirection { Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::SortDirection get(); void set(Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::SortDirection value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart+SortDirection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the direction of the group order for the list items.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GroupByFieldType">
+      <MemberSignature Language="C#" Value="public string GroupByFieldType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string GroupByFieldType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.GroupByFieldType" />
+      <MemberSignature Language="VB.NET" Value="Public Property GroupByFieldType As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupByFieldType { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the list field type used to group the set of list items.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GroupStyle">
+      <MemberSignature Language="C#" Value="public string GroupStyle { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string GroupStyle" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.GroupStyle" />
+      <MemberSignature Language="VB.NET" Value="Public Property GroupStyle As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupStyle { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the group style.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsGhosted">
+      <MemberSignature Language="C#" Value="public override bool IsGhosted { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsGhosted" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.IsGhosted" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property IsGhosted As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool IsGhosted { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>IsGhosted</b> property value.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>
+          <para>A Boolean that indicates whether the current <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart" /> object is ghosted. It returns <b>true</b> if the Content By Query Web Part does not use any custom XSL files.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ItemLimit">
+      <MemberSignature Language="C#" Value="public int ItemLimit { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 ItemLimit" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ItemLimit" />
+      <MemberSignature Language="VB.NET" Value="Public Property ItemLimit As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int ItemLimit { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(15)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the limit of number of items to query.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>For unlimited number of items, set this property value to <paramref name="-1" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ItemStyle">
+      <MemberSignature Language="C#" Value="public string ItemStyle { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ItemStyle" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ItemStyle" />
+      <MemberSignature Language="VB.NET" Value="Public Property ItemStyle As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ItemStyle { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the item style.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ListGuid">
+      <MemberSignature Language="C#" Value="public string ListGuid { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ListGuid" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ListGuid" />
+      <MemberSignature Language="VB.NET" Value="Public Property ListGuid As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ListGuid { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the List GUID.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The WebUrl property determines the <b>ContentByQueryWebPart</b> object's mode is determined by the <b>WebUrl</b>, <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ListGuid" />, and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ListName" /> properties. </para>
+          <list type="bullet">
+            <item>
+              <description>If the <b>WebUrl</b>, <b>ListGuid</b>, and <b>ListName</b> properties are set, the mode is List. </description>
+            </item>
+            <item>
+              <description>If the <b>WebUrl</b> is set and <b>ListGuid</b> and <b>ListName</b> are empty, the mode is Web. </description>
+            </item>
+            <item>
+              <description>If <b>WebUrl</b>, <b>ListGuid</b> and <b>ListName</b> are empty, the mode is Site Collection.</description>
+            </item>
+            <item>
+              <description>If both <b>ListGuid</b> and <b>ListName</b> properties are set, <b>ListGuid</b> takes precedence.</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ListName">
+      <MemberSignature Language="C#" Value="public override string ListName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ListName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ListName" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Property ListName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ ListName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of the list.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The WebUrl property determines the <b>ContentByQueryWebPart</b> object's mode is determined by the <b>WebUrl</b>, <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ListGuid" />, and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ListName" /> properties. </para>
+          <list type="bullet">
+            <item>
+              <description>If the <b>WebUrl</b>, <b>ListGuid</b>, and <b>ListName</b> properties are set, the mode is List. </description>
+            </item>
+            <item>
+              <description>If the <b>WebUrl</b> is set and <b>ListGuid</b> and <b>ListName</b> are empty, the mode is Web. </description>
+            </item>
+            <item>
+              <description>If <b>WebUrl</b>, <b>ListGuid</b> and <b>ListName</b> are empty, the mode is Site Collection.</description>
+            </item>
+            <item>
+              <description>If both <b>ListGuid</b> and <b>ListName</b> properties are set, <b>ListGuid</b> takes precedence.</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ListsOverride">
+      <MemberSignature Language="C#" Value="public string ListsOverride { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ListsOverride" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ListsOverride" />
+      <MemberSignature Language="VB.NET" Value="Public Property ListsOverride As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ListsOverride { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CbqSpdCategoryOverride")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the list field name used to filter the set of list items.</summary>
+        <value>List field name used to fliter the set of list items.</value>
+        <remarks>
+          <para>Using this property grays out part of the tool pane that configures the scope.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MediaPlayerStyleSource">
+      <MemberSignature Language="C#" Value="public string MediaPlayerStyleSource { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string MediaPlayerStyleSource" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.MediaPlayerStyleSource" />
+      <MemberSignature Language="VB.NET" Value="Public Property MediaPlayerStyleSource As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ MediaPlayerStyleSource { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.RequiresDesignerPermission</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a string value which a URL reference to an Extensible Application Markup Language (XAML) document containing a <b>ControlTemplate</b> definition to be used as the media player's style or skin.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>To be used in conjunction with the <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.PlayMediaInBrowser" /> property.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ModifyXsltArgumentList">
+      <MemberSignature Language="C#" Value="protected override void ModifyXsltArgumentList (Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper argList);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void ModifyXsltArgumentList(class Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper argList) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ModifyXsltArgumentList(Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub ModifyXsltArgumentList (argList As ArgumentClassWrapper)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void ModifyXsltArgumentList(Microsoft::SharePoint::WebPartPages::ArgumentClassWrapper ^ argList);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="argList" Type="Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper" />
+      </Parameters>
+      <Docs>
+        <param name="argList">Argument list generated by the base class.</param>
+        <summary>Use this method to change the XSL argument list generated by the base class before it is passed to the XSL transform.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnInit">
+      <MemberSignature Language="C#" Value="protected override void OnInit (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnInit(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.OnInit(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnInit (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnInit(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPreRender">
+      <MemberSignature Language="C#" Value="protected override void OnPreRender (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnPreRender(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.OnPreRender(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreRender (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreRender(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>Raises the <b>OnPreRender</b> event.</summary>
+        <remarks>
+          <para>Event arguments.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PlayMediaInBrowser">
+      <MemberSignature Language="C#" Value="public bool PlayMediaInBrowser { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool PlayMediaInBrowser" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.PlayMediaInBrowser" />
+      <MemberSignature Language="VB.NET" Value="Public Property PlayMediaInBrowser As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool PlayMediaInBrowser { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether links to media files should be played within the browser rather than with the operating system media player.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ProcessDataDelegate">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ProcessData ProcessDataDelegate { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart/ProcessData ProcessDataDelegate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ProcessDataDelegate" />
+      <MemberSignature Language="VB.NET" Value="Public Property ProcessDataDelegate As ContentByQueryWebPart.ProcessData" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::ProcessData ^ ProcessDataDelegate { Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::ProcessData ^ get(); void set(Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::ProcessData ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.WebPartStorage(Microsoft.SharePoint.WebPartPages.Storage.None)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart+ProcessData</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Delegate called to process data before it is sent to the XSL transform.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="QueryOverride">
+      <MemberSignature Language="C#" Value="public string QueryOverride { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string QueryOverride" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.QueryOverride" />
+      <MemberSignature Language="VB.NET" Value="Public Property QueryOverride As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ QueryOverride { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CbqSpdCategoryOverride")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the list field name used to filter the set of list items.</summary>
+        <value>The list field name used to filter the set of list items.</value>
+        <remarks>
+          <para>Using this property grays out part of the tool pane that configures the query.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Results">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.SiteDataResults Results { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.SiteDataResults Results" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.Results" />
+      <MemberSignature Language="VB.NET" Value="Public Property Results As SiteDataResults" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::SiteDataResults ^ Results { Microsoft::SharePoint::Publishing::SiteDataResults ^ get(); void set(Microsoft::SharePoint::Publishing::SiteDataResults ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.WebPartStorage(Microsoft.SharePoint.WebPartPages.Storage.None)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.SiteDataResults</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.Sharepoint.Publishing.SiteDataResults" /> object that is returned by a query.</summary>
+        <value>Returns <see cref="T:Microsoft.SharePoint.Publishing.SiteDataResults" />.</value>
+        <remarks>
+          <para>The property can also be set with an existing <b>SiteDataResults</b> object that the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart" /> object can use when it is output to a page.
+</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SaveViewState">
+      <MemberSignature Language="C#" Value="protected override object SaveViewState ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance object SaveViewState() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.SaveViewState" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function SaveViewState () As Object" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Object ^ SaveViewState();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Part of the view state control lifecycle.</summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>View state for this control consists of the <b>SummaryLinkValue</b> object. </para>
+          <para>View state is saved in all modes except Display mode.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ServerTemplate">
+      <MemberSignature Language="C#" Value="public string ServerTemplate { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ServerTemplate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ServerTemplate" />
+      <MemberSignature Language="VB.NET" Value="Public Property ServerTemplate As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ServerTemplate { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("850")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The server template number to query for.</summary>
+        <value>An integer representing the server template number to query for.</value>
+        <remarks>
+          <para>This number represent the Windows SharePoint Services 3.0 list type.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowUntargetedItems">
+      <MemberSignature Language="C#" Value="public bool ShowUntargetedItems { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ShowUntargetedItems" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ShowUntargetedItems" />
+      <MemberSignature Language="VB.NET" Value="Public Property ShowUntargetedItems As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShowUntargetedItems { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Whether to show items that have no audiences associated with them. </summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>This property only applies if audience targeting is enabled.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SortBy">
+      <MemberSignature Language="C#" Value="public string SortBy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SortBy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.SortBy" />
+      <MemberSignature Language="VB.NET" Value="Public Property SortBy As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SortBy { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the list field name used to sort the set of list items.</summary>
+        <value>The list field name used to sort the set of list items.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SortByDirection">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.SortDirection SortByDirection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart/SortDirection SortByDirection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.SortByDirection" />
+      <MemberSignature Language="VB.NET" Value="Public Property SortByDirection As ContentByQueryWebPart.SortDirection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::SortDirection SortByDirection { Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::SortDirection get(); void set(Microsoft::SharePoint::Publishing::WebControls::ContentByQueryWebPart::SortDirection value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart+SortDirection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the direction of the sort order for the list items.</summary>
+        <value>The direction of the sort order for the list items.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SortByFieldType">
+      <MemberSignature Language="C#" Value="public string SortByFieldType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SortByFieldType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.SortByFieldType" />
+      <MemberSignature Language="VB.NET" Value="Public Property SortByFieldType As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SortByFieldType { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureLayout")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the list field type used to sort the set of list items.</summary>
+        <value>The list field type used to sort the set of list items.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SystemViewFields">
+      <MemberSignature Language="C#" Value="public string SystemViewFields { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SystemViewFields" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.SystemViewFields" />
+      <MemberSignature Language="VB.NET" Value="Public Property SystemViewFields As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SystemViewFields { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <b>SystemViewFields</b> for the query.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>These are additional fields that can be requested when retrieving data. The fields can be either "internalName" or "GUID", and they are separated by semicolons. You can specify the field types using a comma after the "internalName" or the "GUID" of the field. </para>
+          <para />
+        </remarks>
+        <example>
+          <para>"Title,Text;ID,Counter;Editor,User"</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update (Microsoft.SharePoint.Publishing.PublishingWeb ownerWeb);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Update(class Microsoft.SharePoint.Publishing.PublishingWeb ownerWeb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.Update(Microsoft.SharePoint.Publishing.PublishingWeb)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update (ownerWeb As PublishingWeb)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Update(Microsoft::SharePoint::Publishing::PublishingWeb ^ ownerWeb);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Publishing.IWebPartVariationUpdate.Update(Microsoft.SharePoint.Publishing.PublishingWeb)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ownerWeb" Type="Microsoft.SharePoint.Publishing.PublishingWeb" />
+      </Parameters>
+      <Docs>
+        <param name="ownerWeb">The <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object where the Content By Query Web Part appears.</param>
+        <summary>Called to update a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart" /> object when it is pushed to another variation label.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseCache">
+      <MemberSignature Language="C#" Value="public bool UseCache { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseCache" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.UseCache" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseCache As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseCache { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether this <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart" /> should use the cache to retrieve its data.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseCopyUtil">
+      <MemberSignature Language="C#" Value="public bool UseCopyUtil { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseCopyUtil" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.UseCopyUtil" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseCopyUtil As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseCopyUtil { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether the URL for items should use the View Property page.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ViewFieldsOverride">
+      <MemberSignature Language="C#" Value="public string ViewFieldsOverride { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ViewFieldsOverride" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ViewFieldsOverride" />
+      <MemberSignature Language="VB.NET" Value="Public Property ViewFieldsOverride As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ViewFieldsOverride { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CbqSpdCategoryOverride")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the list field name used to filter the set of list items.</summary>
+        <value>The list field name used to filter the set of list items.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WebsOverride">
+      <MemberSignature Language="C#" Value="public string WebsOverride { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string WebsOverride" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.WebsOverride" />
+      <MemberSignature Language="VB.NET" Value="Public Property WebsOverride As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ WebsOverride { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CbqSpdCategoryOverride")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the list field name used to filter the set of list items.</summary>
+        <value>The list field name used to filter the set of list items.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="WebUrl">
+      <MemberSignature Language="C#" Value="public string WebUrl { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string WebUrl" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.WebUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Property WebUrl As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ WebUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.ManagedLink(Fixup=true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryConfigureQuery")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the server-relative URL of the Web site.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The WebUrl property determines the <b>ContentByQueryWebPart</b> object's mode is determined by the <b>WebUrl</b>, <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ListGuid" />, and <see cref="P:Microsoft.SharePoint.Publishing.WebControls.ContentByQueryWebPart.ListName" /> properties. </para>
+          <list type="bullet">
+            <item>
+              <description>If the <b>WebUrl</b>, <b>ListGuid</b>, and <b>ListName</b> properties are set, the mode is List. </description>
+            </item>
+            <item>
+              <description>If the <b>WebUrl</b> is set and <b>ListGuid</b> and <b>ListName</b> are empty, the mode is Web. </description>
+            </item>
+            <item>
+              <description>If <b>WebUrl</b>, <b>ListGuid</b> and <b>ListName</b> are empty, the mode is Site Collection.</description>
+            </item>
+          </list>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

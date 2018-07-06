@@ -1,0 +1,1668 @@
+﻿<Type Name="ContentDeploymentJob" FullName="Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob">
+  <TypeSignature Language="C#" Value="public sealed class ContentDeploymentJob : Microsoft.SharePoint.Publishing.DisposableListItemWrapper" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ContentDeploymentJob extends Microsoft.SharePoint.Publishing.DisposableListItemWrapper" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class ContentDeploymentJob&#xA;Inherits DisposableListItemWrapper" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ContentDeploymentJob sealed : Microsoft::SharePoint::Publishing::DisposableListItemWrapper" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.DisposableListItemWrapper</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Defines details of a content deployment job. </summary>
+    <remarks>
+      <para>A content deployment job consists of the following properties.</para>
+      <list type="table">
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Name" />
+          </term>
+          <description>Provides the name of the content deployment job.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Description" />
+          </term>
+          <description>Describes the content deployment job.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Path" />
+          </term>
+          <description>Provides the path associated with this content deployment job.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.JobType" />
+          </term>
+          <description>Defines whether this is a full or partial content deployment.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.IsRecurring" />
+          </term>
+          <description>Defines whether this is a single or recurring content deployment.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.NotificationSettings" />
+          </term>
+          <description>Defines whether and when to send e-mail notification when the content deployment succeeds or fails.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.ExportMethod" />
+          </term>
+          <description>Determines whether to export all changes at one time or incrementally.</description>
+        </item>
+      </list>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using Microsoft.SharePoint.Publishing.Administration;
+using Microsoft.SharePoint;
+
+namespace Microsoft.SDK.SharePoint.Samples.ContentDeployemnt
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("starting sample tests execution...");
+
+            #region ContentDeploymentJob.SqlSnapshotSetting example
+            
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.SqlSnapshotSetting example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            //
+            // To compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                // set the job to create and use a Sql Snapshot for export
+                job.SqlSnapshotSetting = ContentDeploymentSqlSnapshotSetting.CreateNew;
+                job.Update();
+
+                try
+                {
+                    // the job will run using a newly created sql snapshot for export operation
+                    job.Run();
+
+                    Console.WriteLine("Job's execution completed. Job's status is: " + job.LastStatus.ToString() + "; Job's status message is: " + job.LastStatusMessage);
+                }
+                catch (ContentDeploymentException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (SPException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+
+                    throw;
+                }
+            }
+
+            #endregion
+
+            // ---------------------------------------------------------------------------------------
+            // restore the job's settings back to default
+            // ---------------------------------------------------------------------------------------
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                job.SqlSnapshotSetting = ContentDeploymentSqlSnapshotSetting.None;
+                job.Update();
+            }
+
+            #region ContentDeploymentJob.HostingSupportEnabled example
+
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.HostingSupportEnabled example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            //
+            // To compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                job.HostingSupportEnabled = true;
+                job.Update();
+            }
+
+            #endregion
+
+            // ---------------------------------------------------------------------------------------
+            // restore the job's settings back to default
+            // ---------------------------------------------------------------------------------------
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                job.HostingSupportEnabled = false;
+                job.Update();
+            }
+
+            #region ContentDeploymentJob.Run() example
+
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.Run() example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            //
+            // to compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                try
+                {
+                    // execute this Content Deployment Job synchronously
+                    job.Run();
+
+                    Console.WriteLine("Job's execution completed. Job's status is: " + job.LastStatus.ToString() + "; Job's status message is: " + job.LastStatusMessage);
+                }
+                catch (ContentDeploymentException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (SPException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+
+                    throw;
+                }
+            }
+
+            #endregion
+
+            #region ContentDeploymentJob.Run(bool, DateTime) example
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.Run(bool, DateTime) example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            // - a job was recently successfully executed (so that the time of the
+            //   last successfull run - 1 hour falls within the WSS change log window)
+            //
+            // to compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                try
+                {
+                    // executing the content deployment job synchronously, specifying the 
+                    // deploySinceTime 1 hour prior to the last successfull run
+                    job.Run(false, job.LastSuccessfulDeploymentTime.Subtract(new TimeSpan(1, 0, 0)));
+
+                    Console.WriteLine("Job's execution completed. Job's status is: " + job.LastStatus.ToString() + "; Job's status message is: " + job.LastStatusMessage);
+                }
+                catch (ContentDeploymentException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (SPException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+
+                    throw;
+                }
+            }
+
+            #endregion
+
+            #region ContentDeploymentJob.Run(bool, string) example
+
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.Run(bool, string) example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            // - a Sql snapshot (of the source content DB) named 'yourSnapshot' was created
+            //
+            // to compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                try
+                {
+                    // execute the content deployment job synchronously, specifying an existing
+                    // Sql snapshot to run export against
+                    job.Run(false, "yourSnapshot");
+
+                    Console.WriteLine("Job's execution completed. Job's status is: " + job.LastStatus.ToString() + "; Job's status message is: " + job.LastStatusMessage);
+                }
+                catch (ContentDeploymentException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (SPException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+
+                    throw;
+                }
+            }
+            
+            #endregion
+
+            #region ContentDeploymentJob.Run(bool, DateTime, string) example
+
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.Run(bool, DateTime, string) example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            // - a Sql snapshot (of the source content DB) named 'yourSnapshot' was created
+            //
+            // to compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                // set the job to create and use a Sql Snapshot for export
+                job.SqlSnapshotSetting = ContentDeploymentSqlSnapshotSetting.CreateNew;
+                job.Update();
+
+                try
+                {
+                    // execute this Content Deployment job synchronously, using a specified Sql Snapshot for export,
+                    // with the default behavior in regard to what changes are propagated to target
+                    // even through the SqlSnapshotSetting is set to ContentDeploymentSqlSnapshotSetting.CreateNew
+                    // for this job, it will be ignored and the specified snapshot will be used instead.
+                    job.Run(false, DateTime.MinValue, "yourSnapshot");
+
+                    Console.WriteLine("Job's execution completed. Job's status is: " + job.LastStatus.ToString() + "; Job's status message is: " + job.LastStatusMessage);
+                }
+                catch (ContentDeploymentException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (SPException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+
+                    throw;
+                }
+            }
+
+            #endregion
+
+            // ---------------------------------------------------------------------------------------
+            // restore the job's settings back to default
+            // ---------------------------------------------------------------------------------------
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                job.SqlSnapshotSetting = ContentDeploymentSqlSnapshotSetting.None;
+                job.Update();
+            }
+
+            #region ContentDeploymentJob.Test() example
+
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.Test() example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            //
+            // to compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                try
+                {
+                    // performs a synchronous test run for this job
+                    job.Test();
+
+                    Console.WriteLine("Job's test run completed. Job's status is: " + job.LastStatus.ToString() + "; Job's status message is: " + job.LastStatusMessage);
+                }
+                catch (ContentDeploymentException ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+                }
+                catch (SPException ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+
+                    throw;
+                }
+            }
+
+            #endregion
+
+            #region ContentDeploymentJob.Test(string) example
+
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.Test(string) example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            // - a Sql snapshot (of the source content DB) named 'yourSnapshot' was created
+            //
+            // to compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                try
+                {
+                    // performs a synchronous test run for this job, specifying an existing
+                    // Sql snapsjhot to run export against
+                    job.Test("yourSnapshot");
+
+                    Console.WriteLine("Job's test run completed. Job's status is: " + job.LastStatus.ToString() + "; Job's status message is: " + job.LastStatusMessage);
+                }
+                catch (ContentDeploymentException ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+                }
+                catch (SPException ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+
+                    throw;
+                }
+            }
+
+            #endregion
+
+            #region ContentDeploymentJob.Test(bool, string) example
+
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.Test(bool, string) example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            // - a Sql snapshot (of the source content DB) named 'yourSnapshot' was created
+            //
+            // to compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                // set the job to create and use a Sql Snapshot for export
+                job.SqlSnapshotSetting = ContentDeploymentSqlSnapshotSetting.CreateNew;
+                job.Update();
+
+                try
+                {
+                    // performs a synchronous test run for this job, using a specified Sql Snapshot for export
+                    // even through the SqlSnapshotSetting is set to ContentDeploymentSqlSnapshotSetting.CreateNew
+                    // for this job run, it will be ignored and the specified snapshot will be used instead.
+                    job.Test(false, "yourSnapshot");
+
+                    Console.WriteLine("Job's test run completed. Job's status is: " + job.LastStatus.ToString() + "; Job's status message is: " + job.LastStatusMessage);
+                }
+                catch (ContentDeploymentException ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+                }
+                catch (SPException ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+
+                    throw;
+                }
+            }
+
+            #endregion
+
+            // ---------------------------------------------------------------------------------------
+            // restore the job's settings back to default
+            // ---------------------------------------------------------------------------------------
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                job.SqlSnapshotSetting = ContentDeploymentSqlSnapshotSetting.None;
+                job.Update();
+            }
+
+            #region ContentDeploymentJob.Test(bool) example
+
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.Test(bool) example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            //
+            // to compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                try
+                {
+                    // performs a test run for this job asynchronously
+                    // when the call returns the job might not have finished yet
+                    job.Test(true);
+
+                    Console.WriteLine("Job's test run started. Job's status is: " + job.LastStatus.ToString());
+                }
+                catch (ContentDeploymentException ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+                }
+                catch (SPException ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Job's test run failed. Error details :" + ex.ToString());
+
+                    throw;
+                }
+            }
+
+            #endregion
+
+            // ---------------------------------------------------------------------------------------
+            // wait till the job's done
+            // ---------------------------------------------------------------------------------------
+            ContentDeploymentJobStatus status = ContentDeploymentJobStatus.NotAvailable;
+            do
+            {
+                using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+                {
+                    status = job.LastStatus;
+                }
+
+                System.Threading.Thread.Sleep(30 * 1000); // 30 secs
+            }
+            while ((status == ContentDeploymentJobStatus.TestSuccess || status == ContentDeploymentJobStatus.TestFailure) == false );
+
+            #region ContentDeploymentJob.Run(bool) example
+
+            // ---------------------------------------------------------------------------------------
+            // ContentDeploymentJob.Run(bool) example
+            // ---------------------------------------------------------------------------------------
+            // The sample assumes that
+            // - Content Deployment was configured,  
+            // - a Content Deployment Path was created
+            // - a Content Deployment Job named 'yourJob' was created
+            //
+            // to compile add additional references to 
+            // - Microsoft.SharePoint.dll
+            // - Microsoft.SharePoint.Publishing.dll
+            //
+            // To compile add the following using directives
+            // using System;
+            // using Microsoft.SharePoint.Publishing.Administration;
+            // using Microsoft.SharePoint;
+            using (ContentDeploymentJob job = ContentDeploymentJob.GetInstance("yourJob"))
+            {
+                try
+                {
+                    // execute this Content Deployment Job asynchronously
+                    // when the call returns the job might not have finished yet
+                    job.Run(true);
+
+                    Console.WriteLine("Job's execution started. Job's status is: " + job.LastStatus.ToString());
+                }
+                catch (ContentDeploymentException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (SPException ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Job's execution failed. Error details :" + ex.ToString());
+
+                    throw;
+                }
+            }
+
+            #endregion
+
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("sample tests completed. Press any key:");
+            Console.ReadKey();
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="AddQuickDeployObject">
+      <MemberSignature Language="C#" Value="public static void AddQuickDeployObject (Microsoft.SharePoint.SPWeb web, Microsoft.SharePoint.Deployment.SPDeploymentObjectType itemType, string itemUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void AddQuickDeployObject(class Microsoft.SharePoint.SPWeb web, valuetype Microsoft.SharePoint.Deployment.SPDeploymentObjectType itemType, string itemUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.AddQuickDeployObject(Microsoft.SharePoint.SPWeb,Microsoft.SharePoint.Deployment.SPDeploymentObjectType,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub AddQuickDeployObject (web As SPWeb, itemType As SPDeploymentObjectType, itemUrl As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void AddQuickDeployObject(Microsoft::SharePoint::SPWeb ^ web, Microsoft::SharePoint::Deployment::SPDeploymentObjectType itemType, System::String ^ itemUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
+        <Parameter Name="itemType" Type="Microsoft.SharePoint.Deployment.SPDeploymentObjectType" />
+        <Parameter Name="itemUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="web">The <see cref="T:Microsoft.SharePoint.SPWeb" /> object in which the QuickDeployItems list resides.</param>
+        <param name="itemType">The <see cref="T:Microsoft.SharePoint.Deployment.SPDeploymentObject" /> type.</param>
+        <param name="itemUrl">The URL of the object to deploy.</param>
+        <summary>Adds this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object to the list of Quick Deploy items in the given <see cref="T:Microsoft.SharePoint.SPWeb" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Cancel">
+      <MemberSignature Language="C#" Value="public void Cancel ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Cancel() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Cancel" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Cancel ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Cancel();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Cancels this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <remarks>
+          <para>Cancels the job immediately and synchronously.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Delete">
+      <MemberSignature Language="C#" Value="public void Delete ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Delete() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Delete" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Delete ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Delete();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deletes this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets text that describes this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>A string that describes this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Exporting">
+      <MemberSignature Language="C#" Value="public event Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventHandler Exporting;" />
+      <MemberSignature Language="ILAsm" Value=".event class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventHandler Exporting" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Exporting" />
+      <MemberSignature Language="VB.NET" Value="Public Custom Event Exporting As ContentDeploymentEventHandler " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; event Microsoft::SharePoint::Publishing::Administration::ContentDeploymentEventHandler ^ Exporting;" />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventHandler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Indicates that the export is about to start. </summary>
+        <remarks>
+          <para>The event handler receives an argument of type <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventArgs" /> that contains data related to this event.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExportMethod">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Deployment.SPExportMethodType ExportMethod { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Deployment.SPExportMethodType ExportMethod" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.ExportMethod" />
+      <MemberSignature Language="VB.NET" Value="Public Property ExportMethod As SPExportMethodType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Deployment::SPExportMethodType ExportMethod { Microsoft::SharePoint::Deployment::SPExportMethodType get(); void set(Microsoft::SharePoint::Deployment::SPExportMethodType value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Deployment.SPExportMethodType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the export method for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>A value of the <see cref="T:Microsoft.SharePoint.Deployment.SPExportMethodType" /> enumeration.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExportObjects">
+      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;Microsoft.SharePoint.Deployment.SPExportObject&gt; ExportObjects { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.Collection`1&lt;class Microsoft.SharePoint.Deployment.SPExportObject&gt; ExportObjects" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.ExportObjects" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ExportObjects As Collection(Of SPExportObject)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::ObjectModel::Collection&lt;Microsoft::SharePoint::Deployment::SPExportObject ^&gt; ^ ExportObjects { System::Collections::ObjectModel::Collection&lt;Microsoft::SharePoint::Deployment::SPExportObject ^&gt; ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ObjectModel.Collection&lt;Microsoft.SharePoint.Deployment.SPExportObject&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of objects that is exported in the content deployment job. </summary>
+        <value>The collection of objects that is exported in the content deployment job.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FileLocation">
+      <MemberSignature Language="C#" Value="public string FileLocation { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string FileLocation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.FileLocation" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property FileLocation As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FileLocation { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the location of the data files that have been exported.</summary>
+        <value>The location of the exported data files.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllJobs">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection GetAllJobs ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection GetAllJobs() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.GetAllJobs" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetAllJobs () As ContentDeploymentJobCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobCollection ^ GetAllJobs();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns a collection of all the content deployment jobs associated with this site.</summary>
+        <returns>A collection of all the content deployment jobs associated with this site.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllQuickDeployJobs">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection GetAllQuickDeployJobs ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection GetAllQuickDeployJobs() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.GetAllQuickDeployJobs" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetAllQuickDeployJobs () As ContentDeploymentJobCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobCollection ^ GetAllQuickDeployJobs();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Gets the collection of all Quick Deploy content deployment jobs in this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection" /> collection. </summary>
+        <returns>The list of Quick Deploy content deployment jobs that are associated with this <see cref="T:Microsoft.SharePoint.SPSite" /> object.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetInstance">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob GetInstance (Guid jobId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob GetInstance(valuetype System.Guid jobId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.GetInstance(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetInstance (jobId As Guid) As ContentDeploymentJob" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJob ^ GetInstance(Guid jobId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="jobId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="jobId">The identification number of this content deployment job.</param>
+        <summary>Gets the instance of the <see cref="T:Microsoft.SharePoint.Deployment.SPDeploymentObject" /> object that matches the specified <paramref name="jobId" />.</summary>
+        <returns>The <see cref="T:Microsoft.SharePoint.Deployment.SPDeploymentObject" /> instance with the specified <paramref name="jobId" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetInstance">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob GetInstance (string jobName);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob GetInstance(string jobName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.GetInstance(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetInstance (jobName As String) As ContentDeploymentJob" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJob ^ GetInstance(System::String ^ jobName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="jobName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="jobName">The <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Name" /> property of this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object. </param>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object with the specified <paramref name="jobName" />.</summary>
+        <returns>The <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> with the specified <paramref name="jobName" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HostingSupportEnabled">
+      <MemberSignature Language="C#" Value="public bool HostingSupportEnabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool HostingSupportEnabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.HostingSupportEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public Property HostingSupportEnabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool HostingSupportEnabled { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value that indicates if  hosting support is enabled for the job.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default value is <b>false</b>.</para>
+          <para>If the content deployment job is set up for hosted sites, setting the option to <b>true</b> gives the administrator of the hosted sites an ability to place the sites in or out of content deployment. This means that if the <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.HostingSupportEnabled" /> property is set to <b>true</b>, then when the content deployment job runs it will check if the source site collection is currently marked to be deployed. If it is not marked to deploy, then the jobs are effectively no operation. The job also could be marked as cancelled for an asynchronous run.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Id">
+      <MemberSignature Language="C#" Value="public Guid Id { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid Id" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Id" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Id As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid Id { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the GUID for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The GUID for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Importing">
+      <MemberSignature Language="C#" Value="public event Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventHandler Importing;" />
+      <MemberSignature Language="ILAsm" Value=".event class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventHandler Importing" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Importing" />
+      <MemberSignature Language="VB.NET" Value="Public Custom Event Importing As ContentDeploymentEventHandler " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; event Microsoft::SharePoint::Publishing::Administration::ContentDeploymentEventHandler ^ Importing;" />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventHandler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Indicates that the import is about to start.</summary>
+        <remarks>
+          <para>The event handler receives an argument of type <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventArgs" /> that contains data related to this event.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsEnabled">
+      <MemberSignature Language="C#" Value="public bool IsEnabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsEnabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.IsEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsEnabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsEnabled { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value that determines whether this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object is enabled.</summary>
+        <value>The value that determines whether this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> is enabled or disabled. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsQuickDeployJob">
+      <MemberSignature Language="C#" Value="public bool IsQuickDeployJob { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsQuickDeployJob" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.IsQuickDeployJob" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsQuickDeployJob As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsQuickDeployJob { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that determines whether this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object is a Quick Deploy job.</summary>
+        <value>The value that determines whether this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> is a Quick Deploy job.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsRecurring">
+      <MemberSignature Language="C#" Value="public bool IsRecurring { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsRecurring" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.IsRecurring" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsRecurring As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsRecurring { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the value that determines whether this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object occurs only once or is recurring.</summary>
+        <value>A value that determines whether this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> occurs only once or is recurring. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="JobType">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobType JobType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobType JobType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.JobType" />
+      <MemberSignature Language="VB.NET" Value="Public Property JobType As ContentDeploymentJobType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobType JobType { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobType get(); void set(Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobType value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets type information for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The type information for the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastReport">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobReport LastReport { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobReport LastReport" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastReport" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastReport As ContentDeploymentJobReport" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobReport ^ LastReport { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobReport ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobReport</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the most recent report for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The most recent report for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</value>
+        <remarks>
+          <para>If the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> is currently running, this property gets or sets the report for the current run.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastReportId">
+      <MemberSignature Language="C#" Value="public Guid LastReportId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid LastReportId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastReportId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastReportId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid LastReportId { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="P:Microsoft.SharePoint.SPListItem.UniqueId" /> for the most recent report.</summary>
+        <value>The <see cref="P:Microsoft.SharePoint.SPListItem.UniqueId" /> for the most recent report.</value>
+        <remarks>
+          <para>If the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> is currently running, this is the GUID of the report for that run.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastRunTime">
+      <MemberSignature Language="C#" Value="public DateTime LastRunTime { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime LastRunTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastRunTime" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastRunTime As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime LastRunTime { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the last date and time that this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object was run.</summary>
+        <value>Date and time that this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object was last run.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastStatus">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobStatus LastStatus { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobStatus LastStatus" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastStatus" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastStatus As ContentDeploymentJobStatus" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobStatus LastStatus { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobStatus get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobStatus</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the last status code for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The last status code for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastStatusMessage">
+      <MemberSignature Language="C#" Value="public string LastStatusMessage { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string LastStatusMessage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastStatusMessage" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastStatusMessage As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LastStatusMessage { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the last status message for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The last status message for <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastSuccessfulDeploymentTime">
+      <MemberSignature Language="C#" Value="public DateTime LastSuccessfulDeploymentTime { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime LastSuccessfulDeploymentTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastSuccessfulDeploymentTime" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastSuccessfulDeploymentTime As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime LastSuccessfulDeploymentTime { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the date and time that this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object was successfully deployed.</summary>
+        <value>The last date and time that this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> was successfully deployed.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Name" />
+      <MemberSignature Language="VB.NET" Value="Public Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The string that includes the name of this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NextRunTime">
+      <MemberSignature Language="C#" Value="public DateTime NextRunTime { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime NextRunTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.NextRunTime" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property NextRunTime As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime NextRunTime { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the next date and time that this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object runs.</summary>
+        <value>The next date and time that this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object runs.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NotificationEmailAddresses">
+      <MemberSignature Language="C#" Value="public string NotificationEmailAddresses { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string NotificationEmailAddresses" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.NotificationEmailAddresses" />
+      <MemberSignature Language="VB.NET" Value="Public Property NotificationEmailAddresses As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ NotificationEmailAddresses { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the e-mail addresses of individuals who receive notification e-mails about this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The e-mail addresses of individuals who receive notification e-mails about this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NotificationSettings">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentNotificationSettings NotificationSettings { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Administration.ContentDeploymentNotificationSettings NotificationSettings" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.NotificationSettings" />
+      <MemberSignature Language="VB.NET" Value="Public Property NotificationSettings As ContentDeploymentNotificationSettings" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentNotificationSettings NotificationSettings { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentNotificationSettings get(); void set(Microsoft::SharePoint::Publishing::Administration::ContentDeploymentNotificationSettings value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentNotificationSettings</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets notification settings for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The notification settings for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ParentCollection">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection ParentCollection { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection ParentCollection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.ParentCollection" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ParentCollection As ContentDeploymentJobCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobCollection ^ ParentCollection { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the parent collection for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The parent collection for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Path">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath Path { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath Path" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Path" />
+      <MemberSignature Language="VB.NET" Value="Public Property Path As ContentDeploymentPath" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentPath ^ Path { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentPath ^ get(); void set(Microsoft::SharePoint::Publishing::Administration::ContentDeploymentPath ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the path for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The path for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Reports">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobReportCollection Reports { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobReportCollection Reports" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Reports" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Reports As ContentDeploymentJobReportCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobReportCollection ^ Reports { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobReportCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobReportCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets reports from the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobReportCollection" /> object for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobReportCollection" /> for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Run">
+      <MemberSignature Language="C#" Value="public void Run ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Run() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Run" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Run ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Run();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Runs the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> job.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Run">
+      <MemberSignature Language="C#" Value="public void Run (bool runAsynchronously);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Run(bool runAsynchronously) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Run(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Run (runAsynchronously As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Run(bool runAsynchronously);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="runAsynchronously" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="runAsynchronously">A value that determines whether to run this job synchronously or asynchronously.</param>
+        <summary>Runs the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> job immediately and synchronously, by default.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Run">
+      <MemberSignature Language="C#" Value="public void Run (bool runAsynchronously, DateTime deploySinceTime);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Run(bool runAsynchronously, valuetype System.DateTime deploySinceTime) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Run(System.Boolean,System.DateTime)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Run (runAsynchronously As Boolean, deploySinceTime As DateTime)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Run(bool runAsynchronously, DateTime deploySinceTime);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="runAsynchronously" Type="System.Boolean" />
+        <Parameter Name="deploySinceTime" Type="System.DateTime" />
+      </Parameters>
+      <Docs>
+        <param name="runAsynchronously">A value that specifies whether to run this job asynchronously or synchronously.</param>
+        <param name="deploySinceTime">A value that determines whether to deploy changes that have been made since the specified date and time.</param>
+        <summary>Runs the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> job synchronously or asynchronously and deploys changes that have been made since the specified date and time.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Run">
+      <MemberSignature Language="C#" Value="public void Run (bool runAsynchronously, string sourceContentDBSnapshotName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Run(bool runAsynchronously, string sourceContentDBSnapshotName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Run(System.Boolean,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Run (runAsynchronously As Boolean, sourceContentDBSnapshotName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Run(bool runAsynchronously, System::String ^ sourceContentDBSnapshotName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="runAsynchronously" Type="System.Boolean" />
+        <Parameter Name="sourceContentDBSnapshotName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="runAsynchronously">A value that specifies whether to execute the content deployment job synchronously or asynchronously.</param>
+        <param name="sourceContentDBSnapshotName">A value that specifies the name of a SQL snapshot to be used for an export operation.</param>
+        <summary>Executes a content deployment job based on the type of transformation and the specified snapshot.</summary>
+        <remarks>
+          <para>If <paramref name="runAsynchronously" /> is <b>true</b>, the method will start to execute the content deployment job and can return before the content deployment job has executed, which in this case means that the export phase of the job will run in the timer service. Otherwise, the method will not return until the execution is complete; in this case, the export phase of the job will run in the current process.</para>
+          <para>The execution of the content deployment job is propagates content to the target normally as determined by the value of the <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.ExportMethod" /> property of the job.</para>
+          <para>If <paramref name="sourceContentDBSnapshotName" /> is null or <see cref="F:System.String.Empty" />, the use of the SQL snapshot for an export during the execution of the content deployment job is determined by the value of the <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.SqlSnapshotSetting" /> property (see the <b>SqlSnapshotSetting</b> property for more information). Otherwise, the content deployment job executes by using a SQL snapshot as specified by the <paramref name="sourceContentDBSnapshotName" /> parameter for the export. In this case, if the SQL snapshot specified by the <paramref name="sourceContentDBSnapshotName" /> parameter does not exist or if the SQL Server being used does not support SQL snapshots, then the execution of the job will fail.</para>
+          <para>If an attempt is made to execute a job that is already running or is in a timed out state (<see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastStatus" /> property), the execution of the job will fail.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentException">A specific reason is better described by the actual exception's message. Some common messages include:An attempt is made to execute a job that is already running.An attempt is made to execute a job that is in a timed out state (<see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastStatus" /> property).An attempt was made to run the job by using SQL snapshot for an export, but the SQL Server being used does not support SQL snapshots.The SQL snapshot specified by <paramref name="sourceContentDBSnapshotName" /> was not found.</exception>
+        <exception cref="T:Microsoft.SharePoint.SPException">Can be propagated from underlying Windows SharePoint Services (WSS) layers.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Run">
+      <MemberSignature Language="C#" Value="public void Run (bool runAsynchronously, DateTime deploySinceTime, string sourceContentDBSnapshotName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Run(bool runAsynchronously, valuetype System.DateTime deploySinceTime, string sourceContentDBSnapshotName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Run(System.Boolean,System.DateTime,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Run (runAsynchronously As Boolean, deploySinceTime As DateTime, sourceContentDBSnapshotName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Run(bool runAsynchronously, DateTime deploySinceTime, System::String ^ sourceContentDBSnapshotName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="runAsynchronously" Type="System.Boolean" />
+        <Parameter Name="deploySinceTime" Type="System.DateTime" />
+        <Parameter Name="sourceContentDBSnapshotName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="runAsynchronously">Specifies whether to execute the content deployment job synchronously or asynchronously.</param>
+        <param name="deploySinceTime">Determines whether to deploy changes that have been made since the specified date and time..</param>
+        <param name="sourceContentDBSnapshotName">Specifies the name of a SQL snapshot which is to be used for an export operation.</param>
+        <summary>Executes a content deployment job based on the type of transformation within the referenced time by using the specified snapshot.</summary>
+        <remarks>
+          <para>If <paramref name="runAsynchronously" /> is <b>true</b>, the method will start the execution of the content deployment job and can return before the execution of the content deployment job is complete, which in this case means the export phase of the job will run in the timer service. Otherwise, the method will not return until the execution is complete; in this case, the export phase of the job will run in the current process.</para>
+          <para>If <paramref name="deploySinceTime" /> is set to <see cref="T:System.DateTime.MinValue" />, then the execution of the content deployment job propagates content to the target normally, as determined by the value of the <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.ExportMethod" /> property of the job. Otherwise, the execution of the content deployment job behaves as if the <b>ExportMethod</b> property was set to <see cref="F:Microsoft.SharePoint.Deployment.SPExportMethodType.ExportChanges" /> (regardless of the actual value of the property), propagating all changes that occurred on the source since the date and time specified by the <paramref name="deploySinceTime" /> value. The value of <paramref name="deploySinceTime" /> must be less than or equal to the time of the last successful run of the content deployment job (<see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastSuccessfulDeploymentTime" /> property) and be a valid change time for the WSS Change Log; the log is periodically purged, which can make older change times invalid. Overriding the default behavior of the job execution by providing a specific value of <paramref name="deploySinceTime" /> is an advanced option and should be used carefully with a deep understanding of content deployment and WSS Change Log in general, and with a clear understanding of what it is that the caller is trying to achieve.</para>
+          <para>If <paramref name="sourceContentDBSnapshotName" /> is null or <see cref="F:System.String.Empty" />, then the use of SQL snapshot for export during the execution of the content deployment job is determined by the value of the <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.SqlSnapshotSetting" /> property (see the <b>SqlSnapshotSetting</b> property for more information). Otherwise, the execution of the content deployment job will use SQL snapshot specified by <paramref name="sourceContentDBSnapshotName" /> for export. In this case, if the SQL Server snapshot specified by <paramref name="sourceContentDBSnapshotName" /> does not exist or if the SQL Server being used does not support SQL snapshots, then the execution of the job will fail.</para>
+          <para>If an attempt is made to execute a job that is already running or is in a timed out state (<see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastStatus" /> property), execution of the job will fail.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentException">A specific reason is better described by the actual exception's message. Some common messages include:An attempt is made to execute a job that is already running.An attempt is made to execute a job that is in a timed out state (<see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastStatus" /> property).An attempt was made to run the job by using SQL snapshot for export, but SQL Server is being used and does not support SQL snapshots.The SQL snapshot specified by <paramref name="sourceContentDBSnapshotName" /> was not found.Provided value of <paramref name="deploySinceTime" /> specifies a time later than the time of the last successful run of the content deployment job.</exception>
+        <exception cref="T:Microsoft.SharePoint.SPException">Can be propagated from underlying Windows SharePoint Services (WSS) layers.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SqlSnapshotSetting">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSqlSnapshotSetting SqlSnapshotSetting { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSqlSnapshotSetting SqlSnapshotSetting" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.SqlSnapshotSetting" />
+      <MemberSignature Language="VB.NET" Value="Public Property SqlSnapshotSetting As ContentDeploymentSqlSnapshotSetting" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentSqlSnapshotSetting SqlSnapshotSetting { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentSqlSnapshotSetting get(); void set(Microsoft::SharePoint::Publishing::Administration::ContentDeploymentSqlSnapshotSetting value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSqlSnapshotSetting</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies whether the content deployment job will use SQL snapshot for an export operation.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default value is <see cref="F:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSqlSnapshotSetting.None" />.</para>
+          <para>Setting the value to <see cref="F:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSqlSnapshotSetting.CreateNew" /> when the SQL Server being used does not support snapshots will cause the content deployment job to fail during execution.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Test">
+      <MemberSignature Language="C#" Value="public void Test ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Test() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Test" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Test ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Test();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Tests this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object synchronously.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Test">
+      <MemberSignature Language="C#" Value="public void Test (bool runAsynchronously);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Test(bool runAsynchronously) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Test(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Test (runAsynchronously As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Test(bool runAsynchronously);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="runAsynchronously" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="runAsynchronously">Whether to run this job asynchronously or synchronously.</param>
+        <summary>Tests this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> job asynchronously by default.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Test">
+      <MemberSignature Language="C#" Value="public void Test (string sourceContentDBSnapshotName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Test(string sourceContentDBSnapshotName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Test(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Test (sourceContentDBSnapshotName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Test(System::String ^ sourceContentDBSnapshotName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sourceContentDBSnapshotName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="sourceContentDBSnapshotName">Specifies a name of a SQL snapshot to be used for export operation.</param>
+        <summary>Performs a test run for the content deployment job.</summary>
+        <remarks>
+          <para>The test run includes the export phase of the content deployment job only.</para>
+          <para>The method executes the content deployment job synchronously. That is, it will not return until the execution of the content deployment job is complete. In this case that means that the export phase of the job will run in the current process.</para>
+          <para>The execution of the content deployment job propagates content to the target normally as determined by the value of the <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.ExportMethod" /> property of the job.</para>
+          <para>If <paramref name="sourceContentDBSnapshotName" /> is null or <see cref="F:System.String.Empty" />, the use of SQL snapshot for export during the execution of the content deployment job is determined by the value of the <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.SqlSnapshotSetting" /> property (see <b>SqlSnapshotSetting</b> for more information). Otherwise, the execution of the content deployment job will use SQL snapshot specified by <paramref name="sourceContentDBSnapshotName" /> for export. In this case, if the SQL Server snapshot specified by <paramref name="sourceContentDBSnapshotName" /> does not exist or if the SQL Server being used does not support SQL snapshots, the execution of the job will fail.</para>
+          <para>If an attempt is made to execute a job that is already running or is in a timed out state (<see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastStatus" /> property), the execution of the job will fail.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentException">A specific reason is better described by the actual exception's message. Some common ones can include:An attempt is made to execute a job that is already running.An attempt is made to execute a job that is in a timed out state (<see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastStatus" /> property).An attempt was made to run the job by using SQL snapshot for export, but the SQL Server being used does not support SQL snapshots.The SQL snapshot specified by <paramref name="sourceContentDBSnapshotName" /> was not found.</exception>
+        <exception cref="T:Microsoft.SharePoint.SPException">Can be propagated from underlying Windows SharePoint Services 3.0 (WSS) layers.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Test">
+      <MemberSignature Language="C#" Value="public void Test (bool runAsynchronously, string sourceContentDBSnapshotName);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Test(bool runAsynchronously, string sourceContentDBSnapshotName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Test(System.Boolean,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Test (runAsynchronously As Boolean, sourceContentDBSnapshotName As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Test(bool runAsynchronously, System::String ^ sourceContentDBSnapshotName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="runAsynchronously" Type="System.Boolean" />
+        <Parameter Name="sourceContentDBSnapshotName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="runAsynchronously">Specifies whether to execute the content deployment job synchronously or asynchronously.</param>
+        <param name="sourceContentDBSnapshotName">Specifies a name of a SQL snapshot to be used for an export operation.</param>
+        <summary>Performs a test run for the content deployment job based on the type of transformation and by using the specified snapshot.</summary>
+        <remarks>
+          <para>The test run includes the export phase of the content deployment job only. </para>
+          <para>If <paramref name="runAsynchronously" /> is <b>true</b>, the method starts to execute the content deployment job and can return before the execution of the content deployment job is complete. In this case, that means that the export phase of the job will run in the timer service. Otherwise, the method will not return until the execution is complete; in this case, the export phase of the job will run in the current process.</para>
+          <para>The execution of the content deployment job is propagates content to the target normally as —determined by the value of the <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.ExportMethod" /> property of the job.</para>
+          <para>If the <paramref name="sourceContentDBSnapshotName" /> parameter is null or <see cref="F:System.String.Empty" />, the use of SQL snapshot for an export during the execution of the content deployment job is determined by the value of the <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.SqlSnapshotSetting" /> property (see the <b>SqlSnapshotSetting</b> for more information). Otherwise, the execution of the content deployment job will use SQL snapshot specified by the  <paramref name="sourceContentDBSnapshotName" /> parameter for export. In this case, if the SQL snapshot specified by <paramref name="sourceContentDBSnapshotName" /> does not exist or if the SQL Server being used does not support SQL snapshots, the execution of the job will fail.</para>
+          <para>If an attempt is made to execute a job that is already running or is in a timed out state (<see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastStatus" /> property), the execution of the job will fail.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentException">A specific reason is better described by the actual exception's message. Some common messages include:An attempt is made to execute a job that is already running.An attempt is made to execute a job that is in a timed out state (<see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.LastStatus" /> property).An attempt was made to run the job by using SQL snapshot for an export, but the SQL Server being used does not support SQL snapshots.The SQL snapshot specified by <paramref name="sourceContentDBSnapshotName" /> was not found.</exception>
+        <exception cref="T:Microsoft.SharePoint.SPException">Can be propagated from underlying Windows SharePoint Services (WSS) layers.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="TimerJobDefinition">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Administration.SPJobDefinition TimerJobDefinition { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Administration.SPJobDefinition TimerJobDefinition" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.TimerJobDefinition" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TimerJobDefinition As SPJobDefinition" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::SPJobDefinition ^ TimerJobDefinition { Microsoft::SharePoint::Administration::SPJobDefinition ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Administration.SPJobDefinition</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the timer service for the <see cref="T:Microsoft.SharePoint.Administration.SPJobDefinition" /> object.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.Administration.SPJobDefinition" /> that is associated with this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TimerJobDefinitionId">
+      <MemberSignature Language="C#" Value="public Guid TimerJobDefinitionId { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid TimerJobDefinitionId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.TimerJobDefinitionId" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TimerJobDefinitionId As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid TimerJobDefinitionId { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the timer service GUID for the <see cref="T:Microsoft.SharePoint.Administration.SPJobDefinition" /> object that is associated with this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <value>The timer service GUID for the <see cref="T:Microsoft.SharePoint.Administration.SPJobDefinition" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Transferring">
+      <MemberSignature Language="C#" Value="public event Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventHandler Transferring;" />
+      <MemberSignature Language="ILAsm" Value=".event class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventHandler Transferring" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Transferring" />
+      <MemberSignature Language="VB.NET" Value="Public Custom Event Transferring As ContentDeploymentEventHandler " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; event Microsoft::SharePoint::Publishing::Administration::ContentDeploymentEventHandler ^ Transferring;" />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventHandler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies the event that is raised when the data transfer is about to start.</summary>
+        <remarks>To be added.</remarks>
+        <example>
+          <para>The event handler receives an argument of type <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentEventArgs" /> that contains data related to this event.</para>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Updates this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

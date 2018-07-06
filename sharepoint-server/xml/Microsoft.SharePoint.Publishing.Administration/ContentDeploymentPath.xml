@@ -1,0 +1,736 @@
+﻿<Type Name="ContentDeploymentPath" FullName="Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath">
+  <TypeSignature Language="C#" Value="public sealed class ContentDeploymentPath : Microsoft.SharePoint.Publishing.DisposableListItemWrapper" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ContentDeploymentPath extends Microsoft.SharePoint.Publishing.DisposableListItemWrapper" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class ContentDeploymentPath&#xA;Inherits DisposableListItemWrapper" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ContentDeploymentPath sealed : Microsoft::SharePoint::Publishing::DisposableListItemWrapper" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.DisposableListItemWrapper</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents the configuration of content deployment between one source site and one target site. This class cannot be inherited.</summary>
+    <remarks>
+      <para>The <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> class is a wrapper to a <see cref="T:Microsoft.SharePoint.SPListItem" /> object that stored the content deployment path information in a list. Multiple content deployment jobs can be created that are based on a content deployment path in order to schedule content deployment between the sites that are specified in the content deployment path.</para>
+      <para>A content deployment path has the following properties.</para>
+      <list type="table">
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.Name" />
+          </term>
+          <description>The name of the content deployment path.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.Description" />
+          </term>
+          <description>Text describing the content deployment path.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.SourceServerUri" />
+          </term>
+          <description>The URI for the source server.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.SourceSiteCollection" />
+          </term>
+          <description>The source site collection from which the content is deployed.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.DestinationAdminServerUri" />
+          </term>
+          <description>The URI for the destination server.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.DestinationSiteCollection" />
+          </term>
+          <description>The destination site collection to which the content is deployed.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.IncludeUserInfoDateTime" />
+          </term>
+          <description>Gets or sets the <b>SPImportUserInfoDateTimeOption</b> for this content deployment path.</description>
+        </item>
+        <item>
+          <term>
+            <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.IncludeSecurity" />
+          </term>
+          <description>Gets or sets the <b>SPIncludeSecurity</b> property for this content deployment path.</description>
+        </item>
+      </list>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="AuthenticationType">
+      <MemberSignature Language="C#" Value="public string AuthenticationType { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AuthenticationType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.AuthenticationType" />
+      <MemberSignature Language="VB.NET" Value="Public Property AuthenticationType As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AuthenticationType { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Windows-based authentication type that is used to contact the destination administration server.</summary>
+        <value>A Windows-based authentication type.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CheckSourceStatus">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSourceError[] CheckSourceStatus (int maxErrors);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSourceError[] CheckSourceStatus(int32 maxErrors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.CheckSourceStatus(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CheckSourceStatus (maxErrors As Integer) As ContentDeploymentSourceError()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::Administration::ContentDeploymentSourceError ^&gt; ^ CheckSourceStatus(int maxErrors);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentSourceError[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="maxErrors" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="maxErrors">The maximum number of errors to be returned.</param>
+        <summary>Performs a content deployment source status check.</summary>
+        <returns>Errors during status check.</returns>
+        <remarks>
+          <para>This method can be used to check whether a site collection can act as a content deployment source. If there are errors during this check, content deployment fails.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Delete">
+      <MemberSignature Language="C#" Value="public void Delete ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Delete() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.Delete" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Delete ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Delete();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deletes the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob" /> object definition from this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DeploymentStatusDictionary">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.DeploymentStatusDictionary DeploymentStatusDictionary { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Administration.DeploymentStatusDictionary DeploymentStatusDictionary" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.DeploymentStatusDictionary" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DeploymentStatusDictionary As DeploymentStatusDictionary" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::DeploymentStatusDictionary ^ DeploymentStatusDictionary { Microsoft::SharePoint::Publishing::Administration::DeploymentStatusDictionary ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.DeploymentStatusDictionary</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of deployment statuses.</summary>
+        <value>Collection of deployment statuses.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the text describing this content deployment path.</summary>
+        <value>A string that contains a description of this content deployment path.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DestinationAdminServerUri">
+      <MemberSignature Language="C#" Value="public Uri DestinationAdminServerUri { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri DestinationAdminServerUri" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.DestinationAdminServerUri" />
+      <MemberSignature Language="VB.NET" Value="Public Property DestinationAdminServerUri As Uri" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Uri ^ DestinationAdminServerUri { Uri ^ get(); void set(Uri ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URI for the destination administration server.</summary>
+        <value>The URI for the destination administration virtual server.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">Throws if null or empty.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="DestinationServerUri">
+      <MemberSignature Language="C#" Value="public Uri DestinationServerUri { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri DestinationServerUri" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.DestinationServerUri" />
+      <MemberSignature Language="VB.NET" Value="Public Property DestinationServerUri As Uri" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Uri ^ DestinationServerUri { Uri ^ get(); void set(Uri ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URI for the destination server.</summary>
+        <value>The URI for the destination server.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DestinationSiteCollection">
+      <MemberSignature Language="C#" Value="public string DestinationSiteCollection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DestinationSiteCollection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.DestinationSiteCollection" />
+      <MemberSignature Language="VB.NET" Value="Public Property DestinationSiteCollection As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DestinationSiteCollection { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the destination site collection.</summary>
+        <value>The destination site collection.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EnableCompression">
+      <MemberSignature Language="C#" Value="public bool EnableCompression { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool EnableCompression" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.EnableCompression" />
+      <MemberSignature Language="VB.NET" Value="Public Property EnableCompression As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool EnableCompression { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether to enable compression during export.</summary>
+        <value>A value indicating whether compression during export is enabled or disabled.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EnableEventReceivers">
+      <MemberSignature Language="C#" Value="public bool EnableEventReceivers { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool EnableEventReceivers" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.EnableEventReceivers" />
+      <MemberSignature Language="VB.NET" Value="Public Property EnableEventReceivers As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool EnableEventReceivers { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether to enable event receivers during import.</summary>
+        <value>A value indicating whether event receivers are enabled or disabled during import.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetAllPaths">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPathCollection GetAllPaths ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPathCollection GetAllPaths() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.GetAllPaths" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetAllPaths () As ContentDeploymentPathCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::Administration::ContentDeploymentPathCollection ^ GetAllPaths();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPathCollection</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns a list of all paths that are used by the current instance of the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> class that are associated with this <see cref="T:Microsoft.SharePoint.SPSite" />.</summary>
+        <returns>All paths that are used by the current instance of the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> class.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetInstance">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath GetInstance (Guid pathId);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath GetInstance(valuetype System.Guid pathId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.GetInstance(System.Guid)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetInstance (pathId As Guid) As ContentDeploymentPath" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::Administration::ContentDeploymentPath ^ GetInstance(Guid pathId);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="pathId" Type="System.Guid" />
+      </Parameters>
+      <Docs>
+        <param name="pathId">Id of the content deployment path.</param>
+        <summary>Returns a <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object with the specified <paramref name="pathId" />.</summary>
+        <returns>The <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> with the specified <paramref name="pathId" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetInstance">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath GetInstance (string pathName);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath GetInstance(string pathName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.GetInstance(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetInstance (pathName As String) As ContentDeploymentPath" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::Administration::ContentDeploymentPath ^ GetInstance(System::String ^ pathName);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="pathName" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="pathName">The name of the specified content deployment path.</param>
+        <summary>Returns a <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object with the specified <paramref name="pathName" />. </summary>
+        <returns>The <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> with the specified <paramref name="pathName" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteCollectionNames">
+      <MemberSignature Language="C#" Value="public string[] GetSiteCollectionNames (string virtualServerUrl);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string[] GetSiteCollectionNames(string virtualServerUrl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.GetSiteCollectionNames(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetSiteCollectionNames (virtualServerUrl As String) As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::String ^&gt; ^ GetSiteCollectionNames(System::String ^ virtualServerUrl);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="virtualServerUrl" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="virtualServerUrl">The URL for the virtual server on the destination server farm.</param>
+        <summary>Gets the site collection names for the given virtual server on the destination farm.</summary>
+        <returns>The site collection names for the specified virtual server on the destination farm. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetSiteCollectionNames">
+      <MemberSignature Language="C#" Value="public static string[] GetSiteCollectionNames (string virtualServerUrl, string destinationAdminServerUrl, System.Net.ICredentials credentials);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string[] GetSiteCollectionNames(string virtualServerUrl, string destinationAdminServerUrl, class System.Net.ICredentials credentials) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.GetSiteCollectionNames(System.String,System.String,System.Net.ICredentials)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetSiteCollectionNames (virtualServerUrl As String, destinationAdminServerUrl As String, credentials As ICredentials) As String()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;System::String ^&gt; ^ GetSiteCollectionNames(System::String ^ virtualServerUrl, System::String ^ destinationAdminServerUrl, System::Net::ICredentials ^ credentials);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="virtualServerUrl" Type="System.String" />
+        <Parameter Name="destinationAdminServerUrl" Type="System.String" />
+        <Parameter Name="credentials" Type="System.Net.ICredentials" />
+      </Parameters>
+      <Docs>
+        <param name="virtualServerUrl">The URL for the virtual server on the destination server farm.</param>
+        <param name="destinationAdminServerUrl">The URL for the destination administration server.</param>
+        <param name="credentials">The credentials that are required to access the destination administration server.</param>
+        <summary>Uses the credentials that are provided to rRetrieves site collection names for the specified virtual server on the destination server farm.</summary>
+        <returns>The site collection names for the specified virtual server on the destination server farm, based on the specified parameters.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetVirtualServersInformation">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Internal.Xml.VirtualServerInformation[] GetVirtualServersInformation ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.Internal.Xml.VirtualServerInformation[] GetVirtualServersInformation() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.GetVirtualServersInformation" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetVirtualServersInformation () As VirtualServerInformation()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::Internal::Xml::VirtualServerInformation ^&gt; ^ GetVirtualServersInformation();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Internal.Xml.VirtualServerInformation[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Retrieves the virtual server names and URLs for the destination server farm.</summary>
+        <returns>The virtual server names and URLs for the destination server farm.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetVirtualServersInformation">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.Internal.Xml.VirtualServerInformation[] GetVirtualServersInformation (string destinationAdminServerUrl, System.Net.ICredentials credentials);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.Internal.Xml.VirtualServerInformation[] GetVirtualServersInformation(string destinationAdminServerUrl, class System.Net.ICredentials credentials) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.GetVirtualServersInformation(System.String,System.Net.ICredentials)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetVirtualServersInformation (destinationAdminServerUrl As String, credentials As ICredentials) As VirtualServerInformation()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;Microsoft::SharePoint::Publishing::Internal::Xml::VirtualServerInformation ^&gt; ^ GetVirtualServersInformation(System::String ^ destinationAdminServerUrl, System::Net::ICredentials ^ credentials);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Internal.Xml.VirtualServerInformation[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="destinationAdminServerUrl" Type="System.String" />
+        <Parameter Name="credentials" Type="System.Net.ICredentials" />
+      </Parameters>
+      <Docs>
+        <param name="destinationAdminServerUrl">The URL for the destination administration server.</param>
+        <param name="credentials">The credentials that are required to access the destination administration server.</param>
+        <summary>Uses the credentials provided to rRetrieves the virtual server names and URLs for the specified destination server farm.</summary>
+        <returns>The virtual server names and URLs for the destination server farm.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Id">
+      <MemberSignature Language="C#" Value="public Guid Id { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid Id" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.Id" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Id As Guid" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid Id { Guid get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Id for this <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object.</summary>
+        <value>The Id for this <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" />. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeSecurity">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Deployment.SPIncludeSecurity IncludeSecurity { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Deployment.SPIncludeSecurity IncludeSecurity" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.IncludeSecurity" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludeSecurity As SPIncludeSecurity" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Deployment::SPIncludeSecurity IncludeSecurity { Microsoft::SharePoint::Deployment::SPIncludeSecurity get(); void set(Microsoft::SharePoint::Deployment::SPIncludeSecurity value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Deployment.SPIncludeSecurity</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <see cref="T:Microsoft.SharePoint.Deployment.SPIncludeSecurity" /> property for this content deployment path.</summary>
+        <value>A value that indicating whether to secure this <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeUserInfoDateTime">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Deployment.SPImportUserInfoDateTimeOption IncludeUserInfoDateTime { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Deployment.SPImportUserInfoDateTimeOption IncludeUserInfoDateTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.IncludeUserInfoDateTime" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludeUserInfoDateTime As SPImportUserInfoDateTimeOption" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Deployment::SPImportUserInfoDateTimeOption IncludeUserInfoDateTime { Microsoft::SharePoint::Deployment::SPImportUserInfoDateTimeOption get(); void set(Microsoft::SharePoint::Deployment::SPImportUserInfoDateTimeOption value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Deployment.SPImportUserInfoDateTimeOption</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the <see cref="T:Microsoft.SharePoint.Deployment.SPImportUserInfoDateTimeOption" /> for this content deployment path.</summary>
+        <value>Information about the current user, and the date and time that the content is deployed.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsPathEnabled">
+      <MemberSignature Language="C#" Value="public bool IsPathEnabled { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsPathEnabled" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.IsPathEnabled" />
+      <MemberSignature Language="VB.NET" Value="Public Property IsPathEnabled As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsPathEnabled { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value indicating whether this <see cref="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object is enabled or disabled.</summary>
+        <value>A value indicating whether the content deployment path is enabled or disabled.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Jobs">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection Jobs { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection Jobs" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.Jobs" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Jobs As ContentDeploymentJobCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobCollection ^ Jobs { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJobCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection" /> for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJobCollection" /> for this for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="KeepTemporaryFiles">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.TemporaryFilesOption KeepTemporaryFiles { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.Administration.TemporaryFilesOption KeepTemporaryFiles" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.KeepTemporaryFiles" />
+      <MemberSignature Language="VB.NET" Value="Public Property KeepTemporaryFiles As TemporaryFilesOption" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::TemporaryFilesOption KeepTemporaryFiles { Microsoft::SharePoint::Publishing::Administration::TemporaryFilesOption get(); void set(Microsoft::SharePoint::Publishing::Administration::TemporaryFilesOption value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.TemporaryFilesOption</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether to keep exported files in a temporary folder after content deployment is done.</summary>
+        <value>A value indicating whether to keep temporary files that were generated during export after the export process is complete.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.Name" />
+      <MemberSignature Language="VB.NET" Value="Public Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the name of this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object.</summary>
+        <value>The name of this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" />.</value>
+        <remarks>
+          <para>Setting the <see cref="P:Microsoft.SharePoint.Publihsing.Administration.ContentDeploymentPath.Name" /> property also updates the name of the quick deploy job that is associated with this path.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ParentCollection">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPathCollection ParentCollection { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPathCollection ParentCollection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.ParentCollection" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ParentCollection As ContentDeploymentPathCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentPathCollection ^ ParentCollection { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentPathCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPathCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the parent collection for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Password">
+      <MemberSignature Language="C#" Value="public string Password { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Password" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.Password" />
+      <MemberSignature Language="VB.NET" Value="Public Property Password As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Password { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the password that is used to contact the destinatioin administration server.</summary>
+        <value>The password that is used to contact the administration virtual server that is the destination of this content deployment path.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="QuickDeployJob">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob QuickDeployJob { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob QuickDeployJob" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.QuickDeployJob" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property QuickDeployJob As ContentDeploymentJob" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJob ^ QuickDeployJob { Microsoft::SharePoint::Publishing::Administration::ContentDeploymentJob ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.Administration.ContentDeploymentJob</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the quick deploy job for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SourceServerUri">
+      <MemberSignature Language="C#" Value="public Uri SourceServerUri { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri SourceServerUri" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.SourceServerUri" />
+      <MemberSignature Language="VB.NET" Value="Public Property SourceServerUri As Uri" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Uri ^ SourceServerUri { Uri ^ get(); void set(Uri ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the URI for the source server.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">Throws if null or empty.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SourceSiteCollection">
+      <MemberSignature Language="C#" Value="public string SourceSiteCollection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string SourceSiteCollection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.SourceSiteCollection" />
+      <MemberSignature Language="VB.NET" Value="Public Property SourceSiteCollection As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SourceSiteCollection { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the source site collection for this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">Throws if null or empty.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Updates this <see cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath" /> path.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UserId">
+      <MemberSignature Language="C#" Value="public string UserId { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string UserId" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentPath.UserId" />
+      <MemberSignature Language="VB.NET" Value="Public Property UserId As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ UserId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the user Id that is required to access the destination administration server.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

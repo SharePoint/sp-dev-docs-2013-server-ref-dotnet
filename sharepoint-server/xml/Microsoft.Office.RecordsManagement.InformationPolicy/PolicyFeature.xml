@@ -1,0 +1,464 @@
+﻿<Type Name="PolicyFeature" FullName="Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature">
+  <TypeSignature Language="C#" Value="public class PolicyFeature" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit PolicyFeature extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature" />
+  <TypeSignature Language="VB.NET" Value="Public Class PolicyFeature" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PolicyFeature" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>A policy feature installed on the SharePoint server farm.</summary>
+    <remarks>
+      <para>A policy feature is an assembly or other piece of code that provides some content management functionality to Microsoft SharePoint Server 2010, and possibly to client application documents as well.</para>
+      <para>Each policy feature must implement the <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature" /> interface.</para>
+      <para>For more information about policy features, including additional requirements, see Policy Feature Overview.</para>
+      <para>Policy features are scoped at the farm level, as opposed to policies, which are scoped at the site collection level. Logically, each policy is a collection of instruction sets for one or more policy features. For each policy feature that you want to include in a policy, you include an instruction set, called a policy item, in the policy. A policy item contains the settings for only one policy feature.</para>
+      <para>For more information about information policies in general, see Introduction to Information Management Policy.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="AssemblyName">
+      <MemberSignature Language="C#" Value="public string AssemblyName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AssemblyName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.AssemblyName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AssemblyName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AssemblyName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the strong name of the policy feature assembly.</summary>
+        <value>A string representing the strong name of the policy feature assembly.</value>
+        <remarks>
+          <para>Use the <see cref="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.ClassName" /> property to get the class name of the assembly.</para>
+          <para>The policy feature assembly must be stored in the global assembly cache.</para>
+          <para>The policy feature assembly must contain a class that implements the <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature" /> interface. For more information, see IPolicyFeature Interface Overview.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ClassName">
+      <MemberSignature Language="C#" Value="public string ClassName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ClassName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.ClassName" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ClassName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ClassName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of the class within the policy feature assembly that implements the <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.IPolicyFeature" /> interface.</summary>
+        <value>A string that represents the name of the class.</value>
+        <remarks>
+          <para>Use the <see cref="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.AssemblyName" /> property to get the policy feature assembly name.</para>
+          <para>The policy feature assembly must be stored in the global assembly cache.</para>
+          <para>The policy feature assembly must contain a class that implements the <b>IPolicyFeature</b> interface. For more information, see IPolicyFeature Interface Overview.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConfigPage">
+      <MemberSignature Language="C#" Value="public string ConfigPage { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ConfigPage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.ConfigPage" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ConfigPage As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ConfigPage { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the URL to a Web control used to edit policy instance-level settings.</summary>
+        <value>A string that represents the URL to a Web control used to edit policy instance-level settings.</value>
+        <remarks>
+          <para>The specified Web control is hosted within Microsoft SharePoint Server 2010 on the policy item authoring page, and enables users to set policy instance-level settings for this feature. This URL must be server-relative.</para>
+          <para>If you do not specify a custom settings control, users do not have the ability to overwrite or edit the default data specified for the policy feature in the <see cref="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.DefaultCustomData" /> property, and therefore lack the ability to customize the feature.</para>
+          <para>For more information about custom settings controls, see Policy Feature Definitions.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConfigPageInstructions">
+      <MemberSignature Language="C#" Value="public string ConfigPageInstructions { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ConfigPageInstructions" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.ConfigPageInstructions" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ConfigPageInstructions As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ConfigPageInstructions { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the instructions for using the <see cref="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.ConfigPage" /> Web control.</summary>
+        <value>A string that represents the instructions for using the Web control.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultCustomData">
+      <MemberSignature Language="C#" Value="public string DefaultCustomData { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string DefaultCustomData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.DefaultCustomData" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DefaultCustomData As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DefaultCustomData { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the default values for any policy instance-level settings for this policy feature.</summary>
+        <value>A string that represents the default values for any policy instance-level settings for this policy feature.</value>
+        <remarks>
+          <para>This property can contain any valid XML, as long as it can be parsed by the custom settings controls specified by the <see cref="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.ConfigPage" /> property. Microsoft SharePoint Server 2010 does not parse or use this data.</para>
+          <para>For more information about custom settings controls, see Policy Feature Definitions.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.Description" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the short description of the policy feature and of the service it provides.</summary>
+        <value>A string that represents the short description of the policy feature.</value>
+        <remarks>
+          <para>This description is displayed in the Microsoft SharePoint Server 2010 user interface.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GlobalConfigPage">
+      <MemberSignature Language="C#" Value="public string GlobalConfigPage { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string GlobalConfigPage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.GlobalConfigPage" />
+      <MemberSignature Language="VB.NET" Value="Public Property GlobalConfigPage As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GlobalConfigPage { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the URL to a Web control used to edit server farm-level settings for this policy feature.</summary>
+        <value>A string that represents the URL to a Web control used to edit server farm-level settings for this policy feature.</value>
+        <remarks>
+          <para>This Web control is hosted within Microsoft SharePoint Server 2010 on the policy feature administration page, and enables the server farm administrator to set server farm-level settings for this feature. This URL must be server-relative.</para>
+          <para>The server farm-level Web control must implement the <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.GlobalCustomSettingsControl" /> class.</para>
+          <para>If you do not specify a global custom settings control, administrators do not have the ability to overwrite or edit the default global data specified for the policy feature in the <see cref="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.GlobalCustomData" /> property, and as a result, lack the ability to customize the feature at the administrator level. This limits the administrator's options to either activate the policy feature, or not.</para>
+          <para>For more information about global custom settings controls, see Policy Feature Definitions.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GlobalCustomData">
+      <MemberSignature Language="C#" Value="public string GlobalCustomData { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string GlobalCustomData" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.GlobalCustomData" />
+      <MemberSignature Language="VB.NET" Value="Public Property GlobalCustomData As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GlobalCustomData { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the default settings for any server farm-level settings for this policy feature.</summary>
+        <value>A string that represents the default settings for any server farm-level settings for this policy feature.</value>
+        <remarks>
+          <para>This property can contain any valid XML, as long as it can be parsed by the custom settings controls specified by the <see cref="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.GlobalConfigPage" /> property. Microsoft SharePoint Server 2010 does not parse or use this data.</para>
+          <para>For more information about global custom settings controls, see Policy Feature Definitions.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Group">
+      <MemberSignature Language="C#" Value="public string Group { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Group" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.Group" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Group As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Group { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the policy feature group to which this policy feature belongs.</summary>
+        <value>A string that represents the policy feature group to which this policy feature belongs.</value>
+        <remarks>
+          <para>You can use policy feature groups to categorize policy features that provide similar functionality or services. Microsoft SharePoint Server 2010 uses policy feature groups to visually organize policy features on the policy item authoring pages.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Id">
+      <MemberSignature Language="C#" Value="public string Id { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Id" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.Id" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Id As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Id { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The fully qualified name of the policy feature.</summary>
+        <value>A string that represents the fully qualified name of the policy feature.</value>
+        <remarks>
+          <para>Microsoft SharePoint Server 2010 uses this name to uniquely identify each policy feature.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.Name" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name to display in the Microsoft SharePoint Server 2010 interface for this information policy feature.</summary>
+        <value>A string that represents the policy feature name.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Publisher">
+      <MemberSignature Language="C#" Value="public string Publisher { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Publisher" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.Publisher" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Publisher As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Publisher { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the name of the creator of the policy feature, as it will be displayed in the Microsoft SharePoint Server 2010 user interface.</summary>
+        <value>A string that represents the name of the creator of the policy feature.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ResourceList">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.InformationPolicy.PolicyResourceCollection ResourceList { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.RecordsManagement.InformationPolicy.PolicyResourceCollection ResourceList" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.ResourceList" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ResourceList As PolicyResourceCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::RecordsManagement::InformationPolicy::PolicyResourceCollection ^ ResourceList { Microsoft::Office::RecordsManagement::InformationPolicy::PolicyResourceCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.InformationPolicy.PolicyResourceCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of policy resources for this policy feature.</summary>
+        <value>A <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyResourceCollection" /> that represents the collection of policy resources for this policy feature.</value>
+        <remarks>
+          <para>Each policy feature has its own resource list, which lists the policy resources available to it. For more information, see Policy Resource Overview.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ResourceTypes">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.InformationPolicy.PolicyResourceTypeCollection ResourceTypes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.RecordsManagement.InformationPolicy.PolicyResourceTypeCollection ResourceTypes" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.ResourceTypes" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ResourceTypes As PolicyResourceTypeCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::RecordsManagement::InformationPolicy::PolicyResourceTypeCollection ^ ResourceTypes { Microsoft::Office::RecordsManagement::InformationPolicy::PolicyResourceTypeCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.InformationPolicy.PolicyResourceTypeCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of any resource types employed by this policy feature.</summary>
+        <value>A <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyResourceTypeCollection" /> that represents the collection of any resource types employed by this policy feature.</value>
+        <remarks>
+          <para>For more information, see Policy Resource Overview.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="State">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeatureState State { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeatureState State" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.State" />
+      <MemberSignature Language="VB.NET" Value="Public Property State As PolicyFeatureState" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::RecordsManagement::InformationPolicy::PolicyFeatureState State { Microsoft::Office::RecordsManagement::InformationPolicy::PolicyFeatureState get(); void set(Microsoft::Office::RecordsManagement::InformationPolicy::PolicyFeatureState value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeatureState</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets whether the policy feature is hidden or visible.</summary>
+        <value>A <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeatureState" /> enumeration that is one of the following two values: <see cref="F:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeatureState.Hidden" /> or <see cref="F:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeatureState.Visible" />.</value>
+        <remarks>
+          <para>Hidden policy features are not displayed in the Microsoft SharePoint Server 2010 user interface for inclusion in information policies. However, they can still be accessed programmatically.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Writes the changes made to the policy feature back to the SharePoint content database.</summary>
+        <remarks>
+          <para>If you do not call this method, any changes you have made programmatically to the policy feature are not saved.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Validate">
+      <MemberSignature Language="C#" Value="public void Validate ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Validate() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.Validate" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Validate ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Validate();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Validates this <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature" />.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateManifest">
+      <MemberSignature Language="C#" Value="public static void ValidateManifest (string xmlManifest);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ValidateManifest(string xmlManifest) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.ValidateManifest(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub ValidateManifest (xmlManifest As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ValidateManifest(System::String ^ xmlManifest);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="xmlManifest" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="xmlManifest">The XML information policy feature definition to validate.</param>
+        <summary>Validates the specified XML information policy feature definition.</summary>
+        <remarks>
+          <para>For more information about the policy feature schema, see Policy Feature Definition Schema Overview.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateResources">
+      <MemberSignature Language="C#" Value="public void ValidateResources ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ValidateResources() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature.ValidateResources" />
+      <MemberSignature Language="VB.NET" Value="Public Sub ValidateResources ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void ValidateResources();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Validates the resources used by this <see cref="T:Microsoft.Office.RecordsManagement.InformationPolicy.PolicyFeature" />.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

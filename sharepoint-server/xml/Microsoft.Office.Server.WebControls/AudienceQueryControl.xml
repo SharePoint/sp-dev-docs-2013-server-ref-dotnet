@@ -1,0 +1,150 @@
+﻿<Type Name="AudienceQueryControl" FullName="Microsoft.Office.Server.WebControls.AudienceQueryControl">
+  <TypeSignature Language="C#" Value="public class AudienceQueryControl : Microsoft.SharePoint.WebControls.SimpleQueryControl" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit AudienceQueryControl extends Microsoft.SharePoint.WebControls.SimpleQueryControl" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.WebControls.AudienceQueryControl" />
+  <TypeSignature Language="VB.NET" Value="Public Class AudienceQueryControl&#xA;Inherits SimpleQueryControl" />
+  <TypeSignature Language="C++ CLI" Value="public ref class AudienceQueryControl : Microsoft::SharePoint::WebControls::SimpleQueryControl" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.WebControls.SimpleQueryControl</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Provides a control to search global audiences, distribution lists, and SharePoint groups by audience name. This control works with the <see cref="T:Microsoft.Office.Server.WebControls.AudiencePickerDialog" /> control.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public AudienceQueryControl ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.WebControls.AudienceQueryControl.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; AudienceQueryControl();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.Server.WebControls.AudienceQueryControl" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEntity">
+      <MemberSignature Language="C#" Value="public override Microsoft.SharePoint.WebControls.PickerEntity GetEntity (System.Data.DataRow dr);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.SharePoint.WebControls.PickerEntity GetEntity(class System.Data.DataRow dr) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.WebControls.AudienceQueryControl.GetEntity(System.Data.DataRow)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetEntity (dr As DataRow) As PickerEntity" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::SharePoint::WebControls::PickerEntity ^ GetEntity(System::Data::DataRow ^ dr);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.WebControls.PickerEntity</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="dr" Type="System.Data.DataRow" />
+      </Parameters>
+      <Docs>
+        <param name="dr">The <see cref="T:System.Data.DataRow" /> object that represents a row of audience data from which the <see cref="T:Microsoft.SharePoint.WebControls.PickerEntity" /> object is populated.</param>
+        <summary>Populates a <see cref="T:Microsoft.SharePoint.WebControls.PickerEntity" /> object with the audience information from the provided query results data row.</summary>
+        <returns>The <see cref="T:Microsoft.SharePoint.WebControls.PickerEntity" /> object that contains the audience information.</returns>
+        <remarks>
+          <para>The <see cref="T:Microsoft.SharePoint.WebControls.PickerEntity" /> object returned by this override includes the audience display name, description, type, email nickname, and member count.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IssueQuery">
+      <MemberSignature Language="C#" Value="protected override int IssueQuery (string searchString, string groupName, int pageIndex, int pageSize);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance int32 IssueQuery(string searchString, string groupName, int32 pageIndex, int32 pageSize) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.WebControls.AudienceQueryControl.IssueQuery(System.String,System.String,System.Int32,System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function IssueQuery (searchString As String, groupName As String, pageIndex As Integer, pageSize As Integer) As Integer" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override int IssueQuery(System::String ^ searchString, System::String ^ groupName, int pageIndex, int pageSize);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="searchString" Type="System.String" />
+        <Parameter Name="groupName" Type="System.String" />
+        <Parameter Name="pageIndex" Type="System.Int32" />
+        <Parameter Name="pageSize" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="searchString">The <see cref="T:System.String" /> object that represents the audience name for which to search.</param>
+        <param name="groupName">The <see cref="T:System.String" /> object that represents the name of the type of audience to search.</param>
+        <param name="pageIndex">The <see cref="T:System.Int32" /> object that represents the page index number of the query results to return.</param>
+        <param name="pageSize">The <see cref="T:System.Int32" /> object that represents the number of the query result items to return.</param>
+        <summary>Uses the specified search string to query for an audience by name and returns paged results.</summary>
+        <returns>The <see cref="T:System.Int32" /> object that represents the count of the items returned by the query.</returns>
+        <remarks>
+          <para>This override uses the specified search string to perform a paged query for an audience by name. It then sets the Results property of the parent <see cref="T:Microsoft.SharePoint.WebControls.PickerDialog" /> control with the results of the query.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnLoad">
+      <MemberSignature Language="C#" Value="protected override void OnLoad (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnLoad(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.WebControls.AudienceQueryControl.OnLoad(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">The <see cref="E:System.EventArgs" /> object that contains the event data.</param>
+        <summary>Raises the <see cref="E:System.Web.UI.Control.Load" /> event.</summary>
+        <remarks>
+          <para>This override stores the specified audience group name and adds it to the <see cref="P:Microsoft.SharePoint.WebControls.SimpleQueryControl.SearchColumnNames" /> collection.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPreRender">
+      <MemberSignature Language="C#" Value="protected override void OnPreRender (EventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void OnPreRender(class System.EventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.WebControls.AudienceQueryControl.OnPreRender(System.EventArgs)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreRender (e As EventArgs)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreRender(EventArgs ^ e);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="System.EventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">The <see cref="E:System.EventArgs" /> object that contains the event class.</param>
+        <summary>Raises the <see cref="E:Sytem.Web.UI.Control.PreRender" /> event.</summary>
+        <remarks>
+          <para>If the page where the control is on is being loaded for the first time (that is, the <see cref="P:System.Web.UI.Page.IsPostBack" /> is false), then this override executes the query to get the audience information according to the current audience group name.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

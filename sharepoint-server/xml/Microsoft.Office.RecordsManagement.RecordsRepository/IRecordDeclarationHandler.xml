@@ -1,0 +1,209 @@
+﻿<Type Name="IRecordDeclarationHandler" FullName="Microsoft.Office.RecordsManagement.RecordsRepository.IRecordDeclarationHandler">
+  <TypeSignature Language="C#" Value="public interface IRecordDeclarationHandler" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IRecordDeclarationHandler" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.RecordsRepository.IRecordDeclarationHandler" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IRecordDeclarationHandler" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IRecordDeclarationHandler" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>Provides an interface for custom processing of declaring a list item as record.</summary>
+    <remarks>
+      <para>When a list item is declared as record, custom processing handler can be added by implementing the OnDeclare method in the IRecordDeclarationHandler interface. After the handler has processed the list item, it can choose to continue or skip default processing by returning the corresponiding RecordOperationResult.</para>
+      <para>The following code examples show you how to register a custom record handler and create a custom declaration filter that manages record declaration and undeclaration.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Microsoft.Office.RecordsManagement.RecordsRepository;
+using Microsoft.SharePoint;
+
+namespace Microsoft.SDK.SharePoint.Samples 
+{
+    /// &amp;lt;summary&amp;gt;
+    /// RegisterDeclarationFilter registers the DeclarationFilter assembly with the server 
+    /// to handle record declaration and undeclaration.
+    /// &amp;lt;/summary&amp;gt;
+    class RegisterDeclarationFilter
+    {
+        private const string ASSEMBLY_STRONG_NAME = "DeclarationFilter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=991a95319bfcc113";
+        private const string CLASS_NAME = "Microsoft.SDK.SharePoint.Samples.DeclarationFilter";
+
+        /// &amp;lt;summary&amp;gt;
+        /// Registers the DeclarationFilter assembly on the given site.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;param name="args"&amp;gt;command line arguments, the first one must be a valid site URL&amp;lt;/param&amp;gt;
+        /// &amp;lt;exception cref="System.ArgumentException"&amp;gt;empty command line arguments&amp;lt;/exception&amp;gt;
+        static void Main(string[] args)
+        {
+            if (args.Length &amp;lt; 1)
+            {
+                throw new ArgumentException("Must supply site URL");
+            }
+
+            using (SPSite site = new SPSite(args[0]))
+            {
+                Records.RegisterCustomCodeForRecordDeclaration(site,
+                    ASSEMBLY_STRONG_NAME,
+                    CLASS_NAME);
+                Console.WriteLine(string.Format("DeclarationFilter registered to site {0}.", site.Url));
+            }
+        }
+    }
+}</code>
+      <code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Microsoft.Office.RecordsManagement.RecordsRepository;
+using Microsoft.SharePoint;
+
+namespace Microsoft.SDK.SharePoint.Samples
+{
+    /// &amp;lt;summary&amp;gt;
+    /// DeclarationFilter is a custom handler for record declaration and undeclaration.
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;remarks&amp;gt;
+    /// &amp;lt;para&amp;gt;
+    /// DeclarationFilter filters out items which should not be declared or undeclared before record processing. 
+    /// If an item should not be declared as record, sets the property "_do_not_declare_record" to true.
+    /// If a record item should not be undeclared, sets the property "_do_not_undeclare_record" to true.
+    /// &amp;lt;/para&amp;gt;
+    /// &amp;lt;para&amp;gt;
+    /// DeclarationFilter implements IRecordDeclarationHandler and IRecordUndeclarationHandler to handle both record declaration and undeclaration.
+    /// When an item is declared record, DeclarationFilter checks whether the item has the "_do_not_declare_record" property set to true, if so it cancels the record declaration.
+    /// When a record is undeclared, DeclarationFilter checks if whether the item has the "_do_not_undeclare_record" property set to true, if so it cancels the undeclaration.
+    /// &amp;lt;/para&amp;gt;
+    /// &amp;lt;/remarks&amp;gt;
+    class DeclarationFilter : IRecordDeclarationHandler, IRecordUndeclarationHandler
+    {
+        /// &amp;lt;summary&amp;gt;
+        /// This is the name of the property we assign to items that should not be declared as record.
+        /// &amp;lt;/summary&amp;gt;
+        public const string PROPERTY_DO_NOT_DECLARE = "_do_not_declare_record";
+
+        /// &amp;lt;summary&amp;gt;
+        /// This is the name of the property we assign to records that should not be undeclared.
+        /// &amp;lt;/summary&amp;gt;
+        public const string PROPERTY_DO_NOT_UNDECLARE = "_do_not_undeclare_record";
+
+        #region IRecordDeclarationHandler Members
+
+        /// &amp;lt;summary&amp;gt;
+        /// Checks and filters out item marked with "_do_not_declare_record" for record declaration.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;remarks&amp;gt;
+        /// Checks whether item is marked with "_do_not_declare_record". If so then cancels record declaration, 
+        /// otherwise contniue default record declaration processing.
+        /// &amp;lt;/remarks&amp;gt;
+        /// &amp;lt;param name="item"&amp;gt;the item to be declared as record&amp;lt;/param&amp;gt;
+        /// &amp;lt;returns&amp;gt;
+        /// RecordOperationResult.CancelRecordProcessing if item should not be declared;
+        /// RecordOperationResult.ContinueRecordProcessing otherwise.
+        /// &amp;lt;/returns&amp;gt;
+        RecordOperationResult IRecordDeclarationHandler.OnDeclare(SPListItem item)
+        {
+            // checks if item is marked as "_do_not_declare_record"
+            if (CheckRecordFilterProperty(item, PROPERTY_DO_NOT_DECLARE))
+            {
+                // item marked as "_do_not_declare_record", cancel processing
+                return RecordOperationResult.CancelRecordProcessing;
+            }
+            else
+            {
+                // continue with default processing
+                return RecordOperationResult.ContinueRecordProcessing;
+            }
+        }
+
+        #endregion
+
+        #region IRecordUndeclarationHandler Members
+
+        /// &amp;lt;summary&amp;gt;
+        /// Checks and filters out item marked with "_do_not_undeclare_record" for record undeclaration.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;remarks&amp;gt;
+        /// Checks whether item is marked with "_do_not_undeclare_record" If so then cancels record undeclaration, 
+        /// otherwise contniue default record undeclaration processing.
+        /// &amp;lt;/remarks&amp;gt;
+        /// &amp;lt;param name="item"&amp;gt;the item to be undeclared&amp;lt;/param&amp;gt;
+        /// &amp;lt;returns&amp;gt;
+        /// RecordOperationResult.CancelRecordProcessing if item should not be undeclared; 
+        /// RecordOperationResult.ContinueRecordProcessing otherwise.
+        /// &amp;lt;/returns&amp;gt;
+        RecordOperationResult IRecordUndeclarationHandler.OnUndeclare(SPListItem item)
+        {
+            // checks if item is marked as "_do_not_undeclare_record"
+            if (CheckRecordFilterProperty(item, PROPERTY_DO_NOT_UNDECLARE))
+            {
+                // item mared as "_do_not_undeclare_record", cancel processing
+                return RecordOperationResult.CancelRecordProcessing;
+            }
+            else
+            {
+                // continue with default processing
+                return RecordOperationResult.ContinueRecordProcessing;
+            }
+        }
+
+        #endregion
+
+        /// &amp;lt;summary&amp;gt;
+        /// Checks the given record filter property on the given item.
+        /// &amp;lt;/summary&amp;gt;
+        /// &amp;lt;param name="item"&amp;gt;the item&amp;lt;/param&amp;gt;
+        /// &amp;lt;param name="propertyName"&amp;gt;the record filter property&amp;lt;/param&amp;gt;
+        /// &amp;lt;returns&amp;gt;the property value, false if not found.&amp;lt;/returns&amp;gt;
+        private static bool CheckRecordFilterProperty(SPListItem item, string propertyName)
+        {
+            bool result = false;
+            if (item.Properties.Contains(propertyName))
+            {
+                object property = item.Properties[propertyName];
+                if (property != null)
+                {
+                    result = string.Equals(bool.TrueString, (string)property, StringComparison.OrdinalIgnoreCase);
+                }
+            }
+            return result;
+        }
+    }
+}</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="OnDeclare">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.RecordsManagement.RecordsRepository.RecordOperationResult OnDeclare (Microsoft.SharePoint.SPListItem item);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype Microsoft.Office.RecordsManagement.RecordsRepository.RecordOperationResult OnDeclare(class Microsoft.SharePoint.SPListItem item) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.RecordsRepository.IRecordDeclarationHandler.OnDeclare(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Function OnDeclare (item As SPListItem) As RecordOperationResult" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::RecordsManagement::RecordsRepository::RecordOperationResult OnDeclare(Microsoft::SharePoint::SPListItem ^ item);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.Policy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.RecordsManagement.RecordsRepository.RecordOperationResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="item">T:Microsoft.SharePoint.SPListItem object to declare as a record</param>
+        <summary>Represents the <see cref="T:Microsoft.SharePoint.SPListItem" /> object that will be declared a record.</summary>
+        <returns>Returns <see cref="T:Microsoft.Office.RecordsManagement.RecordsRepository.RecordOperationResult" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,1420 @@
+﻿<Type Name="FormsService" FullName="Microsoft.Office.InfoPath.Server.Administration.FormsService">
+  <TypeSignature Language="C#" Value="public sealed class FormsService : Microsoft.SharePoint.Administration.SPService, Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit FormsService extends Microsoft.SharePoint.Administration.SPService implements class Microsoft.SharePoint.Administration.Backup.IBackupRestore, class Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.Office.InfoPath.Server.Administration.FormsService" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class FormsService&#xA;Inherits SPService&#xA;Implements IBackupRestoreConfiguration" />
+  <TypeSignature Language="C++ CLI" Value="public ref class FormsService sealed : Microsoft::SharePoint::Administration::SPService, Microsoft::SharePoint::Administration::Backup::IBackupRestoreConfiguration" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Administration.SPService</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Runtime.InteropServices.Guid("543DD7B9-6E48-438d-86D8-000000000000")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents the top level entity of InfoPath Forms Services.</summary>
+    <remarks>
+      <para>The <see cref="T:Microsoft.Office.InfoPath.Server.Administration.FormsService" /> object is an SharePoint Server 2010 shared service provider that extends the <see cref="T:Microsoft.SharePoint.Administration.SPService" /> object. Like all shared service providers, it is load-balanced and runs at the farm level. There is only one instance of the forms service per farm.</para>
+      <para />
+    </remarks>
+    <example>
+      <para>The following code example writes the forms service status to the console that the forms service is not available. References are required in the Visual Studio project to the <see cref="Microsoft.Office.Server" />, the <see cref="Microsoft.Office.InfoPath.Server" />, and the <see cref="Microsoft.SharePoint" /> assemblies.</para>
+      <para>
+        <b>Note</b>: Browse for the <see cref="Microsoft.Office.InfoPath.Server" /> assembly at [drive]:\Program Files\Microsoft Office Servers\14.0\Bin.</para>
+      <para>For the example to work, <b>Import</b> statements are required for the</para>
+      <para>
+        <see cref="N:Microsoft.Office.Server" />, the <see cref="N:Microsoft.Office.InfoPath.Server.Administration" />, and the <see cref="N:Microsoft.SharePoint.Administration" /> namespaces.</para>
+      <code>    Dim LocalFormsService As &lt;span class="label"&gt;FormsService&lt;/span&gt;
+    Try
+        LocalFormsService = SPFarm.Local.Services.GetValue(Of FormsService)(&lt;span class="label"&gt;FormsService&lt;/span&gt;.ServiceName)
+        Console.WriteLine(LocalFormsService.Status.ToString())
+    Catch ex As Exception
+        Console.WriteLine("The forms service is not provisioned.")
+    End Try</code>
+      <para>For the example to work, <b>using</b> statements are required for the</para>
+      <para>
+        <see cref="N:Microsoft.Office.Server" />, the <see cref="N:Microsoft.Office.InfoPath.Server.Administration" />, and the <see cref="N:Microsoft.SharePoint.Administration" /> namespaces.</para>
+      <code>&lt;span class="label"&gt;FormsService&lt;/span&gt; localFormsService;
+    try
+    {
+        localFormsService = SPFarm.Local.Services.GetValue&amp;lt;FormsService&amp;gt;(&lt;span class="label"&gt;FormsService&lt;/span&gt;.ServiceName);
+        Console.WriteLine(localFormsService.Status.ToString());
+    }
+    Catch (Exception ex)
+    {
+        Console.WriteLine("The forms service is not provisioned.");
+    }</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public FormsService ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; FormsService();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.FormsService" /> class.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public FormsService (string serviceName, Microsoft.SharePoint.Administration.SPFarm farm);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string serviceName, class Microsoft.SharePoint.Administration.SPFarm farm) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.#ctor(System.String,Microsoft.SharePoint.Administration.SPFarm)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (serviceName As String, farm As SPFarm)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; FormsService(System::String ^ serviceName, Microsoft::SharePoint::Administration::SPFarm ^ farm);" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="serviceName" Type="System.String" />
+        <Parameter Name="farm" Type="Microsoft.SharePoint.Administration.SPFarm" />
+      </Parameters>
+      <Docs>
+        <param name="serviceName">The name of the forms service, typically FormsService.</param>
+        <param name="farm">The SharePoint farm where the forms service is located.</param>
+        <summary>Initializes a new instance of the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.FormsService" /> class using the specified service name and farm.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ActiveSessionsTimeout">
+      <MemberSignature Language="C#" Value="public int ActiveSessionsTimeout { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 ActiveSessionsTimeout" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.ActiveSessionsTimeout" />
+      <MemberSignature Language="VB.NET" Value="Public Property ActiveSessionsTimeout As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int ActiveSessionsTimeout { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the duration, in minutes, that a form session state can remain active.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default value for the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.ActiveSessionsTimeout" /> is 1440 minutes. This property corresponds to the Active sessions should be terminated after setting on the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para>
+            <b>Note</b>: Increasing the value of this property could adversely affect server performance and increase the chance of Denial of Service attacks on the server.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowEmbeddedSqlForDataConnections">
+      <MemberSignature Language="C#" Value="public bool AllowEmbeddedSqlForDataConnections { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowEmbeddedSqlForDataConnections" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowEmbeddedSqlForDataConnections" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowEmbeddedSqlForDataConnections As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowEmbeddedSqlForDataConnections { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether embedded SQL authentication can be used by browser-enabled form templates.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>When the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowEmbeddedSqlForDataConnections" /> property is <b>false</b>, connecting to a SQL database using a connection string with embedded SQL credentials will fail. When <b>true</b>, the SQL connection string is allowed. This property corresponds to the Allow embedded SQL authentication setting on the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowUdcAuthenticationForDataConnections">
+      <MemberSignature Language="C#" Value="public bool AllowUdcAuthenticationForDataConnections { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowUdcAuthenticationForDataConnections" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUdcAuthenticationForDataConnections" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowUdcAuthenticationForDataConnections As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowUdcAuthenticationForDataConnections { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value that indicates whether authentication information in a Universal Data Connection (UDC) file can be used.</summary>
+        <value>
+          <b>true</b> if authentication from the UDC file can be used in the data connection; <b>false</b> if it is ignored.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUdcAuthenticationForDataConnections" /> is <b>false</b> by default, and corresponds to the Allow non-admin-deployed form templates to use authentication information contained in data connection files setting on the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para>If a Universal Data Connection (UDC) file contains alternate authentication information, such as a username and password or a Single Sign-On (SSO) application ID, the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUdcAuthenticationForDataConnections" /> property can be used to disable all forms on the server from using that information.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowUserFormBrowserEnabling">
+      <MemberSignature Language="C#" Value="public bool AllowUserFormBrowserEnabling { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowUserFormBrowserEnabling" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUserFormBrowserEnabling" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowUserFormBrowserEnabling As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowUserFormBrowserEnabling { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value that indicates whether users can browser-enable form templates that do not contain form code, require full trust, enable rendering on a mobile device, or use a data connection managed by a server administrator.</summary>
+        <value>
+          <b>true</b> if users can browser-enable form templates.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUserFormBrowserEnabling" /> is <b>true</b> by default, and corresponds to the Allow end users to browser-enable form templates setting on the Configure InfoPath Forms Services page of the SharePoint Central Administration site.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowUserFormBrowserRendering">
+      <MemberSignature Language="C#" Value="public bool AllowUserFormBrowserRendering { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowUserFormBrowserRendering" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUserFormBrowserRendering" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowUserFormBrowserRendering As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowUserFormBrowserRendering { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value that indicates whether browser-enabled form templates will be rendered by InfoPath Forms Services.</summary>
+        <value>
+          <b>true</b> if forms services renders browser-enabled form templates; <b>false</b> if rendering is disabled.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUserFormBrowserRendering" /> is <b>true</b> by default, and corresponds to the Render form templates that were browser-enabled by end users setting on the Configure InfoPath Forms Services page of the SharePoint Central Administration site.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowUserFormCrossDomainDataConnections">
+      <MemberSignature Language="C#" Value="public bool AllowUserFormCrossDomainDataConnections { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowUserFormCrossDomainDataConnections" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUserFormCrossDomainDataConnections" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowUserFormCrossDomainDataConnections As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowUserFormCrossDomainDataConnections { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value that indicates whether data connections to data sources located in a different domain can be queried.</summary>
+        <value>
+          <b>true</b> if cross-domain data connections are allowed.</value>
+        <remarks>
+          <para>The default value of the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUserFormCrossDomainDataConnections" /> property is <b>false</b>. A form template with a Domain security level cannot use a data connection if the data source is in another domain, even if the data connection information is stored in a trusted Universal Data Connection (UDC) file.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowUserFormWebServiceProxy">
+      <MemberSignature Language="C#" Value="public void AllowUserFormWebServiceProxy (Uri webApplicationUri, bool enable);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AllowUserFormWebServiceProxy(class System.Uri webApplicationUri, bool enable) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUserFormWebServiceProxy(System.Uri,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AllowUserFormWebServiceProxy (webApplicationUri As Uri, enable As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AllowUserFormWebServiceProxy(Uri ^ webApplicationUri, bool enable);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webApplicationUri" Type="System.Uri" />
+        <Parameter Name="enable" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="webApplicationUri">The Uniform Resource Indicator (URI) of the SharePoint Web application associated with the Web service proxy, and located between the farm, but above the site collection level. For more information, see SPWebApplication.</param>
+        <param name="enable">The <b>boolean</b> value which enables or disables the use of the proxy.</param>
+        <summary>Controls whether a form opened in the InfoPath client can use the InfoPath Forms Services Web service proxy to connect to a Web service.</summary>
+        <remarks>
+          <para>Use the <see cref="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowWebServiceProxy(System.Uri,System.Boolean)" /> method to allow browser-enabled form templates to use the proxy service. Default setting is <b>false</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowViewState">
+      <MemberSignature Language="C#" Value="public bool AllowViewState { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool AllowViewState" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowViewState" />
+      <MemberSignature Language="VB.NET" Value="Public Property AllowViewState As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowViewState { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AllowWebServiceProxy">
+      <MemberSignature Language="C#" Value="public void AllowWebServiceProxy (Uri webApplicationUri, bool enable);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AllowWebServiceProxy(class System.Uri webApplicationUri, bool enable) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowWebServiceProxy(System.Uri,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AllowWebServiceProxy (webApplicationUri As Uri, enable As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void AllowWebServiceProxy(Uri ^ webApplicationUri, bool enable);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="webApplicationUri" Type="System.Uri" />
+        <Parameter Name="enable" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="webApplicationUri">The Uniform Resource Indicator (URI) of the SharePoint Web application associated with the Web service proxy, and located between the farm, but above the site collection level. For more information, see SPWebApplication.</param>
+        <param name="enable">The <b>boolean</b> value which enables or disables the use of the proxy.</param>
+        <summary>Controls whether browser-enabled form templates can use the InfoPath Forms Services Web service proxy to connect to a Web service.</summary>
+        <remarks>
+          <para>Use the <see cref="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.AllowUserFormWebServiceProxy(System.Uri,System.Boolean)" /> method to allow InfoPath clients to use the proxy service. Default setting is <b>false</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BrowserEnableUserFormTemplate">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.InfoPath.Server.Administration.ConverterMessageCollection BrowserEnableUserFormTemplate (Microsoft.SharePoint.SPFile solutionFile);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.Office.InfoPath.Server.Administration.ConverterMessageCollection BrowserEnableUserFormTemplate(class Microsoft.SharePoint.SPFile solutionFile) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.BrowserEnableUserFormTemplate(Microsoft.SharePoint.SPFile)" />
+      <MemberSignature Language="VB.NET" Value="Public Function BrowserEnableUserFormTemplate (solutionFile As SPFile) As ConverterMessageCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::InfoPath::Server::Administration::ConverterMessageCollection ^ BrowserEnableUserFormTemplate(Microsoft::SharePoint::SPFile ^ solutionFile);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.InfoPath.Server.Administration.ConverterMessageCollection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="solutionFile" Type="Microsoft.SharePoint.SPFile" />
+      </Parameters>
+      <Docs>
+        <param name="solutionFile">The form template file (.xsn) file to browser-enable.</param>
+        <summary>Browser-enables a browser-compatible form template that does not contain form code, require full trust, enable rendering on a mobile device, or use a data connection managed by a server administrator.</summary>
+        <returns>Returns a collection of messages that describe the results of the form template conversion.</returns>
+        <remarks>
+          <para>A manifest (.xsf) file of a browser-compatible form template can be used in the <paramref name="solutionFile" /> parameter if all supporting files are located in the same folder. For form templates that contain code, use the methods of the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.FormTemplateCollection" /> collection and the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.FormTemplate" /> object. </para>
+          <para />
+        </remarks>
+        <example>
+          <para>In the following code example, a file that has been uploaded to a form library is browser-enabled.</para>
+          <code>    Dim LocalFormsService As FormsService
+    Dim LocalFarm As SPFarm = SPFarm.Local
+    Dim LocalSite As SPSite = New SPSite("http://&lt;span class="placeholder"&gt;ServerName&lt;/span&gt;")
+    Dim LocalWeb As SPWeb = LocalSite.AllWebs("&lt;span class="placeholder"&gt;SiteName&lt;/span&gt;")
+    Dim LocalFile As SPFile
+    Try
+        LocalFormsService = LocalFarm.Services.GetValue(Of FormsService)(FormsService.ServiceName)
+        LocalFile = LocalWeb.GetFile("&lt;span class="placeholder"&gt;FormLibrary&lt;/span&gt;/Forms/&lt;span class="placeholder"&gt;FormTemplate.xsn&lt;/span&gt; ")
+        LocalFormsService.&lt;span class="label"&gt;BrowserEnableUserFormTemplate&lt;/span&gt;(LocalFile)
+        Console.Write("Press Enter to Continue")
+        Console.ReadLine()
+    Catch ex As Exception
+        Console.WriteLine("Error: " + ex.Message)
+        Console.Write("Press Enter to Continue")
+        Console.ReadLine()
+    End Try</code>
+          <code>    FormsService localFormsService;
+    SPFarm localFarm = SPFarm.Local;
+    SPSite localSite = new SPSite("http://&lt;span class="placeholder"&gt;ServerName&lt;/span&gt;");
+    SPWeb localWeb = localSite.AllWebs["&lt;span class="placeholder"&gt;SiteName&lt;/span&gt;"];
+    try
+    {
+        localFormsService = localFarm.Services.GetValue&amp;lt;FormsService&amp;gt;(FormsService.ServiceName);
+        SPFile localFile = localWeb.GetFile("&lt;span class="placeholder"&gt;FormLibrary&lt;/span&gt;/Forms/&lt;span class="placeholder"&gt;FormTemplate.xsn&lt;/span&gt;");
+        localFormsService.&lt;span class="label"&gt;BrowserEnableUserFormTemplate&lt;/span&gt;(localFile);
+        Console.Write("Press Enter to Continue");
+        Console.ReadLine();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Error: " + ex.Message);
+        Console.Write("Press Enter to Continue");
+        Console.ReadLine();
+    }</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="DataConnectionFiles">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.InfoPath.Server.Administration.DataConnectionFileCollection DataConnectionFiles { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.InfoPath.Server.Administration.DataConnectionFileCollection DataConnectionFiles" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.DataConnectionFiles" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DataConnectionFiles As DataConnectionFileCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::InfoPath::Server::Administration::DataConnectionFileCollection ^ DataConnectionFiles { Microsoft::Office::InfoPath::Server::Administration::DataConnectionFileCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.InfoPath.Server.Administration.DataConnectionFileCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the collection of Universal Data Connection (UDC) files available on the server farm.</summary>
+        <value>A <see cref="T:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFileCollection" /> collection of UDC files.</value>
+        <remarks>
+          <para>Use the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile" /> to access properties of the UDC files such as <see cref="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Category" />, <see cref="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Description" />, <see cref="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.DisplayName" />, <see cref="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.HasDependants" />, <see cref="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.WebAccessible" />, <see cref="P:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.Xml" />, and the <see cref="M:Microsoft.Office.InfoPath.Server.Administration.DataConnectionFile.EnumerateDependants" /> method.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DefaultDataConnectionTimeout">
+      <MemberSignature Language="C#" Value="public int DefaultDataConnectionTimeout { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 DefaultDataConnectionTimeout" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.DefaultDataConnectionTimeout" />
+      <MemberSignature Language="VB.NET" Value="Public Property DefaultDataConnectionTimeout As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int DefaultDataConnectionTimeout { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the default data connection timeout in milliseconds.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default value for the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.DefaultDataConnectionTimeout" /> is 10000 milliseconds (10 seconds). This property corresponds to the Default data connection timeout setting on the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para>
+            <b>Note</b>: Increasing the value of this property could adversely affect server performance.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExemptUserAgents">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.InfoPath.Server.Administration.ExemptUserAgentCollection ExemptUserAgents { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.InfoPath.Server.Administration.ExemptUserAgentCollection ExemptUserAgents" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.ExemptUserAgents" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ExemptUserAgents As ExemptUserAgentCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::InfoPath::Server::Administration::ExemptUserAgentCollection ^ ExemptUserAgents { Microsoft::Office::InfoPath::Server::Administration::ExemptUserAgentCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.InfoPath.Server.Administration.ExemptUserAgentCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of <see cref="T:Microsoft.Office.InfoPath.Server.Administration.ExemptUserAgent" /> objects</summary>
+        <value>A <see cref="T:Microsoft.Office.InfoPath.Server.Administration.ExemptUserAgentCollection" /> collection.</value>
+        <remarks>
+          <para>User agents can be added to or removed from the <see cref="T:Microsoft.Office.InfoPath.Server.Administration.ExemptUserAgentCollection" /> collection using methods of the collection. Exempt user agents receive a content stream of InfoPath files from the server instead of an HTML representation of the InfoPath form.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FormTemplates">
+      <MemberSignature Language="C#" Value="public Microsoft.Office.InfoPath.Server.Administration.FormTemplateCollection FormTemplates { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.Office.InfoPath.Server.Administration.FormTemplateCollection FormTemplates" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.FormTemplates" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property FormTemplates As FormTemplateCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::Office::InfoPath::Server::Administration::FormTemplateCollection ^ FormTemplates { Microsoft::Office::InfoPath::Server::Administration::FormTemplateCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Office.InfoPath.Server.Administration.FormTemplateCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a collection of all administrator approved, browser-enabled form templates deployed to the server farm.</summary>
+        <value>A <see cref="T:Microsoft.Office.InfoPath.Server.Administration.FormTemplateCollection" /> collection.</value>
+        <remarks>
+          <para>The <see cref="T:Microsoft.Office.InfoPath.Server.Administration.FormTemplateCollection" /> collection represents all administrator approved form templates on the server farm. It does not include browser-enabled user form templates or form templates deployed to site collections as SharePoint content types.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>The following code examples write the count of administrator approved form templates to the console.</para>
+          <code>    Dim LocalFormsService As FormsService
+    Dim LocalFarm As SPFarm
+    Dim FormTemps As Integer
+
+    Try
+        LocalFarm = SPFarm.Local
+        LocalFormsService = LocalFarm.Services.GetValue(Of FormsService)(FormsService.ServiceName)
+        FormTemps = LocalFormsService.&lt;span class="label"&gt;FormTemplates&lt;/span&gt;.Count()
+        Console.WriteLine("Number of form templates: " &amp;amp; FormTemps.ToString())
+        Console.Write("Press Enter to Continue")
+        Console.ReadLine()
+    Catch ex As Exception
+        Console.WriteLine("Error: " + ex.Message)
+        Console.Write("Press Enter to Continue")
+        Console.ReadLine()
+    End Try</code>
+          <code>    FormsService localFormsService;
+    SPFarm localFarm = SPFarm.Local;
+    Int16 formTemps;
+
+    try
+    {
+        localFormsService = localFarm.Services.GetValue&amp;lt;FormsService&amp;gt;(FormsService.ServiceName);
+        formTemps = (Int16)localFormsService.&lt;span class="label"&gt;FormTemplates&lt;/span&gt;.Count;
+        Console.WriteLine("Number of form templates: " + formTemps.ToString());
+        Console.Write("Press Enter to Continue");
+        Console.ReadLine();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Error: " + ex.Message);
+        Console.Write("Press Enter to Continue");
+        Console.ReadLine();
+    }</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetCertificate">
+      <MemberSignature Language="C#" Value="public string GetCertificate (bool disabled);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetCertificate(bool disabled) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.GetCertificate(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetCertificate (disabled As Boolean) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetCertificate(bool disabled);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="disabled" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="disabled">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>Returns <see cref="T:System.String" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDisabledCertificateById">
+      <MemberSignature Language="C#" Value="public bool GetDisabledCertificateById (string keyCert);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetDisabledCertificateById(string keyCert) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.GetDisabledCertificateById(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetDisabledCertificateById (keyCert As String) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool GetDisabledCertificateById(System::String ^ keyCert);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="keyCert" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="keyCert">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <returns>Returns <see cref="T:System.Boolean" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsUserFormTemplateBrowserEnabled">
+      <MemberSignature Language="C#" Value="public bool IsUserFormTemplateBrowserEnabled (Microsoft.SharePoint.SPFile file);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsUserFormTemplateBrowserEnabled(class Microsoft.SharePoint.SPFile file) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.IsUserFormTemplateBrowserEnabled(Microsoft.SharePoint.SPFile)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsUserFormTemplateBrowserEnabled (file As SPFile) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsUserFormTemplateBrowserEnabled(Microsoft::SharePoint::SPFile ^ file);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="file" Type="Microsoft.SharePoint.SPFile" />
+      </Parameters>
+      <Docs>
+        <param name="file">The file name of the form template and its location on the server</param>
+        <summary>Returns a <b>boolean</b> value that indicates if a form template is browser-enabled.</summary>
+        <returns>
+          <b>true</b> if there is a hash and it matches the hash of the form template; <b>false</b> if there is no hash or if the hash fails to match the hash of the form template.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxDataConnectionResponseSize">
+      <MemberSignature Language="C#" Value="public int MaxDataConnectionResponseSize { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxDataConnectionResponseSize" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxDataConnectionResponseSize" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxDataConnectionResponseSize As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaxDataConnectionResponseSize { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum size allowed for a data connection response.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default size of the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxDataConnectionResponseSize" /> is 1500 kilobytes. This property corresponds to the Data Connection Response Size setting on the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para>
+            <b>Note</b>: Increasing the value of this property could adversely affect server performance and increase the chance of Denial of Service (DOS) attacks on the server.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxDataConnectionRoundTrip">
+      <MemberSignature Language="C#" Value="public long MaxDataConnectionRoundTrip { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 MaxDataConnectionRoundTrip" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxDataConnectionRoundTrip" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxDataConnectionRoundTrip As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property long MaxDataConnectionRoundTrip { long get(); void set(long value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum amount of time allowed for a data connection to retrieve data.</summary>
+        <value>The maximum amount of time allowed for a data connection to retrieve data.</value>
+        <remarks>
+          <para>If the time it takes for a data connection to retrieve data exceeds the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxDataConnectionRoundTrip" /> property setting, a Unified Logging Service (ULS) entry is created. This setting is not available on the Configure InfoPath Forms Services page of the Central Administration site. You can set the value of the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxDataConnectionRoundTrip" /> property only by using code or the corresponding PowerShell cmdlet.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxDataConnectionTimeout">
+      <MemberSignature Language="C#" Value="public int MaxDataConnectionTimeout { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxDataConnectionTimeout" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxDataConnectionTimeout" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxDataConnectionTimeout As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaxDataConnectionTimeout { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum data connection timeout in milliseconds.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default value for the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxDataConnectionTimeout" /> is 20000 milliseconds (20 seconds). This setting overrides settings on data connections in individual form templates if they exceed the value for this property. This property corresponds to the Maximum data connection timeout setting on the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para>
+            <b>Note</b>: Increasing the value of this property could adversely affect server performance and increase the chance of Denial of Service (DOS) attacks on the server.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxFormLoadTime">
+      <MemberSignature Language="C#" Value="public long MaxFormLoadTime { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 MaxFormLoadTime" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxFormLoadTime" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxFormLoadTime As Long" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property long MaxFormLoadTime { long get(); void set(long value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum amount of time allowed for a form to load on the server. </summary>
+        <value>The maximum amount of time allowed for a form to load on the server.</value>
+        <remarks>
+          <para>The value set for the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxFormLoadTime" /> property does not include the time required to render the form in the browser. If the time it takes to load a form on the server exceeds the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxFormLoadTime" /> property setting, a Unified Logging Service (ULS) entry is created. This setting is not available on the Configure InfoPath Forms Services page of the Central Administration site. You can set the value of the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxFormLoadTime" /> property only by using code or the corresponding PowerShell cmdlet.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxPostbacksPerSession">
+      <MemberSignature Language="C#" Value="public int MaxPostbacksPerSession { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxPostbacksPerSession" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxPostbacksPerSession" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxPostbacksPerSession As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaxPostbacksPerSession { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value of the maximum postbacks an instance of a browser-enabled form template can make to the forms service.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default number of <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxPostbacksPerSession" /> is 75. This property corresponds to the Number of postbacks per form session setting on the Thresholds section of the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para>
+            <b>Note</b>: Increasing the value of this property could adversely affect server performance and increase the chance of Denial of Service (DOS) attacks on the server.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxSizeOfFormSessionState">
+      <MemberSignature Language="C#" Value="public int MaxSizeOfFormSessionState { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxSizeOfFormSessionState" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxSizeOfFormSessionState" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxSizeOfFormSessionState As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaxSizeOfFormSessionState { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Use MaxSizeOfUserFormState")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value of the maximum size of session state an instance of a browser-enabled form template can use.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default size of the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxSizeOfFormSessionState" /> is 4096 kilobytes (4 MB). This property corresponds to the Size of form session state setting on the Thresholds section of the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para>
+            <b>Note</b>: Increasing the value of this property could adversely affect server performance and increase the chance of Denial of Service (DOS) attacks on the server.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxSizeOfUserFormState">
+      <MemberSignature Language="C#" Value="public int MaxSizeOfUserFormState { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxSizeOfUserFormState" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxSizeOfUserFormState" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxSizeOfUserFormState As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaxSizeOfUserFormState { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the value of the maximum size of user session data that an instance of a browser-enabled form template can use.</summary>
+        <value>The maximum size of user session data that an instance of a browser-enabled form template can use.</value>
+        <remarks>
+          <para>The default size of the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxSizeOfUserFormState" /> property is 4096 kilobytes (4 MB). This property corresponds to the Maximum size of user session data setting on the User Sessions section of the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para>
+            <b>Note</b>: Increasing the value of this property could adversely affect server performance and increase the chance of Denial of Service (DOS) attacks on the server.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxUserActionsPerPostback">
+      <MemberSignature Language="C#" Value="public int MaxUserActionsPerPostback { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxUserActionsPerPostback" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxUserActionsPerPostback" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxUserActionsPerPostback As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaxUserActionsPerPostback { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum user actions per postback.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default value for the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MaxUserActionsPerPostback" /> is 200. This property corresponds to the Number of actions per postback setting on the Thresholds section of the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para>
+            <b>Note</b>: Increasing the value of this property could adversely affect server performance and increase the chance of Denial of Service (DOS) attacks on the server.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MemoryCacheSize">
+      <MemberSignature Language="C#" Value="public int MemoryCacheSize { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MemoryCacheSize" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MemoryCacheSize" />
+      <MemberSignature Language="VB.NET" Value="Public Property MemoryCacheSize As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MemoryCacheSize { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the size of the memory cache used for the components of browser-enabled form templates.</summary>
+        <value>The size of the memory cache used for the components of browser-enabled form templates.</value>
+        <remarks>
+          <para>The default size of the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.MemoryCacheSize" /> property is 300 MB. The data managed by this setting consists of items such as the .html, .css, and .js files that are used by form templates after they are converted (browser-enabled).</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.AddBackupObjects">
+      <MemberSignature Language="C#" Value="void IBackupRestore.AddBackupObjects (Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject parent);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void Microsoft.SharePoint.Administration.Backup.IBackupRestore.AddBackupObjects(class Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject parent) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#AddBackupObjects(Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject)" />
+      <MemberSignature Language="VB.NET" Value="Sub AddBackupObjects (parent As SPBackupRestoreObject) Implements IBackupRestore.AddBackupObjects" />
+      <MemberSignature Language="C++ CLI" Value=" virtual void Microsoft.SharePoint.Administration.Backup.IBackupRestore.AddBackupObjects(Microsoft::SharePoint::Administration::Backup::SPBackupRestoreObject ^ parent) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::AddBackupObjects;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.AddBackupObjects(Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parent" Type="Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject" />
+      </Parameters>
+      <Docs>
+        <param name="parent">The backup object to which the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> objects are added.</param>
+        <summary>Reserved for internal use. Adds the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object and its child <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> objects to the specified backup object. </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore">
+      <MemberSignature Language="C#" Value="bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#CanRenameOnRestore" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property CanRenameOnRestore As Boolean Implements IBackupRestore.CanRenameOnRestore" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use. Gets a value that indicates whether the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object can be renamed when it is restored. </summary>
+        <value>
+          <b>true</b> if renaming is allowed; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup">
+      <MemberSignature Language="C#" Value="bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#CanSelectForBackup" />
+      <MemberSignature Language="VB.NET" Value=" Property CanSelectForBackup As Boolean Implements IBackupRestore.CanSelectForBackup" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use. Gets or sets a value that indicates whether the content component that is represented by the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object can be selected for backup, independently of its parent component, in the Central Administration user interface or some other UI. </summary>
+        <value>
+          <b>true</b> if the object can be selected for backup; otherwise, <b>false</b>. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore">
+      <MemberSignature Language="C#" Value="bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#CanSelectForRestore" />
+      <MemberSignature Language="VB.NET" Value=" Property CanSelectForRestore As Boolean Implements IBackupRestore.CanSelectForRestore" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use. Gets or sets a value that indicates whether the content component that is represented by the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object can be selected for restoration in the Central Administration user interface or some other UI. </summary>
+        <value>
+          <b>true</b> if the object can be selected for restoration; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired">
+      <MemberSignature Language="C#" Value="ulong Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int64 Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#DiskSizeRequired" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property DiskSizeRequired As ULong Implements IBackupRestore.DiskSizeRequired" />
+      <MemberSignature Language="C++ CLI" Value="property System::UInt64 Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired { System::UInt64 get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use. Gets the amount of disk space, in bytes, that is required to store a backup of the content represented by the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object. </summary>
+        <value>The size, in bytes, that is required on the storage device to backup the data.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.Id">
+      <MemberSignature Language="C#" Value="Guid Microsoft.SharePoint.Administration.Backup.IBackupRestore.Id { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid Microsoft.SharePoint.Administration.Backup.IBackupRestore.Id" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#Id" />
+      <MemberSignature Language="VB.NET" Value=" Property Id As Guid Implements IBackupRestore.Id" />
+      <MemberSignature Language="C++ CLI" Value="property Guid Microsoft.SharePoint.Administration.Backup.IBackupRestore.Id { Guid get(); void set(Guid value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.Id</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Guid</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use. Gets or sets an ID for the content component. </summary>
+        <value>The ID of the content component that is represented by the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name">
+      <MemberSignature Language="C#" Value="string Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#Name" />
+      <MemberSignature Language="VB.NET" Value=" Property Name As String Implements IBackupRestore.Name" />
+      <MemberSignature Language="C++ CLI" Value="property System::String ^ Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use. Gets or sets a name, for use in a UI, for the content component.</summary>
+        <value>The name of the content component that is represented by the <see cref="T:Microsoft.SharePoint.Administration.Backup.IBackupRestore" /> object.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnAbort (object sender, Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort(object sender, class Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnAbort(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnAbort (sender As Object, args As SPBackupRestoreInformation) As Boolean Implements IBackupRestore.OnAbort" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupRestoreInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnAbort;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that calls <see cref="M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation)" />. </param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation" /> object that contains data about the operation.</param>
+        <summary>Reserved for internal use. Assists in a graceful termination when a user cancels a backup or restore operation. </summary>
+        <returns>
+          <b>true</b> in all cases.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackup">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnBackup (object sender, Microsoft.SharePoint.Administration.Backup.SPBackupInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackup(object sender, class Microsoft.SharePoint.Administration.Backup.SPBackupInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnBackup (sender As Object, args As SPBackupInformation) As Boolean Implements IBackupRestore.OnBackup" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackup(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnBackup;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPBackupInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that initiated the backup operation. </param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPBackupInformation" /> object that contains data about the operation. </param>
+        <summary>Reserved for internal use. Creates and stores the backup copy of the content component.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnBackupComplete (object sender, Microsoft.SharePoint.Administration.Backup.SPBackupInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete(object sender, class Microsoft.SharePoint.Administration.Backup.SPBackupInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnBackupComplete(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnBackupComplete (sender As Object, args As SPBackupInformation) As Boolean Implements IBackupRestore.OnBackupComplete" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnBackupComplete;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPBackupInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that calls <see cref="M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />.</param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPBackupInformation" /> object that contains data about the operation.</param>
+        <summary>Reserved for internal use. Provides post backup processing.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnPostRestore (object sender, Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore(object sender, class Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnPostRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnPostRestore (sender As Object, args As SPRestoreInformation) As Boolean Implements IBackupRestore.OnPostRestore" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnPostRestore;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that calls <see cref="M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />.</param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" /> object that contains data about the operation.</param>
+        <summary>Reserved for internal use. Provides post restore processing. </summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPrepareBackup">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnPrepareBackup (object sender, Microsoft.SharePoint.Administration.Backup.SPBackupInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPrepareBackup(object sender, class Microsoft.SharePoint.Administration.Backup.SPBackupInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnPrepareBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnPrepareBackup (sender As Object, args As SPBackupInformation) As Boolean Implements IBackupRestore.OnPrepareBackup" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPrepareBackup(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnPrepareBackup;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPrepareBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPBackupInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that initiated the backup operation.</param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPBackupInformation" /> object that contains data about the operation.</param>
+        <summary>Reserved for internal use. Creates and stores the backup copy of the content component.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnPreRestore (object sender, Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore(object sender, class Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnPreRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnPreRestore (sender As Object, args As SPRestoreInformation) As Boolean Implements IBackupRestore.OnPreRestore" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnPreRestore;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that calls <see cref="M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />.</param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" /> object that contains data about the operation.</param>
+        <summary>Reserved for internal use. Provides restore preparation processing.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore">
+      <MemberSignature Language="C#" Value="bool IBackupRestore.OnRestore (object sender, Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(object sender, class Microsoft.SharePoint.Administration.Backup.SPRestoreInformation args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestore#OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
+      <MemberSignature Language="VB.NET" Value="Function OnRestore (sender As Object, args As SPRestoreInformation) As Boolean Implements IBackupRestore.OnRestore" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ args) = Microsoft::SharePoint::Administration::Backup::IBackupRestore::OnRestore;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sender" Type="System.Object" />
+        <Parameter Name="args" Type="Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" />
+      </Parameters>
+      <Docs>
+        <param name="sender">The object that called <see cref="M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />.</param>
+        <param name="args">An <see cref="T:Microsoft.SharePoint.Administration.Backup.SPRestoreInformation" /> object that contains data about the operation.</param>
+        <summary>Reserved for internal use. Reads the backed up content and copies it to the target destination of the restore operation.</summary>
+        <returns>
+          <b>true</b> if successful; otherwise, <b>false</b>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration">
+      <MemberSignature Language="C#" Value="bool Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.Microsoft#SharePoint#Administration#Backup#IBackupRestoreConfiguration#CanBackupRestoreAsConfiguration" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property CanBackupRestoreAsConfiguration As Boolean Implements IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Reserved for internal use. Gets a value that indicates whether the component can be included in a configuration-only backup or restore. </summary>
+        <value>
+          <b>true</b> if users should be given the option to include the component in a configuration-only backup or restore; otherwise, <b>false</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Provision">
+      <MemberSignature Language="C#" Value="public override void Provision ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Provision() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Provision" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Provision ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Provision();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Provisions the forms service on the SharePoint server farm.</summary>
+        <remarks>
+          <para>This method should not be used from code. Corresponds to provisioning the InfoPath Forms Services through the SharePoint 2010 Products Configuration Wizard</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequireSslForDataConnections">
+      <MemberSignature Language="C#" Value="public bool RequireSslForDataConnections { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool RequireSslForDataConnections" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.RequireSslForDataConnections" />
+      <MemberSignature Language="VB.NET" Value="Public Property RequireSslForDataConnections As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool RequireSslForDataConnections { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Secure Sockets Layer (SSL) requirement value.</summary>
+        <value>
+          <b>true</b> if SSL is required for data connections; <b>false</b> if not.</value>
+        <remarks>
+          <para>The default value of the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.RequireSslForDataConnections" /> is <b>true</b>. If the credential type contained in the Universal Data Connection (UDC) file is basic or digest, the connection will fail if <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.RequireSslForDataConnections" /> is <b>true</b> and the connection URL does not begin with "https". If <b>false</b>, all connections will succeed regardless of the protocol.</para>
+          <para>This property corresponds to the Require SSL for HTTP authentication to data sources setting on the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ServiceId">
+      <MemberSignature Language="C#" Value="public const string ServiceId;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string ServiceId" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.InfoPath.Server.Administration.FormsService.ServiceId" />
+      <MemberSignature Language="VB.NET" Value="Public Const ServiceId As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ ServiceId;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The forms service identification.</summary>
+        <remarks>
+          <para>This field can be used when referencing the forms service, however using the <see cref="F:Microsoft.Office.InfoPath.Server.Administration.FormsService.ServiceName" /> instead of the <see cref="F:Microsoft.Office.InfoPath.Server.Administration.FormsService.ServiceId" /> may make administration automation code easier to read and maintain.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ServiceName">
+      <MemberSignature Language="C#" Value="public const string ServiceName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string ServiceName" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.Office.InfoPath.Server.Administration.FormsService.ServiceName" />
+      <MemberSignature Language="VB.NET" Value="Public Const ServiceName As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ ServiceName;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The forms service name.</summary>
+        <remarks>
+          <para>The <see cref="F:Microsoft.Office.InfoPath.Server.Administration.FormsService.ServiceName" /> field is used when referencing the forms service, and may make administration automation code easier to read and maintain instead of using the <see cref="F:Microsoft.Office.InfoPath.Server.Administration.FormsService.ServiceId" />.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetCertificateDisabled">
+      <MemberSignature Language="C#" Value="public void SetCertificateDisabled (string thumbprint, bool value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetCertificateDisabled(string thumbprint, bool value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.SetCertificateDisabled(System.String,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetCertificateDisabled (thumbprint As String, value As Boolean)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetCertificateDisabled(System::String ^ thumbprint, bool value);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="thumbprint" Type="System.String" />
+        <Parameter Name="value" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="thumbprint">To be added.</param>
+        <param name="value">To be added.</param>
+        <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TypeName">
+      <MemberSignature Language="C#" Value="public override string TypeName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string TypeName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.TypeName" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property TypeName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ TypeName { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the display name for the parent type <see cref="T:Microsoft.Office.InfoPath.Server.Administration.FormsService" />.</summary>
+        <value>Forms Service</value>
+        <remarks>
+          <para>This display name can be used for log files and messages.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Unprovision">
+      <MemberSignature Language="C#" Value="public override void Unprovision ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Unprovision() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Unprovision" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Unprovision ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Unprovision();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Removes the forms service from the SharePoint server farm.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public override sealed void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Administration.FormsService.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides NotOverridable Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>An override of the <see cref="M:Microsoft.SharePoint.Administration.SPPersistedObject.Update" /> method of the SPPersistedObject object.</summary>
+        <remarks>
+          <para>For more information about using the <see cref="T:Microsoft.SharePoint.Administration.SPPersistedObject" /> object, see the SharePoint documentation.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ViewStateThreshold">
+      <MemberSignature Language="C#" Value="public int ViewStateThreshold { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 ViewStateThreshold" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.ViewStateThreshold" />
+      <MemberSignature Language="VB.NET" Value="Public Property ViewStateThreshold As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int ViewStateThreshold { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum size, in kilobytes, of the session state when stored in the form view.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>The default size of the <see cref="P:Microsoft.Office.InfoPath.Server.Administration.FormsService.ViewStateThreshold" /> is 40 kilobytes. This property corresponds to the Form view (reduces database load on server). If form session state is larger than the specified value, the Session State Service will be used instead setting on the Configure InfoPath Forms Services page of the Central Administration site.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

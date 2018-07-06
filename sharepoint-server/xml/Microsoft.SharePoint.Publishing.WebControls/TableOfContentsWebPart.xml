@@ -1,0 +1,533 @@
+﻿<Type Name="TableOfContentsWebPart" FullName="Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart">
+  <TypeSignature Language="C#" Value="public class TableOfContentsWebPart : Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart, Microsoft.SharePoint.Publishing.IWebPartVariationUpdate" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit TableOfContentsWebPart extends Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart implements class Microsoft.SharePoint.Publishing.IWebPartVariationUpdate" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart" />
+  <TypeSignature Language="VB.NET" Value="Public Class TableOfContentsWebPart&#xA;Inherits LevelHierarchyWebPart&#xA;Implements IWebPartVariationUpdate" />
+  <TypeSignature Language="C++ CLI" Value="public ref class TableOfContentsWebPart : Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyWebPart, Microsoft::SharePoint::Publishing::IWebPartVariationUpdate" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.SharePoint.Publishing.IWebPartVariationUpdate</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.CLSCompliant(false)</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>System.Xml.Serialization.XmlRoot(Namespace="urn:schemas-microsoft-com:TableOfContentsWebPart")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Renders a hierarchical view of Web Parts and Web pages when structural navigation is enabled, and renders the navigation term set when managed navigation is enabled.</summary>
+    <remarks>
+      <para>This class derives from the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart" /> class and uses level styling in XSL templates to render a Web page and its child pages. It is associated with the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsDataSource" /> class that provides the data for this Web Part. This class always displays Web sites, and can be configured either to display or not display Web pages. A manual sort can be applied to each Web Part or they can be sorted in navigation.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public TableOfContentsWebPart ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; TableOfContentsWebPart();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of a <see cref="T:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AnchorLocation">
+      <MemberSignature Language="C#" Value="public string AnchorLocation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string AnchorLocation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.AnchorLocation" />
+      <MemberSignature Language="VB.NET" Value="Public Property AnchorLocation As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AnchorLocation { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.WebPartPages.ManagedLink(Fixup=true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryContent")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the server-relative URL of the location from which to start gathering data.</summary>
+        <value>The default value is an empty string.</value>
+        <remarks>
+          <para>The Web Part shows the contents of the Web site, starting from the location indicated by this property. The <b>AnchorLocation</b> will automatically be corrected if the target of the <b>AnchorLocation</b> moves within the SharePoint Foundation system. An empty string for <b>AnchorLocation</b> indicates that the Web Part should be anchored at the context Web site (the Web site containing the page that includes the Web Part). </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConfigureDataSource">
+      <MemberSignature Language="C#" Value="protected override void ConfigureDataSource (Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource levelHierarchyDataSource);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void ConfigureDataSource(class Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource levelHierarchyDataSource) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.ConfigureDataSource(Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource)" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void ConfigureDataSource(Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyDataSource ^ levelHierarchyDataSource);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="levelHierarchyDataSource" Type="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource" />
+      </Parameters>
+      <Docs>
+        <param name="levelHierarchyDataSource">A <b>LevelHierarchyDataSource</b> to configure.</param>
+        <summary>Configures the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsDataSource" /> object.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateChildControls">
+      <MemberSignature Language="C#" Value="protected override void CreateChildControls ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void CreateChildControls() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.CreateChildControls" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub CreateChildControls ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void CreateChildControls();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Sets the ASP.NET<b>CreateChildControls</b> method.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateDataSource">
+      <MemberSignature Language="C#" Value="protected override Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource CreateDataSource ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource CreateDataSource() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.CreateDataSource" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function CreateDataSource () As LevelHierarchyDataSource" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; override Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyDataSource ^ CreateDataSource();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates a data source for the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart" /> object.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetToolParts">
+      <MemberSignature Language="C#" Value="public override Microsoft.SharePoint.WebPartPages.ToolPart[] GetToolParts ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class Microsoft.SharePoint.WebPartPages.ToolPart[] GetToolParts() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.GetToolParts" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetToolParts () As ToolPart()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; override cli::array &lt;Microsoft::SharePoint::WebPartPages::ToolPart ^&gt; ^ GetToolParts();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.WebPartPages.ToolPart[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsToolPart" /> object that are displayed in the toolbar.</summary>
+        <returns>An array of <b>ToolPart</b> objects that appear in the toolbar.</returns>
+        <remarks>
+          <para>All user interface configuration of this Web Part is performed through the <b>TableOfContentsToolPart</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeContentFromStartingLocation">
+      <MemberSignature Language="C#" Value="public bool IncludeContentFromStartingLocation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IncludeContentFromStartingLocation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.IncludeContentFromStartingLocation" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludeContentFromStartingLocation As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IncludeContentFromStartingLocation { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryContent")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether to include the starting site and pages in this site.</summary>
+        <value>The default value is <b>false</b>.</value>
+        <remarks>
+          <para>The Web Part is anchored at a specific Web site. This property determines whether the anchor Web site and its subsites are displayed, or whether only child Web sites and their child sites are displayed. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeHiddenPages">
+      <MemberSignature Language="C#" Value="public bool IncludeHiddenPages { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IncludeHiddenPages" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.IncludeHiddenPages" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludeHiddenPages As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IncludeHiddenPages { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryContent")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether to include pages that are hidden in navigation.</summary>
+        <value>The default value is <b>false</b>.</value>
+        <remarks>
+          <para>If the Web Part is configured to show pages, it can also be configured to show hidden pages. If this property is set to <b>true</b> and <b>ShowPages</b> is set to <b>true</b>, then the Web Part will show hidden pages. If this property is <b>false</b>, the Web Part will not show hidden pages. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeHiddenWebs">
+      <MemberSignature Language="C#" Value="public bool IncludeHiddenWebs { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IncludeHiddenWebs" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.IncludeHiddenWebs" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludeHiddenWebs As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IncludeHiddenWebs { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryContent")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether to include Web sites that are hidden from navigation.</summary>
+        <value>The default value is <b>false</b>.</value>
+        <remarks>
+          <para>The Web Part can be configured to show hidden Web sites. If this property is set to <b>true</b>, the Web Part will show hidden Web sites, otherwise, it will not show hidden Web sites. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.SharePoint.Publishing.IWebPartVariationUpdate.Update">
+      <MemberSignature Language="C#" Value="void IWebPartVariationUpdate.Update (Microsoft.SharePoint.Publishing.PublishingWeb ownerWeb);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void Microsoft.SharePoint.Publishing.IWebPartVariationUpdate.Update(class Microsoft.SharePoint.Publishing.PublishingWeb ownerWeb) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.Microsoft#SharePoint#Publishing#IWebPartVariationUpdate#Update(Microsoft.SharePoint.Publishing.PublishingWeb)" />
+      <MemberSignature Language="VB.NET" Value="Sub Update (ownerWeb As PublishingWeb) Implements IWebPartVariationUpdate.Update" />
+      <MemberSignature Language="C++ CLI" Value=" virtual void Microsoft.SharePoint.Publishing.IWebPartVariationUpdate.Update(Microsoft::SharePoint::Publishing::PublishingWeb ^ ownerWeb) = Microsoft::SharePoint::Publishing::IWebPartVariationUpdate::Update;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.SharePoint.Publishing.IWebPartVariationUpdate.Update(Microsoft.SharePoint.Publishing.PublishingWeb)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="ownerWeb" Type="Microsoft.SharePoint.Publishing.PublishingWeb" />
+      </Parameters>
+      <Docs>
+        <param name="ownerWeb">A <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object.</param>
+        <summary>Updates any properties within a Web Part control that are dependent on the location of the page in the server hierarchy.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShowPages">
+      <MemberSignature Language="C#" Value="public bool ShowPages { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool ShowPages" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.ShowPages" />
+      <MemberSignature Language="VB.NET" Value="Public Property ShowPages As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShowPages { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryContent")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(true)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether to show Web pages.</summary>
+        <value>The default value is <b>true</b>.</value>
+        <remarks>
+          <para>The Web Part can be configured to show or hide pages. If this property is set to <b>true</b>, the Web Part will show Web pages, otherwise, it will hide Web pages. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SortPagesBy">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.NavigationSortOption SortPagesBy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart/NavigationSortOption SortPagesBy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.SortPagesBy" />
+      <MemberSignature Language="VB.NET" Value="Public Property SortPagesBy As TableOfContentsWebPart.NavigationSortOption" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::NavigationSortOption SortPagesBy { Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::NavigationSortOption get(); void set(Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::NavigationSortOption value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryOrganization")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart+NavigationSortOption</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets an enumeration value that determines the sort order for Web pages.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SortPagesByDirection">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.SortDirection SortPagesByDirection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart/SortDirection SortPagesByDirection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.SortPagesByDirection" />
+      <MemberSignature Language="VB.NET" Value="Public Property SortPagesByDirection As TableOfContentsWebPart.SortDirection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::SortDirection SortPagesByDirection { Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::SortDirection get(); void set(Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::SortDirection value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryOrganization")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart+SortDirection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets an enumeration value that determines a sort direction for the page sort order.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SortWebsBy">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.NavigationSortOption SortWebsBy { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart/NavigationSortOption SortWebsBy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.SortWebsBy" />
+      <MemberSignature Language="VB.NET" Value="Public Property SortWebsBy As TableOfContentsWebPart.NavigationSortOption" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::NavigationSortOption SortWebsBy { Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::NavigationSortOption get(); void set(Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::NavigationSortOption value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryOrganization")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart+NavigationSortOption</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets an enumeration value that specifies the sort order for the Web sites.</summary>
+        <value>The default value for this property is <b>NavigationOrder</b>.</value>
+        <remarks>
+          <para>Web sites can be sorted by <b>NavigationOrder</b>, in which case the navigation determines the order, or they can be sorted manually by the <see cref="T:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.NavigationSortOption" /> enumeration. </para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SortWebsByDirection">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.SortDirection SortWebsByDirection { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart/SortDirection SortWebsByDirection" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.SortWebsByDirection" />
+      <MemberSignature Language="VB.NET" Value="Public Property SortWebsByDirection As TableOfContentsWebPart.SortDirection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::SortDirection SortWebsByDirection { Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::SortDirection get(); void set(Microsoft::SharePoint::Publishing::WebControls::TableOfContentsWebPart::SortDirection value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryOrganization")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(Mono.Cecil.CustomAttributeArgument)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart+SortDirection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets an enumeration value that specifies the sort direction for the Web site sort order.</summary>
+        <value>To be added.</value>
+        <remarks>
+          <para>If you have selected a manual sort order in <see cref="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.SortWebsBy" />, you can use this property to determine the direction of the sort. The default value is <b>SortDirection.Asc</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="StartFromCurrentNode">
+      <MemberSignature Language="C#" Value="public bool StartFromCurrentNode { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool StartFromCurrentNode" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.StartFromCurrentNode" />
+      <MemberSignature Language="VB.NET" Value="Public Property StartFromCurrentNode As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool StartFromCurrentNode { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.Category("CategoryContent")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DefaultValue(false)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether the site map that corresponds to the current URL should become the root node in the navigation tree.</summary>
+        <value>A value that indicates whether the site map node that corresponds to the current URL should become the root node in the navigation tree.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.WebControls.TableOfContentsWebPart.StartFromCurrentNode" /> property is only supported for managed navigation.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

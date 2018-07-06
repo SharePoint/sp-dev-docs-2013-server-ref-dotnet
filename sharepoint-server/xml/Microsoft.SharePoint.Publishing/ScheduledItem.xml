@@ -1,0 +1,929 @@
+﻿<Type Name="ScheduledItem" FullName="Microsoft.SharePoint.Publishing.ScheduledItem">
+  <TypeSignature Language="C#" Value="public class ScheduledItem" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ScheduledItem extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.ScheduledItem" />
+  <TypeSignature Language="VB.NET" Value="Public Class ScheduledItem" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ScheduledItem" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, ServerTypeId="E4353749-4AA8-438c-8A8D-AC8052B60449")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Provides a wrapper that includes scheduling-specific behavior for items in the <see cref="T:Microsoft.SharePoint.SPListItem" /> class.</summary>
+    <remarks>
+      <para>A <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> item is visible on the published site only between the scheduled start date (<see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.StartDate" />) and end date (<see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" />).</para>
+      <para>The <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> class wraps the <see cref="T:Microsoft.SharePoint.SPListItem" /> class. It also directly exposes the underlying <see cref="T:Microsoft.SharePoint.SPListItem" /> class through the <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.ListItem" /> property so that additional <see cref="T:Microsoft.SharePoint.SPListItem" /> and <see cref="P:Microsoft.SharePoint.SPListItem.SPFile" /> functionality can be easily accessed.</para>
+      <para>This class can be instantiated by using the static <see cref="M:Microsoft.SharePoint.Publishing.ScheduledItem.GetScheduledItem(Microsoft.SharePoint.SPListItem)" /> method.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="EnableSchedulingOnDeployedItems">
+      <MemberSignature Language="C#" Value="public static void EnableSchedulingOnDeployedItems (Microsoft.SharePoint.SPSite deployedSite, Microsoft.SharePoint.SPChangeToken startChangeToken, Microsoft.SharePoint.SPChangeToken endChangeToken, string jobStatus);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void EnableSchedulingOnDeployedItems(class Microsoft.SharePoint.SPSite deployedSite, class Microsoft.SharePoint.SPChangeToken startChangeToken, class Microsoft.SharePoint.SPChangeToken endChangeToken, string jobStatus) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.ScheduledItem.EnableSchedulingOnDeployedItems(Microsoft.SharePoint.SPSite,Microsoft.SharePoint.SPChangeToken,Microsoft.SharePoint.SPChangeToken,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Sub EnableSchedulingOnDeployedItems (deployedSite As SPSite, startChangeToken As SPChangeToken, endChangeToken As SPChangeToken, jobStatus As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static void EnableSchedulingOnDeployedItems(Microsoft::SharePoint::SPSite ^ deployedSite, Microsoft::SharePoint::SPChangeToken ^ startChangeToken, Microsoft::SharePoint::SPChangeToken ^ endChangeToken, System::String ^ jobStatus);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="deployedSite" Type="Microsoft.SharePoint.SPSite" />
+        <Parameter Name="startChangeToken" Type="Microsoft.SharePoint.SPChangeToken" />
+        <Parameter Name="endChangeToken" Type="Microsoft.SharePoint.SPChangeToken" />
+        <Parameter Name="jobStatus" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="deployedSite">Site where the items are deployed.</param>
+        <param name="startChangeToken">Time when the items will start being viewable.</param>
+        <param name="endChangeToken">Time when the items will stop being viewable.</param>
+        <param name="jobStatus">A string that describes the status of the job.</param>
+        <summary>Enables deployed list items to be visible based on a schedule.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EndDate">
+      <MemberSignature Language="C#" Value="public DateTime EndDate { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime EndDate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" />
+      <MemberSignature Language="VB.NET" Value="Public Property EndDate As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime EndDate { DateTime get(); void set(DateTime value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Coordinated Universal Time (UTC) at which this <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> class ends and is no longer visible on the published site.</summary>
+        <value>The Coordinated Universal Time (UTC) at which this <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> class ends and is no longer visible on the published site. </value>
+        <remarks>
+          <para>A value of January 01, 2050, indicates that an instance of the <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> class is no longer visible on the published site. If the end date is set to this value, the property is displayed by using the string "Never" in the corresponding user interfaces.</para>
+          <para>To save changes after setting this property, call the <b>ScheduledItem.ListItem.Update</b> method.</para>
+          <para>The date and time returned by this property can be converted from UTC to local time in server-side code by using <b>SPRegionalSettings.TimeZone.UTCToLocalTime(DateTime)</b> method.</para>
+          <para>The user must have edit permissions on the <b>PublishingPage</b> to set this value. The user must have view permissions on the <b>PublishingPage</b> to initially retrieve it and get any of its property values.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentNullException">This value cannot be set to a null reference (Nothing in Visual Basic).</exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+        <example>
+          <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
+          <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
+          <code>using ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using DateTime = System.DateTime;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class ScheduledItemCodeSamples
+    {
+        public static void SetDatesAndSchedule(SPListItem listItem, 
+          DateTime startDate, DateTime endDate)
+        {
+            // Set the input parameter values with
+            // your own values.
+            
+            //
+            // validate the input parameters
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+
+            // Get the ScheduledItem wrapper for the SPListItem
+            // that was passed in.
+            //
+            ScheduledItem scheduledItem = null;
+            if (ScheduledItem.IsScheduledItem(listItem))
+            {
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException
+                  ("The document library containing this SPListItem must support scheduling", 
+                  "listItem");
+            }
+
+            // Set and save the date values.
+            scheduledItem.StartDate = startDate;
+            scheduledItem.EndDate = endDate;
+            scheduledItem.ListItem.Update();
+
+            // Schedule the item so that the StartDate and EndDate
+            // take effect.
+            scheduledItem.Schedule();
+        }        
+    }
+}</code>
+          <code>Imports ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class ScheduledItemCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetDatesAndSchedule(ByVal listItem As SPListItem, ByVal startDate As Date, ByVal endDate As Date)
+            ' Set the input parameter values with
+            ' your own values.
+
+            '
+            ' validate the input parameters
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+
+            ' Get the ScheduledItem wrapper for the SPListItem
+            ' that was passed in.
+            '
+            Dim scheduledItem As ScheduledItem = Nothing
+            If ScheduledItem.IsScheduledItem(listItem) Then
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem)
+            Else
+                Throw New System.ArgumentException ("The document library containing this SPListItem must support scheduling", "listItem")
+            End If
+
+            ' Set and save the date values.
+            scheduledItem.StartDate = startDate
+            scheduledItem.EndDate = endDate
+            scheduledItem.ListItem.Update()
+
+            ' Schedule the item so that the StartDate and EndDate
+            ' take effect.
+            scheduledItem.Schedule()
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetScheduledItem">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.ScheduledItem GetScheduledItem (Microsoft.SharePoint.SPListItem sourceListItem);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.ScheduledItem GetScheduledItem(class Microsoft.SharePoint.SPListItem sourceListItem) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.ScheduledItem.GetScheduledItem(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetScheduledItem (sourceListItem As SPListItem) As ScheduledItem" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::ScheduledItem ^ GetScheduledItem(Microsoft::SharePoint::SPListItem ^ sourceListItem);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.ScheduledItem</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sourceListItem" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="sourceListItem">The <b>SPListItem</b> to wrap in a <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> instance.</param>
+        <summary>Retrieves an instance of the <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> class that wraps the specified <see cref="T:Microsoft.SharePoint.SPListItem" /> class.</summary>
+        <returns>A <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> instance that wraps the specified <b>SPListItem</b>. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="System.ArgumentException">Invalid <see cref="T:Microsoft.SharePoint.SPListItem" />. The <b>SPListItem</b> provided is not compatible with a <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" />. This indicates that the <b>SPListItem</b> is either not part of a document library that supports scheduling, or does not have start and end dates, which are required for scheduling.</exception>
+        <exception cref="System.ArgumentNullException">The <paramref name="sourceListItem" /> parameter cannot be a null reference (Nothing in Visual Basic).</exception>
+        <example>
+          <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
+          <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
+          <code>using ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using DateTime = System.DateTime;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class ScheduledItemCodeSamples
+    {
+        public static void SetDatesAndSchedule(SPListItem listItem, 
+          DateTime startDate, DateTime endDate)
+        {
+            // Set the input parameter values with
+            // your own values.
+            
+            //
+            // validate the input parameters
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+
+            // Get the ScheduledItem wrapper for the SPListItem
+            // that was passed in.
+            //
+            ScheduledItem scheduledItem = null;
+            if (ScheduledItem.IsScheduledItem(listItem))
+            {
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException
+                  ("The document library containing this SPListItem must support scheduling", 
+                  "listItem");
+            }
+
+            // Set and save the date values.
+            scheduledItem.StartDate = startDate;
+            scheduledItem.EndDate = endDate;
+            scheduledItem.ListItem.Update();
+
+            // Schedule the item so that the StartDate and EndDate
+            // take effect.
+            scheduledItem.Schedule();
+        }        
+    }
+}</code>
+          <code>Imports ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class ScheduledItemCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetDatesAndSchedule(ByVal listItem As SPListItem, ByVal startDate As Date, ByVal endDate As Date)
+            ' Set the input parameter values with
+            ' your own values.
+
+            '
+            ' validate the input parameters
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+
+            ' Get the ScheduledItem wrapper for the SPListItem
+            ' that was passed in.
+            '
+            Dim scheduledItem As ScheduledItem = Nothing
+            If ScheduledItem.IsScheduledItem(listItem) Then
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem)
+            Else
+                Throw New System.ArgumentException ("The document library containing this SPListItem must support scheduling", "listItem")
+            End If
+
+            ' Set and save the date values.
+            scheduledItem.StartDate = startDate
+            scheduledItem.EndDate = endDate
+            scheduledItem.ListItem.Update()
+
+            ' Schedule the item so that the StartDate and EndDate
+            ' take effect.
+            scheduledItem.Schedule()
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="IsScheduledItem">
+      <MemberSignature Language="C#" Value="public static bool IsScheduledItem (Microsoft.SharePoint.SPListItem sourceListItem);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsScheduledItem(class Microsoft.SharePoint.SPListItem sourceListItem) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.ScheduledItem.IsScheduledItem(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsScheduledItem (sourceListItem As SPListItem) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsScheduledItem(Microsoft::SharePoint::SPListItem ^ sourceListItem);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sourceListItem" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="sourceListItem">
+          <see cref="T:Microsoft.SharePoint.SPListItem" /> to check for validity.</param>
+        <summary>Confirms that a <see cref="T:Microsoft.SharePoint.SPListItem" /> item is a valid instance of the <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> class.</summary>
+        <returns>
+          <b>true</b> if the <b>SPListItem</b> is a <b>ScheduledItem</b>; otherwise, <b>false</b>.</returns>
+        <remarks>
+          <para>This method confirms that the <b>SPListItem</b> is a member of a document library that supports scheduling, and that it has start and end dates, which are required for scheduling.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentNullException">The <paramref name="sourceListItem" /> parameter cannot be a null reference (Nothing in Visual Basic).</exception>
+        <example>
+          <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
+          <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
+          <code>using ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using DateTime = System.DateTime;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class ScheduledItemCodeSamples
+    {
+        public static void SetDatesAndSchedule(SPListItem listItem, 
+          DateTime startDate, DateTime endDate)
+        {
+            // Set the input parameter values with
+            // your own values.
+            
+            //
+            // validate the input parameters
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+
+            // Get the ScheduledItem wrapper for the SPListItem
+            // that was passed in.
+            //
+            ScheduledItem scheduledItem = null;
+            if (ScheduledItem.IsScheduledItem(listItem))
+            {
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException
+                  ("The document library containing this SPListItem must support scheduling", 
+                  "listItem");
+            }
+
+            // Set and save the date values.
+            scheduledItem.StartDate = startDate;
+            scheduledItem.EndDate = endDate;
+            scheduledItem.ListItem.Update();
+
+            // Schedule the item so that the StartDate and EndDate
+            // take effect.
+            scheduledItem.Schedule();
+        }        
+    }
+}</code>
+          <code>Imports ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class ScheduledItemCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetDatesAndSchedule(ByVal listItem As SPListItem, ByVal startDate As Date, ByVal endDate As Date)
+            ' Set the input parameter values with
+            ' your own values.
+
+            '
+            ' validate the input parameters
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+
+            ' Get the ScheduledItem wrapper for the SPListItem
+            ' that was passed in.
+            '
+            Dim scheduledItem As ScheduledItem = Nothing
+            If ScheduledItem.IsScheduledItem(listItem) Then
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem)
+            Else
+                Throw New System.ArgumentException ("The document library containing this SPListItem must support scheduling", "listItem")
+            End If
+
+            ' Set and save the date values.
+            scheduledItem.StartDate = startDate
+            scheduledItem.EndDate = endDate
+            scheduledItem.ListItem.Update()
+
+            ' Schedule the item so that the StartDate and EndDate
+            ' take effect.
+            scheduledItem.Schedule()
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ListItem">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPListItem ListItem { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPListItem ListItem" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.ScheduledItem.ListItem" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ListItem As SPListItem" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPListItem ^ ListItem { Microsoft::SharePoint::SPListItem ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPListItem</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the underlying <see cref="T:Microsoft.SharePoint.SPListItem" /> object that is wrapped by the <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> object. </summary>
+        <value>The underlying <see cref="T:Microsoft.SharePoint.SPListItem" /> that is wrapped by the <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" />.</value>
+        <remarks>
+          <para>The <b>ListItem</b> value is initialized when a <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> is instantiated and cannot be modified.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
+          <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
+          <code>using ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using DateTime = System.DateTime;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class ScheduledItemCodeSamples
+    {
+        public static void SetDatesAndSchedule(SPListItem listItem, 
+          DateTime startDate, DateTime endDate)
+        {
+            // Set the input parameter values with
+            // your own values.
+            
+            //
+            // validate the input parameters
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+
+            // Get the ScheduledItem wrapper for the SPListItem
+            // that was passed in.
+            //
+            ScheduledItem scheduledItem = null;
+            if (ScheduledItem.IsScheduledItem(listItem))
+            {
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException
+                  ("The document library containing this SPListItem must support scheduling", 
+                  "listItem");
+            }
+
+            // Set and save the date values.
+            scheduledItem.StartDate = startDate;
+            scheduledItem.EndDate = endDate;
+            scheduledItem.ListItem.Update();
+
+            // Schedule the item so that the StartDate and EndDate
+            // take effect.
+            scheduledItem.Schedule();
+        }        
+    }
+}</code>
+          <code>Imports ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class ScheduledItemCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetDatesAndSchedule(ByVal listItem As SPListItem, ByVal startDate As Date, ByVal endDate As Date)
+            ' Set the input parameter values with
+            ' your own values.
+
+            '
+            ' validate the input parameters
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+
+            ' Get the ScheduledItem wrapper for the SPListItem
+            ' that was passed in.
+            '
+            Dim scheduledItem As ScheduledItem = Nothing
+            If ScheduledItem.IsScheduledItem(listItem) Then
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem)
+            Else
+                Throw New System.ArgumentException ("The document library containing this SPListItem must support scheduling", "listItem")
+            End If
+
+            ' Set and save the date values.
+            scheduledItem.StartDate = startDate
+            scheduledItem.EndDate = endDate
+            scheduledItem.ListItem.Update()
+
+            ' Schedule the item so that the StartDate and EndDate
+            ' take effect.
+            scheduledItem.Schedule()
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="PublishingWeb">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingWeb PublishingWeb { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.PublishingWeb PublishingWeb" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.ScheduledItem.PublishingWeb" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PublishingWeb As PublishingWeb" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::PublishingWeb ^ PublishingWeb { Microsoft::SharePoint::Publishing::PublishingWeb ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingWeb</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>PublishingWeb</b> object that contains this <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> object.</summary>
+        <value>The <b>PublishingWeb</b> that contains this <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> object. If the user does not have permissions to the parent <b>PublishingWeb</b>, this property returns a null reference (Nothing in Visual Basic).</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Schedule">
+      <MemberSignature Language="C#" Value="public void Schedule ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Schedule() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.ScheduledItem.Schedule" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Schedule ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Schedule();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Schedules an instance of the <see cref="T:Microsoft.SharePoint.SPListItem" /> class to be automatically approved (start) and to be unpublished (end) on specified dates.</summary>
+        <remarks>
+          <para>Scheduling an <b>SPListItem</b> indicates that it has already been approved. The same permissions are required for scheduling and approval.</para>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.StartDate" /> and <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" /> property values are used to determine the publication schedule. If the start date is earlier than the current date, the <b>SPListItem</b> is published immediately. If not, it is scheduled to publish at a future date. If the end date is specified, the <b>SPListItem</b> is scheduled to unpublish at a future date.</para>
+          <para />
+        </remarks>
+        <exception cref="Microsoft.SharePoint.SPException">Scheduling is not supported in this content database. Use Approve or Unpublish instead.</exception>
+        <example>
+          <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
+          <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
+          <code>using ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using DateTime = System.DateTime;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class ScheduledItemCodeSamples
+    {
+        public static void SetDatesAndSchedule(SPListItem listItem, 
+          DateTime startDate, DateTime endDate)
+        {
+            // Set the input parameter values with
+            // your own values.
+            
+            //
+            // validate the input parameters
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+
+            // Get the ScheduledItem wrapper for the SPListItem
+            // that was passed in.
+            //
+            ScheduledItem scheduledItem = null;
+            if (ScheduledItem.IsScheduledItem(listItem))
+            {
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException
+                  ("The document library containing this SPListItem must support scheduling", 
+                  "listItem");
+            }
+
+            // Set and save the date values.
+            scheduledItem.StartDate = startDate;
+            scheduledItem.EndDate = endDate;
+            scheduledItem.ListItem.Update();
+
+            // Schedule the item so that the StartDate and EndDate
+            // take effect.
+            scheduledItem.Schedule();
+        }        
+    }
+}</code>
+          <code>Imports ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class ScheduledItemCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetDatesAndSchedule(ByVal listItem As SPListItem, ByVal startDate As Date, ByVal endDate As Date)
+            ' Set the input parameter values with
+            ' your own values.
+
+            '
+            ' validate the input parameters
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+
+            ' Get the ScheduledItem wrapper for the SPListItem
+            ' that was passed in.
+            '
+            Dim scheduledItem As ScheduledItem = Nothing
+            If ScheduledItem.IsScheduledItem(listItem) Then
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem)
+            Else
+                Throw New System.ArgumentException ("The document library containing this SPListItem must support scheduling", "listItem")
+            End If
+
+            ' Set and save the date values.
+            scheduledItem.StartDate = startDate
+            scheduledItem.EndDate = endDate
+            scheduledItem.ListItem.Update()
+
+            ' Schedule the item so that the StartDate and EndDate
+            ' take effect.
+            scheduledItem.Schedule()
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Schedule">
+      <MemberSignature Language="C#" Value="public void Schedule (string approvalComment);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Schedule(string approvalComment) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.ScheduledItem.Schedule(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Schedule (approvalComment As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Schedule(System::String ^ approvalComment);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="approvalComment" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="approvalComment">Comments to be set when the <b>SPListItem</b> is approved if the <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.StartDate" /> is in the future.</param>
+        <summary>Schedules an <b>SPListItem</b> object to automatically be approved (start) and be unpublished (end) on specified dates.</summary>
+        <remarks>
+          <para>Scheduling an <b>SPListItem</b> indicates that it has already been effectively approved. The same permissions required for scheduling are required for approval.</para>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.StartDate" /> and <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" /> values are used to determine the publication schedule. If the start date is earlier than now, the <b>SPListItem</b> is published immediately. Otherwise, it is scheduled to publish at a future date. If the end date is specified, the <b>SPListItem</b> is scheduled to unpublish at a future date.</para>
+          <para />
+        </remarks>
+        <exception cref="Microsoft.SharePoint.SPException">Scheduling is not supported in this content database. Use Approve or Unpublish instead.</exception>
+        <example>
+          <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
+          <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
+          <code>using ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using DateTime = System.DateTime;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class ScheduledItemCodeSamples
+    {
+        public static void SetDatesAndSchedule(SPListItem listItem, 
+          DateTime startDate, DateTime endDate)
+        {
+            // Set the input parameter values with
+            // your own values.
+            
+            //
+            // validate the input parameters
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+
+            // Get the ScheduledItem wrapper for the SPListItem
+            // that was passed in.
+            //
+            ScheduledItem scheduledItem = null;
+            if (ScheduledItem.IsScheduledItem(listItem))
+            {
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException
+                  ("The document library containing this SPListItem must support scheduling", 
+                  "listItem");
+            }
+
+            // Set and save the date values.
+            scheduledItem.StartDate = startDate;
+            scheduledItem.EndDate = endDate;
+            scheduledItem.ListItem.Update();
+
+            // Schedule the item so that the StartDate and EndDate
+            // take effect.
+            scheduledItem.Schedule();
+        }        
+    }
+}</code>
+          <code>Imports ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class ScheduledItemCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetDatesAndSchedule(ByVal listItem As SPListItem, ByVal startDate As Date, ByVal endDate As Date)
+            ' Set the input parameter values with
+            ' your own values.
+
+            '
+            ' validate the input parameters
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+
+            ' Get the ScheduledItem wrapper for the SPListItem
+            ' that was passed in.
+            '
+            Dim scheduledItem As ScheduledItem = Nothing
+            If ScheduledItem.IsScheduledItem(listItem) Then
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem)
+            Else
+                Throw New System.ArgumentException ("The document library containing this SPListItem must support scheduling", "listItem")
+            End If
+
+            ' Set and save the date values.
+            scheduledItem.StartDate = startDate
+            scheduledItem.EndDate = endDate
+            scheduledItem.ListItem.Update()
+
+            ' Schedule the item so that the StartDate and EndDate
+            ' take effect.
+            scheduledItem.Schedule()
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="StartDate">
+      <MemberSignature Language="C#" Value="public DateTime StartDate { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime StartDate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.ScheduledItem.StartDate" />
+      <MemberSignature Language="VB.NET" Value="Public Property StartDate As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime StartDate { DateTime get(); void set(DateTime value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Coordinated Universal Time (UTC) at which this <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> object becomes a visible part of the published Web site.</summary>
+        <value>The Coordinated Universal Time (UTC) at which this <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> becomes a visible part of the published Web site.</value>
+        <remarks>
+          <para>A value of January 01, 1900, indicates that an instance of the <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" /> class has a start date that is set to a past date and should be published immediately after it is approved. If the start date is set to January 01, 1900, the property is displayed as "Immediately" in the corresponding user interfaces.</para>
+          <para>To save changes after you set this property, call the <b>ScheduledItem.LIstItem.Update</b> method.</para>
+          <para>The date and time that are returned by this property can be converted from UTC to local time in server-side code using the <b>SPRegionalSettings.TimeZone.UTCToLocalTime(DateTime)</b> method. </para>
+          <para>The user must have edit permissions on the <b>PublishingPage</b> to set this value. The user must have view permissions on the <b>PublishingPage</b> to initially retrieve the <b>PublishingPage</b> and get any of its property values. </para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentNullException">The parameter cannot contain a a null reference (Nothing in Visual Basic) value.</exception>
+        <exception cref="Microsoft.SharePoint.SPException">The current user does not have sufficient permissions to perform this action.</exception>
+        <example>
+          <para>This sample sets a start and end date for a <b>ScheduledItem</b> object and schedules the item so that it is published when the start date is reached and it is unpublished when the end date is reached.</para>
+          <para>Before compiling and running this sample, verify that the <b>SPListItem</b> is a list item in a document library that supports scheduling.</para>
+          <code>using ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using DateTime = System.DateTime;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class ScheduledItemCodeSamples
+    {
+        public static void SetDatesAndSchedule(SPListItem listItem, 
+          DateTime startDate, DateTime endDate)
+        {
+            // Set the input parameter values with
+            // your own values.
+            
+            //
+            // validate the input parameters
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+
+            // Get the ScheduledItem wrapper for the SPListItem
+            // that was passed in.
+            //
+            ScheduledItem scheduledItem = null;
+            if (ScheduledItem.IsScheduledItem(listItem))
+            {
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException
+                  ("The document library containing this SPListItem must support scheduling", 
+                  "listItem");
+            }
+
+            // Set and save the date values.
+            scheduledItem.StartDate = startDate;
+            scheduledItem.EndDate = endDate;
+            scheduledItem.ListItem.Update();
+
+            // Schedule the item so that the StartDate and EndDate
+            // take effect.
+            scheduledItem.Schedule();
+        }        
+    }
+}</code>
+          <code>Imports ScheduledItem = Microsoft.SharePoint.Publishing.ScheduledItem
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class ScheduledItemCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetDatesAndSchedule(ByVal listItem As SPListItem, ByVal startDate As Date, ByVal endDate As Date)
+            ' Set the input parameter values with
+            ' your own values.
+
+            '
+            ' validate the input parameters
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+
+            ' Get the ScheduledItem wrapper for the SPListItem
+            ' that was passed in.
+            '
+            Dim scheduledItem As ScheduledItem = Nothing
+            If ScheduledItem.IsScheduledItem(listItem) Then
+                scheduledItem = ScheduledItem.GetScheduledItem(listItem)
+            Else
+                Throw New System.ArgumentException ("The document library containing this SPListItem must support scheduling", "listItem")
+            End If
+
+            ' Set and save the date values.
+            scheduledItem.StartDate = startDate
+            scheduledItem.EndDate = endDate
+            scheduledItem.ListItem.Update()
+
+            ' Schedule the item so that the StartDate and EndDate
+            ' take effect.
+            scheduledItem.Schedule()
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

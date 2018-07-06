@@ -1,0 +1,2693 @@
+﻿<Type Name="PublishingPage" FullName="Microsoft.SharePoint.Publishing.PublishingPage">
+  <TypeSignature Language="C#" Value="public sealed class PublishingPage : Microsoft.SharePoint.Publishing.ScheduledItem" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PublishingPage extends Microsoft.SharePoint.Publishing.ScheduledItem" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.PublishingPage" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PublishingPage&#xA;Inherits ScheduledItem" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PublishingPage sealed : Microsoft::SharePoint::Publishing::ScheduledItem" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.SharePoint.Publishing.ScheduledItem</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, FactoryType=typeof(Microsoft.SharePoint.Publishing.Internal.PublishingClientObjectFactory), ObjectIdentityPropertyName="CanonicalId", ServerTypeId="E361280D-01DC-431a-9823-4AFACD06418B")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Provides publishing-related behavior for an .aspx page that is stored in a <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object.</summary>
+    <remarks>
+      <para>A <b>PublishingPage</b> object is stored as a document library item in a designated document library of a <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object. It contains references to the parts that define the .aspx page, such as the <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> class, the <see cref="T:Microsoft.SharePoint.SPContentType" /> class, resources, and other parts. It contains <b>PublishingPage</b> content as field values in the document library item.</para>
+      <para>Many publishing pages may share common references such as page layout and resources. The server automatically updates these references in the <b>PublishingPage</b> object if the referenced items are renamed or moved within the system.</para>
+      <para>A schedule is associated with each <b>PublishingPage</b> object. The page is visible on the published site only between the scheduled start date (<see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.StartDate" /> property) and end date (<see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" /> property). The scheduling behavior is part of the <b>PublishingPage</b> base class, <see cref="T:Microsoft.SharePoint.Publishing.ScheduledItem" />.</para>
+      <para>The <b>PublishingPage</b> class wraps the <see cref="T:Microsoft.SharePoint.SPListItem" /> class. It also directly exposes the underlying <b>SPListItem</b> (<see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.ListItem" /> property) so that it can more easily access additional <b>SPListItem</b> and <see cref="P:Microsoft.SharePoint.SPListItem.File" /> functionality.</para>
+      <para>You can instantiate the <b>PublishingPage</b> class by using the static <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.GetPublishingPage(Microsoft.SharePoint.SPListItem)" /> method, or by retrieving it from a <see cref="T:Microsoft.SharePoint.Publishing.PublishingPageCollection" /> object.</para>
+      <para />
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="AddFriendlyUrl">
+      <MemberSignature Language="C#" Value="public string AddFriendlyUrl (string friendlyUrlSegment, Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem editableParent, bool doAddToNavigation);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string AddFriendlyUrl(string friendlyUrlSegment, class Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem editableParent, bool doAddToNavigation) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.AddFriendlyUrl(System.String,Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Function AddFriendlyUrl (friendlyUrlSegment As String, editableParent As NavigationTermSetItem, doAddToNavigation As Boolean) As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ AddFriendlyUrl(System::String ^ friendlyUrlSegment, Microsoft::SharePoint::Publishing::Navigation::NavigationTermSetItem ^ editableParent, bool doAddToNavigation);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="friendlyUrlSegment" Type="System.String" />
+        <Parameter Name="editableParent" Type="Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem" />
+        <Parameter Name="doAddToNavigation" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="friendlyUrlSegment">The user-friendly text to use as the URL segment.</param>
+        <param name="editableParent">The parent <see cref="T:Microsoft.SharePoint.Publishing.Navigation.NavigationTermSetItem" /> object below which this new friendly URL should be created. </param>
+        <param name="doAddToNavigation">Indicates whether to add the friendly URL into the managed navigation.</param>
+        <summary>Adds a user-friendly URL for this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <returns>The new server-relative friendly URL for this <b>PublishingPage</b> object.</returns>
+        <remarks>
+          <para>The <paramref name="editableParent" /> parameter must be retrieved as an editable item.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="friendlyUrlSegment" /> parameter cannot be null or empty.</exception>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="editableParent" /> parameter cannot be null.</exception>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Audience">
+      <MemberSignature Language="C#" Value="public string Audience { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Audience" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.Audience" />
+      <MemberSignature Language="VB.NET" Value="Public Property Audience As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Audience { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that represents the audience that this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> is targeted to.</summary>
+        <value>A string that represents the audience to which the active page is targeted.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CheckIn">
+      <MemberSignature Language="C#" Value="public void CheckIn (string comment);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CheckIn(string comment) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.CheckIn(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub CheckIn (comment As String)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void CheckIn(System::String ^ comment);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="comment" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="comment">String that contains a comment describing the check in.</param>
+        <summary>Checks in this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <remarks>
+          <para>The <b>PublishingPage</b> object's underlying <see cref="T:Microsoft.SharePoint.SPFile" /> object is checked in. This method is a wrapper for the <see cref="M:Microsoft.SharePoint.SPFile.CheckIn(System.String)" /> method.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
+          <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the pages document library of a <b>PublishingWeb</b>.</para>
+          <para>This example assumes that the document library that contains the <b>SPListItem</b> requires content approval.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+
+        public static void SetPagePropertiesAndApprove(SPListItem listItem, SPUser pageContact)
+        {
+            // Replace these variable values and input parameters with your own values.
+            //
+            // New PublishingPage.Title value
+            string newTitle = "your Title";
+            //
+            // New PublishingPage.Description value
+            string newDescription = "your Description";
+            //
+            // The comment to set when the page is checked in, published, and approved.
+            string checkInComment = "Your comments";
+
+            
+            // Validate the input parameters.
+            //
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+            if (null == pageContact)
+            {
+                throw new System.ArgumentNullException("pageContact");
+            }
+
+            // Get the PublishingPage wrapper for the SPListItem that was passed in.
+            //
+            PublishingPage publishingPage = null;
+            if (PublishingPage.IsPublishingPage(listItem))
+            {
+                publishingPage = PublishingPage.GetPublishingPage(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException("This SPListItem is not a PublishingPage", "listItem");
+            }
+
+            
+            // Check out the page if it is not checked out yet.
+            //
+            if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                publishingPage.CheckOut();
+            }
+
+            
+            // Set and save some properties on the PublishingPage.
+            //
+            publishingPage.Title = newTitle;
+            publishingPage.Description = newDescription;
+            publishingPage.Contact = pageContact;
+            publishingPage.Update();
+
+            
+            // Publish the page, and approve it if required, so that the updated 
+            // values are visible on the published Web site.
+            //
+            publishingPage.CheckIn(checkInComment);
+            SPFile pageFile = publishingPage.ListItem.File;
+            pageFile.Publish(checkInComment);
+            pageFile.Approve(checkInComment);
+        }
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPagePropertiesAndApprove(ByVal listItem As SPListItem, ByVal pageContact As SPUser)
+            ' Replace these variable values and input parameters with your own values.
+            '
+            ' New PublishingPage.Title value
+            Dim newTitle As String = "your Title"
+            '
+            ' New PublishingPage.Description value
+            Dim newDescription As String = "your Description"
+            '
+            ' The comment to set when the page is checked in, published, and approved.
+            Dim checkInComment As String = "Your comments"
+
+
+            ' Validate the input parameters.
+            '
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+            If Nothing Is pageContact Then
+                Throw New System.ArgumentNullException("pageContact")
+            End If
+
+            ' Get the PublishingPage wrapper for the SPListItem that was passed in.
+            '
+            Dim publishingPage As PublishingPage = Nothing
+            If PublishingPage.IsPublishingPage(listItem) Then
+                publishingPage = PublishingPage.GetPublishingPage(listItem)
+            Else
+                Throw New System.ArgumentException("This SPListItem is not a PublishingPage", "listItem")
+            End If
+
+
+            ' Check out the page if it is not checked out yet.
+            '
+            If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                publishingPage.CheckOut()
+            End If
+
+
+            ' Set and save some properties on the PublishingPage.
+            '
+            publishingPage.Title = newTitle
+            publishingPage.Description = newDescription
+            publishingPage.Contact = pageContact
+            publishingPage.Update()
+
+
+            ' Publish the page, and approve it if required, so that the updated 
+            ' values are visible on the published Web site.
+            '
+            publishingPage.CheckIn(checkInComment)
+            Dim pageFile As SPFile = publishingPage.ListItem.File
+            pageFile.Publish(checkInComment)
+            pageFile.Approve(checkInComment)
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="CheckOut">
+      <MemberSignature Language="C#" Value="public void CheckOut ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CheckOut() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.CheckOut" />
+      <MemberSignature Language="VB.NET" Value="Public Sub CheckOut ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void CheckOut();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Checks out this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> instance for editing.</summary>
+        <remarks>
+          <para>The <b>PublishingPage</b> object's underlying <see cref="T:Microsoft.SharePoint.SPFile" /> object is checked out to the current user. This method is a wrapper for the <see cref="M:Microsoft.SharePoint.SPFile.CheckOut" /> method.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
+          <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the Pages document library of a <b>PublishingWeb</b>.</para>
+          <para>This example assumes that the document library that contains the <b>SPListItem</b> requires content approval.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+
+        public static void SetPagePropertiesAndApprove(SPListItem listItem, SPUser pageContact)
+        {
+            // Replace these variable values and input parameters with your own values.
+            //
+            // New PublishingPage.Title value
+            string newTitle = "your Title";
+            //
+            // New PublishingPage.Description value
+            string newDescription = "your Description";
+            //
+            // The comment to set when the page is checked in, published, and approved.
+            string checkInComment = "Your comments";
+
+            
+            // Validate the input parameters.
+            //
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+            if (null == pageContact)
+            {
+                throw new System.ArgumentNullException("pageContact");
+            }
+
+            // Get the PublishingPage wrapper for the SPListItem that was passed in.
+            //
+            PublishingPage publishingPage = null;
+            if (PublishingPage.IsPublishingPage(listItem))
+            {
+                publishingPage = PublishingPage.GetPublishingPage(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException("This SPListItem is not a PublishingPage", "listItem");
+            }
+
+            
+            // Check out the page if it is not checked out yet.
+            //
+            if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                publishingPage.CheckOut();
+            }
+
+            
+            // Set and save some properties on the PublishingPage.
+            //
+            publishingPage.Title = newTitle;
+            publishingPage.Description = newDescription;
+            publishingPage.Contact = pageContact;
+            publishingPage.Update();
+
+            
+            // Publish the page, and approve it if required, so that the updated 
+            // values are visible on the published Web site.
+            //
+            publishingPage.CheckIn(checkInComment);
+            SPFile pageFile = publishingPage.ListItem.File;
+            pageFile.Publish(checkInComment);
+            pageFile.Approve(checkInComment);
+        }
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPagePropertiesAndApprove(ByVal listItem As SPListItem, ByVal pageContact As SPUser)
+            ' Replace these variable values and input parameters with your own values.
+            '
+            ' New PublishingPage.Title value
+            Dim newTitle As String = "your Title"
+            '
+            ' New PublishingPage.Description value
+            Dim newDescription As String = "your Description"
+            '
+            ' The comment to set when the page is checked in, published, and approved.
+            Dim checkInComment As String = "Your comments"
+
+
+            ' Validate the input parameters.
+            '
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+            If Nothing Is pageContact Then
+                Throw New System.ArgumentNullException("pageContact")
+            End If
+
+            ' Get the PublishingPage wrapper for the SPListItem that was passed in.
+            '
+            Dim publishingPage As PublishingPage = Nothing
+            If PublishingPage.IsPublishingPage(listItem) Then
+                publishingPage = PublishingPage.GetPublishingPage(listItem)
+            Else
+                Throw New System.ArgumentException("This SPListItem is not a PublishingPage", "listItem")
+            End If
+
+
+            ' Check out the page if it is not checked out yet.
+            '
+            If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                publishingPage.CheckOut()
+            End If
+
+
+            ' Set and save some properties on the PublishingPage.
+            '
+            publishingPage.Title = newTitle
+            publishingPage.Description = newDescription
+            publishingPage.Contact = pageContact
+            publishingPage.Update()
+
+
+            ' Publish the page, and approve it if required, so that the updated 
+            ' values are visible on the published Web site.
+            '
+            publishingPage.CheckIn(checkInComment)
+            Dim pageFile As SPFile = publishingPage.ListItem.File
+            pageFile.Publish(checkInComment)
+            pageFile.Approve(checkInComment)
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Contact">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPUser Contact { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPUser Contact" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.Contact" />
+      <MemberSignature Language="VB.NET" Value="Public Property Contact As SPUser" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPUser ^ Contact { Microsoft::SharePoint::SPUser ^ get(); void set(Microsoft::SharePoint::SPUser ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPUser</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the user who currently owns this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>The <b>SPUser</b> object that represents the user who currently owns this <b>PublishingPage</b></value>
+        <remarks>
+          <para>The <b>Contact</b> property is the preferred property for tracking a <see cref="T:Microsoft.SharePoint.SPUser" /> who owns a <b>PublishingPage</b>. However, if you do not specify a <b>Contact</b> value, then the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactName" />, <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactEmail" />, and <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactImage" /> properties provide user information that is specific to this <b>PublishingPage</b>. These values are relevant only for the specified <b>PublishingPage</b> and have no effect on any <b>SPUser</b> objects on the site.</para>
+          <para>The <b>Contact</b> property is mutually exclusive of the <b>LocalContactName</b>, <b>LocalContactEmail</b>, and <b>LocalContactImage</b> properties. Setting the <b>LocalContactName</b>, <b>LocalContactE-mail</b>, or <b>LocalContactImage</b> properties to a value that is not empty and not null clears the <b>Contact</b> property. Similarly, setting the <b>Contact</b> property to a value that is not null clears the <b>LocalContactName</b>, <b>LocalContactE-mail</b>, and <b>LocalContactImage</b> properties.</para>
+          <para>You can set the <b>Contact</b> value to a null reference (Nothing in Visual Basic).</para>
+          <para>To save changes after setting the <b>Contact</b> property, you must call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> method.</para>
+          <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage.</b>,  View permissions to retrieve the page and to return its property values, and Edit permissions to change the value.</para>
+          <para />
+        </remarks>
+        <exception cref="UnauthorizedAccessException">the current user does not have sufficient permissions to perform this action.</exception>
+        <example>
+          <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
+          <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the pages document library of a <b>PublishingWeb</b>.</para>
+          <para>This example assumes that the document library that contains the <b>SPListItem</b> requires content approval.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+
+        public static void SetPagePropertiesAndApprove(SPListItem listItem, SPUser pageContact)
+        {
+            //  Replace these variable values and input parameters with your own values.
+            //
+            // New PublishingPage.Title value
+            string newTitle = "your Title";
+            //
+            // New PublishingPage.Description value
+            string newDescription = "your Description";
+            //
+            // The comment to set when the page is checked in, published, and approved.
+            string checkInComment = "Your comments";
+
+            
+            // Validate the input parameters.
+            //
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+            if (null == pageContact)
+            {
+                throw new System.ArgumentNullException("pageContact");
+            }
+
+            // Get the PublishingPage wrapper for the SPListItem that was passed in.
+            //
+            PublishingPage publishingPage = null;
+            if (PublishingPage.IsPublishingPage(listItem))
+            {
+                publishingPage = PublishingPage.GetPublishingPage(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException("This SPListItem is not a PublishingPage", "listItem");
+            }
+
+            
+            // Check out the page if it is not checked out yet.
+            //
+            if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                publishingPage.CheckOut();
+            }
+
+            
+            // Set and save some properties on the PublishingPage.
+            //
+            publishingPage.Title = newTitle;
+            publishingPage.Description = newDescription;
+            publishingPage.Contact = pageContact;
+            publishingPage.Update();
+
+            
+            // Publish the page, and approve it if required, so that the updated 
+            // values are visible on the published Web site.
+            //
+            publishingPage.CheckIn(checkInComment);
+            SPFile pageFile = publishingPage.ListItem.File;
+            pageFile.Publish(checkInComment);
+            pageFile.Approve(checkInComment);
+        }
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPagePropertiesAndApprove(ByVal listItem As SPListItem, ByVal pageContact As SPUser)
+            '  Replace these variable values and input parameters with your own values.
+            '
+            ' New PublishingPage.Title value
+            Dim newTitle As String = "your Title"
+            '
+            ' New PublishingPage.Description value
+            Dim newDescription As String = "your Description"
+            '
+            ' The comment to set when the page is checked in, published, and approved.
+            Dim checkInComment As String = "Your comments"
+
+
+            ' Validate the input parameters.
+            '
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+            If Nothing Is pageContact Then
+                Throw New System.ArgumentNullException("pageContact")
+            End If
+
+            ' Get the PublishingPage wrapper for the SPListItem that was passed in.
+            '
+            Dim publishingPage As PublishingPage = Nothing
+            If PublishingPage.IsPublishingPage(listItem) Then
+                publishingPage = PublishingPage.GetPublishingPage(listItem)
+            Else
+                Throw New System.ArgumentException("This SPListItem is not a PublishingPage", "listItem")
+            End If
+
+
+            ' Check out the page if it is not checked out yet.
+            '
+            If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                publishingPage.CheckOut()
+            End If
+
+
+            ' Set and save some properties on the PublishingPage.
+            '
+            publishingPage.Title = newTitle
+            publishingPage.Description = newDescription
+            publishingPage.Contact = pageContact
+            publishingPage.Update()
+
+
+            ' Publish the page, and approve it if required, so that the updated 
+            ' values are visible on the published Web site.
+            '
+            publishingPage.CheckIn(checkInComment)
+            Dim pageFile As SPFile = publishingPage.ListItem.File
+            pageFile.Publish(checkInComment)
+            pageFile.Approve(checkInComment)
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ContentType">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPContentType ContentType { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPContentType ContentType" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.ContentType" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ContentType As SPContentType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPContentType ^ ContentType { Microsoft::SharePoint::SPContentType ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPContentType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the content that is available to this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>The <b>ContentType</b> property gets the <see cref="T:Microsoft.SharePoint.SPContentType" /> for this <b>PublishingPage</b>.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.Layout" /> property that provides rendering information to the <b>PublishingPage</b> matches the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ContentTypeproperty" />. The <b>PageLayout</b> object supports rendering the pieces of content that are associated with the <b>SPContentType</b>.</para>
+          <para>The <b>ContentType</b> property value is initialized when you create a <b>PublishingPage</b>; this value is based on the <see cref="P:Microsoft.SharePoint.Publishing.PageLayout.AssociatedContentType" /> and cannot be modified.</para>
+          <para>The user must have View permissions on the <b>PublishingPage</b> to retrieve it and to return its property values.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>This example replaces the <b>PageLayout</b> object for all PublishingPage objects in a Web to a new <b>PageLayout</b> that renders the same type of content.</para>
+          <para>Before compiling and running this example, verify that the <paramref name="oldPageLayout" /> and <paramref name="newPageLayout" /> render the same content. They should use the same <b>AssociatedContentType</b> value.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+        public static void SwapPageLayout(PublishingWeb publishingWeb, PageLayout oldPageLayout, PageLayout newPageLayout)
+        {
+            // Replace these variable values and input parameters
+            // with your own values.
+            //
+            // The comment to set when the page is checked in, published, and
+            // approved.
+            string checkInComment = "Your comments";
+            //
+            // Validate the input parameters.
+            if (null == publishingWeb)
+            {
+                throw new System.ArgumentNullException("publishingWeb");
+            }
+            if (null == oldPageLayout)
+            {
+                throw new System.ArgumentNullException("oldPageLayout");
+            }
+            if (null == newPageLayout)
+            {
+                throw new System.ArgumentNullException("newPageLayout");
+            }
+            // Confirm that the oldPageLayout and newPageLayout are compatible.
+            if (oldPageLayout.AssociatedContentType.Id != newPageLayout.AssociatedContentType.Id)
+            {
+                throw new System.ArgumentException(
+                    "The page layouts must render the same type of content",
+                    "newPageLayout");
+            }
+
+            System.Guid oldPageLayoutId = oldPageLayout.ListItem.File.UniqueId;
+
+            // Set the new PageLayout for all pages that use the old PageLayout.
+            PublishingPageCollection publishingPages = publishingWeb.GetPublishingPages();
+            foreach (PublishingPage publishingPage in publishingPages)
+            {
+                if (publishingPage.Layout.ListItem.UniqueId == oldPageLayoutId)
+                {
+                    if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+                    {
+                        publishingPage.CheckOut();
+                    }
+
+                    publishingPage.Layout = newPageLayout;
+                    publishingPage.Update();
+
+                    // The PublishingPage has the same SPContentType as its PageLayout.
+                    System.Diagnostics.Debug.Assert(
+                        publishingPage.ContentType.Parent.Id ==
+                        newPageLayout.AssociatedContentType.Id);
+
+                    publishingPage.CheckIn(checkInComment);
+                }
+            }
+
+        }
+
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub SwapPageLayout(ByVal publishingWeb As PublishingWeb, ByVal oldPageLayout As PageLayout, ByVal newPageLayout As PageLayout)
+            ' Replace these variable values and input parameters
+            ' with your own values.
+            '
+            ' The comment to set when the page is checked in, published, and
+            ' approved.
+            Dim checkInComment As String = "Your comments"
+            '
+            ' Validate the input parameters.
+            If Nothing Is publishingWeb Then
+                Throw New System.ArgumentNullException("publishingWeb")
+            End If
+            If Nothing Is oldPageLayout Then
+                Throw New System.ArgumentNullException("oldPageLayout")
+            End If
+            If Nothing Is newPageLayout Then
+                Throw New System.ArgumentNullException("newPageLayout")
+            End If
+            ' Confirm that the oldPageLayout and newPageLayout are compatible.
+            If oldPageLayout.AssociatedContentType.Id &amp;lt;&amp;gt; newPageLayout.AssociatedContentType.Id Then
+                Throw New System.ArgumentException("The page layouts must render the same type of content", "newPageLayout")
+            End If
+
+            Dim oldPageLayoutId As System.Guid = oldPageLayout.ListItem.File.UniqueId
+
+            ' Set the new PageLayout for all pages that use the old PageLayout.
+            Dim publishingPages As PublishingPageCollection = publishingWeb.GetPublishingPages()
+            For Each publishingPage As PublishingPage In publishingPages
+                If publishingPage.Layout.ListItem.UniqueId = oldPageLayoutId Then
+                    If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                        publishingPage.CheckOut()
+                    End If
+
+                    publishingPage.Layout = newPageLayout
+                    publishingPage.Update()
+
+                    ' The PublishingPage has the same SPContentType as its PageLayout.
+                    System.Diagnostics.Debug.Assert(publishingPage.ContentType.Parent.Id = newPageLayout.AssociatedContentType.Id)
+
+                    publishingPage.CheckIn(checkInComment)
+                End If
+            Next publishingPage
+
+        End Sub
+
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="CreatedBy">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPUser CreatedBy { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPUser CreatedBy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.CreatedBy" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CreatedBy As SPUser" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPUser ^ CreatedBy { Microsoft::SharePoint::SPUser ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPUser</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets an <see cref="T:Microsoft.SharePoint.SPUser" /> object that indicates who created this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.SPUser" /> object that indicates who created this <b>PublishingPage</b> was created.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreatedDate">
+      <MemberSignature Language="C#" Value="public DateTime CreatedDate { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime CreatedDate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.CreatedDate" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CreatedDate As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime CreatedDate { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the Coordinated Universal Time (UTC) when this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object was created.</summary>
+        <value>The Coordinated Universal Time (UTC) when this <b>PublishingPage</b> was created.</value>
+        <remarks>
+          <para>When a <b>PublishingPage</b> is created (see <see cref="M:Microsoft.SharePoint.Publishing.PublishingPageCollection.Add(System.String,Microsoft.SharePoint.Publishing.PageLayout" />) the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.CreatedDate" /> method is initialized and cannot be modified.</para>
+          <para>The date and time returned by this property can be converted from UTC format to local time in server-side code using the <b>SPRegionalSettings.TimeZone.UTCToLocalTime(DateTime)</b> method.</para>
+          <para>The user must have View permissions on the <b>PublishingPage</b> in order to retrieve it and to return its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Description">
+      <MemberSignature Language="C#" Value="public string Description { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Description" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.Description" />
+      <MemberSignature Language="VB.NET" Value="Public Property Description As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets descriptive text for this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>Text that describes this <b>PublishingPage</b> object.</value>
+        <remarks>
+          <para>The <b>Description</b> value can be an empty string.</para>
+          <para>To save changes, you must call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> after setting this property.</para>
+          <para>The user must have edit permissions on the <b>PublishingPage</b> to set this value. The user must have view permissions on the <b>PublishingPage</b> to initially retrieve it and get any of its property values.</para>
+          <para>If this property value is used in HTML that is rendered in a browser, you should HTML-encode the property value to avoid the possibility of scripting attacks.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentException">A property value that is not valid.</exception>
+        <exception cref="System.ArgumentNullException">Indicates that the value being set is a null reference (Nothing in Visual Basic), which is not valid.</exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+        <example>
+          <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
+          <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the pages document library of a <b>PublishingWeb</b>.</para>
+          <para>This example assumes that the document library that contains the <b>SPListItem</b> requires content approval.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+
+        public static void SetPagePropertiesAndApprove(SPListItem listItem, SPUser pageContact)
+        {
+            // Replace these variable values and input parameters with your own values.
+            //
+            // New PublishingPage.Title value
+            string newTitle = "your Title";
+            //
+            // New PublishingPage.Description value
+            string newDescription = "your Description";
+            //
+            // The comment to set when the page is checked in, published, and approved.
+            string checkInComment = "Your comments";
+
+            
+            // Validate the input parameters.
+            //
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+            if (null == pageContact)
+            {
+                throw new System.ArgumentNullException("pageContact");
+            }
+
+            // Get the PublishingPage wrapper for the SPListItem that was passed in.
+            //
+            PublishingPage publishingPage = null;
+            if (PublishingPage.IsPublishingPage(listItem))
+            {
+                publishingPage = PublishingPage.GetPublishingPage(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException("This SPListItem is not a PublishingPage", "listItem");
+            }
+
+            
+            // Check out the page if it is not checked out yet.
+            //
+            if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                publishingPage.CheckOut();
+            }
+
+            
+            // Set and save some properties on the PublishingPage.
+            //
+            publishingPage.Title = newTitle;
+            publishingPage.Description = newDescription;
+            publishingPage.Contact = pageContact;
+            publishingPage.Update();
+
+            
+            // Publish the page, and approve it if required, so that the updated 
+            // values are visible on the published Web site.
+            //
+            publishingPage.CheckIn(checkInComment);
+            SPFile pageFile = publishingPage.ListItem.File;
+            pageFile.Publish(checkInComment);
+            pageFile.Approve(checkInComment);
+        }
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPagePropertiesAndApprove(ByVal listItem As SPListItem, ByVal pageContact As SPUser)
+            ' Replace these variable values and input parameters with your own values.
+            '
+            ' New PublishingPage.Title value
+            Dim newTitle As String = "your Title"
+            '
+            ' New PublishingPage.Description value
+            Dim newDescription As String = "your Description"
+            '
+            ' The comment to set when the page is checked in, published, and approved.
+            Dim checkInComment As String = "Your comments"
+
+
+            ' Validate the input parameters.
+            '
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+            If Nothing Is pageContact Then
+                Throw New System.ArgumentNullException("pageContact")
+            End If
+
+            ' Get the PublishingPage wrapper for the SPListItem that was passed in.
+            '
+            Dim publishingPage As PublishingPage = Nothing
+            If PublishingPage.IsPublishingPage(listItem) Then
+                publishingPage = PublishingPage.GetPublishingPage(listItem)
+            Else
+                Throw New System.ArgumentException("This SPListItem is not a PublishingPage", "listItem")
+            End If
+
+
+            ' Check out the page if it is not checked out yet.
+            '
+            If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                publishingPage.CheckOut()
+            End If
+
+
+            ' Set and save some properties on the PublishingPage.
+            '
+            publishingPage.Title = newTitle
+            publishingPage.Description = newDescription
+            publishingPage.Contact = pageContact
+            publishingPage.Update()
+
+
+            ' Publish the page, and approve it if required, so that the updated 
+            ' values are visible on the published Web site.
+            '
+            publishingPage.CheckIn(checkInComment)
+            Dim pageFile As SPFile = publishingPage.ListItem.File
+            pageFile.Publish(checkInComment)
+            pageFile.Approve(checkInComment)
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="DisconnectedPublishingPageUrl">
+      <MemberSignature Language="C#" Value="public const string DisconnectedPublishingPageUrl;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string DisconnectedPublishingPageUrl" />
+      <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.Publishing.PublishingPage.DisconnectedPublishingPageUrl" />
+      <MemberSignature Language="VB.NET" Value="Public Const DisconnectedPublishingPageUrl As String " />
+      <MemberSignature Language="C++ CLI" Value="public: System::String ^ DisconnectedPublishingPageUrl;" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Specifies a value that indicates whether the publishing page is disconnected.</summary>
+        <remarks>
+          <para>This field is typically set in the following format: "http://www.microsoft.com/publishing?DisconnectedPublishingPage=true".</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Fields">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPFieldCollection Fields { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPFieldCollection Fields" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.Fields" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Fields As SPFieldCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPFieldCollection ^ Fields { Microsoft::SharePoint::SPFieldCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPFieldCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the underlying <see cref="T:Microsoft.SharePoint.SPField" /> object definitions for this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>An <see cref="T:Microsoft.SharePoint.SPFieldCollection" /> that contains the underlying <see cref="T:Microsoft.SharePoint.SPField" /> object definitions of the <b>PublishingPage</b>.</value>
+        <remarks>
+          <para>Use this property to access the <b>SPField</b> definitions for the <b>PublishingPage</b>. To access the actual values of these fields for the current <b>PublishingPage</b>, use the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ListItem" /> indexer methods to look up the field values by ID or other values. These methods wrap the <see cref="P:Microsoft.SharePoint.SPListItem.Fields" /> property.</para>
+          <para>The user must have View permissions on the <b>PublishingPage</b> to retrieve the <b>PublishingPage</b> and to return its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEffectiveAnonymousPageCacheProfileId">
+      <MemberSignature Language="C#" Value="public int GetEffectiveAnonymousPageCacheProfileId ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetEffectiveAnonymousPageCacheProfileId() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.GetEffectiveAnonymousPageCacheProfileId" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetEffectiveAnonymousPageCacheProfileId () As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; int GetEffectiveAnonymousPageCacheProfileId();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the current cache profile identifier (ID) that this page uses if output is cached for an anonymous user.</summary>
+        <returns>The current effective output cache profile for an anonymous user.</returns>
+        <remarks>
+          <para>This is the ID of the list item in the cache profiles list, stored in the root Web site of the site collection. This property is calculated by looking at the anonymous cache profile of the root Web site.</para>
+          <para>If Web overrides are enabled, the page uses the profile associated with its parent Web site. If page layout overrides are enabled, the page uses the anonymous profile associated with the page layout, if an anonymous profile is defined.</para>
+          <para>If both a Web and page layout override are present, the page layout is used.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetEffectiveAuthenticatedPageCacheProfileId">
+      <MemberSignature Language="C#" Value="public int GetEffectiveAuthenticatedPageCacheProfileId ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetEffectiveAuthenticatedPageCacheProfileId() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.GetEffectiveAuthenticatedPageCacheProfileId" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetEffectiveAuthenticatedPageCacheProfileId () As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; int GetEffectiveAuthenticatedPageCacheProfileId();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Getsthe current cache profile identifier (ID) that this page uses if output is cached for an authenticated user.</summary>
+        <returns>The current effective output cache profile for an authenticated user.</returns>
+        <remarks>
+          <para>This is the ID of the list item in the cache profiles list, stored in the root Web site of the site collection. This property is calculated by looking at the authenticated cache profile of the root Web site.</para>
+          <para>If Web overrides are enabled, the page uses the profile associated with its parent Web.  If page layout overrides are enabled, the page uses the authenticated profile associated with the page layout, if an authenticated profile is defined.</para>
+          <para>If both a Web and page layout override are present, the page layout is used.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPublishingPage">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.PublishingPage GetPublishingPage (Microsoft.SharePoint.SPListItem sourceListItem);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.PublishingPage GetPublishingPage(class Microsoft.SharePoint.SPListItem sourceListItem) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.GetPublishingPage(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function GetPublishingPage (sourceListItem As SPListItem) As PublishingPage" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::PublishingPage ^ GetPublishingPage(Microsoft::SharePoint::SPListItem ^ sourceListItem);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingPage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sourceListItem" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="sourceListItem">An <b>SPListItem</b> object for which to retrieve a <b>PublishingPage</b> wrapper.</param>
+        <summary>Gets a <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object instance that wraps the given <see cref="T:Microsoft.SharePoint.SPListItem" /> object.</summary>
+        <returns>A <b>PublishingPage</b> instance that wraps the given <b>SPListItem</b>.</returns>
+        <remarks>
+          <para>This is a static method. Use it to get a <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object instance that wraps an <b>SPListItem</b> that you have already retrieved. Alternatively, use the <b>PublishingWeb.GetPublishingPages</b> method to get a <b>PublishingPage</b> instance.</para>
+          <para>The <b>sourceListItem</b> must be a non-null <b>SPListItem</b> instance.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentException">Invalid <b>SPListItem</b>. The <b>SPListItem</b> provided is not compatible with a <b>PublishingPage</b>.</exception>
+        <exception cref="System.ArgumentNullException">The <b>sourceListItem</b> is a null reference (Nothing in Visual Basic), which is not valid.</exception>
+        <example>
+          <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
+          <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the Pages document library of a <b>PublishingWeb</b>.</para>
+          <para>This example assumes that the document library that contains the <b>SPListItem</b> requires content approval.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+
+        public static void SetPagePropertiesAndApprove(SPListItem listItem, SPUser pageContact)
+        {
+            // Replace these variable values and input parameters with your own values.
+            //
+            // New PublishingPage.Title value
+            string newTitle = "your Title";
+            //
+            // New PublishingPage.Description value
+            string newDescription = "your Description";
+            //
+            // The comment to set when the page is checked in, published, and approved.
+            string checkInComment = "Your comments";
+
+            
+            // Validate the input parameters.
+            //
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+            if (null == pageContact)
+            {
+                throw new System.ArgumentNullException("pageContact");
+            }
+
+            // Get the PublishingPage wrapper for the SPListItem that was passed in.
+            //
+            PublishingPage publishingPage = null;
+            if (PublishingPage.IsPublishingPage(listItem))
+            {
+                publishingPage = PublishingPage.GetPublishingPage(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException("This SPListItem is not a PublishingPage", "listItem");
+            }
+
+            
+            // Check out the page if it is not checked out yet.
+            //
+            if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                publishingPage.CheckOut();
+            }
+
+            
+            // Set and save some properties on the PublishingPage.
+            //
+            publishingPage.Title = newTitle;
+            publishingPage.Description = newDescription;
+            publishingPage.Contact = pageContact;
+            publishingPage.Update();
+
+            
+            // Publish the page, and approve it if required, so that the updated 
+            // values are visible on the published Web site.
+            //
+            publishingPage.CheckIn(checkInComment);
+            SPFile pageFile = publishingPage.ListItem.File;
+            pageFile.Publish(checkInComment);
+            pageFile.Approve(checkInComment);
+        }
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPagePropertiesAndApprove(ByVal listItem As SPListItem, ByVal pageContact As SPUser)
+            ' Replace these variable values and input parameters with your own values.
+            '
+            ' New PublishingPage.Title value
+            Dim newTitle As String = "your Title"
+            '
+            ' New PublishingPage.Description value
+            Dim newDescription As String = "your Description"
+            '
+            ' The comment to set when the page is checked in, published, and approved.
+            Dim checkInComment As String = "Your comments"
+
+
+            ' Validate the input parameters.
+            '
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+            If Nothing Is pageContact Then
+                Throw New System.ArgumentNullException("pageContact")
+            End If
+
+            ' Get the PublishingPage wrapper for the SPListItem that was passed in.
+            '
+            Dim publishingPage As PublishingPage = Nothing
+            If PublishingPage.IsPublishingPage(listItem) Then
+                publishingPage = PublishingPage.GetPublishingPage(listItem)
+            Else
+                Throw New System.ArgumentException("This SPListItem is not a PublishingPage", "listItem")
+            End If
+
+
+            ' Check out the page if it is not checked out yet.
+            '
+            If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                publishingPage.CheckOut()
+            End If
+
+
+            ' Set and save some properties on the PublishingPage.
+            '
+            publishingPage.Title = newTitle
+            publishingPage.Description = newDescription
+            publishingPage.Contact = pageContact
+            publishingPage.Update()
+
+
+            ' Publish the page, and approve it if required, so that the updated 
+            ' values are visible on the published Web site.
+            '
+            publishingPage.CheckIn(checkInComment)
+            Dim pageFile As SPFile = publishingPage.ListItem.File
+            pageFile.Publish(checkInComment)
+            pageFile.Approve(checkInComment)
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetVariation">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PublishingPage GetVariation (Microsoft.SharePoint.Publishing.VariationLabel varlabel);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Microsoft.SharePoint.Publishing.PublishingPage GetVariation(class Microsoft.SharePoint.Publishing.VariationLabel varlabel) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.GetVariation(Microsoft.SharePoint.Publishing.VariationLabel)" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetVariation (varlabel As VariationLabel) As PublishingPage" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PublishingPage ^ GetVariation(Microsoft::SharePoint::Publishing::VariationLabel ^ varlabel);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingPage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="varlabel" Type="Microsoft.SharePoint.Publishing.VariationLabel" />
+      </Parameters>
+      <Docs>
+        <param name="varlabel">The Variation Label to use to search for the Variation peer page of the current <b>PublishingPage</b>.</param>
+        <summary>Get the peer <b>VariationPublishingPage</b> object that belongs to this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object for the specified <b>Label</b>. </summary>
+        <returns>A <b>PublishingPage</b> object that is a Variation peer of the current <b>PublishingPage</b> in the requested <b>Label</b>.</returns>
+        <remarks>
+          <para>The <see cref="T:Microsoft.SharePoint.SPWeb" /> of the <b>PublishingPage</b> that is returned must be closed.</para>
+          <para>The caller should call the <b>Close</b> method on the returned object when it is no longer needed. Doing this frees the resources allocated for the <b>PublishingWeb</b> object.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeInCurrentNavigation">
+      <MemberSignature Language="C#" Value="public bool IncludeInCurrentNavigation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IncludeInCurrentNavigation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.IncludeInCurrentNavigation" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludeInCurrentNavigation As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IncludeInCurrentNavigation { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether the <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object is included by <b>PortalSitemapProviders</b> that have <b>NavigationType</b> set to "Current".</summary>
+        <value>
+          <b>true</b> if this <b>PublishingPage</b> should be included in the current navigation; otherwise, <b>false</b>. This property defaults to <b>true</b>.The value is <b>true</b> if this <b>PublishingPage</b> should be included in the current navigation, and it is <b>false</b> if the area should not be included.</value>
+        <remarks>
+          <para>Setting this property opens, modifies, or updates the parent <b>PublishingWeb</b> object. Setting the property could make other instances of the same <b>PublishingWeb</b> object stale. Performance may be better if you use the <see cref="M:Microsoft.SharePoint.Publishing.PublishingWeb.IncludeInNavigation(System.Boolean,System.Guid)" /> or <see cref="M:Microsoft.SharePoint.Publishing.PublishingWeb.ExcludeFromNavigation(System.Boolean,System.Guid)" /> methods when showing or hiding several child objects of the same parent.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IncludeInGlobalNavigation">
+      <MemberSignature Language="C#" Value="public bool IncludeInGlobalNavigation { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IncludeInGlobalNavigation" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.IncludeInGlobalNavigation" />
+      <MemberSignature Language="VB.NET" Value="Public Property IncludeInGlobalNavigation As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IncludeInGlobalNavigation { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value that indicates whether this <see cref="T:Microsoft.SharePoint.PublishingPage" /> object is included by the dynamic portion of the <b>PortalSitemapProvider</b> in the <b>GlobalNavigation</b> mode.</summary>
+        <value>
+          <b>true</b> if the area should be included in the current navigation; otherwise, <b>false</b>.This property defaults to <b>true</b>.</value>
+        <remarks>
+          <para>This property can be so that even if this property is set <b>true</b> and the parent Web site has the <see cref="P:Microsoft.SharePoint.Publishing.PublishingWeb.IncludePagesInNavigation" /> property set to <b>false</b>, this Web site does not appear in navigation.</para>
+          <para>Setting this property opens, modifies, or updates the parent <b>PublishingWeb</b> object. This could make other instances of the same <b>PublishingWeb</b> object stale. Performance may be better if you use the <see cref="M:Microsoft.SharePoint.Publishing.PublishingWeb.IncludeInNavigation(System.Boolean,System.Guid)" /> or <see cref="M:Microsoft.SharePoint.Publishing.PublishingWeb.ExcludeFromNavigation(System.Boolean,System.Guid)" /> methods when showing or hiding several child objects of the same parent.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsDisconnected">
+      <MemberSignature Language="C#" Value="public bool IsDisconnected { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsDisconnected" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.IsDisconnected" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsDisconnected As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsDisconnected { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a Boolean value that indicates whether this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object is disconnected from its <see cref="T:Microsoft.SharePoint.Publishing.PageLayout" /> object.</summary>
+        <value>
+          <b>true</b> if the <b>PublishingPage</b> is disconnected from its <b>PageLayout</b>; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>If a <b>PublishingPage</b> is disconnected from its <b>PageLayout</b>, the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.Layout" /> property also returns a null reference (Nothing in Visual Basic).</para>
+          <para>The user must have View permissions on the <b>PublishingPage</b> to retrieve it and to return its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsPublishingPage">
+      <MemberSignature Language="C#" Value="public static bool IsPublishingPage (Microsoft.SharePoint.SPListItem sourceListItem);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsPublishingPage(class Microsoft.SharePoint.SPListItem sourceListItem) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.IsPublishingPage(Microsoft.SharePoint.SPListItem)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function IsPublishingPage (sourceListItem As SPListItem) As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsPublishingPage(Microsoft::SharePoint::SPListItem ^ sourceListItem);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sourceListItem" Type="Microsoft.SharePoint.SPListItem" />
+      </Parameters>
+      <Docs>
+        <param name="sourceListItem">The <b>SPListItem</b> to check for validity.</param>
+        <summary>Confirms that an <see cref="T:Microsoft.SharePoint.SPListItem" /> is compatible with the <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <returns>
+          <b>true</b> if the <see cref="T:Microsoft.SharePoint.SPListItem" /> is a <b>PublishingPage</b>; otherwise, <b>false</b>.</returns>
+        <remarks>
+          <para>This static method confirms that the <see cref="T:Microsoft.SharePoint.SPWeb" /> that the <b>SPListItem</b> belongs to a <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object and confirms that the <b>SPListItem</b> is in the designated <b>SPList</b> specified by the <see cref="P:Microsoft.SharePoint.Publishing.PublishingWeb.PagesList" /> property. If this check returns <b>true</b>, then the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.GetPublishingPage(Microsoft.SharePoint.SPListItem)" /> method succeeds for this <b>sourceListItem</b>.</para>
+          <para />
+        </remarks>
+        <example>
+          <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
+          <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the pages document library of a <b>PublishingWeb</b>.</para>
+          <para>This example assumes that the document library that contains the <b>SPListItem</b> requires content approval.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+
+        public static void SetPagePropertiesAndApprove(SPListItem listItem, SPUser pageContact)
+        {
+            // Replace these variable values and input parameters with your own values.
+            //
+            // New PublishingPage.Title value
+            string newTitle = "your Title";
+            //
+            // New PublishingPage.Description value
+            string newDescription = "your Description";
+            //
+            // The comment to set when the page is checked in, published, and approved.
+            string checkInComment = "Your comments";
+
+            
+            // Validate the input parameters.
+            //
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+            if (null == pageContact)
+            {
+                throw new System.ArgumentNullException("pageContact");
+            }
+
+            // Get the PublishingPage wrapper for the SPListItem that was passed in.
+            //
+            PublishingPage publishingPage = null;
+            if (PublishingPage.IsPublishingPage(listItem))
+            {
+                publishingPage = PublishingPage.GetPublishingPage(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException("This SPListItem is not a PublishingPage", "listItem");
+            }
+
+            
+            // Check out the page if it is not checked out yet.
+            //
+            if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                publishingPage.CheckOut();
+            }
+
+            
+            // Set and save some properties on the PublishingPage.
+            //
+            publishingPage.Title = newTitle;
+            publishingPage.Description = newDescription;
+            publishingPage.Contact = pageContact;
+            publishingPage.Update();
+
+            
+            // Publish the page, and approve it if required, so that the updated 
+            // values are visible on the published Web site.
+            //
+            publishingPage.CheckIn(checkInComment);
+            SPFile pageFile = publishingPage.ListItem.File;
+            pageFile.Publish(checkInComment);
+            pageFile.Approve(checkInComment);
+        }
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPagePropertiesAndApprove(ByVal listItem As SPListItem, ByVal pageContact As SPUser)
+            ' Replace these variable values and input parameters with your own values.
+            '
+            ' New PublishingPage.Title value
+            Dim newTitle As String = "your Title"
+            '
+            ' New PublishingPage.Description value
+            Dim newDescription As String = "your Description"
+            '
+            ' The comment to set when the page is checked in, published, and approved.
+            Dim checkInComment As String = "Your comments"
+
+
+            ' Validate the input parameters.
+            '
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+            If Nothing Is pageContact Then
+                Throw New System.ArgumentNullException("pageContact")
+            End If
+
+            ' Get the PublishingPage wrapper for the SPListItem that was passed in.
+            '
+            Dim publishingPage As PublishingPage = Nothing
+            If PublishingPage.IsPublishingPage(listItem) Then
+                publishingPage = PublishingPage.GetPublishingPage(listItem)
+            Else
+                Throw New System.ArgumentException("This SPListItem is not a PublishingPage", "listItem")
+            End If
+
+
+            ' Check out the page if it is not checked out yet.
+            '
+            If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                publishingPage.CheckOut()
+            End If
+
+
+            ' Set and save some properties on the PublishingPage.
+            '
+            publishingPage.Title = newTitle
+            publishingPage.Description = newDescription
+            publishingPage.Contact = pageContact
+            publishingPage.Update()
+
+
+            ' Publish the page, and approve it if required, so that the updated 
+            ' values are visible on the published Web site.
+            '
+            publishingPage.CheckIn(checkInComment)
+            Dim pageFile As SPFile = publishingPage.ListItem.File
+            pageFile.Publish(checkInComment)
+            pageFile.Approve(checkInComment)
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Label">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.VariationLabel Label { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.VariationLabel Label" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.Label" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Label As VariationLabel" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::VariationLabel ^ Label { Microsoft::SharePoint::Publishing::VariationLabel ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.VariationLabel</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <see cref="T:Microsoft.SharePoint.Publishing.VariationLabel" /> object in whose hierarchy this <see cref="T:Microsoft.SharePoint.Publishing.PublishingWeb" /> object is situated.</summary>
+        <value>The <see cref="T:Microsoft.SharePoint.Publishing.VariationLabel" /> that is associated with the <b>PublishingPage</b>. Returns a null reference (Nothing in Visual Basic) if the <b>PublishingWeb</b> is not a <b>VariationPublishingPage</b>.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastModifiedBy">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.SPUser LastModifiedBy { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.SPUser LastModifiedBy" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.LastModifiedBy" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastModifiedBy As SPUser" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPUser ^ LastModifiedBy { Microsoft::SharePoint::SPUser ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.SPUser</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the <b>SPUser</b> object that represents the user who last modified this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>The <b>SPUser</b> object that represents the user who last modified this <b>PublishingPage</b> object</value>
+        <remarks>
+          <para>The <b>PublishingPage.LastModifiedBy</b> value changes implicitly each time a <b>PublishingPage</b> is updated.</para>
+          <para>The user must have View permissions on the <b>PublishingPage</b> to retrieve the <b>PublishingPage</b> and to return its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastModifiedDate">
+      <MemberSignature Language="C#" Value="public DateTime LastModifiedDate { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime LastModifiedDate" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.LastModifiedDate" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LastModifiedDate As DateTime" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime LastModifiedDate { DateTime get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.DateTime</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the Coordinated Universal Time (UTC) when this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object was last modified.</summary>
+        <value>The Coordinated Universal Time (UTC) when this <b>PublishingPage</b> was last modified.</value>
+        <remarks>
+          <para>The <b>PublishingPage.LastModifiedDate</b> value changes implicitly each time a <b>PublishingPage</b> is updated.</para>
+          <para>The date and time returned by this property can be converted from UTC format to local time in server-side code by using the <b>SPRegionalSettings.TimeZone.UTCToLocalTime(DateTime)</b> method.</para>
+          <para>The user must have View permissions on the <b>PublishingPage</b> to retrieve the <b>PublishingPage</b> and to return its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Layout">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.PageLayout Layout { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Publishing.PageLayout Layout" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.Layout" />
+      <MemberSignature Language="VB.NET" Value="Public Property Layout As PageLayout" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::PageLayout ^ Layout { Microsoft::SharePoint::Publishing::PageLayout ^ get(); void set(Microsoft::SharePoint::Publishing::PageLayout ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PageLayout</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets and sets the <b>PageLayout</b> for this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>The <b>PageLayout</b> for this <b>PublishingPage</b> object.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.Layout" /> property provides rendering information for the <b>PublishingPage</b>, and matches the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ContentType" />. It supports rendering the content defined by the <see cref="T:Microsoft.SharePoint.SPContentType" /> object.</para>
+          <para>The <b>PublishingPage.Layout</b> value is initialized when a <b>PublishingPage</b> is created (see <see cref="M:Microsoft.SharePoint.Publishing.PublishingPageCollection.Add(System.String,Microsoft.SharePoint.Publishing.PageLayout" />). Unlike the <b>PublishingPage.ContentType</b> object, you can modify the <b>PublishingPage.Layout</b> after creation. Only <b>PageLayouts</b> that are associated with the current <b>PublishingPage.ContentType</b> are valid. If you attempt to set a layout that is not valid, the system throws a <b>System.ArgumentException</b> exception.</para>
+          <para>The <b>PageLayout</b> generally should be a member of the <b>PageLayoutCollection</b> that is returned by the <b>Publishing.GetAvailablePageLayouts(SPContentType)</b> method, but SharePoint 2010 does not enforce this. </para>
+          <para>The <b>PageLayout</b> may return a null reference (Nothing in Visual Basic) if the <b>PublishingPage</b> is disconnected from its <b>PageLayout</b> object.</para>
+          <para>To save changes after setting this property, you must call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> method.</para>
+          <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage</b>, View permissions to retrieve the page and to return its property values, and Edit permissions to change the value.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentException">
+          <b>PageLayout.AssociatedContentType</b> does not match the <b>PublishingPage.ContentType</b></exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+        <exception cref="System.ArgumentNullException">Indicates that the value being set was a null reference (Nothing in Visual Basic), which is not valid.</exception>
+        <example>
+          <para>This example replaces the <b>PageLayout</b> object for all <b>PublishingPage</b> objects in a Web to a new <b>PageLayout</b> that renders the same type of content.</para>
+          <para>Before compiling and running this example, verify that the <paramref name="oldPageLayout" /> and <paramref name="newPageLayout" /> render the same content. They should use the same <b>AssociatedContentType</b> value.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+        public static void SwapPageLayout(PublishingWeb publishingWeb, PageLayout oldPageLayout, PageLayout newPageLayout)
+        {
+            // Replace these variable values and input parameters
+            // with your own values.
+            //
+            // The comment to set when the page is checked in, published, and
+            // approved.
+            string checkInComment = "Your comments";
+            //
+            // Validate the input parameters.
+            if (null == publishingWeb)
+            {
+                throw new System.ArgumentNullException("publishingWeb");
+            }
+            if (null == oldPageLayout)
+            {
+                throw new System.ArgumentNullException("oldPageLayout");
+            }
+            if (null == newPageLayout)
+            {
+                throw new System.ArgumentNullException("newPageLayout");
+            }
+            // Confirm that the oldPageLayout and newPageLayout are compatible.
+            if (oldPageLayout.AssociatedContentType.Id != newPageLayout.AssociatedContentType.Id)
+            {
+                throw new System.ArgumentException(
+                    "The page layouts must render the same type of content",
+                    "newPageLayout");
+            }
+
+            System.Guid oldPageLayoutId = oldPageLayout.ListItem.File.UniqueId;
+
+            // Set the new PageLayout for all pages that use the old PageLayout.
+            PublishingPageCollection publishingPages = publishingWeb.GetPublishingPages();
+            foreach (PublishingPage publishingPage in publishingPages)
+            {
+                if (publishingPage.Layout.ListItem.UniqueId == oldPageLayoutId)
+                {
+                    if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+                    {
+                        publishingPage.CheckOut();
+                    }
+
+                    publishingPage.Layout = newPageLayout;
+                    publishingPage.Update();
+
+                    // The PublishingPage has the same SPContentType as its PageLayout.
+                    System.Diagnostics.Debug.Assert(
+                        publishingPage.ContentType.Parent.Id ==
+                        newPageLayout.AssociatedContentType.Id);
+
+                    publishingPage.CheckIn(checkInComment);
+                }
+            }
+
+        }
+
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+        Private Sub New()
+        End Sub
+        Public Shared Sub SwapPageLayout(ByVal publishingWeb As PublishingWeb, ByVal oldPageLayout As PageLayout, ByVal newPageLayout As PageLayout)
+            ' Replace these variable values and input parameters
+            ' with your own values.
+            '
+            ' The comment to set when the page is checked in, published, and
+            ' approved.
+            Dim checkInComment As String = "Your comments"
+            '
+            ' Validate the input parameters.
+            If Nothing Is publishingWeb Then
+                Throw New System.ArgumentNullException("publishingWeb")
+            End If
+            If Nothing Is oldPageLayout Then
+                Throw New System.ArgumentNullException("oldPageLayout")
+            End If
+            If Nothing Is newPageLayout Then
+                Throw New System.ArgumentNullException("newPageLayout")
+            End If
+            ' Confirm that the oldPageLayout and newPageLayout are compatible.
+            If oldPageLayout.AssociatedContentType.Id &amp;lt;&amp;gt; newPageLayout.AssociatedContentType.Id Then
+                Throw New System.ArgumentException("The page layouts must render the same type of content", "newPageLayout")
+            End If
+
+            Dim oldPageLayoutId As System.Guid = oldPageLayout.ListItem.File.UniqueId
+
+            ' Set the new PageLayout for all pages that use the old PageLayout.
+            Dim publishingPages As PublishingPageCollection = publishingWeb.GetPublishingPages()
+            For Each publishingPage As PublishingPage In publishingPages
+                If publishingPage.Layout.ListItem.UniqueId = oldPageLayoutId Then
+                    If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                        publishingPage.CheckOut()
+                    End If
+
+                    publishingPage.Layout = newPageLayout
+                    publishingPage.Update()
+
+                    ' The PublishingPage has the same SPContentType as its PageLayout.
+                    System.Diagnostics.Debug.Assert(publishingPage.ContentType.Parent.Id = newPageLayout.AssociatedContentType.Id)
+
+                    publishingPage.CheckIn(checkInComment)
+                End If
+            Next publishingPage
+
+        End Sub
+
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="LocalContactEmail">
+      <MemberSignature Language="C#" Value="public string LocalContactEmail { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string LocalContactEmail" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactEmail" />
+      <MemberSignature Language="VB.NET" Value="Public Property LocalContactEmail As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LocalContactEmail { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the e-mail address of the local contact for this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>The e-mail address of the local contact for the <b>PublishingPage</b>.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.Contact" /> property is the preferred property for tracking an <see cref="T:Microsoft.SharePoint.SPUser" /> owns a <b>PublishingPage</b>. However, if no <b>Contact</b> is specified, then <b>PublishingPage</b> information that is specific to the user is provided through the <b>LocalContactName</b>, <b>LocalContactEmail</b>, and <b>LocalContactImage</b> properties. These values are relevant only for the specified <b>PublishingPage</b> and have no effect on any <b>SPUser</b> objects on the site.</para>
+          <para>The <b>Contact</b> property is mutually exclusive from the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactName" />, <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactEmail" />, and <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactImage" /> properties. Setting the <b>LocalContactName</b>, <b>LocalContactEmail</b>, or <b>LocalContactImage</b> properties to a non-empty, non-null value clears the <b>Contact</b> property. Similarly, setting the <b>Contact</b> property to a non-null value clears the <b>LocalContactName</b>, <b>LocalContactEmail</b>, and <b>LocalContactImage</b> properties. </para>
+          <para>The <b>PublishingPage.LocalContactEmail</b> value should be a well-formed e-mail address or an empty string. The <b>PublishingPage.LocalContactEmail</b> value cannot exceed 255 characters. Any excess characters cause the system to throw a <b>System.ArgumentException</b> exception.</para>
+          <para>If this property value is used in HTML and will be rendered in a browser, you should HTML-encode the property value in HTML to avoid the possibility of scripting attacks.</para>
+          <para>Call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> method after you set this property to save the changes. </para>
+          <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage</b>, View permissions to retrieve the page and to return its property values, and Edit permissions to change the value.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentException">Invalid property value. The value cannot exceed 255 characters.</exception>
+        <exception cref="System.ArgumentNullException">Indicates that the value being set was a null reference (Nothing in Visual Basic), which is not valid.</exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="LocalContactImage">
+      <MemberSignature Language="C#" Value="public string LocalContactImage { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string LocalContactImage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactImage" />
+      <MemberSignature Language="VB.NET" Value="Public Property LocalContactImage As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LocalContactImage { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a URL that refers to an image that is associated with the local contact for the <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>A URL that refers to an image that is associated with the local contact for the <b>PublishingPage</b>.</value>
+        <remarks>
+          <para>The <b>Contact</b> property is the preferred property for tracking an <b>SPUser</b> who owns a <b>PublishingPage</b>. However, if no <b>Contact</b> is specified, then user information that is specific to the <b>PublishingPage</b> is provided through the <b>LocalContactName</b>, <b>LocalContactEmail</b>, and <b>LocalContactImage</b> properties. These values are relevant only for the given <b>PublishingPage</b>, and have no effect on any <b>SPUser</b> objects in the site. </para>
+          <para>The <b>Contact</b> property is mutually exclusive from the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactName" />, <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactEmail" />, and <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactImage" /> properties. Setting the <b>LocalContactName</b>, <b>LocalContactEmail</b>, or <b>LocalContactImage</b> property to a non-empty, non-null value clears the <b>Contact</b> property. Similarly, setting the <b>Contact</b> property to a non-null value clears the <b>LocalContactName</b>, <b>LocalContactEmail</b>, and <b>LocalContactImage</b> properties.</para>
+          <para>If this property value is used in HTML that will be rendered in a browser, you should encode the property value in HTML to avoid the possibility of scripting attacks. </para>
+          <para>To save changes after you set this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> method.</para>
+          <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage</b>, View permissions to retrieve the page and to return its property values, and Edit permissions to change the value.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentNullException">Indicates that the value being set was a null reference (Nothing in Visual Basic), which is not valid.</exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="LocalContactName">
+      <MemberSignature Language="C#" Value="public string LocalContactName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string LocalContactName" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactName" />
+      <MemberSignature Language="VB.NET" Value="Public Property LocalContactName As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LocalContactName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a name that identifies the local contact of this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>A name that identifies the local contact of this <b>PublishingPage</b> object.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.Contact" /> property is the preferred property for tracking an <see cref="T:Microsoft.SharePoint.SPUser" /> who owns a <b>PublishingPage</b>. However, if no <b>Contact</b> is specified, then user information that is specific to the <b>PublishingPage</b> is provided through the <b>LocalContactName</b>, <b>LocalContactEmail</b> and <b>LocalContactImage</b> properties. These values are relevant only for the given <b>PublishingPage</b>, and have no effect on any <b>SPUser</b> objects in the site.</para>
+          <para>The <b>Contact</b> property is mutually exclusive from the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactName" />, <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactEmail" />, and <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.LocalContactImage" /> properties. Setting the <b>LocalContactName</b>, <b>LocalContactEmail</b>, or <b>LocalContactImage</b> properties to a non-empty, non-null value clears the <b>Contact</b> property. Similarly, setting the <b>Contact</b> property to a non-null value clears the <b>LocalContactName</b>, <b>LocalContactEmail</b>, and <b>LocalContactImage</b> properties.</para>
+          <para>The <b>PublishingPage.LocalContactName</b> value is usually used only for user interface (UI) display purposes, so it does not need to match any existing <b>SPUser</b> names.</para>
+          <para>The value cannot exceed 255 characters. Any excess characters cause the system to throw a <b>System.ArgumentException</b> exception. The value can be an empty string. </para>
+          <para>If this property value is used in HTML that will be rendered in a browser, you should encode the property value in HTML to avoid the possibility of scripting attacks. </para>
+          <para>To save changes after setting this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> method.</para>
+          <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage</b>, View permissions to retrieve the page and to return its property values, and Edit permissions to change the value.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentNullException">Indicates that the value being set is a null reference (Nothing in Visual Basic), which is not valid.</exception>
+        <exception cref="System.ArgumentException">A property value that is not valid. The value cannot exceed 255 characters.</exception>
+        <exception cref="System.UnauthorizedAccessException">Current user does not have sufficient permissions to perform this action.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.Name" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Name As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the URL name for this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>The URL name for this <b>PublishingPage</b> object.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.Name" /> property is initialized when a <b>PublishingPage</b> is created (see <see cref="M:Microsoft.SharePoint.Publishing.PublishingPageCollection.Add(System.String,Microsoft.SharePoint.Publishing.PageLayout" />) and cannot be modified.</para>
+          <para>If this property value is used in HTML to be rendered in a browser, you should encode the property value in HTML to avoid the possibility of scripting attacks.</para>
+          <para>The user must have View permissions on the <b>PublishingPage</b> to retrieve it and return its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="QuickDeploy">
+      <MemberSignature Language="C#" Value="public void QuickDeploy ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void QuickDeploy() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.QuickDeploy" />
+      <MemberSignature Language="VB.NET" Value="Public Sub QuickDeploy ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void QuickDeploy();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Deploys this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object by using the <b>QuickDeploy</b> method.</summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Microsoft.SharePoint.Publishing.Administration.ContentDeploymentException">No <b>ContentDeploymentJob</b> objects are enabled for this source site collection</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="RequiresRouting">
+      <MemberSignature Language="C#" Value="public bool RequiresRouting { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool RequiresRouting" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.RequiresRouting" />
+      <MemberSignature Language="VB.NET" Value="Public Property RequiresRouting As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool RequiresRouting { bool get(); void set(bool value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a Boolean value that indicates whether the <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object needs to be routed by using the content organizer rules.</summary>
+        <value>
+          <b>true</b> if the <b>PublishingPage</b> needs to be routed by using the content organizer rules; otherwise, <b>false</b>.</value>
+        <remarks>
+          <para>The default value is <b>true</b>.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReviewRequestInterval">
+      <MemberSignature Language="C#" Value="public int ReviewRequestInterval { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 ReviewRequestInterval" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.ReviewRequestInterval" />
+      <MemberSignature Language="VB.NET" Value="Public Property ReviewRequestInterval As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int ReviewRequestInterval { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the interval between content review request notifications.</summary>
+        <value>An integer specifying the content review request notification interval.Exception TypeCondition<see cref="System.UnauthorizedAccessException" />The current user does not have sufficient permissions to perform this action.<see cref="System.ArgumentException" /><b>ReviewRequestInterval</b> cannot be negative or greater than 99.</value>
+        <remarks>
+          <para>The <b>ReviewRequestInterval</b> and <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ReviewRequestIntervalUnit" /> properties determine the schedule for content reviews. The related <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ReviewRequestTimeSpan" /> property uses these properties to determine how much time there is between e-mail review notifications once you publish a <b>PublishingPage</b>. SharePoint 2010 uses these e-mail notifications to remind a user to review content.</para>
+          <para>If the <b>ReviewRequestIntervalUnit</b> property value is equal to <b>PublishingPage.DisabledInterval</b>, review requests are disabled. Regardless of what interval is specified, review requests are disabled if a <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" /> property set for the <b>PublishingPage</b>.</para>
+          <para>To save changes after setting this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> method.</para>
+          <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage</b>, View permissions to retrieve the page and to return any of its property values, and Edit permissions to change the value.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReviewRequestIntervalUnit">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.IntervalUnit ReviewRequestIntervalUnit { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.IntervalUnit ReviewRequestIntervalUnit" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.ReviewRequestIntervalUnit" />
+      <MemberSignature Language="VB.NET" Value="Public Property ReviewRequestIntervalUnit As IntervalUnit" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::IntervalUnit ReviewRequestIntervalUnit { Microsoft::SharePoint::Publishing::IntervalUnit get(); void set(Microsoft::SharePoint::Publishing::IntervalUnit value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.IntervalUnit</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the unit of time used by the content review request notification interval.</summary>
+        <value>An interval unit that specifies the unit of time for the content review request notification interval.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ReviewRequestInterval" /> and <b>ReviewRequestIntervalUnit</b> properties determine the schedule for content reviews. The related <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ReviewRequestTimeSpan" /> property uses these properties to determine how much time there is between e-mail review notifications after a <b>PublishingPage</b> is published. SharePoint 2010 uses these e-mail notifications to remind a user to review content.</para>
+          <para>If this property is equal to <b>IntervalUnit.Unspecified</b>, review requests are disabled. Regardless of what interval is specified, review requests are disabled if a <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" /> property is set for the <b>PublishingPage</b>.</para>
+          <para>To save changes after setting this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> method.</para>
+          <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage</b>, View permissions to retrieve the page and to return any of its property values, and Edit permissions to change the value.</para>
+          <para />
+        </remarks>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ReviewRequestTimeSpan">
+      <MemberSignature Language="C#" Value="public TimeSpan ReviewRequestTimeSpan { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan ReviewRequestTimeSpan" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.ReviewRequestTimeSpan" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ReviewRequestTimeSpan As TimeSpan" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property TimeSpan ReviewRequestTimeSpan { TimeSpan get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.TimeSpan</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the span of time between content review request notifications.</summary>
+        <value>The <b>TimeSpan</b> specifying the content review request notification interval.</value>
+        <remarks>
+          <para>This property returns a <b>TimeSpan</b> value calculated based on the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ReviewRequestInterval" /> and <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ReviewRequestIntervalUnit" /> property values. This property indicates the amount of time between e-mail review notifications after a <b>PublishingPage</b> has been published. These review e-mails are used to remind a user to review content.</para>
+          <para>If this property is equal to <b>TimeSpan.MaxValue</b>, review requests are disabled.</para>
+          <para>The user must have View permissions on the <b>PublishingPage</b> to retrieve it and return its property values.</para>
+          <para />
+        </remarks>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Route">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.PublishingPage Route (Microsoft.SharePoint.Publishing.PublishingPage originalPage);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.PublishingPage Route(class Microsoft.SharePoint.Publishing.PublishingPage originalPage) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.Route(Microsoft.SharePoint.Publishing.PublishingPage)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Route (originalPage As PublishingPage) As PublishingPage" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::PublishingPage ^ Route(Microsoft::SharePoint::Publishing::PublishingPage ^ originalPage);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingPage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="originalPage" Type="Microsoft.SharePoint.Publishing.PublishingPage" />
+      </Parameters>
+      <Docs>
+        <param name="originalPage">The <b>PublishingPage</b> object to be routed.</param>
+        <summary>Routes a <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object by using the content organizer rules.</summary>
+        <returns>The <b>PublishingPage</b> object after routing.</returns>
+        <remarks>
+          <para>If the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.RequiresRouting" /> property of the <b>PublishingPage</b> object is <b>true</b>, and the <b>PublishingPage</b> matches one of the content organizer rules, then the <b>PublishingPage</b> is routed to the new location based on the rule; otherwise, the <see cref="PublishingPage" /> object stays in the current location.</para>
+          <para>Regardless of whether the <b>PublishingPage</b> object is routed, the <b>RequiresRouting</b> property is set to <b>false</b> and the <b>PublishingPage</b> is checked in after the method is called. </para>
+          <para />
+        </remarks>
+        <example>
+          <para />
+          <code>
+                PublishingWeb web;
+                PublishingPage pageBeforeRouting;    
+                
+                ... get PublishingWeb and PublishingPage instances
+                
+                PublishingPage pageAfterRouting = PublishingPage.Route(pageBeforeRouting);
+            </code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Route">
+      <MemberSignature Language="C#" Value="public static Microsoft.SharePoint.Publishing.PublishingPage Route (Microsoft.SharePoint.Publishing.PublishingPage originalPage, string checkInComments);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.SharePoint.Publishing.PublishingPage Route(class Microsoft.SharePoint.Publishing.PublishingPage originalPage, string checkInComments) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.Route(Microsoft.SharePoint.Publishing.PublishingPage,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Route (originalPage As PublishingPage, checkInComments As String) As PublishingPage" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::Publishing::PublishingPage ^ Route(Microsoft::SharePoint::Publishing::PublishingPage ^ originalPage, System::String ^ checkInComments);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.PublishingPage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="originalPage" Type="Microsoft.SharePoint.Publishing.PublishingPage" />
+        <Parameter Name="checkInComments" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="originalPage">The <b>PublishingPage</b> object to be routed.</param>
+        <param name="checkInComments">A string that specifies any check-in comment.</param>
+        <summary>Routes a <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object by using the content organizer rules.</summary>
+        <returns>The <b>PublishingPage</b> object after routing.</returns>
+        <remarks>
+          <para>If the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.RequiresRouting" /> property of the <b>PublishingPage</b> object is <b>true</b> and the <b>PublishingPage</b> object matches one of the content organizer rules, then the <b>PublishingPage</b> object is routed to the new location based on the rule. Otherwise, the <b>PublishingPage</b> stays in the current location. </para>
+          <para>Regardless if the <b>PublishingPage</b> is routed, the <b>RequiresRouting</b> property is set to false and the <b>PublishingPage</b> is checked in after the method is called.</para>
+          <para />
+        </remarks>
+        <example>
+          <para />
+          <code>
+                PublishingWeb web;
+                PublishingPage pageBeforeRouting;    
+                
+                ... get PublishingWeb and PublishingPage instances
+                
+                string comments = "Check in Comment";
+                PublishingPage pageAfterRouting = PublishingPage.Route(pageBeforeRouting, comments);
+            </code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="ScheduleEndNotificationInterval">
+      <MemberSignature Language="C#" Value="public int ScheduleEndNotificationInterval { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 ScheduleEndNotificationInterval" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.ScheduleEndNotificationInterval" />
+      <MemberSignature Language="VB.NET" Value="Public Property ScheduleEndNotificationInterval As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int ScheduleEndNotificationInterval { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the interval of time before end-of-schedule notifications are sent.</summary>
+        <value>An integer specifying the end-of-schedule notification interval.</value>
+        <remarks>
+          <para>The <b>ScheduleEndNotificationInterval</b> and <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ScheduleEndNotificationIntervalUnit" /> properties determine the time prior to the <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" /> that a notification e-mail <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ScheduleEndNotificationTimeSpan" /> property is the actual span of time prior to the end date, and it is calculated based on the <b>ScheduleEndNotificationInterval</b> and <b>ScheduleEndNotificationIntervalUnit</b> properties.</para>
+          <para>If this property is equal to <b>PublishingPage.DisabledInterval</b>, then end date schedule notifications are disabled. Regardless of what interval is specified, schedule end notifications are disabled if there is no <b>ScheduledItem.EndDate</b> specified for the <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" />.To save changes after setting this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> method.</para>
+          <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage</b>, View permissions to retrieve the page and to return any of its property values, and Edit permissions to change the value.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentException">
+          <b>ScheduleEndInterval</b> cannot be negative or greater than 99.</exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ScheduleEndNotificationIntervalUnit">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Publishing.IntervalUnit ScheduleEndNotificationIntervalUnit { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Microsoft.SharePoint.Publishing.IntervalUnit ScheduleEndNotificationIntervalUnit" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.ScheduleEndNotificationIntervalUnit" />
+      <MemberSignature Language="VB.NET" Value="Public Property ScheduleEndNotificationIntervalUnit As IntervalUnit" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Publishing::IntervalUnit ScheduleEndNotificationIntervalUnit { Microsoft::SharePoint::Publishing::IntervalUnit get(); void set(Microsoft::SharePoint::Publishing::IntervalUnit value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Publishing.IntervalUnit</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the unit of time used for the <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" /> schedule notification interval.</summary>
+        <value>An interval unit that specifies the unit of time for the interval.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ScheduleEndNotificationInterval" /> and <b>ScheduleEndNotificationIntervalUnit</b> properties determine the time prior to the <b>EndDate</b> that a notification e-mail is sent. The <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ScheduleEndNotificationTimeSpan" /> property is the actual span of time prior to the <b>EndDate</b>, and it is calculated based on the <b>ScheduleEndNotificationInterval</b> and <b>ScheduleEndNotificationIntervalUnit</b> properties.</para>
+          <para>If this property is equal to <b>IntervalUnit.Unspecified</b>, then <b>EndDate</b> schedule notifications are disabled. Regardless of what interval is specified, schedule end notifications are disabled if there is no <b>EndDate</b> specified for the <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" />.</para>
+          <para>To save changes after setting this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> method.</para>
+          <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage</b>, View permissions to retrieve the page and to return any of its property values, and Edit permissions to change the value.</para>
+          <para />
+        </remarks>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ScheduleEndNotificationTimeSpan">
+      <MemberSignature Language="C#" Value="public TimeSpan ScheduleEndNotificationTimeSpan { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan ScheduleEndNotificationTimeSpan" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.ScheduleEndNotificationTimeSpan" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ScheduleEndNotificationTimeSpan As TimeSpan" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property TimeSpan ScheduleEndNotificationTimeSpan { TimeSpan get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.TimeSpan</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the span of time prior to the <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object's <see cref="P:Microsoft.SharePoint.Publishing.ScheduledItem.EndDate" /> that the end-of-schedule e-mail notification is sent.</summary>
+        <value>Timespan that represents the time period, before the <b>PublishingPage</b> object's <b>EndDate</b>, that the end-of-schedule e-mail notification is sent.</value>
+        <remarks>
+          <para>The <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ScheduleEndNotificationInterval" /> and <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ScheduleEndNotificationIntervalUnit" /> properties determine the time before the <b>EndDate</b> that a notification e-mail is sent. This e-mail reminds the user that the <b>EndDate</b> is approaching. The related <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.ScheduleEndNotificationTimeSpan" /> property is the actual span of time prior to the <b>EndDate</b>, which is calculated based on the <b>ScheduleEndNotificationInterval</b> and <b>ScheduleEndNotificationIntervalUnit</b> properties.</para>
+          <para>The <b>TimeSpan</b> that is specified is truncated to the nearest day. A value of <b>TimeSpan.MaxValue</b> indicates that the <b>EndDate</b> for schedule notifications are disabled.</para>
+          <para>The user must have View permissions on the <b>PublishingPage</b> to retrieve it and return its property values.</para>
+          <para />
+        </remarks>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Title">
+      <MemberSignature Language="C#" Value="public string Title { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Title" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.Title" />
+      <MemberSignature Language="VB.NET" Value="Public Property Title As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Title { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the title that is displayed for this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>The title that is displayed for this <b>PublishingPage</b> object.</value>
+        <remarks>
+          <para>The title cannot exceed 255 characters. SharePoint 2010 throws a <b>System.ArgumentException</b> exception if it encounters any excess characters. The <b>Title</b> can be set to an empty string in which case the <see cref="P:Microsoft.SharePoint.Publishing.PublishingPage.Name" /> is displayed.</para>
+          <para>To save changes after setting this property, call the <see cref="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" /> method.</para>
+          <para>To set this value, the user must have both View and Edit permissions on the <b>PublishingPage</b>, View permissions to retrieve the page and to return its property values, and Edit permissions to change the value.</para>
+          <para>If this property value is used in HTML that is rendered in a browser, you should encode the property value in HTML to avoid the possibility of scripting attacks.</para>
+          <para />
+        </remarks>
+        <exception cref="System.ArgumentNullException">Indicates that the value being set was a null reference (Nothing in Visual Basic), which is not valid.</exception>
+        <exception cref="System.ArgumentException">Invalid property value. The value cannot exceed 255 characters.</exception>
+        <exception cref="System.UnauthorizedAccessException">The current user does not have sufficient permissions to perform this action.</exception>
+        <example>
+          <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
+          <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the pages document library of a <b>PublishingWeb</b>.</para>
+          <para>This example assumes that the document library that contains the <b>SPListItem</b> requires content approval.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+
+        public static void SetPagePropertiesAndApprove(SPListItem listItem, SPUser pageContact)
+        {
+            // Replace these variable values and input parameters with your own values.
+            //
+            // New PublishingPage.Title value
+            string newTitle = "your Title";
+            //
+            // New PublishingPage.Description value
+            string newDescription = "your Description";
+            //
+            // The comment to set when the page is checked in, published, and approved.
+            string checkInComment = "Your comments";
+
+            
+            // Validate the input parameters.
+            //
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+            if (null == pageContact)
+            {
+                throw new System.ArgumentNullException("pageContact");
+            }
+
+            // Get the PublishingPage wrapper for the SPListItem that was passed in.
+            //
+            PublishingPage publishingPage = null;
+            if (PublishingPage.IsPublishingPage(listItem))
+            {
+                publishingPage = PublishingPage.GetPublishingPage(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException("This SPListItem is not a PublishingPage", "listItem");
+            }
+
+            
+            // Check out the page if it is not checked out yet.
+            //
+            if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                publishingPage.CheckOut();
+            }
+
+            
+            // Set and save some properties on the PublishingPage.
+            //
+            publishingPage.Title = newTitle;
+            publishingPage.Description = newDescription;
+            publishingPage.Contact = pageContact;
+            publishingPage.Update();
+
+            
+            // Publish the page, and approve it if required, so that the updated 
+            // values are visible on the published Web site.
+            //
+            publishingPage.CheckIn(checkInComment);
+            SPFile pageFile = publishingPage.ListItem.File;
+            pageFile.Publish(checkInComment);
+            pageFile.Approve(checkInComment);
+        }
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPagePropertiesAndApprove(ByVal listItem As SPListItem, ByVal pageContact As SPUser)
+            ' Replace these variable values and input parameters with your own values.
+            '
+            ' New PublishingPage.Title value
+            Dim newTitle As String = "your Title"
+            '
+            ' New PublishingPage.Description value
+            Dim newDescription As String = "your Description"
+            '
+            ' The comment to set when the page is checked in, published, and approved.
+            Dim checkInComment As String = "Your comments"
+
+
+            ' Validate the input parameters.
+            '
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+            If Nothing Is pageContact Then
+                Throw New System.ArgumentNullException("pageContact")
+            End If
+
+            ' Get the PublishingPage wrapper for the SPListItem that was passed in.
+            '
+            Dim publishingPage As PublishingPage = Nothing
+            If PublishingPage.IsPublishingPage(listItem) Then
+                publishingPage = PublishingPage.GetPublishingPage(listItem)
+            Else
+                Throw New System.ArgumentException("This SPListItem is not a PublishingPage", "listItem")
+            End If
+
+
+            ' Check out the page if it is not checked out yet.
+            '
+            If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                publishingPage.CheckOut()
+            End If
+
+
+            ' Set and save some properties on the PublishingPage.
+            '
+            publishingPage.Title = newTitle
+            publishingPage.Description = newDescription
+            publishingPage.Contact = pageContact
+            publishingPage.Update()
+
+
+            ' Publish the page, and approve it if required, so that the updated 
+            ' values are visible on the published Web site.
+            '
+            publishingPage.CheckIn(checkInComment)
+            Dim pageFile As SPFile = publishingPage.ListItem.File
+            pageFile.Publish(checkInComment)
+            pageFile.Approve(checkInComment)
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Update">
+      <MemberSignature Language="C#" Value="public void Update ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Update() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.Update" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Commits changes to this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <remarks>
+          <para>This method saves changes made to this <b>PublishingPage</b> instance. Call this method after you set values on the <b>PublishingPage</b>; this allows the changes to persist.</para>
+          <para>The user must have edit permissions on the <b>PublishingPage</b> to call this method.</para>
+          <para />
+        </remarks>
+        <exception cref="Microsoft.SharePoint.SPException">The update operation failed.</exception>
+        <example>
+          <para>This example sets some properties on a <b>PublishingPage</b> object, saves the new values, and publishes the <b>PublishingPage</b>.</para>
+          <para>Before compiling and running this example, verify that this <b>SPLIstItem</b> is a list item in the pages document library of a <b>PublishingWeb</b>.</para>
+          <para>This example assumes that the document library that contains the <b>SPListItem</b> requires content approval.</para>
+          <code>using PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage;
+using SPListItem = Microsoft.SharePoint.SPListItem;
+using SPFile = Microsoft.SharePoint.SPFile;
+using SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType;
+using PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb;
+using SPUser = Microsoft.SharePoint.SPUser;
+using PageLayout = Microsoft.SharePoint.Publishing.PageLayout;
+using PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class PublishingPageCodeSamples
+    {
+
+        public static void SetPagePropertiesAndApprove(SPListItem listItem, SPUser pageContact)
+        {
+            //  Replace these variable values and input parameters with your own values.
+            //
+            // New PublishingPage.Title value
+            string newTitle = "your Title";
+            //
+            // New PublishingPage.Description value
+            string newDescription = "your Description";
+            //
+            // The comment to set when the page is checked in, published, and approved.
+            string checkInComment = "Your comments";
+
+            
+            // Validate the input parameters.
+            //
+            if (null == listItem)
+            {
+                throw new System.ArgumentNullException("listItem");
+            }
+            if (null == pageContact)
+            {
+                throw new System.ArgumentNullException("pageContact");
+            }
+
+            // Get the PublishingPage wrapper for the SPListItem that was passed in.
+            //
+            PublishingPage publishingPage = null;
+            if (PublishingPage.IsPublishingPage(listItem))
+            {
+                publishingPage = PublishingPage.GetPublishingPage(listItem);
+            }
+            else
+            {
+                throw new System.ArgumentException("This SPListItem is not a PublishingPage", "listItem");
+            }
+
+            
+            // Check out the page if it is not checked out yet.
+            //
+            if (publishingPage.ListItem.File.CheckOutStatus == SPFile.SPCheckOutStatus.None)
+            {
+                publishingPage.CheckOut();
+            }
+
+            
+            // Set and save some properties on the PublishingPage.
+            //
+            publishingPage.Title = newTitle;
+            publishingPage.Description = newDescription;
+            publishingPage.Contact = pageContact;
+            publishingPage.Update();
+
+            
+            // Publish the page, and approve it if required, so that the updated 
+            // values are visible on the published Web site.
+            //
+            publishingPage.CheckIn(checkInComment);
+            SPFile pageFile = publishingPage.ListItem.File;
+            pageFile.Publish(checkInComment);
+            pageFile.Approve(checkInComment);
+        }
+    }
+}</code>
+          <code>Imports PublishingPage = Microsoft.SharePoint.Publishing.PublishingPage
+Imports SPListItem = Microsoft.SharePoint.SPListItem
+Imports SPFile = Microsoft.SharePoint.SPFile
+Imports SPModerationStatusType = Microsoft.SharePoint.SPModerationStatusType
+Imports PublishingWeb = Microsoft.SharePoint.Publishing.PublishingWeb
+Imports SPUser = Microsoft.SharePoint.SPUser
+Imports PageLayout = Microsoft.SharePoint.Publishing.PageLayout
+Imports PublishingPageCollection = Microsoft.SharePoint.Publishing.PublishingPageCollection
+
+Namespace Microsoft.SDK.SharePointServer.Samples
+    Public NotInheritable Class PublishingPageCodeSamples
+
+        Private Sub New()
+        End Sub
+        Public Shared Sub SetPagePropertiesAndApprove(ByVal listItem As SPListItem, ByVal pageContact As SPUser)
+            '  Replace these variable values and input parameters with your own values.
+            '
+            ' New PublishingPage.Title value
+            Dim newTitle As String = "your Title"
+            '
+            ' New PublishingPage.Description value
+            Dim newDescription As String = "your Description"
+            '
+            ' The comment to set when the page is checked in, published, and approved.
+            Dim checkInComment As String = "Your comments"
+
+
+            ' Validate the input parameters.
+            '
+            If Nothing Is listItem Then
+                Throw New System.ArgumentNullException("listItem")
+            End If
+            If Nothing Is pageContact Then
+                Throw New System.ArgumentNullException("pageContact")
+            End If
+
+            ' Get the PublishingPage wrapper for the SPListItem that was passed in.
+            '
+            Dim publishingPage As PublishingPage = Nothing
+            If PublishingPage.IsPublishingPage(listItem) Then
+                publishingPage = PublishingPage.GetPublishingPage(listItem)
+            Else
+                Throw New System.ArgumentException("This SPListItem is not a PublishingPage", "listItem")
+            End If
+
+
+            ' Check out the page if it is not checked out yet.
+            '
+            If publishingPage.ListItem.File.CheckOutStatus = SPFile.SPCheckOutStatus.None Then
+                publishingPage.CheckOut()
+            End If
+
+
+            ' Set and save some properties on the PublishingPage.
+            '
+            publishingPage.Title = newTitle
+            publishingPage.Description = newDescription
+            publishingPage.Contact = pageContact
+            publishingPage.Update()
+
+
+            ' Publish the page, and approve it if required, so that the updated 
+            ' values are visible on the published Web site.
+            '
+            publishingPage.CheckIn(checkInComment)
+            Dim pageFile As SPFile = publishingPage.ListItem.File
+            pageFile.Publish(checkInComment)
+            pageFile.Approve(checkInComment)
+        End Sub
+    End Class
+End Namespace</code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="UpdateContentFromSourceDocument">
+      <MemberSignature Language="C#" Value="public void UpdateContentFromSourceDocument (Microsoft.SharePoint.Publishing.PageConversionPriority priority);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void UpdateContentFromSourceDocument(valuetype Microsoft.SharePoint.Publishing.PageConversionPriority priority) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingPage.UpdateContentFromSourceDocument(Microsoft.SharePoint.Publishing.PageConversionPriority)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub UpdateContentFromSourceDocument (priority As PageConversionPriority)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void UpdateContentFromSourceDocument(Microsoft::SharePoint::Publishing::PageConversionPriority priority);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("This member is obsolete - use the specialized Office services instead", false)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="priority" Type="Microsoft.SharePoint.Publishing.PageConversionPriority" />
+      </Parameters>
+      <Docs>
+        <param name="priority">The <see cref="T:Microsoft.SharePoint.Publishing.PageConversionPriority" /> enumeration for the conversion. </param>
+        <summary>Updates a <see cref="T:Microsoft.SharePoint.PublishingPageobject" /> created by converting a document and reruns the conversion. </summary>
+        <remarks>
+          <para>Rerunning the conversion updates the contents of this <b>PublishingPage</b> with the contents of the document.</para>
+          <para />
+        </remarks>
+        <exception cref="T:Microsoft.System.ArgumentException">A document was not converted to create this page.</exception>
+        <exception cref="T:Microsoft.SharePoint.Publishishing.DocumentToPublishingPageConversionException">The update operation failed or succeeded with warnings.</exception>
+        <exception cref="Microsoft.SharePoint.SPException">The update operation failed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Uri">
+      <MemberSignature Language="C#" Value="public Uri Uri { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri Uri" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.Uri" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Uri As Uri" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Uri ^ Uri { Uri ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Uri</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the Uniform Resource Identifier (URI) for this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>The URI for this <b>PublishingPage</b>.</value>
+        <remarks>
+          <para>The user must have View permissions on the <b>PublishingPage</b> to retrieve it and to return its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Url">
+      <MemberSignature Language="C#" Value="public string Url { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Url" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.Url" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Url As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Url { System::String ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the web-relative URL for <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>The server-relative URL for this <b>PublishingPage</b>.</value>
+        <remarks>
+          <para>The user must have View permissions on the <b>PublishingPage</b> to retrieve it and to return its property values.</para>
+          <para />
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="VariationPageUrls">
+      <MemberSignature Language="C#" Value="public System.Collections.Specialized.StringCollection VariationPageUrls { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Specialized.StringCollection VariationPageUrls" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.PublishingPage.VariationPageUrls" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property VariationPageUrls As StringCollection" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Specialized::StringCollection ^ VariationPageUrls { System::Collections::Specialized::StringCollection ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Specialized.StringCollection</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a <see cref="T:System.Collections.Specialized.StringCollection" /> object of URLs that point to Variation peer <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> objects associated with this <see cref="T:Microsoft.SharePoint.Publishing.PublishingPage" /> object.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

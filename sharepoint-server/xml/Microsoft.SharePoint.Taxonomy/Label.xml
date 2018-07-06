@@ -1,0 +1,252 @@
+﻿<Type Name="Label" FullName="Microsoft.SharePoint.Taxonomy.Label">
+  <TypeSignature Language="C#" Value="public sealed class Label" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit Label extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.Label" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class Label" />
+  <TypeSignature Language="C++ CLI" Value="public ref class Label sealed" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+    <AssemblyVersion>15.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Microsoft.SharePoint.Client.ClientCallableType(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, FactoryType=typeof(Microsoft.SharePoint.Taxonomy.Internal.TaxonomyClientObjectFactory), ObjectIdentityPropertyName="CanonicalId", ServerTypeId="81503AE1-8747-4684-A172-163C7E009EF9")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents the name of a <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object in a specific language.</summary>
+    <remarks>
+      <para>Aterm can have one or more labels in the default language, and zero or more labels in the non-default language. If the term has labels in a language, one of the labels must be the default label.</para>
+      <para />
+    </remarks>
+    <example>
+      <code>using System;
+using System.IO;
+using System.Globalization;
+using System.Collections.Specialized;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Taxonomy;
+
+namespace Microsoft.SDK.SharePointServer.Samples
+{
+    public static class LabelSamples
+    {
+        public static void UseLabel(TermStore store, Term term, string newLabel)
+        {
+            // Show all the labels in current language
+            DisplayLabels(term);
+
+            Console.WriteLine("Adding a new label");
+
+            // Create a new label
+            Label label = term.CreateLabel(newLabel,
+                CultureInfo.CurrentUICulture.LCID,
+                false);
+
+            // Commit the change into the TermStore
+            store.CommitAll();
+
+            // Show all the labels in current language
+            DisplayLabels(term);
+
+            // Set the new label as the default label for current language
+            label.SetAsDefaultForLanguage();
+
+            // Commit the change into the TermStore
+            store.CommitAll();
+
+            // Show all the labels in current language
+            DisplayLabels(term);
+        }
+
+        public static void DisplayLabels(Term term)
+        {
+            // Show all the labels in current language
+            foreach (Label termLabel in term.Labels)
+            {
+                Console.WriteLine("The term has label: \"" + termLabel.Value
+                    + "\" and IsDefault is " + termLabel.IsDefaultForLanguage);
+            }
+        }
+    }
+}
+</code>
+    </example>
+  </Docs>
+  <Members>
+    <Member MemberName="Delete">
+      <MemberSignature Language="C#" Value="public void Delete ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Delete() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Label.Delete" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Delete ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void Delete();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful, Name="DeleteObject")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary> Deletes the current <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> object. </summary>
+        <remarks>
+          <para> The current user must have <b>TaxonomyRights.EditTerm</b> permission to use the method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException"> The default label for a <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object in the default language cannot be deleted. Deleting the last Label of a Term is disallowed. Please delete the Term instead.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="IsDefaultForLanguage">
+      <MemberSignature Language="C#" Value="public bool IsDefaultForLanguage { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsDefaultForLanguage" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Label.IsDefaultForLanguage" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsDefaultForLanguage As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsDefaultForLanguage { bool get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Indicates whether this <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> object is the default label for the label's language.</summary>
+        <value>Returns <see cref="T:System.Boolean" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Language">
+      <MemberSignature Language="C#" Value="public int Language { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Language" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Label.Language" />
+      <MemberSignature Language="VB.NET" Value="Public Property Language As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Language { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Indicates the locale of the current <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> object.</summary>
+        <value>Returns <see cref="T:System.Int32" />.</value>
+        <remarks>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission in order to set this property. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:Microsoft.SharePoint.Taxonomy.TermStoreOperationException">The language of a default Label cannot be changed.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">The language is not a valid language or is not one of the working languages for the current term store.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SetAsDefaultForLanguage">
+      <MemberSignature Language="C#" Value="public void SetAsDefaultForLanguage ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetAsDefaultForLanguage() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Taxonomy.Label.SetAsDefaultForLanguage" />
+      <MemberSignature Language="VB.NET" Value="Public Sub SetAsDefaultForLanguage ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetAsDefaultForLanguage();" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Sets the current <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> object as the default label for its language.</summary>
+        <remarks>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission in order to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Term">
+      <MemberSignature Language="C#" Value="public Microsoft.SharePoint.Taxonomy.Term Term { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Taxonomy.Term Term" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Label.Term" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Term As Term" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Taxonomy::Term ^ Term { Microsoft::SharePoint::Taxonomy::Term ^ get(); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.SharePoint.Taxonomy.Term</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Returns the <see cref="T:Microsoft.SharePoint.Taxonomy.Term" /> object that the current <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> object is associated with.</summary>
+        <value>Returns <see cref="T:Microsoft.SharePoint.Taxonomy.Term" />.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Value">
+      <MemberSignature Language="C#" Value="public string Value { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Value" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Taxonomy.Label.Value" />
+      <MemberSignature Language="VB.NET" Value="Public Property Value As String" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Value { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.SharePoint.Taxonomy</AssemblyName>
+        <AssemblyVersion>15.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.SharePoint.Client.ClientCallable(ClientLibraryTargets=Microsoft.SharePoint.Client.ClientLibraryTargets.NonRESTful)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the value of the current <see cref="T:Microsoft.SharePoint.Taxonomy.Label" /> object.</summary>
+        <value>Returns <see cref="T:System.String" />.</value>
+        <remarks>
+          <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission to set this property. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
+          <para />
+        </remarks>
+        <exception cref="T:System.UnauthorizedAccessException">The current user has insufficient permissions to perform this operation.</exception>
+        <exception cref="T:System.ArgumentException">The value is not valid for a Term Label. The Label can not have more than 255 characters, and cannot contain any invalid characters including: semicolon,  double quote, left angle bracket, right angle bracket, ampersand, pipe, and tab.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
