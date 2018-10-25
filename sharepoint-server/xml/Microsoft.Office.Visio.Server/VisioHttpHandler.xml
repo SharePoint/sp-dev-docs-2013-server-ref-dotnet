@@ -1,9 +1,10 @@
 ﻿<Type Name="VisioHttpHandler" FullName="Microsoft.Office.Visio.Server.VisioHttpHandler">
-  <TypeSignature Language="C#" Value="public sealed class VisioHttpHandler : System.Web.IHttpAsyncHandler" />
+  <TypeSignature Language="C#" Value="public sealed class VisioHttpHandler : System.Web.IHttpAsyncHandler, System.Web.IHttpHandler" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit VisioHttpHandler extends System.Object implements class System.Web.IHttpAsyncHandler, class System.Web.IHttpHandler" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.Visio.Server.VisioHttpHandler" />
-  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class VisioHttpHandler&#xA;Implements IHttpAsyncHandler" />
-  <TypeSignature Language="C++ CLI" Value="public ref class VisioHttpHandler sealed : System::Web::IHttpAsyncHandler" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class VisioHttpHandler&#xA;Implements IHttpAsyncHandler, IHttpHandler" />
+  <TypeSignature Language="C++ CLI" Value="public ref class VisioHttpHandler sealed : System::Web::IHttpAsyncHandler, System::Web::IHttpHandler" />
+  <TypeSignature Language="F#" Value="type VisioHttpHandler = class&#xA;    interface IHttpAsyncHandler&#xA;    interface IHttpHandler" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -14,6 +15,9 @@
   <Interfaces>
     <Interface>
       <InterfaceName>System.Web.IHttpAsyncHandler</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Web.IHttpHandler</InterfaceName>
     </Interface>
   </Interfaces>
   <Docs>
@@ -44,10 +48,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Visio.Server.VisioHttpHandler.BeginProcessRequest(System.Web.HttpContext,System.AsyncCallback,System.Object)" />
       <MemberSignature Language="VB.NET" Value="Public Function BeginProcessRequest (context As HttpContext, callback As AsyncCallback, asyncState As Object) As IAsyncResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual IAsyncResult ^ BeginProcessRequest(System::Web::HttpContext ^ context, AsyncCallback ^ callback, System::Object ^ asyncState);" />
+      <MemberSignature Language="F#" Value="abstract member BeginProcessRequest : System.Web.HttpContext * AsyncCallback * obj -&gt; IAsyncResult&#xA;override this.BeginProcessRequest : System.Web.HttpContext * AsyncCallback * obj -&gt; IAsyncResult" Usage="visioHttpHandler.BeginProcessRequest (context, callback, asyncState)" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.IHttpAsyncHandler.BeginProcessRequest(System.Web.HttpContext,System.AsyncCallback,System.Object)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -75,10 +77,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Visio.Server.VisioHttpHandler.EndProcessRequest(System.IAsyncResult)" />
       <MemberSignature Language="VB.NET" Value="Public Sub EndProcessRequest (result As IAsyncResult)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void EndProcessRequest(IAsyncResult ^ result);" />
+      <MemberSignature Language="F#" Value="abstract member EndProcessRequest : IAsyncResult -&gt; unit&#xA;override this.EndProcessRequest : IAsyncResult -&gt; unit" Usage="visioHttpHandler.EndProcessRequest result" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.IHttpAsyncHandler.EndProcessRequest(System.IAsyncResult)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -101,10 +101,8 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Visio.Server.VisioHttpHandler.IsReusable" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsReusable As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsReusable { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IsReusable : bool" Usage="Microsoft.Office.Visio.Server.VisioHttpHandler.IsReusable" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:System.Web.IHttpHandler.IsReusable</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -124,10 +122,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Visio.Server.VisioHttpHandler.ProcessRequest(System.Web.HttpContext)" />
       <MemberSignature Language="VB.NET" Value="Public Sub ProcessRequest (context As HttpContext)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void ProcessRequest(System::Web::HttpContext ^ context);" />
+      <MemberSignature Language="F#" Value="abstract member ProcessRequest : System.Web.HttpContext -&gt; unit&#xA;override this.ProcessRequest : System.Web.HttpContext -&gt; unit" Usage="visioHttpHandler.ProcessRequest context" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Visio.Server</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>

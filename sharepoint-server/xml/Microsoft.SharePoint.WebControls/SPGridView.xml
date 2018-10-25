@@ -1,9 +1,10 @@
 ﻿<Type Name="SPGridView" FullName="Microsoft.SharePoint.WebControls.SPGridView">
-  <TypeSignature Language="C#" Value="public class SPGridView : System.Web.UI.WebControls.GridView" />
+  <TypeSignature Language="C#" Value="public class SPGridView : System.Web.UI.WebControls.GridView, System.Web.UI.ICallbackEventHandler, System.Web.UI.IPostBackEventHandler" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SPGridView extends System.Web.UI.WebControls.GridView implements class System.Web.UI.ICallbackEventHandler, class System.Web.UI.IPostBackEventHandler" />
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.WebControls.SPGridView" />
-  <TypeSignature Language="VB.NET" Value="Public Class SPGridView&#xA;Inherits GridView" />
-  <TypeSignature Language="C++ CLI" Value="public ref class SPGridView : System::Web::UI::WebControls::GridView" />
+  <TypeSignature Language="VB.NET" Value="Public Class SPGridView&#xA;Inherits GridView&#xA;Implements ICallbackEventHandler, IPostBackEventHandler" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SPGridView : System::Web::UI::WebControls::GridView, System::Web::UI::ICallbackEventHandler, System::Web::UI::IPostBackEventHandler" />
+  <TypeSignature Language="F#" Value="type SPGridView = class&#xA;    inherit GridView&#xA;    interface ICallbackEventHandler&#xA;    interface IPostBackEventHandler" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -11,7 +12,14 @@
   <Base>
     <BaseTypeName>System.Web.UI.WebControls.GridView</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Web.UI.ICallbackEventHandler</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Web.UI.IPostBackEventHandler</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
@@ -40,6 +48,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.AllowFiltering" />
       <MemberSignature Language="VB.NET" Value="Public Property AllowFiltering As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowFiltering { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.AllowFiltering : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.AllowFiltering" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -68,6 +77,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.AllowGroupCollapse" />
       <MemberSignature Language="VB.NET" Value="Public Property AllowGroupCollapse As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowGroupCollapse { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.AllowGroupCollapse : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.AllowGroupCollapse" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -96,6 +106,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.AllowGrouping" />
       <MemberSignature Language="VB.NET" Value="Public Property AllowGrouping As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowGrouping { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.AllowGrouping : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.AllowGrouping" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -124,6 +135,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebControls.SPGridView.CallbackArgumentPrefix" />
       <MemberSignature Language="VB.NET" Value="Public Const CallbackArgumentPrefix As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ CallbackArgumentPrefix;" />
+      <MemberSignature Language="F#" Value="val mutable CallbackArgumentPrefix : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.CallbackArgumentPrefix" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -143,6 +155,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function CreateChildControls (dataSource As IEnumerable, dataBinding As Boolean) As Integer" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override int CreateChildControls(System::Collections::IEnumerable ^ dataSource, bool dataBinding);" />
+      <MemberSignature Language="F#" Value="abstract member CreateChildControls : System.Collections.IEnumerable * bool -&gt; int&#xA;override this.CreateChildControls : System.Collections.IEnumerable * bool -&gt; int" Usage="sPGridView.CreateChildControls (dataSource, dataBinding)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -169,6 +182,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.CreateRow(System.Int32,System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function CreateRow (rowIndex As Integer, dataSourceIndex As Integer, rowType As DataControlRowType, rowState As DataControlRowState) As GridViewRow" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Web::UI::WebControls::GridViewRow ^ CreateRow(int rowIndex, int dataSourceIndex, System::Web::UI::WebControls::DataControlRowType rowType, System::Web::UI::WebControls::DataControlRowState rowState);" />
+      <MemberSignature Language="F#" Value="abstract member CreateRow : int * int * System.Web.UI.WebControls.DataControlRowType * System.Web.UI.WebControls.DataControlRowState -&gt; System.Web.UI.WebControls.GridViewRow&#xA;override this.CreateRow : int * int * System.Web.UI.WebControls.DataControlRowType * System.Web.UI.WebControls.DataControlRowState -&gt; System.Web.UI.WebControls.GridViewRow" Usage="sPGridView.CreateRow (rowIndex, dataSourceIndex, rowType, rowState)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -199,6 +213,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.DataBoundHasBeenRaised" />
       <MemberSignature Language="VB.NET" Value="Public Property DataBoundHasBeenRaised As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool DataBoundHasBeenRaised { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.DataBoundHasBeenRaised : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.DataBoundHasBeenRaised" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -219,6 +234,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.DisplayGroupFieldName" />
       <MemberSignature Language="VB.NET" Value="Public Property DisplayGroupFieldName As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool DisplayGroupFieldName { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.DisplayGroupFieldName : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.DisplayGroupFieldName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -247,6 +263,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.DoFilterPostBackEventProcessing(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub DoFilterPostBackEventProcessing (filterData As String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void DoFilterPostBackEventProcessing(System::String ^ filterData);" />
+      <MemberSignature Language="F#" Value="member this.DoFilterPostBackEventProcessing : string -&gt; unit" Usage="sPGridView.DoFilterPostBackEventProcessing filterData" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -270,6 +287,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.DoSortPostBackEventProcessing(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub DoSortPostBackEventProcessing (sortData As String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void DoSortPostBackEventProcessing(System::String ^ sortData);" />
+      <MemberSignature Language="F#" Value="member this.DoSortPostBackEventProcessing : string -&gt; unit" Usage="sPGridView.DoSortPostBackEventProcessing sortData" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -293,6 +311,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.FilterDataFields" />
       <MemberSignature Language="VB.NET" Value="Public Property FilterDataFields As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterDataFields { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.FilterDataFields : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.FilterDataFields" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -321,6 +340,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.FilteredDataSourcePropertyFormat" />
       <MemberSignature Language="VB.NET" Value="Public Property FilteredDataSourcePropertyFormat As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilteredDataSourcePropertyFormat { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.FilteredDataSourcePropertyFormat : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.FilteredDataSourcePropertyFormat" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -349,6 +369,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.FilteredDataSourcePropertyName" />
       <MemberSignature Language="VB.NET" Value="Public Property FilteredDataSourcePropertyName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilteredDataSourcePropertyName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.FilteredDataSourcePropertyName : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.FilteredDataSourcePropertyName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -377,6 +398,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.FilterFieldName" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property FilterFieldName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterFieldName { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.FilterFieldName : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.FilterFieldName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -397,6 +419,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.FilterFieldValue" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property FilterFieldValue As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FilterFieldValue { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.FilterFieldValue : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.FilterFieldValue" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -417,6 +440,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.FilteringIsCaseSensitive" />
       <MemberSignature Language="VB.NET" Value="Public Property FilteringIsCaseSensitive As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool FilteringIsCaseSensitive { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.FilteringIsCaseSensitive : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.FilteringIsCaseSensitive" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -445,10 +469,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.GetCallbackResult" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetCallbackResult () As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::String ^ GetCallbackResult();" />
+      <MemberSignature Language="F#" Value="abstract member GetCallbackResult : unit -&gt; string&#xA;override this.GetCallbackResult : unit -&gt; string" Usage="sPGridView.GetCallbackResult " />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.ICallbackEventHandler.GetCallbackResult</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -469,6 +491,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.GroupColumnHeaderCssClass" />
       <MemberSignature Language="VB.NET" Value="Public Property GroupColumnHeaderCssClass As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupColumnHeaderCssClass { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.GroupColumnHeaderCssClass : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.GroupColumnHeaderCssClass" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -489,6 +512,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.GroupDescriptionField" />
       <MemberSignature Language="VB.NET" Value="Public Property GroupDescriptionField As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupDescriptionField { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.GroupDescriptionField : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.GroupDescriptionField" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -509,6 +533,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.GroupDisplayTextField" />
       <MemberSignature Language="VB.NET" Value="Public Property GroupDisplayTextField As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupDisplayTextField { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.GroupDisplayTextField : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.GroupDisplayTextField" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -529,6 +554,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.GroupField" />
       <MemberSignature Language="VB.NET" Value="Public Property GroupField As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupField { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.GroupField : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.GroupField" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -549,6 +575,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.GroupFieldDisplayName" />
       <MemberSignature Language="VB.NET" Value="Public Property GroupFieldDisplayName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupFieldDisplayName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.GroupFieldDisplayName : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.GroupFieldDisplayName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -569,6 +596,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.GroupImageDescriptionField" />
       <MemberSignature Language="VB.NET" Value="Public Property GroupImageDescriptionField As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupImageDescriptionField { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.GroupImageDescriptionField : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.GroupImageDescriptionField" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -589,6 +617,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.GroupImageUrlField" />
       <MemberSignature Language="VB.NET" Value="Public Property GroupImageUrlField As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ GroupImageUrlField { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.GroupImageUrlField : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.GroupImageUrlField" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -609,6 +638,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.GroupMenu" />
       <MemberSignature Language="VB.NET" Value="Public Property GroupMenu As SPMenuField" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebControls::SPMenuField ^ GroupMenu { Microsoft::SharePoint::WebControls::SPMenuField ^ get(); void set(Microsoft::SharePoint::WebControls::SPMenuField ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.GroupMenu : Microsoft.SharePoint.WebControls.SPMenuField with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.GroupMenu" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -629,6 +659,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.HighestDataItemIndex" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property HighestDataItemIndex As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int HighestDataItemIndex { int get(); };" />
+      <MemberSignature Language="F#" Value="member this.HighestDataItemIndex : int" Usage="Microsoft.SharePoint.WebControls.SPGridView.HighestDataItemIndex" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -649,6 +680,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.InvokeCallbackEvent(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Function InvokeCallbackEvent (eventArgument As String) As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; System::String ^ InvokeCallbackEvent(System::String ^ eventArgument);" />
+      <MemberSignature Language="F#" Value="member this.InvokeCallbackEvent : string -&gt; string" Usage="sPGridView.InvokeCallbackEvent eventArgument" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -673,6 +705,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.LoadControlState(System.Object)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub LoadControlState (savedState As Object)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void LoadControlState(System::Object ^ savedState);" />
+      <MemberSignature Language="F#" Value="abstract member LoadControlState : obj -&gt; unit&#xA;override this.LoadControlState : obj -&gt; unit" Usage="sPGridView.LoadControlState savedState" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -696,6 +729,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.LowestDataItemIndex" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LowestDataItemIndex As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int LowestDataItemIndex { int get(); };" />
+      <MemberSignature Language="F#" Value="member this.LowestDataItemIndex : int" Usage="Microsoft.SharePoint.WebControls.SPGridView.LowestDataItemIndex" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -716,6 +750,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebControls.SPGridView.m_HighestDataItemIndex" />
       <MemberSignature Language="VB.NET" Value="Protected m_HighestDataItemIndex As Integer " />
       <MemberSignature Language="C++ CLI" Value="protected: int m_HighestDataItemIndex;" />
+      <MemberSignature Language="F#" Value="val mutable m_HighestDataItemIndex : int" Usage="Microsoft.SharePoint.WebControls.SPGridView.m_HighestDataItemIndex" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -735,6 +770,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebControls.SPGridView.m_LowestDataItemIndex" />
       <MemberSignature Language="VB.NET" Value="Protected m_LowestDataItemIndex As Integer " />
       <MemberSignature Language="C++ CLI" Value="protected: int m_LowestDataItemIndex;" />
+      <MemberSignature Language="F#" Value="val mutable m_LowestDataItemIndex : int" Usage="Microsoft.SharePoint.WebControls.SPGridView.m_LowestDataItemIndex" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -754,6 +790,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.OnDataBinding(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnDataBinding (arguments As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnDataBinding(EventArgs ^ arguments);" />
+      <MemberSignature Language="F#" Value="abstract member OnDataBinding : EventArgs -&gt; unit&#xA;override this.OnDataBinding : EventArgs -&gt; unit" Usage="sPGridView.OnDataBinding arguments" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -777,6 +814,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.OnDataBound(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnDataBound (args As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnDataBound(EventArgs ^ args);" />
+      <MemberSignature Language="F#" Value="abstract member OnDataBound : EventArgs -&gt; unit&#xA;override this.OnDataBound : EventArgs -&gt; unit" Usage="sPGridView.OnDataBound args" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -800,6 +838,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.OnInit(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnInit (args As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnInit(EventArgs ^ args);" />
+      <MemberSignature Language="F#" Value="abstract member OnInit : EventArgs -&gt; unit&#xA;override this.OnInit : EventArgs -&gt; unit" Usage="sPGridView.OnInit args" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -823,6 +862,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.OnLoad(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (args As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ args);" />
+      <MemberSignature Language="F#" Value="abstract member OnLoad : EventArgs -&gt; unit&#xA;override this.OnLoad : EventArgs -&gt; unit" Usage="sPGridView.OnLoad args" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -846,6 +886,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.OnRowCreated(System.Web.UI.WebControls.GridViewRowEventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnRowCreated (args As GridViewRowEventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnRowCreated(System::Web::UI::WebControls::GridViewRowEventArgs ^ args);" />
+      <MemberSignature Language="F#" Value="abstract member OnRowCreated : System.Web.UI.WebControls.GridViewRowEventArgs -&gt; unit&#xA;override this.OnRowCreated : System.Web.UI.WebControls.GridViewRowEventArgs -&gt; unit" Usage="sPGridView.OnRowCreated args" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -869,6 +910,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.PageIndex" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property PageIndex As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property int PageIndex { int get(); void set(int value); };" />
+      <MemberSignature Language="F#" Value="member this.PageIndex : int with get, set" Usage="Microsoft.SharePoint.WebControls.SPGridView.PageIndex" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -889,6 +931,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebControls.SPGridView.PostbackArgumentPrefix" />
       <MemberSignature Language="VB.NET" Value="Public Const PostbackArgumentPrefix As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ PostbackArgumentPrefix;" />
+      <MemberSignature Language="F#" Value="val mutable PostbackArgumentPrefix : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.PostbackArgumentPrefix" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -908,6 +951,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebControls.SPGridView.PostbackFilterCommand" />
       <MemberSignature Language="VB.NET" Value="Public Const PostbackFilterCommand As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ PostbackFilterCommand;" />
+      <MemberSignature Language="F#" Value="val mutable PostbackFilterCommand : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.PostbackFilterCommand" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -927,6 +971,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebControls.SPGridView.PostbackFilterCommandClear" />
       <MemberSignature Language="VB.NET" Value="Public Const PostbackFilterCommandClear As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ PostbackFilterCommandClear;" />
+      <MemberSignature Language="F#" Value="val mutable PostbackFilterCommandClear : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.PostbackFilterCommandClear" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -946,6 +991,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebControls.SPGridView.PostbackSortCommand" />
       <MemberSignature Language="VB.NET" Value="Public Const PostbackSortCommand As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ PostbackSortCommand;" />
+      <MemberSignature Language="F#" Value="val mutable PostbackSortCommand : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.PostbackSortCommand" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -965,6 +1011,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebControls.SPGridView.PostbackSortCommandAscending" />
       <MemberSignature Language="VB.NET" Value="Public Const PostbackSortCommandAscending As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ PostbackSortCommandAscending;" />
+      <MemberSignature Language="F#" Value="val mutable PostbackSortCommandAscending : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.PostbackSortCommandAscending" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -984,6 +1031,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebControls.SPGridView.PostbackSortCommandDescending" />
       <MemberSignature Language="VB.NET" Value="Public Const PostbackSortCommandDescending As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ PostbackSortCommandDescending;" />
+      <MemberSignature Language="F#" Value="val mutable PostbackSortCommandDescending : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.PostbackSortCommandDescending" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1003,6 +1051,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.PreviousPageFirstRowDataKey" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PreviousPageFirstRowDataKey As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ PreviousPageFirstRowDataKey { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.PreviousPageFirstRowDataKey : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.PreviousPageFirstRowDataKey" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1023,6 +1072,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.PreviousPageIndex" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PreviousPageIndex As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int PreviousPageIndex { int get(); };" />
+      <MemberSignature Language="F#" Value="member this.PreviousPageIndex : int" Usage="Microsoft.SharePoint.WebControls.SPGridView.PreviousPageIndex" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1043,6 +1093,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.PreviousPageLastRowDataKey" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PreviousPageLastRowDataKey As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ PreviousPageLastRowDataKey { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.PreviousPageLastRowDataKey : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.PreviousPageLastRowDataKey" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1063,10 +1114,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.RaiseCallbackEvent(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub RaiseCallbackEvent (eventArgument As String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void RaiseCallbackEvent(System::String ^ eventArgument);" />
+      <MemberSignature Language="F#" Value="abstract member RaiseCallbackEvent : string -&gt; unit&#xA;override this.RaiseCallbackEvent : string -&gt; unit" Usage="sPGridView.RaiseCallbackEvent eventArgument" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -1089,10 +1138,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.RaisePostBackEvent(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub RaisePostBackEvent (eventArgument As String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void RaisePostBackEvent(System::String ^ eventArgument);" />
+      <MemberSignature Language="F#" Value="abstract member RaisePostBackEvent : string -&gt; unit&#xA;override this.RaisePostBackEvent : string -&gt; unit" Usage="sPGridView.RaisePostBackEvent eventArgument" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -1115,6 +1162,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.RaisePostBackEventInternal(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub RaisePostBackEventInternal (eventArgument As String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void RaisePostBackEventInternal(System::String ^ eventArgument);" />
+      <MemberSignature Language="F#" Value="member this.RaisePostBackEventInternal : string -&gt; unit" Usage="sPGridView.RaisePostBackEventInternal eventArgument" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1138,6 +1186,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.Render(System.Web.UI.HtmlTextWriter)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub Render (writer As HtmlTextWriter)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void Render(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberSignature Language="F#" Value="abstract member Render : System.Web.UI.HtmlTextWriter -&gt; unit&#xA;override this.Render : System.Web.UI.HtmlTextWriter -&gt; unit" Usage="sPGridView.Render writer" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1161,6 +1210,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPGridView.SaveControlState" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function SaveControlState () As Object" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Object ^ SaveControlState();" />
+      <MemberSignature Language="F#" Value="abstract member SaveControlState : unit -&gt; obj&#xA;override this.SaveControlState : unit -&gt; obj" Usage="sPGridView.SaveControlState " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1182,6 +1232,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPGridView.SortDirectionImageUrl" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SortDirectionImageUrl As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SortDirectionImageUrl { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.SortDirectionImageUrl : string" Usage="Microsoft.SharePoint.WebControls.SPGridView.SortDirectionImageUrl" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

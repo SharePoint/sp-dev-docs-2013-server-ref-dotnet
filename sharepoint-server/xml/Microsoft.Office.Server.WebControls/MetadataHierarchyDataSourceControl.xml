@@ -1,9 +1,10 @@
 ﻿<Type Name="MetadataHierarchyDataSourceControl" FullName="Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl">
-  <TypeSignature Language="C#" Value="public sealed class MetadataHierarchyDataSourceControl : System.Web.UI.HierarchicalDataSourceControl" />
+  <TypeSignature Language="C#" Value="public sealed class MetadataHierarchyDataSourceControl : System.Web.UI.HierarchicalDataSourceControl, System.Web.UI.IHierarchicalDataSource" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit MetadataHierarchyDataSourceControl extends System.Web.UI.HierarchicalDataSourceControl implements class System.Web.UI.IHierarchicalDataSource" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl" />
-  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class MetadataHierarchyDataSourceControl&#xA;Inherits HierarchicalDataSourceControl" />
-  <TypeSignature Language="C++ CLI" Value="public ref class MetadataHierarchyDataSourceControl sealed : System::Web::UI::HierarchicalDataSourceControl" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class MetadataHierarchyDataSourceControl&#xA;Inherits HierarchicalDataSourceControl&#xA;Implements IHierarchicalDataSource" />
+  <TypeSignature Language="C++ CLI" Value="public ref class MetadataHierarchyDataSourceControl sealed : System::Web::UI::HierarchicalDataSourceControl, System::Web::UI::IHierarchicalDataSource" />
+  <TypeSignature Language="F#" Value="type MetadataHierarchyDataSourceControl = class&#xA;    inherit HierarchicalDataSourceControl&#xA;    interface IHierarchicalDataSource" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -11,7 +12,11 @@
   <Base>
     <BaseTypeName>System.Web.UI.HierarchicalDataSourceControl</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Web.UI.IHierarchicalDataSource</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Attributes>
     <Attribute>
       <AttributeName>Microsoft.SharePoint.WebControls.MdsCompliant(IsCompliant=true)</AttributeName>
@@ -51,6 +56,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.#ctor(Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (underlyingSPHierarchyDataSource As SPHierarchyDataSourceControl)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; MetadataHierarchyDataSourceControl(Microsoft::SharePoint::WebControls::SPHierarchyDataSourceControl ^ underlyingSPHierarchyDataSource);" />
+      <MemberSignature Language="F#" Value="new Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl : Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl -&gt; Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl" Usage="new Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl underlyingSPHierarchyDataSource" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -71,6 +77,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.AdditionalQueryString" />
       <MemberSignature Language="VB.NET" Value="Public Property AdditionalQueryString As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AdditionalQueryString { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.AdditionalQueryString : string with get, set" Usage="Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.AdditionalQueryString" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -91,10 +98,8 @@
       <MemberSignature Language="DocId" Value="E:Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.DataSourceChanged" />
       <MemberSignature Language="VB.NET" Value="Public Custom Event DataSourceChanged As EventHandler " />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual event EventHandler ^ DataSourceChanged;" />
+      <MemberSignature Language="F#" Value="member this.DataSourceChanged : EventHandler " Usage="member this.DataSourceChanged : System.EventHandler " />
       <MemberType>Event</MemberType>
-      <Implements>
-        <InterfaceMember>E:System.Web.UI.IHierarchicalDataSource.DataSourceChanged</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -116,10 +121,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.GetHierarchicalView(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetHierarchicalView (viewName As String) As HierarchicalDataSourceView" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Web::UI::HierarchicalDataSourceView ^ GetHierarchicalView(System::String ^ viewName);" />
+      <MemberSignature Language="F#" Value="abstract member GetHierarchicalView : string -&gt; System.Web.UI.HierarchicalDataSourceView&#xA;override this.GetHierarchicalView : string -&gt; System.Web.UI.HierarchicalDataSourceView" Usage="metadataHierarchyDataSourceControl.GetHierarchicalView viewName" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -146,6 +149,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.OnInit(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnInit (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnInit(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="abstract member OnInit : EventArgs -&gt; unit&#xA;override this.OnInit : EventArgs -&gt; unit" Usage="metadataHierarchyDataSourceControl.OnInit e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -169,6 +173,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.OnLoad(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="abstract member OnLoad : EventArgs -&gt; unit&#xA;override this.OnLoad : EventArgs -&gt; unit" Usage="metadataHierarchyDataSourceControl.OnLoad e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -192,6 +197,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.SPHierarchyDataSourceId" />
       <MemberSignature Language="VB.NET" Value="Public Property SPHierarchyDataSourceId As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SPHierarchyDataSourceId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.SPHierarchyDataSourceId : string with get, set" Usage="Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.SPHierarchyDataSourceId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -217,6 +223,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.Web" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Web As SPWeb" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPWeb ^ Web { Microsoft::SharePoint::SPWeb ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Web : Microsoft.SharePoint.SPWeb" Usage="Microsoft.Office.Server.WebControls.MetadataHierarchyDataSourceControl.Web" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>

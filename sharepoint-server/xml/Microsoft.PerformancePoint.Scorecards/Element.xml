@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.PerformancePoint.Scorecards.Element" />
   <TypeSignature Language="VB.NET" Value="Public MustInherit Class Element&#xA;Implements ICloneable, IComparable(Of Element), IDiffable, IEquatable(Of Element)" />
   <TypeSignature Language="C++ CLI" Value="public ref class Element abstract : ICloneable, IComparable&lt;Microsoft::PerformancePoint::Scorecards::Element ^&gt;, IEquatable&lt;Microsoft::PerformancePoint::Scorecards::Element ^&gt;, Microsoft::PerformancePoint::Scorecards::IDiffable" />
+  <TypeSignature Language="F#" Value="type Element = class&#xA;    interface IDiffable&#xA;    interface ICloneable&#xA;    interface IEquatable&lt;Element&gt;&#xA;    interface IComparable&lt;Element&gt;" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -25,6 +26,11 @@
       <InterfaceName>System.IEquatable&lt;Microsoft.PerformancePoint.Scorecards.Element&gt;</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
@@ -53,6 +59,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Element.Clone" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function Clone () As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::Object ^ Clone();" />
+      <MemberSignature Language="F#" Value="abstract member Clone : unit -&gt; obj" Usage="element.Clone " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.ICloneable.Clone</InterfaceMember>
@@ -77,6 +84,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Element.Comments" />
       <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property Comments As CommentCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::PerformancePoint::Scorecards::CommentCollection ^ Comments { Microsoft::PerformancePoint::Scorecards::CommentCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Comments : Microsoft.PerformancePoint.Scorecards.CommentCollection" Usage="Microsoft.PerformancePoint.Scorecards.Element.Comments" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -102,6 +110,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Element.CompareTo(Microsoft.PerformancePoint.Scorecards.Element)" />
       <MemberSignature Language="VB.NET" Value="Public Function CompareTo (other As Element) As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual int CompareTo(Microsoft::PerformancePoint::Scorecards::Element ^ other);" />
+      <MemberSignature Language="F#" Value="abstract member CompareTo : Microsoft.PerformancePoint.Scorecards.Element -&gt; int&#xA;override this.CompareTo : Microsoft.PerformancePoint.Scorecards.Element -&gt; int" Usage="element.CompareTo other" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.IComparable`1.CompareTo(`0)</InterfaceMember>
@@ -128,6 +137,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CopyFrom(class Microsoft.PerformancePoint.Scorecards.Element element) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Element.CopyFrom(Microsoft.PerformancePoint.Scorecards.Element)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void CopyFrom(Microsoft::PerformancePoint::Scorecards::Element ^ element);" />
+      <MemberSignature Language="F#" Value="abstract member CopyFrom : Microsoft.PerformancePoint.Scorecards.Element -&gt; unit&#xA;override this.CopyFrom : Microsoft.PerformancePoint.Scorecards.Element -&gt; unit" Usage="element.CopyFrom element" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -151,6 +161,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Element.Description" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property Description As BpmPropertyLongText" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::PerformancePoint::Scorecards::BpmPropertyLongText ^ Description { Microsoft::PerformancePoint::Scorecards::BpmPropertyLongText ^ get(); void set(Microsoft::PerformancePoint::Scorecards::BpmPropertyLongText ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Description : Microsoft.PerformancePoint.Scorecards.BpmPropertyLongText with get, set" Usage="Microsoft.PerformancePoint.Scorecards.Element.Description" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -176,6 +187,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Element.Diff(System.Object)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function Diff (oldValue As Object) As DiffCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::PerformancePoint::Scorecards::DiffCollection ^ Diff(System::Object ^ oldValue);" />
+      <MemberSignature Language="F#" Value="abstract member Diff : obj -&gt; Microsoft.PerformancePoint.Scorecards.DiffCollection&#xA;override this.Diff : obj -&gt; Microsoft.PerformancePoint.Scorecards.DiffCollection" Usage="element.Diff oldValue" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.PerformancePoint.Scorecards.IDiffable.Diff(System.Object)</InterfaceMember>
@@ -203,6 +215,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Element.Equals(Microsoft.PerformancePoint.Scorecards.Element)" />
       <MemberSignature Language="VB.NET" Value="Public Function Equals (other As Element) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool Equals(Microsoft::PerformancePoint::Scorecards::Element ^ other);" />
+      <MemberSignature Language="F#" Value="override this.Equals : Microsoft.PerformancePoint.Scorecards.Element -&gt; bool" Usage="element.Equals other" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.IEquatable`1.Equals(`0)</InterfaceMember>
@@ -230,6 +243,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Element.Guid" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Property Guid As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property Guid Guid { Guid get(); void set(Guid value); };" />
+      <MemberSignature Language="F#" Value="member this.Guid : Guid with get, set" Usage="Microsoft.PerformancePoint.Scorecards.Element.Guid" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -255,6 +269,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Element.Name" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property Name As BpmPropertyText" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::PerformancePoint::Scorecards::BpmPropertyText ^ Name { Microsoft::PerformancePoint::Scorecards::BpmPropertyText ^ get(); void set(Microsoft::PerformancePoint::Scorecards::BpmPropertyText ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Name : Microsoft.PerformancePoint.Scorecards.BpmPropertyText with get, set" Usage="Microsoft.PerformancePoint.Scorecards.Element.Name" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -280,6 +295,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Element.Owner" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property Owner As BpmPropertyUser" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::PerformancePoint::Scorecards::BpmPropertyUser ^ Owner { Microsoft::PerformancePoint::Scorecards::BpmPropertyUser ^ get(); void set(Microsoft::PerformancePoint::Scorecards::BpmPropertyUser ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Owner : Microsoft.PerformancePoint.Scorecards.BpmPropertyUser with get, set" Usage="Microsoft.PerformancePoint.Scorecards.Element.Owner" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -305,6 +321,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Element.Properties" />
       <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property Properties As BpmPropertyCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::PerformancePoint::Scorecards::BpmPropertyCollection ^ Properties { Microsoft::PerformancePoint::Scorecards::BpmPropertyCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Properties : Microsoft.PerformancePoint.Scorecards.BpmPropertyCollection" Usage="Microsoft.PerformancePoint.Scorecards.Element.Properties" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -330,6 +347,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.PerformancePoint.Scorecards.Element.UniqueDescriptionId" />
       <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly UniqueDescriptionId As String " />
       <MemberSignature Language="C++ CLI" Value="public: static initonly System::String ^ UniqueDescriptionId;" />
+      <MemberSignature Language="F#" Value=" staticval mutable UniqueDescriptionId : string" Usage="Microsoft.PerformancePoint.Scorecards.Element.UniqueDescriptionId" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -349,6 +367,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.PerformancePoint.Scorecards.Element.UniqueNameId" />
       <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly UniqueNameId As String " />
       <MemberSignature Language="C++ CLI" Value="public: static initonly System::String ^ UniqueNameId;" />
+      <MemberSignature Language="F#" Value=" staticval mutable UniqueNameId : string" Usage="Microsoft.PerformancePoint.Scorecards.Element.UniqueNameId" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -368,6 +387,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.PerformancePoint.Scorecards.Element.UniqueOwnerId" />
       <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly UniqueOwnerId As String " />
       <MemberSignature Language="C++ CLI" Value="public: static initonly System::String ^ UniqueOwnerId;" />
+      <MemberSignature Language="F#" Value=" staticval mutable UniqueOwnerId : string" Usage="Microsoft.PerformancePoint.Scorecards.Element.UniqueOwnerId" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -387,6 +407,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Element.Validate" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub Validate ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Validate();" />
+      <MemberSignature Language="F#" Value="abstract member Validate : unit -&gt; unit&#xA;override this.Validate : unit -&gt; unit" Usage="element.Validate " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>

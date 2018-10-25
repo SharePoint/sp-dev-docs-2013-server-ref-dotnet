@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.PerformancePoint.Scorecards.MemberOperation" />
   <TypeSignature Language="VB.NET" Value="Public MustInherit Class MemberOperation&#xA;Implements ICloneable, IDiffable" />
   <TypeSignature Language="C++ CLI" Value="public ref class MemberOperation abstract : ICloneable, Microsoft::PerformancePoint::Scorecards::IDiffable" />
+  <TypeSignature Language="F#" Value="type MemberOperation = class&#xA;    interface ICloneable&#xA;    interface IDiffable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -56,6 +57,9 @@
     <Attribute>
       <AttributeName>System.Xml.Serialization.XmlInclude(typeof(Microsoft.PerformancePoint.Scorecards.MemberOperationLeafDescendants))</AttributeName>
     </Attribute>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
   </Attributes>
   <Docs>
     <summary>To be added.</summary>
@@ -85,6 +89,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.MemberOperation.Clone" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function Clone () As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::Object ^ Clone();" />
+      <MemberSignature Language="F#" Value="abstract member Clone : unit -&gt; obj" Usage="memberOperation.Clone " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.ICloneable.Clone</InterfaceMember>
@@ -109,6 +114,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.MemberOperation.Diff(System.Object)" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function Diff (oldValue As Object) As DiffCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract Microsoft::PerformancePoint::Scorecards::DiffCollection ^ Diff(System::Object ^ oldValue);" />
+      <MemberSignature Language="F#" Value="abstract member Diff : obj -&gt; Microsoft.PerformancePoint.Scorecards.DiffCollection" Usage="memberOperation.Diff oldValue" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.PerformancePoint.Scorecards.IDiffable.Diff(System.Object)</InterfaceMember>
@@ -136,6 +142,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.MemberOperation.GetDisplayName(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function GetDisplayName (memberDisplayName As String) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::String ^ GetDisplayName(System::String ^ memberDisplayName);" />
+      <MemberSignature Language="F#" Value="abstract member GetDisplayName : string -&gt; string&#xA;override this.GetDisplayName : string -&gt; string" Usage="memberOperation.GetDisplayName memberDisplayName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -160,6 +167,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.MemberOperation.GetMdxExpression(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function GetMdxExpression (memberUniqueName As String) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::String ^ GetMdxExpression(System::String ^ memberUniqueName);" />
+      <MemberSignature Language="F#" Value="abstract member GetMdxExpression : string -&gt; string&#xA;override this.GetMdxExpression : string -&gt; string" Usage="memberOperation.GetMdxExpression memberUniqueName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>

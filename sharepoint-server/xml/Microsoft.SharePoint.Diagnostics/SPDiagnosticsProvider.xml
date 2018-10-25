@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider" />
   <TypeSignature Language="VB.NET" Value="Public MustInherit Class SPDiagnosticsProvider&#xA;Inherits SPDiagnosticsProviderJobDefinition&#xA;Implements ILoggingProvider" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPDiagnosticsProvider abstract : Microsoft::SharePoint::Diagnostics::SPDiagnosticsProviderJobDefinition, Microsoft::SharePoint::Administration::ILoggingProvider" />
+  <TypeSignature Language="F#" Value="type SPDiagnosticsProvider = class&#xA;    inherit SPDiagnosticsProviderJobDefinition&#xA;    interface ILoggingProvider" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -49,6 +50,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.#ctor(System.String,System.String,System.String,Microsoft.SharePoint.Administration.SPService,Microsoft.SharePoint.Administration.SPJobLockType)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub New (title As String, name As String, schedule As String, service As SPService, lockType As SPJobLockType)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; SPDiagnosticsProvider(System::String ^ title, System::String ^ name, System::String ^ schedule, Microsoft::SharePoint::Administration::SPService ^ service, Microsoft::SharePoint::Administration::SPJobLockType lockType);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider : string * string * string * Microsoft.SharePoint.Administration.SPService * Microsoft.SharePoint.Administration.SPJobLockType -&gt; Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider" Usage="new Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider (title, name, schedule, service, lockType)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -77,6 +79,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.Columns" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property Columns As IList(Of SPColumnDefinition)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property System::Collections::Generic::IList&lt;Microsoft::SharePoint::Administration::SPColumnDefinition&gt; ^ Columns { System::Collections::Generic::IList&lt;Microsoft::SharePoint::Administration::SPColumnDefinition&gt; ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Columns : System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt;" Usage="Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.Columns" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ILoggingProvider.Columns</InterfaceMember>
@@ -100,6 +103,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.CreateHelperTable(System.String,System.Collections.Generic.IList{Microsoft.SharePoint.Administration.SPColumnDefinition})" />
       <MemberSignature Language="VB.NET" Value="Protected Sub CreateHelperTable (name As String, columnDefs As IList(Of SPColumnDefinition))" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void CreateHelperTable(System::String ^ name, System::Collections::Generic::IList&lt;Microsoft::SharePoint::Administration::SPColumnDefinition&gt; ^ columnDefs);" />
+      <MemberSignature Language="F#" Value="member this.CreateHelperTable : string * System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt; -&gt; unit" Usage="sPDiagnosticsProvider.CreateHelperTable (name, columnDefs)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -125,6 +129,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.CreateStoredProcedure(System.String,System.Collections.Generic.IList{System.Data.SqlClient.SqlParameter},System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub CreateStoredProcedure (name As String, parameters As IList(Of SqlParameter), body As String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void CreateStoredProcedure(System::String ^ name, System::Collections::Generic::IList&lt;System::Data::SqlClient::SqlParameter ^&gt; ^ parameters, System::String ^ body);" />
+      <MemberSignature Language="F#" Value="member this.CreateStoredProcedure : string * System.Collections.Generic.IList&lt;System.Data.SqlClient.SqlParameter&gt; * string -&gt; unit" Usage="sPDiagnosticsProvider.CreateStoredProcedure (name, parameters, body)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -152,6 +157,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.CreateTable(System.String,System.Collections.Generic.IList{Microsoft.SharePoint.Administration.SPColumnDefinition})" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub CreateTable (tableName As String, columnDefs As IList(Of SPColumnDefinition))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void CreateTable(System::String ^ tableName, System::Collections::Generic::IList&lt;Microsoft::SharePoint::Administration::SPColumnDefinition&gt; ^ columnDefs);" />
+      <MemberSignature Language="F#" Value="abstract member CreateTable : string * System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt; -&gt; unit&#xA;override this.CreateTable : string * System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt; -&gt; unit" Usage="sPDiagnosticsProvider.CreateTable (tableName, columnDefs)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.CreateTable(System.String,System.Collections.Generic.IList{Microsoft.SharePoint.Administration.SPColumnDefinition})</InterfaceMember>
@@ -180,6 +186,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.Delete" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Delete ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Delete();" />
+      <MemberSignature Language="F#" Value="override this.Delete : unit -&gt; unit" Usage="sPDiagnosticsProvider.Delete " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -200,6 +207,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.DisableAll(Microsoft.SharePoint.Administration.SPFarm)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub DisableAll (farm As SPFarm)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void DisableAll(Microsoft::SharePoint::Administration::SPFarm ^ farm);" />
+      <MemberSignature Language="F#" Value="static member DisableAll : Microsoft.SharePoint.Administration.SPFarm -&gt; unit" Usage="Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.DisableAll farm" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -223,6 +231,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.DisableProvider``1(Microsoft.SharePoint.Administration.SPFarm)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub DisableProvider(Of TProvider As SPDiagnosticsProvider) (farm As SPFarm)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename TProvider&gt;&#xA; where TProvider : Microsoft::SharePoint::Diagnostics::SPDiagnosticsProvider static void DisableProvider(Microsoft::SharePoint::Administration::SPFarm ^ farm);" />
+      <MemberSignature Language="F#" Value="static member DisableProvider : Microsoft.SharePoint.Administration.SPFarm -&gt; unit (requires 'Provider :&gt; Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider)" Usage="Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.DisableProvider farm" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -254,6 +263,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.DropHelperTable(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub DropHelperTable (tableName As String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void DropHelperTable(System::String ^ tableName);" />
+      <MemberSignature Language="F#" Value="member this.DropHelperTable : string -&gt; unit" Usage="sPDiagnosticsProvider.DropHelperTable tableName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -277,6 +287,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.DropStoredProcedure(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub DropStoredProcedure (storedProcedureName As String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void DropStoredProcedure(System::String ^ storedProcedureName);" />
+      <MemberSignature Language="F#" Value="member this.DropStoredProcedure : string -&gt; unit" Usage="sPDiagnosticsProvider.DropStoredProcedure storedProcedureName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -300,6 +311,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.DropTable(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub DropTable (tableName As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void DropTable(System::String ^ tableName);" />
+      <MemberSignature Language="F#" Value="abstract member DropTable : string -&gt; unit&#xA;override this.DropTable : string -&gt; unit" Usage="sPDiagnosticsProvider.DropTable tableName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -323,6 +335,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.EnableAll(Microsoft.SharePoint.Administration.SPFarm)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub EnableAll (farm As SPFarm)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void EnableAll(Microsoft::SharePoint::Administration::SPFarm ^ farm);" />
+      <MemberSignature Language="F#" Value="static member EnableAll : Microsoft.SharePoint.Administration.SPFarm -&gt; unit" Usage="Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.EnableAll farm" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -346,6 +359,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.EnableProvider``1(Microsoft.SharePoint.Administration.SPFarm)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub EnableProvider(Of TProvider As SPDiagnosticsProvider) (farm As SPFarm)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename TProvider&gt;&#xA; where TProvider : Microsoft::SharePoint::Diagnostics::SPDiagnosticsProvider static void EnableProvider(Microsoft::SharePoint::Administration::SPFarm ^ farm);" />
+      <MemberSignature Language="F#" Value="static member EnableProvider : Microsoft.SharePoint.Administration.SPFarm -&gt; unit (requires 'Provider :&gt; Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider)" Usage="Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.EnableProvider farm" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -377,6 +391,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.Ensure" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Sub Ensure ()" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void Ensure();" />
+      <MemberSignature Language="F#" Value="abstract member Ensure : unit -&gt; unit&#xA;override this.Ensure : unit -&gt; unit" Usage="sPDiagnosticsProvider.Ensure " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -397,6 +412,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.Execute(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Execute (targetInstanceId As Guid)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Execute(Guid targetInstanceId);" />
+      <MemberSignature Language="F#" Value="override this.Execute : Guid -&gt; unit" Usage="sPDiagnosticsProvider.Execute targetInstanceId" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -420,6 +436,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.ExecuteNonQuery(System.Data.SqlClient.SqlCommand)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ExecuteNonQuery (command As SqlCommand) As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual int ExecuteNonQuery(System::Data::SqlClient::SqlCommand ^ command);" />
+      <MemberSignature Language="F#" Value="abstract member ExecuteNonQuery : System.Data.SqlClient.SqlCommand -&gt; int&#xA;override this.ExecuteNonQuery : System.Data.SqlClient.SqlCommand -&gt; int" Usage="sPDiagnosticsProvider.ExecuteNonQuery command" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.ExecuteNonQuery(System.Data.SqlClient.SqlCommand)</InterfaceMember>
@@ -447,6 +464,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.ExecuteReader(System.Data.SqlClient.SqlCommand)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ExecuteReader (command As SqlCommand) As SqlDataReader" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Data::SqlClient::SqlDataReader ^ ExecuteReader(System::Data::SqlClient::SqlCommand ^ command);" />
+      <MemberSignature Language="F#" Value="abstract member ExecuteReader : System.Data.SqlClient.SqlCommand -&gt; System.Data.SqlClient.SqlDataReader&#xA;override this.ExecuteReader : System.Data.SqlClient.SqlCommand -&gt; System.Data.SqlClient.SqlDataReader" Usage="sPDiagnosticsProvider.ExecuteReader command" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.ExecuteReader(System.Data.SqlClient.SqlCommand)</InterfaceMember>
@@ -474,6 +492,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.GetLastSyncUtc(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetLastSyncUtc (machineName As String) As DateTime" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; DateTime GetLastSyncUtc(System::String ^ machineName);" />
+      <MemberSignature Language="F#" Value="member this.GetLastSyncUtc : string -&gt; DateTime" Usage="sPDiagnosticsProvider.GetLastSyncUtc machineName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -498,6 +517,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.GetLastSyncUtc(System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetLastSyncUtc (tableName As String, machineName As String) As DateTime" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; DateTime GetLastSyncUtc(System::String ^ tableName, System::String ^ machineName);" />
+      <MemberSignature Language="F#" Value="member this.GetLastSyncUtc : string * string -&gt; DateTime" Usage="sPDiagnosticsProvider.GetLastSyncUtc (tableName, machineName)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -524,6 +544,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.MaxTotalSizeInBytes" />
       <MemberSignature Language="VB.NET" Value="Public Property MaxTotalSizeInBytes As Long" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property long MaxTotalSizeInBytes { long get(); void set(long value); };" />
+      <MemberSignature Language="F#" Value="member this.MaxTotalSizeInBytes : int64 with get, set" Usage="Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.MaxTotalSizeInBytes" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -544,6 +565,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.OnProvisioning" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub OnProvisioning ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void OnProvisioning();" />
+      <MemberSignature Language="F#" Value="abstract member OnProvisioning : unit -&gt; unit&#xA;override this.OnProvisioning : unit -&gt; unit" Usage="sPDiagnosticsProvider.OnProvisioning " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.OnProvisioning</InterfaceMember>
@@ -567,6 +589,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.OnUnprovisioning" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub OnUnprovisioning ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void OnUnprovisioning();" />
+      <MemberSignature Language="F#" Value="abstract member OnUnprovisioning : unit -&gt; unit&#xA;override this.OnUnprovisioning : unit -&gt; unit" Usage="sPDiagnosticsProvider.OnUnprovisioning " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.OnUnprovisioning</InterfaceMember>
@@ -590,6 +613,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.ProvisionAll(Microsoft.SharePoint.Administration.SPFarm)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub ProvisionAll (farm As SPFarm)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ProvisionAll(Microsoft::SharePoint::Administration::SPFarm ^ farm);" />
+      <MemberSignature Language="F#" Value="static member ProvisionAll : Microsoft.SharePoint.Administration.SPFarm -&gt; unit" Usage="Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.ProvisionAll farm" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -613,6 +637,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.RetentionPeriod" />
       <MemberSignature Language="VB.NET" Value="Public Property RetentionPeriod As Byte" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Byte RetentionPeriod { System::Byte get(); void set(System::Byte value); };" />
+      <MemberSignature Language="F#" Value="member this.RetentionPeriod : byte with get, set" Usage="Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.RetentionPeriod" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ILoggingProvider.RetentionPeriod</InterfaceMember>
@@ -636,6 +661,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.Sync" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Sub Sync ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract void Sync();" />
+      <MemberSignature Language="F#" Value="abstract member Sync : unit -&gt; unit" Usage="sPDiagnosticsProvider.Sync " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -656,6 +682,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.TableName" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property TableName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property System::String ^ TableName { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.TableName : string" Usage="Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.TableName" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ILoggingProvider.TableName</InterfaceMember>
@@ -679,6 +706,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.Unprovision" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Unprovision ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Unprovision();" />
+      <MemberSignature Language="F#" Value="override this.Unprovision : unit -&gt; unit" Usage="sPDiagnosticsProvider.Unprovision " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -699,6 +727,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.Update" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Update ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Update();" />
+      <MemberSignature Language="F#" Value="override this.Update : unit -&gt; unit" Usage="sPDiagnosticsProvider.Update " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -719,6 +748,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.WriteDataRowToServer(System.DateTime,System.String,System.Object[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub WriteDataRowToServer (logTime As DateTime, machineName As String, ParamArray row As Object())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void WriteDataRowToServer(DateTime logTime, System::String ^ machineName, ... cli::array &lt;System::Object ^&gt; ^ row);" />
+      <MemberSignature Language="F#" Value="member this.WriteDataRowToServer : DateTime * string * obj[] -&gt; unit" Usage="sPDiagnosticsProvider.WriteDataRowToServer (logTime, machineName, row)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -752,6 +782,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticsProvider.WriteDataRowToServer(System.String,System.Collections.Generic.IList{Microsoft.SharePoint.Administration.SPColumnDefinition},System.DateTime,System.String,System.Object[])" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub WriteDataRowToServer (tableName As String, columns As IList(Of SPColumnDefinition), logTime As DateTime, machineName As String, ParamArray row As Object())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void WriteDataRowToServer(System::String ^ tableName, System::Collections::Generic::IList&lt;Microsoft::SharePoint::Administration::SPColumnDefinition&gt; ^ columns, DateTime logTime, System::String ^ machineName, ... cli::array &lt;System::Object ^&gt; ^ row);" />
+      <MemberSignature Language="F#" Value="abstract member WriteDataRowToServer : string * System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt; * DateTime * string * obj[] -&gt; unit&#xA;override this.WriteDataRowToServer : string * System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt; * DateTime * string * obj[] -&gt; unit" Usage="sPDiagnosticsProvider.WriteDataRowToServer (tableName, columns, logTime, machineName, row)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.WriteDataRowToServer(System.String,System.Collections.Generic.IList{Microsoft.SharePoint.Administration.SPColumnDefinition},System.DateTime,System.String,System.Object[])</InterfaceMember>

@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart" />
   <TypeSignature Language="VB.NET" Value="Public MustInherit Class LevelHierarchyWebPart&#xA;Inherits CmsDataFormWebPart" />
   <TypeSignature Language="C++ CLI" Value="public ref class LevelHierarchyWebPart abstract : Microsoft::SharePoint::Publishing::WebControls::CmsDataFormWebPart" />
+  <TypeSignature Language="F#" Value="type LevelHierarchyWebPart = class&#xA;    inherit CmsDataFormWebPart&#xA;    interface INamingContainer" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -51,6 +52,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.ConfigureDataSource" />
       <MemberSignature Language="VB.NET" Value="Protected Sub ConfigureDataSource ()" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void ConfigureDataSource();" />
+      <MemberSignature Language="F#" Value="member this.ConfigureDataSource : unit -&gt; unit" Usage="levelHierarchyWebPart.ConfigureDataSource " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -70,6 +72,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void ConfigureDataSource(class Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource levelHierarchyDataSource) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.ConfigureDataSource(Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void ConfigureDataSource(Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyDataSource ^ levelHierarchyDataSource);" />
+      <MemberSignature Language="F#" Value="abstract member ConfigureDataSource : Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource -&gt; unit&#xA;override this.ConfigureDataSource : Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource -&gt; unit" Usage="levelHierarchyWebPart.ConfigureDataSource levelHierarchyDataSource" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -93,6 +96,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.ConnectToDataSourceControl" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function ConnectToDataSourceControl () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override bool ConnectToDataSourceControl();" />
+      <MemberSignature Language="F#" Value="override this.ConnectToDataSourceControl : unit -&gt; bool" Usage="levelHierarchyWebPart.ConnectToDataSourceControl " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -114,6 +118,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.CreateDataSource" />
       <MemberSignature Language="VB.NET" Value="Protected MustOverride Function CreateDataSource () As LevelHierarchyDataSource" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyDataSource ^ CreateDataSource();" />
+      <MemberSignature Language="F#" Value="abstract member CreateDataSource : unit -&gt; Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource" Usage="levelHierarchyWebPart.CreateDataSource " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -135,6 +140,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.DefaultSampleData" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides ReadOnly Property DefaultSampleData As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ DefaultSampleData { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.DefaultSampleData : string" Usage="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.DefaultSampleData" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -155,6 +161,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.DisplayColumns" />
       <MemberSignature Language="VB.NET" Value="Public Property DisplayColumns As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int DisplayColumns { int get(); void set(int value); };" />
+      <MemberSignature Language="F#" Value="member this.DisplayColumns : int with get, set" Usage="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.DisplayColumns" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -168,10 +175,10 @@
           <AttributeName>System.ComponentModel.DefaultValue(3)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -192,6 +199,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.GetXPathNavigator(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetXPathNavigator (viewPath As String) As XPathNavigator" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Xml::XPath::XPathNavigator ^ GetXPathNavigator(System::String ^ viewPath);" />
+      <MemberSignature Language="F#" Value="override this.GetXPathNavigator : string -&gt; System.Xml.XPath.XPathNavigator" Usage="levelHierarchyWebPart.GetXPathNavigator viewPath" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -216,6 +224,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Header" />
       <MemberSignature Language="VB.NET" Value="Public Property Header As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Header { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Header : string with get, set" Usage="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Header" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -229,10 +238,10 @@
           <AttributeName>System.ComponentModel.DefaultValue("")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -254,6 +263,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.HeaderTemplate" />
       <MemberSignature Language="VB.NET" Value="Public Property HeaderTemplate As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ HeaderTemplate { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.HeaderTemplate : string with get, set" Usage="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.HeaderTemplate" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -267,10 +277,10 @@
           <AttributeName>System.ComponentModel.DefaultValue("DefaultHeader")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -291,6 +301,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Level1Style" />
       <MemberSignature Language="VB.NET" Value="Public Property Level1Style As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Level1Style { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Level1Style : string with get, set" Usage="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Level1Style" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -304,10 +315,10 @@
           <AttributeName>System.ComponentModel.DefaultValue("Vertical")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -328,6 +339,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Level2Style" />
       <MemberSignature Language="VB.NET" Value="Public Property Level2Style As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Level2Style { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Level2Style : string with get, set" Usage="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Level2Style" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -341,10 +353,10 @@
           <AttributeName>System.ComponentModel.DefaultValue("Vertical")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -365,6 +377,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Level3Style" />
       <MemberSignature Language="VB.NET" Value="Public Property Level3Style As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Level3Style { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Level3Style : string with get, set" Usage="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.Level3Style" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -378,10 +391,10 @@
           <AttributeName>System.ComponentModel.DefaultValue("Vertical")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -402,6 +415,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.LevelHierarchyDataSource" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable ReadOnly Property LevelHierarchyDataSource As LevelHierarchyDataSource" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyDataSource ^ LevelHierarchyDataSource { Microsoft::SharePoint::Publishing::WebControls::LevelHierarchyDataSource ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.LevelHierarchyDataSource : Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyDataSource" Usage="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.LevelHierarchyDataSource" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -422,6 +436,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.LevelsToShow" />
       <MemberSignature Language="VB.NET" Value="Public Property LevelsToShow As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int LevelsToShow { int get(); void set(int value); };" />
+      <MemberSignature Language="F#" Value="member this.LevelsToShow : int with get, set" Usage="Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.LevelsToShow" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -435,10 +450,10 @@
           <AttributeName>System.ComponentModel.DefaultValue(2)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.WebBrowsable(false)</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -459,6 +474,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.ModifyXsltArgumentList(Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub ModifyXsltArgumentList (argList As ArgumentClassWrapper)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void ModifyXsltArgumentList(Microsoft::SharePoint::WebPartPages::ArgumentClassWrapper ^ argList);" />
+      <MemberSignature Language="F#" Value="override this.ModifyXsltArgumentList : Microsoft.SharePoint.WebPartPages.ArgumentClassWrapper -&gt; unit" Usage="levelHierarchyWebPart.ModifyXsltArgumentList argList" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -482,6 +498,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.OnLoad(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="override this.OnLoad : EventArgs -&gt; unit" Usage="levelHierarchyWebPart.OnLoad e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -505,6 +522,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebControls.LevelHierarchyWebPart.OnPreRender(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreRender (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreRender(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="override this.OnPreRender : EventArgs -&gt; unit" Usage="levelHierarchyWebPart.OnPreRender e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>

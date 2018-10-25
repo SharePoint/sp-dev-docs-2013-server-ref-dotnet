@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice" />
   <TypeSignature Language="VB.NET" Value="Public Interface IDiagnosticsDataservice" />
   <TypeSignature Language="C++ CLI" Value="public interface class IDiagnosticsDataservice" />
+  <TypeSignature Language="F#" Value="type IDiagnosticsDataservice = interface" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -25,6 +26,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.GetAggregatedDiagnosticsData(System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetAggregatedDiagnosticsData (correlationId As String, name As String) As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Object ^ GetAggregatedDiagnosticsData(System::String ^ correlationId, System::String ^ name);" />
+      <MemberSignature Language="F#" Value="abstract member GetAggregatedDiagnosticsData : string * string -&gt; obj" Usage="iDiagnosticsDataservice.GetAggregatedDiagnosticsData (correlationId, name)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -41,7 +43,7 @@
           <AttributeName>System.ServiceModel.ServiceKnownType(typeof(System.Int64))</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebGet(ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="{CorrelationId}/{Name}/Aggregate")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebGet</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -65,6 +67,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.GetDiagnosticsData(System.String,System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetDiagnosticsData (correlationId As String, executionplanAsLink As Boolean) As SPDiagnosticsData()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Diagnostics::SPDiagnosticsData ^&gt; ^ GetDiagnosticsData(System::String ^ correlationId, bool executionplanAsLink);" />
+      <MemberSignature Language="F#" Value="abstract member GetDiagnosticsData : string * bool -&gt; Microsoft.SharePoint.Diagnostics.SPDiagnosticsData[]" Usage="iDiagnosticsDataservice.GetDiagnosticsData (correlationId, executionplanAsLink)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -75,7 +78,7 @@
           <AttributeName>System.ServiceModel.OperationContract</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebGet(ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="{CorrelationId}/Data?executionplanAsLink={executionplanAsLink}")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebGet</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -99,6 +102,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.GetDiagnosticsData(System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetDiagnosticsData (correlationId As String, name As String) As SPDiagnosticsData()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Diagnostics::SPDiagnosticsData ^&gt; ^ GetDiagnosticsData(System::String ^ correlationId, System::String ^ name);" />
+      <MemberSignature Language="F#" Value="abstract member GetDiagnosticsData : string * string -&gt; Microsoft.SharePoint.Diagnostics.SPDiagnosticsData[]" Usage="iDiagnosticsDataservice.GetDiagnosticsData (correlationId, name)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -109,7 +113,7 @@
           <AttributeName>System.ServiceModel.OperationContract(Name="GetDiagnosticsDataInCorrelation")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebGet(ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="{CorrelationId}/{Name}/Data")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebGet</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -133,6 +137,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.GetDiagnosticsData(System.String,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetDiagnosticsData (correlationId As String, scopeId As String, name As String) As SPDiagnosticsData()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Diagnostics::SPDiagnosticsData ^&gt; ^ GetDiagnosticsData(System::String ^ correlationId, System::String ^ scopeId, System::String ^ name);" />
+      <MemberSignature Language="F#" Value="abstract member GetDiagnosticsData : string * string * string -&gt; Microsoft.SharePoint.Diagnostics.SPDiagnosticsData[]" Usage="iDiagnosticsDataservice.GetDiagnosticsData (correlationId, scopeId, name)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -143,7 +148,7 @@
           <AttributeName>System.ServiceModel.OperationContract(Name="GetDiagnosticsDataInScope")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebGet(ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="{CorrelationId}/{ScopeId}/{Name}/Data")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebGet</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -169,6 +174,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.GetDiagnosticsDataAsFile(System.String,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetDiagnosticsDataAsFile (correlationId As String, name As String, fileName As String) As Stream" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::IO::Stream ^ GetDiagnosticsDataAsFile(System::String ^ correlationId, System::String ^ name, System::String ^ fileName);" />
+      <MemberSignature Language="F#" Value="abstract member GetDiagnosticsDataAsFile : string * string * string -&gt; System.IO.Stream" Usage="iDiagnosticsDataservice.GetDiagnosticsDataAsFile (correlationId, name, fileName)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -205,6 +211,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.GetMyCorrelationId" />
       <MemberSignature Language="VB.NET" Value="Public Function GetMyCorrelationId () As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Guid GetMyCorrelationId();" />
+      <MemberSignature Language="F#" Value="abstract member GetMyCorrelationId : unit -&gt; Guid" Usage="iDiagnosticsDataservice.GetMyCorrelationId " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -215,7 +222,7 @@
           <AttributeName>System.ServiceModel.OperationContract</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="GET", RequestFormat=System.ServiceModel.Web.WebMessageFormat.Json, ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="My/CorrelationId")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebInvoke</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -234,6 +241,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.GetMyScopes(System.DateTime)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetMyScopes (startTimeUtc As DateTime) As SPMonitoredScopeData()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Diagnostics::SPMonitoredScopeData ^&gt; ^ GetMyScopes(DateTime startTimeUtc);" />
+      <MemberSignature Language="F#" Value="abstract member GetMyScopes : DateTime -&gt; Microsoft.SharePoint.Diagnostics.SPMonitoredScopeData[]" Usage="iDiagnosticsDataservice.GetMyScopes startTimeUtc" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -244,7 +252,7 @@
           <AttributeName>System.ServiceModel.OperationContract</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebGet(ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="My/Scopes?startTimeUtc={startTimeUtc}")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebGet</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -266,6 +274,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.GetScope(System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetScope (correlationId As String, scopeId As String) As SPMonitoredScopeData" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Diagnostics::SPMonitoredScopeData ^ GetScope(System::String ^ correlationId, System::String ^ scopeId);" />
+      <MemberSignature Language="F#" Value="abstract member GetScope : string * string -&gt; Microsoft.SharePoint.Diagnostics.SPMonitoredScopeData" Usage="iDiagnosticsDataservice.GetScope (correlationId, scopeId)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -276,7 +285,7 @@
           <AttributeName>System.ServiceModel.OperationContract</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebGet(ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="{CorrelationId}/{ScopeId}/Scopes")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebGet</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -300,6 +309,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.GetScopes(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetScopes (correlationId As String) As SPMonitoredScopeData()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Diagnostics::SPMonitoredScopeData ^&gt; ^ GetScopes(System::String ^ correlationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetScopes : string -&gt; Microsoft.SharePoint.Diagnostics.SPMonitoredScopeData[]" Usage="iDiagnosticsDataservice.GetScopes correlationId" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -310,7 +320,7 @@
           <AttributeName>System.ServiceModel.OperationContract</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebGet(ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="{CorrelationId}/Scopes")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebGet</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -332,6 +342,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.GetULSLog(System.String,System.DateTime,System.Int32,System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetULSLog (correlationId As String, startTimeUtc As DateTime, maxEntries As Integer, forwardScanMinutes As Integer) As ULSLogEntry()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Diagnostics::ULSLogEntry ^&gt; ^ GetULSLog(System::String ^ correlationId, DateTime startTimeUtc, int maxEntries, int forwardScanMinutes);" />
+      <MemberSignature Language="F#" Value="abstract member GetULSLog : string * DateTime * int * int -&gt; Microsoft.SharePoint.Diagnostics.ULSLogEntry[]" Usage="iDiagnosticsDataservice.GetULSLog (correlationId, startTimeUtc, maxEntries, forwardScanMinutes)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -342,7 +353,7 @@
           <AttributeName>System.ServiceModel.OperationContract</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebGet(RequestFormat=System.ServiceModel.Web.WebMessageFormat.Json, ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="{CorrelationId}/ULS?startTimeUtc={startTimeUtc}&amp;maxEntries={maxEntries}&amp;forwardScanMinutes={forwardScanMinutes}")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebGet</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -370,6 +381,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.PutDiagnosticsData(Microsoft.SharePoint.Diagnostics.SPDiagnosticsData[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub PutDiagnosticsData (scopes As SPDiagnosticsData())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void PutDiagnosticsData(cli::array &lt;Microsoft::SharePoint::Diagnostics::SPDiagnosticsData ^&gt; ^ scopes);" />
+      <MemberSignature Language="F#" Value="abstract member PutDiagnosticsData : Microsoft.SharePoint.Diagnostics.SPDiagnosticsData[] -&gt; unit" Usage="iDiagnosticsDataservice.PutDiagnosticsData scopes" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -380,7 +392,7 @@
           <AttributeName>System.ServiceModel.OperationContract</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="PUT", RequestFormat=System.ServiceModel.Web.WebMessageFormat.Json, ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="Data")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebInvoke</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -401,6 +413,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.PutScopes(Microsoft.SharePoint.Diagnostics.SPMonitoredScopeData[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub PutScopes (scopes As SPMonitoredScopeData())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void PutScopes(cli::array &lt;Microsoft::SharePoint::Diagnostics::SPMonitoredScopeData ^&gt; ^ scopes);" />
+      <MemberSignature Language="F#" Value="abstract member PutScopes : Microsoft.SharePoint.Diagnostics.SPMonitoredScopeData[] -&gt; unit" Usage="iDiagnosticsDataservice.PutScopes scopes" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -411,7 +424,7 @@
           <AttributeName>System.ServiceModel.OperationContract</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="PUT", RequestFormat=System.ServiceModel.Web.WebMessageFormat.Json, ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="Scopes")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebInvoke</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -432,6 +445,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.IDiagnosticsDataservice.SetMyCorrelationId(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetMyCorrelationId (correlationId As Guid)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetMyCorrelationId(Guid correlationId);" />
+      <MemberSignature Language="F#" Value="abstract member SetMyCorrelationId : Guid -&gt; unit" Usage="iDiagnosticsDataservice.SetMyCorrelationId correlationId" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -442,7 +456,7 @@
           <AttributeName>System.ServiceModel.OperationContract</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ServiceModel.Web.WebInvoke(Method="POST", RequestFormat=System.ServiceModel.Web.WebMessageFormat.Json, ResponseFormat=System.ServiceModel.Web.WebMessageFormat.Json, UriTemplate="My/CorrelationId")</AttributeName>
+          <AttributeName>System.ServiceModel.Web.WebInvoke</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>

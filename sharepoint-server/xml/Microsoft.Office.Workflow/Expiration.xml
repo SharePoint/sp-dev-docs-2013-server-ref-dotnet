@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.Workflow.Expiration" />
   <TypeSignature Language="VB.NET" Value="Public Class Expiration&#xA;Inherits SequentialWorkflowActivity" />
   <TypeSignature Language="C++ CLI" Value="public ref class Expiration : System::Workflow::Activities::SequentialWorkflowActivity" />
+  <TypeSignature Language="F#" Value="type Expiration = class&#xA;    inherit SequentialWorkflowActivity" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -12,6 +13,11 @@
     <BaseTypeName>System.Workflow.Activities.SequentialWorkflowActivity</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>Workflow activity responsible for creating expiration tasks for the records management routing workflow.</summary>
     <remarks>To be added.</remarks>
@@ -42,6 +48,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Expiration.CreateExpirationTask(System.Object,System.Workflow.Activities.ConditionalEventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub CreateExpirationTask (sender As Object, e As ConditionalEventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void CreateExpirationTask(System::Object ^ sender, System::Workflow::Activities::ConditionalEventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.CreateExpirationTask : obj * System.Workflow.Activities.ConditionalEventArgs -&gt; unit" Usage="expiration.CreateExpirationTask (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -67,6 +74,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Expiration.Dispose(System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub Dispose (disposing As Boolean)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void Dispose(bool disposing);" />
+      <MemberSignature Language="F#" Value="override this.Dispose : bool -&gt; unit" Usage="expiration.Dispose disposing" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -90,6 +98,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Expiration.GetCreationProperties(System.Object,System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetCreationProperties (sender As Object, taskId As Guid) As SPWorkflowTaskProperties" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Workflow::SPWorkflowTaskProperties ^ GetCreationProperties(System::Object ^ sender, Guid taskId);" />
+      <MemberSignature Language="F#" Value="member this.GetCreationProperties : obj * Guid -&gt; Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties" Usage="expiration.GetCreationProperties (sender, taskId)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -116,6 +125,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Expiration.IsTaskCompleted(System.Object,System.Guid,Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties,System.Collections.Hashtable,System.String,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function IsTaskCompleted (sender As Object, taskId As Guid, creationPtoperties As SPWorkflowTaskProperties, properties As Hashtable, executor As String, ByRef outcome As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsTaskCompleted(System::Object ^ sender, Guid taskId, Microsoft::SharePoint::Workflow::SPWorkflowTaskProperties ^ creationPtoperties, System::Collections::Hashtable ^ properties, System::String ^ executor, [Runtime::InteropServices::Out] System::String ^ % outcome);" />
+      <MemberSignature Language="F#" Value="member this.IsTaskCompleted : obj * Guid * Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties * System.Collections.Hashtable * string *  -&gt; bool" Usage="expiration.IsTaskCompleted (sender, taskId, creationPtoperties, properties, executor, outcome)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -130,7 +140,7 @@
         <Parameter Name="creationPtoperties" Type="Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties" />
         <Parameter Name="properties" Type="System.Collections.Hashtable" />
         <Parameter Name="executor" Type="System.String" />
-        <Parameter Name="outcome" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="outcome" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
         <param name="sender">To be added.</param>
@@ -150,6 +160,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.Expiration.m_itemAProperties" />
       <MemberSignature Language="VB.NET" Value="Public m_itemAProperties As Hashtable " />
       <MemberSignature Language="C++ CLI" Value="public: System::Collections::Hashtable ^ m_itemAProperties;" />
+      <MemberSignature Language="F#" Value="val mutable m_itemAProperties : System.Collections.Hashtable" Usage="Microsoft.Office.Workflow.Expiration.m_itemAProperties" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -169,6 +180,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.Expiration.m_itemBProperties" />
       <MemberSignature Language="VB.NET" Value="Public m_itemBProperties As Hashtable " />
       <MemberSignature Language="C++ CLI" Value="public: System::Collections::Hashtable ^ m_itemBProperties;" />
+      <MemberSignature Language="F#" Value="val mutable m_itemBProperties : System.Collections.Hashtable" Usage="Microsoft.Office.Workflow.Expiration.m_itemBProperties" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -188,6 +200,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.Expiration.m_wkProps" />
       <MemberSignature Language="VB.NET" Value="Public m_wkProps As SPWorkflowActivationProperties " />
       <MemberSignature Language="C++ CLI" Value="public: Microsoft::SharePoint::Workflow::SPWorkflowActivationProperties ^ m_wkProps;" />
+      <MemberSignature Language="F#" Value="val mutable m_wkProps : Microsoft.SharePoint.Workflow.SPWorkflowActivationProperties" Usage="Microsoft.Office.Workflow.Expiration.m_wkProps" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -207,6 +220,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.Expiration.m_workflowId" />
       <MemberSignature Language="VB.NET" Value="Public m_workflowId As Guid " />
       <MemberSignature Language="C++ CLI" Value="public: Guid m_workflowId;" />
+      <MemberSignature Language="F#" Value="val mutable m_workflowId : Guid" Usage="Microsoft.Office.Workflow.Expiration.m_workflowId" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -226,6 +240,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Expiration.OnItemDeleted(System.Object,System.Workflow.Activities.ExternalDataEventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnItemDeleted (sender As Object, e As ExternalDataEventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnItemDeleted(System::Object ^ sender, System::Workflow::Activities::ExternalDataEventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.OnItemDeleted : obj * System.Workflow.Activities.ExternalDataEventArgs -&gt; unit" Usage="expiration.OnItemDeleted (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -251,6 +266,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Expiration.OnTaskCancelled(System.Object,System.Guid,Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function OnTaskCancelled (sender As Object, taskId As Guid, creationProperties As SPWorkflowTaskProperties, ByRef outcome As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool OnTaskCancelled(System::Object ^ sender, Guid taskId, Microsoft::SharePoint::Workflow::SPWorkflowTaskProperties ^ creationProperties, [Runtime::InteropServices::Out] System::String ^ % outcome);" />
+      <MemberSignature Language="F#" Value="member this.OnTaskCancelled : obj * Guid * Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties *  -&gt; bool" Usage="expiration.OnTaskCancelled (sender, taskId, creationProperties, outcome)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -263,7 +279,7 @@
         <Parameter Name="sender" Type="System.Object" />
         <Parameter Name="taskId" Type="System.Guid" />
         <Parameter Name="creationProperties" Type="Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties" />
-        <Parameter Name="outcome" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="outcome" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
         <param name="sender">To be added.</param>
@@ -281,6 +297,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Expiration.OnTaskDeleted(System.Object,System.Guid,Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnTaskDeleted (sender As Object, taskId As Guid, creationProperties As SPWorkflowTaskProperties, executor As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnTaskDeleted(System::Object ^ sender, Guid taskId, Microsoft::SharePoint::Workflow::SPWorkflowTaskProperties ^ creationProperties, System::String ^ executor);" />
+      <MemberSignature Language="F#" Value="member this.OnTaskDeleted : obj * Guid * Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties * string -&gt; unit" Usage="expiration.OnTaskDeleted (sender, taskId, creationProperties, executor)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -310,6 +327,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Expiration.OnWorkflowActivated(System.Object,System.Workflow.Activities.ExternalDataEventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnWorkflowActivated (sender As Object, e As ExternalDataEventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnWorkflowActivated(System::Object ^ sender, System::Workflow::Activities::ExternalDataEventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.OnWorkflowActivated : obj * System.Workflow.Activities.ExternalDataEventArgs -&gt; unit" Usage="expiration.OnWorkflowActivated (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>

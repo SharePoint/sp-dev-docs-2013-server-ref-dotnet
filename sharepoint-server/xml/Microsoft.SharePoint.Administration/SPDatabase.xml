@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Administration.SPDatabase" />
   <TypeSignature Language="VB.NET" Value="Public Class SPDatabase&#xA;Inherits SPPersistedUpgradableObject&#xA;Implements IBackupRestore" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPDatabase : Microsoft::SharePoint::Administration::SPPersistedUpgradableObject, Microsoft::SharePoint::Administration::Backup::IBackupRestore" />
+  <TypeSignature Language="F#" Value="type SPDatabase = class&#xA;    inherit SPPersistedUpgradableObject&#xA;    interface IBackupRestore" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -49,6 +50,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.#ctor(Microsoft.SharePoint.Administration.SPDatabaseParameters)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (parameters As SPDatabaseParameters)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; SPDatabase(Microsoft::SharePoint::Administration::SPDatabaseParameters ^ parameters);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.Administration.SPDatabase : Microsoft.SharePoint.Administration.SPDatabaseParameters -&gt; Microsoft.SharePoint.Administration.SPDatabase" Usage="new Microsoft.SharePoint.Administration.SPDatabase parameters" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -69,6 +71,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.#ctor(System.String,Microsoft.SharePoint.Administration.SPDatabaseServiceInstance)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (name As String, serviceInstance As SPDatabaseServiceInstance)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; SPDatabase(System::String ^ name, Microsoft::SharePoint::Administration::SPDatabaseServiceInstance ^ serviceInstance);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.Administration.SPDatabase : string * Microsoft.SharePoint.Administration.SPDatabaseServiceInstance -&gt; Microsoft.SharePoint.Administration.SPDatabase" Usage="new Microsoft.SharePoint.Administration.SPDatabase (name, serviceInstance)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -91,6 +94,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.AddBackupObjects(Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub AddBackupObjects (parent As SPBackupRestoreObject)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void AddBackupObjects(Microsoft::SharePoint::Administration::Backup::SPBackupRestoreObject ^ parent);" />
+      <MemberSignature Language="F#" Value="abstract member AddBackupObjects : Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject -&gt; unit&#xA;override this.AddBackupObjects : Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject -&gt; unit" Usage="sPDatabase.AddBackupObjects parent" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.AddBackupObjects(Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject)</InterfaceMember>
@@ -117,6 +121,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.AddFailoverServiceInstance(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub AddFailoverServiceInstance (failoverServerInstance As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddFailoverServiceInstance(System::String ^ failoverServerInstance);" />
+      <MemberSignature Language="F#" Value="member this.AddFailoverServiceInstance : string -&gt; unit" Usage="sPDatabase.AddFailoverServiceInstance failoverServerInstance" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -140,6 +145,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.BuildVersion" />
       <MemberSignature Language="VB.NET" Value="Protected Friend ReadOnly Property BuildVersion As Version" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; property Version ^ BuildVersion { Version ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.BuildVersion : Version" Usage="Microsoft.SharePoint.Administration.SPDatabase.BuildVersion" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -160,6 +166,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.CanRenameOnRestore" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CanRenameOnRestore As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool CanRenameOnRestore { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.CanRenameOnRestore : bool" Usage="Microsoft.SharePoint.Administration.SPDatabase.CanRenameOnRestore" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore</InterfaceMember>
@@ -183,6 +190,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.CanSelectForBackup" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property CanSelectForBackup As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool CanSelectForBackup { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.CanSelectForBackup : bool with get, set" Usage="Microsoft.SharePoint.Administration.SPDatabase.CanSelectForBackup" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup</InterfaceMember>
@@ -206,6 +214,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.CanSelectForRestore" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property CanSelectForRestore As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool CanSelectForRestore { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.CanSelectForRestore : bool with get, set" Usage="Microsoft.SharePoint.Administration.SPDatabase.CanSelectForRestore" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore</InterfaceMember>
@@ -229,6 +238,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.ChangeDatabaseInstance(Microsoft.SharePoint.Administration.SPDatabaseServiceInstance)" />
       <MemberSignature Language="VB.NET" Value="Public Sub ChangeDatabaseInstance (newParent As SPDatabaseServiceInstance)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void ChangeDatabaseInstance(Microsoft::SharePoint::Administration::SPDatabaseServiceInstance ^ newParent);" />
+      <MemberSignature Language="F#" Value="member this.ChangeDatabaseInstance : Microsoft.SharePoint.Administration.SPDatabaseServiceInstance -&gt; unit" Usage="sPDatabase.ChangeDatabaseInstance newParent" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -252,6 +262,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.ChangeDatabaseInstance(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub ChangeDatabaseInstance (databaseServiceInstance As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void ChangeDatabaseInstance(System::String ^ databaseServiceInstance);" />
+      <MemberSignature Language="F#" Value="member this.ChangeDatabaseInstance : string -&gt; unit" Usage="sPDatabase.ChangeDatabaseInstance databaseServiceInstance" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -275,6 +286,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.DatabaseConnectionString" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DatabaseConnectionString As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DatabaseConnectionString { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.DatabaseConnectionString : string" Usage="Microsoft.SharePoint.Administration.SPDatabase.DatabaseConnectionString" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -295,6 +307,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.DiskSizeRequired" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DiskSizeRequired As ULong" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::UInt64 DiskSizeRequired { System::UInt64 get(); };" />
+      <MemberSignature Language="F#" Value="member this.DiskSizeRequired : uint64" Usage="Microsoft.SharePoint.Administration.SPDatabase.DiskSizeRequired" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired</InterfaceMember>
@@ -318,6 +331,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.DropRoleMember(System.Security.Principal.SecurityIdentifier,System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Friend Sub DropRoleMember (sid As SecurityIdentifier, role As String)" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; void DropRoleMember(System::Security::Principal::SecurityIdentifier ^ sid, System::String ^ role);" />
+      <MemberSignature Language="F#" Value="member this.DropRoleMember : System.Security.Principal.SecurityIdentifier * string -&gt; unit" Usage="sPDatabase.DropRoleMember (sid, role)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -343,6 +357,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.Exists" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Exists As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool Exists { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.Exists : bool" Usage="Microsoft.SharePoint.Administration.SPDatabase.Exists" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -363,6 +378,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.FailoverServer" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property FailoverServer As SPServer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::SPServer ^ FailoverServer { Microsoft::SharePoint::Administration::SPServer ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.FailoverServer : Microsoft.SharePoint.Administration.SPServer" Usage="Microsoft.SharePoint.Administration.SPDatabase.FailoverServer" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -383,6 +399,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.FailoverServiceInstance" />
       <MemberSignature Language="VB.NET" Value="Public Property FailoverServiceInstance As SPDatabaseServiceInstance" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::SPDatabaseServiceInstance ^ FailoverServiceInstance { Microsoft::SharePoint::Administration::SPDatabaseServiceInstance ^ get(); void set(Microsoft::SharePoint::Administration::SPDatabaseServiceInstance ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.FailoverServiceInstance : Microsoft.SharePoint.Administration.SPDatabaseServiceInstance with get, set" Usage="Microsoft.SharePoint.Administration.SPDatabase.FailoverServiceInstance" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -403,6 +420,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.GenerateConnectionStringForProvisioning(System.Data.SqlClient.SqlConnectionStringBuilder)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function GenerateConnectionStringForProvisioning (connectionString As SqlConnectionStringBuilder) As SqlConnectionStringBuilder" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Data::SqlClient::SqlConnectionStringBuilder ^ GenerateConnectionStringForProvisioning(System::Data::SqlClient::SqlConnectionStringBuilder ^ connectionString);" />
+      <MemberSignature Language="F#" Value="static member GenerateConnectionStringForProvisioning : System.Data.SqlClient.SqlConnectionStringBuilder -&gt; System.Data.SqlClient.SqlConnectionStringBuilder" Usage="Microsoft.SharePoint.Administration.SPDatabase.GenerateConnectionStringForProvisioning connectionString" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -432,6 +450,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.GenerateRandomName(System.Data.SqlClient.SqlConnectionStringBuilder@)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub GenerateRandomName (ByRef suggestedConnectionString As SqlConnectionStringBuilder)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void GenerateRandomName(System::Data::SqlClient::SqlConnectionStringBuilder ^ % suggestedConnectionString);" />
+      <MemberSignature Language="F#" Value="static member GenerateRandomName :  -&gt; unit" Usage="Microsoft.SharePoint.Administration.SPDatabase.GenerateRandomName suggestedConnectionString" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -441,7 +460,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="suggestedConnectionString" Type="System.Data.SqlClient.SqlConnectionStringBuilder&amp;" RefType="ref" />
+        <Parameter Name="suggestedConnectionString" Type="System.Data.SqlClient.SqlConnectionStringBuilder" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="suggestedConnectionString">To be added.</param>
@@ -455,6 +474,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.GetVersionForId(System.Guid,System.Version)" />
       <MemberSignature Language="VB.NET" Value="Protected Function GetVersionForId (id As Guid, defaultVersion As Version) As Version" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; Version ^ GetVersionForId(Guid id, Version ^ defaultVersion);" />
+      <MemberSignature Language="F#" Value="member this.GetVersionForId : Guid * Version -&gt; Version" Usage="sPDatabase.GetVersionForId (id, defaultVersion)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -481,6 +501,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.GrantAccess(System.Security.Principal.SecurityIdentifier)" />
       <MemberSignature Language="VB.NET" Value="Protected Friend Sub GrantAccess (sid As SecurityIdentifier)" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; void GrantAccess(System::Security::Principal::SecurityIdentifier ^ sid);" />
+      <MemberSignature Language="F#" Value="member this.GrantAccess : System.Security.Principal.SecurityIdentifier -&gt; unit" Usage="sPDatabase.GrantAccess sid" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -504,6 +525,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.GrantAccess(System.Security.Principal.SecurityIdentifier,System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Friend Sub GrantAccess (sid As SecurityIdentifier, role As String)" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; void GrantAccess(System::Security::Principal::SecurityIdentifier ^ sid, System::String ^ role);" />
+      <MemberSignature Language="F#" Value="member this.GrantAccess : System.Security.Principal.SecurityIdentifier * string -&gt; unit" Usage="sPDatabase.GrantAccess (sid, role)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -529,6 +551,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.GrantOwnerAccessToDatabaseAccount" />
       <MemberSignature Language="VB.NET" Value="Public Sub GrantOwnerAccessToDatabaseAccount ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void GrantOwnerAccessToDatabaseAccount();" />
+      <MemberSignature Language="F#" Value="member this.GrantOwnerAccessToDatabaseAccount : unit -&gt; unit" Usage="sPDatabase.GrantOwnerAccessToDatabaseAccount " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -549,6 +572,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.IncludeInVssBackup" />
       <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property IncludeInVssBackup As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool IncludeInVssBackup { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IncludeInVssBackup : bool" Usage="Microsoft.SharePoint.Administration.SPDatabase.IncludeInVssBackup" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -569,6 +593,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.Invalidate" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Invalidate ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Invalidate();" />
+      <MemberSignature Language="F#" Value="override this.Invalidate : unit -&gt; unit" Usage="sPDatabase.Invalidate " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -589,6 +614,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.IsEmpty" />
       <MemberSignature Language="VB.NET" Value="Public Function IsEmpty () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsEmpty();" />
+      <MemberSignature Language="F#" Value="member this.IsEmpty : unit -&gt; bool" Usage="sPDatabase.IsEmpty " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -610,6 +636,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.IsReadOnly" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsReadOnly As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsReadOnly { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IsReadOnly : bool" Usage="Microsoft.SharePoint.Administration.SPDatabase.IsReadOnly" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -630,6 +657,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.IsSqlAzure" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSqlAzure As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSqlAzure { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IsSqlAzure : bool" Usage="Microsoft.SharePoint.Administration.SPDatabase.IsSqlAzure" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -650,6 +678,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.LegacyDatabaseConnectionString" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LegacyDatabaseConnectionString As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LegacyDatabaseConnectionString { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.LegacyDatabaseConnectionString : string" Usage="Microsoft.SharePoint.Administration.SPDatabase.LegacyDatabaseConnectionString" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -670,6 +699,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.MultiSubnetFailover" />
       <MemberSignature Language="VB.NET" Value="Public Property MultiSubnetFailover As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool MultiSubnetFailover { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.MultiSubnetFailover : bool with get, set" Usage="Microsoft.SharePoint.Administration.SPDatabase.MultiSubnetFailover" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -690,6 +720,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.NormalizedDataSource" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property NormalizedDataSource As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ NormalizedDataSource { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.NormalizedDataSource : string" Usage="Microsoft.SharePoint.Administration.SPDatabase.NormalizedDataSource" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -710,6 +741,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.OnAbort(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Function OnAbort (sender As Object, info As SPBackupRestoreInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnAbort(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupRestoreInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnAbort : obj * Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation -&gt; bool&#xA;override this.OnAbort : obj * Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation -&gt; bool" Usage="sPDatabase.OnAbort (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation)</InterfaceMember>
@@ -739,6 +771,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.OnBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnBackup (sender As Object, info As SPBackupInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnBackup(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnBackup : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool&#xA;override this.OnBackup : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool" Usage="sPDatabase.OnBackup (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
@@ -768,6 +801,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.OnBackupComplete(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnBackupComplete (sender As Object, info As SPBackupInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnBackupComplete(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnBackupComplete : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool&#xA;override this.OnBackupComplete : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool" Usage="sPDatabase.OnBackupComplete (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
@@ -797,6 +831,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.OnDeserialization" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnDeserialization ()" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnDeserialization();" />
+      <MemberSignature Language="F#" Value="override this.OnDeserialization : unit -&gt; unit" Usage="sPDatabase.OnDeserialization " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -817,6 +852,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.OnPostRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnPostRestore (sender As Object, info As SPRestoreInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnPostRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnPostRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool&#xA;override this.OnPostRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool" Usage="sPDatabase.OnPostRestore (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
@@ -846,6 +882,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.OnPrepareBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnPrepareBackup (sender As Object, info As SPBackupInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnPrepareBackup(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnPrepareBackup : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool&#xA;override this.OnPrepareBackup : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool" Usage="sPDatabase.OnPrepareBackup (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPrepareBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
@@ -875,6 +912,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.OnPreRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnPreRestore (sender As Object, info As SPRestoreInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnPreRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnPreRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool&#xA;override this.OnPreRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool" Usage="sPDatabase.OnPreRestore (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
@@ -904,6 +942,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnRestore (sender As Object, info As SPRestoreInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool&#xA;override this.OnRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool" Usage="sPDatabase.OnRestore (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
@@ -933,6 +972,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.Password" />
       <MemberSignature Language="VB.NET" Value="Public Property Password As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Password { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Password : string with get, set" Usage="Microsoft.SharePoint.Administration.SPDatabase.Password" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -953,6 +993,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.Provision(System.Data.SqlClient.SqlConnectionStringBuilder,System.IO.TextReader,System.Collections.Generic.Dictionary{Microsoft.SharePoint.Administration.SPDatabase.DatabaseOptions,System.Boolean})" />
       <MemberSignature Language="VB.NET" Value="Protected Shared Sub Provision (connectionString As SqlConnectionStringBuilder, provisioningScriptStream As TextReader, options As Dictionary(Of SPDatabase.DatabaseOptions, Boolean))" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; static void Provision(System::Data::SqlClient::SqlConnectionStringBuilder ^ connectionString, System::IO::TextReader ^ provisioningScriptStream, System::Collections::Generic::Dictionary&lt;Microsoft::SharePoint::Administration::SPDatabase::DatabaseOptions, bool&gt; ^ options);" />
+      <MemberSignature Language="F#" Value="static member Provision : System.Data.SqlClient.SqlConnectionStringBuilder * System.IO.TextReader * System.Collections.Generic.Dictionary&lt;Microsoft.SharePoint.Administration.SPDatabase.DatabaseOptions, bool&gt; -&gt; unit" Usage="Microsoft.SharePoint.Administration.SPDatabase.Provision (connectionString, provisioningScriptStream, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -980,6 +1021,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.Provision(System.Data.SqlClient.SqlConnectionStringBuilder,System.IO.TextReader,System.Collections.Generic.Dictionary{System.String,System.Boolean})" />
       <MemberSignature Language="VB.NET" Value="Protected Shared Sub Provision (connectionString As SqlConnectionStringBuilder, provisioningScriptStream As TextReader, options As Dictionary(Of String, Boolean))" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; static void Provision(System::Data::SqlClient::SqlConnectionStringBuilder ^ connectionString, System::IO::TextReader ^ provisioningScriptStream, System::Collections::Generic::Dictionary&lt;System::String ^, bool&gt; ^ options);" />
+      <MemberSignature Language="F#" Value="static member Provision : System.Data.SqlClient.SqlConnectionStringBuilder * System.IO.TextReader * System.Collections.Generic.Dictionary&lt;string, bool&gt; -&gt; unit" Usage="Microsoft.SharePoint.Administration.SPDatabase.Provision (connectionString, provisioningScriptStream, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1012,6 +1054,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.Provision(System.Data.SqlClient.SqlConnectionStringBuilder,System.String,System.Collections.Generic.Dictionary{Microsoft.SharePoint.Administration.SPDatabase.DatabaseOptions,System.Boolean})" />
       <MemberSignature Language="VB.NET" Value="Protected Shared Sub Provision (connectionString As SqlConnectionStringBuilder, provisioningScriptPath As String, options As Dictionary(Of SPDatabase.DatabaseOptions, Boolean))" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; static void Provision(System::Data::SqlClient::SqlConnectionStringBuilder ^ connectionString, System::String ^ provisioningScriptPath, System::Collections::Generic::Dictionary&lt;Microsoft::SharePoint::Administration::SPDatabase::DatabaseOptions, bool&gt; ^ options);" />
+      <MemberSignature Language="F#" Value="static member Provision : System.Data.SqlClient.SqlConnectionStringBuilder * string * System.Collections.Generic.Dictionary&lt;Microsoft.SharePoint.Administration.SPDatabase.DatabaseOptions, bool&gt; -&gt; unit" Usage="Microsoft.SharePoint.Administration.SPDatabase.Provision (connectionString, provisioningScriptPath, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1039,6 +1082,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.Provision(System.Data.SqlClient.SqlConnectionStringBuilder,System.String,System.Collections.Generic.Dictionary{System.String,System.Boolean})" />
       <MemberSignature Language="VB.NET" Value="Protected Shared Sub Provision (connectionString As SqlConnectionStringBuilder, provisioningScriptPath As String, options As Dictionary(Of String, Boolean))" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; static void Provision(System::Data::SqlClient::SqlConnectionStringBuilder ^ connectionString, System::String ^ provisioningScriptPath, System::Collections::Generic::Dictionary&lt;System::String ^, bool&gt; ^ options);" />
+      <MemberSignature Language="F#" Value="static member Provision : System.Data.SqlClient.SqlConnectionStringBuilder * string * System.Collections.Generic.Dictionary&lt;string, bool&gt; -&gt; unit" Usage="Microsoft.SharePoint.Administration.SPDatabase.Provision (connectionString, provisioningScriptPath, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1071,6 +1115,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.Provision(System.String,System.String,System.Collections.Generic.Dictionary{Microsoft.SharePoint.Administration.SPDatabase.DatabaseOptions,System.Boolean})" />
       <MemberSignature Language="VB.NET" Value="Protected Shared Sub Provision (connectionString As String, provisioningScriptPath As String, options As Dictionary(Of SPDatabase.DatabaseOptions, Boolean))" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; static void Provision(System::String ^ connectionString, System::String ^ provisioningScriptPath, System::Collections::Generic::Dictionary&lt;Microsoft::SharePoint::Administration::SPDatabase::DatabaseOptions, bool&gt; ^ options);" />
+      <MemberSignature Language="F#" Value="static member Provision : string * string * System.Collections.Generic.Dictionary&lt;Microsoft.SharePoint.Administration.SPDatabase.DatabaseOptions, bool&gt; -&gt; unit" Usage="Microsoft.SharePoint.Administration.SPDatabase.Provision (connectionString, provisioningScriptPath, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1098,6 +1143,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.Provision(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Boolean})" />
       <MemberSignature Language="VB.NET" Value="Protected Shared Sub Provision (connectionString As String, provisioningScriptPath As String, options As Dictionary(Of String, Boolean))" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; static void Provision(System::String ^ connectionString, System::String ^ provisioningScriptPath, System::Collections::Generic::Dictionary&lt;System::String ^, bool&gt; ^ options);" />
+      <MemberSignature Language="F#" Value="static member Provision : string * string * System.Collections.Generic.Dictionary&lt;string, bool&gt; -&gt; unit" Usage="Microsoft.SharePoint.Administration.SPDatabase.Provision (connectionString, provisioningScriptPath, options)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1130,6 +1176,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.SchemaVersionXml" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SchemaVersionXml As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SchemaVersionXml { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.SchemaVersionXml : string" Usage="Microsoft.SharePoint.Administration.SPDatabase.SchemaVersionXml" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1150,6 +1197,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.Server" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Server As SPServer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::SPServer ^ Server { Microsoft::SharePoint::Administration::SPServer ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Server : Microsoft.SharePoint.Administration.SPServer" Usage="Microsoft.SharePoint.Administration.SPDatabase.Server" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1170,6 +1218,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.ServiceInstance" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ServiceInstance As SPDatabaseServiceInstance" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::SPDatabaseServiceInstance ^ ServiceInstance { Microsoft::SharePoint::Administration::SPDatabaseServiceInstance ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ServiceInstance : Microsoft.SharePoint.Administration.SPDatabaseServiceInstance" Usage="Microsoft.SharePoint.Administration.SPDatabase.ServiceInstance" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1190,6 +1239,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.Snapshots" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Snapshots As SPDatabaseSnapshotCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::Backup::SPDatabaseSnapshotCollection ^ Snapshots { Microsoft::SharePoint::Administration::Backup::SPDatabaseSnapshotCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Snapshots : Microsoft.SharePoint.Administration.Backup.SPDatabaseSnapshotCollection" Usage="Microsoft.SharePoint.Administration.SPDatabase.Snapshots" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1210,6 +1260,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.Administration.SPDatabase.SqlDatabaseOption" />
       <MemberSignature Language="VB.NET" Value="Protected Shared SqlDatabaseOption As String() " />
       <MemberSignature Language="C++ CLI" Value="protected: static cli::array &lt;System::String ^&gt; ^ SqlDatabaseOption;" />
+      <MemberSignature Language="F#" Value=" staticval mutable SqlDatabaseOption : string[]" Usage="Microsoft.SharePoint.Administration.SPDatabase.SqlDatabaseOption" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1229,6 +1280,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.Unprovision" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Unprovision ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Unprovision();" />
+      <MemberSignature Language="F#" Value="override this.Unprovision : unit -&gt; unit" Usage="sPDatabase.Unprovision " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1249,6 +1301,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.Update" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Update ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Update();" />
+      <MemberSignature Language="F#" Value="override this.Update : unit -&gt; unit" Usage="sPDatabase.Update " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1269,6 +1322,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.Upgrade(System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Upgrade (recursively As Boolean)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Upgrade(bool recursively);" />
+      <MemberSignature Language="F#" Value="override this.Upgrade : bool -&gt; unit" Usage="sPDatabase.Upgrade recursively" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1292,6 +1346,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDatabase.Username" />
       <MemberSignature Language="VB.NET" Value="Public Property Username As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Username { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Username : string with get, set" Usage="Microsoft.SharePoint.Administration.SPDatabase.Username" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1312,6 +1367,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDatabase.WarnAboutRemoteBlobStorageSettings" />
       <MemberSignature Language="VB.NET" Value="Protected Function WarnAboutRemoteBlobStorageSettings () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; bool WarnAboutRemoteBlobStorageSettings();" />
+      <MemberSignature Language="F#" Value="member this.WarnAboutRemoteBlobStorageSettings : unit -&gt; bool" Usage="sPDatabase.WarnAboutRemoteBlobStorageSettings " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

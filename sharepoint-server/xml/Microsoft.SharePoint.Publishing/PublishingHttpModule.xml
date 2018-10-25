@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.PublishingHttpModule" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PublishingHttpModule&#xA;Implements IHttpModule" />
   <TypeSignature Language="C++ CLI" Value="public ref class PublishingHttpModule sealed : System::Web::IHttpModule" />
+  <TypeSignature Language="F#" Value="type PublishingHttpModule = class&#xA;    interface IHttpModule" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -47,6 +48,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingHttpModule.BeginRequestHandler(System.Object,System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub BeginRequestHandler (sender As Object, ea As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void BeginRequestHandler(System::Object ^ sender, EventArgs ^ ea);" />
+      <MemberSignature Language="F#" Value="member this.BeginRequestHandler : obj * EventArgs -&gt; unit" Usage="publishingHttpModule.BeginRequestHandler (sender, ea)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -72,10 +74,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingHttpModule.Dispose" />
       <MemberSignature Language="VB.NET" Value="Public Sub Dispose ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Dispose();" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : unit -&gt; unit&#xA;override this.Dispose : unit -&gt; unit" Usage="publishingHttpModule.Dispose " />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.IHttpModule.Dispose</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -95,6 +95,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingHttpModule.DontChangeCacheHeadersForRequest(System.Web.HttpContext)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub DontChangeCacheHeadersForRequest (context As HttpContext)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void DontChangeCacheHeadersForRequest(System::Web::HttpContext ^ context);" />
+      <MemberSignature Language="F#" Value="static member DontChangeCacheHeadersForRequest : System.Web.HttpContext -&gt; unit" Usage="Microsoft.SharePoint.Publishing.PublishingHttpModule.DontChangeCacheHeadersForRequest context" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -121,6 +122,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingHttpModule.DontEnableCachingForRequest(System.Web.HttpContext)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub DontEnableCachingForRequest (context As HttpContext)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void DontEnableCachingForRequest(System::Web::HttpContext ^ context);" />
+      <MemberSignature Language="F#" Value="static member DontEnableCachingForRequest : System.Web.HttpContext -&gt; unit" Usage="Microsoft.SharePoint.Publishing.PublishingHttpModule.DontEnableCachingForRequest context" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -148,10 +150,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingHttpModule.Init(System.Web.HttpApplication)" />
       <MemberSignature Language="VB.NET" Value="Public Sub Init (app As HttpApplication)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Init(System::Web::HttpApplication ^ app);" />
+      <MemberSignature Language="F#" Value="abstract member Init : System.Web.HttpApplication -&gt; unit&#xA;override this.Init : System.Web.HttpApplication -&gt; unit" Usage="publishingHttpModule.Init app" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.IHttpModule.Init(System.Web.HttpApplication)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -174,6 +174,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.PublishingHttpModule.ValidateCache(System.Web.HttpContext,System.Object,System.Web.HttpValidationStatus@)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub ValidateCache (context As HttpContext, data As Object, ByRef status As HttpValidationStatus)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ValidateCache(System::Web::HttpContext ^ context, System::Object ^ data, System::Web::HttpValidationStatus % status);" />
+      <MemberSignature Language="F#" Value="static member ValidateCache : System.Web.HttpContext * obj *  -&gt; unit" Usage="Microsoft.SharePoint.Publishing.PublishingHttpModule.ValidateCache (context, data, status)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -185,7 +186,7 @@
       <Parameters>
         <Parameter Name="context" Type="System.Web.HttpContext" />
         <Parameter Name="data" Type="System.Object" />
-        <Parameter Name="status" Type="System.Web.HttpValidationStatus&amp;" RefType="ref" />
+        <Parameter Name="status" Type="System.Web.HttpValidationStatus" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="context">Current <b>HttpContext</b>.</param>
