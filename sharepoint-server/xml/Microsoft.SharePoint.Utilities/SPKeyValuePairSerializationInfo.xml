@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Utilities.SPKeyValuePairSerializationInfo" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SPKeyValuePairSerializationInfo&#xA;Implements IEnumerable(Of KeyValuePair(Of String, Object))" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPKeyValuePairSerializationInfo sealed : System::Collections::Generic::IEnumerable&lt;System::Collections::Generic::KeyValuePair&lt;System::String ^, System::Object ^&gt;&gt;" />
+  <TypeSignature Language="F#" Value="type SPKeyValuePairSerializationInfo = class&#xA;    interface seq&lt;KeyValuePair&lt;string, obj&gt;&gt;&#xA;    interface IEnumerable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -27,6 +28,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPKeyValuePairSerializationInfo.AddValue(System.String,System.Object)" />
       <MemberSignature Language="VB.NET" Value="Public Sub AddValue (name As String, value As Object)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddValue(System::String ^ name, System::Object ^ value);" />
+      <MemberSignature Language="F#" Value="member this.AddValue : string * obj -&gt; unit" Usage="sPKeyValuePairSerializationInfo.AddValue (name, value)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -52,6 +54,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Utilities.SPKeyValuePairSerializationInfo.Count" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Count As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Count { int get(); };" />
+      <MemberSignature Language="F#" Value="member this.Count : int" Usage="Microsoft.SharePoint.Utilities.SPKeyValuePairSerializationInfo.Count" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -72,6 +75,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPKeyValuePairSerializationInfo.GetRawValue(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetRawValue (name As String) As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Object ^ GetRawValue(System::String ^ name);" />
+      <MemberSignature Language="F#" Value="member this.GetRawValue : string -&gt; obj" Usage="sPKeyValuePairSerializationInfo.GetRawValue name" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -144,6 +148,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPKeyValuePairSerializationInfo.TryGetValue``1(System.String,``0@)" />
       <MemberSignature Language="VB.NET" Value="Public Function TryGetValue(Of T) (name As String, ByRef value As T) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename T&gt;&#xA; bool TryGetValue(System::String ^ name, [Runtime::InteropServices::Out] T % value);" />
+      <MemberSignature Language="F#" Value="member this.TryGetValue : string *  -&gt; bool" Usage="sPKeyValuePairSerializationInfo.TryGetValue (name, value)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -157,7 +162,7 @@
       </TypeParameters>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
-        <Parameter Name="value" Type="T&amp;" RefType="out" />
+        <Parameter Name="value" Type="T" RefType="out" />
       </Parameters>
       <Docs>
         <typeparam name="T">To be added.</typeparam>
@@ -174,6 +179,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPKeyValuePairSerializationInfo.TryGetValue``1(System.String,``0@,``0)" />
       <MemberSignature Language="VB.NET" Value="Public Function TryGetValue(Of T) (name As String, ByRef value As T, defaultValue As T) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename T&gt;&#xA; bool TryGetValue(System::String ^ name, [Runtime::InteropServices::Out] T % value, T defaultValue);" />
+      <MemberSignature Language="F#" Value="member this.TryGetValue : string *  * 'T -&gt; bool" Usage="sPKeyValuePairSerializationInfo.TryGetValue (name, value, defaultValue)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -187,7 +193,7 @@
       </TypeParameters>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
-        <Parameter Name="value" Type="T&amp;" RefType="out" />
+        <Parameter Name="value" Type="T" RefType="out" />
         <Parameter Name="defaultValue" Type="T" />
       </Parameters>
       <Docs>

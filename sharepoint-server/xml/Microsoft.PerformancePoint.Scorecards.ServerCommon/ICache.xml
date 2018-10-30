@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache" />
   <TypeSignature Language="VB.NET" Value="Public Interface ICache" />
   <TypeSignature Language="C++ CLI" Value="public interface class ICache" />
+  <TypeSignature Language="F#" Value="type ICache = interface" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -20,6 +21,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache.CreateCacheKey(Microsoft.PerformancePoint.Scorecards.ServerCommon.ServerCacheObjectType,Microsoft.PerformancePoint.Scorecards.RepositoryLocation,Microsoft.PerformancePoint.Scorecards.ElementVersion,System.String,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function CreateCacheKey (objectType As ServerCacheObjectType, objectLoc As RepositoryLocation, objectVersion As ElementVersion, userName As String, dataTimeStamp As String, customKey As String) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ CreateCacheKey(Microsoft::PerformancePoint::Scorecards::ServerCommon::ServerCacheObjectType objectType, Microsoft::PerformancePoint::Scorecards::RepositoryLocation ^ objectLoc, Microsoft::PerformancePoint::Scorecards::ElementVersion ^ objectVersion, System::String ^ userName, System::String ^ dataTimeStamp, System::String ^ customKey);" />
+      <MemberSignature Language="F#" Value="abstract member CreateCacheKey : Microsoft.PerformancePoint.Scorecards.ServerCommon.ServerCacheObjectType * Microsoft.PerformancePoint.Scorecards.RepositoryLocation * Microsoft.PerformancePoint.Scorecards.ElementVersion * string * string * string -&gt; string" Usage="iCache.CreateCacheKey (objectType, objectLoc, objectVersion, userName, dataTimeStamp, customKey)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>
@@ -54,6 +56,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache.CreateCacheKey(Microsoft.PerformancePoint.Scorecards.ServerCommon.ServerCacheObjectType,System.String,System.String,System.String,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function CreateCacheKey (objectType As ServerCacheObjectType, objectName As String, objectVersion As String, userName As String, dataTimeStamp As String, customKey As String) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ CreateCacheKey(Microsoft::PerformancePoint::Scorecards::ServerCommon::ServerCacheObjectType objectType, System::String ^ objectName, System::String ^ objectVersion, System::String ^ userName, System::String ^ dataTimeStamp, System::String ^ customKey);" />
+      <MemberSignature Language="F#" Value="abstract member CreateCacheKey : Microsoft.PerformancePoint.Scorecards.ServerCommon.ServerCacheObjectType * string * string * string * string * string -&gt; string" Usage="iCache.CreateCacheKey (objectType, objectName, objectVersion, userName, dataTimeStamp, customKey)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>
@@ -88,6 +91,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache.Get(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function Get (key As String) As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Object ^ Get(System::String ^ key);" />
+      <MemberSignature Language="F#" Value="abstract member Get : string -&gt; obj" Usage="iCache.Get key" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>
@@ -112,6 +116,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache.Get(System.String,System.Int32@)" />
       <MemberSignature Language="VB.NET" Value="Public Function Get (key As String, ByRef hitcount As Integer) As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Object ^ Get(System::String ^ key, [Runtime::InteropServices::Out] int % hitcount);" />
+      <MemberSignature Language="F#" Value="abstract member Get : string *  -&gt; obj" Usage="iCache.Get (key, hitcount)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>
@@ -122,7 +127,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="key" Type="System.String" />
-        <Parameter Name="hitcount" Type="System.Int32&amp;" RefType="out" />
+        <Parameter Name="hitcount" Type="System.Int32" RefType="out" />
       </Parameters>
       <Docs>
         <param name="key">To be added.</param>
@@ -138,6 +143,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache.GetWaitPending(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetWaitPending (key As String) As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Object ^ GetWaitPending(System::String ^ key);" />
+      <MemberSignature Language="F#" Value="abstract member GetWaitPending : string -&gt; obj" Usage="iCache.GetWaitPending key" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>
@@ -162,6 +168,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache.KillPending(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub KillPending (key As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void KillPending(System::String ^ key);" />
+      <MemberSignature Language="F#" Value="abstract member KillPending : string -&gt; unit" Usage="iCache.KillPending key" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>
@@ -185,6 +192,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache.Remove(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub Remove (key As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Remove(System::String ^ key);" />
+      <MemberSignature Language="F#" Value="abstract member Remove : string -&gt; unit" Usage="iCache.Remove key" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>
@@ -208,6 +216,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache.Set(System.String,System.Object,System.DateTime)" />
       <MemberSignature Language="VB.NET" Value="Public Sub Set (key As String, obj As Object, expiration As DateTime)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Set(System::String ^ key, System::Object ^ obj, DateTime expiration);" />
+      <MemberSignature Language="F#" Value="abstract member Set : string * obj * DateTime -&gt; unit" Usage="iCache.Set (key, obj, expiration)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>
@@ -235,6 +244,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache.Set(System.String,System.Object,System.TimeSpan)" />
       <MemberSignature Language="VB.NET" Value="Public Sub Set (key As String, obj As Object, life As TimeSpan)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Set(System::String ^ key, System::Object ^ obj, TimeSpan life);" />
+      <MemberSignature Language="F#" Value="abstract member Set : string * obj * TimeSpan -&gt; unit" Usage="iCache.Set (key, obj, life)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>
@@ -262,6 +272,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ServerCommon.ICache.SetPending(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetPending (key As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetPending(System::String ^ key);" />
+      <MemberSignature Language="F#" Value="abstract member SetPending : string -&gt; unit" Usage="iCache.SetPending key" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.ServerCommon</AssemblyName>

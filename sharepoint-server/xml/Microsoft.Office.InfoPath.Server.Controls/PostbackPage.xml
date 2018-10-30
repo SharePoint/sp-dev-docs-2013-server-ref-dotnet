@@ -1,9 +1,10 @@
 ﻿<Type Name="PostbackPage" FullName="Microsoft.Office.InfoPath.Server.Controls.PostbackPage">
-  <TypeSignature Language="C#" Value="public class PostbackPage : System.Web.UI.Page, Microsoft.SharePoint.ApplicationRuntime.IRequiresCultureInfo" />
+  <TypeSignature Language="C#" Value="public class PostbackPage : System.Web.UI.Page, Microsoft.SharePoint.ApplicationRuntime.IRequiresCultureInfo, System.Web.IHttpHandler" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit PostbackPage extends System.Web.UI.Page implements class Microsoft.SharePoint.ApplicationRuntime.IRequiresCultureInfo, class System.Web.IHttpHandler" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.InfoPath.Server.Controls.PostbackPage" />
-  <TypeSignature Language="VB.NET" Value="Public Class PostbackPage&#xA;Inherits Page&#xA;Implements IRequiresCultureInfo" />
-  <TypeSignature Language="C++ CLI" Value="public ref class PostbackPage : System::Web::UI::Page, Microsoft::SharePoint::ApplicationRuntime::IRequiresCultureInfo" />
+  <TypeSignature Language="VB.NET" Value="Public Class PostbackPage&#xA;Inherits Page&#xA;Implements IHttpHandler, IRequiresCultureInfo" />
+  <TypeSignature Language="C++ CLI" Value="public ref class PostbackPage : System::Web::UI::Page, Microsoft::SharePoint::ApplicationRuntime::IRequiresCultureInfo, System::Web::IHttpHandler" />
+  <TypeSignature Language="F#" Value="type PostbackPage = class&#xA;    inherit Page&#xA;    interface IHttpHandler&#xA;    interface IRequiresCultureInfo" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -14,6 +15,9 @@
   <Interfaces>
     <Interface>
       <InterfaceName>Microsoft.SharePoint.ApplicationRuntime.IRequiresCultureInfo</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Web.IHttpHandler</InterfaceName>
     </Interface>
   </Interfaces>
   <Docs>
@@ -44,6 +48,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.PostbackPage.OnPreInit(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreInit (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreInit(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="abstract member OnPreInit : EventArgs -&gt; unit&#xA;override this.OnPreInit : EventArgs -&gt; unit" Usage="postbackPage.OnPreInit e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
@@ -67,10 +72,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.PostbackPage.ProcessRequest(System.Web.HttpContext)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub ProcessRequest (context As HttpContext)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void ProcessRequest(System::Web::HttpContext ^ context);" />
+      <MemberSignature Language="F#" Value="abstract member ProcessRequest : System.Web.HttpContext -&gt; unit&#xA;override this.ProcessRequest : System.Web.HttpContext -&gt; unit" Usage="postbackPage.ProcessRequest context" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -93,6 +96,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.PostbackPage.RequiresCultureInfo" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property RequiresCultureInfo As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool RequiresCultureInfo { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.RequiresCultureInfo : bool" Usage="Microsoft.Office.InfoPath.Server.Controls.PostbackPage.RequiresCultureInfo" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.ApplicationRuntime.IRequiresCultureInfo.RequiresCultureInfo</InterfaceMember>
@@ -115,11 +119,9 @@
       <MemberSignature Language="ILAsm" Value=".property instance bool System.Web.IHttpHandler.IsReusable" />
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.InfoPath.Server.Controls.PostbackPage.System#Web#IHttpHandler#IsReusable" />
       <MemberSignature Language="VB.NET" Value=" ReadOnly Property IsReusable As Boolean Implements IHttpHandler.IsReusable" />
-      <MemberSignature Language="C++ CLI" Value="property bool System.Web.IHttpHandler.IsReusable { bool get(); };" />
+      <MemberSignature Language="C++ CLI" Value="property bool System::Web::IHttpHandler::IsReusable { bool get(); };" />
+      <MemberSignature Language="F#" Usage="System.Web.IHttpHandler.IsReusable" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:System.Web.IHttpHandler.IsReusable</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>

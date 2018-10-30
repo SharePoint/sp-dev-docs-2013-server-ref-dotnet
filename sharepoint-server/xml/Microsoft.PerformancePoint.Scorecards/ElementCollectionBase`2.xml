@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2" />
   <TypeSignature Language="VB.NET" Value="Public MustInherit Class ElementCollectionBase(Of ElementCollectionType, ElementType)&#xA;Inherits KeyedCollection(Of Guid, ElementType)&#xA;Implements ICloneable, IDiffable" />
   <TypeSignature Language="C++ CLI" Value="generic &lt;typename ElementCollectionType, typename ElementType&gt;&#xA; where ElementCollectionType : ElementCollectionBase&lt;ElementCollectionType, ElementType&gt;gcnew() where ElementType : Element, IEquatable&lt;ElementType&gt;public ref class ElementCollectionBase abstract : System::Collections::ObjectModel::KeyedCollection&lt;Guid, ElementType&gt;, ICloneable, Microsoft::PerformancePoint::Scorecards::IDiffable" />
+  <TypeSignature Language="F#" Value="type ElementCollectionBase&lt;'ElementCollectionType, 'ElementType (requires 'ElementCollectionType :&gt; ElementCollectionBase&lt;'ElementCollectionType, 'ElementType&gt; and 'ElementCollectionType : (new : unit -&gt; 'ElementCollectionType) and 'ElementType :&gt; Element and 'ElementType :&gt; IEquatable&lt;'ElementType&gt;)&gt; = class&#xA;    inherit KeyedCollection&lt;Guid, 'ElementType (requires 'ElementType :&gt; Element and 'ElementType :&gt; IEquatable&lt;'ElementType&gt;)&gt;&#xA;    interface ICloneable&#xA;    interface IDiffable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -37,6 +38,11 @@
       <InterfaceName>System.ICloneable</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <typeparam name="ElementCollectionType">To be added.</typeparam>
     <typeparam name="ElementType">To be added.</typeparam>
@@ -67,6 +73,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.AddRange(System.Collections.Generic.ICollection{`1})" />
       <MemberSignature Language="VB.NET" Value="Public Sub AddRange (collection As ICollection(Of ElementType))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void AddRange(System::Collections::Generic::ICollection&lt;ElementType&gt; ^ collection);" />
+      <MemberSignature Language="F#" Value="member this.AddRange : System.Collections.Generic.ICollection&lt;'ElementType (requires 'ElementType :&gt; Microsoft.PerformancePoint.Scorecards.Element and 'ElementType :&gt; IEquatable&lt;'ElementType&gt;)&gt; -&gt; unit" Usage="elementCollectionBase.AddRange collection" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -90,6 +97,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.Clone" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function Clone () As ElementCollectionType" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual ElementCollectionType Clone();" />
+      <MemberSignature Language="F#" Value="abstract member Clone : unit -&gt; 'ElementCollectionType&#xA;override this.Clone : unit -&gt; 'ElementCollectionType" Usage="elementCollectionBase.Clone " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -111,6 +119,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.Diff(`0)" />
       <MemberSignature Language="VB.NET" Value="Public Function Diff (oldCollection As ElementCollectionType) As DiffCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::PerformancePoint::Scorecards::DiffCollection ^ Diff(ElementCollectionType oldCollection);" />
+      <MemberSignature Language="F#" Value="member this.Diff : 'ElementCollectionType -&gt; Microsoft.PerformancePoint.Scorecards.DiffCollection" Usage="elementCollectionBase.Diff oldCollection" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -135,6 +144,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.Exists(System.Predicate{`1})" />
       <MemberSignature Language="VB.NET" Value="Public Function Exists (match As Predicate(Of ElementType)) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool Exists(Predicate&lt;ElementType&gt; ^ match);" />
+      <MemberSignature Language="F#" Value="member this.Exists : Predicate&lt;'ElementType (requires 'ElementType :&gt; Microsoft.PerformancePoint.Scorecards.Element and 'ElementType :&gt; IEquatable&lt;'ElementType&gt;)&gt; -&gt; bool" Usage="elementCollectionBase.Exists match" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -159,6 +169,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.ForEach(System.Action{`1})" />
       <MemberSignature Language="VB.NET" Value="Public Sub ForEach (action As Action(Of ElementType))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void ForEach(Action&lt;ElementType&gt; ^ action);" />
+      <MemberSignature Language="F#" Value="member this.ForEach : Action&lt;'ElementType (requires 'ElementType :&gt; Microsoft.PerformancePoint.Scorecards.Element and 'ElementType :&gt; IEquatable&lt;'ElementType&gt;)&gt; -&gt; unit" Usage="elementCollectionBase.ForEach action" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -182,6 +193,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.GetElementEnumerable" />
       <MemberSignature Language="VB.NET" Value="Public Function GetElementEnumerable () As IEnumerable(Of Element)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::Generic::IEnumerable&lt;Microsoft::PerformancePoint::Scorecards::Element ^&gt; ^ GetElementEnumerable();" />
+      <MemberSignature Language="F#" Value="member this.GetElementEnumerable : unit -&gt; seq&lt;Microsoft.PerformancePoint.Scorecards.Element&gt;" Usage="elementCollectionBase.GetElementEnumerable " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -203,6 +215,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.GetKeyForItem(`1)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetKeyForItem (item As ElementType) As Guid" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override Guid GetKeyForItem(ElementType item);" />
+      <MemberSignature Language="F#" Value="abstract member GetKeyForItem : 'ElementType -&gt; Guid&#xA;override this.GetKeyForItem : 'ElementType -&gt; Guid" Usage="elementCollectionBase.GetKeyForItem item" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -226,6 +239,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 IndexOfGuid(valuetype System.Guid guid) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.IndexOfGuid(System.Guid)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; int IndexOfGuid(Guid guid);" />
+      <MemberSignature Language="F#" Value="member this.IndexOfGuid : Guid -&gt; int" Usage="elementCollectionBase.IndexOfGuid guid" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -249,6 +263,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !ElementType IndexOfGuidSafe(valuetype System.Guid guid) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.IndexOfGuidSafe(System.Guid)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; ElementType IndexOfGuidSafe(Guid guid);" />
+      <MemberSignature Language="F#" Value="member this.IndexOfGuidSafe : Guid -&gt; 'ElementType" Usage="elementCollectionBase.IndexOfGuidSafe guid" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -273,6 +288,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.IndexOfName(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function IndexOfName (name As String) As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; int IndexOfName(System::String ^ name);" />
+      <MemberSignature Language="F#" Value="member this.IndexOfName : string -&gt; int" Usage="elementCollectionBase.IndexOfName name" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -297,6 +313,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.IndexOfNameSafe(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function IndexOfNameSafe (name As String) As ElementType" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; ElementType IndexOfNameSafe(System::String ^ name);" />
+      <MemberSignature Language="F#" Value="member this.IndexOfNameSafe : string -&gt; 'ElementType" Usage="elementCollectionBase.IndexOfNameSafe name" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -321,6 +338,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.InsertItem(System.Int32,`1)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub InsertItem (index As Integer, item As ElementType)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void InsertItem(int index, ElementType item);" />
+      <MemberSignature Language="F#" Value="abstract member InsertItem : int * 'ElementType -&gt; unit&#xA;override this.InsertItem : int * 'ElementType -&gt; unit" Usage="elementCollectionBase.InsertItem (index, item)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -346,6 +364,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.Item(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Default Public Property Item(key As Guid) As ElementType" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property ElementType default[Guid] { ElementType get(Guid key); void set(Guid key, ElementType value); };" />
+      <MemberSignature Language="F#" Value="member this.Item(Guid) : 'ElementType with get, set" Usage="Microsoft.PerformancePoint.Scorecards.ElementCollectionBase&lt;'ElementCollectionType, 'ElementType (requires 'ElementCollectionType :&gt; Microsoft.PerformancePoint.Scorecards.ElementCollectionBase&lt;'ElementCollectionType, 'ElementType&gt; and 'ElementCollectionType : (new : unit -&gt; 'ElementCollectionType) and 'ElementType :&gt; Microsoft.PerformancePoint.Scorecards.Element and 'ElementType :&gt; System.IEquatable&lt;'ElementType&gt;)&gt;.Item" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -397,6 +416,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.SetItem(System.Int32,`1)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub SetItem (index As Integer, item As ElementType)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void SetItem(int index, ElementType item);" />
+      <MemberSignature Language="F#" Value="abstract member SetItem : int * 'ElementType -&gt; unit&#xA;override this.SetItem : int * 'ElementType -&gt; unit" Usage="elementCollectionBase.SetItem (index, item)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -422,6 +442,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.Sort" />
       <MemberSignature Language="VB.NET" Value="Public Sub Sort ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Sort();" />
+      <MemberSignature Language="F#" Value="member this.Sort : unit -&gt; unit" Usage="elementCollectionBase.Sort " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -442,6 +463,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.Sort(System.Collections.IComparer)" />
       <MemberSignature Language="VB.NET" Value="Public Sub Sort (comparer As IComparer)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Sort(System::Collections::IComparer ^ comparer);" />
+      <MemberSignature Language="F#" Value="member this.Sort : System.Collections.IComparer -&gt; unit" Usage="elementCollectionBase.Sort comparer" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -489,6 +511,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ElementCollectionBase`2.Validate" />
       <MemberSignature Language="VB.NET" Value="Public Sub Validate ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Validate();" />
+      <MemberSignature Language="F#" Value="member this.Validate : unit -&gt; unit" Usage="elementCollectionBase.Validate " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>

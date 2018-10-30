@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider" />
   <TypeSignature Language="VB.NET" Value="Public Class SPUserCodeLoadBalancerProvider&#xA;Inherits SPUserCodeProvider" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPUserCodeLoadBalancerProvider : Microsoft::SharePoint::Administration::SPUserCodeProvider" />
+  <TypeSignature Language="F#" Value="type SPUserCodeLoadBalancerProvider = class&#xA;    inherit SPUserCodeProvider&#xA;    interface IBackupRestoreConfiguration&#xA;    interface IBackupRestore" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -40,6 +41,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider.#ctor(System.String,Microsoft.SharePoint.Administration.SPPersistedObject)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (name As String, parent As SPPersistedObject)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; SPUserCodeLoadBalancerProvider(System::String ^ name, Microsoft::SharePoint::Administration::SPPersistedObject ^ parent);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider : string * Microsoft.SharePoint.Administration.SPPersistedObject -&gt; Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider" Usage="new Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider (name, parent)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -62,6 +64,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider.CanSelectForBackupRestore" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides ReadOnly Property CanSelectForBackupRestore As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property bool CanSelectForBackupRestore { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.CanSelectForBackupRestore : bool" Usage="Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider.CanSelectForBackupRestore" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -82,6 +85,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider.GetActivationSite(Microsoft.SharePoint.Administration.SPUserCodeAssemblyGroupId,System.Guid,System.Collections.ObjectModel.ReadOnlyCollection{Microsoft.SharePoint.Administration.SPUserCodeServiceInstance})" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function GetActivationSite (assemblyGroupId As SPUserCodeAssemblyGroupId, siteCollectionId As Guid, availableInstances As ReadOnlyCollection(Of SPUserCodeServiceInstance)) As SPUserCodeActivationSiteInfo" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::SharePoint::Administration::SPUserCodeActivationSiteInfo ^ GetActivationSite(Microsoft::SharePoint::Administration::SPUserCodeAssemblyGroupId ^ assemblyGroupId, Guid siteCollectionId, System::Collections::ObjectModel::ReadOnlyCollection&lt;Microsoft::SharePoint::Administration::SPUserCodeServiceInstance ^&gt; ^ availableInstances);" />
+      <MemberSignature Language="F#" Value="abstract member GetActivationSite : Microsoft.SharePoint.Administration.SPUserCodeAssemblyGroupId * Guid * System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.SharePoint.Administration.SPUserCodeServiceInstance&gt; -&gt; Microsoft.SharePoint.Administration.SPUserCodeActivationSiteInfo&#xA;override this.GetActivationSite : Microsoft.SharePoint.Administration.SPUserCodeAssemblyGroupId * Guid * System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.SharePoint.Administration.SPUserCodeServiceInstance&gt; -&gt; Microsoft.SharePoint.Administration.SPUserCodeActivationSiteInfo" Usage="sPUserCodeLoadBalancerProvider.GetActivationSite (assemblyGroupId, siteCollectionId, availableInstances)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -110,6 +114,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider.GetBackupActivationSite(Microsoft.SharePoint.Administration.SPUserCodeAssemblyGroupId,System.Guid,System.Collections.ObjectModel.ReadOnlyCollection{Microsoft.SharePoint.Administration.SPUserCodeServiceInstance},Microsoft.SharePoint.Administration.SPUserCodeServiceInstance)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function GetBackupActivationSite (assemblyGroupId As SPUserCodeAssemblyGroupId, siteCollectionId As Guid, availableInstances As ReadOnlyCollection(Of SPUserCodeServiceInstance), instanceToBackup As SPUserCodeServiceInstance) As SPUserCodeActivationSiteInfo" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::SharePoint::Administration::SPUserCodeActivationSiteInfo ^ GetBackupActivationSite(Microsoft::SharePoint::Administration::SPUserCodeAssemblyGroupId ^ assemblyGroupId, Guid siteCollectionId, System::Collections::ObjectModel::ReadOnlyCollection&lt;Microsoft::SharePoint::Administration::SPUserCodeServiceInstance ^&gt; ^ availableInstances, Microsoft::SharePoint::Administration::SPUserCodeServiceInstance ^ instanceToBackup);" />
+      <MemberSignature Language="F#" Value="abstract member GetBackupActivationSite : Microsoft.SharePoint.Administration.SPUserCodeAssemblyGroupId * Guid * System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.SharePoint.Administration.SPUserCodeServiceInstance&gt; * Microsoft.SharePoint.Administration.SPUserCodeServiceInstance -&gt; Microsoft.SharePoint.Administration.SPUserCodeActivationSiteInfo&#xA;override this.GetBackupActivationSite : Microsoft.SharePoint.Administration.SPUserCodeAssemblyGroupId * Guid * System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.SharePoint.Administration.SPUserCodeServiceInstance&gt; * Microsoft.SharePoint.Administration.SPUserCodeServiceInstance -&gt; Microsoft.SharePoint.Administration.SPUserCodeActivationSiteInfo" Usage="sPUserCodeLoadBalancerProvider.GetBackupActivationSite (assemblyGroupId, siteCollectionId, availableInstances, instanceToBackup)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -140,6 +145,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider.OnAddBackupObjects(Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnAddBackupObjects (self As SPBackupRestoreObject)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnAddBackupObjects(Microsoft::SharePoint::Administration::Backup::SPBackupRestoreObject ^ self);" />
+      <MemberSignature Language="F#" Value="override this.OnAddBackupObjects : Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject -&gt; unit" Usage="sPUserCodeLoadBalancerProvider.OnAddBackupObjects self" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -163,6 +169,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUserCodeLoadBalancerProvider.OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function OnRestore (sender As Object, info As SPRestoreInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override bool OnRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ info);" />
+      <MemberSignature Language="F#" Value="override this.OnRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool" Usage="sPUserCodeLoadBalancerProvider.OnRestore (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>

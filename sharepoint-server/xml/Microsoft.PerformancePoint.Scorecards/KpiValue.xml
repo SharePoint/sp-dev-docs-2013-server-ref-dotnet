@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.PerformancePoint.Scorecards.KpiValue" />
   <TypeSignature Language="VB.NET" Value="Public Class KpiValue&#xA;Implements ICloneable" />
   <TypeSignature Language="C++ CLI" Value="public ref class KpiValue : ICloneable" />
+  <TypeSignature Language="F#" Value="type KpiValue = class&#xA;    interface ICloneable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -16,6 +17,11 @@
       <InterfaceName>System.ICloneable</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
@@ -44,6 +50,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.KpiValue.#ctor(Microsoft.PerformancePoint.Scorecards.IGlobalCache)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (localCache As IGlobalCache)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; KpiValue(Microsoft::PerformancePoint::Scorecards::IGlobalCache ^ localCache);" />
+      <MemberSignature Language="F#" Value="new Microsoft.PerformancePoint.Scorecards.KpiValue : Microsoft.PerformancePoint.Scorecards.IGlobalCache -&gt; Microsoft.PerformancePoint.Scorecards.KpiValue" Usage="new Microsoft.PerformancePoint.Scorecards.KpiValue localCache" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -64,6 +71,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.KpiValue.Actual" />
       <MemberSignature Language="VB.NET" Value="Public Property Actual As KpiMeasureValue" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::KpiMeasureValue ^ Actual { Microsoft::PerformancePoint::Scorecards::KpiMeasureValue ^ get(); void set(Microsoft::PerformancePoint::Scorecards::KpiMeasureValue ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Actual : Microsoft.PerformancePoint.Scorecards.KpiMeasureValue with get, set" Usage="Microsoft.PerformancePoint.Scorecards.KpiValue.Actual" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -89,6 +97,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.KpiValue.Actuals" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Actuals As ActualValueCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::ActualValueCollection ^ Actuals { Microsoft::PerformancePoint::Scorecards::ActualValueCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Actuals : Microsoft.PerformancePoint.Scorecards.ActualValueCollection" Usage="Microsoft.PerformancePoint.Scorecards.KpiValue.Actuals" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -114,6 +123,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.KpiValue.BaseKpi" />
       <MemberSignature Language="VB.NET" Value="Public Property BaseKpi As Kpi" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::Kpi ^ BaseKpi { Microsoft::PerformancePoint::Scorecards::Kpi ^ get(); void set(Microsoft::PerformancePoint::Scorecards::Kpi ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.BaseKpi : Microsoft.PerformancePoint.Scorecards.Kpi with get, set" Usage="Microsoft.PerformancePoint.Scorecards.KpiValue.BaseKpi" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -139,6 +149,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.KpiValue.BaseKpiLocation" />
       <MemberSignature Language="VB.NET" Value="Public Property BaseKpiLocation As RepositoryLocation" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::RepositoryLocation ^ BaseKpiLocation { Microsoft::PerformancePoint::Scorecards::RepositoryLocation ^ get(); void set(Microsoft::PerformancePoint::Scorecards::RepositoryLocation ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.BaseKpiLocation : Microsoft.PerformancePoint.Scorecards.RepositoryLocation with get, set" Usage="Microsoft.PerformancePoint.Scorecards.KpiValue.BaseKpiLocation" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -164,6 +175,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.KpiValue.Clone" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function Clone () As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Object ^ Clone();" />
+      <MemberSignature Language="F#" Value="abstract member Clone : unit -&gt; obj&#xA;override this.Clone : unit -&gt; obj" Usage="kpiValue.Clone " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.ICloneable.Clone</InterfaceMember>
@@ -188,6 +200,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.KpiValue.ComputeScore(System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Sub ComputeScore (isLeaf As Boolean)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void ComputeScore(bool isLeaf);" />
+      <MemberSignature Language="F#" Value="member this.ComputeScore : bool -&gt; unit" Usage="kpiValue.ComputeScore isLeaf" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -211,6 +224,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.KpiValue.CopyFrom(Microsoft.PerformancePoint.Scorecards.KpiValue)" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Sub CopyFrom (element As KpiValue)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void CopyFrom(Microsoft::PerformancePoint::Scorecards::KpiValue ^ element);" />
+      <MemberSignature Language="F#" Value="abstract member CopyFrom : Microsoft.PerformancePoint.Scorecards.KpiValue -&gt; unit&#xA;override this.CopyFrom : Microsoft.PerformancePoint.Scorecards.KpiValue -&gt; unit" Usage="kpiValue.CopyFrom element" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -234,6 +248,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.KpiValue.ErrorValue" />
       <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property ErrorValue As KpiValue" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::PerformancePoint::Scorecards::KpiValue ^ ErrorValue { Microsoft::PerformancePoint::Scorecards::KpiValue ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ErrorValue : Microsoft.PerformancePoint.Scorecards.KpiValue" Usage="Microsoft.PerformancePoint.Scorecards.KpiValue.ErrorValue" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -259,6 +274,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.KpiValue.IsInError" />
       <MemberSignature Language="VB.NET" Value="Public Property IsInError As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsInError { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.IsInError : bool with get, set" Usage="Microsoft.PerformancePoint.Scorecards.KpiValue.IsInError" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -284,6 +300,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.KpiValue.LocalCache" />
       <MemberSignature Language="VB.NET" Value="Public Property LocalCache As IGlobalCache" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::IGlobalCache ^ LocalCache { Microsoft::PerformancePoint::Scorecards::IGlobalCache ^ get(); void set(Microsoft::PerformancePoint::Scorecards::IGlobalCache ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.LocalCache : Microsoft.PerformancePoint.Scorecards.IGlobalCache with get, set" Usage="Microsoft.PerformancePoint.Scorecards.KpiValue.LocalCache" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -309,6 +326,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.KpiValue.Targets" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Targets As TargetValueCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::TargetValueCollection ^ Targets { Microsoft::PerformancePoint::Scorecards::TargetValueCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Targets : Microsoft.PerformancePoint.Scorecards.TargetValueCollection" Usage="Microsoft.PerformancePoint.Scorecards.KpiValue.Targets" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -334,6 +352,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.KpiValue.Validate" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub Validate ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Validate();" />
+      <MemberSignature Language="F#" Value="abstract member Validate : unit -&gt; unit&#xA;override this.Validate : unit -&gt; unit" Usage="kpiValue.Validate " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -354,6 +373,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.KpiValue.Weight" />
       <MemberSignature Language="VB.NET" Value="Public Property Weight As Decimal" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Decimal Weight { System::Decimal get(); void set(System::Decimal value); };" />
+      <MemberSignature Language="F#" Value="member this.Weight : decimal with get, set" Usage="Microsoft.PerformancePoint.Scorecards.KpiValue.Weight" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>

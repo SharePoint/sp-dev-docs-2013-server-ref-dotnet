@@ -1,9 +1,10 @@
 ﻿<Type Name="SignaturePage" FullName="Microsoft.Office.InfoPath.Server.Controls.SignaturePage">
-  <TypeSignature Language="C#" Value="public class SignaturePage : System.Web.UI.Page" />
+  <TypeSignature Language="C#" Value="public class SignaturePage : System.Web.UI.Page, System.Web.IHttpHandler" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SignaturePage extends System.Web.UI.Page implements class System.Web.IHttpHandler" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.InfoPath.Server.Controls.SignaturePage" />
-  <TypeSignature Language="VB.NET" Value="Public Class SignaturePage&#xA;Inherits Page" />
-  <TypeSignature Language="C++ CLI" Value="public ref class SignaturePage : System::Web::UI::Page" />
+  <TypeSignature Language="VB.NET" Value="Public Class SignaturePage&#xA;Inherits Page&#xA;Implements IHttpHandler" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SignaturePage : System::Web::UI::Page, System::Web::IHttpHandler" />
+  <TypeSignature Language="F#" Value="type SignaturePage = class&#xA;    inherit Page&#xA;    interface IHttpHandler" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -11,7 +12,11 @@
   <Base>
     <BaseTypeName>System.Web.UI.Page</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Web.IHttpHandler</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
@@ -40,10 +45,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.InfoPath.Server.Controls.SignaturePage.ProcessRequest(System.Web.HttpContext)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub ProcessRequest (context As HttpContext)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void ProcessRequest(System::Web::HttpContext ^ context);" />
+      <MemberSignature Language="F#" Value="abstract member ProcessRequest : System.Web.HttpContext -&gt; unit&#xA;override this.ProcessRequest : System.Web.HttpContext -&gt; unit" Usage="signaturePage.ProcessRequest context" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.InfoPath.Server</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>

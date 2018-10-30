@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.PerformancePoint.Scorecards.ReportView" />
   <TypeSignature Language="VB.NET" Value="Public Class ReportView&#xA;Inherits FirstClassElement&#xA;Implements ICloneable, ICustomizableFCO, IEquatable(Of ReportView), IParameterPoint, IWebPluggableView" />
   <TypeSignature Language="C++ CLI" Value="public ref class ReportView : Microsoft::PerformancePoint::Scorecards::FirstClassElement, ICloneable, IEquatable&lt;Microsoft::PerformancePoint::Scorecards::ReportView ^&gt;, Microsoft::PerformancePoint::Scorecards::ICustomizableFCO, Microsoft::PerformancePoint::Scorecards::IParameterPoint, Microsoft::PerformancePoint::Scorecards::IWebPluggableView" />
+  <TypeSignature Language="F#" Value="type ReportView = class&#xA;    inherit FirstClassElement&#xA;    interface IParameterPoint&#xA;    interface ICloneable&#xA;    interface IDiffable&#xA;    interface IEquatable&lt;ReportView&gt;&#xA;    interface IWebPluggableView&#xA;    interface ICustomizableFCO" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -28,6 +29,11 @@
       <InterfaceName>System.IEquatable&lt;Microsoft.PerformancePoint.Scorecards.ReportView&gt;</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
@@ -56,6 +62,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.ReportView.BeginPoints" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property BeginPoints As ParameterDefinitionCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::ParameterDefinitionCollection ^ BeginPoints { Microsoft::PerformancePoint::Scorecards::ParameterDefinitionCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.BeginPoints : Microsoft.PerformancePoint.Scorecards.ParameterDefinitionCollection" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.BeginPoints" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.PerformancePoint.Scorecards.IParameterPoint.BeginPoints</InterfaceMember>
@@ -84,6 +91,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.Clone" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function Clone () As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Object ^ Clone();" />
+      <MemberSignature Language="F#" Value="override this.Clone : unit -&gt; obj" Usage="reportView.Clone " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.ICloneable.Clone</InterfaceMember>
@@ -108,6 +116,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.ReportView.ConfiguredViewId" />
       <MemberSignature Language="VB.NET" Value="Public Property ConfiguredViewId As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid ConfiguredViewId { Guid get(); void set(Guid value); };" />
+      <MemberSignature Language="F#" Value="member this.ConfiguredViewId : Guid with get, set" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.ConfiguredViewId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -132,6 +141,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void CopyFrom(class Microsoft.PerformancePoint.Scorecards.Element element) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.CopyFrom(Microsoft.PerformancePoint.Scorecards.Element)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void CopyFrom(Microsoft::PerformancePoint::Scorecards::Element ^ element);" />
+      <MemberSignature Language="F#" Value="override this.CopyFrom : Microsoft.PerformancePoint.Scorecards.Element -&gt; unit" Usage="reportView.CopyFrom element" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -155,6 +165,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.CreateNew" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function CreateNew () As ReportView" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::PerformancePoint::Scorecards::ReportView ^ CreateNew();" />
+      <MemberSignature Language="F#" Value="static member CreateNew : unit -&gt; Microsoft.PerformancePoint.Scorecards.ReportView" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.CreateNew " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -176,6 +187,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.ReportView.CustomData" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property CustomData As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ CustomData { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.CustomData : string with get, set" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.CustomData" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.PerformancePoint.Scorecards.ICustomizableFCO.CustomData</InterfaceMember>
@@ -204,6 +216,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.Diff(System.Object)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function Diff (oldValue As Object) As DiffCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::PerformancePoint::Scorecards::DiffCollection ^ Diff(System::Object ^ oldValue);" />
+      <MemberSignature Language="F#" Value="override this.Diff : obj -&gt; Microsoft.PerformancePoint.Scorecards.DiffCollection" Usage="reportView.Diff oldValue" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.PerformancePoint.Scorecards.IDiffable.Diff(System.Object)</InterfaceMember>
@@ -231,6 +244,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.ReportView.EndPoints" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property EndPoints As EndPointCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::EndPointCollection ^ EndPoints { Microsoft::PerformancePoint::Scorecards::EndPointCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.EndPoints : Microsoft.PerformancePoint.Scorecards.EndPointCollection" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.EndPoints" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.PerformancePoint.Scorecards.IParameterPoint.EndPoints</InterfaceMember>
@@ -259,6 +273,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.Equals(Microsoft.PerformancePoint.Scorecards.ReportView)" />
       <MemberSignature Language="VB.NET" Value="Public Function Equals (other As ReportView) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool Equals(Microsoft::PerformancePoint::Scorecards::ReportView ^ other);" />
+      <MemberSignature Language="F#" Value="override this.Equals : Microsoft.PerformancePoint.Scorecards.ReportView -&gt; bool" Usage="reportView.Equals other" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.IEquatable`1.Equals(`0)</InterfaceMember>
@@ -286,6 +301,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.GetChildFCOLocations" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function GetChildFCOLocations () As List(Of RepositoryLocation)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Collections::Generic::List&lt;Microsoft::PerformancePoint::Scorecards::RepositoryLocation ^&gt; ^ GetChildFCOLocations();" />
+      <MemberSignature Language="F#" Value="override this.GetChildFCOLocations : unit -&gt; System.Collections.Generic.List&lt;Microsoft.PerformancePoint.Scorecards.RepositoryLocation&gt;" Usage="reportView.GetChildFCOLocations " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -307,6 +323,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.GetOlapReportViewData" />
       <MemberSignature Language="VB.NET" Value="Public Function GetOlapReportViewData () As OLAPReportViewData" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::PerformancePoint::Scorecards::OlapReportViews::OLAPReportViewData ^ GetOlapReportViewData();" />
+      <MemberSignature Language="F#" Value="member this.GetOlapReportViewData : unit -&gt; Microsoft.PerformancePoint.Scorecards.OlapReportViews.OLAPReportViewData" Usage="reportView.GetOlapReportViewData " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -328,6 +345,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.GetRendererClassForNativeFCO(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function GetRendererClassForNativeFCO (subTypeId As String) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ GetRendererClassForNativeFCO(System::String ^ subTypeId);" />
+      <MemberSignature Language="F#" Value="static member GetRendererClassForNativeFCO : string -&gt; string" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.GetRendererClassForNativeFCO subTypeId" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -352,6 +370,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.GetStrategyMapViewData" />
       <MemberSignature Language="VB.NET" Value="Public Function GetStrategyMapViewData () As StrategyMapViewData" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::PerformancePoint::Scorecards::StrategyMapViewData ^ GetStrategyMapViewData();" />
+      <MemberSignature Language="F#" Value="member this.GetStrategyMapViewData : unit -&gt; Microsoft.PerformancePoint.Scorecards.StrategyMapViewData" Usage="reportView.GetStrategyMapViewData " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -373,6 +392,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.GetTypeDisplayName" />
       <MemberSignature Language="VB.NET" Value="Public Function GetTypeDisplayName () As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetTypeDisplayName();" />
+      <MemberSignature Language="F#" Value="member this.GetTypeDisplayName : unit -&gt; string" Usage="reportView.GetTypeDisplayName " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -394,6 +414,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.HasCustomData" />
       <MemberSignature Language="VB.NET" Value="Public Function HasCustomData () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool HasCustomData();" />
+      <MemberSignature Language="F#" Value="member this.HasCustomData : unit -&gt; bool" Usage="reportView.HasCustomData " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -415,6 +436,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.InitBeginPoints" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub InitBeginPoints ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void InitBeginPoints();" />
+      <MemberSignature Language="F#" Value="abstract member InitBeginPoints : unit -&gt; unit&#xA;override this.InitBeginPoints : unit -&gt; unit" Usage="reportView.InitBeginPoints " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.PerformancePoint.Scorecards.IParameterPoint.InitBeginPoints</InterfaceMember>
@@ -438,6 +460,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.InitEndPoints" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub InitEndPoints ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void InitEndPoints();" />
+      <MemberSignature Language="F#" Value="abstract member InitEndPoints : unit -&gt; unit&#xA;override this.InitEndPoints : unit -&gt; unit" Usage="reportView.InitEndPoints " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.PerformancePoint.Scorecards.IParameterPoint.InitEndPoints</InterfaceMember>
@@ -461,6 +484,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.InitEndPoints(Microsoft.PerformancePoint.Scorecards.Cube)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub InitEndPoints (cubeMetaData As Cube)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void InitEndPoints(Microsoft::PerformancePoint::Scorecards::Cube ^ cubeMetaData);" />
+      <MemberSignature Language="F#" Value="abstract member InitEndPoints : Microsoft.PerformancePoint.Scorecards.Cube -&gt; unit&#xA;override this.InitEndPoints : Microsoft.PerformancePoint.Scorecards.Cube -&gt; unit" Usage="reportView.InitEndPoints cubeMetaData" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -484,6 +508,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.IsAnalyticChartReport" />
       <MemberSignature Language="VB.NET" Value="Public Function IsAnalyticChartReport () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsAnalyticChartReport();" />
+      <MemberSignature Language="F#" Value="member this.IsAnalyticChartReport : unit -&gt; bool" Usage="reportView.IsAnalyticChartReport " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -505,6 +530,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.IsAnalyticReport" />
       <MemberSignature Language="VB.NET" Value="Public Function IsAnalyticReport () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsAnalyticReport();" />
+      <MemberSignature Language="F#" Value="member this.IsAnalyticReport : unit -&gt; bool" Usage="reportView.IsAnalyticReport " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -526,6 +552,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.IsNativeFCO(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function IsNativeFCO (subTypeId As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool IsNativeFCO(System::String ^ subTypeId);" />
+      <MemberSignature Language="F#" Value="static member IsNativeFCO : string -&gt; bool" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.IsNativeFCO subTypeId" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -550,6 +577,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.IsStrategyMapReport" />
       <MemberSignature Language="VB.NET" Value="Public Function IsStrategyMapReport () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsStrategyMapReport();" />
+      <MemberSignature Language="F#" Value="member this.IsStrategyMapReport : unit -&gt; bool" Usage="reportView.IsStrategyMapReport " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -571,6 +599,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.ReportView.RenderClientSide" />
       <MemberSignature Language="VB.NET" Value="Public Property RenderClientSide As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool RenderClientSide { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.RenderClientSide : bool with get, set" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.RenderClientSide" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -596,6 +625,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.ReportView.RendererClassName" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property RendererClassName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ RendererClassName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.RendererClassName : string with get, set" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.RendererClassName" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.PerformancePoint.Scorecards.IWebPluggableView.RendererClassName</InterfaceMember>
@@ -624,6 +654,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.ReportView.ScorecardLocation" />
       <MemberSignature Language="VB.NET" Value="Public Property ScorecardLocation As RepositoryLocation" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::RepositoryLocation ^ ScorecardLocation { Microsoft::PerformancePoint::Scorecards::RepositoryLocation ^ get(); void set(Microsoft::PerformancePoint::Scorecards::RepositoryLocation ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.ScorecardLocation : Microsoft.PerformancePoint.Scorecards.RepositoryLocation with get, set" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.ScorecardLocation" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -649,6 +680,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.SetAnalyticReportCaption(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetAnalyticReportCaption (caption As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetAnalyticReportCaption(System::String ^ caption);" />
+      <MemberSignature Language="F#" Value="member this.SetAnalyticReportCaption : string -&gt; unit" Usage="reportView.SetAnalyticReportCaption caption" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -672,6 +704,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.SetAnalyticReportParentId(Microsoft.PerformancePoint.Scorecards.RepositoryLocation)" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetAnalyticReportParentId (parentLocation As RepositoryLocation)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetAnalyticReportParentId(Microsoft::PerformancePoint::Scorecards::RepositoryLocation ^ parentLocation);" />
+      <MemberSignature Language="F#" Value="member this.SetAnalyticReportParentId : Microsoft.PerformancePoint.Scorecards.RepositoryLocation -&gt; unit" Usage="reportView.SetAnalyticReportParentId parentLocation" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -695,6 +728,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.SetOlapReportViewData(Microsoft.PerformancePoint.Scorecards.OlapReportViews.OLAPReportViewData)" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetOlapReportViewData (data As OLAPReportViewData)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetOlapReportViewData(Microsoft::PerformancePoint::Scorecards::OlapReportViews::OLAPReportViewData ^ data);" />
+      <MemberSignature Language="F#" Value="member this.SetOlapReportViewData : Microsoft.PerformancePoint.Scorecards.OlapReportViews.OLAPReportViewData -&gt; unit" Usage="reportView.SetOlapReportViewData data" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -718,6 +752,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.SetStrategyMapViewData(Microsoft.PerformancePoint.Scorecards.StrategyMapViewData)" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetStrategyMapViewData (data As StrategyMapViewData)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetStrategyMapViewData(Microsoft::PerformancePoint::Scorecards::StrategyMapViewData ^ data);" />
+      <MemberSignature Language="F#" Value="member this.SetStrategyMapViewData : Microsoft.PerformancePoint.Scorecards.StrategyMapViewData -&gt; unit" Usage="reportView.SetStrategyMapViewData data" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -741,6 +776,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.ReportView.SubTypeId" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property SubTypeId As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ SubTypeId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.SubTypeId : string with get, set" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.SubTypeId" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.PerformancePoint.Scorecards.ICustomizableFCO.SubTypeId</InterfaceMember>
@@ -769,6 +805,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.ReportView.TypeName" />
       <MemberSignature Language="VB.NET" Value="Public Property TypeName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ TypeName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.TypeName : string with get, set" Usage="Microsoft.PerformancePoint.Scorecards.ReportView.TypeName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -794,6 +831,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.ReportView.Validate" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Validate ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Validate();" />
+      <MemberSignature Language="F#" Value="override this.Validate : unit -&gt; unit" Usage="reportView.Validate " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>

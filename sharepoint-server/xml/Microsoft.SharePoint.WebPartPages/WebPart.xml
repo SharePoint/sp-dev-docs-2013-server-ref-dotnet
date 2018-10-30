@@ -1,9 +1,10 @@
 ﻿<Type Name="WebPart" FullName="Microsoft.SharePoint.WebPartPages.WebPart">
-  <TypeSignature Language="C#" Value="public abstract class WebPart : System.Web.UI.WebControls.WebParts.WebPart, Microsoft.SharePoint.WebPartPages.IConnectionData" />
+  <TypeSignature Language="C#" Value="public abstract class WebPart : System.Web.UI.WebControls.WebParts.WebPart, Microsoft.SharePoint.WebPartPages.IConnectionData, System.Web.UI.IAttributeAccessor, System.Web.UI.INamingContainer" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit WebPart extends System.Web.UI.WebControls.WebParts.WebPart implements class Microsoft.SharePoint.WebPartPages.IConnectionData, class System.Web.UI.IAttributeAccessor, class System.Web.UI.INamingContainer" />
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.WebPartPages.WebPart" />
-  <TypeSignature Language="VB.NET" Value="Public MustInherit Class WebPart&#xA;Inherits WebPart&#xA;Implements IConnectionData" />
-  <TypeSignature Language="C++ CLI" Value="public ref class WebPart abstract : System::Web::UI::WebControls::WebParts::WebPart, Microsoft::SharePoint::WebPartPages::IConnectionData" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class WebPart&#xA;Inherits WebPart&#xA;Implements IAttributeAccessor, IConnectionData, INamingContainer" />
+  <TypeSignature Language="C++ CLI" Value="public ref class WebPart abstract : System::Web::UI::WebControls::WebParts::WebPart, Microsoft::SharePoint::WebPartPages::IConnectionData, System::Web::UI::IAttributeAccessor, System::Web::UI::INamingContainer" />
+  <TypeSignature Language="F#" Value="type WebPart = class&#xA;    inherit WebPart&#xA;    interface INamingContainer&#xA;    interface IAttributeAccessor&#xA;    interface IConnectionData" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -14,6 +15,12 @@
   <Interfaces>
     <Interface>
       <InterfaceName>Microsoft.SharePoint.WebPartPages.IConnectionData</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Web.UI.IAttributeAccessor</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Web.UI.INamingContainer</InterfaceName>
     </Interface>
   </Interfaces>
   <Attributes>
@@ -58,6 +65,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.AddParsedSubObject(System.Object)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub AddParsedSubObject (obj As Object)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void AddParsedSubObject(System::Object ^ obj);" />
+      <MemberSignature Language="F#" Value="abstract member AddParsedSubObject : obj -&gt; unit&#xA;override this.AddParsedSubObject : obj -&gt; unit" Usage="webPart.AddParsedSubObject obj" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -81,6 +89,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.AfterDeserialize" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub AfterDeserialize ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void AfterDeserialize();" />
+      <MemberSignature Language="F#" Value="abstract member AfterDeserialize : unit -&gt; unit&#xA;override this.AfterDeserialize : unit -&gt; unit" Usage="webPart.AfterDeserialize " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -101,6 +110,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.AllowConnect" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property AllowConnect As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool AllowConnect { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.AllowConnect : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.AllowConnect" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -135,6 +145,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.AllowEdit" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property AllowEdit As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool AllowEdit { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.AllowEdit : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.AllowEdit" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -169,6 +180,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.AllowHide" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property AllowHide As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool AllowHide { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.AllowHide : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.AllowHide" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -203,6 +215,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.AllowMinimize" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property AllowMinimize As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool AllowMinimize { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.AllowMinimize : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.AllowMinimize" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -237,6 +250,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.AllowRemove" />
       <MemberSignature Language="VB.NET" Value="Public Property AllowRemove As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool AllowRemove { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.AllowRemove : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.AllowRemove" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -274,6 +288,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.AllowZoneChange" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property AllowZoneChange As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool AllowZoneChange { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.AllowZoneChange : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.AllowZoneChange" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -308,6 +323,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.AuthorizationFilter" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property AuthorizationFilter As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ AuthorizationFilter { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.AuthorizationFilter : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.AuthorizationFilter" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -333,6 +349,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.BrowserDesignMode" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property BrowserDesignMode As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool BrowserDesignMode { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.BrowserDesignMode : bool" Usage="Microsoft.SharePoint.WebPartPages.WebPart.BrowserDesignMode" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -340,10 +357,10 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.Obsolete("Use WebPartManager.DisplayMode instead.")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Obsolete("Use WebPartManager.DisplayMode instead.")</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -361,6 +378,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.CacheType" />
       <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property CacheType As CacheType" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; property Microsoft::SharePoint::WebPartPages::CacheType CacheType { Microsoft::SharePoint::WebPartPages::CacheType get(); };" />
+      <MemberSignature Language="F#" Value="member this.CacheType : Microsoft.SharePoint.WebPartPages.CacheType" Usage="Microsoft.SharePoint.WebPartPages.WebPart.CacheType" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -381,6 +399,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.CanRunAt" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function CanRunAt () As ConnectionRunAt" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::SharePoint::WebPartPages::Communication::ConnectionRunAt CanRunAt();" />
+      <MemberSignature Language="F#" Value="abstract member CanRunAt : unit -&gt; Microsoft.SharePoint.WebPartPages.Communication.ConnectionRunAt&#xA;override this.CanRunAt : unit -&gt; Microsoft.SharePoint.WebPartPages.Communication.ConnectionRunAt" Usage="webPart.CanRunAt " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -407,6 +426,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Caption" />
       <MemberSignature Language="VB.NET" Value="Public Property Caption As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Caption { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Caption : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Caption" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -417,10 +437,10 @@
           <AttributeName>Microsoft.SharePoint.WebPartPages.WebPartStorage(Microsoft.SharePoint.WebPartPages.Storage.None)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.Obsolete("Use Subtitle instead.")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Obsolete("Use Subtitle instead.")</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -438,6 +458,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.CatalogIconImageUrl" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property CatalogIconImageUrl As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ CatalogIconImageUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.CatalogIconImageUrl : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.CatalogIconImageUrl" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -463,6 +484,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.ClassResourcePath" />
       <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property ClassResourcePath As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; property System::String ^ ClassResourcePath { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ClassResourcePath : string" Usage="Microsoft.SharePoint.WebPartPages.WebPart.ClassResourcePath" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -483,6 +505,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.ClientName" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ClientName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ClientName { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ClientName : string" Usage="Microsoft.SharePoint.WebPartPages.WebPart.ClientName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -490,7 +513,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -508,6 +531,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.ConnectionID" />
       <MemberSignature Language="VB.NET" Value="Public Property ConnectionID As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid ConnectionID { Guid get(); void set(Guid value); };" />
+      <MemberSignature Language="F#" Value="member this.ConnectionID : Guid with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.ConnectionID" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -539,6 +563,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Connections" />
       <MemberSignature Language="VB.NET" Value="Public Property Connections As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Connections { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Connections : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Connections" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -570,6 +595,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.ContainerWidth" />
       <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property ContainerWidth As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; property System::String ^ ContainerWidth { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ContainerWidth : string" Usage="Microsoft.SharePoint.WebPartPages.WebPart.ContainerWidth" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -595,6 +621,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.CreateWebPartMenu" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub CreateWebPartMenu ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void CreateWebPartMenu();" />
+      <MemberSignature Language="F#" Value="abstract member CreateWebPartMenu : unit -&gt; unit&#xA;override this.CreateWebPartMenu : unit -&gt; unit" Usage="webPart.CreateWebPartMenu " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -615,6 +642,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.CssStyleSheet" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property CssStyleSheet As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ CssStyleSheet { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.CssStyleSheet : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.CssStyleSheet" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -640,6 +668,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Description" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property Description As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ Description { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Description : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Description" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -674,6 +703,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.DetailLink" />
       <MemberSignature Language="VB.NET" Value="Public Property DetailLink As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DetailLink { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.DetailLink : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.DetailLink" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -714,6 +744,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Dir" />
       <MemberSignature Language="VB.NET" Value="Public Property Dir As Direction" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebPartPages::Direction Dir { Microsoft::SharePoint::WebPartPages::Direction get(); void set(Microsoft::SharePoint::WebPartPages::Direction value); };" />
+      <MemberSignature Language="F#" Value="member this.Dir : Microsoft.SharePoint.WebPartPages.Direction with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Dir" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -751,6 +782,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.Dispose" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Dispose ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Dispose();" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : unit -&gt; unit&#xA;override this.Dispose : unit -&gt; unit" Usage="webPart.Dispose " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -771,6 +803,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.EffectiveFrameType" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property EffectiveFrameType As FrameType" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebPartPages::FrameType EffectiveFrameType { Microsoft::SharePoint::WebPartPages::FrameType get(); };" />
+      <MemberSignature Language="F#" Value="member this.EffectiveFrameType : Microsoft.SharePoint.WebPartPages.FrameType" Usage="Microsoft.SharePoint.WebPartPages.WebPart.EffectiveFrameType" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -778,10 +811,10 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.Obsolete("Use WebPartZone.GetEffectiveChromeType() instead.")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Obsolete("Use WebPartZone.GetEffectiveChromeType() instead.")</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -799,6 +832,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.EffectiveStorage" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property EffectiveStorage As Storage" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebPartPages::Storage EffectiveStorage { Microsoft::SharePoint::WebPartPages::Storage get(); };" />
+      <MemberSignature Language="F#" Value="member this.EffectiveStorage : Microsoft.SharePoint.WebPartPages.Storage" Usage="Microsoft.SharePoint.WebPartPages.WebPart.EffectiveStorage" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -806,7 +840,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -824,6 +858,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.EffectiveTitle" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property EffectiveTitle As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ EffectiveTitle { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.EffectiveTitle : string" Usage="Microsoft.SharePoint.WebPartPages.WebPart.EffectiveTitle" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -831,7 +866,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -849,6 +884,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.EnsureInterfaces" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub EnsureInterfaces ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void EnsureInterfaces();" />
+      <MemberSignature Language="F#" Value="abstract member EnsureInterfaces : unit -&gt; unit&#xA;override this.EnsureInterfaces : unit -&gt; unit" Usage="webPart.EnsureInterfaces " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -874,6 +910,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.ExportControlledProperties" />
       <MemberSignature Language="VB.NET" Value="Public Property ExportControlledProperties As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ExportControlledProperties { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.ExportControlledProperties : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.ExportControlledProperties" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -911,6 +948,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.FrameState" />
       <MemberSignature Language="VB.NET" Value="Public Property FrameState As FrameState" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebPartPages::FrameState FrameState { Microsoft::SharePoint::WebPartPages::FrameState get(); void set(Microsoft::SharePoint::WebPartPages::FrameState value); };" />
+      <MemberSignature Language="F#" Value="member this.FrameState : Microsoft.SharePoint.WebPartPages.FrameState with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.FrameState" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -948,6 +986,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.FrameType" />
       <MemberSignature Language="VB.NET" Value="Public Property FrameType As FrameType" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebPartPages::FrameType FrameType { Microsoft::SharePoint::WebPartPages::FrameType get(); void set(Microsoft::SharePoint::WebPartPages::FrameType value); };" />
+      <MemberSignature Language="F#" Value="member this.FrameType : Microsoft.SharePoint.WebPartPages.FrameType with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.FrameType" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -985,6 +1024,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.GetCustomBuilder(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Function GetCustomBuilder (propertyName As String) As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual System::String ^ GetCustomBuilder(System::String ^ propertyName);" />
+      <MemberSignature Language="F#" Value="abstract member GetCustomBuilder : string -&gt; string&#xA;override this.GetCustomBuilder : string -&gt; string" Usage="webPart.GetCustomBuilder propertyName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1009,6 +1049,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.GetData" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub GetData ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void GetData();" />
+      <MemberSignature Language="F#" Value="abstract member GetData : unit -&gt; unit&#xA;override this.GetData : unit -&gt; unit" Usage="webPart.GetData " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.WebPartPages.IConnectionData.GetData</InterfaceMember>
@@ -1037,6 +1078,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.GetDesignTimeFooter" />
       <MemberSignature Language="VB.NET" Value="Public Function GetDesignTimeFooter () As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetDesignTimeFooter();" />
+      <MemberSignature Language="F#" Value="member this.GetDesignTimeFooter : unit -&gt; string" Usage="webPart.GetDesignTimeFooter " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1058,6 +1100,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.GetDesignTimeHeader" />
       <MemberSignature Language="VB.NET" Value="Public Function GetDesignTimeHeader () As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetDesignTimeHeader();" />
+      <MemberSignature Language="F#" Value="member this.GetDesignTimeHeader : unit -&gt; string" Usage="webPart.GetDesignTimeHeader " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1079,6 +1122,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.GetInitEventArgs(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function GetInitEventArgs (InterfaceName As String) As InitEventArgs" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::SharePoint::WebPartPages::Communication::InitEventArgs ^ GetInitEventArgs(System::String ^ InterfaceName);" />
+      <MemberSignature Language="F#" Value="abstract member GetInitEventArgs : string -&gt; Microsoft.SharePoint.WebPartPages.Communication.InitEventArgs&#xA;override this.GetInitEventArgs : string -&gt; Microsoft.SharePoint.WebPartPages.Communication.InitEventArgs" Usage="webPart.GetInitEventArgs InterfaceName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1108,6 +1152,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.GetRequiresData" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function GetRequiresData () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool GetRequiresData();" />
+      <MemberSignature Language="F#" Value="abstract member GetRequiresData : unit -&gt; bool&#xA;override this.GetRequiresData : unit -&gt; bool" Usage="webPart.GetRequiresData " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.WebPartPages.IConnectionData.GetRequiresData</InterfaceMember>
@@ -1137,6 +1182,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.GetThemedImages" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function GetThemedImages () As String()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual cli::array &lt;System::String ^&gt; ^ GetThemedImages();" />
+      <MemberSignature Language="F#" Value="abstract member GetThemedImages : unit -&gt; string[]&#xA;override this.GetThemedImages : unit -&gt; string[]" Usage="webPart.GetThemedImages " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1158,6 +1204,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.GetThemedLocalizedImages" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function GetThemedLocalizedImages () As String()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual cli::array &lt;System::String ^&gt; ^ GetThemedLocalizedImages();" />
+      <MemberSignature Language="F#" Value="abstract member GetThemedLocalizedImages : unit -&gt; string[]&#xA;override this.GetThemedLocalizedImages : unit -&gt; string[]" Usage="webPart.GetThemedLocalizedImages " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1179,6 +1226,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.GetToolParts" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function GetToolParts () As ToolPart()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual cli::array &lt;Microsoft::SharePoint::WebPartPages::ToolPart ^&gt; ^ GetToolParts();" />
+      <MemberSignature Language="F#" Value="abstract member GetToolParts : unit -&gt; Microsoft.SharePoint.WebPartPages.ToolPart[]&#xA;override this.GetToolParts : unit -&gt; Microsoft.SharePoint.WebPartPages.ToolPart[]" Usage="webPart.GetToolParts " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1200,6 +1248,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Height" />
       <MemberSignature Language="VB.NET" Value="Public Property Height As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Height { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Height : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Height" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1237,6 +1286,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.HelpLink" />
       <MemberSignature Language="VB.NET" Value="Public Property HelpLink As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ HelpLink { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.HelpLink : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.HelpLink" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1277,6 +1327,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.HelpMode" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property HelpMode As WebPartHelpMode" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Web::UI::WebControls::WebParts::WebPartHelpMode HelpMode { System::Web::UI::WebControls::WebParts::WebPartHelpMode get(); void set(System::Web::UI::WebControls::WebParts::WebPartHelpMode value); };" />
+      <MemberSignature Language="F#" Value="member this.HelpMode : System.Web.UI.WebControls.WebParts.WebPartHelpMode with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.HelpMode" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1311,6 +1362,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.HelpUrl" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property HelpUrl As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ HelpUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.HelpUrl : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.HelpUrl" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1336,6 +1388,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Hidden" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property Hidden As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool Hidden { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.Hidden : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Hidden" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1361,6 +1414,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.ID" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property ID As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ ID { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.ID : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.ID" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1392,6 +1446,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.ImportErrorMessage" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property ImportErrorMessage As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ ImportErrorMessage { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.ImportErrorMessage : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.ImportErrorMessage" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1417,6 +1472,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.IsIncluded" />
       <MemberSignature Language="VB.NET" Value="Public Property IsIncluded As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsIncluded { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.IsIncluded : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.IsIncluded" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1454,6 +1510,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.IsIncludedFilter" />
       <MemberSignature Language="VB.NET" Value="Public Property IsIncludedFilter As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ IsIncludedFilter { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.IsIncludedFilter : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.IsIncludedFilter" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1491,6 +1548,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.IsVisible" />
       <MemberSignature Language="VB.NET" Value="Public Property IsVisible As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsVisible { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.IsVisible : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.IsVisible" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1528,6 +1586,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebPartPages.WebPart.LimitOneConnection" />
       <MemberSignature Language="VB.NET" Value="Public Const LimitOneConnection As Integer  = 1" />
       <MemberSignature Language="C++ CLI" Value="public: int LimitOneConnection = 1;" />
+      <MemberSignature Language="F#" Value="val mutable LimitOneConnection : int" Usage="Microsoft.SharePoint.WebPartPages.WebPart.LimitOneConnection" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1548,6 +1607,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.LoadResource(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function LoadResource (id As String) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::String ^ LoadResource(System::String ^ id);" />
+      <MemberSignature Language="F#" Value="abstract member LoadResource : string -&gt; string&#xA;override this.LoadResource : string -&gt; string" Usage="webPart.LoadResource id" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1572,6 +1632,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.LoadViewState(System.Object)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub LoadViewState (savedState As Object)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void LoadViewState(System::Object ^ savedState);" />
+      <MemberSignature Language="F#" Value="abstract member LoadViewState : obj -&gt; unit&#xA;override this.LoadViewState : obj -&gt; unit" Usage="webPart.LoadViewState savedState" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1642,6 +1703,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.MissingAssembly" />
       <MemberSignature Language="VB.NET" Value="Public Property MissingAssembly As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ MissingAssembly { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.MissingAssembly : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.MissingAssembly" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1661,10 +1723,10 @@
           <AttributeName>System.Obsolete("Use ImportErrorMessage instead.")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable(System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared)</AttributeName>
+          <AttributeName>System.Xml.Serialization.XmlElement("MissingAssembly")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("MissingAssembly")</AttributeName>
+          <AttributeName>System.Web.UI.WebControls.WebParts.Personalizable</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -1682,6 +1744,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.NotifyWorkItemComplete(System.IAsyncResult)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub NotifyWorkItemComplete (iar As IAsyncResult)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void NotifyWorkItemComplete(IAsyncResult ^ iar);" />
+      <MemberSignature Language="F#" Value="member this.NotifyWorkItemComplete : IAsyncResult -&gt; unit" Usage="webPart.NotifyWorkItemComplete iar" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1710,6 +1773,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.OnDataBinding(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnDataBinding (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnDataBinding(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="abstract member OnDataBinding : EventArgs -&gt; unit&#xA;override this.OnDataBinding : EventArgs -&gt; unit" Usage="webPart.OnDataBinding e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1733,6 +1797,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.OnInit(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnInit (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnInit(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="abstract member OnInit : EventArgs -&gt; unit&#xA;override this.OnInit : EventArgs -&gt; unit" Usage="webPart.OnInit e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1756,6 +1821,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.OnPreRender(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnPreRender (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnPreRender(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="abstract member OnPreRender : EventArgs -&gt; unit&#xA;override this.OnPreRender : EventArgs -&gt; unit" Usage="webPart.OnPreRender e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1779,6 +1845,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.OnUnload(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnUnload (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnUnload(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="abstract member OnUnload : EventArgs -&gt; unit&#xA;override this.OnUnload : EventArgs -&gt; unit" Usage="webPart.OnUnload e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1802,6 +1869,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.OverflowAuto" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable ReadOnly Property OverflowAuto As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property bool OverflowAuto { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.OverflowAuto : bool" Usage="Microsoft.SharePoint.WebPartPages.WebPart.OverflowAuto" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1822,6 +1890,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.PartCacheInvalidate" />
       <MemberSignature Language="VB.NET" Value="Public Sub PartCacheInvalidate ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void PartCacheInvalidate();" />
+      <MemberSignature Language="F#" Value="member this.PartCacheInvalidate : unit -&gt; unit" Usage="webPart.PartCacheInvalidate " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1841,6 +1910,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig instance void PartCacheInvalidate(valuetype Microsoft.SharePoint.WebPartPages.Storage storage) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.PartCacheInvalidate(Microsoft.SharePoint.WebPartPages.Storage)" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; void PartCacheInvalidate(Microsoft::SharePoint::WebPartPages::Storage storage);" />
+      <MemberSignature Language="F#" Value="member this.PartCacheInvalidate : Microsoft.SharePoint.WebPartPages.Storage -&gt; unit" Usage="webPart.PartCacheInvalidate storage" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1863,6 +1933,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void PartCacheInvalidate(valuetype Microsoft.SharePoint.WebPartPages.Storage storage, string key) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.PartCacheInvalidate(Microsoft.SharePoint.WebPartPages.Storage,System.String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void PartCacheInvalidate(Microsoft::SharePoint::WebPartPages::Storage storage, System::String ^ key);" />
+      <MemberSignature Language="F#" Value="member this.PartCacheInvalidate : Microsoft.SharePoint.WebPartPages.Storage * string -&gt; unit" Usage="webPart.PartCacheInvalidate (storage, key)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1887,6 +1958,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance object PartCacheRead(valuetype Microsoft.SharePoint.WebPartPages.Storage storage, string key) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.PartCacheRead(Microsoft.SharePoint.WebPartPages.Storage,System.String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; System::Object ^ PartCacheRead(Microsoft::SharePoint::WebPartPages::Storage storage, System::String ^ key);" />
+      <MemberSignature Language="F#" Value="member this.PartCacheRead : Microsoft.SharePoint.WebPartPages.Storage * string -&gt; obj" Usage="webPart.PartCacheRead (storage, key)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1912,6 +1984,7 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void PartCacheWrite(valuetype Microsoft.SharePoint.WebPartPages.Storage storage, string key, object value, valuetype System.TimeSpan timeout) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.PartCacheWrite(Microsoft.SharePoint.WebPartPages.Storage,System.String,System.Object,System.TimeSpan)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void PartCacheWrite(Microsoft::SharePoint::WebPartPages::Storage storage, System::String ^ key, System::Object ^ value, TimeSpan timeout);" />
+      <MemberSignature Language="F#" Value="member this.PartCacheWrite : Microsoft.SharePoint.WebPartPages.Storage * string * obj * TimeSpan -&gt; unit" Usage="webPart.PartCacheWrite (storage, key, value, timeout)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1941,6 +2014,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.PartCommunicationConnect(System.String,Microsoft.SharePoint.WebPartPages.WebPart,System.String,Microsoft.SharePoint.WebPartPages.Communication.ConnectionRunAt)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub PartCommunicationConnect (interfaceName As String, connectedPart As WebPart, connectedInterfaceName As String, runAt As ConnectionRunAt)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void PartCommunicationConnect(System::String ^ interfaceName, Microsoft::SharePoint::WebPartPages::WebPart ^ connectedPart, System::String ^ connectedInterfaceName, Microsoft::SharePoint::WebPartPages::Communication::ConnectionRunAt runAt);" />
+      <MemberSignature Language="F#" Value="abstract member PartCommunicationConnect : string * Microsoft.SharePoint.WebPartPages.WebPart * string * Microsoft.SharePoint.WebPartPages.Communication.ConnectionRunAt -&gt; unit&#xA;override this.PartCommunicationConnect : string * Microsoft.SharePoint.WebPartPages.WebPart * string * Microsoft.SharePoint.WebPartPages.Communication.ConnectionRunAt -&gt; unit" Usage="webPart.PartCommunicationConnect (interfaceName, connectedPart, connectedInterfaceName, runAt)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1975,6 +2049,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.PartCommunicationInit" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub PartCommunicationInit ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void PartCommunicationInit();" />
+      <MemberSignature Language="F#" Value="abstract member PartCommunicationInit : unit -&gt; unit&#xA;override this.PartCommunicationInit : unit -&gt; unit" Usage="webPart.PartCommunicationInit " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2000,6 +2075,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.PartCommunicationMain" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub PartCommunicationMain ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void PartCommunicationMain();" />
+      <MemberSignature Language="F#" Value="abstract member PartCommunicationMain : unit -&gt; unit&#xA;override this.PartCommunicationMain : unit -&gt; unit" Usage="webPart.PartCommunicationMain " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2025,6 +2101,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.PartImageLarge" />
       <MemberSignature Language="VB.NET" Value="Public Property PartImageLarge As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ PartImageLarge { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.PartImageLarge : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.PartImageLarge" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2065,6 +2142,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.PartImageSmall" />
       <MemberSignature Language="VB.NET" Value="Public Property PartImageSmall As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ PartImageSmall { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.PartImageSmall : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.PartImageSmall" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2105,6 +2183,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.PartOrder" />
       <MemberSignature Language="VB.NET" Value="Public Property PartOrder As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int PartOrder { int get(); void set(int value); };" />
+      <MemberSignature Language="F#" Value="member this.PartOrder : int with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.PartOrder" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2142,6 +2221,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Permissions" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Permissions As Permissions" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebPartPages::Permissions Permissions { Microsoft::SharePoint::WebPartPages::Permissions get(); };" />
+      <MemberSignature Language="F#" Value="member this.Permissions : Microsoft.SharePoint.WebPartPages.Permissions" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Permissions" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2149,10 +2229,10 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.Obsolete("Use SPWebPartManager.GetPermissions instead.")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Obsolete("Use SPWebPartManager.GetPermissions instead.")</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -2170,6 +2250,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Qualifier" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Qualifier As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Qualifier { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Qualifier : string" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Qualifier" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2177,7 +2258,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -2195,6 +2276,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.RegisterInterface(System.String,System.String,System.Int32,Microsoft.SharePoint.WebPartPages.Communication.ConnectionRunAt,System.Object,System.String,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub RegisterInterface (interfaceName As String, interfaceType As String, maxConnections As Integer, runAtOptions As ConnectionRunAt, interfaceObject As Object, interfaceClientReference As String, menuLabel As String, description As String)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void RegisterInterface(System::String ^ interfaceName, System::String ^ interfaceType, int maxConnections, Microsoft::SharePoint::WebPartPages::Communication::ConnectionRunAt runAtOptions, System::Object ^ interfaceObject, System::String ^ interfaceClientReference, System::String ^ menuLabel, System::String ^ description);" />
+      <MemberSignature Language="F#" Value="member this.RegisterInterface : string * string * int * Microsoft.SharePoint.WebPartPages.Communication.ConnectionRunAt * obj * string * string * string -&gt; unit" Usage="webPart.RegisterInterface (interfaceName, interfaceType, maxConnections, runAtOptions, interfaceObject, interfaceClientReference, menuLabel, description)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2237,6 +2319,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.RegisterInterface(System.String,System.String,System.Int32,Microsoft.SharePoint.WebPartPages.Communication.ConnectionRunAt,System.Object,System.String,System.String,System.String,System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub RegisterInterface (interfaceName As String, interfaceTypeName As String, maxConnections As Integer, runAtOptions As ConnectionRunAt, interfaceObject As Object, interfaceClientReference As String, menuLabel As String, description As String, allowCrossPageConnection As Boolean)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void RegisterInterface(System::String ^ interfaceName, System::String ^ interfaceTypeName, int maxConnections, Microsoft::SharePoint::WebPartPages::Communication::ConnectionRunAt runAtOptions, System::Object ^ interfaceObject, System::String ^ interfaceClientReference, System::String ^ menuLabel, System::String ^ description, bool allowCrossPageConnection);" />
+      <MemberSignature Language="F#" Value="member this.RegisterInterface : string * string * int * Microsoft.SharePoint.WebPartPages.Communication.ConnectionRunAt * obj * string * string * string * bool -&gt; unit" Usage="webPart.RegisterInterface (interfaceName, interfaceTypeName, maxConnections, runAtOptions, interfaceObject, interfaceClientReference, menuLabel, description, allowCrossPageConnection)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2281,6 +2364,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.RegisterWorkItem(System.IAsyncResult)" />
       <MemberSignature Language="VB.NET" Value="Protected Function RegisterWorkItem (ar As IAsyncResult) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; bool RegisterWorkItem(IAsyncResult ^ ar);" />
+      <MemberSignature Language="F#" Value="member this.RegisterWorkItem : IAsyncResult -&gt; bool" Usage="webPart.RegisterWorkItem ar" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2310,6 +2394,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.RegisterWorkItemCallback(System.Threading.WaitCallback,System.Object)" />
       <MemberSignature Language="VB.NET" Value="Protected Function RegisterWorkItemCallback (beginCallBack As WaitCallback, state As Object) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; bool RegisterWorkItemCallback(System::Threading::WaitCallback ^ beginCallBack, System::Object ^ state);" />
+      <MemberSignature Language="F#" Value="member this.RegisterWorkItemCallback : System.Threading.WaitCallback * obj -&gt; bool" Usage="webPart.RegisterWorkItemCallback (beginCallBack, state)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2341,6 +2426,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.Render(System.Web.UI.HtmlTextWriter)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub Render (writer As HtmlTextWriter)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void Render(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberSignature Language="F#" Value="abstract member Render : System.Web.UI.HtmlTextWriter -&gt; unit&#xA;override this.Render : System.Web.UI.HtmlTextWriter -&gt; unit" Usage="webPart.Render writer" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2364,6 +2450,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.RenderWebPart(System.Web.UI.HtmlTextWriter)" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Sub RenderWebPart (output As HtmlTextWriter)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void RenderWebPart(System::Web::UI::HtmlTextWriter ^ output);" />
+      <MemberSignature Language="F#" Value="abstract member RenderWebPart : System.Web.UI.HtmlTextWriter -&gt; unit&#xA;override this.RenderWebPart : System.Web.UI.HtmlTextWriter -&gt; unit" Usage="webPart.RenderWebPart output" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2387,6 +2474,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.RenderWorkItemTimeout(System.Web.UI.HtmlTextWriter)" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Sub RenderWorkItemTimeout (writer As HtmlTextWriter)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void RenderWorkItemTimeout(System::Web::UI::HtmlTextWriter ^ writer);" />
+      <MemberSignature Language="F#" Value="abstract member RenderWorkItemTimeout : System.Web.UI.HtmlTextWriter -&gt; unit&#xA;override this.RenderWorkItemTimeout : System.Web.UI.HtmlTextWriter -&gt; unit" Usage="webPart.RenderWorkItemTimeout writer" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2415,6 +2503,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ReplaceTokens(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Friend Function ReplaceTokens (input As String) As String" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; System::String ^ ReplaceTokens(System::String ^ input);" />
+      <MemberSignature Language="F#" Value="member this.ReplaceTokens : string -&gt; string" Usage="webPart.ReplaceTokens input" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2439,6 +2528,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.RequiresWebPartClientScript" />
       <MemberSignature Language="VB.NET" Value="Protected Friend Overridable Function RequiresWebPartClientScript () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; virtual bool RequiresWebPartClientScript();" />
+      <MemberSignature Language="F#" Value="abstract member RequiresWebPartClientScript : unit -&gt; bool&#xA;override this.RequiresWebPartClientScript : unit -&gt; bool" Usage="webPart.RequiresWebPartClientScript " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2460,6 +2550,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.SaveProperties" />
       <MemberSignature Language="VB.NET" Value="Protected Friend Property SaveProperties As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; property bool SaveProperties { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.SaveProperties : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.SaveProperties" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2480,6 +2571,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.SerializeAll" />
       <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property SerializeAll As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; property bool SerializeAll { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.SerializeAll : bool" Usage="Microsoft.SharePoint.WebPartPages.WebPart.SerializeAll" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2500,6 +2592,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.SerializedAttachedPropertiesShared" />
       <MemberSignature Language="VB.NET" Value="Public Property SerializedAttachedPropertiesShared As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SerializedAttachedPropertiesShared { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.SerializedAttachedPropertiesShared : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.SerializedAttachedPropertiesShared" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2516,10 +2609,10 @@
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.Xml.Serialization.XmlElement("AttachedPropertiesShared")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("AttachedPropertiesShared")</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -2537,6 +2630,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.SerializedAttachedPropertiesUser" />
       <MemberSignature Language="VB.NET" Value="Public Property SerializedAttachedPropertiesUser As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SerializedAttachedPropertiesUser { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.SerializedAttachedPropertiesUser : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.SerializedAttachedPropertiesUser" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2553,10 +2647,10 @@
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.Xml.Serialization.XmlElement("AttachedPropertiesUser")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.Xml.Serialization.XmlElement("AttachedPropertiesUser")</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -2574,6 +2668,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.ServerRelativeClassResourcePath" />
       <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property ServerRelativeClassResourcePath As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; property System::String ^ ServerRelativeClassResourcePath { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ServerRelativeClassResourcePath : string" Usage="Microsoft.SharePoint.WebPartPages.WebPart.ServerRelativeClassResourcePath" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2594,6 +2689,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.SetWebPartPageComponent" />
       <MemberSignature Language="VB.NET" Value="Protected Sub SetWebPartPageComponent ()" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void SetWebPartPageComponent();" />
+      <MemberSignature Language="F#" Value="member this.SetWebPartPageComponent : unit -&gt; unit" Usage="webPart.SetWebPartPageComponent " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2614,6 +2710,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeAllowConnect" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeAllowConnect () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeAllowConnect();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeAllowConnect : unit -&gt; bool&#xA;override this.ShouldSerializeAllowConnect : unit -&gt; bool" Usage="webPart.ShouldSerializeAllowConnect " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2635,6 +2732,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeAllowEdit" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeAllowEdit () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeAllowEdit();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeAllowEdit : unit -&gt; bool&#xA;override this.ShouldSerializeAllowEdit : unit -&gt; bool" Usage="webPart.ShouldSerializeAllowEdit " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2656,6 +2754,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeAllowHide" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeAllowHide () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeAllowHide();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeAllowHide : unit -&gt; bool&#xA;override this.ShouldSerializeAllowHide : unit -&gt; bool" Usage="webPart.ShouldSerializeAllowHide " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2677,6 +2776,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeAllowMinimize" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeAllowMinimize () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeAllowMinimize();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeAllowMinimize : unit -&gt; bool&#xA;override this.ShouldSerializeAllowMinimize : unit -&gt; bool" Usage="webPart.ShouldSerializeAllowMinimize " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2698,6 +2798,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeAllowRemove" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeAllowRemove () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeAllowRemove();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeAllowRemove : unit -&gt; bool&#xA;override this.ShouldSerializeAllowRemove : unit -&gt; bool" Usage="webPart.ShouldSerializeAllowRemove " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2719,6 +2820,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeAllowZoneChange" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeAllowZoneChange () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeAllowZoneChange();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeAllowZoneChange : unit -&gt; bool&#xA;override this.ShouldSerializeAllowZoneChange : unit -&gt; bool" Usage="webPart.ShouldSerializeAllowZoneChange " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2740,6 +2842,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeConnectionID" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeConnectionID () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeConnectionID();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeConnectionID : unit -&gt; bool&#xA;override this.ShouldSerializeConnectionID : unit -&gt; bool" Usage="webPart.ShouldSerializeConnectionID " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2761,6 +2864,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeConnections" />
       <MemberSignature Language="VB.NET" Value="Public Function ShouldSerializeConnections () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool ShouldSerializeConnections();" />
+      <MemberSignature Language="F#" Value="member this.ShouldSerializeConnections : unit -&gt; bool" Usage="webPart.ShouldSerializeConnections " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2782,6 +2886,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeDescription" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeDescription () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeDescription();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeDescription : unit -&gt; bool&#xA;override this.ShouldSerializeDescription : unit -&gt; bool" Usage="webPart.ShouldSerializeDescription " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2803,6 +2908,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeDetailLink" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeDetailLink () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeDetailLink();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeDetailLink : unit -&gt; bool&#xA;override this.ShouldSerializeDetailLink : unit -&gt; bool" Usage="webPart.ShouldSerializeDetailLink " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2824,6 +2930,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeDir" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeDir () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeDir();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeDir : unit -&gt; bool&#xA;override this.ShouldSerializeDir : unit -&gt; bool" Usage="webPart.ShouldSerializeDir " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2845,6 +2952,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeExportControlledProperties" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeExportControlledProperties () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeExportControlledProperties();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeExportControlledProperties : unit -&gt; bool&#xA;override this.ShouldSerializeExportControlledProperties : unit -&gt; bool" Usage="webPart.ShouldSerializeExportControlledProperties " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2866,6 +2974,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeFrameState" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeFrameState () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeFrameState();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeFrameState : unit -&gt; bool&#xA;override this.ShouldSerializeFrameState : unit -&gt; bool" Usage="webPart.ShouldSerializeFrameState " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2887,6 +2996,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeFrameType" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeFrameType () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeFrameType();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeFrameType : unit -&gt; bool&#xA;override this.ShouldSerializeFrameType : unit -&gt; bool" Usage="webPart.ShouldSerializeFrameType " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2908,6 +3018,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeHeight" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeHeight () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeHeight();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeHeight : unit -&gt; bool&#xA;override this.ShouldSerializeHeight : unit -&gt; bool" Usage="webPart.ShouldSerializeHeight " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2929,6 +3040,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeHelpLink" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeHelpLink () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeHelpLink();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeHelpLink : unit -&gt; bool&#xA;override this.ShouldSerializeHelpLink : unit -&gt; bool" Usage="webPart.ShouldSerializeHelpLink " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2950,6 +3062,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeHelpMode" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeHelpMode () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeHelpMode();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeHelpMode : unit -&gt; bool&#xA;override this.ShouldSerializeHelpMode : unit -&gt; bool" Usage="webPart.ShouldSerializeHelpMode " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2971,6 +3084,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeID" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeID () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeID();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeID : unit -&gt; bool&#xA;override this.ShouldSerializeID : unit -&gt; bool" Usage="webPart.ShouldSerializeID " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -2992,6 +3106,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeIsIncluded" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeIsIncluded () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeIsIncluded();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeIsIncluded : unit -&gt; bool&#xA;override this.ShouldSerializeIsIncluded : unit -&gt; bool" Usage="webPart.ShouldSerializeIsIncluded " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3013,6 +3128,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeIsIncludedFilter" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeIsIncludedFilter () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeIsIncludedFilter();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeIsIncludedFilter : unit -&gt; bool&#xA;override this.ShouldSerializeIsIncludedFilter : unit -&gt; bool" Usage="webPart.ShouldSerializeIsIncludedFilter " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3034,6 +3150,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeIsVisible" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeIsVisible () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeIsVisible();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeIsVisible : unit -&gt; bool&#xA;override this.ShouldSerializeIsVisible : unit -&gt; bool" Usage="webPart.ShouldSerializeIsVisible " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3055,6 +3172,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeMissingAssembly" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeMissingAssembly () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeMissingAssembly();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeMissingAssembly : unit -&gt; bool&#xA;override this.ShouldSerializeMissingAssembly : unit -&gt; bool" Usage="webPart.ShouldSerializeMissingAssembly " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3076,6 +3194,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializePartImageLarge" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializePartImageLarge () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializePartImageLarge();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializePartImageLarge : unit -&gt; bool&#xA;override this.ShouldSerializePartImageLarge : unit -&gt; bool" Usage="webPart.ShouldSerializePartImageLarge " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3097,6 +3216,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializePartImageSmall" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializePartImageSmall () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializePartImageSmall();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializePartImageSmall : unit -&gt; bool&#xA;override this.ShouldSerializePartImageSmall : unit -&gt; bool" Usage="webPart.ShouldSerializePartImageSmall " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3118,6 +3238,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializePartOrder" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializePartOrder () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializePartOrder();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializePartOrder : unit -&gt; bool&#xA;override this.ShouldSerializePartOrder : unit -&gt; bool" Usage="webPart.ShouldSerializePartOrder " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3139,6 +3260,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeTitle" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeTitle () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeTitle();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeTitle : unit -&gt; bool&#xA;override this.ShouldSerializeTitle : unit -&gt; bool" Usage="webPart.ShouldSerializeTitle " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3160,6 +3282,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeWidth" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeWidth () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeWidth();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeWidth : unit -&gt; bool&#xA;override this.ShouldSerializeWidth : unit -&gt; bool" Usage="webPart.ShouldSerializeWidth " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3181,6 +3304,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebPartPages.WebPart.ShouldSerializeZoneID" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ShouldSerializeZoneID () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ShouldSerializeZoneID();" />
+      <MemberSignature Language="F#" Value="abstract member ShouldSerializeZoneID : unit -&gt; bool&#xA;override this.ShouldSerializeZoneID : unit -&gt; bool" Usage="webPart.ShouldSerializeZoneID " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3202,6 +3326,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.ShouldValidate" />
       <MemberSignature Language="VB.NET" Value="Protected Friend ReadOnly Property ShouldValidate As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; property bool ShouldValidate { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.ShouldValidate : bool" Usage="Microsoft.SharePoint.WebPartPages.WebPart.ShouldValidate" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3222,6 +3347,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.StorageKey" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property StorageKey As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid StorageKey { Guid get(); };" />
+      <MemberSignature Language="F#" Value="member this.StorageKey : Guid" Usage="Microsoft.SharePoint.WebPartPages.WebPart.StorageKey" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3235,7 +3361,7 @@
           <AttributeName>System.ComponentModel.Browsable(false)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -3253,6 +3379,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Subtitle" />
       <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property Subtitle As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ Subtitle { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Subtitle : string" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Subtitle" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3260,7 +3387,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -3278,6 +3405,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.SuppressWebPartChrome" />
       <MemberSignature Language="VB.NET" Value="Public Property SuppressWebPartChrome As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool SuppressWebPartChrome { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.SuppressWebPartChrome : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.SuppressWebPartChrome" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3307,9 +3435,6 @@
       <MemberSignature Language="VB.NET" Value="Function GetAttribute (key As String) As String Implements IAttributeAccessor.GetAttribute" />
       <MemberSignature Language="C++ CLI" Value=" virtual System::String ^ System.Web.UI.IAttributeAccessor.GetAttribute(System::String ^ key) = System::Web::UI::IAttributeAccessor::GetAttribute;" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IAttributeAccessor.GetAttribute(System.String)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -3334,9 +3459,6 @@
       <MemberSignature Language="VB.NET" Value="Sub SetAttribute (key As String, value As String) Implements IAttributeAccessor.SetAttribute" />
       <MemberSignature Language="C++ CLI" Value=" virtual void System.Web.UI.IAttributeAccessor.SetAttribute(System::String ^ key, System::String ^ value) = System::Web::UI::IAttributeAccessor::SetAttribute;" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -3361,6 +3483,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Title" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property Title As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ Title { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Title : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Title" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3395,6 +3518,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.TitleIconImageUrl" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property TitleIconImageUrl As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ TitleIconImageUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.TitleIconImageUrl : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.TitleIconImageUrl" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3420,6 +3544,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.TitleUrl" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property TitleUrl As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ TitleUrl { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.TitleUrl : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.TitleUrl" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3445,6 +3570,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.UnknownXmlElements" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property UnknownXmlElements As UnknownXmlElementCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebPartPages::UnknownXmlElementCollection ^ UnknownXmlElements { Microsoft::SharePoint::WebPartPages::UnknownXmlElementCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.UnknownXmlElements : Microsoft.SharePoint.WebPartPages.UnknownXmlElementCollection" Usage="Microsoft.SharePoint.WebPartPages.WebPart.UnknownXmlElements" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3461,13 +3587,13 @@
           <AttributeName>System.ComponentModel.DefaultValue(null)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
-        </Attribute>
-        <Attribute>
           <AttributeName>System.ComponentModel.TypeConverter(typeof(Microsoft.SharePoint.WebPartPages.WebPartXmlElementCollectionConverter))</AttributeName>
         </Attribute>
         <Attribute>
           <AttributeName>System.Xml.Serialization.XmlAnyElement</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -3485,6 +3611,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.SharePoint.WebPartPages.WebPart.UnlimitedConnections" />
       <MemberSignature Language="VB.NET" Value="Public Const UnlimitedConnections As Integer  = -1" />
       <MemberSignature Language="C++ CLI" Value="public: int UnlimitedConnections = -1;" />
+      <MemberSignature Language="F#" Value="val mutable UnlimitedConnections : int" Usage="Microsoft.SharePoint.WebPartPages.WebPart.UnlimitedConnections" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3505,6 +3632,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.UseDefaultStyles" />
       <MemberSignature Language="VB.NET" Value="Public Property UseDefaultStyles As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UseDefaultStyles { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.UseDefaultStyles : bool with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.UseDefaultStyles" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3515,7 +3643,7 @@
           <AttributeName>Microsoft.SharePoint.WebPartPages.WebPartStorage(Microsoft.SharePoint.WebPartPages.Storage.None)</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName>System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)</AttributeName>
+          <AttributeName>System.ComponentModel.DesignerSerializationVisibility</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -3533,6 +3661,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.WebPartMenu" />
       <MemberSignature Language="VB.NET" Value="Protected Friend Property WebPartMenu As Menu" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; property Microsoft::SharePoint::WebPartPages::Menu ^ WebPartMenu { Microsoft::SharePoint::WebPartPages::Menu ^ get(); void set(Microsoft::SharePoint::WebPartPages::Menu ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.WebPartMenu : Microsoft.SharePoint.WebPartPages.Menu with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.WebPartMenu" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3553,6 +3682,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.Width" />
       <MemberSignature Language="VB.NET" Value="Public Property Width As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Width { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Width : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.Width" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3590,6 +3720,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.WorkItemTimeout" />
       <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property WorkItemTimeout As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; property bool WorkItemTimeout { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.WorkItemTimeout : bool" Usage="Microsoft.SharePoint.WebPartPages.WebPart.WorkItemTimeout" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -3615,6 +3746,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebPartPages.WebPart.ZoneID" />
       <MemberSignature Language="VB.NET" Value="Public Property ZoneID As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ZoneID { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.ZoneID : string with get, set" Usage="Microsoft.SharePoint.WebPartPages.WebPart.ZoneID" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

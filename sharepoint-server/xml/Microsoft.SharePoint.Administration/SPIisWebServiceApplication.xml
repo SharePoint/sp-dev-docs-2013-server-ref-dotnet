@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Administration.SPIisWebServiceApplication" />
   <TypeSignature Language="VB.NET" Value="Public MustInherit Class SPIisWebServiceApplication&#xA;Inherits SPServiceApplication&#xA;Implements IBackupRestore, ISharedServiceApplication" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPIisWebServiceApplication abstract : Microsoft::SharePoint::Administration::SPServiceApplication, Microsoft::SharePoint::Administration::Backup::IBackupRestore, Microsoft::SharePoint::Administration::ISharedServiceApplication" />
+  <TypeSignature Language="F#" Value="type SPIisWebServiceApplication = class&#xA;    inherit SPServiceApplication&#xA;    interface ISharedServiceApplication&#xA;    interface IBackupRestore" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -52,6 +53,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.#ctor(System.String,Microsoft.SharePoint.Administration.SPIisWebService,Microsoft.SharePoint.Administration.SPIisWebServiceApplicationPool)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub New (name As String, service As SPIisWebService, applicationPool As SPIisWebServiceApplicationPool)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; SPIisWebServiceApplication(System::String ^ name, Microsoft::SharePoint::Administration::SPIisWebService ^ service, Microsoft::SharePoint::Administration::SPIisWebServiceApplicationPool ^ applicationPool);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.Administration.SPIisWebServiceApplication : string * Microsoft.SharePoint.Administration.SPIisWebService * Microsoft.SharePoint.Administration.SPIisWebServiceApplicationPool -&gt; Microsoft.SharePoint.Administration.SPIisWebServiceApplication" Usage="new Microsoft.SharePoint.Administration.SPIisWebServiceApplication (name, service, applicationPool)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -76,6 +78,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.AccessRights" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable ReadOnly Property AccessRights As SPNamedIisWebServiceApplicationRights()" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property cli::array &lt;Microsoft::SharePoint::Administration::AccessControl::SPNamedIisWebServiceApplicationRights ^&gt; ^ AccessRights { cli::array &lt;Microsoft::SharePoint::Administration::AccessControl::SPNamedIisWebServiceApplicationRights ^&gt; ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.AccessRights : Microsoft.SharePoint.Administration.AccessControl.SPNamedIisWebServiceApplicationRights[]" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.AccessRights" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -96,6 +99,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.AddServiceEndpoint(System.String,Microsoft.SharePoint.Administration.SPIisWebServiceBindingType)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function AddServiceEndpoint (name As String, bindingType As SPIisWebServiceBindingType) As SPIisWebServiceEndpoint" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::SharePoint::Administration::SPIisWebServiceEndpoint ^ AddServiceEndpoint(System::String ^ name, Microsoft::SharePoint::Administration::SPIisWebServiceBindingType bindingType);" />
+      <MemberSignature Language="F#" Value="abstract member AddServiceEndpoint : string * Microsoft.SharePoint.Administration.SPIisWebServiceBindingType -&gt; Microsoft.SharePoint.Administration.SPIisWebServiceEndpoint&#xA;override this.AddServiceEndpoint : string * Microsoft.SharePoint.Administration.SPIisWebServiceBindingType -&gt; Microsoft.SharePoint.Administration.SPIisWebServiceEndpoint" Usage="sPIisWebServiceApplication.AddServiceEndpoint (name, bindingType)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -122,6 +126,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.AddServiceEndpoint(System.String,Microsoft.SharePoint.Administration.SPIisWebServiceBindingType,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function AddServiceEndpoint (name As String, bindingType As SPIisWebServiceBindingType, relativeAddress As String) As SPIisWebServiceEndpoint" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::SharePoint::Administration::SPIisWebServiceEndpoint ^ AddServiceEndpoint(System::String ^ name, Microsoft::SharePoint::Administration::SPIisWebServiceBindingType bindingType, System::String ^ relativeAddress);" />
+      <MemberSignature Language="F#" Value="abstract member AddServiceEndpoint : string * Microsoft.SharePoint.Administration.SPIisWebServiceBindingType * string -&gt; Microsoft.SharePoint.Administration.SPIisWebServiceEndpoint&#xA;override this.AddServiceEndpoint : string * Microsoft.SharePoint.Administration.SPIisWebServiceBindingType * string -&gt; Microsoft.SharePoint.Administration.SPIisWebServiceEndpoint" Usage="sPIisWebServiceApplication.AddServiceEndpoint (name, bindingType, relativeAddress)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -150,6 +155,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.ApplicationPool" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property ApplicationPool As SPIisWebServiceApplicationPool" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Administration::SPIisWebServiceApplicationPool ^ ApplicationPool { Microsoft::SharePoint::Administration::SPIisWebServiceApplicationPool ^ get(); void set(Microsoft::SharePoint::Administration::SPIisWebServiceApplicationPool ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.ApplicationPool : Microsoft.SharePoint.Administration.SPIisWebServiceApplicationPool with get, set" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.ApplicationPool" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -170,6 +176,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.CheckAccess(Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationRights)" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Function CheckAccess (rights As SPIisWebServiceApplicationRights) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual bool CheckAccess(Microsoft::SharePoint::Administration::AccessControl::SPIisWebServiceApplicationRights rights);" />
+      <MemberSignature Language="F#" Value="abstract member CheckAccess : Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationRights -&gt; bool&#xA;override this.CheckAccess : Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationRights -&gt; bool" Usage="sPIisWebServiceApplication.CheckAccess rights" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -194,6 +201,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Comments" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property Comments As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ Comments { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Comments : string with get, set" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Comments" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ISharedServiceApplication.Comments</InterfaceMember>
@@ -217,6 +225,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.ConfigureServiceHost(System.ServiceModel.ServiceHostBase,Microsoft.SharePoint.SPServiceAuthenticationMode)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub ConfigureServiceHost (serviceHost As ServiceHostBase, authenticationMode As SPServiceAuthenticationMode)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void ConfigureServiceHost(System::ServiceModel::ServiceHostBase ^ serviceHost, Microsoft::SharePoint::SPServiceAuthenticationMode authenticationMode);" />
+      <MemberSignature Language="F#" Value="static member ConfigureServiceHost : System.ServiceModel.ServiceHostBase * Microsoft.SharePoint.SPServiceAuthenticationMode -&gt; unit" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.ConfigureServiceHost (serviceHost, authenticationMode)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -242,6 +251,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Current" />
       <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property Current As SPIisWebServiceApplication" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::SharePoint::Administration::SPIisWebServiceApplication ^ Current { Microsoft::SharePoint::Administration::SPIisWebServiceApplication ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Current : Microsoft.SharePoint.Administration.SPIisWebServiceApplication" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Current" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -262,6 +272,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.DefaultEndpoint" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property DefaultEndpoint As SPIisWebServiceEndpoint" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Administration::SPIisWebServiceEndpoint ^ DefaultEndpoint { Microsoft::SharePoint::Administration::SPIisWebServiceEndpoint ^ get(); void set(Microsoft::SharePoint::Administration::SPIisWebServiceEndpoint ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.DefaultEndpoint : Microsoft.SharePoint.Administration.SPIisWebServiceEndpoint with get, set" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.DefaultEndpoint" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -282,6 +293,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.DefaultEndpointName" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable ReadOnly Property DefaultEndpointName As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ DefaultEndpointName { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.DefaultEndpointName : string" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.DefaultEndpointName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -302,6 +314,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Delete" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Delete ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Delete();" />
+      <MemberSignature Language="F#" Value="override this.Delete : unit -&gt; unit" Usage="sPIisWebServiceApplication.Delete " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -322,6 +335,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.DemandAccess(Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationRights)" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Sub DemandAccess (rights As SPIisWebServiceApplicationRights)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void DemandAccess(Microsoft::SharePoint::Administration::AccessControl::SPIisWebServiceApplicationRights rights);" />
+      <MemberSignature Language="F#" Value="abstract member DemandAccess : Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationRights -&gt; unit&#xA;override this.DemandAccess : Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationRights -&gt; unit" Usage="sPIisWebServiceApplication.DemandAccess rights" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -345,6 +359,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Endpoints" />
       <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property Endpoints As IEnumerable(Of IServiceEndpoint)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::Administration::IServiceEndpoint ^&gt; ^ Endpoints { System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::Administration::IServiceEndpoint ^&gt; ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Endpoints : seq&lt;Microsoft.SharePoint.Administration.IServiceEndpoint&gt;" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Endpoints" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ISharedServiceApplication.Endpoints</InterfaceMember>
@@ -368,6 +383,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.GetAccessControl" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function GetAccessControl () As SPIisWebServiceApplicationSecurity" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::SharePoint::Administration::AccessControl::SPIisWebServiceApplicationSecurity ^ GetAccessControl();" />
+      <MemberSignature Language="F#" Value="abstract member GetAccessControl : unit -&gt; Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationSecurity&#xA;override this.GetAccessControl : unit -&gt; Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationSecurity" Usage="sPIisWebServiceApplication.GetAccessControl " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -389,6 +405,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.IisVirtualDirectoryPath" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IisVirtualDirectoryPath As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ IisVirtualDirectoryPath { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.IisVirtualDirectoryPath : string" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.IisVirtualDirectoryPath" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -409,6 +426,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.InstallPath" />
       <MemberSignature Language="VB.NET" Value="Protected MustOverride ReadOnly Property InstallPath As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract property System::String ^ InstallPath { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.InstallPath : string" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.InstallPath" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -429,6 +447,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.IsConnected(Microsoft.SharePoint.Administration.SPServiceApplicationProxy)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function IsConnected (proxy As SPServiceApplicationProxy) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override bool IsConnected(Microsoft::SharePoint::Administration::SPServiceApplicationProxy ^ proxy);" />
+      <MemberSignature Language="F#" Value="override this.IsConnected : Microsoft.SharePoint.Administration.SPServiceApplicationProxy -&gt; bool" Usage="sPIisWebServiceApplication.IsConnected proxy" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -478,7 +497,8 @@
       <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore" />
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Microsoft#SharePoint#Administration#Backup#IBackupRestore#CanRenameOnRestore" />
       <MemberSignature Language="VB.NET" Value=" ReadOnly Property CanRenameOnRestore As Boolean Implements IBackupRestore.CanRenameOnRestore" />
-      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore { bool get(); };" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft::SharePoint::Administration::Backup::IBackupRestore::CanRenameOnRestore { bool get(); };" />
+      <MemberSignature Language="F#" Usage="Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore</InterfaceMember>
@@ -501,7 +521,8 @@
       <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup" />
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Microsoft#SharePoint#Administration#Backup#IBackupRestore#CanSelectForBackup" />
       <MemberSignature Language="VB.NET" Value=" Property CanSelectForBackup As Boolean Implements IBackupRestore.CanSelectForBackup" />
-      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup { bool get(); void set(bool value); };" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft::SharePoint::Administration::Backup::IBackupRestore::CanSelectForBackup { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Usage="Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup</InterfaceMember>
@@ -524,7 +545,8 @@
       <MemberSignature Language="ILAsm" Value=".property instance bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore" />
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Microsoft#SharePoint#Administration#Backup#IBackupRestore#CanSelectForRestore" />
       <MemberSignature Language="VB.NET" Value=" Property CanSelectForRestore As Boolean Implements IBackupRestore.CanSelectForRestore" />
-      <MemberSignature Language="C++ CLI" Value="property bool Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore { bool get(); void set(bool value); };" />
+      <MemberSignature Language="C++ CLI" Value="property bool Microsoft::SharePoint::Administration::Backup::IBackupRestore::CanSelectForRestore { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Usage="Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore</InterfaceMember>
@@ -547,7 +569,8 @@
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int64 Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired" />
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Microsoft#SharePoint#Administration#Backup#IBackupRestore#DiskSizeRequired" />
       <MemberSignature Language="VB.NET" Value=" ReadOnly Property DiskSizeRequired As ULong Implements IBackupRestore.DiskSizeRequired" />
-      <MemberSignature Language="C++ CLI" Value="property System::UInt64 Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired { System::UInt64 get(); };" />
+      <MemberSignature Language="C++ CLI" Value="property System::UInt64 Microsoft::SharePoint::Administration::Backup::IBackupRestore::DiskSizeRequired { System::UInt64 get(); };" />
+      <MemberSignature Language="F#" Usage="Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired</InterfaceMember>
@@ -773,7 +796,8 @@
       <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.SharePoint.Administration.IServiceEndpoint Microsoft.SharePoint.Administration.ISharedServiceApplication.DefaultEndpoint" />
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Microsoft#SharePoint#Administration#ISharedServiceApplication#DefaultEndpoint" />
       <MemberSignature Language="VB.NET" Value=" Property DefaultEndpoint As IServiceEndpoint Implements ISharedServiceApplication.DefaultEndpoint" />
-      <MemberSignature Language="C++ CLI" Value="property Microsoft::SharePoint::Administration::IServiceEndpoint ^ Microsoft.SharePoint.Administration.ISharedServiceApplication.DefaultEndpoint { Microsoft::SharePoint::Administration::IServiceEndpoint ^ get(); void set(Microsoft::SharePoint::Administration::IServiceEndpoint ^ value); };" />
+      <MemberSignature Language="C++ CLI" Value="property Microsoft::SharePoint::Administration::IServiceEndpoint ^ Microsoft::SharePoint::Administration::ISharedServiceApplication::DefaultEndpoint { Microsoft::SharePoint::Administration::IServiceEndpoint ^ get(); void set(Microsoft::SharePoint::Administration::IServiceEndpoint ^ value); };" />
+      <MemberSignature Language="F#" Usage="Microsoft.SharePoint.Administration.ISharedServiceApplication.DefaultEndpoint" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ISharedServiceApplication.DefaultEndpoint</InterfaceMember>
@@ -797,6 +821,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.MigrateUserAccount(System.Guid,System.String,System.String,System.Collections.Generic.IEnumerable{System.Byte[]},System.Byte[])" />
       <MemberSignature Language="VB.NET" Value="Protected Friend Overrides Function MigrateUserAccount (subscriptionId As Guid, oldPrincipalName As String, newPrincipalName As String, allowedOldBinaryIds As IEnumerable(Of Byte()), newBinaryId As Byte()) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; override bool MigrateUserAccount(Guid subscriptionId, System::String ^ oldPrincipalName, System::String ^ newPrincipalName, System::Collections::Generic::IEnumerable&lt;cli::array &lt;System::Byte&gt; ^&gt; ^ allowedOldBinaryIds, cli::array &lt;System::Byte&gt; ^ newBinaryId);" />
+      <MemberSignature Language="F#" Value="override this.MigrateUserAccount : Guid * string * string * seq&lt;byte[]&gt; * byte[] -&gt; bool" Usage="sPIisWebServiceApplication.MigrateUserAccount (subscriptionId, oldPrincipalName, newPrincipalName, allowedOldBinaryIds, newBinaryId)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -829,6 +854,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.OnDeserialization" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnDeserialization ()" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnDeserialization();" />
+      <MemberSignature Language="F#" Value="override this.OnDeserialization : unit -&gt; unit" Usage="sPIisWebServiceApplication.OnDeserialization " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -849,6 +875,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.OnProcessIdentityChanged(System.Security.Principal.SecurityIdentifier)" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Sub OnProcessIdentityChanged (processSecurityIdentifier As SecurityIdentifier)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void OnProcessIdentityChanged(System::Security::Principal::SecurityIdentifier ^ processSecurityIdentifier);" />
+      <MemberSignature Language="F#" Value="abstract member OnProcessIdentityChanged : System.Security.Principal.SecurityIdentifier -&gt; unit&#xA;override this.OnProcessIdentityChanged : System.Security.Principal.SecurityIdentifier -&gt; unit" Usage="sPIisWebServiceApplication.OnProcessIdentityChanged processSecurityIdentifier" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -872,6 +899,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.OpenInstanceConfiguration" />
       <MemberSignature Language="VB.NET" Value="Protected Function OpenInstanceConfiguration () As Configuration" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; System::Configuration::Configuration ^ OpenInstanceConfiguration();" />
+      <MemberSignature Language="F#" Value="member this.OpenInstanceConfiguration : unit -&gt; System.Configuration.Configuration" Usage="sPIisWebServiceApplication.OpenInstanceConfiguration " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -893,6 +921,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.PermissionsLink" />
       <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property PermissionsLink As SPAdministrationLink" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Administration::SPAdministrationLink ^ PermissionsLink { Microsoft::SharePoint::Administration::SPAdministrationLink ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.PermissionsLink : Microsoft.SharePoint.Administration.SPAdministrationLink" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.PermissionsLink" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -913,6 +942,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Provision" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Provision ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Provision();" />
+      <MemberSignature Language="F#" Value="override this.Provision : unit -&gt; unit" Usage="sPIisWebServiceApplication.Provision " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -933,6 +963,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.ProvisionLocal(Microsoft.SharePoint.Administration.SPServiceInstance)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub ProvisionLocal (serviceInstance As SPServiceInstance)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void ProvisionLocal(Microsoft::SharePoint::Administration::SPServiceInstance ^ serviceInstance);" />
+      <MemberSignature Language="F#" Value="override this.ProvisionLocal : Microsoft.SharePoint.Administration.SPServiceInstance -&gt; unit" Usage="sPIisWebServiceApplication.ProvisionLocal serviceInstance" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -956,6 +987,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.SetAccessControl(Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationSecurity)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub SetAccessControl (security As SPIisWebServiceApplicationSecurity)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void SetAccessControl(Microsoft::SharePoint::Administration::AccessControl::SPIisWebServiceApplicationSecurity ^ security);" />
+      <MemberSignature Language="F#" Value="abstract member SetAccessControl : Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationSecurity -&gt; unit&#xA;override this.SetAccessControl : Microsoft.SharePoint.Administration.AccessControl.SPIisWebServiceApplicationSecurity -&gt; unit" Usage="sPIisWebServiceApplication.SetAccessControl security" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -979,6 +1011,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Shared" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property Shared As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool Shared { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.Shared : bool with get, set" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Shared" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ISharedServiceApplication.Shared</InterfaceMember>
@@ -1002,6 +1035,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.TermsOfServiceUri" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property TermsOfServiceUri As Uri" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Uri ^ TermsOfServiceUri { Uri ^ get(); void set(Uri ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.TermsOfServiceUri : Uri with get, set" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.TermsOfServiceUri" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ISharedServiceApplication.TermsOfServiceUri</InterfaceMember>
@@ -1025,6 +1059,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Unprovision(System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Unprovision (deleteData As Boolean)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Unprovision(bool deleteData);" />
+      <MemberSignature Language="F#" Value="override this.Unprovision : bool -&gt; unit" Usage="sPIisWebServiceApplication.Unprovision deleteData" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1048,6 +1083,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.UnprovisionLocal(Microsoft.SharePoint.Administration.SPServiceInstance)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub UnprovisionLocal (serviceInstance As SPServiceInstance)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void UnprovisionLocal(Microsoft::SharePoint::Administration::SPServiceInstance ^ serviceInstance);" />
+      <MemberSignature Language="F#" Value="override this.UnprovisionLocal : Microsoft.SharePoint.Administration.SPServiceInstance -&gt; unit" Usage="sPIisWebServiceApplication.UnprovisionLocal serviceInstance" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1071,6 +1107,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Update" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Update ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Update();" />
+      <MemberSignature Language="F#" Value="override this.Update : unit -&gt; unit" Usage="sPIisWebServiceApplication.Update " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -1091,6 +1128,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Uri" />
       <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property Uri As Uri" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Uri ^ Uri { Uri ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Uri : Uri" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.Uri" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ISharedServiceApplication.Uri</InterfaceMember>
@@ -1114,6 +1152,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPIisWebServiceApplication.VirtualPath" />
       <MemberSignature Language="VB.NET" Value="Protected MustOverride ReadOnly Property VirtualPath As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract property System::String ^ VirtualPath { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.VirtualPath : string" Usage="Microsoft.SharePoint.Administration.SPIisWebServiceApplication.VirtualPath" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

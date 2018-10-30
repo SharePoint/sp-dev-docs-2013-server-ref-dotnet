@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Administration.SPAcl`1" />
   <TypeSignature Language="VB.NET" Value="Public Class SPAcl(Of T)&#xA;Implements IEnumerable(Of SPAce(Of T))" />
   <TypeSignature Language="C++ CLI" Value="generic &lt;typename T&gt;&#xA;public ref class SPAcl : System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^&gt;" />
+  <TypeSignature Language="F#" Value="type SPAcl&lt;'T&gt; = class&#xA;    interface seq&lt;SPAce&lt;'T&gt;&gt;&#xA;    interface IEnumerable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -48,6 +49,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.Add(System.String,`0,`0)" />
       <MemberSignature Language="VB.NET" Value="Public Function Add (principalName As String, grantRightsMask As T, denyRightsMask As T) As SPAce(Of T)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^ Add(System::String ^ principalName, T grantRightsMask, T denyRightsMask);" />
+      <MemberSignature Language="F#" Value="member this.Add : string * 'T * 'T -&gt; Microsoft.SharePoint.Administration.SPAce&lt;'T&gt;" Usage="sPAcl.Add (principalName, grantRightsMask, denyRightsMask)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -76,6 +78,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.Add(System.String,System.String,System.Byte[],`0,`0)" />
       <MemberSignature Language="VB.NET" Value="Public Function Add (principalName As String, displayName As String, securityIdentifier As Byte(), grantRightsMask As T, denyRightsMask As T) As SPAce(Of T)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^ Add(System::String ^ principalName, System::String ^ displayName, cli::array &lt;System::Byte&gt; ^ securityIdentifier, T grantRightsMask, T denyRightsMask);" />
+      <MemberSignature Language="F#" Value="member this.Add : string * string * byte[] * 'T * 'T -&gt; Microsoft.SharePoint.Administration.SPAce&lt;'T&gt;" Usage="sPAcl.Add (principalName, displayName, securityIdentifier, grantRightsMask, denyRightsMask)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -108,6 +111,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.Add(System.String,System.String,Microsoft.SharePoint.Administration.SPIdentifierType,System.Byte[],`0,`0)" />
       <MemberSignature Language="VB.NET" Value="Public Function Add (principalName As String, displayName As String, identifierType As SPIdentifierType, identifier As Byte(), grantRightsMask As T, denyRightsMask As T) As SPAce(Of T)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^ Add(System::String ^ principalName, System::String ^ displayName, Microsoft::SharePoint::Administration::SPIdentifierType identifierType, cli::array &lt;System::Byte&gt; ^ identifier, T grantRightsMask, T denyRightsMask);" />
+      <MemberSignature Language="F#" Value="member this.Add : string * string * Microsoft.SharePoint.Administration.SPIdentifierType * byte[] * 'T * 'T -&gt; Microsoft.SharePoint.Administration.SPAce&lt;'T&gt;" Usage="sPAcl.Add (principalName, displayName, identifierType, identifier, grantRightsMask, denyRightsMask)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -142,6 +146,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPAcl`1.AnonymousPermissionMask" />
       <MemberSignature Language="VB.NET" Value="Public Property AnonymousPermissionMask As T" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property T AnonymousPermissionMask { T get(); void set(T value); };" />
+      <MemberSignature Language="F#" Value="member this.AnonymousPermissionMask : 'T with get, set" Usage="Microsoft.SharePoint.Administration.SPAcl&lt;'T&gt;.AnonymousPermissionMask" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -162,6 +167,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.CalculatePermissions" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Function CalculatePermissions () As ULong" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual System::UInt64 CalculatePermissions();" />
+      <MemberSignature Language="F#" Value="abstract member CalculatePermissions : unit -&gt; uint64&#xA;override this.CalculatePermissions : unit -&gt; uint64" Usage="sPAcl.CalculatePermissions " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -183,6 +189,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.Clear" />
       <MemberSignature Language="VB.NET" Value="Public Sub Clear ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Clear();" />
+      <MemberSignature Language="F#" Value="member this.Clear : unit -&gt; unit" Usage="sPAcl.Clear " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -203,6 +210,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPAcl`1.Count" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Count As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Count { int get(); };" />
+      <MemberSignature Language="F#" Value="member this.Count : int" Usage="Microsoft.SharePoint.Administration.SPAcl&lt;'T&gt;.Count" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -223,6 +231,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.DoesUserHavePermissions(`0)" />
       <MemberSignature Language="VB.NET" Value="Public Function DoesUserHavePermissions (permissions As T) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool DoesUserHavePermissions(T permissions);" />
+      <MemberSignature Language="F#" Value="member this.DoesUserHavePermissions : 'T -&gt; bool" Usage="sPAcl.DoesUserHavePermissions permissions" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -247,6 +256,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.EffectivePermissions" />
       <MemberSignature Language="VB.NET" Value="Public Function EffectivePermissions () As T" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; T EffectivePermissions();" />
+      <MemberSignature Language="F#" Value="member this.EffectivePermissions : unit -&gt; 'T" Usage="sPAcl.EffectivePermissions " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -268,6 +278,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.GetEnumerator" />
       <MemberSignature Language="VB.NET" Value="Public Function GetEnumerator () As IEnumerator(Of SPAce(Of T))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IEnumerator&lt;Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^&gt; ^ GetEnumerator();" />
+      <MemberSignature Language="F#" Value="abstract member GetEnumerator : unit -&gt; System.Collections.Generic.IEnumerator&lt;Microsoft.SharePoint.Administration.SPAce&lt;'T&gt;&gt;&#xA;override this.GetEnumerator : unit -&gt; System.Collections.Generic.IEnumerator&lt;Microsoft.SharePoint.Administration.SPAce&lt;'T&gt;&gt;" Usage="sPAcl.GetEnumerator " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.Collections.Generic.IEnumerable`1.GetEnumerator</InterfaceMember>
@@ -292,6 +303,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.Init" />
       <MemberSignature Language="VB.NET" Value="Protected Sub Init ()" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; void Init();" />
+      <MemberSignature Language="F#" Value="member this.Init : unit -&gt; unit" Usage="sPAcl.Init " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -317,6 +329,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPAcl`1.Item(System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(index As Integer) As SPAce(Of T)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^ default[int] { Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^ get(int index); };" />
+      <MemberSignature Language="F#" Value="member this.Item(int) : Microsoft.SharePoint.Administration.SPAce&lt;'T&gt;" Usage="Microsoft.SharePoint.Administration.SPAcl&lt;'T&gt;.Item" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -341,6 +354,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPAcl`1.Item(System.String)" />
       <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(principalName As String) As SPAce(Of T)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^ default[System::String ^] { Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^ get(System::String ^ principalName); };" />
+      <MemberSignature Language="F#" Value="member this.Item(string) : Microsoft.SharePoint.Administration.SPAce&lt;'T&gt;" Usage="Microsoft.SharePoint.Administration.SPAcl&lt;'T&gt;.Item" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -365,6 +379,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.MigrateUserAccount(System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function MigrateUserAccount (oldPrincipalName As String, newPrincipalName As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool MigrateUserAccount(System::String ^ oldPrincipalName, System::String ^ newPrincipalName);" />
+      <MemberSignature Language="F#" Value="member this.MigrateUserAccount : string * string -&gt; bool" Usage="sPAcl.MigrateUserAccount (oldPrincipalName, newPrincipalName)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -391,6 +406,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.MigrateUserAccount(System.String,System.String,System.Collections.Generic.IEnumerable{System.Byte[]})" />
       <MemberSignature Language="VB.NET" Value="Public Function MigrateUserAccount (oldPrincipalName As String, newPrincipalName As String, allowedOldBinaryIds As IEnumerable(Of Byte())) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool MigrateUserAccount(System::String ^ oldPrincipalName, System::String ^ newPrincipalName, System::Collections::Generic::IEnumerable&lt;cli::array &lt;System::Byte&gt; ^&gt; ^ allowedOldBinaryIds);" />
+      <MemberSignature Language="F#" Value="member this.MigrateUserAccount : string * string * seq&lt;byte[]&gt; -&gt; bool" Usage="sPAcl.MigrateUserAccount (oldPrincipalName, newPrincipalName, allowedOldBinaryIds)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -419,6 +435,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.OnAdd(Microsoft.SharePoint.Administration.SPAce{`0})" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Sub OnAdd (ace As SPAce(Of T))" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void OnAdd(Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^ ace);" />
+      <MemberSignature Language="F#" Value="abstract member OnAdd : Microsoft.SharePoint.Administration.SPAce&lt;'T&gt; -&gt; unit&#xA;override this.OnAdd : Microsoft.SharePoint.Administration.SPAce&lt;'T&gt; -&gt; unit" Usage="sPAcl.OnAdd ace" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -442,6 +459,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.Remove(Microsoft.SharePoint.Administration.SPAce{`0})" />
       <MemberSignature Language="VB.NET" Value="Public Sub Remove (ace As SPAce(Of T))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Remove(Microsoft::SharePoint::Administration::SPAce&lt;T&gt; ^ ace);" />
+      <MemberSignature Language="F#" Value="member this.Remove : Microsoft.SharePoint.Administration.SPAce&lt;'T&gt; -&gt; unit" Usage="sPAcl.Remove ace" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -465,6 +483,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPAcl`1.Remove(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub Remove (principalName As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Remove(System::String ^ principalName);" />
+      <MemberSignature Language="F#" Value="member this.Remove : string -&gt; unit" Usage="sPAcl.Remove principalName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase" />
   <TypeSignature Language="VB.NET" Value="Public MustInherit Class SPDiagnosticsServiceBase&#xA;Inherits SPService&#xA;Implements IBackupRestoreConfiguration" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPDiagnosticsServiceBase abstract : Microsoft::SharePoint::Administration::SPService, Microsoft::SharePoint::Administration::Backup::IBackupRestoreConfiguration" />
+  <TypeSignature Language="F#" Value="type SPDiagnosticsServiceBase = class&#xA;    inherit SPService&#xA;    interface IBackupRestoreConfiguration&#xA;    interface IBackupRestore" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -44,6 +45,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.#ctor(System.String,Microsoft.SharePoint.Administration.SPFarm)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub New (name As String, parent As SPFarm)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; SPDiagnosticsServiceBase(System::String ^ name, Microsoft::SharePoint::Administration::SPFarm ^ parent);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase : string * Microsoft.SharePoint.Administration.SPFarm -&gt; Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase" Usage="new Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase (name, parent)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -66,6 +68,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.AddBackupObjects(Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub AddBackupObjects (parent As SPBackupRestoreObject)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void AddBackupObjects(Microsoft::SharePoint::Administration::Backup::SPBackupRestoreObject ^ parent);" />
+      <MemberSignature Language="F#" Value="abstract member AddBackupObjects : Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject -&gt; unit&#xA;override this.AddBackupObjects : Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject -&gt; unit" Usage="sPDiagnosticsServiceBase.AddBackupObjects parent" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.AddBackupObjects(Microsoft.SharePoint.Administration.Backup.SPBackupRestoreObject)</InterfaceMember>
@@ -92,6 +95,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.Areas" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Areas As SPDiagnosticsCollection(Of SPDiagnosticsArea)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Administration::SPDiagnosticsCollection&lt;Microsoft::SharePoint::Administration::SPDiagnosticsArea ^&gt; ^ Areas { Microsoft::SharePoint::Administration::SPDiagnosticsCollection&lt;Microsoft::SharePoint::Administration::SPDiagnosticsArea ^&gt; ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Areas : Microsoft.SharePoint.Administration.SPDiagnosticsCollection&lt;Microsoft.SharePoint.Administration.SPDiagnosticsArea&gt;" Usage="Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.Areas" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -112,6 +116,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.CanBackupRestoreAsConfiguration" />
       <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property CanBackupRestoreAsConfiguration As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool CanBackupRestoreAsConfiguration { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.CanBackupRestoreAsConfiguration : bool" Usage="Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.CanBackupRestoreAsConfiguration" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestoreConfiguration.CanBackupRestoreAsConfiguration</InterfaceMember>
@@ -135,6 +140,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.CanRenameOnRestore" />
       <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property CanRenameOnRestore As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool CanRenameOnRestore { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.CanRenameOnRestore : bool" Usage="Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.CanRenameOnRestore" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanRenameOnRestore</InterfaceMember>
@@ -158,6 +164,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.CanSelectForBackup" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property CanSelectForBackup As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool CanSelectForBackup { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.CanSelectForBackup : bool with get, set" Usage="Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.CanSelectForBackup" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForBackup</InterfaceMember>
@@ -181,6 +188,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.CanSelectForRestore" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property CanSelectForRestore As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool CanSelectForRestore { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.CanSelectForRestore : bool with get, set" Usage="Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.CanSelectForRestore" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.CanSelectForRestore</InterfaceMember>
@@ -204,6 +212,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.CorrelationVisibleID" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CorrelationVisibleID As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid CorrelationVisibleID { Guid get(); };" />
+      <MemberSignature Language="F#" Value="member this.CorrelationVisibleID : Guid" Usage="Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.CorrelationVisibleID" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -224,6 +233,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.DiskSizeRequired" />
       <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property DiskSizeRequired As ULong" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::UInt64 DiskSizeRequired { System::UInt64 get(); };" />
+      <MemberSignature Language="F#" Value="member this.DiskSizeRequired : uint64" Usage="Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.DiskSizeRequired" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.DiskSizeRequired</InterfaceMember>
@@ -247,6 +257,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.GetLocal``1" />
       <MemberSignature Language="VB.NET" Value="Protected Shared Function GetLocal(Of T As {SPDiagnosticsServiceBaseNew}) () As T" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA;generic &lt;typename T&gt;&#xA; where T : Microsoft::SharePoint::Administration::SPDiagnosticsServiceBasegcnew() static T GetLocal();" />
+      <MemberSignature Language="F#" Value="static member GetLocal : unit -&gt; 'T (requires 'T :&gt; Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase and 'T : (new : unit -&gt; 'T))" Usage="Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.GetLocal " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -277,6 +288,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.GetLocalToFarm``1(Microsoft.SharePoint.Administration.SPFarm)" />
       <MemberSignature Language="VB.NET" Value="Protected Shared Function GetLocalToFarm(Of T As {SPDiagnosticsServiceBaseNew}) (farm As SPFarm) As T" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA;generic &lt;typename T&gt;&#xA; where T : Microsoft::SharePoint::Administration::SPDiagnosticsServiceBasegcnew() static T GetLocalToFarm(Microsoft::SharePoint::Administration::SPFarm ^ farm);" />
+      <MemberSignature Language="F#" Value="static member GetLocalToFarm : Microsoft.SharePoint.Administration.SPFarm -&gt; 'T (requires 'T :&gt; Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase and 'T : (new : unit -&gt; 'T))" Usage="Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.GetLocalToFarm farm" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -309,7 +321,8 @@
       <MemberSignature Language="ILAsm" Value=".property instance string Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name" />
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.Microsoft#SharePoint#Administration#Backup#IBackupRestore#Name" />
       <MemberSignature Language="VB.NET" Value=" Property Name As String Implements IBackupRestore.Name" />
-      <MemberSignature Language="C++ CLI" Value="property System::String ^ Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="C++ CLI" Value="property System::String ^ Microsoft::SharePoint::Administration::Backup::IBackupRestore::Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Usage="Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.Backup.IBackupRestore.Name</InterfaceMember>
@@ -333,6 +346,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.OnAbort(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnAbort (sender As Object, info As SPBackupRestoreInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnAbort(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupRestoreInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnAbort : obj * Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation -&gt; bool&#xA;override this.OnAbort : obj * Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation -&gt; bool" Usage="sPDiagnosticsServiceBase.OnAbort (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnAbort(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupRestoreInformation)</InterfaceMember>
@@ -362,6 +376,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.OnBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnBackup (sender As Object, info As SPBackupInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnBackup(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnBackup : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool&#xA;override this.OnBackup : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool" Usage="sPDiagnosticsServiceBase.OnBackup (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
@@ -391,6 +406,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.OnBackupComplete(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnBackupComplete (sender As Object, info As SPBackupInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnBackupComplete(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnBackupComplete : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool&#xA;override this.OnBackupComplete : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool" Usage="sPDiagnosticsServiceBase.OnBackupComplete (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnBackupComplete(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
@@ -420,6 +436,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.OnPostRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnPostRestore (sender As Object, info As SPRestoreInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnPostRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnPostRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool&#xA;override this.OnPostRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool" Usage="sPDiagnosticsServiceBase.OnPostRestore (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPostRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
@@ -449,6 +466,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.OnPrepareBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnPrepareBackup (sender As Object, info As SPBackupInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnPrepareBackup(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPBackupInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnPrepareBackup : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool&#xA;override this.OnPrepareBackup : obj * Microsoft.SharePoint.Administration.Backup.SPBackupInformation -&gt; bool" Usage="sPDiagnosticsServiceBase.OnPrepareBackup (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPrepareBackup(System.Object,Microsoft.SharePoint.Administration.Backup.SPBackupInformation)</InterfaceMember>
@@ -478,6 +496,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.OnPreRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnPreRestore (sender As Object, info As SPRestoreInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnPreRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnPreRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool&#xA;override this.OnPreRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool" Usage="sPDiagnosticsServiceBase.OnPreRestore (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnPreRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
@@ -507,6 +526,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function OnRestore (sender As Object, info As SPRestoreInformation) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool OnRestore(System::Object ^ sender, Microsoft::SharePoint::Administration::Backup::SPRestoreInformation ^ info);" />
+      <MemberSignature Language="F#" Value="abstract member OnRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool&#xA;override this.OnRestore : obj * Microsoft.SharePoint.Administration.Backup.SPRestoreInformation -&gt; bool" Usage="sPDiagnosticsServiceBase.OnRestore (sender, info)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.Backup.IBackupRestore.OnRestore(System.Object,Microsoft.SharePoint.Administration.Backup.SPRestoreInformation)</InterfaceMember>
@@ -536,6 +556,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.ProvideAreas" />
       <MemberSignature Language="VB.NET" Value="Protected MustOverride Function ProvideAreas () As IEnumerable(Of SPDiagnosticsArea)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; abstract System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::Administration::SPDiagnosticsArea ^&gt; ^ ProvideAreas();" />
+      <MemberSignature Language="F#" Value="abstract member ProvideAreas : unit -&gt; seq&lt;Microsoft.SharePoint.Administration.SPDiagnosticsArea&gt;" Usage="sPDiagnosticsServiceBase.ProvideAreas " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -557,6 +578,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.ResetAll" />
       <MemberSignature Language="VB.NET" Value="Public Sub ResetAll ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void ResetAll();" />
+      <MemberSignature Language="F#" Value="abstract member ResetAll : unit -&gt; unit&#xA;override this.ResetAll : unit -&gt; unit" Usage="sPDiagnosticsServiceBase.ResetAll " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -577,6 +599,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.ResourceDll" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable ReadOnly Property ResourceDll As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ ResourceDll { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ResourceDll : string" Usage="Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.ResourceDll" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -596,6 +619,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetAll(valuetype Microsoft.SharePoint.Administration.EventSeverity eventSeverity) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.SetAll(Microsoft.SharePoint.Administration.EventSeverity)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void SetAll(Microsoft::SharePoint::Administration::EventSeverity eventSeverity);" />
+      <MemberSignature Language="F#" Value="member this.SetAll : Microsoft.SharePoint.Administration.EventSeverity -&gt; unit" Usage="sPDiagnosticsServiceBase.SetAll eventSeverity" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -618,6 +642,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetAll(valuetype Microsoft.SharePoint.Administration.TraceSeverity traceSeverity) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.SetAll(Microsoft.SharePoint.Administration.TraceSeverity)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void SetAll(Microsoft::SharePoint::Administration::TraceSeverity traceSeverity);" />
+      <MemberSignature Language="F#" Value="abstract member SetAll : Microsoft.SharePoint.Administration.TraceSeverity -&gt; unit&#xA;override this.SetAll : Microsoft.SharePoint.Administration.TraceSeverity -&gt; unit" Usage="sPDiagnosticsServiceBase.SetAll traceSeverity" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -640,6 +665,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetAll(valuetype Microsoft.SharePoint.Administration.TraceSeverity traceSeverity, valuetype Microsoft.SharePoint.Administration.EventSeverity eventSeverity) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.SetAll(Microsoft.SharePoint.Administration.TraceSeverity,Microsoft.SharePoint.Administration.EventSeverity)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void SetAll(Microsoft::SharePoint::Administration::TraceSeverity traceSeverity, Microsoft::SharePoint::Administration::EventSeverity eventSeverity);" />
+      <MemberSignature Language="F#" Value="abstract member SetAll : Microsoft.SharePoint.Administration.TraceSeverity * Microsoft.SharePoint.Administration.EventSeverity -&gt; unit&#xA;override this.SetAll : Microsoft.SharePoint.Administration.TraceSeverity * Microsoft.SharePoint.Administration.EventSeverity -&gt; unit" Usage="sPDiagnosticsServiceBase.SetAll (traceSeverity, eventSeverity)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -665,6 +691,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.Update" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Update ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Update();" />
+      <MemberSignature Language="F#" Value="override this.Update : unit -&gt; unit" Usage="sPDiagnosticsServiceBase.Update " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -685,6 +712,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.WriteEvent(System.UInt16,Microsoft.SharePoint.Administration.SPDiagnosticsCategory,Microsoft.SharePoint.Administration.EventSeverity,System.String,System.Object[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub WriteEvent (id As UShort, category As SPDiagnosticsCategory, severity As EventSeverity, output As String, ParamArray data As Object())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void WriteEvent(System::UInt16 id, Microsoft::SharePoint::Administration::SPDiagnosticsCategory ^ category, Microsoft::SharePoint::Administration::EventSeverity severity, System::String ^ output, ... cli::array &lt;System::Object ^&gt; ^ data);" />
+      <MemberSignature Language="F#" Value="member this.WriteEvent : uint16 * Microsoft.SharePoint.Administration.SPDiagnosticsCategory * Microsoft.SharePoint.Administration.EventSeverity * string * obj[] -&gt; unit" Usage="sPDiagnosticsServiceBase.WriteEvent (id, category, severity, output, data)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -722,6 +750,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPDiagnosticsServiceBase.WriteTrace(System.UInt32,Microsoft.SharePoint.Administration.SPDiagnosticsCategory,Microsoft.SharePoint.Administration.TraceSeverity,System.String,System.Object[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub WriteTrace (id As UInteger, category As SPDiagnosticsCategory, severity As TraceSeverity, output As String, ParamArray data As Object())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void WriteTrace(System::UInt32 id, Microsoft::SharePoint::Administration::SPDiagnosticsCategory ^ category, Microsoft::SharePoint::Administration::TraceSeverity severity, System::String ^ output, ... cli::array &lt;System::Object ^&gt; ^ data);" />
+      <MemberSignature Language="F#" Value="member this.WriteTrace : uint32 * Microsoft.SharePoint.Administration.SPDiagnosticsCategory * Microsoft.SharePoint.Administration.TraceSeverity * string * obj[] -&gt; unit" Usage="sPDiagnosticsServiceBase.WriteTrace (id, category, severity, output, data)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

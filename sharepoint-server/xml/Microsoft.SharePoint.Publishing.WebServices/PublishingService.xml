@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Publishing.WebServices.PublishingService" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class PublishingService&#xA;Inherits WebService" />
   <TypeSignature Language="C++ CLI" Value="public ref class PublishingService sealed : System::Web::Services::WebService" />
+  <TypeSignature Language="F#" Value="type PublishingService = class&#xA;    inherit WebService" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -52,6 +53,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.CreatePageLayout(System.String,System.String,System.String,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function CreatePageLayout (pageLayoutName As String, associatedContentTypeId As String, title As String, description As String, siteUrl As String) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ CreatePageLayout(System::String ^ pageLayoutName, System::String ^ associatedContentTypeId, System::String ^ title, System::String ^ description, System::String ^ siteUrl);" />
+      <MemberSignature Language="F#" Value="member this.CreatePageLayout : string * string * string * string * string -&gt; string" Usage="publishingService.CreatePageLayout (pageLayoutName, associatedContentTypeId, title, description, siteUrl)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -128,6 +130,7 @@ namespace PublishingServiceUtility
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.DisconnectPageLayout(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub DisconnectPageLayout (pageUrl As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void DisconnectPageLayout(System::String ^ pageUrl);" />
+      <MemberSignature Language="F#" Value="member this.DisconnectPageLayout : string -&gt; unit" Usage="publishingService.DisconnectPageLayout pageUrl" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -196,6 +199,7 @@ namespace PublishingServiceUtility
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetAllContentSlices" />
       <MemberSignature Language="VB.NET" Value="Public Function GetAllContentSlices () As ContentSlice()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::WebServices::ContentSlice ^&gt; ^ GetAllContentSlices();" />
+      <MemberSignature Language="F#" Value="member this.GetAllContentSlices : unit -&gt; Microsoft.SharePoint.Publishing.WebServices.ContentSlice[]" Usage="publishingService.GetAllContentSlices " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -222,6 +226,7 @@ namespace PublishingServiceUtility
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetAllFriendlyUrls(System.Guid,System.Guid,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetAllFriendlyUrls (siteId As Guid, webId As Guid, ByRef pagingToken As String) As FriendlyUrl()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::WebServices::FriendlyUrl ^&gt; ^ GetAllFriendlyUrls(Guid siteId, Guid webId, System::String ^ % pagingToken);" />
+      <MemberSignature Language="F#" Value="member this.GetAllFriendlyUrls : Guid * Guid *  -&gt; Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl[]" Usage="publishingService.GetAllFriendlyUrls (siteId, webId, pagingToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -238,7 +243,7 @@ namespace PublishingServiceUtility
       <Parameters>
         <Parameter Name="siteId" Type="System.Guid" />
         <Parameter Name="webId" Type="System.Guid" />
-        <Parameter Name="pagingToken" Type="System.String&amp;" RefType="ref" />
+        <Parameter Name="pagingToken" Type="System.String" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="siteId">ID of the <see cref="T:Microsoft.SharePoint.SPSite" /> object.</param>
@@ -258,6 +263,7 @@ namespace PublishingServiceUtility
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetChangedFriendlyUrlBasedWebs(System.Guid,System.String,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetChangedFriendlyUrlBasedWebs (contentPartitionId As Guid, changeToken As String, ByRef pagingToken As String) As FriendlyUrlBasedWeb()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::WebServices::FriendlyUrlBasedWeb ^&gt; ^ GetChangedFriendlyUrlBasedWebs(Guid contentPartitionId, System::String ^ changeToken, System::String ^ % pagingToken);" />
+      <MemberSignature Language="F#" Value="member this.GetChangedFriendlyUrlBasedWebs : Guid * string *  -&gt; Microsoft.SharePoint.Publishing.WebServices.FriendlyUrlBasedWeb[]" Usage="publishingService.GetChangedFriendlyUrlBasedWebs (contentPartitionId, changeToken, pagingToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -274,7 +280,7 @@ namespace PublishingServiceUtility
       <Parameters>
         <Parameter Name="contentPartitionId" Type="System.Guid" />
         <Parameter Name="changeToken" Type="System.String" />
-        <Parameter Name="pagingToken" Type="System.String&amp;" RefType="ref" />
+        <Parameter Name="pagingToken" Type="System.String" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="contentPartitionId">To be added.</param>
@@ -307,6 +313,7 @@ that token to get a list of <see cref="T:Microsoft.SharePoint.SPWeb" /> objects 
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetChangedFriendlyUrls(System.Guid,System.Guid,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetChangedFriendlyUrls (siteId As Guid, webId As Guid, ByRef pagingToken As String) As FriendlyUrl()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::WebServices::FriendlyUrl ^&gt; ^ GetChangedFriendlyUrls(Guid siteId, Guid webId, System::String ^ % pagingToken);" />
+      <MemberSignature Language="F#" Value="member this.GetChangedFriendlyUrls : Guid * Guid *  -&gt; Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl[]" Usage="publishingService.GetChangedFriendlyUrls (siteId, webId, pagingToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -323,7 +330,7 @@ that token to get a list of <see cref="T:Microsoft.SharePoint.SPWeb" /> objects 
       <Parameters>
         <Parameter Name="siteId" Type="System.Guid" />
         <Parameter Name="webId" Type="System.Guid" />
-        <Parameter Name="pagingToken" Type="System.String&amp;" RefType="ref" />
+        <Parameter Name="pagingToken" Type="System.String" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="siteId">ID of the site for which to return friendly URLs.</param>
@@ -341,6 +348,7 @@ that token to get a list of <see cref="T:Microsoft.SharePoint.SPWeb" /> objects 
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetFriendlyUrl(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetFriendlyUrl (url As String) As FriendlyUrl" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::WebServices::FriendlyUrl ^ GetFriendlyUrl(System::String ^ url);" />
+      <MemberSignature Language="F#" Value="member this.GetFriendlyUrl : string -&gt; Microsoft.SharePoint.Publishing.WebServices.FriendlyUrl" Usage="publishingService.GetFriendlyUrl url" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -373,6 +381,7 @@ that token to get a list of <see cref="T:Microsoft.SharePoint.SPWeb" /> objects 
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetFriendlyUrlBasedWebs(System.Guid,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetFriendlyUrlBasedWebs (contentPartitionId As Guid, ByRef pagingToken As String) As FriendlyUrlBasedWeb()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;Microsoft::SharePoint::Publishing::WebServices::FriendlyUrlBasedWeb ^&gt; ^ GetFriendlyUrlBasedWebs(Guid contentPartitionId, System::String ^ % pagingToken);" />
+      <MemberSignature Language="F#" Value="member this.GetFriendlyUrlBasedWebs : Guid *  -&gt; Microsoft.SharePoint.Publishing.WebServices.FriendlyUrlBasedWeb[]" Usage="publishingService.GetFriendlyUrlBasedWebs (contentPartitionId, pagingToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -388,7 +397,7 @@ that token to get a list of <see cref="T:Microsoft.SharePoint.SPWeb" /> objects 
       </ReturnValue>
       <Parameters>
         <Parameter Name="contentPartitionId" Type="System.Guid" />
-        <Parameter Name="pagingToken" Type="System.String&amp;" RefType="ref" />
+        <Parameter Name="pagingToken" Type="System.String" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="contentPartitionId">The ID of the content database that is being queried.</param>
@@ -407,6 +416,7 @@ that token to get a list of <see cref="T:Microsoft.SharePoint.SPWeb" /> objects 
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetObjectStatus(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetObjectStatus (objectUrl As String) As PublishingObjectStatus" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Publishing::PublishingObjectStatus ^ GetObjectStatus(System::String ^ objectUrl);" />
+      <MemberSignature Language="F#" Value="member this.GetObjectStatus : string -&gt; Microsoft.SharePoint.Publishing.PublishingObjectStatus" Usage="publishingService.GetObjectStatus objectUrl" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -436,6 +446,7 @@ that token to get a list of <see cref="T:Microsoft.SharePoint.SPWeb" /> objects 
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetObjectStatusCollection(System.String[])" />
       <MemberSignature Language="VB.NET" Value="Public Function GetObjectStatusCollection (objectUrls As String()) As Collection(Of PublishingObjectStatus)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ObjectModel::Collection&lt;Microsoft::SharePoint::Publishing::PublishingObjectStatus ^&gt; ^ GetObjectStatusCollection(cli::array &lt;System::String ^&gt; ^ objectUrls);" />
+      <MemberSignature Language="F#" Value="member this.GetObjectStatusCollection : string[] -&gt; System.Collections.ObjectModel.Collection&lt;Microsoft.SharePoint.Publishing.PublishingObjectStatus&gt;" Usage="publishingService.GetObjectStatusCollection objectUrls" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -465,6 +476,7 @@ that token to get a list of <see cref="T:Microsoft.SharePoint.SPWeb" /> objects 
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.GetObjectStatusCollectionWithExclusions(System.String[],System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetObjectStatusCollectionWithExclusions (objectUrls As String(), thisPageUrl As String) As Collection(Of PublishingObjectStatus)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::ObjectModel::Collection&lt;Microsoft::SharePoint::Publishing::PublishingObjectStatus ^&gt; ^ GetObjectStatusCollectionWithExclusions(cli::array &lt;System::String ^&gt; ^ objectUrls, System::String ^ thisPageUrl);" />
+      <MemberSignature Language="F#" Value="member this.GetObjectStatusCollectionWithExclusions : string[] * string -&gt; System.Collections.ObjectModel.Collection&lt;Microsoft.SharePoint.Publishing.PublishingObjectStatus&gt;" Usage="publishingService.GetObjectStatusCollectionWithExclusions (objectUrls, thisPageUrl)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>
@@ -496,6 +508,7 @@ that token to get a list of <see cref="T:Microsoft.SharePoint.SPWeb" /> objects 
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Publishing.WebServices.PublishingService.ReconnectPageLayout(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function ReconnectPageLayout (pageUrl As String) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ ReconnectPageLayout(System::String ^ pageUrl);" />
+      <MemberSignature Language="F#" Value="member this.ReconnectPageLayout : string -&gt; string" Usage="publishingService.ReconnectPageLayout pageUrl" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint.Publishing</AssemblyName>

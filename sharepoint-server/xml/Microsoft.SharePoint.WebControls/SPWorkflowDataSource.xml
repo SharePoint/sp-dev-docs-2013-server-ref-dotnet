@@ -1,9 +1,10 @@
 ﻿<Type Name="SPWorkflowDataSource" FullName="Microsoft.SharePoint.WebControls.SPWorkflowDataSource">
-  <TypeSignature Language="C#" Value="public sealed class SPWorkflowDataSource : System.Web.UI.DataSourceControl, IDisposable" />
+  <TypeSignature Language="C#" Value="public sealed class SPWorkflowDataSource : System.Web.UI.DataSourceControl, IDisposable, System.Web.UI.IDataSource" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SPWorkflowDataSource extends System.Web.UI.DataSourceControl implements class System.IDisposable, class System.Web.UI.IDataSource" />
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.WebControls.SPWorkflowDataSource" />
-  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SPWorkflowDataSource&#xA;Inherits DataSourceControl&#xA;Implements IDisposable" />
-  <TypeSignature Language="C++ CLI" Value="public ref class SPWorkflowDataSource sealed : System::Web::UI::DataSourceControl, IDisposable" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SPWorkflowDataSource&#xA;Inherits DataSourceControl&#xA;Implements IDataSource, IDisposable" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SPWorkflowDataSource sealed : System::Web::UI::DataSourceControl, IDisposable, System::Web::UI::IDataSource" />
+  <TypeSignature Language="F#" Value="type SPWorkflowDataSource = class&#xA;    inherit DataSourceControl&#xA;    interface IDataSource&#xA;    interface IDisposable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -14,6 +15,9 @@
   <Interfaces>
     <Interface>
       <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Web.UI.IDataSource</InterfaceName>
     </Interface>
   </Interfaces>
   <Attributes>
@@ -52,6 +56,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPWorkflowDataSource.AssociatedTemplateId" />
       <MemberSignature Language="VB.NET" Value="Public Property AssociatedTemplateId As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ AssociatedTemplateId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.AssociatedTemplateId : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPWorkflowDataSource.AssociatedTemplateId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -72,6 +77,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPWorkflowDataSource.BaseTemplateId" />
       <MemberSignature Language="VB.NET" Value="Public Property BaseTemplateId As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ BaseTemplateId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.BaseTemplateId : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPWorkflowDataSource.BaseTemplateId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -92,6 +98,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPWorkflowDataSource.FieldXml" />
       <MemberSignature Language="VB.NET" Value="Public Property FieldXml As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ FieldXml { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.FieldXml : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPWorkflowDataSource.FieldXml" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -112,10 +119,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPWorkflowDataSource.GetView(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetView (viewName As String) As DataSourceView" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Web::UI::DataSourceView ^ GetView(System::String ^ viewName);" />
+      <MemberSignature Language="F#" Value="abstract member GetView : string -&gt; System.Web.UI.DataSourceView&#xA;override this.GetView : string -&gt; System.Web.UI.DataSourceView" Usage="sPWorkflowDataSource.GetView viewName" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IDataSource.GetView(System.String)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -139,10 +144,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPWorkflowDataSource.GetViewNames" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetViewNames () As ICollection" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Collections::ICollection ^ GetViewNames();" />
+      <MemberSignature Language="F#" Value="abstract member GetViewNames : unit -&gt; System.Collections.ICollection&#xA;override this.GetViewNames : unit -&gt; System.Collections.ICollection" Usage="sPWorkflowDataSource.GetViewNames " />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IDataSource.GetViewNames</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -163,6 +166,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPWorkflowDataSource.InsertParameters" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property InsertParameters As ParameterCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Web::UI::WebControls::ParameterCollection ^ InsertParameters { System::Web::UI::WebControls::ParameterCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.InsertParameters : System.Web.UI.WebControls.ParameterCollection" Usage="Microsoft.SharePoint.WebControls.SPWorkflowDataSource.InsertParameters" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -170,7 +174,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName>System.Web.UI.PersistenceMode</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -188,6 +192,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPWorkflowDataSource.ItemId" />
       <MemberSignature Language="VB.NET" Value="Public Property ItemId As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int ItemId { int get(); void set(int value); };" />
+      <MemberSignature Language="F#" Value="member this.ItemId : int with get, set" Usage="Microsoft.SharePoint.WebControls.SPWorkflowDataSource.ItemId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -208,6 +213,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPWorkflowDataSource.ListId" />
       <MemberSignature Language="VB.NET" Value="Public Property ListId As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ListId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.ListId : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPWorkflowDataSource.ListId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -228,6 +234,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPWorkflowDataSource.SelectParameters" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SelectParameters As ParameterCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Web::UI::WebControls::ParameterCollection ^ SelectParameters { System::Web::UI::WebControls::ParameterCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.SelectParameters : System.Web.UI.WebControls.ParameterCollection" Usage="Microsoft.SharePoint.WebControls.SPWorkflowDataSource.SelectParameters" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -235,7 +242,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName>System.Web.UI.PersistenceMode(System.Web.UI.PersistenceMode.InnerProperty)</AttributeName>
+          <AttributeName>System.Web.UI.PersistenceMode</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>

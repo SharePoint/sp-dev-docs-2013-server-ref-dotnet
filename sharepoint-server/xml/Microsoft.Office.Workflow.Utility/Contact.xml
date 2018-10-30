@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.Workflow.Utility.Contact" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class Contact" />
   <TypeSignature Language="C++ CLI" Value="public ref class Contact sealed" />
+  <TypeSignature Language="F#" Value="type Contact = class" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -16,6 +17,11 @@
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>Represents data from the Contact Selector control.</summary>
     <remarks>
@@ -31,6 +37,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Workflow.Utility.Contact.DisplayName" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property DisplayName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DisplayName { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.DisplayName : string" Usage="Microsoft.Office.Workflow.Utility.Contact.DisplayName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -58,6 +65,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Workflow.Utility.Contact.EmailAddress" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property EmailAddress As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ EmailAddress { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.EmailAddress : string" Usage="Microsoft.Office.Workflow.Utility.Contact.EmailAddress" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -85,6 +93,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.Equals(Microsoft.Office.Workflow.Utility.Contact)" />
       <MemberSignature Language="VB.NET" Value="Public Function Equals (c As Contact) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool Equals(Microsoft::Office::Workflow::Utility::Contact ^ c);" />
+      <MemberSignature Language="F#" Value="override this.Equals : Microsoft.Office.Workflow.Utility.Contact -&gt; bool" Usage="contact.Equals c" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -113,6 +122,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.ExpandGroups(Microsoft.SharePoint.SPWeb,Microsoft.Office.Workflow.Utility.Contact[],System.Int32,System.Boolean@)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function ExpandGroups (web As SPWeb, reviewers As Contact(), maxCount As Integer, ByRef reachedMaxCount As Boolean) As Contact()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;Microsoft::Office::Workflow::Utility::Contact ^&gt; ^ ExpandGroups(Microsoft::SharePoint::SPWeb ^ web, cli::array &lt;Microsoft::Office::Workflow::Utility::Contact ^&gt; ^ reviewers, int maxCount, [Runtime::InteropServices::Out] bool % reachedMaxCount);" />
+      <MemberSignature Language="F#" Value="static member ExpandGroups : Microsoft.SharePoint.SPWeb * Microsoft.Office.Workflow.Utility.Contact[] * int *  -&gt; Microsoft.Office.Workflow.Utility.Contact[]" Usage="Microsoft.Office.Workflow.Utility.Contact.ExpandGroups (web, reviewers, maxCount, reachedMaxCount)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -129,7 +139,7 @@
         <Parameter Name="web" Type="Microsoft.SharePoint.SPWeb" />
         <Parameter Name="reviewers" Type="Microsoft.Office.Workflow.Utility.Contact[]" />
         <Parameter Name="maxCount" Type="System.Int32" />
-        <Parameter Name="reachedMaxCount" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="reachedMaxCount" Type="System.Boolean" RefType="out" />
       </Parameters>
       <Docs>
         <param name="web">The SharePoint Web site to look for the group.</param>
@@ -650,6 +660,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.FromDisplayNameAndEmailAddress(System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function FromDisplayNameAndEmailAddress (name As String, email As String) As Contact" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::Workflow::Utility::Contact ^ FromDisplayNameAndEmailAddress(System::String ^ name, System::String ^ email);" />
+      <MemberSignature Language="F#" Value="static member FromDisplayNameAndEmailAddress : string * string -&gt; Microsoft.Office.Workflow.Utility.Contact" Usage="Microsoft.Office.Workflow.Utility.Contact.FromDisplayNameAndEmailAddress (name, email)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -683,6 +694,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.FromName(System.String,Microsoft.SharePoint.SPWeb)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function FromName (name As String, web As SPWeb) As Contact" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::Workflow::Utility::Contact ^ FromName(System::String ^ name, Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberSignature Language="F#" Value="static member FromName : string * Microsoft.SharePoint.SPWeb -&gt; Microsoft.Office.Workflow.Utility.Contact" Usage="Microsoft.Office.Workflow.Utility.Contact.FromName (name, web)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -716,6 +728,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.FromPrincipal(Microsoft.SharePoint.SPPrincipal)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function FromPrincipal (principal As SPPrincipal) As Contact" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::Workflow::Utility::Contact ^ FromPrincipal(Microsoft::SharePoint::SPPrincipal ^ principal);" />
+      <MemberSignature Language="F#" Value="static member FromPrincipal : Microsoft.SharePoint.SPPrincipal -&gt; Microsoft.Office.Workflow.Utility.Contact" Usage="Microsoft.Office.Workflow.Utility.Contact.FromPrincipal principal" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -749,6 +762,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.FromPrincipalID(System.Int32,Microsoft.SharePoint.SPWeb)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function FromPrincipalID (id As Integer, web As SPWeb) As Contact" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::Workflow::Utility::Contact ^ FromPrincipalID(int id, Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberSignature Language="F#" Value="static member FromPrincipalID : int * Microsoft.SharePoint.SPWeb -&gt; Microsoft.Office.Workflow.Utility.Contact" Usage="Microsoft.Office.Workflow.Utility.Contact.FromPrincipalID (id, web)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -784,6 +798,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.FromPrincipalInfo(Microsoft.SharePoint.Utilities.SPPrincipalInfo)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function FromPrincipalInfo (pi As SPPrincipalInfo) As Contact" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::Workflow::Utility::Contact ^ FromPrincipalInfo(Microsoft::SharePoint::Utilities::SPPrincipalInfo ^ pi);" />
+      <MemberSignature Language="F#" Value="static member FromPrincipalInfo : Microsoft.SharePoint.Utilities.SPPrincipalInfo -&gt; Microsoft.Office.Workflow.Utility.Contact" Usage="Microsoft.Office.Workflow.Utility.Contact.FromPrincipalInfo pi" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -817,6 +832,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.FromSharePointUserString(System.String,Microsoft.SharePoint.SPWeb)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function FromSharePointUserString (strId As String, web As SPWeb) As Contact" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::Office::Workflow::Utility::Contact ^ FromSharePointUserString(System::String ^ strId, Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberSignature Language="F#" Value="static member FromSharePointUserString : string * Microsoft.SharePoint.SPWeb -&gt; Microsoft.Office.Workflow.Utility.Contact" Usage="Microsoft.Office.Workflow.Utility.Contact.FromSharePointUserString (strId, web)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -850,6 +866,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.GetPrincipal(Microsoft.SharePoint.SPWeb)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetPrincipal (web As SPWeb) As SPPrincipal" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::SPPrincipal ^ GetPrincipal(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberSignature Language="F#" Value="member this.GetPrincipal : Microsoft.SharePoint.SPWeb -&gt; Microsoft.SharePoint.SPPrincipal" Usage="contact.GetPrincipal web" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -883,6 +900,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Workflow.Utility.Contact.IsCollection" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsCollection As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsCollection { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IsCollection : bool" Usage="Microsoft.Office.Workflow.Utility.Contact.IsCollection" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -910,6 +928,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Workflow.Utility.Contact.IsSPUser" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSPUser As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSPUser { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IsSPUser : bool" Usage="Microsoft.Office.Workflow.Utility.Contact.IsSPUser" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -937,6 +956,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Workflow.Utility.Contact.LoginName" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LoginName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LoginName { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.LoginName : string" Usage="Microsoft.Office.Workflow.Utility.Contact.LoginName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -964,6 +984,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Workflow.Utility.Contact.PrincipalID" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PrincipalID As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int PrincipalID { int get(); };" />
+      <MemberSignature Language="F#" Value="member this.PrincipalID : int" Usage="Microsoft.Office.Workflow.Utility.Contact.PrincipalID" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -993,6 +1014,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Workflow.Utility.Contact.PrincipalType" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property PrincipalType As SPPrincipalType" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Utilities::SPPrincipalType PrincipalType { Microsoft::SharePoint::Utilities::SPPrincipalType get(); };" />
+      <MemberSignature Language="F#" Value="member this.PrincipalType : Microsoft.SharePoint.Utilities.SPPrincipalType" Usage="Microsoft.Office.Workflow.Utility.Contact.PrincipalType" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -1023,6 +1045,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.PrincipalTypeIsSPUser(Microsoft.SharePoint.Utilities.SPPrincipalType)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function PrincipalTypeIsSPUser (principalType As SPPrincipalType) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static bool PrincipalTypeIsSPUser(Microsoft::SharePoint::Utilities::SPPrincipalType principalType);" />
+      <MemberSignature Language="F#" Value="static member PrincipalTypeIsSPUser : Microsoft.SharePoint.Utilities.SPPrincipalType -&gt; bool" Usage="Microsoft.Office.Workflow.Utility.Contact.PrincipalTypeIsSPUser principalType" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -1056,6 +1079,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.ToContacts(System.String,Microsoft.SharePoint.SPWeb)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function ToContacts (inputXml As String, web As SPWeb) As Contact()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static cli::array &lt;Microsoft::Office::Workflow::Utility::Contact ^&gt; ^ ToContacts(System::String ^ inputXml, Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberSignature Language="F#" Value="static member ToContacts : string * Microsoft.SharePoint.SPWeb -&gt; Microsoft.Office.Workflow.Utility.Contact[]" Usage="Microsoft.Office.Workflow.Utility.Contact.ToContacts (inputXml, web)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -1088,6 +1112,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig string ToPersonXml(class Microsoft.Office.Workflow.Utility.Contact contact) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.ToPersonXml(Microsoft.Office.Workflow.Utility.Contact)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::String ^ ToPersonXml(Microsoft::Office::Workflow::Utility::Contact ^ contact);" />
+      <MemberSignature Language="F#" Value="static member ToPersonXml : Microsoft.Office.Workflow.Utility.Contact -&gt; string" Usage="Microsoft.Office.Workflow.Utility.Contact.ToPersonXml contact" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -1116,6 +1141,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.Utility.Contact.ToString" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::String ^ ToString();" />
+      <MemberSignature Language="F#" Value="override this.ToString : unit -&gt; string" Usage="contact.ToString " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>
@@ -1144,6 +1170,7 @@ namespace Microsoft.Office.Samples.ECM.Workflow
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Workflow.Utility.Contact.Xml" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Xml As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Xml { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Xml : string" Usage="Microsoft.Office.Workflow.Utility.Contact.Xml" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Pages</AssemblyName>

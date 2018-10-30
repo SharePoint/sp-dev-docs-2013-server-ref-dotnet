@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.Workflow.CollectSignatures" />
   <TypeSignature Language="VB.NET" Value="Public Class CollectSignatures&#xA;Inherits SequentialWorkflowActivity" />
   <TypeSignature Language="C++ CLI" Value="public ref class CollectSignatures : System::Workflow::Activities::SequentialWorkflowActivity" />
+  <TypeSignature Language="F#" Value="type CollectSignatures = class&#xA;    inherit SequentialWorkflowActivity" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -12,6 +13,11 @@
     <BaseTypeName>System.Workflow.Activities.SequentialWorkflowActivity</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>Collects signatures from specified participants in the Routing workflow.</summary>
     <remarks>To be added.</remarks>
@@ -40,6 +46,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.Dispose(System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub Dispose (disposing As Boolean)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void Dispose(bool disposing);" />
+      <MemberSignature Language="F#" Value="override this.Dispose : bool -&gt; unit" Usage="collectSignatures.Dispose disposing" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -63,6 +70,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.GetCreationProperties(System.Object,System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetCreationProperties (sender As Object, taskId As Guid) As SPWorkflowTaskProperties" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::Workflow::SPWorkflowTaskProperties ^ GetCreationProperties(System::Object ^ sender, Guid taskId);" />
+      <MemberSignature Language="F#" Value="member this.GetCreationProperties : obj * Guid -&gt; Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties" Usage="collectSignatures.GetCreationProperties (sender, taskId)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -89,6 +97,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.GetParticipants" />
       <MemberSignature Language="VB.NET" Value="Public Function GetParticipants () As String()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::String ^&gt; ^ GetParticipants();" />
+      <MemberSignature Language="F#" Value="member this.GetParticipants : unit -&gt; string[]" Usage="collectSignatures.GetParticipants " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -110,6 +119,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.GetSignatureLineIndexForNextTask" />
       <MemberSignature Language="VB.NET" Value="Public Function GetSignatureLineIndexForNextTask () As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; int GetSignatureLineIndexForNextTask();" />
+      <MemberSignature Language="F#" Value="member this.GetSignatureLineIndexForNextTask : unit -&gt; int" Usage="collectSignatures.GetSignatureLineIndexForNextTask " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -131,6 +141,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.GetTasks(System.Object,System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub GetTasks (sender As Object, e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void GetTasks(System::Object ^ sender, EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.GetTasks : obj * EventArgs -&gt; unit" Usage="collectSignatures.GetTasks (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -156,6 +167,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.IsChangeAllowed(System.Object,System.Guid,Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties,Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties,System.String,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function IsChangeAllowed (sender As Object, taskId As Guid, beforeProperties As SPWorkflowTaskProperties, afterProperties As SPWorkflowTaskProperties, executor As String, ByRef reason As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsChangeAllowed(System::Object ^ sender, Guid taskId, Microsoft::SharePoint::Workflow::SPWorkflowTaskProperties ^ beforeProperties, Microsoft::SharePoint::Workflow::SPWorkflowTaskProperties ^ afterProperties, System::String ^ executor, [Runtime::InteropServices::Out] System::String ^ % reason);" />
+      <MemberSignature Language="F#" Value="member this.IsChangeAllowed : obj * Guid * Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties * Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties * string *  -&gt; bool" Usage="collectSignatures.IsChangeAllowed (sender, taskId, beforeProperties, afterProperties, executor, reason)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -170,7 +182,7 @@
         <Parameter Name="beforeProperties" Type="Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties" />
         <Parameter Name="afterProperties" Type="Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties" />
         <Parameter Name="executor" Type="System.String" />
-        <Parameter Name="reason" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="reason" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
         <param name="sender">To be added.</param>
@@ -190,6 +202,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.IsTaskCompleted(System.Object,System.Guid,Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties,System.Collections.Hashtable,System.String,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function IsTaskCompleted (sender As Object, taskId As Guid, creationProps As SPWorkflowTaskProperties, properties As Hashtable, executorLogon As String, ByRef outcome As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool IsTaskCompleted(System::Object ^ sender, Guid taskId, Microsoft::SharePoint::Workflow::SPWorkflowTaskProperties ^ creationProps, System::Collections::Hashtable ^ properties, System::String ^ executorLogon, [Runtime::InteropServices::Out] System::String ^ % outcome);" />
+      <MemberSignature Language="F#" Value="member this.IsTaskCompleted : obj * Guid * Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties * System.Collections.Hashtable * string *  -&gt; bool" Usage="collectSignatures.IsTaskCompleted (sender, taskId, creationProps, properties, executorLogon, outcome)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -204,7 +217,7 @@
         <Parameter Name="creationProps" Type="Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties" />
         <Parameter Name="properties" Type="System.Collections.Hashtable" />
         <Parameter Name="executorLogon" Type="System.String" />
-        <Parameter Name="outcome" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="outcome" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
         <param name="sender">To be added.</param>
@@ -224,6 +237,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.LogActivationHistory(System.Object,System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub LogActivationHistory (sender As Object, e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void LogActivationHistory(System::Object ^ sender, EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.LogActivationHistory : obj * EventArgs -&gt; unit" Usage="collectSignatures.LogActivationHistory (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -249,6 +263,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.LogCompletionHistory(System.Object,System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub LogCompletionHistory (sender As Object, e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void LogCompletionHistory(System::Object ^ sender, EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.LogCompletionHistory : obj * EventArgs -&gt; unit" Usage="collectSignatures.LogCompletionHistory (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -274,6 +289,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_activationHistory" />
       <MemberSignature Language="VB.NET" Value="Public m_activationHistory As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ m_activationHistory;" />
+      <MemberSignature Language="F#" Value="val mutable m_activationHistory : string" Usage="Microsoft.Office.Workflow.CollectSignatures.m_activationHistory" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -293,6 +309,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_completionHistory" />
       <MemberSignature Language="VB.NET" Value="Public m_completionHistory As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ m_completionHistory;" />
+      <MemberSignature Language="F#" Value="val mutable m_completionHistory : string" Usage="Microsoft.Office.Workflow.CollectSignatures.m_completionHistory" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -312,6 +329,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_emailBody" />
       <MemberSignature Language="VB.NET" Value="Public m_emailBody As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ m_emailBody;" />
+      <MemberSignature Language="F#" Value="val mutable m_emailBody : string" Usage="Microsoft.Office.Workflow.CollectSignatures.m_emailBody" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -331,6 +349,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_emailHeaders" />
       <MemberSignature Language="VB.NET" Value="Public m_emailHeaders As StringDictionary " />
       <MemberSignature Language="C++ CLI" Value="public: System::Collections::Specialized::StringDictionary ^ m_emailHeaders;" />
+      <MemberSignature Language="F#" Value="val mutable m_emailHeaders : System.Collections.Specialized.StringDictionary" Usage="Microsoft.Office.Workflow.CollectSignatures.m_emailHeaders" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -350,6 +369,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_formExecutor" />
       <MemberSignature Language="VB.NET" Value="Public m_formExecutor As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ m_formExecutor;" />
+      <MemberSignature Language="F#" Value="val mutable m_formExecutor : string" Usage="Microsoft.Office.Workflow.CollectSignatures.m_formExecutor" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -369,6 +389,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_historyEventId" />
       <MemberSignature Language="VB.NET" Value="Public m_historyEventId As SPWorkflowHistoryEventType " />
       <MemberSignature Language="C++ CLI" Value="public: Microsoft::SharePoint::Workflow::SPWorkflowHistoryEventType m_historyEventId;" />
+      <MemberSignature Language="F#" Value="val mutable m_historyEventId : Microsoft.SharePoint.Workflow.SPWorkflowHistoryEventType" Usage="Microsoft.Office.Workflow.CollectSignatures.m_historyEventId" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -388,6 +409,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_historyOtherData" />
       <MemberSignature Language="VB.NET" Value="Public m_historyOtherData As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ m_historyOtherData;" />
+      <MemberSignature Language="F#" Value="val mutable m_historyOtherData : string" Usage="Microsoft.Office.Workflow.CollectSignatures.m_historyOtherData" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -407,6 +429,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_historyUserId" />
       <MemberSignature Language="VB.NET" Value="Public m_historyUserId As Integer " />
       <MemberSignature Language="C++ CLI" Value="public: int m_historyUserId;" />
+      <MemberSignature Language="F#" Value="val mutable m_historyUserId : int" Usage="Microsoft.Office.Workflow.CollectSignatures.m_historyUserId" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -426,6 +449,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_initProps" />
       <MemberSignature Language="VB.NET" Value="Public m_initProps As SPWorkflowActivationProperties " />
       <MemberSignature Language="C++ CLI" Value="public: Microsoft::SharePoint::Workflow::SPWorkflowActivationProperties ^ m_initProps;" />
+      <MemberSignature Language="F#" Value="val mutable m_initProps : Microsoft.SharePoint.Workflow.SPWorkflowActivationProperties" Usage="Microsoft.Office.Workflow.CollectSignatures.m_initProps" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -445,6 +469,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_itemAProperties" />
       <MemberSignature Language="VB.NET" Value="Public m_itemAProperties As Hashtable " />
       <MemberSignature Language="C++ CLI" Value="public: System::Collections::Hashtable ^ m_itemAProperties;" />
+      <MemberSignature Language="F#" Value="val mutable m_itemAProperties : System.Collections.Hashtable" Usage="Microsoft.Office.Workflow.CollectSignatures.m_itemAProperties" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -464,6 +489,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_itemBProperties" />
       <MemberSignature Language="VB.NET" Value="Public m_itemBProperties As Hashtable " />
       <MemberSignature Language="C++ CLI" Value="public: System::Collections::Hashtable ^ m_itemBProperties;" />
+      <MemberSignature Language="F#" Value="val mutable m_itemBProperties : System.Collections.Hashtable" Usage="Microsoft.Office.Workflow.CollectSignatures.m_itemBProperties" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -483,6 +509,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_iWorkflowStatus" />
       <MemberSignature Language="VB.NET" Value="Public m_iWorkflowStatus As Integer " />
       <MemberSignature Language="C++ CLI" Value="public: int m_iWorkflowStatus;" />
+      <MemberSignature Language="F#" Value="val mutable m_iWorkflowStatus : int" Usage="Microsoft.Office.Workflow.CollectSignatures.m_iWorkflowStatus" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -502,6 +529,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_taskHDesc" />
       <MemberSignature Language="VB.NET" Value="Public m_taskHDesc As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ m_taskHDesc;" />
+      <MemberSignature Language="F#" Value="val mutable m_taskHDesc : string" Usage="Microsoft.Office.Workflow.CollectSignatures.m_taskHDesc" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -521,6 +549,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_taskHDuration" />
       <MemberSignature Language="VB.NET" Value="Public m_taskHDuration As TimeSpan " />
       <MemberSignature Language="C++ CLI" Value="public: TimeSpan m_taskHDuration;" />
+      <MemberSignature Language="F#" Value="val mutable m_taskHDuration : TimeSpan" Usage="Microsoft.Office.Workflow.CollectSignatures.m_taskHDuration" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -540,6 +569,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_taskHOutcome" />
       <MemberSignature Language="VB.NET" Value="Public m_taskHOutcome As String " />
       <MemberSignature Language="C++ CLI" Value="public: System::String ^ m_taskHOutcome;" />
+      <MemberSignature Language="F#" Value="val mutable m_taskHOutcome : string" Usage="Microsoft.Office.Workflow.CollectSignatures.m_taskHOutcome" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -559,6 +589,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_workflowId" />
       <MemberSignature Language="VB.NET" Value="Public m_workflowId As Guid " />
       <MemberSignature Language="C++ CLI" Value="public: Guid m_workflowId;" />
+      <MemberSignature Language="F#" Value="val mutable m_workflowId : Guid" Usage="Microsoft.Office.Workflow.CollectSignatures.m_workflowId" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -578,6 +609,7 @@
       <MemberSignature Language="DocId" Value="F:Microsoft.Office.Workflow.CollectSignatures.m_wrapItUpMod" />
       <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly m_wrapItUpMod As Guid " />
       <MemberSignature Language="C++ CLI" Value="public: static initonly Guid m_wrapItUpMod;" />
+      <MemberSignature Language="F#" Value=" staticval mutable m_wrapItUpMod : Guid" Usage="Microsoft.Office.Workflow.CollectSignatures.m_wrapItUpMod" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -597,6 +629,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.OnActivate(System.Object,System.Workflow.Activities.ExternalDataEventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnActivate (sender As Object, e As ExternalDataEventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnActivate(System::Object ^ sender, System::Workflow::Activities::ExternalDataEventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.OnActivate : obj * System.Workflow.Activities.ExternalDataEventArgs -&gt; unit" Usage="collectSignatures.OnActivate (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -622,6 +655,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.OnBeforeStartedEmail(System.Object,System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnBeforeStartedEmail (sender As Object, e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnBeforeStartedEmail(System::Object ^ sender, EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.OnBeforeStartedEmail : obj * EventArgs -&gt; unit" Usage="collectSignatures.OnBeforeStartedEmail (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -647,6 +681,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.OnBeforeSummaryEmail(System.Object,System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnBeforeSummaryEmail (sender As Object, e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnBeforeSummaryEmail(System::Object ^ sender, EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.OnBeforeSummaryEmail : obj * EventArgs -&gt; unit" Usage="collectSignatures.OnBeforeSummaryEmail (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -672,6 +707,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.OnItemDeleted(System.Object,System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnItemDeleted (sender As Object, e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnItemDeleted(System::Object ^ sender, EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.OnItemDeleted : obj * EventArgs -&gt; unit" Usage="collectSignatures.OnItemDeleted (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -697,6 +733,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.OnTaskCancelled(System.Object,System.Guid,Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function OnTaskCancelled (sender As Object, taskId As Guid, creationProps As SPWorkflowTaskProperties, ByRef outcome As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool OnTaskCancelled(System::Object ^ sender, Guid taskId, Microsoft::SharePoint::Workflow::SPWorkflowTaskProperties ^ creationProps, [Runtime::InteropServices::Out] System::String ^ % outcome);" />
+      <MemberSignature Language="F#" Value="member this.OnTaskCancelled : obj * Guid * Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties *  -&gt; bool" Usage="collectSignatures.OnTaskCancelled (sender, taskId, creationProps, outcome)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -709,7 +746,7 @@
         <Parameter Name="sender" Type="System.Object" />
         <Parameter Name="taskId" Type="System.Guid" />
         <Parameter Name="creationProps" Type="Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties" />
-        <Parameter Name="outcome" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="outcome" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
         <param name="sender">To be added.</param>
@@ -727,6 +764,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.OnTaskDeleted(System.Object,System.Guid,Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnTaskDeleted (sender As Object, taskId As Guid, creationProps As SPWorkflowTaskProperties, executorLogon As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnTaskDeleted(System::Object ^ sender, Guid taskId, Microsoft::SharePoint::Workflow::SPWorkflowTaskProperties ^ creationProps, System::String ^ executorLogon);" />
+      <MemberSignature Language="F#" Value="member this.OnTaskDeleted : obj * Guid * Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties * string -&gt; unit" Usage="collectSignatures.OnTaskDeleted (sender, taskId, creationProps, executorLogon)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -756,6 +794,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.OnTaskDone(System.Object,System.Workflow.Activities.ReplicatorChildEventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnTaskDone (sender As Object, e As ReplicatorChildEventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnTaskDone(System::Object ^ sender, System::Workflow::Activities::ReplicatorChildEventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.OnTaskDone : obj * System.Workflow.Activities.ReplicatorChildEventArgs -&gt; unit" Usage="collectSignatures.OnTaskDone (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -781,6 +820,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.OnWrapItUp(System.Object,System.Workflow.Activities.ExternalDataEventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnWrapItUp (sender As Object, e As ExternalDataEventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnWrapItUp(System::Object ^ sender, System::Workflow::Activities::ExternalDataEventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.OnWrapItUp : obj * System.Workflow.Activities.ExternalDataEventArgs -&gt; unit" Usage="collectSignatures.OnWrapItUp (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -806,6 +846,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.TaskCompletionCondition(System.Object,System.Workflow.Activities.ConditionalEventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub TaskCompletionCondition (sender As Object, e As ConditionalEventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void TaskCompletionCondition(System::Object ^ sender, System::Workflow::Activities::ConditionalEventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.TaskCompletionCondition : obj * System.Workflow.Activities.ConditionalEventArgs -&gt; unit" Usage="collectSignatures.TaskCompletionCondition (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>
@@ -831,6 +872,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Workflow.CollectSignatures.WantSetState(System.Object,System.Workflow.Activities.ConditionalEventArgs)" />
       <MemberSignature Language="VB.NET" Value="Public Sub WantSetState (sender As Object, e As ConditionalEventArgs)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void WantSetState(System::Object ^ sender, System::Workflow::Activities::ConditionalEventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="member this.WantSetState : obj * System.Workflow.Activities.ConditionalEventArgs -&gt; unit" Usage="collectSignatures.WantSetState (sender, e)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Workflow.Routing</AssemblyName>

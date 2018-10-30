@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.SPOfficialFileHost" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SPOfficialFileHost&#xA;Inherits SPAutoSerializingObject" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPOfficialFileHost sealed : Microsoft::SharePoint::Administration::SPAutoSerializingObject" />
+  <TypeSignature Language="F#" Value="type SPOfficialFileHost = class&#xA;    inherit SPAutoSerializingObject" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -12,6 +13,11 @@
     <BaseTypeName>Microsoft.SharePoint.Administration.SPAutoSerializingObject</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
@@ -40,6 +46,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPOfficialFileHost.#ctor(System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (bCreateUniqueId As Boolean)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; SPOfficialFileHost(bool bCreateUniqueId);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.SPOfficialFileHost : bool -&gt; Microsoft.SharePoint.SPOfficialFileHost" Usage="new Microsoft.SharePoint.SPOfficialFileHost bCreateUniqueId" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -60,6 +67,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPOfficialFileHost.Action" />
       <MemberSignature Language="VB.NET" Value="Public Property Action As SPOfficialFileAction" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPOfficialFileAction Action { Microsoft::SharePoint::SPOfficialFileAction get(); void set(Microsoft::SharePoint::SPOfficialFileAction value); };" />
+      <MemberSignature Language="F#" Value="member this.Action : Microsoft.SharePoint.SPOfficialFileAction with get, set" Usage="Microsoft.SharePoint.SPOfficialFileHost.Action" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -80,6 +88,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPOfficialFileHost.CopyFrom(Microsoft.SharePoint.SPOfficialFileHost)" />
       <MemberSignature Language="VB.NET" Value="Public Sub CopyFrom (srcHost As SPOfficialFileHost)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void CopyFrom(Microsoft::SharePoint::SPOfficialFileHost ^ srcHost);" />
+      <MemberSignature Language="F#" Value="member this.CopyFrom : Microsoft.SharePoint.SPOfficialFileHost -&gt; unit" Usage="sPOfficialFileHost.CopyFrom srcHost" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -103,6 +112,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPOfficialFileHost.Explanation" />
       <MemberSignature Language="VB.NET" Value="Public Property Explanation As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Explanation { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Explanation : string with get, set" Usage="Microsoft.SharePoint.SPOfficialFileHost.Explanation" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -123,6 +133,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPOfficialFileHost.GetHostById(Microsoft.SharePoint.SPSite,System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function GetHostById (site As SPSite, id As Guid) As SPOfficialFileHost" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static Microsoft::SharePoint::SPOfficialFileHost ^ GetHostById(Microsoft::SharePoint::SPSite ^ site, Guid id);" />
+      <MemberSignature Language="F#" Value="static member GetHostById : Microsoft.SharePoint.SPSite * Guid -&gt; Microsoft.SharePoint.SPOfficialFileHost" Usage="Microsoft.SharePoint.SPOfficialFileHost.GetHostById (site, id)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -149,6 +160,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPOfficialFileHost.GetPropertiesForSubmission(Microsoft.SharePoint.SPListItem,System.Boolean,System.Nullable{System.Boolean})" />
       <MemberSignature Language="VB.NET" Value="Public Function GetPropertiesForSubmission (item As SPListItem, bIncludeAuditHistory As Boolean, bUseFieldGuid As Nullable(Of Boolean)) As List(Of RecordsRepositoryProperty)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Collections::Generic::List&lt;Microsoft::SharePoint::RecordsRepositoryProperty ^&gt; ^ GetPropertiesForSubmission(Microsoft::SharePoint::SPListItem ^ item, bool bIncludeAuditHistory, Nullable&lt;bool&gt; bUseFieldGuid);" />
+      <MemberSignature Language="F#" Value="member this.GetPropertiesForSubmission : Microsoft.SharePoint.SPListItem * bool * Nullable&lt;bool&gt; -&gt; System.Collections.Generic.List&lt;Microsoft.SharePoint.RecordsRepositoryProperty&gt;" Usage="sPOfficialFileHost.GetPropertiesForSubmission (item, bIncludeAuditHistory, bUseFieldGuid)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -177,6 +189,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPOfficialFileHost.GetPropertiesForSubmission(Microsoft.SharePoint.SPListItem,Microsoft.SharePoint.SPOfficialFileAction,System.Boolean,System.Nullable{System.Boolean})" />
       <MemberSignature Language="VB.NET" Value="Public Shared Function GetPropertiesForSubmission (item As SPListItem, action As SPOfficialFileAction, bIncludeAuditHistory As Boolean, bUseFieldGuid As Nullable(Of Boolean)) As List(Of RecordsRepositoryProperty)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static System::Collections::Generic::List&lt;Microsoft::SharePoint::RecordsRepositoryProperty ^&gt; ^ GetPropertiesForSubmission(Microsoft::SharePoint::SPListItem ^ item, Microsoft::SharePoint::SPOfficialFileAction action, bool bIncludeAuditHistory, Nullable&lt;bool&gt; bUseFieldGuid);" />
+      <MemberSignature Language="F#" Value="static member GetPropertiesForSubmission : Microsoft.SharePoint.SPListItem * Microsoft.SharePoint.SPOfficialFileAction * bool * Nullable&lt;bool&gt; -&gt; System.Collections.Generic.List&lt;Microsoft.SharePoint.RecordsRepositoryProperty&gt;" Usage="Microsoft.SharePoint.SPOfficialFileHost.GetPropertiesForSubmission (item, action, bIncludeAuditHistory, bUseFieldGuid)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -207,6 +220,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPOfficialFileHost.OfficialFileName" />
       <MemberSignature Language="VB.NET" Value="Public Property OfficialFileName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ OfficialFileName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.OfficialFileName : string with get, set" Usage="Microsoft.SharePoint.SPOfficialFileHost.OfficialFileName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -227,6 +241,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPOfficialFileHost.OfficialFileUrl" />
       <MemberSignature Language="VB.NET" Value="Public Property OfficialFileUrl As Uri" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Uri ^ OfficialFileUrl { Uri ^ get(); void set(Uri ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.OfficialFileUrl : Uri with get, set" Usage="Microsoft.SharePoint.SPOfficialFileHost.OfficialFileUrl" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -247,6 +262,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPOfficialFileHost.PrepareForSubmission(Microsoft.SharePoint.SPFile,Microsoft.SharePoint.SPOfficialFileSubmissionMode,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function PrepareForSubmission (file As SPFile, submissionMode As SPOfficialFileSubmissionMode, ByRef strAdditionalInfo As String) As OfficialFileResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::OfficialFileResult PrepareForSubmission(Microsoft::SharePoint::SPFile ^ file, Microsoft::SharePoint::SPOfficialFileSubmissionMode submissionMode, [Runtime::InteropServices::Out] System::String ^ % strAdditionalInfo);" />
+      <MemberSignature Language="F#" Value="member this.PrepareForSubmission : Microsoft.SharePoint.SPFile * Microsoft.SharePoint.SPOfficialFileSubmissionMode *  -&gt; Microsoft.SharePoint.OfficialFileResult" Usage="sPOfficialFileHost.PrepareForSubmission (file, submissionMode, strAdditionalInfo)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -258,7 +274,7 @@
       <Parameters>
         <Parameter Name="file" Type="Microsoft.SharePoint.SPFile" />
         <Parameter Name="submissionMode" Type="Microsoft.SharePoint.SPOfficialFileSubmissionMode" />
-        <Parameter Name="strAdditionalInfo" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="strAdditionalInfo" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
         <param name="file">To be added.</param>
@@ -275,6 +291,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPOfficialFileHost.RunPostProcessing(System.String,Microsoft.SharePoint.SPFile.CustomFileSubmissionPostProcessing,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function RunPostProcessing (resultXmlFragment As String, customProcessor As SPFile.CustomFileSubmissionPostProcessing, ByRef strAdditionalInfo As String) As OfficialFileResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::OfficialFileResult RunPostProcessing(System::String ^ resultXmlFragment, Microsoft::SharePoint::SPFile::CustomFileSubmissionPostProcessing ^ customProcessor, [Runtime::InteropServices::Out] System::String ^ % strAdditionalInfo);" />
+      <MemberSignature Language="F#" Value="member this.RunPostProcessing : string * Microsoft.SharePoint.SPFile.CustomFileSubmissionPostProcessing *  -&gt; Microsoft.SharePoint.OfficialFileResult" Usage="sPOfficialFileHost.RunPostProcessing (resultXmlFragment, customProcessor, strAdditionalInfo)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -286,7 +303,7 @@
       <Parameters>
         <Parameter Name="resultXmlFragment" Type="System.String" />
         <Parameter Name="customProcessor" Type="Microsoft.SharePoint.SPFile+CustomFileSubmissionPostProcessing" />
-        <Parameter Name="strAdditionalInfo" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="strAdditionalInfo" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
         <param name="resultXmlFragment">To be added.</param>
@@ -303,6 +320,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPOfficialFileHost.RunStandardPostProcessing(Microsoft.SharePoint.SPFile,Microsoft.SharePoint.SPOfficialFileSubmissionMode,System.String,System.String,System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function RunStandardPostProcessing (file As SPFile, submissionMode As SPOfficialFileSubmissionMode, submitter As String, resultXmlFragment As String, ByRef strAdditionalInfo As String) As OfficialFileResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::SharePoint::OfficialFileResult RunStandardPostProcessing(Microsoft::SharePoint::SPFile ^ file, Microsoft::SharePoint::SPOfficialFileSubmissionMode submissionMode, System::String ^ submitter, System::String ^ resultXmlFragment, [Runtime::InteropServices::Out] System::String ^ % strAdditionalInfo);" />
+      <MemberSignature Language="F#" Value="member this.RunStandardPostProcessing : Microsoft.SharePoint.SPFile * Microsoft.SharePoint.SPOfficialFileSubmissionMode * string * string *  -&gt; Microsoft.SharePoint.OfficialFileResult" Usage="sPOfficialFileHost.RunStandardPostProcessing (file, submissionMode, submitter, resultXmlFragment, strAdditionalInfo)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -316,7 +334,7 @@
         <Parameter Name="submissionMode" Type="Microsoft.SharePoint.SPOfficialFileSubmissionMode" />
         <Parameter Name="submitter" Type="System.String" />
         <Parameter Name="resultXmlFragment" Type="System.String" />
-        <Parameter Name="strAdditionalInfo" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="strAdditionalInfo" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
         <param name="file">To be added.</param>
@@ -335,6 +353,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPOfficialFileHost.RunStandardPostProcessor(Microsoft.SharePoint.SPFile,Microsoft.SharePoint.SPOfficialFileSubmissionMode,System.String,System.Xml.XmlDocument)" />
       <MemberSignature Language="VB.NET" Value="Public Function RunStandardPostProcessor (file As SPFile, submissionMode As SPOfficialFileSubmissionMode, submitter As String, submissionResult As XmlDocument) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ RunStandardPostProcessor(Microsoft::SharePoint::SPFile ^ file, Microsoft::SharePoint::SPOfficialFileSubmissionMode submissionMode, System::String ^ submitter, System::Xml::XmlDocument ^ submissionResult);" />
+      <MemberSignature Language="F#" Value="member this.RunStandardPostProcessor : Microsoft.SharePoint.SPFile * Microsoft.SharePoint.SPOfficialFileSubmissionMode * string * System.Xml.XmlDocument -&gt; string" Usage="sPOfficialFileHost.RunStandardPostProcessor (file, submissionMode, submitter, submissionResult)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -365,6 +384,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPOfficialFileHost.ShowOnSendToMenu" />
       <MemberSignature Language="VB.NET" Value="Public Property ShowOnSendToMenu As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShowOnSendToMenu { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.ShowOnSendToMenu : bool with get, set" Usage="Microsoft.SharePoint.SPOfficialFileHost.ShowOnSendToMenu" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -385,6 +405,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPOfficialFileHost.UniqueId" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property UniqueId As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid UniqueId { Guid get(); };" />
+      <MemberSignature Language="F#" Value="member this.UniqueId : Guid" Usage="Microsoft.SharePoint.SPOfficialFileHost.UniqueId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

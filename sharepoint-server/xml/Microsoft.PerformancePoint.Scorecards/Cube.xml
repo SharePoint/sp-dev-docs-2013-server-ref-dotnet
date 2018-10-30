@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.PerformancePoint.Scorecards.Cube" />
   <TypeSignature Language="VB.NET" Value="Public Class Cube&#xA;Inherits NameInfo&#xA;Implements ICloneable" />
   <TypeSignature Language="C++ CLI" Value="public ref class Cube : Microsoft::PerformancePoint::Scorecards::NameInfo, ICloneable" />
+  <TypeSignature Language="F#" Value="type Cube = class&#xA;    inherit NameInfo&#xA;    interface ICloneable&#xA;    interface IDiffable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -16,6 +17,11 @@
       <InterfaceName>System.ICloneable</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
@@ -44,6 +50,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Cube.#ctor(Microsoft.PerformancePoint.Scorecards.Cube)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub New (template As Cube)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; Cube(Microsoft::PerformancePoint::Scorecards::Cube ^ template);" />
+      <MemberSignature Language="F#" Value="new Microsoft.PerformancePoint.Scorecards.Cube : Microsoft.PerformancePoint.Scorecards.Cube -&gt; Microsoft.PerformancePoint.Scorecards.Cube" Usage="new Microsoft.PerformancePoint.Scorecards.Cube template" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -64,6 +71,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Cube.#ctor(System.String,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (displayName As String, uniqueName As String, description As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Cube(System::String ^ displayName, System::String ^ uniqueName, System::String ^ description);" />
+      <MemberSignature Language="F#" Value="new Microsoft.PerformancePoint.Scorecards.Cube : string * string * string -&gt; Microsoft.PerformancePoint.Scorecards.Cube" Usage="new Microsoft.PerformancePoint.Scorecards.Cube (displayName, uniqueName, description)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -88,6 +96,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Cube.Clone" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function Clone () As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Object ^ Clone();" />
+      <MemberSignature Language="F#" Value="override this.Clone : unit -&gt; obj" Usage="cube.Clone " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.ICloneable.Clone</InterfaceMember>
@@ -112,6 +121,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Cube.Diff(System.Object)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function Diff (oldValue As Object) As DiffCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::PerformancePoint::Scorecards::DiffCollection ^ Diff(System::Object ^ oldValue);" />
+      <MemberSignature Language="F#" Value="override this.Diff : obj -&gt; Microsoft.PerformancePoint.Scorecards.DiffCollection" Usage="cube.Diff oldValue" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.PerformancePoint.Scorecards.IDiffable.Diff(System.Object)</InterfaceMember>
@@ -139,6 +149,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Cube.Dimensions" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Dimensions As DimensionCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::DimensionCollection ^ Dimensions { Microsoft::PerformancePoint::Scorecards::DimensionCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Dimensions : Microsoft.PerformancePoint.Scorecards.DimensionCollection" Usage="Microsoft.PerformancePoint.Scorecards.Cube.Dimensions" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -164,6 +175,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Cube.GetHierarchy(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetHierarchy (hierarchyUniqueName As String) As Hierarchy" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::PerformancePoint::Scorecards::Hierarchy ^ GetHierarchy(System::String ^ hierarchyUniqueName);" />
+      <MemberSignature Language="F#" Value="member this.GetHierarchy : string -&gt; Microsoft.PerformancePoint.Scorecards.Hierarchy" Usage="cube.GetHierarchy hierarchyUniqueName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -188,6 +200,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Cube.GetMeasuresHierarchy" />
       <MemberSignature Language="VB.NET" Value="Public Function GetMeasuresHierarchy () As Hierarchy" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::PerformancePoint::Scorecards::Hierarchy ^ GetMeasuresHierarchy();" />
+      <MemberSignature Language="F#" Value="member this.GetMeasuresHierarchy : unit -&gt; Microsoft.PerformancePoint.Scorecards.Hierarchy" Usage="cube.GetMeasuresHierarchy " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -209,6 +222,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Cube.MeasureGroups" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property MeasureGroups As MeasureGroupCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::MeasureGroupCollection ^ MeasureGroups { Microsoft::PerformancePoint::Scorecards::MeasureGroupCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.MeasureGroups : Microsoft.PerformancePoint.Scorecards.MeasureGroupCollection" Usage="Microsoft.PerformancePoint.Scorecards.Cube.MeasureGroups" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -234,6 +248,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Cube.Measures" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Measures As MeasureCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::MeasureCollection ^ Measures { Microsoft::PerformancePoint::Scorecards::MeasureCollection ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Measures : Microsoft.PerformancePoint.Scorecards.MeasureCollection" Usage="Microsoft.PerformancePoint.Scorecards.Cube.Measures" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -259,6 +274,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Cube.NamedSets" />
       <MemberSignature Language="VB.NET" Value="Public Property NamedSets As NamedSetCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::PerformancePoint::Scorecards::NamedSetCollection ^ NamedSets { Microsoft::PerformancePoint::Scorecards::NamedSetCollection ^ get(); void set(Microsoft::PerformancePoint::Scorecards::NamedSetCollection ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.NamedSets : Microsoft.PerformancePoint.Scorecards.NamedSetCollection with get, set" Usage="Microsoft.PerformancePoint.Scorecards.Cube.NamedSets" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -284,6 +300,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Cube.Validate" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Validate ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Validate();" />
+      <MemberSignature Language="F#" Value="override this.Validate : unit -&gt; unit" Usage="cube.Validate " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -304,6 +321,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Cube.Version" />
       <MemberSignature Language="VB.NET" Value="Public Property Version As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Version { int get(); void set(int value); };" />
+      <MemberSignature Language="F#" Value="member this.Version : int with get, set" Usage="Microsoft.PerformancePoint.Scorecards.Cube.Version" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>

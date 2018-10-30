@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SecureStoreServiceApplication&#xA;Inherits SPIisWebServiceApplication&#xA;Implements IDisposable, ISecureStoreServiceApplication" />
   <TypeSignature Language="C++ CLI" Value="public ref class SecureStoreServiceApplication sealed : Microsoft::SharePoint::Administration::SPIisWebServiceApplication, IDisposable, Microsoft::Office::SecureStoreService::Server::ISecureStoreServiceApplication" />
+  <TypeSignature Language="F#" Value="type SecureStoreServiceApplication = class&#xA;    inherit SPIisWebServiceApplication&#xA;    interface ISecureStoreServiceApplication&#xA;    interface IDisposable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -61,6 +62,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.AdministrationAccessRights" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides ReadOnly Property AdministrationAccessRights As SPNamedCentralAdministrationRights()" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property cli::array &lt;Microsoft::SharePoint::Administration::AccessControl::SPNamedCentralAdministrationRights ^&gt; ^ AdministrationAccessRights { cli::array &lt;Microsoft::SharePoint::Administration::AccessControl::SPNamedCentralAdministrationRights ^&gt; ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.AdministrationAccessRights : Microsoft.SharePoint.Administration.AccessControl.SPNamedCentralAdministrationRights[]" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.AdministrationAccessRights" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -81,6 +83,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.ApplicationClassId" />
       <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property ApplicationClassId As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Guid ApplicationClassId { Guid get(); };" />
+      <MemberSignature Language="F#" Value="member this.ApplicationClassId : Guid" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.ApplicationClassId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -101,6 +104,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.ApplicationPoolChanged(Microsoft.SharePoint.Administration.SPIisWebServiceApplicationPool)" />
       <MemberSignature Language="VB.NET" Value="Public Sub ApplicationPoolChanged (oldApplicationPool As SPIisWebServiceApplicationPool)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void ApplicationPoolChanged(Microsoft::SharePoint::Administration::SPIisWebServiceApplicationPool ^ oldApplicationPool);" />
+      <MemberSignature Language="F#" Value="member this.ApplicationPoolChanged : Microsoft.SharePoint.Administration.SPIisWebServiceApplicationPool -&gt; unit" Usage="secureStoreServiceApplication.ApplicationPoolChanged oldApplicationPool" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -127,6 +131,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.ApplicationVersion" />
       <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property ApplicationVersion As Version" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Version ^ ApplicationVersion { Version ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ApplicationVersion : Version" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.ApplicationVersion" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -147,6 +152,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.ChangeMasterSecretKey(System.String,System.Byte[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub ChangeMasterSecretKey (token As String, passPhraseHash As Byte())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void ChangeMasterSecretKey(System::String ^ token, cli::array &lt;System::Byte&gt; ^ passPhraseHash);" />
+      <MemberSignature Language="F#" Value="abstract member ChangeMasterSecretKey : string * byte[] -&gt; unit&#xA;override this.ChangeMasterSecretKey : string * byte[] -&gt; unit" Usage="secureStoreServiceApplication.ChangeMasterSecretKey (token, passPhraseHash)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.ChangeMasterSecretKey(System.String,System.Byte[])</InterfaceMember>
@@ -178,6 +184,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.CreateApplication(System.Guid,Microsoft.Office.SecureStoreService.Server.TargetApplication,System.Collections.Generic.IList{Microsoft.Office.SecureStoreService.Server.TargetApplicationField},Microsoft.Office.SecureStoreService.Server.TargetApplicationClaims)" />
       <MemberSignature Language="VB.NET" Value="Public Sub CreateApplication (rawPartitionId As Guid, application As TargetApplication, applicationFields As IList(Of TargetApplicationField), applicationClaims As TargetApplicationClaims)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void CreateApplication(Guid rawPartitionId, Microsoft::Office::SecureStoreService::Server::TargetApplication ^ application, System::Collections::Generic::IList&lt;Microsoft::Office::SecureStoreService::Server::TargetApplicationField ^&gt; ^ applicationFields, Microsoft::Office::SecureStoreService::Server::TargetApplicationClaims ^ applicationClaims);" />
+      <MemberSignature Language="F#" Value="abstract member CreateApplication : Guid * Microsoft.Office.SecureStoreService.Server.TargetApplication * System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplicationField&gt; * Microsoft.Office.SecureStoreService.Server.TargetApplicationClaims -&gt; unit&#xA;override this.CreateApplication : Guid * Microsoft.Office.SecureStoreService.Server.TargetApplication * System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplicationField&gt; * Microsoft.Office.SecureStoreService.Server.TargetApplicationClaims -&gt; unit" Usage="secureStoreServiceApplication.CreateApplication (rawPartitionId, application, applicationFields, applicationClaims)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.CreateApplication(System.Guid,Microsoft.Office.SecureStoreService.Server.TargetApplication,System.Collections.Generic.IList{Microsoft.Office.SecureStoreService.Server.TargetApplicationField},Microsoft.Office.SecureStoreService.Server.TargetApplicationClaims)</InterfaceMember>
@@ -212,6 +219,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CreateConnectionSettings(valuetype System.Guid rawPartitionId, class Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings connectionSettings) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.CreateConnectionSettings(System.Guid,Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void CreateConnectionSettings(Guid rawPartitionId, Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ connectionSettings);" />
+      <MemberSignature Language="F#" Value="abstract member CreateConnectionSettings : Guid * Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings -&gt; unit&#xA;override this.CreateConnectionSettings : Guid * Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings -&gt; unit" Usage="secureStoreServiceApplication.CreateConnectionSettings (rawPartitionId, connectionSettings)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.CreateConnectionSettings(System.Guid,Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)</InterfaceMember>
@@ -242,6 +250,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.DefaultEndpointName" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides ReadOnly Property DefaultEndpointName As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ DefaultEndpointName { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.DefaultEndpointName : string" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.DefaultEndpointName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -262,6 +271,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.Delete" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Delete ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Delete();" />
+      <MemberSignature Language="F#" Value="override this.Delete : unit -&gt; unit" Usage="secureStoreServiceApplication.Delete " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -285,6 +295,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.DeleteAllUserCredentials(System.Guid,Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim)" />
       <MemberSignature Language="VB.NET" Value="Public Sub DeleteAllUserCredentials (rawPartitionId As Guid, claim As SecureStoreServiceClaim)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void DeleteAllUserCredentials(Guid rawPartitionId, Microsoft::Office::SecureStoreService::Server::SecureStoreServiceClaim ^ claim);" />
+      <MemberSignature Language="F#" Value="abstract member DeleteAllUserCredentials : Guid * Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim -&gt; unit&#xA;override this.DeleteAllUserCredentials : Guid * Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim -&gt; unit" Usage="secureStoreServiceApplication.DeleteAllUserCredentials (rawPartitionId, claim)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.DeleteAllUserCredentials(System.Guid,Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim)</InterfaceMember>
@@ -313,6 +324,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.DeleteApplication(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub DeleteApplication (rawPartitionId As Guid, applicationId As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void DeleteApplication(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member DeleteApplication : Guid * string -&gt; unit&#xA;override this.DeleteApplication : Guid * string -&gt; unit" Usage="secureStoreServiceApplication.DeleteApplication (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.DeleteApplication(System.Guid,System.String)</InterfaceMember>
@@ -341,6 +353,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.DeleteConnectionSettings(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub DeleteConnectionSettings (rawPartitionId As Guid, name As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void DeleteConnectionSettings(Guid rawPartitionId, System::String ^ name);" />
+      <MemberSignature Language="F#" Value="abstract member DeleteConnectionSettings : Guid * string -&gt; unit&#xA;override this.DeleteConnectionSettings : Guid * string -&gt; unit" Usage="secureStoreServiceApplication.DeleteConnectionSettings (rawPartitionId, name)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.DeleteConnectionSettings(System.Guid,System.String)</InterfaceMember>
@@ -371,6 +384,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.DeleteCredentials(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub DeleteCredentials (rawPartitionId As Guid, applicationId As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void DeleteCredentials(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member DeleteCredentials : Guid * string -&gt; unit&#xA;override this.DeleteCredentials : Guid * string -&gt; unit" Usage="secureStoreServiceApplication.DeleteCredentials (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.DeleteCredentials(System.Guid,System.String)</InterfaceMember>
@@ -399,6 +413,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.DeleteUserCredentials(System.Guid,System.String,Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim)" />
       <MemberSignature Language="VB.NET" Value="Public Sub DeleteUserCredentials (rawPartitionId As Guid, applicationId As String, claim As SecureStoreServiceClaim)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void DeleteUserCredentials(Guid rawPartitionId, System::String ^ applicationId, Microsoft::Office::SecureStoreService::Server::SecureStoreServiceClaim ^ claim);" />
+      <MemberSignature Language="F#" Value="abstract member DeleteUserCredentials : Guid * string * Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim -&gt; unit&#xA;override this.DeleteUserCredentials : Guid * string * Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim -&gt; unit" Usage="secureStoreServiceApplication.DeleteUserCredentials (rawPartitionId, applicationId, claim)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.DeleteUserCredentials(System.Guid,System.String,Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim)</InterfaceMember>
@@ -429,6 +444,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.Dispose" />
       <MemberSignature Language="VB.NET" Value="Public Sub Dispose ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Dispose();" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : unit -&gt; unit&#xA;override this.Dispose : unit -&gt; unit" Usage="secureStoreServiceApplication.Dispose " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
@@ -460,6 +476,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.Finalize" />
       <MemberSignature Language="VB.NET" Value="Finalize ()" />
       <MemberSignature Language="C++ CLI" Value="!SecureStoreServiceApplication ()" />
+      <MemberSignature Language="F#" Value="override this.Finalize : unit -&gt; unit" Usage="secureStoreServiceApplication.Finalize " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -480,6 +497,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetAllConnectionSettings(System.Guid,Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetAllConnectionSettings (rawPartitionId As Guid, type As ConnectionSettingsType) As IEnumerable(Of ConnectionSettings)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IEnumerable&lt;Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^&gt; ^ GetAllConnectionSettings(Guid rawPartitionId, Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettingsType type);" />
+      <MemberSignature Language="F#" Value="abstract member GetAllConnectionSettings : Guid * Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType -&gt; seq&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&gt;&#xA;override this.GetAllConnectionSettings : Guid * Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType -&gt; seq&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&gt;" Usage="secureStoreServiceApplication.GetAllConnectionSettings (rawPartitionId, type)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetAllConnectionSettings(System.Guid,Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType)</InterfaceMember>
@@ -511,6 +529,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetApplication(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetApplication (rawPartitionId As Guid, applicationId As String) As TargetApplication" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::Office::SecureStoreService::Server::TargetApplication ^ GetApplication(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetApplication : Guid * string -&gt; Microsoft.Office.SecureStoreService.Server.TargetApplication&#xA;override this.GetApplication : Guid * string -&gt; Microsoft.Office.SecureStoreService.Server.TargetApplication" Usage="secureStoreServiceApplication.GetApplication (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetApplication(System.Guid,System.String)</InterfaceMember>
@@ -540,6 +559,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetApplicationAdministratorClaims(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetApplicationAdministratorClaims (rawPartitionId As Guid, applicationId As String) As IList(Of SecureStoreServiceClaim)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IList&lt;Microsoft::Office::SecureStoreService::Server::SecureStoreServiceClaim ^&gt; ^ GetApplicationAdministratorClaims(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetApplicationAdministratorClaims : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim&gt;&#xA;override this.GetApplicationAdministratorClaims : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim&gt;" Usage="secureStoreServiceApplication.GetApplicationAdministratorClaims (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetApplicationAdministratorClaims(System.Guid,System.String)</InterfaceMember>
@@ -572,6 +592,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetApplicationClaims(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetApplicationClaims (rawPartitionId As Guid, applicationId As String) As TargetApplicationClaims" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::Office::SecureStoreService::Server::TargetApplicationClaims ^ GetApplicationClaims(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetApplicationClaims : Guid * string -&gt; Microsoft.Office.SecureStoreService.Server.TargetApplicationClaims&#xA;override this.GetApplicationClaims : Guid * string -&gt; Microsoft.Office.SecureStoreService.Server.TargetApplicationClaims" Usage="secureStoreServiceApplication.GetApplicationClaims (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetApplicationClaims(System.Guid,System.String)</InterfaceMember>
@@ -601,6 +622,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetApplicationFields(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetApplicationFields (rawPartitionId As Guid, applicationId As String) As IList(Of TargetApplicationField)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IList&lt;Microsoft::Office::SecureStoreService::Server::TargetApplicationField ^&gt; ^ GetApplicationFields(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetApplicationFields : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplicationField&gt;&#xA;override this.GetApplicationFields : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplicationField&gt;" Usage="secureStoreServiceApplication.GetApplicationFields (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetApplicationFields(System.Guid,System.String)</InterfaceMember>
@@ -630,6 +652,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetApplicationGroupClaims(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetApplicationGroupClaims (rawPartitionId As Guid, applicationId As String) As IList(Of SecureStoreServiceClaim)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IList&lt;Microsoft::Office::SecureStoreService::Server::SecureStoreServiceClaim ^&gt; ^ GetApplicationGroupClaims(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetApplicationGroupClaims : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim&gt;&#xA;override this.GetApplicationGroupClaims : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim&gt;" Usage="secureStoreServiceApplication.GetApplicationGroupClaims (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetApplicationGroupClaims(System.Guid,System.String)</InterfaceMember>
@@ -659,6 +682,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetApplications(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetApplications (rawPartitionId As Guid) As IList(Of TargetApplication)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IList&lt;Microsoft::Office::SecureStoreService::Server::TargetApplication ^&gt; ^ GetApplications(Guid rawPartitionId);" />
+      <MemberSignature Language="F#" Value="abstract member GetApplications : Guid -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplication&gt;&#xA;override this.GetApplications : Guid -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplication&gt;" Usage="secureStoreServiceApplication.GetApplications rawPartitionId" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetApplications(System.Guid)</InterfaceMember>
@@ -686,6 +710,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetApplicationTicketRedeemerClaims(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetApplicationTicketRedeemerClaims (rawPartitionId As Guid, applicationId As String) As IList(Of SecureStoreServiceClaim)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IList&lt;Microsoft::Office::SecureStoreService::Server::SecureStoreServiceClaim ^&gt; ^ GetApplicationTicketRedeemerClaims(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetApplicationTicketRedeemerClaims : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim&gt;&#xA;override this.GetApplicationTicketRedeemerClaims : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim&gt;" Usage="secureStoreServiceApplication.GetApplicationTicketRedeemerClaims (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetApplicationTicketRedeemerClaims(System.Guid,System.String)</InterfaceMember>
@@ -718,6 +743,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetChangeMasterSecretKeyToken" />
       <MemberSignature Language="VB.NET" Value="Public Function GetChangeMasterSecretKeyToken () As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::String ^ GetChangeMasterSecretKeyToken();" />
+      <MemberSignature Language="F#" Value="abstract member GetChangeMasterSecretKeyToken : unit -&gt; string&#xA;override this.GetChangeMasterSecretKeyToken : unit -&gt; string" Usage="secureStoreServiceApplication.GetChangeMasterSecretKeyToken " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetChangeMasterSecretKeyToken</InterfaceMember>
@@ -745,6 +771,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetChildConnectionSettings(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetChildConnectionSettings (rawPartitionId As Guid, parentName As String) As ConnectionSettings" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ GetChildConnectionSettings(Guid rawPartitionId, System::String ^ parentName);" />
+      <MemberSignature Language="F#" Value="abstract member GetChildConnectionSettings : Guid * string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&#xA;override this.GetChildConnectionSettings : Guid * string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings" Usage="secureStoreServiceApplication.GetChildConnectionSettings (rawPartitionId, parentName)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetChildConnectionSettings(System.Guid,System.String)</InterfaceMember>
@@ -776,6 +803,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetConnectionSettings(System.Guid,System.String,System.Boolean,Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection@,Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection@)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetConnectionSettings (rawPartitionId As Guid, name As String, includeCredentials As Boolean, ByRef targetCredentials As SerializableSecureStoreCredentialCollection, ByRef proxyCredentials As SerializableSecureStoreCredentialCollection) As ConnectionSettings" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ GetConnectionSettings(Guid rawPartitionId, System::String ^ name, bool includeCredentials, [Runtime::InteropServices::Out] Microsoft::Office::SecureStoreService::Server::SerializableSecureStoreCredentialCollection ^ % targetCredentials, [Runtime::InteropServices::Out] Microsoft::Office::SecureStoreService::Server::SerializableSecureStoreCredentialCollection ^ % proxyCredentials);" />
+      <MemberSignature Language="F#" Value="abstract member GetConnectionSettings : Guid * string * bool *  *  -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&#xA;override this.GetConnectionSettings : Guid * string * bool *  *  -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings" Usage="secureStoreServiceApplication.GetConnectionSettings (rawPartitionId, name, includeCredentials, targetCredentials, proxyCredentials)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetConnectionSettings(System.Guid,System.String,System.Boolean,Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection@,Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection@)</InterfaceMember>
@@ -791,8 +819,8 @@
         <Parameter Name="rawPartitionId" Type="System.Guid" />
         <Parameter Name="name" Type="System.String" />
         <Parameter Name="includeCredentials" Type="System.Boolean" />
-        <Parameter Name="targetCredentials" Type="Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection&amp;" RefType="out" />
-        <Parameter Name="proxyCredentials" Type="Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection&amp;" RefType="out" />
+        <Parameter Name="targetCredentials" Type="Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection" RefType="out" />
+        <Parameter Name="proxyCredentials" Type="Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection" RefType="out" />
       </Parameters>
       <Docs>
         <param name="rawPartitionId">Raw Partition Id</param>
@@ -813,6 +841,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetCredentials(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetCredentials (rawPartitionId As Guid, applicationId As String) As SerializableSecureStoreCredentialCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::Office::SecureStoreService::Server::SerializableSecureStoreCredentialCollection ^ GetCredentials(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetCredentials : Guid * string -&gt; Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection&#xA;override this.GetCredentials : Guid * string -&gt; Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection" Usage="secureStoreServiceApplication.GetCredentials (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetCredentials(System.Guid,System.String)</InterfaceMember>
@@ -842,6 +871,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetRestrictedCredentials(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetRestrictedCredentials (rawPartitionId As Guid, applicationId As String) As SerializableSecureStoreCredentialCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::Office::SecureStoreService::Server::SerializableSecureStoreCredentialCollection ^ GetRestrictedCredentials(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetRestrictedCredentials : Guid * string -&gt; Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection&#xA;override this.GetRestrictedCredentials : Guid * string -&gt; Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection" Usage="secureStoreServiceApplication.GetRestrictedCredentials (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetRestrictedCredentials(System.Guid,System.String)</InterfaceMember>
@@ -874,6 +904,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetUserApplication(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetUserApplication (rawPartitionId As Guid, applicationId As String) As TargetApplication" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::Office::SecureStoreService::Server::TargetApplication ^ GetUserApplication(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetUserApplication : Guid * string -&gt; Microsoft.Office.SecureStoreService.Server.TargetApplication&#xA;override this.GetUserApplication : Guid * string -&gt; Microsoft.Office.SecureStoreService.Server.TargetApplication" Usage="secureStoreServiceApplication.GetUserApplication (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetUserApplication(System.Guid,System.String)</InterfaceMember>
@@ -906,6 +937,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetUserApplicationFields(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetUserApplicationFields (rawPartitionId As Guid, applicationId As String) As IList(Of TargetApplicationField)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IList&lt;Microsoft::Office::SecureStoreService::Server::TargetApplicationField ^&gt; ^ GetUserApplicationFields(Guid rawPartitionId, System::String ^ applicationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetUserApplicationFields : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplicationField&gt;&#xA;override this.GetUserApplicationFields : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplicationField&gt;" Usage="secureStoreServiceApplication.GetUserApplicationFields (rawPartitionId, applicationId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetUserApplicationFields(System.Guid,System.String)</InterfaceMember>
@@ -938,6 +970,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.GetUserApplications(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetUserApplications (rawPartitionId As Guid) As IList(Of TargetApplication)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IList&lt;Microsoft::Office::SecureStoreService::Server::TargetApplication ^&gt; ^ GetUserApplications(Guid rawPartitionId);" />
+      <MemberSignature Language="F#" Value="abstract member GetUserApplications : Guid -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplication&gt;&#xA;override this.GetUserApplications : Guid -&gt; System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplication&gt;" Usage="secureStoreServiceApplication.GetUserApplications rawPartitionId" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.GetUserApplications(System.Guid)</InterfaceMember>
@@ -965,6 +998,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.InstallPath" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides ReadOnly Property InstallPath As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ InstallPath { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.InstallPath : string" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.InstallPath" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -985,6 +1019,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.IsMasterSecretKeyPopulated" />
       <MemberSignature Language="VB.NET" Value="Public Function IsMasterSecretKeyPopulated () As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool IsMasterSecretKeyPopulated();" />
+      <MemberSignature Language="F#" Value="abstract member IsMasterSecretKeyPopulated : unit -&gt; bool&#xA;override this.IsMasterSecretKeyPopulated : unit -&gt; bool" Usage="secureStoreServiceApplication.IsMasterSecretKeyPopulated " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.IsMasterSecretKeyPopulated</InterfaceMember>
@@ -1010,6 +1045,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.IssueTicket(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Function IssueTicket (rawPartitionId As Guid) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::String ^ IssueTicket(Guid rawPartitionId);" />
+      <MemberSignature Language="F#" Value="abstract member IssueTicket : Guid -&gt; string&#xA;override this.IssueTicket : Guid -&gt; string" Usage="secureStoreServiceApplication.IssueTicket rawPartitionId" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.IssueTicket(System.Guid)</InterfaceMember>
@@ -1040,6 +1076,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.ManageLink" />
       <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property ManageLink As SPAdministrationLink" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Administration::SPAdministrationLink ^ ManageLink { Microsoft::SharePoint::Administration::SPAdministrationLink ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ManageLink : Microsoft.SharePoint.Administration.SPAdministrationLink" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.ManageLink" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -1063,6 +1100,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.OnProcessIdentityChanged(System.Security.Principal.SecurityIdentifier)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnProcessIdentityChanged (processSecurityIdentifier As SecurityIdentifier)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnProcessIdentityChanged(System::Security::Principal::SecurityIdentifier ^ processSecurityIdentifier);" />
+      <MemberSignature Language="F#" Value="override this.OnProcessIdentityChanged : System.Security.Principal.SecurityIdentifier -&gt; unit" Usage="secureStoreServiceApplication.OnProcessIdentityChanged processSecurityIdentifier" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -1088,6 +1126,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.PropertiesLink" />
       <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property PropertiesLink As SPAdministrationLink" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::SharePoint::Administration::SPAdministrationLink ^ PropertiesLink { Microsoft::SharePoint::Administration::SPAdministrationLink ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.PropertiesLink : Microsoft.SharePoint.Administration.SPAdministrationLink" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.PropertiesLink" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -1108,6 +1147,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.Provision" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Provision ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Provision();" />
+      <MemberSignature Language="F#" Value="override this.Provision : unit -&gt; unit" Usage="secureStoreServiceApplication.Provision " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -1131,6 +1171,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.ProvisionLocal(Microsoft.SharePoint.Administration.SPServiceInstance)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub ProvisionLocal (serviceInstance As SPServiceInstance)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void ProvisionLocal(Microsoft::SharePoint::Administration::SPServiceInstance ^ serviceInstance);" />
+      <MemberSignature Language="F#" Value="override this.ProvisionLocal : Microsoft.SharePoint.Administration.SPServiceInstance -&gt; unit" Usage="secureStoreServiceApplication.ProvisionLocal serviceInstance" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -1157,6 +1198,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.RedeemTicket(System.Guid,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function RedeemTicket (rawPartitionId As Guid, applicationId As String, base64EncodedTicket As String) As SerializableSecureStoreCredentialCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::Office::SecureStoreService::Server::SerializableSecureStoreCredentialCollection ^ RedeemTicket(Guid rawPartitionId, System::String ^ applicationId, System::String ^ base64EncodedTicket);" />
+      <MemberSignature Language="F#" Value="abstract member RedeemTicket : Guid * string * string -&gt; Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection&#xA;override this.RedeemTicket : Guid * string * string -&gt; Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection" Usage="secureStoreServiceApplication.RedeemTicket (rawPartitionId, applicationId, base64EncodedTicket)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.RedeemTicket(System.Guid,System.String,System.String)</InterfaceMember>
@@ -1191,6 +1233,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.SetChangeKeyPassphrase(System.Byte[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetChangeKeyPassphrase (passPhraseHash As Byte())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void SetChangeKeyPassphrase(cli::array &lt;System::Byte&gt; ^ passPhraseHash);" />
+      <MemberSignature Language="F#" Value="abstract member SetChangeKeyPassphrase : byte[] -&gt; unit&#xA;override this.SetChangeKeyPassphrase : byte[] -&gt; unit" Usage="secureStoreServiceApplication.SetChangeKeyPassphrase passPhraseHash" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.SetChangeKeyPassphrase(System.Byte[])</InterfaceMember>
@@ -1221,6 +1264,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.SetCredentials(System.Guid,System.String,Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection)" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetCredentials (rawPartitionId As Guid, applicationId As String, credentials As SerializableSecureStoreCredentialCollection)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void SetCredentials(Guid rawPartitionId, System::String ^ applicationId, Microsoft::Office::SecureStoreService::Server::SerializableSecureStoreCredentialCollection ^ credentials);" />
+      <MemberSignature Language="F#" Value="abstract member SetCredentials : Guid * string * Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection -&gt; unit&#xA;override this.SetCredentials : Guid * string * Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection -&gt; unit" Usage="secureStoreServiceApplication.SetCredentials (rawPartitionId, applicationId, credentials)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.SetCredentials(System.Guid,System.String,Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection)</InterfaceMember>
@@ -1251,6 +1295,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.SetGroupCredentials(System.Guid,System.String,Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection)" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetGroupCredentials (rawPartitionId As Guid, applicationId As String, credentials As SerializableSecureStoreCredentialCollection)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void SetGroupCredentials(Guid rawPartitionId, System::String ^ applicationId, Microsoft::Office::SecureStoreService::Server::SerializableSecureStoreCredentialCollection ^ credentials);" />
+      <MemberSignature Language="F#" Value="abstract member SetGroupCredentials : Guid * string * Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection -&gt; unit&#xA;override this.SetGroupCredentials : Guid * string * Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection -&gt; unit" Usage="secureStoreServiceApplication.SetGroupCredentials (rawPartitionId, applicationId, credentials)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.SetGroupCredentials(System.Guid,System.String,Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection)</InterfaceMember>
@@ -1281,6 +1326,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.SetMasterSecretKey(System.Byte[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetMasterSecretKey (passPhraseHash As Byte())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void SetMasterSecretKey(cli::array &lt;System::Byte&gt; ^ passPhraseHash);" />
+      <MemberSignature Language="F#" Value="abstract member SetMasterSecretKey : byte[] -&gt; unit&#xA;override this.SetMasterSecretKey : byte[] -&gt; unit" Usage="secureStoreServiceApplication.SetMasterSecretKey passPhraseHash" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.SetMasterSecretKey(System.Byte[])</InterfaceMember>
@@ -1311,6 +1357,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.SetUserCredentials(System.Guid,System.String,Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim,Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection)" />
       <MemberSignature Language="VB.NET" Value="Public Sub SetUserCredentials (rawPartitionId As Guid, applicationId As String, claim As SecureStoreServiceClaim, credentials As SerializableSecureStoreCredentialCollection)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void SetUserCredentials(Guid rawPartitionId, System::String ^ applicationId, Microsoft::Office::SecureStoreService::Server::SecureStoreServiceClaim ^ claim, Microsoft::Office::SecureStoreService::Server::SerializableSecureStoreCredentialCollection ^ credentials);" />
+      <MemberSignature Language="F#" Value="abstract member SetUserCredentials : Guid * string * Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim * Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection -&gt; unit&#xA;override this.SetUserCredentials : Guid * string * Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim * Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection -&gt; unit" Usage="secureStoreServiceApplication.SetUserCredentials (rawPartitionId, applicationId, claim, credentials)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.SetUserCredentials(System.Guid,System.String,Microsoft.Office.SecureStoreService.Server.SecureStoreServiceClaim,Microsoft.Office.SecureStoreService.Server.SerializableSecureStoreCredentialCollection)</InterfaceMember>
@@ -1346,6 +1393,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.TypeName" />
       <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property TypeName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::String ^ TypeName { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.TypeName : string" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.TypeName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -1366,6 +1414,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.Unprovision(System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Unprovision (deleteData As Boolean)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Unprovision(bool deleteData);" />
+      <MemberSignature Language="F#" Value="override this.Unprovision : bool -&gt; unit" Usage="secureStoreServiceApplication.Unprovision deleteData" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -1393,6 +1442,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.UnprovisionLocal(Microsoft.SharePoint.Administration.SPServiceInstance)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub UnprovisionLocal (serviceInstance As SPServiceInstance)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void UnprovisionLocal(Microsoft::SharePoint::Administration::SPServiceInstance ^ serviceInstance);" />
+      <MemberSignature Language="F#" Value="override this.UnprovisionLocal : Microsoft.SharePoint.Administration.SPServiceInstance -&gt; unit" Usage="secureStoreServiceApplication.UnprovisionLocal serviceInstance" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
@@ -1419,6 +1469,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.UpdateApplication(System.Guid,Microsoft.Office.SecureStoreService.Server.TargetApplication,System.Collections.Generic.IList{Microsoft.Office.SecureStoreService.Server.TargetApplicationField},Microsoft.Office.SecureStoreService.Server.TargetApplicationClaims)" />
       <MemberSignature Language="VB.NET" Value="Public Sub UpdateApplication (rawPartitionId As Guid, application As TargetApplication, applicationFields As IList(Of TargetApplicationField), applicationClaims As TargetApplicationClaims)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void UpdateApplication(Guid rawPartitionId, Microsoft::Office::SecureStoreService::Server::TargetApplication ^ application, System::Collections::Generic::IList&lt;Microsoft::Office::SecureStoreService::Server::TargetApplicationField ^&gt; ^ applicationFields, Microsoft::Office::SecureStoreService::Server::TargetApplicationClaims ^ applicationClaims);" />
+      <MemberSignature Language="F#" Value="abstract member UpdateApplication : Guid * Microsoft.Office.SecureStoreService.Server.TargetApplication * System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplicationField&gt; * Microsoft.Office.SecureStoreService.Server.TargetApplicationClaims -&gt; unit&#xA;override this.UpdateApplication : Guid * Microsoft.Office.SecureStoreService.Server.TargetApplication * System.Collections.Generic.IList&lt;Microsoft.Office.SecureStoreService.Server.TargetApplicationField&gt; * Microsoft.Office.SecureStoreService.Server.TargetApplicationClaims -&gt; unit" Usage="secureStoreServiceApplication.UpdateApplication (rawPartitionId, application, applicationFields, applicationClaims)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.UpdateApplication(System.Guid,Microsoft.Office.SecureStoreService.Server.TargetApplication,System.Collections.Generic.IList{Microsoft.Office.SecureStoreService.Server.TargetApplicationField},Microsoft.Office.SecureStoreService.Server.TargetApplicationClaims)</InterfaceMember>
@@ -1453,6 +1504,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void UpdateConnectionSettings(valuetype System.Guid rawPartitionId, class Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings connectionSettings) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.UpdateConnectionSettings(System.Guid,Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void UpdateConnectionSettings(Guid rawPartitionId, Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ connectionSettings);" />
+      <MemberSignature Language="F#" Value="abstract member UpdateConnectionSettings : Guid * Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings -&gt; unit&#xA;override this.UpdateConnectionSettings : Guid * Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings -&gt; unit" Usage="secureStoreServiceApplication.UpdateConnectionSettings (rawPartitionId, connectionSettings)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceApplication.UpdateConnectionSettings(System.Guid,Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)</InterfaceMember>
@@ -1483,6 +1535,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.VirtualPath" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides ReadOnly Property VirtualPath As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::String ^ VirtualPath { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.VirtualPath : string" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreServiceApplication.VirtualPath" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
