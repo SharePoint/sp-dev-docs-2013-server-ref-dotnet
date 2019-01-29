@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SecureStoreProvider&#xA;Implements ICredentialEntry, ISecureStoreProviderExtended, ISecureStoreServiceContext" />
   <TypeSignature Language="C++ CLI" Value="public ref class SecureStoreProvider sealed : Microsoft::BusinessData::Infrastructure::SecureStore::ICredentialEntry, Microsoft::BusinessData::Infrastructure::SecureStore::ISecureStoreProviderExtended, Microsoft::Office::SecureStoreService::Server::ISecureStoreServiceContext" />
+  <TypeSignature Language="F#" Value="type SecureStoreProvider = class&#xA;    interface ISecureStoreProviderExtended&#xA;    interface ISecureStoreProvider&#xA;    interface IConnectionSettingsProvider&#xA;    interface ISecureStoreServiceContext&#xA;    interface ICredentialEntry" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.SecureStoreService</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -53,6 +54,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.Context" />
       <MemberSignature Language="VB.NET" Value="Public Property Context As SPServiceContext" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPServiceContext ^ Context { Microsoft::SharePoint::SPServiceContext ^ get(); void set(Microsoft::SharePoint::SPServiceContext ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Context : Microsoft.SharePoint.SPServiceContext with get, set" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.Context" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.Office.SecureStoreService.Server.ISecureStoreServiceContext.Context</InterfaceMember>
@@ -76,6 +78,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.CreateConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)" />
       <MemberSignature Language="VB.NET" Value="Public Sub CreateConnectionSettings (endpoint As ConnectionSettings)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void CreateConnectionSettings(Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ endpoint);" />
+      <MemberSignature Language="F#" Value="abstract member CreateConnectionSettings : Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings -&gt; unit&#xA;override this.CreateConnectionSettings : Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings -&gt; unit" Usage="secureStoreProvider.CreateConnectionSettings endpoint" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.CreateConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)</InterfaceMember>
@@ -102,6 +105,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.DeleteConnectionSettings(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub DeleteConnectionSettings (name As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void DeleteConnectionSettings(System::String ^ name);" />
+      <MemberSignature Language="F#" Value="abstract member DeleteConnectionSettings : string -&gt; unit&#xA;override this.DeleteConnectionSettings : string -&gt; unit" Usage="secureStoreProvider.DeleteConnectionSettings name" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.DeleteConnectionSettings(System.String)</InterfaceMember>
@@ -128,6 +132,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.DeleteCredentials(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub DeleteCredentials (appId As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void DeleteCredentials(System::String ^ appId);" />
+      <MemberSignature Language="F#" Value="abstract member DeleteCredentials : string -&gt; unit&#xA;override this.DeleteCredentials : string -&gt; unit" Usage="secureStoreProvider.DeleteCredentials appId" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.DeleteCredentials(System.String)</InterfaceMember>
@@ -159,6 +164,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetAllConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetAllConnectionSettings (type As ConnectionSettingsType) As IEnumerable(Of ConnectionSettings)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IEnumerable&lt;Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^&gt; ^ GetAllConnectionSettings(Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettingsType type);" />
+      <MemberSignature Language="F#" Value="abstract member GetAllConnectionSettings : Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType -&gt; seq&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&gt;&#xA;override this.GetAllConnectionSettings : Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType -&gt; seq&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&gt;" Usage="secureStoreProvider.GetAllConnectionSettings type" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.GetAllConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettingsType)</InterfaceMember>
@@ -186,6 +192,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetChildConnectionSettings(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetChildConnectionSettings (parentName As String) As ConnectionSettings" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ GetChildConnectionSettings(System::String ^ parentName);" />
+      <MemberSignature Language="F#" Value="abstract member GetChildConnectionSettings : string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&#xA;override this.GetChildConnectionSettings : string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings" Usage="secureStoreProvider.GetChildConnectionSettings parentName" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.GetChildConnectionSettings(System.String)</InterfaceMember>
@@ -213,6 +220,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetConnectionSettings(System.String,System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetConnectionSettings (name As String, includeCredentials As Boolean) As ConnectionSettings" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ GetConnectionSettings(System::String ^ name, bool includeCredentials);" />
+      <MemberSignature Language="F#" Value="abstract member GetConnectionSettings : string * bool -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings&#xA;override this.GetConnectionSettings : string * bool -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings" Usage="secureStoreProvider.GetConnectionSettings (name, includeCredentials)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.GetConnectionSettings(System.String,System.Boolean)</InterfaceMember>
@@ -244,6 +252,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetCredentialManagementUrl(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetCredentialManagementUrl (appId As String) As Uri" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Uri ^ GetCredentialManagementUrl(System::String ^ appId);" />
+      <MemberSignature Language="F#" Value="abstract member GetCredentialManagementUrl : string -&gt; Uri&#xA;override this.GetCredentialManagementUrl : string -&gt; Uri" Usage="secureStoreProvider.GetCredentialManagementUrl appId" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ICredentialEntry.GetCredentialManagementUrl(System.String)</InterfaceMember>
@@ -275,6 +284,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetCredentials(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetCredentials (appId As String) As SecureStoreCredentialCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::SecureStoreCredentialCollection ^ GetCredentials(System::String ^ appId);" />
+      <MemberSignature Language="F#" Value="abstract member GetCredentials : string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection&#xA;override this.GetCredentials : string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection" Usage="secureStoreProvider.GetCredentials appId" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.GetCredentials(System.String)</InterfaceMember>
@@ -304,6 +314,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetCredentialsUsingTicket(System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetCredentialsUsingTicket (ticket As String, appId As String) As SecureStoreCredentialCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::SecureStoreCredentialCollection ^ GetCredentialsUsingTicket(System::String ^ ticket, System::String ^ appId);" />
+      <MemberSignature Language="F#" Value="abstract member GetCredentialsUsingTicket : string * string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection&#xA;override this.GetCredentialsUsingTicket : string * string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection" Usage="secureStoreProvider.GetCredentialsUsingTicket (ticket, appId)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.GetCredentialsUsingTicket(System.String,System.String)</InterfaceMember>
@@ -335,6 +346,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetRestrictedCredentials(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetRestrictedCredentials (appId As String) As SecureStoreCredentialCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::SecureStoreCredentialCollection ^ GetRestrictedCredentials(System::String ^ appId);" />
+      <MemberSignature Language="F#" Value="abstract member GetRestrictedCredentials : string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection&#xA;override this.GetRestrictedCredentials : string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.SecureStoreCredentialCollection" Usage="secureStoreProvider.GetRestrictedCredentials appId" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.GetRestrictedCredentials(System.String)</InterfaceMember>
@@ -364,6 +376,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetTargetApplication(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetTargetApplication (appId As String) As ITargetApplicationDefinition" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::BusinessData::Infrastructure::SecureStore::ITargetApplicationDefinition ^ GetTargetApplication(System::String ^ appId);" />
+      <MemberSignature Language="F#" Value="abstract member GetTargetApplication : string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition&#xA;override this.GetTargetApplication : string -&gt; Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition" Usage="secureStoreProvider.GetTargetApplication appId" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderExtended.GetTargetApplication(System.String)</InterfaceMember>
@@ -395,6 +408,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetTargetApplicationFields(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetTargetApplicationFields (appId As String) As ReadOnlyCollection(Of ITargetApplicationField)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::ObjectModel::ReadOnlyCollection&lt;Microsoft::BusinessData::Infrastructure::SecureStore::ITargetApplicationField ^&gt; ^ GetTargetApplicationFields(System::String ^ appId);" />
+      <MemberSignature Language="F#" Value="abstract member GetTargetApplicationFields : string -&gt; System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationField&gt;&#xA;override this.GetTargetApplicationFields : string -&gt; System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationField&gt;" Usage="secureStoreProvider.GetTargetApplicationFields appId" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderExtended.GetTargetApplicationFields(System.String)</InterfaceMember>
@@ -423,6 +437,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.GetTargetApplications" />
       <MemberSignature Language="VB.NET" Value="Public Function GetTargetApplications () As ReadOnlyCollection(Of ITargetApplicationDefinition)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::ObjectModel::ReadOnlyCollection&lt;Microsoft::BusinessData::Infrastructure::SecureStore::ITargetApplicationDefinition ^&gt; ^ GetTargetApplications();" />
+      <MemberSignature Language="F#" Value="abstract member GetTargetApplications : unit -&gt; System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition&gt;&#xA;override this.GetTargetApplications : unit -&gt; System.Collections.ObjectModel.ReadOnlyCollection&lt;Microsoft.BusinessData.Infrastructure.SecureStore.ITargetApplicationDefinition&gt;" Usage="secureStoreProvider.GetTargetApplications " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderExtended.GetTargetApplications</InterfaceMember>
@@ -447,6 +462,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.IssueTicket" />
       <MemberSignature Language="VB.NET" Value="Public Function IssueTicket () As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::String ^ IssueTicket();" />
+      <MemberSignature Language="F#" Value="abstract member IssueTicket : unit -&gt; string&#xA;override this.IssueTicket : unit -&gt; string" Usage="secureStoreProvider.IssueTicket " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.IssueTicket</InterfaceMember>
@@ -471,6 +487,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.ProviderInformation" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ProviderInformation As ISecureStoreProviderInformation" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::BusinessData::Infrastructure::SecureStore::ISecureStoreProviderInformation ^ ProviderInformation { Microsoft::BusinessData::Infrastructure::SecureStore::ISecureStoreProviderInformation ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ProviderInformation : Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProviderInformation" Usage="Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.ProviderInformation" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.BusinessData.Infrastructure.SecureStore.ISecureStoreProvider.ProviderInformation</InterfaceMember>
@@ -493,6 +510,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void UpdateConnectionSettings(class Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings connectionSettings) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.SecureStoreService.Server.SecureStoreProvider.UpdateConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void UpdateConnectionSettings(Microsoft::BusinessData::Infrastructure::SecureStore::ConnectionSettings ^ connectionSettings);" />
+      <MemberSignature Language="F#" Value="abstract member UpdateConnectionSettings : Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings -&gt; unit&#xA;override this.UpdateConnectionSettings : Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings -&gt; unit" Usage="secureStoreProvider.UpdateConnectionSettings connectionSettings" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.BusinessData.Infrastructure.SecureStore.IConnectionSettingsProvider.UpdateConnectionSettings(Microsoft.BusinessData.Infrastructure.SecureStore.ConnectionSettings)</InterfaceMember>

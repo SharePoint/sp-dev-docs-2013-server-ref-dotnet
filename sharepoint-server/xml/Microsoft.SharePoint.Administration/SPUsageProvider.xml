@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Administration.SPUsageProvider" />
   <TypeSignature Language="VB.NET" Value="Public MustInherit Class SPUsageProvider&#xA;Inherits SPUsageDefinition&#xA;Implements ILoggingProvider" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPUsageProvider abstract : Microsoft::SharePoint::Administration::SPUsageDefinition, Microsoft::SharePoint::Administration::ILoggingProvider" />
+  <TypeSignature Language="F#" Value="type SPUsageProvider = class&#xA;    inherit SPUsageDefinition&#xA;    interface ILoggingProvider" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -49,6 +50,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.#ctor(Microsoft.SharePoint.Administration.SPFarm)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub New (farm As SPFarm)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; SPUsageProvider(Microsoft::SharePoint::Administration::SPFarm ^ farm);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.Administration.SPUsageProvider : Microsoft.SharePoint.Administration.SPFarm -&gt; Microsoft.SharePoint.Administration.SPUsageProvider" Usage="new Microsoft.SharePoint.Administration.SPUsageProvider farm" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -69,6 +71,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPUsageProvider.Columns" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property Columns As IList(Of SPColumnDefinition)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property System::Collections::Generic::IList&lt;Microsoft::SharePoint::Administration::SPColumnDefinition&gt; ^ Columns { System::Collections::Generic::IList&lt;Microsoft::SharePoint::Administration::SPColumnDefinition&gt; ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Columns : System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt;" Usage="Microsoft.SharePoint.Administration.SPUsageProvider.Columns" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ILoggingProvider.Columns</InterfaceMember>
@@ -92,6 +95,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.CreateTable(System.String,System.Collections.Generic.IList{Microsoft.SharePoint.Administration.SPColumnDefinition})" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub CreateTable (tableName As String, columnDefs As IList(Of SPColumnDefinition))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void CreateTable(System::String ^ tableName, System::Collections::Generic::IList&lt;Microsoft::SharePoint::Administration::SPColumnDefinition&gt; ^ columnDefs);" />
+      <MemberSignature Language="F#" Value="abstract member CreateTable : string * System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt; -&gt; unit&#xA;override this.CreateTable : string * System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt; -&gt; unit" Usage="sPUsageProvider.CreateTable (tableName, columnDefs)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.CreateTable(System.String,System.Collections.Generic.IList{Microsoft.SharePoint.Administration.SPColumnDefinition})</InterfaceMember>
@@ -120,6 +124,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPUsageProvider.DaysToKeepDetailedData" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Property DaysToKeepDetailedData As UInteger" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::UInt32 DaysToKeepDetailedData { System::UInt32 get(); void set(System::UInt32 value); };" />
+      <MemberSignature Language="F#" Value="member this.DaysToKeepDetailedData : uint32 with get, set" Usage="Microsoft.SharePoint.Administration.SPUsageProvider.DaysToKeepDetailedData" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -140,6 +145,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.DeserializeBase64String(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Shared Function DeserializeBase64String (str As String) As Object" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; static System::Object ^ DeserializeBase64String(System::String ^ str);" />
+      <MemberSignature Language="F#" Value="static member DeserializeBase64String : string -&gt; obj" Usage="Microsoft.SharePoint.Administration.SPUsageProvider.DeserializeBase64String str" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -164,6 +170,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.ExecuteNonQuery(System.Data.SqlClient.SqlCommand)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ExecuteNonQuery (command As SqlCommand) As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual int ExecuteNonQuery(System::Data::SqlClient::SqlCommand ^ command);" />
+      <MemberSignature Language="F#" Value="abstract member ExecuteNonQuery : System.Data.SqlClient.SqlCommand -&gt; int&#xA;override this.ExecuteNonQuery : System.Data.SqlClient.SqlCommand -&gt; int" Usage="sPUsageProvider.ExecuteNonQuery command" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.ExecuteNonQuery(System.Data.SqlClient.SqlCommand)</InterfaceMember>
@@ -191,6 +198,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.ExecuteReader(System.Data.SqlClient.SqlCommand)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ExecuteReader (command As SqlCommand) As SqlDataReader" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Data::SqlClient::SqlDataReader ^ ExecuteReader(System::Data::SqlClient::SqlCommand ^ command);" />
+      <MemberSignature Language="F#" Value="abstract member ExecuteReader : System.Data.SqlClient.SqlCommand -&gt; System.Data.SqlClient.SqlDataReader&#xA;override this.ExecuteReader : System.Data.SqlClient.SqlCommand -&gt; System.Data.SqlClient.SqlDataReader" Usage="sPUsageProvider.ExecuteReader command" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.ExecuteReader(System.Data.SqlClient.SqlCommand)</InterfaceMember>
@@ -218,6 +226,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.ImportEntries(System.Collections.Generic.IEnumerator{Microsoft.SharePoint.Administration.SPUsageEntry})" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub ImportEntries (usageEntries As IEnumerator(Of SPUsageEntry))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void ImportEntries(System::Collections::Generic::IEnumerator&lt;Microsoft::SharePoint::Administration::SPUsageEntry ^&gt; ^ usageEntries);" />
+      <MemberSignature Language="F#" Value="override this.ImportEntries : System.Collections.Generic.IEnumerator&lt;Microsoft.SharePoint.Administration.SPUsageEntry&gt; -&gt; unit" Usage="sPUsageProvider.ImportEntries usageEntries" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -241,6 +250,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.OnProvisioning" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub OnProvisioning ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void OnProvisioning();" />
+      <MemberSignature Language="F#" Value="abstract member OnProvisioning : unit -&gt; unit&#xA;override this.OnProvisioning : unit -&gt; unit" Usage="sPUsageProvider.OnProvisioning " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.OnProvisioning</InterfaceMember>
@@ -264,6 +274,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.OnUnprovisioning" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub OnUnprovisioning ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void OnUnprovisioning();" />
+      <MemberSignature Language="F#" Value="abstract member OnUnprovisioning : unit -&gt; unit&#xA;override this.OnUnprovisioning : unit -&gt; unit" Usage="sPUsageProvider.OnUnprovisioning " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.OnUnprovisioning</InterfaceMember>
@@ -287,6 +298,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.ParseLogFileCommonEntry(System.String[])" />
       <MemberSignature Language="VB.NET" Value="Public Function ParseLogFileCommonEntry (cols As String()) As Object()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::Object ^&gt; ^ ParseLogFileCommonEntry(cli::array &lt;System::String ^&gt; ^ cols);" />
+      <MemberSignature Language="F#" Value="member this.ParseLogFileCommonEntry : string[] -&gt; obj[]" Usage="sPUsageProvider.ParseLogFileCommonEntry cols" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -311,6 +323,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.ParseLogFileEntry(System.Object[])" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function ParseLogFileEntry (value As Object()) As SPUsageEntry" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract Microsoft::SharePoint::Administration::SPUsageEntry ^ ParseLogFileEntry(cli::array &lt;System::Object ^&gt; ^ value);" />
+      <MemberSignature Language="F#" Value="abstract member ParseLogFileEntry : obj[] -&gt; Microsoft.SharePoint.Administration.SPUsageEntry" Usage="sPUsageProvider.ParseLogFileEntry value" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -335,6 +348,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.ParseLogFileEntry(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ParseLogFileEntry (line As String) As Object()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual cli::array &lt;System::Object ^&gt; ^ ParseLogFileEntry(System::String ^ line);" />
+      <MemberSignature Language="F#" Value="abstract member ParseLogFileEntry : string -&gt; obj[]&#xA;override this.ParseLogFileEntry : string -&gt; obj[]" Usage="sPUsageProvider.ParseLogFileEntry line" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -359,6 +373,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPUsageProvider.ProvisionSchema" />
       <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property ProvisionSchema As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property bool ProvisionSchema { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.ProvisionSchema : bool" Usage="Microsoft.SharePoint.Administration.SPUsageProvider.ProvisionSchema" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -379,6 +394,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPUsageProvider.RetentionPeriod" />
       <MemberSignature Language="VB.NET" Value="Public Property RetentionPeriod As Byte" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Byte RetentionPeriod { System::Byte get(); void set(System::Byte value); };" />
+      <MemberSignature Language="F#" Value="member this.RetentionPeriod : byte with get, set" Usage="Microsoft.SharePoint.Administration.SPUsageProvider.RetentionPeriod" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ILoggingProvider.RetentionPeriod</InterfaceMember>
@@ -402,6 +418,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Administration.SPUsageProvider.TableName" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property TableName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property System::String ^ TableName { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.TableName : string" Usage="Microsoft.SharePoint.Administration.SPUsageProvider.TableName" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.SharePoint.Administration.ILoggingProvider.TableName</InterfaceMember>
@@ -425,6 +442,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.TryGetDateTime(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Function TryGetDateTime (col As String) As DateTime" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; DateTime TryGetDateTime(System::String ^ col);" />
+      <MemberSignature Language="F#" Value="member this.TryGetDateTime : string -&gt; DateTime" Usage="sPUsageProvider.TryGetDateTime col" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -449,6 +467,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.TryGetValueOrDefault``1(System.String,Microsoft.SharePoint.Administration.SPUsageProvider.TryParse{``0})" />
       <MemberSignature Language="VB.NET" Value="Protected Shared Function TryGetValueOrDefault(Of T As New) (col As String, parser As SPUsageProvider.TryParse(Of T)) As T" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA;generic &lt;typename T&gt;&#xA; where T : gcnew() static T TryGetValueOrDefault(System::String ^ col, Microsoft::SharePoint::Administration::SPUsageProvider::TryParse&lt;T&gt; ^ parser);" />
+      <MemberSignature Language="F#" Value="static member TryGetValueOrDefault : string * Microsoft.SharePoint.Administration.SPUsageProvider.TryParse&lt;'T (requires 'T : (new : unit -&gt; 'T))&gt; -&gt; 'T (requires 'T : (new : unit -&gt; 'T))" Usage="Microsoft.SharePoint.Administration.SPUsageProvider.TryGetValueOrDefault (col, parser)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -483,6 +502,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.Update" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Sub Update ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void Update();" />
+      <MemberSignature Language="F#" Value="override this.Update : unit -&gt; unit" Usage="sPUsageProvider.Update " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -503,6 +523,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Administration.SPUsageProvider.WriteDataRowToServer(System.String,System.Collections.Generic.IList{Microsoft.SharePoint.Administration.SPColumnDefinition},System.DateTime,System.String,System.Object[])" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub WriteDataRowToServer (tableName As String, columns As IList(Of SPColumnDefinition), logTime As DateTime, machineName As String, ParamArray row As Object())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void WriteDataRowToServer(System::String ^ tableName, System::Collections::Generic::IList&lt;Microsoft::SharePoint::Administration::SPColumnDefinition&gt; ^ columns, DateTime logTime, System::String ^ machineName, ... cli::array &lt;System::Object ^&gt; ^ row);" />
+      <MemberSignature Language="F#" Value="abstract member WriteDataRowToServer : string * System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt; * DateTime * string * obj[] -&gt; unit&#xA;override this.WriteDataRowToServer : string * System.Collections.Generic.IList&lt;Microsoft.SharePoint.Administration.SPColumnDefinition&gt; * DateTime * string * obj[] -&gt; unit" Usage="sPUsageProvider.WriteDataRowToServer (tableName, columns, logTime, machineName, row)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.SharePoint.Administration.ILoggingProvider.WriteDataRowToServer(System.String,System.Collections.Generic.IList{Microsoft.SharePoint.Administration.SPColumnDefinition},System.DateTime,System.String,System.Object[])</InterfaceMember>

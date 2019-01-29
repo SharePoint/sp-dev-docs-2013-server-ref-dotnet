@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Utilities.SPMonitoredScope" />
   <TypeSignature Language="VB.NET" Value="Public Class SPMonitoredScope&#xA;Implements IDisposable" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPMonitoredScope : IDisposable" />
+  <TypeSignature Language="F#" Value="type SPMonitoredScope = class&#xA;    interface IDisposable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -32,6 +33,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPMonitoredScope.#ctor(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (name As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; SPMonitoredScope(System::String ^ name);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.Utilities.SPMonitoredScope : string -&gt; Microsoft.SharePoint.Utilities.SPMonitoredScope" Usage="new Microsoft.SharePoint.Utilities.SPMonitoredScope name" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -52,6 +54,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPMonitoredScope.#ctor(System.String,Microsoft.SharePoint.Administration.TraceSeverity,Microsoft.SharePoint.Utilities.ISPScopedPerformanceMonitor[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (name As String, traceLevel As TraceSeverity, ParamArray monitors As ISPScopedPerformanceMonitor())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; SPMonitoredScope(System::String ^ name, Microsoft::SharePoint::Administration::TraceSeverity traceLevel, ... cli::array &lt;Microsoft::SharePoint::Utilities::ISPScopedPerformanceMonitor ^&gt; ^ monitors);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.Utilities.SPMonitoredScope : string * Microsoft.SharePoint.Administration.TraceSeverity * Microsoft.SharePoint.Utilities.ISPScopedPerformanceMonitor[] -&gt; Microsoft.SharePoint.Utilities.SPMonitoredScope" Usage="new Microsoft.SharePoint.Utilities.SPMonitoredScope (name, traceLevel, monitors)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -87,6 +90,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPMonitoredScope.#ctor(System.String,System.UInt32,Microsoft.SharePoint.Utilities.ISPScopedPerformanceMonitor[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (name As String, maximumExecutionTime As UInteger, ParamArray monitors As ISPScopedPerformanceMonitor())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; SPMonitoredScope(System::String ^ name, System::UInt32 maximumExecutionTime, ... cli::array &lt;Microsoft::SharePoint::Utilities::ISPScopedPerformanceMonitor ^&gt; ^ monitors);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.Utilities.SPMonitoredScope : string * uint32 * Microsoft.SharePoint.Utilities.ISPScopedPerformanceMonitor[] -&gt; Microsoft.SharePoint.Utilities.SPMonitoredScope" Usage="new Microsoft.SharePoint.Utilities.SPMonitoredScope (name, maximumExecutionTime, monitors)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -122,6 +126,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPMonitoredScope.AddMonitor``1(``0)" />
       <MemberSignature Language="VB.NET" Value="Protected Function AddMonitor(Of T As ISPScopedPerformanceMonitor) (monitor As T) As T" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA;generic &lt;typename T&gt;&#xA; where T : Microsoft::SharePoint::Utilities::ISPScopedPerformanceMonitor T AddMonitor(T monitor);" />
+      <MemberSignature Language="F#" Value="member this.AddMonitor : 'T -&gt; 'T (requires 'T :&gt; Microsoft.SharePoint.Utilities.ISPScopedPerformanceMonitor)" Usage="sPMonitoredScope.AddMonitor monitor" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -159,6 +164,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Utilities.SPMonitoredScope.Children" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Children As IEnumerable(Of SPMonitoredScope)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::Utilities::SPMonitoredScope ^&gt; ^ Children { System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::Utilities::SPMonitoredScope ^&gt; ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Children : seq&lt;Microsoft.SharePoint.Utilities.SPMonitoredScope&gt;" Usage="Microsoft.SharePoint.Utilities.SPMonitoredScope.Children" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -184,6 +190,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Utilities.SPMonitoredScope.Current" />
       <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property Current As SPMonitoredScope" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static property Microsoft::SharePoint::Utilities::SPMonitoredScope ^ Current { Microsoft::SharePoint::Utilities::SPMonitoredScope ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Current : Microsoft.SharePoint.Utilities.SPMonitoredScope" Usage="Microsoft.SharePoint.Utilities.SPMonitoredScope.Current" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -204,6 +211,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPMonitoredScope.Dispose" />
       <MemberSignature Language="VB.NET" Value="Public Sub Dispose ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Dispose();" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : unit -&gt; unit&#xA;override this.Dispose : unit -&gt; unit" Usage="sPMonitoredScope.Dispose " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
@@ -227,6 +235,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPMonitoredScope.Dispose(System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Sub Dispose (disposing As Boolean)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void Dispose(bool disposing);" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : bool -&gt; unit&#xA;override this.Dispose : bool -&gt; unit" Usage="sPMonitoredScope.Dispose disposing" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -255,6 +264,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPMonitoredScope.GetMonitor``1" />
       <MemberSignature Language="VB.NET" Value="Public Function GetMonitor(Of T As ISPScopedPerformanceMonitor) () As T" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename T&gt;&#xA; where T : Microsoft::SharePoint::Utilities::ISPScopedPerformanceMonitor T GetMonitor();" />
+      <MemberSignature Language="F#" Value="member this.GetMonitor : unit -&gt; 'T (requires 'T :&gt; Microsoft.SharePoint.Utilities.ISPScopedPerformanceMonitor)" Usage="sPMonitoredScope.GetMonitor " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -289,6 +299,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPMonitoredScope.GetMonitorRecursive``1" />
       <MemberSignature Language="VB.NET" Value="Public Function GetMonitorRecursive(Of T As ISPScopedPerformanceMonitor) () As T" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename T&gt;&#xA; where T : Microsoft::SharePoint::Utilities::ISPScopedPerformanceMonitor T GetMonitorRecursive();" />
+      <MemberSignature Language="F#" Value="member this.GetMonitorRecursive : unit -&gt; 'T (requires 'T :&gt; Microsoft.SharePoint.Utilities.ISPScopedPerformanceMonitor)" Usage="sPMonitoredScope.GetMonitorRecursive " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -323,6 +334,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Utilities.SPMonitoredScope.Id" />
       <MemberSignature Language="VB.NET" Value="Public Property Id As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Guid Id { Guid get(); void set(Guid value); };" />
+      <MemberSignature Language="F#" Value="member this.Id : Guid with get, set" Usage="Microsoft.SharePoint.Utilities.SPMonitoredScope.Id" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -343,6 +355,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Utilities.SPMonitoredScope.IsDeveloperDashboardEnabled" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsDeveloperDashboardEnabled As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsDeveloperDashboardEnabled { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IsDeveloperDashboardEnabled : bool" Usage="Microsoft.SharePoint.Utilities.SPMonitoredScope.IsDeveloperDashboardEnabled" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -363,6 +376,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Utilities.SPMonitoredScope.Monitors" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Monitors As IEnumerable(Of ISPPerformanceMonitor)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::Utilities::ISPPerformanceMonitor ^&gt; ^ Monitors { System::Collections::Generic::IEnumerable&lt;Microsoft::SharePoint::Utilities::ISPPerformanceMonitor ^&gt; ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Monitors : seq&lt;Microsoft.SharePoint.Utilities.ISPPerformanceMonitor&gt;" Usage="Microsoft.SharePoint.Utilities.SPMonitoredScope.Monitors" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -388,6 +402,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Utilities.SPMonitoredScope.Name" />
       <MemberSignature Language="VB.NET" Value="Public Property Name As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Name : string with get, set" Usage="Microsoft.SharePoint.Utilities.SPMonitoredScope.Name" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -408,6 +423,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Utilities.SPMonitoredScope.OnDisposing" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Sub OnDisposing ()" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void OnDisposing();" />
+      <MemberSignature Language="F#" Value="abstract member OnDisposing : unit -&gt; unit&#xA;override this.OnDisposing : unit -&gt; unit" Usage="sPMonitoredScope.OnDisposing " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -433,6 +449,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Utilities.SPMonitoredScope.Parent" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Parent As SPMonitoredScope" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::Utilities::SPMonitoredScope ^ Parent { Microsoft::SharePoint::Utilities::SPMonitoredScope ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Parent : Microsoft.SharePoint.Utilities.SPMonitoredScope" Usage="Microsoft.SharePoint.Utilities.SPMonitoredScope.Parent" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -453,6 +470,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Utilities.SPMonitoredScope.ParentScopeId" />
       <MemberSignature Language="VB.NET" Value="Public Property ParentScopeId As Long" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property long ParentScopeId { long get(); void set(long value); };" />
+      <MemberSignature Language="F#" Value="member this.ParentScopeId : int64 with get, set" Usage="Microsoft.SharePoint.Utilities.SPMonitoredScope.ParentScopeId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -478,6 +496,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Utilities.SPMonitoredScope.ScopeId" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ScopeId As Long" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property long ScopeId { long get(); };" />
+      <MemberSignature Language="F#" Value="member this.ScopeId : int64" Usage="Microsoft.SharePoint.Utilities.SPMonitoredScope.ScopeId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

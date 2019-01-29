@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore" />
   <TypeSignature Language="VB.NET" Value="Public MustInherit Class SPDiagnosticDataStore&#xA;Inherits SPAutoSerializingObject" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPDiagnosticDataStore abstract : Microsoft::SharePoint::Administration::SPAutoSerializingObject" />
+  <TypeSignature Language="F#" Value="type SPDiagnosticDataStore = class&#xA;    inherit SPAutoSerializingObject" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -40,6 +41,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.Add(System.Collections.Generic.IList{Microsoft.SharePoint.Diagnostics.SPDiagnosticsData})" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Sub Add (dataList As IList(Of SPDiagnosticsData))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract void Add(System::Collections::Generic::IList&lt;Microsoft::SharePoint::Diagnostics::SPDiagnosticsData ^&gt; ^ dataList);" />
+      <MemberSignature Language="F#" Value="abstract member Add : System.Collections.Generic.IList&lt;Microsoft.SharePoint.Diagnostics.SPDiagnosticsData&gt; -&gt; unit" Usage="sPDiagnosticDataStore.Add dataList" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -63,6 +65,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.Add(System.Collections.Generic.IList{Microsoft.SharePoint.Diagnostics.SPMonitoredScopeData})" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Sub Add (scopes As IList(Of SPMonitoredScopeData))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract void Add(System::Collections::Generic::IList&lt;Microsoft::SharePoint::Diagnostics::SPMonitoredScopeData ^&gt; ^ scopes);" />
+      <MemberSignature Language="F#" Value="abstract member Add : System.Collections.Generic.IList&lt;Microsoft.SharePoint.Diagnostics.SPMonitoredScopeData&gt; -&gt; unit" Usage="sPDiagnosticDataStore.Add scopes" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -86,6 +89,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.Get(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function Get (correlationId As Guid) As IList(Of SPMonitoredScopeData)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::Collections::Generic::IList&lt;Microsoft::SharePoint::Diagnostics::SPMonitoredScopeData ^&gt; ^ Get(Guid correlationId);" />
+      <MemberSignature Language="F#" Value="abstract member Get : Guid -&gt; System.Collections.Generic.IList&lt;Microsoft.SharePoint.Diagnostics.SPMonitoredScopeData&gt;" Usage="sPDiagnosticDataStore.Get correlationId" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -110,6 +114,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.Get(System.Guid,System.Int64)" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function Get (correlationId As Guid, scopeId As Long) As SPMonitoredScopeData" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract Microsoft::SharePoint::Diagnostics::SPMonitoredScopeData ^ Get(Guid correlationId, long scopeId);" />
+      <MemberSignature Language="F#" Value="abstract member Get : Guid * int64 -&gt; Microsoft.SharePoint.Diagnostics.SPMonitoredScopeData" Usage="sPDiagnosticDataStore.Get (correlationId, scopeId)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -136,6 +141,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.Get(System.String,System.DateTime)" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function Get (user As String, start As DateTime) As IList(Of SPMonitoredScopeData)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::Collections::Generic::IList&lt;Microsoft::SharePoint::Diagnostics::SPMonitoredScopeData ^&gt; ^ Get(System::String ^ user, DateTime start);" />
+      <MemberSignature Language="F#" Value="abstract member Get : string * DateTime -&gt; System.Collections.Generic.IList&lt;Microsoft.SharePoint.Diagnostics.SPMonitoredScopeData&gt;" Usage="sPDiagnosticDataStore.Get (user, start)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -162,6 +168,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.GetAggregatedData(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetAggregatedData (correlationId As Guid, name As String) As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::Object ^ GetAggregatedData(Guid correlationId, System::String ^ name);" />
+      <MemberSignature Language="F#" Value="abstract member GetAggregatedData : Guid * string -&gt; obj" Usage="sPDiagnosticDataStore.GetAggregatedData (correlationId, name)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -188,6 +195,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.GetData(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetData (correlationId As Guid) As IList(Of SPDiagnosticsData)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::Collections::Generic::IList&lt;Microsoft::SharePoint::Diagnostics::SPDiagnosticsData ^&gt; ^ GetData(Guid correlationId);" />
+      <MemberSignature Language="F#" Value="abstract member GetData : Guid -&gt; System.Collections.Generic.IList&lt;Microsoft.SharePoint.Diagnostics.SPDiagnosticsData&gt;" Usage="sPDiagnosticDataStore.GetData correlationId" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -212,6 +220,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.GetData(System.Guid,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetData (correlationId As Guid, name As String) As IList(Of SPDiagnosticsData)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::Collections::Generic::IList&lt;Microsoft::SharePoint::Diagnostics::SPDiagnosticsData ^&gt; ^ GetData(Guid correlationId, System::String ^ name);" />
+      <MemberSignature Language="F#" Value="abstract member GetData : Guid * string -&gt; System.Collections.Generic.IList&lt;Microsoft.SharePoint.Diagnostics.SPDiagnosticsData&gt;" Usage="sPDiagnosticDataStore.GetData (correlationId, name)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -238,6 +247,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.GetData(System.Guid,System.Int64,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function GetData (correlationId As Guid, scopeId As Long, name As String) As IList(Of SPDiagnosticsData)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract System::Collections::Generic::IList&lt;Microsoft::SharePoint::Diagnostics::SPDiagnosticsData ^&gt; ^ GetData(Guid correlationId, long scopeId, System::String ^ name);" />
+      <MemberSignature Language="F#" Value="abstract member GetData : Guid * int64 * string -&gt; System.Collections.Generic.IList&lt;Microsoft.SharePoint.Diagnostics.SPDiagnosticsData&gt;" Usage="sPDiagnosticDataStore.GetData (correlationId, scopeId, name)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -266,6 +276,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.IsReady" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property IsReady As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property bool IsReady { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IsReady : bool" Usage="Microsoft.SharePoint.Diagnostics.SPDiagnosticDataStore.IsReady" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

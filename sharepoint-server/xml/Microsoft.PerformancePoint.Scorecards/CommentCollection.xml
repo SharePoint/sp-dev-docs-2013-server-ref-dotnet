@@ -1,9 +1,10 @@
 ﻿<Type Name="CommentCollection" FullName="Microsoft.PerformancePoint.Scorecards.CommentCollection">
-  <TypeSignature Language="C#" Value="public class CommentCollection : System.Collections.CollectionBase, ICloneable, Microsoft.PerformancePoint.Scorecards.ISortableCollection" />
+  <TypeSignature Language="C#" Value="public class CommentCollection : System.Collections.CollectionBase, ICloneable, Microsoft.PerformancePoint.Scorecards.ISortableCollection, System.Collections.IList" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit CommentCollection extends System.Collections.CollectionBase implements class Microsoft.PerformancePoint.Scorecards.ISortableCollection, class System.Collections.ICollection, class System.Collections.IEnumerable, class System.Collections.IList, class System.ICloneable" />
   <TypeSignature Language="DocId" Value="T:Microsoft.PerformancePoint.Scorecards.CommentCollection" />
-  <TypeSignature Language="VB.NET" Value="Public Class CommentCollection&#xA;Inherits CollectionBase&#xA;Implements ICloneable, ISortableCollection" />
-  <TypeSignature Language="C++ CLI" Value="public ref class CommentCollection : System::Collections::CollectionBase, ICloneable, Microsoft::PerformancePoint::Scorecards::ISortableCollection" />
+  <TypeSignature Language="VB.NET" Value="Public Class CommentCollection&#xA;Inherits CollectionBase&#xA;Implements ICloneable, IList, ISortableCollection" />
+  <TypeSignature Language="C++ CLI" Value="public ref class CommentCollection : System::Collections::CollectionBase, ICloneable, Microsoft::PerformancePoint::Scorecards::ISortableCollection, System::Collections::IList" />
+  <TypeSignature Language="F#" Value="type CommentCollection = class&#xA;    inherit CollectionBase&#xA;    interface ICloneable&#xA;    interface ISortableCollection&#xA;    interface IList&#xA;    interface ICollection&#xA;    interface IEnumerable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -16,12 +17,18 @@
       <InterfaceName>Microsoft.PerformancePoint.Scorecards.ISortableCollection</InterfaceName>
     </Interface>
     <Interface>
+      <InterfaceName>System.Collections.IList</InterfaceName>
+    </Interface>
+    <Interface>
       <InterfaceName>System.ICloneable</InterfaceName>
     </Interface>
   </Interfaces>
   <Attributes>
     <Attribute>
       <AttributeName>System.Runtime.Serialization.KnownType(typeof(Microsoft.PerformancePoint.Scorecards.Comment))</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
     </Attribute>
   </Attributes>
   <Docs>
@@ -52,6 +59,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.Add(Microsoft.PerformancePoint.Scorecards.Comment)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub Add (value As Comment)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Add(Microsoft::PerformancePoint::Scorecards::Comment ^ value);" />
+      <MemberSignature Language="F#" Value="abstract member Add : Microsoft.PerformancePoint.Scorecards.Comment -&gt; unit&#xA;override this.Add : Microsoft.PerformancePoint.Scorecards.Comment -&gt; unit" Usage="commentCollection.Add value" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -75,6 +83,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.AddRange(System.Collections.ICollection)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub AddRange (collection As ICollection)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void AddRange(System::Collections::ICollection ^ collection);" />
+      <MemberSignature Language="F#" Value="abstract member AddRange : System.Collections.ICollection -&gt; unit&#xA;override this.AddRange : System.Collections.ICollection -&gt; unit" Usage="commentCollection.AddRange collection" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -98,6 +107,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.Clone" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function Clone () As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Object ^ Clone();" />
+      <MemberSignature Language="F#" Value="abstract member Clone : unit -&gt; obj&#xA;override this.Clone : unit -&gt; obj" Usage="commentCollection.Clone " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.ICloneable.Clone</InterfaceMember>
@@ -122,6 +132,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.Contains(Microsoft.PerformancePoint.Scorecards.Comment)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function Contains (value As Comment) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool Contains(Microsoft::PerformancePoint::Scorecards::Comment ^ value);" />
+      <MemberSignature Language="F#" Value="abstract member Contains : Microsoft.PerformancePoint.Scorecards.Comment -&gt; bool&#xA;override this.Contains : Microsoft.PerformancePoint.Scorecards.Comment -&gt; bool" Usage="commentCollection.Contains value" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -146,6 +157,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.CopyTo(Microsoft.PerformancePoint.Scorecards.CommentCollection,System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub CopyTo (list As CommentCollection, index As Integer)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void CopyTo(Microsoft::PerformancePoint::Scorecards::CommentCollection ^ list, int index);" />
+      <MemberSignature Language="F#" Value="abstract member CopyTo : Microsoft.PerformancePoint.Scorecards.CommentCollection * int -&gt; unit&#xA;override this.CopyTo : Microsoft.PerformancePoint.Scorecards.CommentCollection * int -&gt; unit" Usage="commentCollection.CopyTo (list, index)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -171,6 +183,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.IndexOf(Microsoft.PerformancePoint.Scorecards.Comment)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function IndexOf (value As Comment) As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual int IndexOf(Microsoft::PerformancePoint::Scorecards::Comment ^ value);" />
+      <MemberSignature Language="F#" Value="abstract member IndexOf : Microsoft.PerformancePoint.Scorecards.Comment -&gt; int&#xA;override this.IndexOf : Microsoft.PerformancePoint.Scorecards.Comment -&gt; int" Usage="commentCollection.IndexOf value" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -194,6 +207,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 IndexOfGuid(valuetype System.Guid guid) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.IndexOfGuid(System.Guid)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual int IndexOfGuid(Guid guid);" />
+      <MemberSignature Language="F#" Value="abstract member IndexOfGuid : Guid -&gt; int&#xA;override this.IndexOfGuid : Guid -&gt; int" Usage="commentCollection.IndexOfGuid guid" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -218,6 +232,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.Insert(System.Int32,Microsoft.PerformancePoint.Scorecards.Comment)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub Insert (index As Integer, value As Comment)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Insert(int index, Microsoft::PerformancePoint::Scorecards::Comment ^ value);" />
+      <MemberSignature Language="F#" Value="abstract member Insert : int * Microsoft.PerformancePoint.Scorecards.Comment -&gt; unit&#xA;override this.Insert : int * Microsoft.PerformancePoint.Scorecards.Comment -&gt; unit" Usage="commentCollection.Insert (index, value)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -243,6 +258,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.CommentCollection.Item(System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Default Public Overridable Property Item(index As Integer) As Comment" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property Microsoft::PerformancePoint::Scorecards::Comment ^ default[int] { Microsoft::PerformancePoint::Scorecards::Comment ^ get(int index); void set(int index, Microsoft::PerformancePoint::Scorecards::Comment ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Item(int) : Microsoft.PerformancePoint.Scorecards.Comment with get, set" Usage="Microsoft.PerformancePoint.Scorecards.CommentCollection.Item" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -267,6 +283,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.ItemAt(System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function ItemAt (index As Integer) As Comment" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::PerformancePoint::Scorecards::Comment ^ ItemAt(int index);" />
+      <MemberSignature Language="F#" Value="abstract member ItemAt : int -&gt; Microsoft.PerformancePoint.Scorecards.Comment&#xA;override this.ItemAt : int -&gt; Microsoft.PerformancePoint.Scorecards.Comment" Usage="commentCollection.ItemAt index" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -291,6 +308,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.Remove(Microsoft.PerformancePoint.Scorecards.Comment)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub Remove (value As Comment)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Remove(Microsoft::PerformancePoint::Scorecards::Comment ^ value);" />
+      <MemberSignature Language="F#" Value="abstract member Remove : Microsoft.PerformancePoint.Scorecards.Comment -&gt; unit&#xA;override this.Remove : Microsoft.PerformancePoint.Scorecards.Comment -&gt; unit" Usage="commentCollection.Remove value" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -314,6 +332,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.Sort" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub Sort ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Sort();" />
+      <MemberSignature Language="F#" Value="abstract member Sort : unit -&gt; unit&#xA;override this.Sort : unit -&gt; unit" Usage="commentCollection.Sort " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -334,6 +353,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.CommentCollection.Sort(System.Collections.IComparer)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub Sort (comparer As IComparer)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Sort(System::Collections::IComparer ^ comparer);" />
+      <MemberSignature Language="F#" Value="abstract member Sort : System.Collections.IComparer -&gt; unit&#xA;override this.Sort : System.Collections.IComparer -&gt; unit" Usage="commentCollection.Sort comparer" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.PerformancePoint.Scorecards.ISortableCollection.Sort(System.Collections.IComparer)</InterfaceMember>

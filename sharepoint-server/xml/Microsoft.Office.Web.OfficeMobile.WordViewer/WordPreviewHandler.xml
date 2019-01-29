@@ -1,9 +1,10 @@
 ﻿<Type Name="WordPreviewHandler" FullName="Microsoft.Office.Web.OfficeMobile.WordViewer.WordPreviewHandler">
-  <TypeSignature Language="C#" Value="public class WordPreviewHandler : IDisposable, System.Web.IHttpAsyncHandler" />
+  <TypeSignature Language="C#" Value="public class WordPreviewHandler : IDisposable, System.Web.IHttpAsyncHandler, System.Web.IHttpHandler" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit WordPreviewHandler extends System.Object implements class System.IDisposable, class System.Web.IHttpAsyncHandler, class System.Web.IHttpHandler" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.Web.OfficeMobile.WordViewer.WordPreviewHandler" />
-  <TypeSignature Language="VB.NET" Value="Public Class WordPreviewHandler&#xA;Implements IDisposable, IHttpAsyncHandler" />
-  <TypeSignature Language="C++ CLI" Value="public ref class WordPreviewHandler : IDisposable, System::Web::IHttpAsyncHandler" />
+  <TypeSignature Language="VB.NET" Value="Public Class WordPreviewHandler&#xA;Implements IDisposable, IHttpAsyncHandler, IHttpHandler" />
+  <TypeSignature Language="C++ CLI" Value="public ref class WordPreviewHandler : IDisposable, System::Web::IHttpAsyncHandler, System::Web::IHttpHandler" />
+  <TypeSignature Language="F#" Value="type WordPreviewHandler = class&#xA;    interface IHttpAsyncHandler&#xA;    interface IHttpHandler&#xA;    interface IDisposable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.Web.OfficeMobile.WordViewer</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -17,6 +18,9 @@
     </Interface>
     <Interface>
       <InterfaceName>System.Web.IHttpAsyncHandler</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Web.IHttpHandler</InterfaceName>
     </Interface>
   </Interfaces>
   <Docs>
@@ -49,10 +53,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.OfficeMobile.WordViewer.WordPreviewHandler.BeginProcessRequest(System.Web.HttpContext,System.AsyncCallback,System.Object)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function BeginProcessRequest (context As HttpContext, cb As AsyncCallback, extraData As Object) As IAsyncResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual IAsyncResult ^ BeginProcessRequest(System::Web::HttpContext ^ context, AsyncCallback ^ cb, System::Object ^ extraData);" />
+      <MemberSignature Language="F#" Value="abstract member BeginProcessRequest : System.Web.HttpContext * AsyncCallback * obj -&gt; IAsyncResult&#xA;override this.BeginProcessRequest : System.Web.HttpContext * AsyncCallback * obj -&gt; IAsyncResult" Usage="wordPreviewHandler.BeginProcessRequest (context, cb, extraData)" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.IHttpAsyncHandler.BeginProcessRequest(System.Web.HttpContext,System.AsyncCallback,System.Object)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Web.OfficeMobile.WordViewer</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -80,6 +82,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.OfficeMobile.WordViewer.WordPreviewHandler.Dispose" />
       <MemberSignature Language="VB.NET" Value="Public Sub Dispose ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Dispose();" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : unit -&gt; unit&#xA;override this.Dispose : unit -&gt; unit" Usage="wordPreviewHandler.Dispose " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
@@ -103,10 +106,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.OfficeMobile.WordViewer.WordPreviewHandler.EndProcessRequest(System.IAsyncResult)" />
       <MemberSignature Language="VB.NET" Value="Public Sub EndProcessRequest (result As IAsyncResult)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void EndProcessRequest(IAsyncResult ^ result);" />
+      <MemberSignature Language="F#" Value="abstract member EndProcessRequest : IAsyncResult -&gt; unit&#xA;override this.EndProcessRequest : IAsyncResult -&gt; unit" Usage="wordPreviewHandler.EndProcessRequest result" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.IHttpAsyncHandler.EndProcessRequest(System.IAsyncResult)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Web.OfficeMobile.WordViewer</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -129,6 +130,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.OfficeMobile.WordViewer.WordPreviewHandler.Finalize" />
       <MemberSignature Language="VB.NET" Value="Finalize ()" />
       <MemberSignature Language="C++ CLI" Value="!WordPreviewHandler ()" />
+      <MemberSignature Language="F#" Value="override this.Finalize : unit -&gt; unit" Usage="wordPreviewHandler.Finalize " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Web.OfficeMobile.WordViewer</AssemblyName>
@@ -149,10 +151,8 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.Office.Web.OfficeMobile.WordViewer.WordPreviewHandler.IsReusable" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsReusable As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsReusable { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IsReusable : bool" Usage="Microsoft.Office.Web.OfficeMobile.WordViewer.WordPreviewHandler.IsReusable" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:System.Web.IHttpHandler.IsReusable</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Web.OfficeMobile.WordViewer</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -172,10 +172,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.OfficeMobile.WordViewer.WordPreviewHandler.ProcessRequest(System.Web.HttpContext)" />
       <MemberSignature Language="VB.NET" Value="Public Sub ProcessRequest (context As HttpContext)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void ProcessRequest(System::Web::HttpContext ^ context);" />
+      <MemberSignature Language="F#" Value="abstract member ProcessRequest : System.Web.HttpContext -&gt; unit&#xA;override this.ProcessRequest : System.Web.HttpContext -&gt; unit" Usage="wordPreviewHandler.ProcessRequest context" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Web.OfficeMobile.WordViewer</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>

@@ -1,9 +1,10 @@
 ﻿<Type Name="SPHierarchyDataSourceControl" FullName="Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl">
-  <TypeSignature Language="C#" Value="public sealed class SPHierarchyDataSourceControl : System.Web.UI.HierarchicalDataSourceControl" />
+  <TypeSignature Language="C#" Value="public sealed class SPHierarchyDataSourceControl : System.Web.UI.HierarchicalDataSourceControl, System.Web.UI.IHierarchicalDataSource" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SPHierarchyDataSourceControl extends System.Web.UI.HierarchicalDataSourceControl implements class System.Web.UI.IHierarchicalDataSource" />
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl" />
-  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SPHierarchyDataSourceControl&#xA;Inherits HierarchicalDataSourceControl" />
-  <TypeSignature Language="C++ CLI" Value="public ref class SPHierarchyDataSourceControl sealed : System::Web::UI::HierarchicalDataSourceControl" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SPHierarchyDataSourceControl&#xA;Inherits HierarchicalDataSourceControl&#xA;Implements IHierarchicalDataSource" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SPHierarchyDataSourceControl sealed : System::Web::UI::HierarchicalDataSourceControl, System::Web::UI::IHierarchicalDataSource" />
+  <TypeSignature Language="F#" Value="type SPHierarchyDataSourceControl = class&#xA;    inherit HierarchicalDataSourceControl&#xA;    interface IHierarchicalDataSource" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -11,7 +12,11 @@
   <Base>
     <BaseTypeName>System.Web.UI.HierarchicalDataSourceControl</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Web.UI.IHierarchicalDataSource</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Attributes>
     <Attribute>
       <AttributeName>System.Web.UI.NonVisualControl</AttributeName>
@@ -48,6 +53,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.#ctor(Microsoft.SharePoint.SPWeb)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (web As SPWeb)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; SPHierarchyDataSourceControl(Microsoft::SharePoint::SPWeb ^ web);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl : Microsoft.SharePoint.SPWeb -&gt; Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl" Usage="new Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl web" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -68,10 +74,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.GetHierarchicalView(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetHierarchicalView (viewName As String) As HierarchicalDataSourceView" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override System::Web::UI::HierarchicalDataSourceView ^ GetHierarchicalView(System::String ^ viewName);" />
+      <MemberSignature Language="F#" Value="abstract member GetHierarchicalView : string -&gt; System.Web.UI.HierarchicalDataSourceView&#xA;override this.GetHierarchicalView : string -&gt; System.Web.UI.HierarchicalDataSourceView" Usage="sPHierarchyDataSourceControl.GetHierarchicalView viewName" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -95,6 +99,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.GetHierarchicalViewPublic(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetHierarchicalViewPublic (viewName As String) As HierarchicalDataSourceView" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Web::UI::HierarchicalDataSourceView ^ GetHierarchicalViewPublic(System::String ^ viewName);" />
+      <MemberSignature Language="F#" Value="member this.GetHierarchicalViewPublic : string -&gt; System.Web.UI.HierarchicalDataSourceView" Usage="sPHierarchyDataSourceControl.GetHierarchicalViewPublic viewName" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -119,6 +124,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.IncludeDiscussionFolders" />
       <MemberSignature Language="VB.NET" Value="Public Property IncludeDiscussionFolders As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IncludeDiscussionFolders { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.IncludeDiscussionFolders : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.IncludeDiscussionFolders" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -139,6 +145,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.OnLoad(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overrides Sub OnLoad (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; override void OnLoad(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="abstract member OnLoad : EventArgs -&gt; unit&#xA;override this.OnLoad : EventArgs -&gt; unit" Usage="sPHierarchyDataSourceControl.OnLoad e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -162,6 +169,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.RootContextObject" />
       <MemberSignature Language="VB.NET" Value="Public Property RootContextObject As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ RootContextObject { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.RootContextObject : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.RootContextObject" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -182,6 +190,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.RootListId" />
       <MemberSignature Language="VB.NET" Value="Public Property RootListId As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ RootListId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.RootListId : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.RootListId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -202,6 +211,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.RootWebId" />
       <MemberSignature Language="VB.NET" Value="Public Property RootWebId As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ RootWebId { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.RootWebId : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.RootWebId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -222,6 +232,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.ShowDocLibChildren" />
       <MemberSignature Language="VB.NET" Value="Public Property ShowDocLibChildren As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShowDocLibChildren { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.ShowDocLibChildren : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.ShowDocLibChildren" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -242,6 +253,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.ShowFolderChildren" />
       <MemberSignature Language="VB.NET" Value="Public Property ShowFolderChildren As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShowFolderChildren { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.ShowFolderChildren : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.ShowFolderChildren" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -262,6 +274,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.ShowListChildren" />
       <MemberSignature Language="VB.NET" Value="Public Property ShowListChildren As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShowListChildren { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.ShowListChildren : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.ShowListChildren" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -282,6 +295,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.ShowWebChildren" />
       <MemberSignature Language="VB.NET" Value="Public Property ShowWebChildren As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool ShowWebChildren { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.ShowWebChildren : bool with get, set" Usage="Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.ShowWebChildren" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -302,6 +316,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.Web" />
       <MemberSignature Language="VB.NET" Value="Public Property Web As SPWeb" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPWeb ^ Web { Microsoft::SharePoint::SPWeb ^ get(); void set(Microsoft::SharePoint::SPWeb ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Web : Microsoft.SharePoint.SPWeb with get, set" Usage="Microsoft.SharePoint.WebControls.SPHierarchyDataSourceControl.Web" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

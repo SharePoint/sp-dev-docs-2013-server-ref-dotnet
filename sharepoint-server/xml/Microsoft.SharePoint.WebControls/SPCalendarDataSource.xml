@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.WebControls.SPCalendarDataSource" />
   <TypeSignature Language="VB.NET" Value="Public Class SPCalendarDataSource&#xA;Inherits Control&#xA;Implements IDataSource" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPCalendarDataSource : System::Web::UI::Control, System::Web::UI::IDataSource" />
+  <TypeSignature Language="F#" Value="type SPCalendarDataSource = class&#xA;    inherit Control&#xA;    interface IDataSource" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -55,10 +56,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPCalendarDataSource.GetView(System.String)" />
       <MemberSignature Language="VB.NET" Value="Protected Function GetView (viewName As String) As DataSourceView" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; System::Web::UI::DataSourceView ^ GetView(System::String ^ viewName);" />
+      <MemberSignature Language="F#" Value="member this.GetView : string -&gt; System.Web.UI.DataSourceView" Usage="sPCalendarDataSource.GetView viewName" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IDataSource.GetView(System.String)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -82,10 +81,8 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPCalendarDataSource.GetViewNames" />
       <MemberSignature Language="VB.NET" Value="Protected Function GetViewNames () As ICollection" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; System::Collections::ICollection ^ GetViewNames();" />
+      <MemberSignature Language="F#" Value="member this.GetViewNames : unit -&gt; System.Collections.ICollection" Usage="sPCalendarDataSource.GetViewNames " />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IDataSource.GetViewNames</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -106,6 +103,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPCalendarDataSource.List" />
       <MemberSignature Language="VB.NET" Value="Public Property List As SPList" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPList ^ List { Microsoft::SharePoint::SPList ^ get(); void set(Microsoft::SharePoint::SPList ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.List : Microsoft.SharePoint.SPList with get, set" Usage="Microsoft.SharePoint.WebControls.SPCalendarDataSource.List" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -126,6 +124,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.WebControls.SPCalendarDataSource.RaiseDataSourceChangedEvent(System.EventArgs)" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Sub RaiseDataSourceChangedEvent (e As EventArgs)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void RaiseDataSourceChangedEvent(EventArgs ^ e);" />
+      <MemberSignature Language="F#" Value="abstract member RaiseDataSourceChangedEvent : EventArgs -&gt; unit&#xA;override this.RaiseDataSourceChangedEvent : EventArgs -&gt; unit" Usage="sPCalendarDataSource.RaiseDataSourceChangedEvent e" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -149,6 +148,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPCalendarDataSource.SelectedDate" />
       <MemberSignature Language="VB.NET" Value="Public Property SelectedDate As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ SelectedDate { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.SelectedDate : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPCalendarDataSource.SelectedDate" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -163,27 +163,6 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Web.UI.IDataSource.DataSourceChanged">
-      <MemberSignature Language="C#" Value="event EventHandler System.Web.UI.IDataSource.DataSourceChanged;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler System.Web.UI.IDataSource.DataSourceChanged" />
-      <MemberSignature Language="DocId" Value="E:Microsoft.SharePoint.WebControls.SPCalendarDataSource.System#Web#UI#IDataSource#DataSourceChanged" />
-      <MemberSignature Language="VB.NET" Value="Custom Event DataSourceChanged As EventHandler Implements System.Web.UI.IDataSource" />
-      <MemberType>Event</MemberType>
-      <Implements>
-        <InterfaceMember>E:System.Web.UI.IDataSource.DataSourceChanged</InterfaceMember>
-      </Implements>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.SharePoint</AssemblyName>
-        <AssemblyVersion>15.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.EventHandler</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
     <Member MemberName="System.Web.UI.IDataSource.GetView">
       <MemberSignature Language="C#" Value="System.Web.UI.DataSourceView IDataSource.GetView (string viewName);" />
       <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Web.UI.DataSourceView System.Web.UI.IDataSource.GetView(string viewName) cil managed" />
@@ -191,9 +170,6 @@
       <MemberSignature Language="VB.NET" Value="Function GetView (viewName As String) As DataSourceView Implements IDataSource.GetView" />
       <MemberSignature Language="C++ CLI" Value=" virtual System::Web::UI::DataSourceView ^ System.Web.UI.IDataSource.GetView(System::String ^ viewName) = System::Web::UI::IDataSource::GetView;" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IDataSource.GetView(System.String)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -218,9 +194,6 @@
       <MemberSignature Language="VB.NET" Value="Function GetViewNames () As ICollection Implements IDataSource.GetViewNames" />
       <MemberSignature Language="C++ CLI" Value=" virtual System::Collections::ICollection ^ System.Web.UI.IDataSource.GetViewNames() = System::Web::UI::IDataSource::GetViewNames;" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:System.Web.UI.IDataSource.GetViewNames</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
         <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -241,6 +214,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPCalendarDataSource.Url" />
       <MemberSignature Language="VB.NET" Value="Public Property Url As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Url { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Url : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPCalendarDataSource.Url" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -261,6 +235,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPCalendarDataSource.View" />
       <MemberSignature Language="VB.NET" Value="Public Property View As SPView" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPView ^ View { Microsoft::SharePoint::SPView ^ get(); void set(Microsoft::SharePoint::SPView ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.View : Microsoft.SharePoint.SPView with get, set" Usage="Microsoft.SharePoint.WebControls.SPCalendarDataSource.View" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -281,6 +256,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.WebControls.SPCalendarDataSource.ViewType" />
       <MemberSignature Language="VB.NET" Value="Public Property ViewType As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ViewType { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.ViewType : string with get, set" Usage="Microsoft.SharePoint.WebControls.SPCalendarDataSource.ViewType" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
