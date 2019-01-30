@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.RecordsManagement.Internal.AddToHold" />
   <TypeSignature Language="VB.NET" Value="Public Class AddToHold&#xA;Implements IDisposable, IProcessAndSendEmail" />
   <TypeSignature Language="C++ CLI" Value="public ref class AddToHold : IDisposable, Microsoft::Office::RecordsManagement::SearchAndProcess::IProcessAndSendEmail" />
+  <TypeSignature Language="F#" Value="type AddToHold = class&#xA;    interface IProcessAndSendEmail&#xA;    interface IProcess&#xA;    interface IDisposable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.Policy</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -47,6 +48,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Internal.AddToHold.Dispose" />
       <MemberSignature Language="VB.NET" Value="Public Sub Dispose ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Dispose();" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : unit -&gt; unit&#xA;override this.Dispose : unit -&gt; unit" Usage="addToHold.Dispose " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
@@ -70,6 +72,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Internal.AddToHold.EndEmail(System.Text.StringBuilder,System.String[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub EndEmail (sbEmail As StringBuilder, args As String())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void EndEmail(System::Text::StringBuilder ^ sbEmail, cli::array &lt;System::String ^&gt; ^ args);" />
+      <MemberSignature Language="F#" Value="abstract member EndEmail : System.Text.StringBuilder * string[] -&gt; unit&#xA;override this.EndEmail : System.Text.StringBuilder * string[] -&gt; unit" Usage="addToHold.EndEmail (sbEmail, args)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.RecordsManagement.SearchAndProcess.IProcessAndSendEmail.EndEmail(System.Text.StringBuilder,System.String[])</InterfaceMember>
@@ -98,6 +101,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Internal.AddToHold.ProcessItem(Microsoft.SharePoint.SPListItem,System.String[],System.String@)" />
       <MemberSignature Language="VB.NET" Value="Public Function ProcessItem (item As SPListItem, rgstrOtherArgs As String(), ByRef strMessage As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool ProcessItem(Microsoft::SharePoint::SPListItem ^ item, cli::array &lt;System::String ^&gt; ^ rgstrOtherArgs, [Runtime::InteropServices::Out] System::String ^ % strMessage);" />
+      <MemberSignature Language="F#" Value="abstract member ProcessItem : Microsoft.SharePoint.SPListItem * string[] *  -&gt; bool&#xA;override this.ProcessItem : Microsoft.SharePoint.SPListItem * string[] *  -&gt; bool" Usage="addToHold.ProcessItem (item, rgstrOtherArgs, strMessage)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.RecordsManagement.SearchAndProcess.IProcess.ProcessItem(Microsoft.SharePoint.SPListItem,System.String[],System.String@)</InterfaceMember>
@@ -112,7 +116,7 @@
       <Parameters>
         <Parameter Name="item" Type="Microsoft.SharePoint.SPListItem" />
         <Parameter Name="rgstrOtherArgs" Type="System.String[]" />
-        <Parameter Name="strMessage" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="strMessage" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
         <param name="item">To be added.</param>
@@ -129,6 +133,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.RecordsManagement.Internal.AddToHold.StartEmail(System.Text.StringBuilder,System.String[])" />
       <MemberSignature Language="VB.NET" Value="Public Sub StartEmail (sbEmail As StringBuilder, args As String())" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void StartEmail(System::Text::StringBuilder ^ sbEmail, cli::array &lt;System::String ^&gt; ^ args);" />
+      <MemberSignature Language="F#" Value="abstract member StartEmail : System.Text.StringBuilder * string[] -&gt; unit&#xA;override this.StartEmail : System.Text.StringBuilder * string[] -&gt; unit" Usage="addToHold.StartEmail (sbEmail, args)" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.Office.RecordsManagement.SearchAndProcess.IProcessAndSendEmail.StartEmail(System.Text.StringBuilder,System.String[])</InterfaceMember>

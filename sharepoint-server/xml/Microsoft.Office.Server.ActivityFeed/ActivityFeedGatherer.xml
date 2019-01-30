@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.Server.ActivityFeed.ActivityFeedGatherer" />
   <TypeSignature Language="VB.NET" Value="Public Class ActivityFeedGatherer" />
   <TypeSignature Language="C++ CLI" Value="public ref class ActivityFeedGatherer" />
+  <TypeSignature Language="F#" Value="type ActivityFeedGatherer = class" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -28,6 +29,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.ActivityFeed.ActivityFeedGatherer.BatchWriteActivityEvents(System.Collections.Generic.List{Microsoft.Office.Server.ActivityFeed.ActivityEvent},System.Int32,System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub BatchWriteActivityEvents (events As List(Of ActivityEvent), startIndex As Integer, numToWrite As Integer)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void BatchWriteActivityEvents(System::Collections::Generic::List&lt;Microsoft::Office::Server::ActivityFeed::ActivityEvent ^&gt; ^ events, int startIndex, int numToWrite);" />
+      <MemberSignature Language="F#" Value="static member BatchWriteActivityEvents : System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.ActivityEvent&gt; * int * int -&gt; unit" Usage="Microsoft.Office.Server.ActivityFeed.ActivityFeedGatherer.BatchWriteActivityEvents (events, startIndex, numToWrite)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
@@ -55,6 +57,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.ActivityFeed.ActivityFeedGatherer.CollectActivityEventsToConsolidate(System.Collections.Generic.Dictionary{System.Int64,System.Collections.Generic.List{Microsoft.Office.Server.ActivityFeed.ActivityEvent}},System.Collections.Generic.List{Microsoft.Office.Server.ActivityFeed.ActivityEvent}@)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub CollectActivityEventsToConsolidate (eventsConsolidatedPerOwner As Dictionary(Of Long, List(Of ActivityEvent)), ByRef eventsConsolidated As List(Of ActivityEvent))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void CollectActivityEventsToConsolidate(System::Collections::Generic::Dictionary&lt;long, System::Collections::Generic::List&lt;Microsoft::Office::Server::ActivityFeed::ActivityEvent ^&gt; ^&gt; ^ eventsConsolidatedPerOwner, [Runtime::InteropServices::Out] System::Collections::Generic::List&lt;Microsoft::Office::Server::ActivityFeed::ActivityEvent ^&gt; ^ % eventsConsolidated);" />
+      <MemberSignature Language="F#" Value="static member CollectActivityEventsToConsolidate : System.Collections.Generic.Dictionary&lt;int64, System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.ActivityEvent&gt;&gt; *  -&gt; unit" Usage="Microsoft.Office.Server.ActivityFeed.ActivityFeedGatherer.CollectActivityEventsToConsolidate (eventsConsolidatedPerOwner, eventsConsolidated)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
@@ -65,7 +68,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="eventsConsolidatedPerOwner" Type="System.Collections.Generic.Dictionary&lt;System.Int64,System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.ActivityEvent&gt;&gt;" />
-        <Parameter Name="eventsConsolidated" Type="System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.ActivityEvent&gt;&amp;" RefType="out" />
+        <Parameter Name="eventsConsolidated" Type="System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.ActivityEvent&gt;" RefType="out" />
       </Parameters>
       <Docs>
         <param name="eventsConsolidatedPerOwner">A dictionary consisting of owner record identifiers and <b>ActivityEvent</b> objects.</param>
@@ -80,6 +83,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.ActivityFeed.ActivityFeedGatherer.GetUsersColleaguesAndRights(Microsoft.Office.Server.ActivityFeed.ActivityManager,System.Collections.Generic.List{System.Int64},System.Collections.Generic.Dictionary{System.Int64,Microsoft.Office.Server.ActivityFeed.MinimalPerson}@,System.Collections.Generic.Dictionary{System.Int64,System.Collections.Generic.List{Microsoft.Office.Server.ActivityFeed.MinimalPerson}}@)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub GetUsersColleaguesAndRights (am As ActivityManager, bulkRecordIds As List(Of Long), ByRef owners As Dictionary(Of Long, MinimalPerson), ByRef colleaguesOfOwners As Dictionary(Of Long, List(Of MinimalPerson)))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void GetUsersColleaguesAndRights(Microsoft::Office::Server::ActivityFeed::ActivityManager ^ am, System::Collections::Generic::List&lt;long&gt; ^ bulkRecordIds, [Runtime::InteropServices::Out] System::Collections::Generic::Dictionary&lt;long, Microsoft::Office::Server::ActivityFeed::MinimalPerson ^&gt; ^ % owners, [Runtime::InteropServices::Out] System::Collections::Generic::Dictionary&lt;long, System::Collections::Generic::List&lt;Microsoft::Office::Server::ActivityFeed::MinimalPerson ^&gt; ^&gt; ^ % colleaguesOfOwners);" />
+      <MemberSignature Language="F#" Value="static member GetUsersColleaguesAndRights : Microsoft.Office.Server.ActivityFeed.ActivityManager * System.Collections.Generic.List&lt;int64&gt; *  *  -&gt; unit" Usage="Microsoft.Office.Server.ActivityFeed.ActivityFeedGatherer.GetUsersColleaguesAndRights (am, bulkRecordIds, owners, colleaguesOfOwners)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
@@ -91,8 +95,8 @@
       <Parameters>
         <Parameter Name="am" Type="Microsoft.Office.Server.ActivityFeed.ActivityManager" />
         <Parameter Name="bulkRecordIds" Type="System.Collections.Generic.List&lt;System.Int64&gt;" />
-        <Parameter Name="owners" Type="System.Collections.Generic.Dictionary&lt;System.Int64,Microsoft.Office.Server.ActivityFeed.MinimalPerson&gt;&amp;" RefType="out" />
-        <Parameter Name="colleaguesOfOwners" Type="System.Collections.Generic.Dictionary&lt;System.Int64,System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.MinimalPerson&gt;&gt;&amp;" RefType="out" />
+        <Parameter Name="owners" Type="System.Collections.Generic.Dictionary&lt;System.Int64,Microsoft.Office.Server.ActivityFeed.MinimalPerson&gt;" RefType="out" />
+        <Parameter Name="colleaguesOfOwners" Type="System.Collections.Generic.Dictionary&lt;System.Int64,System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.MinimalPerson&gt;&gt;" RefType="out" />
       </Parameters>
       <Docs>
         <param name="am">The <b>ActivityManager</b> associated with this gatherer.</param>
@@ -109,6 +113,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Server.ActivityFeed.ActivityFeedGatherer.MulticastActivityEvents(Microsoft.Office.Server.ActivityFeed.ActivityManager,System.Collections.Generic.List{Microsoft.Office.Server.ActivityFeed.ActivityEvent},System.Collections.Generic.Dictionary{System.Int64,System.Collections.Generic.List{Microsoft.Office.Server.ActivityFeed.MinimalPerson}},System.Collections.Generic.Dictionary{System.Int64,System.Collections.Generic.List{Microsoft.Office.Server.ActivityFeed.ActivityEvent}}@)" />
       <MemberSignature Language="VB.NET" Value="Public Shared Sub MulticastActivityEvents (objManager As ActivityManager, eventsToTryToMulticast As List(Of ActivityEvent), colleaguesOfOwners As Dictionary(Of Long, List(Of MinimalPerson)), ByRef eventsConsolidatedPerOwner As Dictionary(Of Long, List(Of ActivityEvent)))" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; static void MulticastActivityEvents(Microsoft::Office::Server::ActivityFeed::ActivityManager ^ objManager, System::Collections::Generic::List&lt;Microsoft::Office::Server::ActivityFeed::ActivityEvent ^&gt; ^ eventsToTryToMulticast, System::Collections::Generic::Dictionary&lt;long, System::Collections::Generic::List&lt;Microsoft::Office::Server::ActivityFeed::MinimalPerson ^&gt; ^&gt; ^ colleaguesOfOwners, [Runtime::InteropServices::Out] System::Collections::Generic::Dictionary&lt;long, System::Collections::Generic::List&lt;Microsoft::Office::Server::ActivityFeed::ActivityEvent ^&gt; ^&gt; ^ % eventsConsolidatedPerOwner);" />
+      <MemberSignature Language="F#" Value="static member MulticastActivityEvents : Microsoft.Office.Server.ActivityFeed.ActivityManager * System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.ActivityEvent&gt; * System.Collections.Generic.Dictionary&lt;int64, System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.MinimalPerson&gt;&gt; *  -&gt; unit" Usage="Microsoft.Office.Server.ActivityFeed.ActivityFeedGatherer.MulticastActivityEvents (objManager, eventsToTryToMulticast, colleaguesOfOwners, eventsConsolidatedPerOwner)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.UserProfiles</AssemblyName>
@@ -121,7 +126,7 @@
         <Parameter Name="objManager" Type="Microsoft.Office.Server.ActivityFeed.ActivityManager" />
         <Parameter Name="eventsToTryToMulticast" Type="System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.ActivityEvent&gt;" />
         <Parameter Name="colleaguesOfOwners" Type="System.Collections.Generic.Dictionary&lt;System.Int64,System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.MinimalPerson&gt;&gt;" />
-        <Parameter Name="eventsConsolidatedPerOwner" Type="System.Collections.Generic.Dictionary&lt;System.Int64,System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.ActivityEvent&gt;&gt;&amp;" RefType="out" />
+        <Parameter Name="eventsConsolidatedPerOwner" Type="System.Collections.Generic.Dictionary&lt;System.Int64,System.Collections.Generic.List&lt;Microsoft.Office.Server.ActivityFeed.ActivityEvent&gt;&gt;" RefType="out" />
       </Parameters>
       <Docs>
         <param name="objManager">The <b>ActivityManager</b> associated with this gatherer.</param>

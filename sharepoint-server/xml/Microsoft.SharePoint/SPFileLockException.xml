@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.SPFileLockException" />
   <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SPFileLockException&#xA;Inherits SPException" />
   <TypeSignature Language="C++ CLI" Value="public ref class SPFileLockException sealed : Microsoft::SharePoint::SPException" />
+  <TypeSignature Language="F#" Value="type SPFileLockException = class&#xA;    inherit SPException" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -12,6 +13,11 @@
     <BaseTypeName>Microsoft.SharePoint.SPException</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
@@ -23,6 +29,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPFileLockException.#ctor(Microsoft.SharePoint.SPFile,System.String,System.Int32,Microsoft.SharePoint.SPFileLockExceptionType)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (file As SPFile, message As String, errorCode As Integer, type As SPFileLockExceptionType)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; SPFileLockException(Microsoft::SharePoint::SPFile ^ file, System::String ^ message, int errorCode, Microsoft::SharePoint::SPFileLockExceptionType type);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.SPFileLockException : Microsoft.SharePoint.SPFile * string * int * Microsoft.SharePoint.SPFileLockExceptionType -&gt; Microsoft.SharePoint.SPFileLockException" Usage="new Microsoft.SharePoint.SPFileLockException (file, message, errorCode, type)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -49,6 +56,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPFileLockException.#ctor(System.String,System.Int32,Microsoft.SharePoint.SPFileLockExceptionType,Microsoft.SharePoint.SPFile.SPLockType,System.String,System.DateTime,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (message As String, errorCode As Integer, type As SPFileLockExceptionType, lockType As SPFile.SPLockType, lockUser As String, lockExpires As DateTime, lockId As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; SPFileLockException(System::String ^ message, int errorCode, Microsoft::SharePoint::SPFileLockExceptionType type, Microsoft::SharePoint::SPFile::SPLockType lockType, System::String ^ lockUser, DateTime lockExpires, System::String ^ lockId);" />
+      <MemberSignature Language="F#" Value="new Microsoft.SharePoint.SPFileLockException : string * int * Microsoft.SharePoint.SPFileLockExceptionType * Microsoft.SharePoint.SPFile.SPLockType * string * DateTime * string -&gt; Microsoft.SharePoint.SPFileLockException" Usage="new Microsoft.SharePoint.SPFileLockException (message, errorCode, type, lockType, lockUser, lockExpires, lockId)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -80,6 +88,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo serializationInfo, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPFileLockException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override void GetObjectData(System::Runtime::Serialization::SerializationInfo ^ serializationInfo, System::Runtime::Serialization::StreamingContext context);" />
+      <MemberSignature Language="F#" Value="override this.GetObjectData : System.Runtime.Serialization.SerializationInfo * System.Runtime.Serialization.StreamingContext -&gt; unit" Usage="sPFileLockException.GetObjectData (serializationInfo, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -105,6 +114,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPFileLockException.LockedBy" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LockedBy As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LockedBy { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.LockedBy : string" Usage="Microsoft.SharePoint.SPFileLockException.LockedBy" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -125,6 +135,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPFileLockException.LockExpires" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LockExpires As DateTime" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property DateTime LockExpires { DateTime get(); };" />
+      <MemberSignature Language="F#" Value="member this.LockExpires : DateTime" Usage="Microsoft.SharePoint.SPFileLockException.LockExpires" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -145,6 +156,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPFileLockException.LockId" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LockId As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ LockId { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.LockId : string" Usage="Microsoft.SharePoint.SPFileLockException.LockId" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -165,6 +177,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPFileLockException.LockType" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property LockType As SPFile.SPLockType" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPFile::SPLockType LockType { Microsoft::SharePoint::SPFile::SPLockType get(); };" />
+      <MemberSignature Language="F#" Value="member this.LockType : Microsoft.SharePoint.SPFile.SPLockType" Usage="Microsoft.SharePoint.SPFileLockException.LockType" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -185,6 +198,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPFileLockException.Type" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Type As SPFileLockExceptionType" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPFileLockExceptionType Type { Microsoft::SharePoint::SPFileLockExceptionType get(); };" />
+      <MemberSignature Language="F#" Value="member this.Type : Microsoft.SharePoint.SPFileLockExceptionType" Usage="Microsoft.SharePoint.SPFileLockException.Type" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

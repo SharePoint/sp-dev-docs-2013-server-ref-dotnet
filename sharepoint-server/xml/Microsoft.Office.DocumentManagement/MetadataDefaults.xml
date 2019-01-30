@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.DocumentManagement.MetadataDefaults" />
   <TypeSignature Language="VB.NET" Value="Public Class MetadataDefaults" />
   <TypeSignature Language="C++ CLI" Value="public ref class MetadataDefaults" />
+  <TypeSignature Language="F#" Value="type MetadataDefaults = class" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -29,6 +30,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.#ctor(Microsoft.SharePoint.SPList)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (list As SPList)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; MetadataDefaults(Microsoft::SharePoint::SPList ^ list);" />
+      <MemberSignature Language="F#" Value="new Microsoft.Office.DocumentManagement.MetadataDefaults : Microsoft.SharePoint.SPList -&gt; Microsoft.Office.DocumentManagement.MetadataDefaults" Usage="new Microsoft.Office.DocumentManagement.MetadataDefaults list" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -60,6 +62,7 @@ MetadataDefaults defaults = MetadataDefaults(list);</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.#ctor(System.String,Microsoft.SharePoint.SPWeb)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (listPath As String, currentWeb As SPWeb)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; MetadataDefaults(System::String ^ listPath, Microsoft::SharePoint::SPWeb ^ currentWeb);" />
+      <MemberSignature Language="F#" Value="new Microsoft.Office.DocumentManagement.MetadataDefaults : string * Microsoft.SharePoint.SPWeb -&gt; Microsoft.Office.DocumentManagement.MetadataDefaults" Usage="new Microsoft.Office.DocumentManagement.MetadataDefaults (listPath, currentWeb)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -92,6 +95,7 @@ MetadataDefaults defaults = MetadataDefaults("/Documents", web);</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.ApplyDefaults(Microsoft.SharePoint.SPListItem)" />
       <MemberSignature Language="VB.NET" Value="Public Function ApplyDefaults (item As SPListItem) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool ApplyDefaults(Microsoft::SharePoint::SPListItem ^ item);" />
+      <MemberSignature Language="F#" Value="member this.ApplyDefaults : Microsoft.SharePoint.SPListItem -&gt; bool" Usage="metadataDefaults.ApplyDefaults item" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -143,6 +147,7 @@ item.SystemUpdate(false);</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.GetDefaultMetadata(Microsoft.SharePoint.SPFolder)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetDefaultMetadata (folder As SPFolder) As Pair()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::Web::UI::Pair ^&gt; ^ GetDefaultMetadata(Microsoft::SharePoint::SPFolder ^ folder);" />
+      <MemberSignature Language="F#" Value="member this.GetDefaultMetadata : Microsoft.SharePoint.SPFolder -&gt; System.Web.UI.Pair[]" Usage="metadataDefaults.GetDefaultMetadata folder" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -178,6 +183,7 @@ Pair[] fieldDefaults = defaults.GetDefaultMetadata(folder);</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.GetDefaultMetadata(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetDefaultMetadata (folderPath As String) As Pair()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; cli::array &lt;System::Web::UI::Pair ^&gt; ^ GetDefaultMetadata(System::String ^ folderPath);" />
+      <MemberSignature Language="F#" Value="member this.GetDefaultMetadata : string -&gt; System.Web.UI.Pair[]" Usage="metadataDefaults.GetDefaultMetadata folderPath" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -213,6 +219,7 @@ Pair[] fieldDefaults = defaults.GetDefaultMetadata("/Documents/AdventureWorks");
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.GetFieldDefault(Microsoft.SharePoint.SPFolder,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetFieldDefault (folder As SPFolder, fieldName As String) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetFieldDefault(Microsoft::SharePoint::SPFolder ^ folder, System::String ^ fieldName);" />
+      <MemberSignature Language="F#" Value="member this.GetFieldDefault : Microsoft.SharePoint.SPFolder * string -&gt; string" Usage="metadataDefaults.GetFieldDefault (folder, fieldName)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -247,6 +254,7 @@ string defaultValue = defaults.GetFieldDefault(folder, "Title");</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.GetFieldDefault(System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetFieldDefault (folderPath As String, fieldName As String) As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; System::String ^ GetFieldDefault(System::String ^ folderPath, System::String ^ fieldName);" />
+      <MemberSignature Language="F#" Value="member this.GetFieldDefault : string * string -&gt; string" Usage="metadataDefaults.GetFieldDefault (folderPath, fieldName)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -281,6 +289,7 @@ string defaultValue = defaults.GetFieldDefault("/Documents/AdventureWorks", "Tit
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.RemoveAllDefaults" />
       <MemberSignature Language="VB.NET" Value="Public Sub RemoveAllDefaults ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemoveAllDefaults();" />
+      <MemberSignature Language="F#" Value="member this.RemoveAllDefaults : unit -&gt; unit" Usage="metadataDefaults.RemoveAllDefaults " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -308,6 +317,7 @@ defaults.Update();</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.RemoveAllFieldDefaults(Microsoft.SharePoint.SPFolder)" />
       <MemberSignature Language="VB.NET" Value="Public Function RemoveAllFieldDefaults (folder As SPFolder) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RemoveAllFieldDefaults(Microsoft::SharePoint::SPFolder ^ folder);" />
+      <MemberSignature Language="F#" Value="member this.RemoveAllFieldDefaults : Microsoft.SharePoint.SPFolder -&gt; bool" Usage="metadataDefaults.RemoveAllFieldDefaults folder" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -343,6 +353,7 @@ defaults.Update();</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.RemoveAllFieldDefaults(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function RemoveAllFieldDefaults (folderPath As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RemoveAllFieldDefaults(System::String ^ folderPath);" />
+      <MemberSignature Language="F#" Value="member this.RemoveAllFieldDefaults : string -&gt; bool" Usage="metadataDefaults.RemoveAllFieldDefaults folderPath" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -379,6 +390,7 @@ defaults.Update();</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.RemoveFieldDefault(Microsoft.SharePoint.SPFolder,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function RemoveFieldDefault (folder As SPFolder, fieldName As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RemoveFieldDefault(Microsoft::SharePoint::SPFolder ^ folder, System::String ^ fieldName);" />
+      <MemberSignature Language="F#" Value="member this.RemoveFieldDefault : Microsoft.SharePoint.SPFolder * string -&gt; bool" Usage="metadataDefaults.RemoveFieldDefault (folder, fieldName)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -417,6 +429,7 @@ defaults.Update();
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.RemoveFieldDefault(System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function RemoveFieldDefault (folderPath As String, fieldName As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool RemoveFieldDefault(System::String ^ folderPath, System::String ^ fieldName);" />
+      <MemberSignature Language="F#" Value="member this.RemoveFieldDefault : string * string -&gt; bool" Usage="metadataDefaults.RemoveFieldDefault (folderPath, fieldName)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -453,6 +466,7 @@ defaults.Update();</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.SetFieldDefault(Microsoft.SharePoint.SPFolder,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function SetFieldDefault (folder As SPFolder, fieldName As String, value As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool SetFieldDefault(Microsoft::SharePoint::SPFolder ^ folder, System::String ^ fieldName, System::String ^ value);" />
+      <MemberSignature Language="F#" Value="member this.SetFieldDefault : Microsoft.SharePoint.SPFolder * string * string -&gt; bool" Usage="metadataDefaults.SetFieldDefault (folder, fieldName, value)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -496,6 +510,7 @@ defaults.Update();</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.SetFieldDefault(System.String,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function SetFieldDefault (folderPath As String, fieldName As String, value As String) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool SetFieldDefault(System::String ^ folderPath, System::String ^ fieldName, System::String ^ value);" />
+      <MemberSignature Language="F#" Value="member this.SetFieldDefault : string * string * string -&gt; bool" Usage="metadataDefaults.SetFieldDefault (folderPath, fieldName, value)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>
@@ -537,6 +552,7 @@ defaults.Update();</para>
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.DocumentManagement.MetadataDefaults.Update" />
       <MemberSignature Language="VB.NET" Value="Public Sub Update ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Update();" />
+      <MemberSignature Language="F#" Value="member this.Update : unit -&gt; unit" Usage="metadataDefaults.Update " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.DocumentManagement</AssemblyName>

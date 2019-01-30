@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.PerformancePoint.Scorecards.PropertyBag" />
   <TypeSignature Language="VB.NET" Value="Public Class PropertyBag&#xA;Implements ICloneable, IDiffable" />
   <TypeSignature Language="C++ CLI" Value="public ref class PropertyBag : ICloneable, Microsoft::PerformancePoint::Scorecards::IDiffable" />
+  <TypeSignature Language="F#" Value="type PropertyBag = class&#xA;    interface ICloneable&#xA;    interface IDiffable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -19,6 +20,11 @@
       <InterfaceName>System.ICloneable</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
@@ -47,6 +53,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.PropertyBag.#ctor(Microsoft.PerformancePoint.Scorecards.PropertyBag)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (template As PropertyBag)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; PropertyBag(Microsoft::PerformancePoint::Scorecards::PropertyBag ^ template);" />
+      <MemberSignature Language="F#" Value="new Microsoft.PerformancePoint.Scorecards.PropertyBag : Microsoft.PerformancePoint.Scorecards.PropertyBag -&gt; Microsoft.PerformancePoint.Scorecards.PropertyBag" Usage="new Microsoft.PerformancePoint.Scorecards.PropertyBag template" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -67,6 +74,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.PropertyBag.Clone" />
       <MemberSignature Language="VB.NET" Value="Public Function Clone () As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Object ^ Clone();" />
+      <MemberSignature Language="F#" Value="abstract member Clone : unit -&gt; obj&#xA;override this.Clone : unit -&gt; obj" Usage="propertyBag.Clone " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.ICloneable.Clone</InterfaceMember>
@@ -91,6 +99,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.PropertyBag.Diff(System.Object)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Function Diff (oldValue As Object) As DiffCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::PerformancePoint::Scorecards::DiffCollection ^ Diff(System::Object ^ oldValue);" />
+      <MemberSignature Language="F#" Value="abstract member Diff : obj -&gt; Microsoft.PerformancePoint.Scorecards.DiffCollection&#xA;override this.Diff : obj -&gt; Microsoft.PerformancePoint.Scorecards.DiffCollection" Usage="propertyBag.Diff oldValue" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.PerformancePoint.Scorecards.IDiffable.Diff(System.Object)</InterfaceMember>
@@ -118,6 +127,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.PropertyBag.Item(System.String)" />
       <MemberSignature Language="VB.NET" Value="Default Public Property Item(key As String) As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Object ^ default[System::String ^] { System::Object ^ get(System::String ^ key); void set(System::String ^ key, System::Object ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Item(string) : obj with get, set" Usage="Microsoft.PerformancePoint.Scorecards.PropertyBag.Item" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -147,6 +157,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.PropertyBag.Keys" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Keys As List(Of String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::List&lt;System::String ^&gt; ^ Keys { System::Collections::Generic::List&lt;System::String ^&gt; ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Keys : System.Collections.Generic.List&lt;string&gt;" Usage="Microsoft.PerformancePoint.Scorecards.PropertyBag.Keys" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -172,6 +183,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.PropertyBag.TryGetValue(System.String,System.Object@)" />
       <MemberSignature Language="VB.NET" Value="Public Function TryGetValue (key As String, ByRef value As Object) As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool TryGetValue(System::String ^ key, [Runtime::InteropServices::Out] System::Object ^ % value);" />
+      <MemberSignature Language="F#" Value="member this.TryGetValue : string *  -&gt; bool" Usage="propertyBag.TryGetValue (key, value)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -182,7 +194,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="key" Type="System.String" />
-        <Parameter Name="value" Type="System.Object&amp;" RefType="out" />
+        <Parameter Name="value" Type="System.Object" RefType="out" />
       </Parameters>
       <Docs>
         <param name="key">To be added.</param>
@@ -198,6 +210,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.PropertyBag.Values" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Values As List(Of Object)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::List&lt;System::Object ^&gt; ^ Values { System::Collections::Generic::List&lt;System::Object ^&gt; ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Values : System.Collections.Generic.List&lt;obj&gt;" Usage="Microsoft.PerformancePoint.Scorecards.PropertyBag.Values" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>

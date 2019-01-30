@@ -1,9 +1,10 @@
 ﻿<Type Name="SPWebPartCollection" FullName="Microsoft.SharePoint.SPWebPartCollection">
-  <TypeSignature Language="C#" Value="public class SPWebPartCollection : System.Collections.CollectionBase" />
+  <TypeSignature Language="C#" Value="public class SPWebPartCollection : System.Collections.CollectionBase, System.Collections.IList" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SPWebPartCollection extends System.Collections.CollectionBase implements class System.Collections.ICollection, class System.Collections.IEnumerable, class System.Collections.IList" />
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.SPWebPartCollection" />
-  <TypeSignature Language="VB.NET" Value="Public Class SPWebPartCollection&#xA;Inherits CollectionBase" />
-  <TypeSignature Language="C++ CLI" Value="public ref class SPWebPartCollection : System::Collections::CollectionBase" />
+  <TypeSignature Language="VB.NET" Value="Public Class SPWebPartCollection&#xA;Inherits CollectionBase&#xA;Implements IList" />
+  <TypeSignature Language="C++ CLI" Value="public ref class SPWebPartCollection : System::Collections::CollectionBase, System::Collections::IList" />
+  <TypeSignature Language="F#" Value="type SPWebPartCollection = class&#xA;    inherit CollectionBase&#xA;    interface IList&#xA;    interface ICollection&#xA;    interface IEnumerable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.SharePoint</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -11,7 +12,11 @@
   <Base>
     <BaseTypeName>System.Collections.CollectionBase</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Collections.IList</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Attributes>
     <Attribute>
       <AttributeName>System.Obsolete("Use SPLimitedWebPartManager instead.")</AttributeName>
@@ -28,6 +33,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.Add(Microsoft.SharePoint.WebPartPages.ListViewWebPart)" />
       <MemberSignature Language="VB.NET" Value="Public Function Add (listWebPart As ListViewWebPart) As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Guid Add(Microsoft::SharePoint::WebPartPages::ListViewWebPart ^ listWebPart);" />
+      <MemberSignature Language="F#" Value="member this.Add : Microsoft.SharePoint.WebPartPages.ListViewWebPart -&gt; Guid" Usage="sPWebPartCollection.Add listWebPart" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -51,6 +57,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.Guid Add(class Microsoft.SharePoint.WebPartPages.WebPart webPart) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.Add(Microsoft.SharePoint.WebPartPages.WebPart)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Guid Add(Microsoft::SharePoint::WebPartPages::WebPart ^ webPart);" />
+      <MemberSignature Language="F#" Value="member this.Add : Microsoft.SharePoint.WebPartPages.WebPart -&gt; Guid" Usage="sPWebPartCollection.Add webPart" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -75,6 +82,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.Add(System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function Add (dwp As String) As Guid" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Guid Add(System::String ^ dwp);" />
+      <MemberSignature Language="F#" Value="member this.Add : string -&gt; Guid" Usage="sPWebPartCollection.Add dwp" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -98,6 +106,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.Guid Add(class System.Web.UI.WebControls.WebParts.WebPart webPart, bool throwIfLocked) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.Add(System.Web.UI.WebControls.WebParts.WebPart,System.Boolean)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Guid Add(System::Web::UI::WebControls::WebParts::WebPart ^ webPart, bool throwIfLocked);" />
+      <MemberSignature Language="F#" Value="member this.Add : System.Web.UI.WebControls.WebParts.WebPart * bool -&gt; Guid" Usage="sPWebPartCollection.Add (webPart, throwIfLocked)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -123,6 +132,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CacheInvalidate(valuetype System.Guid storageKey, valuetype Microsoft.SharePoint.WebPartPages.Storage storage) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.CacheInvalidate(System.Guid,Microsoft.SharePoint.WebPartPages.Storage)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void CacheInvalidate(Guid storageKey, Microsoft::SharePoint::WebPartPages::Storage storage);" />
+      <MemberSignature Language="F#" Value="member this.CacheInvalidate : Guid * Microsoft.SharePoint.WebPartPages.Storage -&gt; unit" Usage="sPWebPartCollection.CacheInvalidate (storageKey, storage)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -148,6 +158,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.Clear" />
       <MemberSignature Language="VB.NET" Value="Public Sub Clear ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Clear();" />
+      <MemberSignature Language="F#" Value="member this.Clear : unit -&gt; unit" Usage="sPWebPartCollection.Clear " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.Collections.IList.Clear</InterfaceMember>
@@ -170,6 +181,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Contains(class Microsoft.SharePoint.WebPartPages.WebPart webPart) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.Contains(Microsoft.SharePoint.WebPartPages.WebPart)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; bool Contains(Microsoft::SharePoint::WebPartPages::WebPart ^ webPart);" />
+      <MemberSignature Language="F#" Value="member this.Contains : Microsoft.SharePoint.WebPartPages.WebPart -&gt; bool" Usage="sPWebPartCollection.Contains webPart" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -194,6 +206,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.CopyTo(Microsoft.SharePoint.WebPartPages.WebPart[],System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Public Sub CopyTo (array As WebPart(), index As Integer)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void CopyTo(cli::array &lt;Microsoft::SharePoint::WebPartPages::WebPart ^&gt; ^ array, int index);" />
+      <MemberSignature Language="F#" Value="member this.CopyTo : Microsoft.SharePoint.WebPartPages.WebPart[] * int -&gt; unit" Usage="sPWebPartCollection.CopyTo (array, index)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -219,6 +232,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.Delete(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Sub Delete (storageKey As Guid)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Delete(Guid storageKey);" />
+      <MemberSignature Language="F#" Value="member this.Delete : Guid -&gt; unit" Usage="sPWebPartCollection.Delete storageKey" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -242,6 +256,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.DeleteAllPersonalizations" />
       <MemberSignature Language="VB.NET" Value="Public Sub DeleteAllPersonalizations ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteAllPersonalizations();" />
+      <MemberSignature Language="F#" Value="member this.DeleteAllPersonalizations : unit -&gt; unit" Usage="sPWebPartCollection.DeleteAllPersonalizations " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -262,6 +277,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.DeleteAllPersonalizations(System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Public Sub DeleteAllPersonalizations (userId As Integer)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeleteAllPersonalizations(int userId);" />
+      <MemberSignature Language="F#" Value="member this.DeleteAllPersonalizations : int -&gt; unit" Usage="sPWebPartCollection.DeleteAllPersonalizations userId" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -285,6 +301,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.DeletePersonalizations(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Sub DeletePersonalizations (storageKey As Guid)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void DeletePersonalizations(Guid storageKey);" />
+      <MemberSignature Language="F#" Value="member this.DeletePersonalizations : Guid -&gt; unit" Usage="sPWebPartCollection.DeletePersonalizations storageKey" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -308,6 +325,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.GetEnumerator" />
       <MemberSignature Language="VB.NET" Value="Public Function GetEnumerator () As IEnumerator" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::IEnumerator ^ GetEnumerator();" />
+      <MemberSignature Language="F#" Value="abstract member GetEnumerator : unit -&gt; System.Collections.IEnumerator&#xA;override this.GetEnumerator : unit -&gt; System.Collections.IEnumerator" Usage="sPWebPartCollection.GetEnumerator " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.Collections.IEnumerable.GetEnumerator</InterfaceMember>
@@ -331,6 +349,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 IndexOf(class Microsoft.SharePoint.WebPartPages.WebPart webPart) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.IndexOf(Microsoft.SharePoint.WebPartPages.WebPart)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; int IndexOf(Microsoft::SharePoint::WebPartPages::WebPart ^ webPart);" />
+      <MemberSignature Language="F#" Value="member this.IndexOf : Microsoft.SharePoint.WebPartPages.WebPart -&gt; int" Usage="sPWebPartCollection.IndexOf webPart" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -355,6 +374,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPWebPartCollection.IsSynchronized" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSynchronized As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSynchronized { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IsSynchronized : bool" Usage="Microsoft.SharePoint.SPWebPartCollection.IsSynchronized" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:System.Collections.ICollection.IsSynchronized</InterfaceMember>
@@ -378,6 +398,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPWebPartCollection.Item(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(storageKey As Guid) As WebPart" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebPartPages::WebPart ^ default[Guid] { Microsoft::SharePoint::WebPartPages::WebPart ^ get(Guid storageKey); };" />
+      <MemberSignature Language="F#" Value="member this.Item(Guid) : Microsoft.SharePoint.WebPartPages.WebPart" Usage="Microsoft.SharePoint.SPWebPartCollection.Item" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -402,6 +423,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPWebPartCollection.Item(System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Default Public ReadOnly Property Item(index As Integer) As WebPart" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebPartPages::WebPart ^ default[int] { Microsoft::SharePoint::WebPartPages::WebPart ^ get(int index); };" />
+      <MemberSignature Language="F#" Value="member this.Item(int) : Microsoft.SharePoint.WebPartPages.WebPart" Usage="Microsoft.SharePoint.SPWebPartCollection.Item" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -426,6 +448,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.RemoveAt(System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Public Sub RemoveAt (index As Integer)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void RemoveAt(int index);" />
+      <MemberSignature Language="F#" Value="member this.RemoveAt : int -&gt; unit" Usage="sPWebPartCollection.RemoveAt index" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.Collections.IList.RemoveAt(System.Int32)</InterfaceMember>
@@ -452,6 +475,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.SharePoint.SPWebPartCollection.SaveChanges(System.Guid)" />
       <MemberSignature Language="VB.NET" Value="Public Sub SaveChanges (storageKey As Guid)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void SaveChanges(Guid storageKey);" />
+      <MemberSignature Language="F#" Value="member this.SaveChanges : Guid -&gt; unit" Usage="sPWebPartCollection.SaveChanges storageKey" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -475,6 +499,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPWebPartCollection.ServerRelativeUrl" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ServerRelativeUrl As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ ServerRelativeUrl { System::String ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.ServerRelativeUrl : string" Usage="Microsoft.SharePoint.SPWebPartCollection.ServerRelativeUrl" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -495,6 +520,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPWebPartCollection.Storage" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Storage As Storage" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::WebPartPages::Storage Storage { Microsoft::SharePoint::WebPartPages::Storage get(); };" />
+      <MemberSignature Language="F#" Value="member this.Storage : Microsoft.SharePoint.WebPartPages.Storage" Usage="Microsoft.SharePoint.SPWebPartCollection.Storage" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>
@@ -515,6 +541,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPWebPartCollection.SyncRoot" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property SyncRoot As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Object ^ SyncRoot { System::Object ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.SyncRoot : obj" Usage="Microsoft.SharePoint.SPWebPartCollection.SyncRoot" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:System.Collections.ICollection.SyncRoot</InterfaceMember>
@@ -668,6 +695,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.SharePoint.SPWebPartCollection.Web" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Web As SPWeb" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::SharePoint::SPWeb ^ Web { Microsoft::SharePoint::SPWeb ^ get(); };" />
+      <MemberSignature Language="F#" Value="member this.Web : Microsoft.SharePoint.SPWeb" Usage="Microsoft.SharePoint.SPWebPartCollection.Web" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.SharePoint</AssemblyName>

@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.PerformancePoint.Scorecards.Measure" />
   <TypeSignature Language="VB.NET" Value="Public Class Measure&#xA;Inherits NameInfo&#xA;Implements ICloneable, IComparable(Of Measure)" />
   <TypeSignature Language="C++ CLI" Value="public ref class Measure : Microsoft::PerformancePoint::Scorecards::NameInfo, ICloneable, IComparable&lt;Microsoft::PerformancePoint::Scorecards::Measure ^&gt;" />
+  <TypeSignature Language="F#" Value="type Measure = class&#xA;    inherit NameInfo&#xA;    interface ICloneable&#xA;    interface IDiffable&#xA;    interface IComparable&lt;Measure&gt;" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -19,6 +20,11 @@
       <InterfaceName>System.IComparable&lt;Microsoft.PerformancePoint.Scorecards.Measure&gt;</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>Serializable</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
@@ -47,6 +53,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Measure.#ctor(Microsoft.PerformancePoint.Scorecards.Measure)" />
       <MemberSignature Language="VB.NET" Value="Protected Sub New (template As Measure)" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; Measure(Microsoft::PerformancePoint::Scorecards::Measure ^ template);" />
+      <MemberSignature Language="F#" Value="new Microsoft.PerformancePoint.Scorecards.Measure : Microsoft.PerformancePoint.Scorecards.Measure -&gt; Microsoft.PerformancePoint.Scorecards.Measure" Usage="new Microsoft.PerformancePoint.Scorecards.Measure template" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -67,6 +74,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Measure.#ctor(System.String,System.String,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (displayName As String, uniqueName As String, description As String)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Measure(System::String ^ displayName, System::String ^ uniqueName, System::String ^ description);" />
+      <MemberSignature Language="F#" Value="new Microsoft.PerformancePoint.Scorecards.Measure : string * string * string -&gt; Microsoft.PerformancePoint.Scorecards.Measure" Usage="new Microsoft.PerformancePoint.Scorecards.Measure (displayName, uniqueName, description)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -91,6 +99,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Measure.AggregatorValue" />
       <MemberSignature Language="VB.NET" Value="Public Property AggregatorValue As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int AggregatorValue { int get(); void set(int value); };" />
+      <MemberSignature Language="F#" Value="member this.AggregatorValue : int with get, set" Usage="Microsoft.PerformancePoint.Scorecards.Measure.AggregatorValue" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -116,6 +125,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Measure.Clone" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function Clone () As Object" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override System::Object ^ Clone();" />
+      <MemberSignature Language="F#" Value="override this.Clone : unit -&gt; obj" Usage="measure.Clone " />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.ICloneable.Clone</InterfaceMember>
@@ -140,6 +150,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Measure.CompareTo(Microsoft.PerformancePoint.Scorecards.Measure)" />
       <MemberSignature Language="VB.NET" Value="Public Function CompareTo (other As Measure) As Integer" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual int CompareTo(Microsoft::PerformancePoint::Scorecards::Measure ^ other);" />
+      <MemberSignature Language="F#" Value="override this.CompareTo : Microsoft.PerformancePoint.Scorecards.Measure -&gt; int" Usage="measure.CompareTo other" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.IComparable`1.CompareTo(`0)</InterfaceMember>
@@ -167,6 +178,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.PerformancePoint.Scorecards.Measure.Diff(System.Object)" />
       <MemberSignature Language="VB.NET" Value="Public Overrides Function Diff (oldValue As Object) As DiffCollection" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; override Microsoft::PerformancePoint::Scorecards::DiffCollection ^ Diff(System::Object ^ oldValue);" />
+      <MemberSignature Language="F#" Value="override this.Diff : obj -&gt; Microsoft.PerformancePoint.Scorecards.DiffCollection" Usage="measure.Diff oldValue" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.PerformancePoint.Scorecards.IDiffable.Diff(System.Object)</InterfaceMember>
@@ -194,6 +206,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Measure.DisplayFolder" />
       <MemberSignature Language="VB.NET" Value="Public Property DisplayFolder As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ DisplayFolder { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.DisplayFolder : string with get, set" Usage="Microsoft.PerformancePoint.Scorecards.Measure.DisplayFolder" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -219,6 +232,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Measure.HierarchyName" />
       <MemberSignature Language="VB.NET" Value="Public Property HierarchyName As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ HierarchyName { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.HierarchyName : string with get, set" Usage="Microsoft.PerformancePoint.Scorecards.Measure.HierarchyName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -244,6 +258,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Measure.IsSumAggregationType" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property IsSumAggregationType As Boolean" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool IsSumAggregationType { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.IsSumAggregationType : bool" Usage="Microsoft.PerformancePoint.Scorecards.Measure.IsSumAggregationType" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>
@@ -264,6 +279,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.PerformancePoint.Scorecards.Measure.MeasureGroup" />
       <MemberSignature Language="VB.NET" Value="Public Property MeasureGroup As String" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ MeasureGroup { System::String ^ get(); void set(System::String ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.MeasureGroup : string with get, set" Usage="Microsoft.PerformancePoint.Scorecards.Measure.MeasureGroup" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.PerformancePoint.Scorecards.Client</AssemblyName>

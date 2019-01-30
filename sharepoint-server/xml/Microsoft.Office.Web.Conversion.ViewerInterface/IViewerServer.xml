@@ -4,6 +4,7 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServer" />
   <TypeSignature Language="VB.NET" Value="Public Interface IViewerServer&#xA;Implements IServer" />
   <TypeSignature Language="C++ CLI" Value="public interface class IViewerServer : Microsoft::Office::Web::Conversion::ViewerInterface::IServer" />
+  <TypeSignature Language="F#" Value="type IViewerServer = interface&#xA;    interface IServer" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Office.Server.Conversion.ViewerInterface</AssemblyName>
     <AssemblyVersion>15.0.0.0</AssemblyVersion>
@@ -26,6 +27,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServer.CloseDocument" />
       <MemberSignature Language="VB.NET" Value="Public Sub CloseDocument ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void CloseDocument();" />
+      <MemberSignature Language="F#" Value="abstract member CloseDocument : unit -&gt; unit" Usage="iViewerServer.CloseDocument " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.Conversion.ViewerInterface</AssemblyName>
@@ -46,6 +48,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServer.GetSectionCount(Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat,System.Int32@)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetSectionCount (outputFormat As ViewFormat, ByRef sectionCount As Integer) As ServerResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Web::Conversion::ViewerInterface::ServerResult GetSectionCount(Microsoft::Office::Web::Conversion::ViewerInterface::ViewFormat outputFormat, [Runtime::InteropServices::Out] int % sectionCount);" />
+      <MemberSignature Language="F#" Value="abstract member GetSectionCount : Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat *  -&gt; Microsoft.Office.Web.Conversion.ViewerInterface.ServerResult" Usage="iViewerServer.GetSectionCount (outputFormat, sectionCount)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.Conversion.ViewerInterface</AssemblyName>
@@ -56,7 +59,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="outputFormat" Type="Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat" />
-        <Parameter Name="sectionCount" Type="System.Int32&amp;" RefType="out" />
+        <Parameter Name="sectionCount" Type="System.Int32" RefType="out" />
       </Parameters>
       <Docs>
         <param name="outputFormat">To be added.</param>
@@ -72,6 +75,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServer.GetSectionIndex(Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat,System.String,System.Int32@)" />
       <MemberSignature Language="VB.NET" Value="Public Function GetSectionIndex (outputFormat As ViewFormat, itemName As String, ByRef sectionIndex As Integer) As ServerResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Web::Conversion::ViewerInterface::ServerResult GetSectionIndex(Microsoft::Office::Web::Conversion::ViewerInterface::ViewFormat outputFormat, System::String ^ itemName, [Runtime::InteropServices::Out] int % sectionIndex);" />
+      <MemberSignature Language="F#" Value="abstract member GetSectionIndex : Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat * string *  -&gt; Microsoft.Office.Web.Conversion.ViewerInterface.ServerResult" Usage="iViewerServer.GetSectionIndex (outputFormat, itemName, sectionIndex)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.Conversion.ViewerInterface</AssemblyName>
@@ -83,7 +87,7 @@
       <Parameters>
         <Parameter Name="outputFormat" Type="Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat" />
         <Parameter Name="itemName" Type="System.String" />
-        <Parameter Name="sectionIndex" Type="System.Int32&amp;" RefType="out" />
+        <Parameter Name="sectionIndex" Type="System.Int32" RefType="out" />
       </Parameters>
       <Docs>
         <param name="outputFormat">To be added.</param>
@@ -100,6 +104,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServer.Initialize(Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServerCallBack)" />
       <MemberSignature Language="VB.NET" Value="Public Function Initialize (callback As IViewerServerCallBack) As ServerResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Web::Conversion::ViewerInterface::ServerResult Initialize(Microsoft::Office::Web::Conversion::ViewerInterface::IViewerServerCallBack ^ callback);" />
+      <MemberSignature Language="F#" Value="abstract member Initialize : Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServerCallBack -&gt; Microsoft.Office.Web.Conversion.ViewerInterface.ServerResult" Usage="iViewerServer.Initialize callback" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.Conversion.ViewerInterface</AssemblyName>
@@ -124,6 +129,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServer.OpenDocument(Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat,System.String)" />
       <MemberSignature Language="VB.NET" Value="Public Function OpenDocument (outputFormat As ViewFormat, sourceFile As String) As ServerResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Web::Conversion::ViewerInterface::ServerResult OpenDocument(Microsoft::Office::Web::Conversion::ViewerInterface::ViewFormat outputFormat, System::String ^ sourceFile);" />
+      <MemberSignature Language="F#" Value="abstract member OpenDocument : Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat * string -&gt; Microsoft.Office.Web.Conversion.ViewerInterface.ServerResult" Usage="iViewerServer.OpenDocument (outputFormat, sourceFile)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.Conversion.ViewerInterface</AssemblyName>
@@ -150,6 +156,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServer.RenderSections(Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat,System.Int32,System.Int32)" />
       <MemberSignature Language="VB.NET" Value="Public Function RenderSections (outputFormat As ViewFormat, sectionIndex As Integer, sectionCount As Integer) As ServerResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Web::Conversion::ViewerInterface::ServerResult RenderSections(Microsoft::Office::Web::Conversion::ViewerInterface::ViewFormat outputFormat, int sectionIndex, int sectionCount);" />
+      <MemberSignature Language="F#" Value="abstract member RenderSections : Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat * int * int -&gt; Microsoft.Office.Web.Conversion.ViewerInterface.ServerResult" Usage="iViewerServer.RenderSections (outputFormat, sectionIndex, sectionCount)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.Conversion.ViewerInterface</AssemblyName>
@@ -178,6 +185,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServer.ReportUnManagedUnhandledException(System.IntPtr)" />
       <MemberSignature Language="VB.NET" Value="Public Sub ReportUnManagedUnhandledException (pExceptionPointers As IntPtr)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void ReportUnManagedUnhandledException(IntPtr pExceptionPointers);" />
+      <MemberSignature Language="F#" Value="abstract member ReportUnManagedUnhandledException : nativeint -&gt; unit" Usage="iViewerServer.ReportUnManagedUnhandledException pExceptionPointers" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.Conversion.ViewerInterface</AssemblyName>
@@ -201,6 +209,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServer.Uninitialize" />
       <MemberSignature Language="VB.NET" Value="Public Sub Uninitialize ()" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void Uninitialize();" />
+      <MemberSignature Language="F#" Value="abstract member Uninitialize : unit -&gt; unit" Usage="iViewerServer.Uninitialize " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.Conversion.ViewerInterface</AssemblyName>
@@ -221,6 +230,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.Office.Web.Conversion.ViewerInterface.IViewerServer.WriteDocumentGlobalData(Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat)" />
       <MemberSignature Language="VB.NET" Value="Public Function WriteDocumentGlobalData (outputFormat As ViewFormat) As ServerResult" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::Office::Web::Conversion::ViewerInterface::ServerResult WriteDocumentGlobalData(Microsoft::Office::Web::Conversion::ViewerInterface::ViewFormat outputFormat);" />
+      <MemberSignature Language="F#" Value="abstract member WriteDocumentGlobalData : Microsoft.Office.Web.Conversion.ViewerInterface.ViewFormat -&gt; Microsoft.Office.Web.Conversion.ViewerInterface.ServerResult" Usage="iViewerServer.WriteDocumentGlobalData outputFormat" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Office.Server.Conversion.ViewerInterface</AssemblyName>
