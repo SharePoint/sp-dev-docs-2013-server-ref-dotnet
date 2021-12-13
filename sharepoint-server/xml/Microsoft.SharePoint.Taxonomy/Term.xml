@@ -1167,7 +1167,9 @@ namespace Microsoft.SDK.SharePoint.Samples
       <Docs>
         <summary>Gets the collection of local custom properties for this term.</summary>
         <value>A read-only collection of key and value types.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para> The local custom property name cannot be prefixed with "_Sys_". </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Merge">
@@ -1597,6 +1599,7 @@ namespace Microsoft.SDK.SharePoint.Samples
  </summary>
         <remarks>
           <para>Add a custom property by using <paramref name="name" /> if no local property exists for the <b>Term</b> object.</para>
+          <para> The <paramref name="name" /> must be non-empty, and cannot be prefixed with "_Sys_". </para>
           <para />
         </remarks>
         <exception cref="T:System.UnauthorizedAccessException">The user must have the <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.EditTerm" /> permission to edit this term to perform this operation.</exception>
