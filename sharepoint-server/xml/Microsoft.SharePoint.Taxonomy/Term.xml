@@ -1,4 +1,4 @@
-﻿<Type Name="Term" FullName="Microsoft.SharePoint.Taxonomy.Term">
+<Type Name="Term" FullName="Microsoft.SharePoint.Taxonomy.Term">
   <TypeSignature Language="C#" Value="public sealed class Term : Microsoft.SharePoint.Taxonomy.TermSetItem" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit Term extends Microsoft.SharePoint.Taxonomy.TermSetItem" />
   <TypeSignature Language="DocId" Value="T:Microsoft.SharePoint.Taxonomy.Term" />
@@ -331,6 +331,7 @@ namespace Microsoft.SDK.SharePoint.Samples
         <returns>The newly created copied <b>Term</b></returns>
         <remarks>
           <para>The copied <b>Term</b> will have the same properties as the current <b>Term</b>, except for the <see cref="P:Microsoft.SharePoint.Taxonomy.Term.Name" /> property. If the term is copied with its child terms, the newly created child terms will have the same properties as the child terms of the current term including the Name property.The copied child terms will perserve the same hierarchy.</para>
+          <para>From mid-May 2020, the name of the copied term is the name of the original term appended with "- Copy", instead of being the name of the original term prefixed with "Copy of". This allows the original and the copies of a term to be listed together when sorted alphabetically. Multiple copies of the same term are appended by a serial number starting from 1.</para>
           <para>The current user must have <b>TaxonomyRights.EditTerm</b> permission in order to use this method. Call the <see cref="M:Microsoft.SharePoint.Taxonomy.TermStore.CommitAll" /> method to save this change to the database.</para>
           <para>Starting in July 2020, the name of the copied term will be the name of the original term appended with "- Copy", instead of prepending the original filename with "Copy of". This allows the original and the copies to be listed together when sorted alphabetically. Multiple copies of the same term will be suffixed with a serial number starting from 1, instead of 2.</para>
           <para />
@@ -1168,7 +1169,9 @@ namespace Microsoft.SDK.SharePoint.Samples
       <Docs>
         <summary>Gets the collection of local custom properties for this term.</summary>
         <value>A read-only collection of key and value types.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para> The local custom property name cannot be prefixed with "_Sys_". </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="Merge">
@@ -1598,6 +1601,7 @@ namespace Microsoft.SDK.SharePoint.Samples
  </summary>
         <remarks>
           <para>Add a custom property by using <paramref name="name" /> if no local property exists for the <b>Term</b> object.</para>
+          <para> The <paramref name="name" /> must be non-empty, and cannot be prefixed with "_Sys_". </para>
           <para />
         </remarks>
         <exception cref="T:System.UnauthorizedAccessException">The user must have the <see cref="F:Microsoft.SharePoint.Taxonomy.TaxonomyRights.EditTerm" /> permission to edit this term to perform this operation.</exception>
